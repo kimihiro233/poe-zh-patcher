@@ -67,14 +67,21 @@ def main():
             copied.append("out/" + name)
     shutil.copy2(os.path.join(ROOT, "out", "glossary.csv"), os.path.join(rel_dir, "glossary.csv"))
     copied.append("out/glossary.csv")
+    # 补丁清单：记录本版本往游戏里写了哪些字节
+    mf = os.path.join(ROOT, "out", "patch", "manifest.json")
+    if os.path.exists(mf):
+        shutil.copy2(mf, os.path.join(rel_dir, "patch-manifest.json"))
+        copied.append("out/patch/manifest.json")
 
     # RELEASE.md
+    mpath = os.path.join(ROOT, "out", "patch", "manifest.json")
+    patched = os.path.exists(mpath)
     lines = [
         "# v%s" % VERSION,
         "",
         "- 打包时间：%s" % now.strftime("%Y-%m-%d %H:%M:%S %z"),
         "- 游戏基线：Content.ggpk 74,730,084,326 B（2026-09-06 22:24）",
-        "- 状态：**分析基线，尚未写入任何游戏文件**",
+        "- 状态：**%s**" % ("已向 ggpk 写入 .dat 补丁" if patched else "分析基线，尚未写入任何游戏文件"),
         "",
     ]
     if note:
@@ -96,6 +103,19 @@ def main():
         % sum(1 for n, _ in FIXES if os.path.exists(os.path.join(ROOT, "out", n))),
         "",
     ]
+    if patched:
+        import json
+        m = json.load(open(mpath, encoding="utf-8"))
+        lines += ["## 已写入游戏（.dat 侧）", "",
+                  "| 表 | 改动 | 原始 → 补丁字节 | sha256(补丁) |", "|---|---|---|---|"]
+        for f in m["files"]:
+            lines.append("| `%s` | %d | %d → %d | `%s` |"
+                         % (f["table"], len(f["edits"]), f["size_original"],
+                            f["size_patched"], f["sha256_patched"][:16]))
+        lines += ["",
+                  "写入方式：`patcher apply`（LibBundledGGPK3），每个文件写入后从 ggpk 重读比对 sha256；",
+                  "回滚：`patcher restore`。逐条改动见 `out/patch/manifest.json`。", ""]
+
     open(os.path.join(rel_dir, "RELEASE.md"), "w", encoding="utf-8").write("\n".join(lines))
 
     # MANIFEST

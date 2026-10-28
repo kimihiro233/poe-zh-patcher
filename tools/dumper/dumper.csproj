@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -19,6 +19,10 @@
       <HintPath>..\lib\LibDat2.dll</HintPath>
       <Private>true</Private>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\lib\oo2core.dll" Link="oo2core.dll" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

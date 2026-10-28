@@ -293,30 +293,91 @@ reason    = 一句话理由
 
 ---
 
-## 六、建议的下一步
+## 六、回写链路（v0.2.0 打通）
 
-1. **先落地 L1 的 19 条方向修正**——影响最大、成本最低，可以直接验证「改 `.txt` → 进游戏」这条链路通不通。
-2. 再决定要不要开 L2 批量替换（我可以先把 699 条偏离按术语归类，你看归类对不对）。
-3. `.dat` 写回（物品名/UI）留到最后，因为需要重打包 bundle，收益远小于 `.txt`。
+`.dat` 写回不再靠「重打包 bundle」这种重型方案，拆成三步，每步都能单独验证：
+
+| 步骤 | 工具 | 产物 |
+|---|---|---|
+| 1 生成补丁 | `tools/patch_dat.py` | `out/patch/<表>.datc64` + `manifest.json`（含原文/补丁 sha256、每处改动前后文本） |
+| 2 写回 | `tools/patcher`（C#，LibBundledGGPK3） | `status` / `apply` / `restore` |
+| 3 验证 | `dumper raw` 重新导出 + sha256 比对 | 与补丁逐字节一致 |
+
+### .datc64 重写策略：不重建，只追加
+
+`.datc64` 里字符串池是「行内 u64 偏移 + 池内 UTF-16 串」，没有长度字段、没有索引表。
+所以重写不需要动行区：**把新串追加到池尾，只改目标槽位那 8 字节指针**。
+旧串原样留在池里，其他行对同一串的引用不受影响（`shared_refs` 会一并报出来）。
+
+因为是追加而不是原地改，还要处理一个坑：文件末尾常有一个**空串哨兵**——某个槽位的偏移
+正好等于池长度，指向池外。追加后那个位置长出数据，哨兵就会读出新串。所以每次追加前先补
+2 个 `0x00`，让哨兵读到的是空串；`verify` 里也把「未编辑槽位读数漂移」列为硬错误
+（唯一例外是 `None → ""` 且偏移恰为原池长的哨兵，记入 `tolerated_eof_sentinel`）。
+
+### 三重自检（任一不过就不产出补丁）
+
+1. 结构不变：行数、行宽、池基址前后一致；
+2. 目标字段回读等于新串；
+3. 原文件范围内，除被改的 8 字节指针外**逐字节相同**（这一条把「顺手改坏了别处」堵死）。
+
+### 实机结果
+
+| 表 | 改动 | 体积 | 写入耗时 |
+|---|---|---|---|
+| `achievementitems.datc64` | 5 处 | 1,371,030 → 1,371,102 | 433 ms |
+| `clientstrings.datc64` | 1 处 | 1,279,106 → 1,279,206 | 410 ms |
+| `currencyitems.datc64` | 2 处 | 518,020 → 518,224 | 456 ms |
+| `incursionrooms.datc64` | 1 处 | 64,720 → 64,734 | 441 ms |
+| `uitalktext.datc64` | 1 处 | 23,852 → 23,916 | 367 ms |
+
+写入后**另起进程**从 ggpk 重新导出这 5 个文件，与 `out/patch` 逐字节一致（5/5）。
+回滚也做了完整往返：`restore` 后导出结果与 `pairs/zh` 原始字节一致，再 `apply` 又回到补丁内容。
+
+`Content.ggpk` 体积**未变**（74,730,084,326 B）——LibGGPK3 把新 bundle 写进了空闲块，
+不是简单追加，所以不会把 74 G 的文件越滚越大。
+
+### 风险与边界
+
+- **只写繁中目录**（`data/traditional chinese/…`），不碰英文与其他语种，误伤面最小。
+- 写回器有状态门禁：内容既非基线也非补丁就中止，不覆盖来路不明的数据；每次写入留
+  `out/backup/<表>.before-apply`。
+- 游戏运行时拒绝写入（进程检测）。
+- 已知遗留：GGG 官方补丁器会覆盖被改文件（每次大版本重跑一次即可）；纯文本修改没有
+  已被封禁的先例，但这条无法自证，属于用户自担的选择。
+
+---
+
+## 七、建议的下一步
+
+1. **把 `.txt` 也接进同一条链路**——168 条修正稿里有 158 条在 `metadata/statdescriptions/*.txt`，
+   是 UTF-16 纯文本，不需要 dat 重写器，只要给 patcher 增加「整文件替换」的 manifest 条目。
+2. 进游戏确认本次 10 条：`飾品冶煉室`（穿越房间名）、`實驗性飾品`（劫盜奖励展示）、
+   `任一傳奇飾品` / `飾品寶箱`（成就奖励）、`札爾特的飾品盒`（對話）。
+3. 再决定要不要开 L2 批量替换（我可以先把 699 条偏离按术语归类，你看归类对不对）。
 
 ---
 
 ## 附：怎么复现
 
-见 `DATA-FINDINGS.md` 第五节。全部脚本在 `tools/`，全部产物在 `out/`：
+见 `DATA-FINDINGS.md` 第六节。全部脚本在 `tools/`，全部产物在 `out/`：
 
 ```
 out/statdesc.csv               22,167 个词缀/技能描述变体对照
 out/pairs.csv                 322,198 条 UI/物品/名词对照
-out/glossary.csv                   47 条术语表（含置信度）
+out/glossary.csv                   51 条术语表（含置信度）
 out/fix-direction.csv              19 条方向修正稿（只改出错的一侧）
 out/fix-mult.csv                   49 条乘法口径修正稿（增加→更多）
 out/fix-additive-rev.csv            5 条反向口径修正稿（更多→增加）
+out/fix-wording.csv                 5 条逐条润色/语义补全
+out/fix-gem.csv                    34 条技能宝石限定词（技能寶石→主動技能寶石）
+out/fix-order.csv                  10 条数值位置/语序统一
 out/fix-category.csv               41 条物品类别词修正稿（Jewellery/Item/Armour）
-out/fix-category-ui.csv            10 条 UI 侧类别词修正稿（需另走 .dat 回写）
+out/fix-category-ui.csv            10 条 UI 侧类别词修正稿（已写入 ggpk）
 out/fix-category-hold.csv           5 条存疑，待拍板（Amulet 两套词 4 + 诗意文本 1）
+out/patch/                          已生成并写入的 5 个 .dat + manifest.json
 out/report-statdesc.md            词缀侧体检报告（含明细表）
 out/report-ui.md                  UI 侧体检报告
 out/direction-check.csv          108 条方向问题 + 11 条「中文比英文准，别动」
 out/report-*-issues.csv       2,921 条可当工单的问题清单
+releases/v0.1.0/                  分析基线快照（未动游戏文件）
 ```

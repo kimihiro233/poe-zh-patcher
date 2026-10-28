@@ -1,0 +1,58 @@
+kind,stat_ids,detail,zh_before,zh_after
+S1_neg_variant_wrong,support_trap_and_mine_damage_+%_final,负变体应 LESS 实为 MORE,"正 被輔助的技能造成 {0}% 更多陷阱和地雷傷害
+负 被輔助的技能造成 {0}% 更多陷阱和地雷傷害","正 被輔助的技能造成 {0}% 更多陷阱和地雷傷害
+负 被輔助的技能造成 {0}% 更少陷阱和地雷傷害"
+S1_neg_variant_wrong,heist_contract_npc_agility_experience_gain_+%,负变体应 RED 实为 INC,"正 增加 {0}% 獲得靈敏經驗值
+负 增加 {0}% 獲得靈敏經驗值","正 增加 {0}% 獲得靈敏經驗值
+负 減少 {0}% 獲得靈敏經驗值"
+S1_neg_variant_wrong,local_charges_added_+%,负变体应 RED 实为 INC,"正 增加 {0}% 充能恢復
+负 增加 {0}% 充能恢復","正 增加 {0}% 充能恢復
+负 減少 {0}% 充能恢復"
+S1_neg_variant_wrong,local_flask_effect_+% local_flask_consume_flask_effect_+%_when_used,负变体应 RED 实为 INC,"正 增加 {0}% 效果。使用時 -1% 此數值
+负 增加 {0}% 效果。使用時 -1% 此數值","正 增加 {0}% 效果。使用時 -1% 此數值
+负 減少 {0}% 效果。使用時 -1% 此數值"
+S1_neg_variant_wrong,support_minion_maximum_life_+%_final,负变体应 LESS 实为 MORE,"正 召喚物有 {0}% 更多最大生命
+负 召喚物有 {0}% 更多最大生命","正 召喚物有 {0}% 更多最大生命
+负 召喚物有 {0}% 更少最大生命"
+S1_neg_variant_wrong,melee_cold_damage_+%,负变体应 RED 实为 INC,"正 增加 {0}% 近戰冰冷傷害
+负 增加 {0}% 近戰冰冷傷害","正 增加 {0}% 近戰冰冷傷害
+负 減少 {0}% 近戰冰冷傷害"
+S1_neg_variant_wrong,weapon_elemental_damage_+%_while_using_flask,负变体应 RED 实为 INC,"正 任何藥劑效果持續時間內，增加 {0}% 武器的元素傷害
+负 任何藥劑效果持續時間內，增加 {0}% 武器的元素傷害","正 任何藥劑效果持續時間內，增加 {0}% 武器的元素傷害
+负 任何藥劑效果持續時間內，減少 {0}% 武器的元素傷害"
+S1_neg_variant_wrong,arcanist_brand_cast_speed_+%,负变体应 RED 实为 INC,"正 奧術烙印增加 {0}% 施放速度
+负 奧術烙印增加 {0}% 施放速度","正 奧術烙印增加 {0}% 施放速度
+负 奧術烙印減少 {0}% 施放速度"
+S1_neg_variant_wrong,attack_ailment_damage_+%_while_wielding_claw,负变体应 RED 实为 INC,"正 持爪時攻擊技能增加 {0}% 異常狀態傷害
+负 持爪時攻擊技能增加 {0}% 異常狀態傷害","正 持爪時攻擊技能增加 {0}% 異常狀態傷害
+负 持爪時攻擊技能減少 {0}% 異常狀態傷害"
+S1p_pos_variant_wrong,aura_effect_on_self_from_skills_+%_per_herald_effecting_you,正变体应 INC 实为 RED,"正 每個影響你的捷光環，\n減少 {0}% 你身上來自你技能的光環效果，最多 40%
+负 來自你技能的光環會根據\n每一影響你的捷光環降低{0}%作用於你的效果","正 每個影響你的捷光環，\n增加 {0}% 你身上來自你技能的光環效果，最多 40%
+负 來自你技能的光環會根據\n每一影響你的捷光環降低{0}%作用於你的效果"
+S1_neg_variant_wrong,base_attack_skill_cost_efficiency_+%,负变体应 RED 实为 INC,"正 增加 {0}% 攻擊的消耗效用
+负 增加 {0}% 攻擊的消耗效用","正 增加 {0}% 攻擊的消耗效用
+负 減少 {0}% 攻擊的消耗效用"
+S1_neg_variant_wrong,base_mana_cost_efficiency_+%_per_10_devotion,负变体应 RED 实为 INC,"正 每 10 個奉獻增加 {0}% 魔力消耗效用
+负 每 10 個奉獻增加 {0}% 魔力消耗效用","正 每 10 個奉獻增加 {0}% 魔力消耗效用
+负 每 10 個奉獻減少 {0}% 魔力消耗效用"
+S1_neg_variant_wrong,base_mana_cost_efficiency_+%_while_on_low_mana,负变体应 RED 实为 INC,"正 貧魔時增加 {0}% 魔力消耗效用
+负 貧魔時增加 {0}% 魔力消耗效用","正 貧魔時增加 {0}% 魔力消耗效用
+负 貧魔時減少 {0}% 魔力消耗效用"
+S1_neg_variant_wrong,defences_+%_while_wielding_staff,负变体应 RED 实为 INC,"正 持長杖時，增加 {0}% 防禦
+负 持長杖時，增加 {0}% 防禦f","正 持長杖時，增加 {0}% 防禦
+负 持長杖時，減少 {0}% 防禦f"
+S1_neg_variant_wrong,energy_shield_from_helmet_+%,负变体应 RED 实为 INC,"正 增加 {0}% 裝備的頭盔的能量護盾
+负 增加 {0}% 裝備的頭盔的能量護盾","正 增加 {0}% 裝備的頭盔的能量護盾
+负 減少 {0}% 裝備的頭盔的能量護盾"
+S1_neg_variant_wrong,hallowing_flame_magnitude_+%_per_2%_attack_block_chance,负变体应 RED 实为 INC,"正 每2%攻擊格擋機率，增加{0}%你施加的聖徒烈火幅度
+负 每2%攻擊格擋機率，增加{0}%你施加的聖徒烈火幅度","正 每2%攻擊格擋機率，增加{0}%你施加的聖徒烈火幅度
+负 每2%攻擊格擋機率，減少{0}%你施加的聖徒烈火幅度"
+S1_neg_variant_wrong,spell_damage_+%_while_you_have_arcane_surge,负变体应 RED 实为 INC,"正 當你有秘能波動時增加 {0}% 法術傷害
+负 當你有秘能波動時增加 {0}% 法術傷害","正 當你有秘能波動時增加 {0}% 法術傷害
+负 當你有秘能波動時減少 {0}% 法術傷害"
+S1p_pos_variant_wrong,unattached_sigil_attachment_range_+%_per_second,正变体应 INC 实为 RED,"正 未附著的烙印每秒減少 {0}% 烙印附著距離
+负 未附著的烙印每秒減少{0}%烙印附著範圍","正 未附著的烙印每秒增加 {0}% 烙印附著距離
+负 未附著的烙印每秒減少{0}%烙印附著範圍"
+S1_neg_variant_wrong,unique_quiver_chill_as_though_damage_+%_final,负变体应 LESS 实为 MORE,"正 冰緩敵人有如造成 {0}% 更多傷害
+负 冰緩敵人有如造成 {0}% 更多傷害","正 冰緩敵人有如造成 {0}% 更多傷害
+负 冰緩敵人有如造成 {0}% 更少傷害"

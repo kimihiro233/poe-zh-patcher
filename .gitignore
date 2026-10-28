@@ -13,7 +13,8 @@ tools/*/*.log
 out/pairs.csv
 
 # 补丁输出（由 patch_dat.py 生成）与打包快照
-out/patch/
+out/patch/*
+!out/patch/manifest.json
 releases/*.zip
 
 # 游戏本体

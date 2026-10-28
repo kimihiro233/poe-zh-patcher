@@ -127,6 +127,20 @@ if (args.Length > 0 && args[0] == "fields") {
     return;
 }
 
+if (args.Length > 0 && args[0] == "ls") {
+    var filt2 = args.Length > 1 ? args[1] : "";
+    using var g5 = new BundledGGPK(args.Length > 2 ? args[2] : @"C:\Program Files (x86)\Grinding Gear Games\Path of Exile\Content.ggpk", true);
+    var hit = g5.Index.Files.Values.Select(f => f.Path)
+        .Where(p => p is not null && p.Contains(filt2, StringComparison.OrdinalIgnoreCase))
+        .OrderBy(p => p, StringComparer.Ordinal).Take(60).ToList();
+    Console.WriteLine($"matches: {hit.Count}");
+    foreach (var p in hit) {
+        g5.Index.TryGetFile(p, out var rec);
+        Console.WriteLine($"  {p}  [{rec.Size:N0} B]");
+    }
+    return;
+}
+
 if (args.Length > 0 && args[0] == "api") {
     var want = args.Length > 1 ? args[1] : "";
     foreach (var an in new[] { "LibBundle3", "LibBundledGGPK3", "LibGGPK3" }) {

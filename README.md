@@ -17,16 +17,22 @@
 ## 目录
 
 ```
+├─ VERSION                当前版本号（打 tag 的依据）
 ├─ REPORT.md              体检报告与修正方案（给人看）
 ├─ DATA-FINDINGS.md       二进制格式与流程（给下个赛季的自己看）
 ├─ tools/
 │  ├─ dat64.py            .dat/.datc64 解析器，无 schema 依赖
+│  ├─ datwrite.py         .datc64 字符串重写器（追加式，三重自检）
+│  ├─ patch_dat.py        修正稿 → out/patch/*.dat + manifest.json
+│  ├─ release.py          打版本快照到 releases/v<ver>/
 │  ├─ extract_pairs.py    成对抽取 EN/ZH 的 .dat 文本
 │  ├─ parse_statdesc.py   解析词缀/技能描述模板（纯文本）
 │  ├─ analyze.py          体检：占位符/方向词/术语/简体字/长度
 │  ├─ glossary.py         从对照数据反推术语表
-│  └─ dumper/             C# 导出器（LibGGPK3 + oo2core）
-├─ out/                   全部产物
+│  ├─ dumper/             C# 导出器（LibGGPK3 + oo2core）
+│  └─ patcher/            C# 写回器（status / apply / restore）
+├─ out/                   全部产物（out/patch 为待写入的补丁）
+├─ releases/              版本快照（v0.1.0、v0.2.0…）
 └─ pairs/ raw_sd/ raw/    原始导出（可随时重建，不必备份）
 ```
 
@@ -50,6 +56,29 @@ python tools/analyze.py  out/pairs.csv    out/report-ui.md
 python tools/glossary.py out/statdesc.csv out/glossary.csv
 ```
 
+## 写回游戏（已打通）
+
+```bash
+GGPK="C:/Program Files (x86)/Grinding Gear Games/Path of Exile/Content.ggpk"
+
+# 1) 生成补丁（读 out/fix-category-ui.csv + pairs/zh 基线）
+python tools/patch_dat.py
+
+# 2) 看当前状态（只读，1.7 秒）
+./tools/patcher/bin/Debug/net8.0/patcher.exe status  "$GGPK" out/patch/manifest.json
+
+# 3) 写入 / 回滚
+./tools/patcher/bin/Debug/net8.0/patcher.exe apply   "$GGPK" out/patch/manifest.json
+./tools/patcher/bin/Debug/net8.0/patcher.exe restore "$GGPK" out/patch/manifest.json
+
+# 只处理某张表
+... apply "$GGPK" out/patch/manifest.json --only=incursionrooms.datc64
+```
+
+写回器只认三种状态：**原始**（sha 等于基线）、**已打补丁**（sha 等于补丁）、**未知**。
+未知状态一律中止，不会覆盖来路不明的内容。每次写入前后都重新读出比对 sha256，
+并留一份 `out/backup/<表>.before-apply`。
+
 ## 关键约定
 
 `key` 不能用行号（每个赛季都会变），用业务主键：
@@ -64,6 +93,6 @@ statdescriptions/<文件名> : <stat_ids> : <变体条件>      词缀/技能描
 
 ## 尚未做
 
-- 写回 `.dat`（需要重打包 bundle）。`metadata/statdescriptions/*.txt` 是纯文本，
-  优先级更高、成本更低，建议先走这条。
+- 写回 `metadata/statdescriptions/*.txt`（168 条修正稿里有 158 条在这里）。
+  链路已通，只差把 .txt 也做成 manifest 条目：它们是 UTF-16 纯文本，不需要 dat 重写器。
 - 覆盖层与校验器本体（`data/overlay.csv` + `validate.py`）：等 L1/L2 的修法定下来再落。
