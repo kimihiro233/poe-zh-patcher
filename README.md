@@ -5,6 +5,10 @@
 
 核心原则：**不动原文，只维护一份按 key 索引的覆盖清单。**
 
+源码仓库：<https://github.com/kimihiro233/poe-zh-patcher>。
+仓库**按字节存取**（`.gitattributes` 里 `* -text`），克隆后别开换行转换——否则补丁载荷变形、
+`MANIFEST.sha256` 校验必然失败。`releases/*.zip`、`dist/`、`raw*/`、`pairs/` 等体积大或可重新生成的内容不入库。
+
 ---
 
 ## 先读这三个
