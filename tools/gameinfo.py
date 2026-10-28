@@ -152,11 +152,26 @@ def collect(game_dir):
     }
 
 
-def compare(old, new):
-    """返回 (状态, 明细)。状态：same / version_changed / content_changed / new"""
+def patched_shas():
+    """本项目补丁写入后的 sha256 集合：用来把「我们改的」和「游戏改的」分开。"""
+    mp = os.path.join(ROOT, "out", "patch", "manifest.json")
+    if not os.path.exists(mp):
+        return {}
+    m = json.load(open(mp, encoding="utf-8"))
+    return {f["path_in_ggpk"]: f["sha256_patched"] for f in m.get("files", [])}
+
+
+def compare(old, new, patched=None):
+    """返回 (状态, 明细, 本项补丁条数)。
+
+    状态：same / version_changed / content_changed / new
+    我们自己打进去的补丁也会让文件 sha 变，那不是「游戏更新」，
+    比对时必须剔除，否则每次 check 都误报。
+    """
+    patched = patched or {}
     if not old:
-        return "new", []
-    rows = []
+        return "new", [], 0
+    rows, n_patch = [], 0
     of, nf = old.get("files", {}), new["files"]
     for p in sorted(set(of) | set(nf)):
         a, b = of.get(p), nf.get(p)
@@ -165,15 +180,18 @@ def compare(old, new):
         elif b is None:
             rows.append(("-", p, a["sha256"][:12], "-"))
         elif a["sha256"] != b["sha256"]:
-            rows.append(("~", p, a["sha256"][:12], b["sha256"][:12]))
+            if patched.get(p) == b["sha256"]:
+                n_patch += 1
+            else:
+                rows.append(("~", p, a["sha256"][:12], b["sha256"][:12]))
     ov, nv = old.get("version", {}), new.get("version", {})
     vchange = ov.get("client_version") != nv.get("client_version") or \
               ov.get("patch_version") != nv.get("patch_version")
     if not rows and not vchange:
-        return "same", []
+        return "same", [], n_patch
     if rows:
-        return "content_changed", rows
-    return "version_changed", []
+        return "content_changed", rows, n_patch
+    return "version_changed", [], n_patch
 
 
 def patched_tables(new_files):
@@ -210,9 +228,18 @@ def main():
     v = new["version"]
     print("客户端版本：%s   补丁版本：%s   （来源 %s）"
           % (v.get("client_version", "?"), v.get("patch_version", "?"), v.get("log", "?")))
-    print("语言文件 %d 个 + 词缀 txt %d 个，合计指纹 %s"
-          % (new["counts"]["lang_files"], new["counts"]["statdesc_files"],
-             new["fingerprint"][:16]))
+    old_peek = None
+    if os.path.exists(LOCK):
+        try:
+            old_peek = json.load(open(LOCK, encoding="utf-8"))
+        except Exception:
+            old_peek = None
+    print("语言文件 %d 个 + 词缀 txt %d 个" % (new["counts"]["lang_files"], new["counts"]["statdesc_files"]))
+    print("当前指纹：%s" % new["fingerprint"][:16])
+    if old_peek:
+        print("锁定指纹：%s%s"
+              % (old_peek.get("fingerprint", "")[:16],
+                 "  （与当前一致）" if old_peek.get("fingerprint") == new["fingerprint"] else "  （与当前不同）"))
     print("Content.ggpk %s B" % format(new["ggpk"]["size"], ","))
 
     dirty = patched_tables(new["files"])
@@ -229,10 +256,11 @@ def main():
     if os.path.exists(LOCK):
         old = json.load(open(LOCK, encoding="utf-8"))
 
-    state, rows = compare(old, new)
+    state, rows, n_patch = compare(old, new, patched_shas())
     label = {"new": "首次锁定", "same": "与上次一致", "version_changed": "版本号变了，内容未变",
-             "content_changed": "内容有变化"}[state]
-    print("对比上次：%s（%d 个文件变动）" % (label, len(rows)))
+             "content_changed": "游戏内容有变化"}[state]
+    extra = "，另有 %d 个文件是本项目补丁（已剔除）" % n_patch if n_patch else ""
+    print("对比上次：%s（%d 个游戏侧变动%s）" % (label, len(rows), extra))
 
     if rows and (a.diff or a.check):
         for op, p, x, y in rows[:40]:
