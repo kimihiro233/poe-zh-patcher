@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "lang": "traditional chinese",
   "source": "out/fix-category-ui.csv",
   "total_edits": 10,
@@ -14,6 +14,7 @@
       "size_original": 1371030,
       "size_patched": 1371102,
       "verify": "ok",
+      "tolerated_eof_sentinel": [],
       "edits": [
         {
           "row": 2947,
@@ -77,6 +78,7 @@
       "size_original": 1279106,
       "size_patched": 1279206,
       "verify": "ok",
+      "tolerated_eof_sentinel": [],
       "edits": [
         {
           "row": 7910,
@@ -100,6 +102,12 @@
       "size_original": 518020,
       "size_patched": 518224,
       "verify": "ok",
+      "tolerated_eof_sentinel": [
+        [
+          1961,
+          72
+        ]
+      ],
       "edits": [
         {
           "row": 1932,
@@ -133,6 +141,7 @@
       "size_original": 64720,
       "size_patched": 64734,
       "verify": "ok",
+      "tolerated_eof_sentinel": [],
       "edits": [
         {
           "row": 50,
@@ -156,6 +165,7 @@
       "size_original": 23852,
       "size_patched": 23916,
       "verify": "ok",
+      "tolerated_eof_sentinel": [],
       "edits": [
         {
           "row": 54,

@@ -93,6 +93,7 @@ def main():
             "size_original": rep["old_len"],
             "size_patched": rep["new_len"],
             "verify": rep["verify"],
+            "tolerated_eof_sentinel": rep.get("tolerated_eof_sentinel", []),
             "edits": rep["edits"],
         })
 
