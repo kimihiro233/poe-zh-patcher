@@ -30,6 +30,7 @@ out/game-lock-history/
 
 # 写入前的临时备份与回读校验导出
 out/backup/
+out/ggpk-backup-*/
 out/verify*/
 out/out/
 

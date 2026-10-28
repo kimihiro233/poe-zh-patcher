@@ -389,8 +389,11 @@ internal interface IContainer : IDisposable {
     string RootDir { get; }     // 游戏根目录
     long Size { get; }
     bool TryRead(string path, out byte[] bytes);
+    bool TryRead(string path, out byte[] bytes, out string? error);   // error 非空 = 路径在但数据读不出来
     bool Write(string path, byte[] bytes);
-    void Flush();               // Bundles2 需要落 index；ggpk 立即生效
+    void Flush();               // 一次落盘；ggpk 与 Bundles2 都是收起改动后统一存
+    int Sanitize();             // 把重名/悬空的自建 bundle 记录收成一个；返回归并掉的条数
+    bool Alive { get; }         // 容器还活着吗（采集/演练会中途换容器，旧句柄不能再写）
 }
 
 internal sealed class GgpkContainer : IContainer {
@@ -407,21 +410,36 @@ internal sealed class GgpkContainer : IContainer {
     public string RootDir => Path.GetDirectoryName(Display)!;
     public long Size { get; }
 
-    public bool TryRead(string p, out byte[] bytes) {
+    public bool TryRead(string p, out byte[] bytes) => TryRead(p, out bytes, out _);
+
+    public bool TryRead(string p, out byte[] bytes, out string? error) {
         bytes = Array.Empty<byte>();
+        error = null;
         if (!_g.Index.TryGetFile(p, out var rec)) return false;
-        bytes = rec.Read().ToArray();
-        return true;
+        try { bytes = rec.Read().ToArray(); return true; }
+        catch (Exception ex) { error = ex.Message; return false; }
     }
 
     public bool Write(string p, byte[] bytes) {
         if (!_g.Index.TryGetFile(p, out var rec)) return false;
-        rec.Write(bytes, true);      // ggpk 内部索引随写随存
-        return true;
+        rec.Write(bytes, saveIndex: false);   // 统一在 Flush 里存一次。逐个存会把 20 MB 索引反复重写进 ggpk，
+        return true;                          // 每次都要腾/让空闲块，历史上就是这么把自建 bundle 弄没的
     }
 
-    public void Flush() { }
-    public void Dispose() => _g.Dispose();
+    public void Flush() => _g.Index.Save();
+    public int Sanitize() {
+        var r = BundleHygiene.Consolidate(_g.Index);
+        if (r.Removed > 0) Console.WriteLine($"  自建 bundle 记录归并：{r.SelfMade.Count} → {r.SelfMade.Count - r.Removed}");
+        if (r.Error is not null) Console.WriteLine($"  ! 自建 bundle 无法就地整理：{r.Error}");
+        return r.Removed;
+    }
+    private bool _dead;
+    public bool Alive => !_dead;
+    public void Dispose() {
+        if (_dead) return;
+        _dead = true;
+        _g.Dispose();
+    }
 }
 
 internal sealed class BundlesContainer : IContainer {
@@ -440,11 +458,14 @@ internal sealed class BundlesContainer : IContainer {
     public string RootDir { get; }
     public long Size { get; }
 
-    public bool TryRead(string p, out byte[] bytes) {
+    public bool TryRead(string p, out byte[] bytes) => TryRead(p, out bytes, out _);
+
+    public bool TryRead(string p, out byte[] bytes, out string? error) {
         bytes = Array.Empty<byte>();
+        error = null;
         if (!_index.TryGetFile(p, out var rec)) return false;
         try { bytes = rec.Read().ToArray(); return true; }
-        catch { return false; }          // bundle 缺失 / 损坏
+        catch (Exception ex) { error = ex.Message; return false; }   // bundle 缺失 / 损坏
     }
 
     public bool Write(string p, byte[] bytes) {
@@ -454,7 +475,19 @@ internal sealed class BundlesContainer : IContainer {
     }
 
     public void Flush() => _index.Save();
-    public void Dispose() => _index.Dispose();
+    public int Sanitize() {
+        var r = BundleHygiene.Consolidate(_index);
+        if (r.Removed > 0) Console.WriteLine($"  自建 bundle 记录归并：{r.SelfMade.Count} → {r.SelfMade.Count - r.Removed}");
+        if (r.Error is not null) Console.WriteLine($"  ! 自建 bundle 无法就地整理：{r.Error}");
+        return r.Removed;
+    }
+    private bool _dead;
+    public bool Alive => !_dead;
+    public void Dispose() {
+        if (_dead) return;
+        _dead = true;
+        _index.Dispose();
+    }
 }
 
 internal static class Program {
@@ -513,6 +546,9 @@ internal static class Program {
             return 1;
         }
         _target = gp;
+
+        // 写入通道演练：在临时目录的索引副本上写一遍，不碰真实客户端
+        if (Args.ContainsKey("writetest")) return WriteTest(Args.GetValueOrDefault("writetest") ?? "");
 
         var store = OpenContainer();
         if (store is null) { Pause(); return 1; }
@@ -689,6 +725,85 @@ internal static class Program {
         return 0;
     }
 
+    /// <summary>
+    /// 写入通道演练：把目标容器的索引复制到临时目录，在那里做 N 次写入 + 一次落盘 + 回读。
+    /// 全程不碰真实客户端（ggpk 除外：它太大，复制不了，只能拿 index 里的记录做只读核对）。
+    /// </summary>
+    private static int WriteTest(string nArg) {
+        var n = int.TryParse(nArg, out var k) ? Math.Clamp(k, 1, 200) : 30;
+        var isBundles = System.IO.Path.GetFileName(_target).Equals("_.index.bin", StringComparison.OrdinalIgnoreCase);
+        if (!isBundles) {
+            Console.WriteLine("写入演练只对 Steam/WeGame 的 Bundles2 有效（ggpk 是 70 GB 的单文件，复制一份不现实）。");
+            Console.WriteLine("  ggpk 请用 --struct 结构演练，或在副本上跑。");
+            return 1;
+        }
+        var idxPath = _target;
+        if (!File.Exists(idxPath)) { Console.WriteLine($"找不到 {idxPath}"); return 1; }
+
+        var tmp = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "poe-zh-writetest-" + Guid.NewGuid().ToString("N")[..8]);
+        Directory.CreateDirectory(tmp);
+        var copy = System.IO.Path.Combine(tmp, "_.index.bin");
+        File.Copy(idxPath, copy);
+        Console.WriteLine($"写入演练（只动临时副本，真实客户端一个字节不碰）");
+        Console.WriteLine($"  源索引 {idxPath}");
+        Console.WriteLine($"  演练目录 {tmp}");
+
+        Idx? idx = null;
+        var bad = 0;
+        try {
+            idx = new Idx(copy, parsePaths: false, bundleFactory: new DriveBundleFactory(tmp));
+            Console.WriteLine($"  索引里 {idx.Files.Count:N0} 个文件 / {idx.Bundles.Length:N0} 个 bundle");
+            var recs = idx.Files.Values.Where(f => f.Size is > 0 and < (4 << 20)).Take(n).ToArray();
+            Console.WriteLine($"  取 {recs.Length} 个文件依次写入");
+            Console.WriteLine();
+
+            var expect = new Dictionary<LibBundle3.Records.FileRecord, string>();
+            for (var i = 0; i < recs.Length; i++) {
+                var rec = recs[i];
+                var data = new byte[Math.Min(rec.Size + 17, 1 << 20)];
+                for (var j = 0; j < data.Length; j++) data[j] = (byte)(i * 31 + j);
+                try {
+                    rec.Write(data, saveIndex: false);
+                    expect[rec] = Sha(data);
+                    Console.WriteLine($"  [{i + 1,2}/{recs.Length}] bundle#{rec.BundleRecord.BundleIndex,-5} {rec.Size,9:N0} → {data.Length,9:N0} B   ✓");
+                } catch (Exception ex) {
+                    Console.WriteLine($"  [{i + 1,2}/{recs.Length}] bundle#{rec.BundleRecord.BundleIndex,-5} {rec.Size,9:N0} B   ✗ {ex.GetType().Name}: {ex.Message}");
+                    bad++;
+                }
+            }
+
+            Console.WriteLine();
+            var sw = Stopwatch.StartNew();
+            try {
+                idx.Save();
+                Console.WriteLine($"  落盘索引  {sw.ElapsedMilliseconds} ms  ✓");
+            } catch (Exception ex) {
+                Console.WriteLine($"  落盘索引  ✗ {ex.GetType().Name}: {ex.Message}");
+                bad++;
+            }
+
+            var ok = 0;
+            foreach (var (rec, sha) in expect) {
+                try {
+                    if (Sha(rec.Read().ToArray()) == sha) ok++;
+                    else { Console.WriteLine($"  ✗ 回读不符：bundle#{rec.BundleRecord.BundleIndex}"); bad++; }
+                } catch (Exception ex) {
+                    Console.WriteLine($"  ✗ 回读失败：bundle#{rec.BundleRecord.BundleIndex} {ex.GetType().Name}: {ex.Message}");
+                    bad++;
+                }
+            }
+            Console.WriteLine($"  回读校验  {ok}/{expect.Count} 通过");
+        } catch (Exception ex) {
+            Console.WriteLine($"✗ 演练中断：{ex.GetType().Name}: {ex.Message}");
+            Console.WriteLine(ex.StackTrace);
+            return 3;
+        } finally {
+            try { idx?.Dispose(); } catch { }
+            try { Directory.Delete(tmp, true); } catch { }
+        }
+        return bad == 0 ? 0 : 3;
+    }
+
     // ---------------------------------------------------------------- 标记层自检
 
     private static int MarkupTest() {
@@ -847,6 +962,7 @@ internal static class Program {
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --selftest                       数据与文件对得上吗");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --struct                         结构演练（只验读写通道）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --collect [--out=目录]           采集诊断包（只读，发给作者排查）");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --writetest[=N]                  写入演练（在索引副本上写 N 个文件，不碰客户端）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --partial       只处理对得上的文件，跳过对不上的");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --plan          只演算校验，不写文件");
     }
@@ -1020,6 +1136,8 @@ internal static class Program {
         public string Path = "";
         public bool IsSd;
         public bool Missing;             // 容器里根本没有这个文件（客户端版本不同）
+        public bool Broken;              // 路径在，但数据读不出来（索引里的自建 bundle 被删掉过）
+        public string BrokenWhy = "";
         public SdEntry? Sd;
         public DatEntry? Dat;
         public byte[] Cur = Array.Empty<byte>();
@@ -1065,7 +1183,15 @@ internal static class Program {
         var list = new List<Item>();
         foreach (var e in _sd) {
             var it = new Item { Label = System.IO.Path.GetFileName(e.Path), Path = e.Path, IsSd = true, Sd = e };
-            if (!store.TryRead(e.Path, out var cur)) { it.Missing = true; it.CurFlavor = Flavor.Unknown; it.Cur = Array.Empty<byte>(); list.Add(it); continue; }
+            if (!store.TryRead(e.Path, out var cur, out var err)) {
+                it.Missing = err is null;
+                it.Broken = err is not null;
+                it.BrokenWhy = err ?? "";
+                it.CurFlavor = Flavor.Unknown;
+                it.Cur = Array.Empty<byte>();
+                list.Add(it);
+                continue;
+            }
             it.Cur = cur;
             it.CurFlavor = Detect(e, Sha(it.Cur));
             var why = "";
@@ -1080,7 +1206,15 @@ internal static class Program {
         }
         foreach (var e in _dat) {
             var it = new Item { Label = e.Table, Path = e.Path, IsSd = false, Dat = e };
-            if (!store.TryRead(e.Path, out var cur)) { it.Missing = true; it.CurFlavor = Flavor.Unknown; it.Cur = Array.Empty<byte>(); list.Add(it); continue; }
+            if (!store.TryRead(e.Path, out var cur, out var err)) {
+                it.Missing = err is null;
+                it.Broken = err is not null;
+                it.BrokenWhy = err ?? "";
+                it.CurFlavor = Flavor.Unknown;
+                it.Cur = Array.Empty<byte>();
+                list.Add(it);
+                continue;
+            }
             it.Cur = cur;
             var sha = Sha(it.Cur);
             it.CurFlavor = sha == e.ShaOrig ? Flavor.Original : sha == e.ShaPatch ? Flavor.DualAll : Flavor.Unknown;
@@ -1095,6 +1229,7 @@ internal static class Program {
     }
 
     private static string ShowFlavor(Item i) => i.CurFlavor switch {
+        Flavor.Unknown when i.Broken => "读不出",
         Flavor.Unknown => "未知",
         Flavor.Custom => i.Legacy ? "旧版补丁" : "外部改过",
         _ when !i.IsSd && i.CurFlavor != Flavor.Original => "已打补丁",
@@ -1128,13 +1263,19 @@ internal static class Program {
 
     // ---------------------------------------------------------------- 主流程
 
-    private static int Menu(IContainer store) {
-        var items = Preflight(store);
+    private static int Menu(IContainer? store) {
+        var items = Preflight(store!);
         while (true) {
+            // 采集/结构演练会中途让出句柄再重开，手里这个可能已经释放 —— 每轮都取当前活着的那个
+            if (store is null || !store.Alive) {
+                if (Reopen() is null) return 1;
+                store = _store!;
+                items = Preflight(store);
+            }
             try { if (!Console.IsOutputRedirected) Console.Clear(); } catch { }
             PrintHeader(items, store);
             var missing = items.Count(i => i.Missing);
-            var unknown = items.Count(i => i.CurFlavor == Flavor.Unknown && !i.Missing);
+            var unknown = items.Count(i => i.CurFlavor == Flavor.Unknown && !i.Missing && !i.Broken);
             if (missing > 0 || unknown > 0) {
                 if (missing > 0) {
                     Console.WriteLine($" ! 有 {missing} 个目标文件在这个客户端里找不到（多半是版本不同）。");
@@ -1169,6 +1310,7 @@ internal static class Program {
                 Console.WriteLine();
                 Console.WriteLine(" 按回车返回菜单");
                 ReadKeyLine();
+                if (Reopen() is not null) items = Preflight(_store!);   // 采集把句柄让出去了，必须重开
                 continue;
             }
             if (k is "t") {
@@ -1233,9 +1375,23 @@ internal static class Program {
     }
 
     private static int ApplyInPlace(IContainer store, List<Item> items, Flavor target, bool partial = false) {
+        if (!store.Alive) {
+            Console.WriteLine("容器已经释放（采集或结构演练之后没有重新打开），这次一个都没写。请重新运行本程序。");
+            return 6;
+        }
         var missing = items.Where(i => i.Missing).ToList();
-        var unknown = items.Where(i => i.CurFlavor == Flavor.Unknown && !i.Missing).ToList();
-        var skip = missing.Concat(unknown).ToList();
+        var broken = items.Where(i => i.Broken).ToList();
+        var unknown = items.Where(i => i.CurFlavor == Flavor.Unknown && !i.Missing && !i.Broken).ToList();
+        var skip = missing.Concat(broken).Concat(unknown).ToList();
+
+        if (broken.Count > 0) {
+            Console.WriteLine();
+            Console.WriteLine($"!! {broken.Count} 个目标文件数据已损坏，读不出来：");
+            foreach (var u in broken.Take(6)) Console.WriteLine($"    {u.Label}  —  {u.BrokenWhy}");
+            if (broken.Count > 6) Console.WriteLine($"    ... 还有 {broken.Count - 6} 个");
+            Console.WriteLine("  这些文件的索引记录指向一个已经被删掉的自建 bundle（Bundles2/LibGGPK3/*.bundle.bin）。");
+            Console.WriteLine("  内容无法在本机重建，先修客户端再打补丁。");
+        }
 
         if (skip.Count > 0) {
             if (!partial) {
@@ -1305,6 +1461,7 @@ internal static class Program {
         Console.WriteLine();
 
         var plan = Args.ContainsKey("plan");
+        if (!plan) store.Sanitize();   // 重名的自建 bundle 记录不收拾干净，写入时的清理会连带删掉活文件
         var backupRoot = System.IO.Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             "PoE-zh-汉化", "backup", DateTime.Now.ToString("yyyyMMdd-HHmmss"));
@@ -1364,8 +1521,12 @@ internal static class Program {
                 Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} {ShowFlavor(i)} → {FlavorName(EffectiveFlavor(i, target))}  {t0.ElapsedMilliseconds} ms");
                 nDone++;
             } catch (Exception ex) {
-                Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} ✗ {ex.Message}");
+                Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} ✗ {ex.GetType().Name}: {ex.Message}");
                 nFail++;
+                if (ex is ObjectDisposedException) {
+                    Console.WriteLine("  容器被中途释放了，剩下的文件没有写。请重新运行本程序。");
+                    break;
+                }
             }
         }
 

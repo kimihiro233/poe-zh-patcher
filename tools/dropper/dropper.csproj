@@ -22,6 +22,7 @@
   <ItemGroup>
     <None Include="..\lib\oo2core.dll" Link="oo2core.dll" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="..\pack\bundle.gz" LogicalName="bundle.gz" />
+    <Compile Include="..\shared\BundleHygiene.cs" Link="BundleHygiene.cs" />
   </ItemGroup>
 
 </Project>

@@ -122,6 +122,21 @@
   Steam/WeGame = `Bundles2/_.index.bin` + `*.bundle.bin`（`LibBundle3.Index` + `DriveBundleFactory`）。
   抽象在 dropper 的 `IContainer`；`_.index.bin` **只能一个写句柄**，必须 `CloseStore()/Reopen()`。
   Bundles2 写完要 `index.Save()` 才落盘（ggpk 是随写随存）。完整性体检 `tools/b2probe --check`。
+- **ggpk 千万别逐文件落盘（v0.4.1 修，血的教训）**：`FileRecord.Write(..., saveIndex:true)` 每写一个文件就把
+  20 MB `_.index.bin` 重写进 ggpk 一次，31 个文件 31 次，反复吃/让空闲块 → 复用到
+  `Bundles2/LibGGPK3/*.bundle.bin` 的位置就把它挤没了，索引记录还在 → 进游戏
+  `Cannot find bundle: "Bundles2/LibGGPK3/1.bundle.bin" in GGPK`。
+  现在 ggpk 也走「收齐改动 → 结尾一次 `Save()`」。写入前 `BundleHygiene.Consolidate()` 把重名/悬空的自建
+  bundle 记录收成一条（`Index.Save()` 删空 bundle 是按路径删的，重名会连带删掉活的那个）。
+  已经写坏的 ggpk 用 `tools/ggpkdoctor`：体检 + 备份到 `out/ggpk-backup-*/` + 归并 + 补写。
+- **`ObjectDisposedException` 认对象名**：报 `LibBundle3.Bundle` = **容器已被释放还在用**
+  （`Index.EnsureNotDisposed()` 转调 `baseBundle`，抛的是基准 bundle 的名字），不是数据问题。
+  v0.4.1 的实例：菜单 `[t]` 结构演练 / `[c]` 采集内部 `CloseStore()` 换容器，回到菜单后仍用最初那个死句柄
+  → 每个文件一行 `Cannot access a disposed object.`。现在 `IContainer.Alive` + 菜单每轮取当前活着的容器。
+  **凡是「先演练/采集，再安装」的路径都要复核句柄**。
+- **远端排障先跑 `--writetest[=N]`**：把 `_.index.bin` 复制到临时目录，在副本上写 N 个文件 + 落盘 + 回读，
+  不碰客户端 → 一眼分清是「写入通道」问题还是「内容对不上」问题。ggpk 太大不适用（用 `--struct`）。
+  `dist/PoE-zh-Patcher.exe` 要管理员权限，本机自测用 `dotnet ...PoE-zh-Patcher.dll`。
 - 本机模拟环境：国服 `E:\games\WeGameApps\流放之路`（3.25.1d，只有 `data/simplified chinese/`，
   所以 5 张 dat 表缺失、词缀 sha 对不上 → 拒写是正确的；只用于 `--struct` 验通道）。
 - 修正稿：`fix-direction.csv`(19) + `fix-mult.csv`(49) + `fix-wording.csv`(3)。
