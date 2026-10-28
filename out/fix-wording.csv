@@ -1,0 +1,6 @@
+﻿stat_ids,en,zh_old,zh_new,zh_alt,why
+map_unique_monster_X_special_rewards,Unique Monsters in Area have an additional Reward\nUnique Monsters in Area are more Difficult for each Reward they have,區域內的傳奇怪物有 1 個額外獎勵\n區域內的傳奇怪物會根據每個獎勵增加難度,區域內的傳奇怪物有 1 個額外獎勵\n區域內每有一個獎勵，傳奇怪物的難度就更高,區域內的傳奇怪物有 1 個額外獎勵\n區域內的傳奇怪物每有一個獎勵，難度就更高,去「根據」；more 补比较级；「每…就…」立起递进；「的」让「區域內」读作状语，主宾不漂移（用户定稿）
+map_unique_monster_X_special_rewards,Unique Monsters in Area have {0} additional Rewards\nUnique Monsters in Area are more Difficult for each Reward they have,區域內的傳奇怪物有 {0} 個額外獎勵\n區域內的傳奇怪物會根據每個獎勵增加難度,區域內的傳奇怪物有 {0} 個額外獎勵\n區域內每有一個獎勵，傳奇怪物的難度就更高,區域內的傳奇怪物有 {0} 個額外獎勵\n區域內的傳奇怪物每有一個獎勵，難度就更高,去「根據」；more 补比较级；「每…就…」立起递进；「的」让「區域內」读作状语，主宾不漂移（用户定稿）
+map_metamorph_itemised_boss_more_difficult,Metamorph Boss Organs found in Area construct more difficult Metamorph Bosses,區域內鍊魔頭目掉落的器官可構成更困難的鍊魔頭目,區域內鍊魔頭目掉落的器官可構成難度更高的鍊魔頭目,,「更困難的頭目」像在说这只 BOSS 很为难；「難度」是繁中既有一级术语（25 处 increased Difficulty → 增加難度）
+all_skill_gem_quality_+,{0:+d}% to Quality of all Skill Gems,全部技能寶石品質 {0:+d}%,全部主動技能寶石品質 {0:+d}%,,stat id 与 wiki 证实仅对主动技能石生效（辅助宝石不加品质）；GGG 显示文本省略 active，中文补全避免误读（群星之灰等）
+all_skill_gem_level_+,{0:+d} to Level of all Skill Gems,全部技能寶石等級 {0:+d},全部主動技能寶石等級 {0:+d},,同上；同物品的 Experience Gain of Gems 用 Gems（含辅助），对照证明 Skill Gems 仅主动

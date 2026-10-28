@@ -1,0 +1,6 @@
+﻿stat_ids,file,cond,en,zh_old,zh_new,note
+physical_damage_+%_per_frenzy_charge,metadata_statdescriptions_active_skill_gem_stat_descriptions.txt,1|#,{0}% increased Physical Damage per Frenzy Charge,每一狂怒球造成{0}%更多物理傷害,每顆狂怒球增加 {0}% 物理傷害,increased/reduced 是加法，不可譯「更多/更少」
+physical_damage_+%_per_frenzy_charge,metadata_statdescriptions_active_skill_gem_stat_descriptions.txt,#|-1,{0}% reduced Physical Damage per Frenzy Charge,每一狂怒球造成{0}%更少物理傷害,每顆狂怒球減少 {0}% 物理傷害,increased/reduced 是加法，不可譯「更多/更少」
+map_boss_damage_+%_per_divination_card,metadata_statdescriptions_map_stat_descriptions.txt,#,Final Map Boss deals increased Damage per stolen Divination Card,每張盜竊命運卡會使最終地圖頭目造成更多傷害,每張盜竊命運卡使最終地圖頭目的傷害增加,increased/reduced 是加法，不可譯「更多/更少」
+display_map_boss_gives_experience_+%,metadata_statdescriptions_stat_descriptions.txt,#,Unique Boss gives {0}% increased Experience,傳奇頭目給予 {0}% 更多經驗值,傳奇頭目給予的經驗值增加 {0}%,increased/reduced 是加法，不可譯「更多/更少」
+map_unique_item_drop_chance_+%,metadata_statdescriptions_stat_descriptions.txt,#,{0}% increased Unique Items found in Area,區域掉落 {0}% 更多傳奇道具,區域內找到的傳奇物品增加 {0}%,increased/reduced 是加法，不可譯「更多/更少」

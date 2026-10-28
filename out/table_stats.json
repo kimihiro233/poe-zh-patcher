@@ -1,0 +1,2498 @@
+[
+ {
+  "table": "mtxtypes.datc64",
+  "rows": 8411,
+  "cols": 3,
+  "pairs": 24985,
+  "diff": 16345,
+  "cjk": 16272
+ },
+ {
+  "table": "achievementitems.datc64",
+  "rows": 11776,
+  "cols": 2,
+  "pairs": 23036,
+  "diff": 11257,
+  "cjk": 10774
+ },
+ {
+  "table": "achievementitems.datcl64",
+  "rows": 11776,
+  "cols": 1,
+  "pairs": 11260,
+  "diff": 11228,
+  "cjk": 10730
+ },
+ {
+  "table": "monstervarieties.datc64",
+  "rows": 10691,
+  "cols": 4,
+  "pairs": 42763,
+  "diff": 10542,
+  "cjk": 10542
+ },
+ {
+  "table": "clientstrings.datc64",
+  "rows": 8494,
+  "cols": 3,
+  "pairs": 17272,
+  "diff": 8551,
+  "cjk": 8514
+ },
+ {
+  "table": "clientstrings.datcl64",
+  "rows": 8494,
+  "cols": 2,
+  "pairs": 8778,
+  "diff": 8123,
+  "cjk": 8012
+ },
+ {
+  "table": "baseitemtypes.datc64",
+  "rows": 5461,
+  "cols": 7,
+  "pairs": 37802,
+  "diff": 5018,
+  "cjk": 5271
+ },
+ {
+  "table": "baseitemtypes.datcl64",
+  "rows": 5461,
+  "cols": 1,
+  "pairs": 5041,
+  "diff": 5017,
+  "cjk": 5014
+ },
+ {
+  "table": "words.datc64",
+  "rows": 4117,
+  "cols": 2,
+  "pairs": 8234,
+  "diff": 4102,
+  "cjk": 4102
+ },
+ {
+  "table": "npctalk.datc64",
+  "rows": 3990,
+  "cols": 1,
+  "pairs": 3990,
+  "diff": 3984,
+  "cjk": 3984
+ },
+ {
+  "table": "achievements.datc64",
+  "rows": 1749,
+  "cols": 3,
+  "pairs": 5230,
+  "diff": 3481,
+  "cjk": 3478
+ },
+ {
+  "table": "words.datcl64",
+  "rows": 4117,
+  "cols": 1,
+  "pairs": 4117,
+  "diff": 3547,
+  "cjk": 3229
+ },
+ {
+  "table": "flavourtext.datc64",
+  "rows": 2962,
+  "cols": 2,
+  "pairs": 5923,
+  "diff": 2914,
+  "cjk": 2913
+ },
+ {
+  "table": "necropolispacks.datc64",
+  "rows": 956,
+  "cols": 6,
+  "pairs": 4507,
+  "diff": 2519,
+  "cjk": 2519
+ },
+ {
+  "table": "currencyitems.datc64",
+  "rows": 1962,
+  "cols": 2,
+  "pairs": 3206,
+  "diff": 2308,
+  "cjk": 2305
+ },
+ {
+  "table": "worldareas.datc64",
+  "rows": 1932,
+  "cols": 3,
+  "pairs": 5789,
+  "diff": 1920,
+  "cjk": 1925
+ },
+ {
+  "table": "queststates.datc64",
+  "rows": 2010,
+  "cols": 1,
+  "pairs": 1568,
+  "diff": 1568,
+  "cjk": 1568
+ },
+ {
+  "table": "buffdefinitions.datc64",
+  "rows": 2814,
+  "cols": 3,
+  "pairs": 4834,
+  "diff": 1474,
+  "cjk": 1474
+ },
+ {
+  "table": "charactertextaudio.datc64",
+  "rows": 1042,
+  "cols": 4,
+  "pairs": 3323,
+  "diff": 1026,
+  "cjk": 1026
+ },
+ {
+  "table": "shoptag.datc64",
+  "rows": 948,
+  "cols": 2,
+  "pairs": 1896,
+  "diff": 945,
+  "cjk": 943
+ },
+ {
+  "table": "npcs.datc64",
+  "rows": 819,
+  "cols": 2,
+  "pairs": 1622,
+  "diff": 803,
+  "cjk": 803
+ },
+ {
+  "table": "passiveskills.datc64",
+  "rows": 5706,
+  "cols": 3,
+  "pairs": 12182,
+  "diff": 781,
+  "cjk": 781
+ },
+ {
+  "table": "passiveskills.datcl64",
+  "rows": 5706,
+  "cols": 1,
+  "pairs": 781,
+  "diff": 781,
+  "cjk": 781
+ },
+ {
+  "table": "backenderrors.datc64",
+  "rows": 715,
+  "cols": 2,
+  "pairs": 1430,
+  "diff": 713,
+  "cjk": 704
+ },
+ {
+  "table": "gemeffects.datc64",
+  "rows": 1292,
+  "cols": 3,
+  "pairs": 2056,
+  "diff": 615,
+  "cjk": 615
+ },
+ {
+  "table": "indexableskillgems.datc64",
+  "rows": 287,
+  "cols": 2,
+  "pairs": 574,
+  "diff": 574,
+  "cjk": 574
+ },
+ {
+  "table": "indexableskillgems.datcl64",
+  "rows": 287,
+  "cols": 2,
+  "pairs": 574,
+  "diff": 574,
+  "cjk": 574
+ },
+ {
+  "table": "mercenaryskills.datc64",
+  "rows": 272,
+  "cols": 2,
+  "pairs": 544,
+  "diff": 538,
+  "cjk": 538
+ },
+ {
+  "table": "achievementsetrewards.datc64",
+  "rows": 329,
+  "cols": 4,
+  "pairs": 970,
+  "diff": 492,
+  "cjk": 492
+ },
+ {
+  "table": "remindertext.datc64",
+  "rows": 468,
+  "cols": 2,
+  "pairs": 936,
+  "diff": 466,
+  "cjk": 466
+ },
+ {
+  "table": "alternatepassiveskills.datc64",
+  "rows": 381,
+  "cols": 3,
+  "pairs": 789,
+  "diff": 408,
+  "cjk": 408
+ },
+ {
+  "table": "characterpanelstats.datc64",
+  "rows": 387,
+  "cols": 2,
+  "pairs": 774,
+  "diff": 387,
+  "cjk": 387
+ },
+ {
+  "table": "leagueinfo.datc64",
+  "rows": 373,
+  "cols": 3,
+  "pairs": 1013,
+  "diff": 352,
+  "cjk": 352
+ },
+ {
+  "table": "incursionrooms.datc64",
+  "rows": 98,
+  "cols": 11,
+  "pairs": 972,
+  "diff": 331,
+  "cjk": 338
+ },
+ {
+  "table": "clientstrings2.datc64",
+  "rows": 311,
+  "cols": 2,
+  "pairs": 619,
+  "diff": 300,
+  "cjk": 300
+ },
+ {
+  "table": "mappins.datc64",
+  "rows": 140,
+  "cols": 4,
+  "pairs": 558,
+  "diff": 280,
+  "cjk": 280
+ },
+ {
+  "table": "mappins.datcl64",
+  "rows": 140,
+  "cols": 2,
+  "pairs": 280,
+  "diff": 280,
+  "cjk": 280
+ },
+ {
+  "table": "clientstrings2.datcl64",
+  "rows": 311,
+  "cols": 1,
+  "pairs": 308,
+  "diff": 275,
+  "cjk": 273
+ },
+ {
+  "table": "mercenaryskills.datcl64",
+  "rows": 272,
+  "cols": 1,
+  "pairs": 272,
+  "diff": 269,
+  "cjk": 269
+ },
+ {
+  "table": "mercenaryflavourtext.datc64",
+  "rows": 234,
+  "cols": 2,
+  "pairs": 468,
+  "diff": 234,
+  "cjk": 234
+ },
+ {
+  "table": "lakerooms.datc64",
+  "rows": 95,
+  "cols": 4,
+  "pairs": 378,
+  "diff": 219,
+  "cjk": 219
+ },
+ {
+  "table": "skillgeminfo.datc64",
+  "rows": 204,
+  "cols": 4,
+  "pairs": 815,
+  "diff": 204,
+  "cjk": 204
+ },
+ {
+  "table": "quest.datc64",
+  "rows": 212,
+  "cols": 3,
+  "pairs": 565,
+  "diff": 198,
+  "cjk": 198
+ },
+ {
+  "table": "quest.datcl64",
+  "rows": 212,
+  "cols": 1,
+  "pairs": 198,
+  "diff": 198,
+  "cjk": 198
+ },
+ {
+  "table": "archetypes.datc64",
+  "rows": 91,
+  "cols": 7,
+  "pairs": 611,
+  "diff": 180,
+  "cjk": 180
+ },
+ {
+  "table": "incursionrooms.datcl64",
+  "rows": 98,
+  "cols": 4,
+  "pairs": 370,
+  "diff": 174,
+  "cjk": 179
+ },
+ {
+  "table": "indexablesupportgems.datc64",
+  "rows": 172,
+  "cols": 1,
+  "pairs": 172,
+  "diff": 172,
+  "cjk": 172
+ },
+ {
+  "table": "indexablesupportgems.datcl64",
+  "rows": 172,
+  "cols": 1,
+  "pairs": 172,
+  "diff": 172,
+  "cjk": 172
+ },
+ {
+  "table": "synthesisareas.datc64",
+  "rows": 167,
+  "cols": 2,
+  "pairs": 334,
+  "diff": 167,
+  "cjk": 167
+ },
+ {
+  "table": "indexablenonactivesupportgems.datc64",
+  "rows": 164,
+  "cols": 1,
+  "pairs": 164,
+  "diff": 164,
+  "cjk": 164
+ },
+ {
+  "table": "indexablenonactivesupportgems.datcl64",
+  "rows": 164,
+  "cols": 1,
+  "pairs": 164,
+  "diff": 164,
+  "cjk": 164
+ },
+ {
+  "table": "bestiaryrecipes.datc64",
+  "rows": 144,
+  "cols": 2,
+  "pairs": 288,
+  "diff": 144,
+  "cjk": 144
+ },
+ {
+  "table": "recipeunlockdisplay.datc64",
+  "rows": 130,
+  "cols": 2,
+  "pairs": 142,
+  "diff": 142,
+  "cjk": 142
+ },
+ {
+  "table": "bestiaryrecipes.datcl64",
+  "rows": 144,
+  "cols": 1,
+  "pairs": 144,
+  "diff": 143,
+  "cjk": 140
+ },
+ {
+  "table": "ancestraltrialunits.datc64",
+  "rows": 74,
+  "cols": 5,
+  "pairs": 370,
+  "diff": 137,
+  "cjk": 137
+ },
+ {
+  "table": "ancestraltrialitems.datc64",
+  "rows": 45,
+  "cols": 5,
+  "pairs": 225,
+  "diff": 90,
+  "cjk": 135
+ },
+ {
+  "table": "hideoutdoodadcategory.datc64",
+  "rows": 133,
+  "cols": 2,
+  "pairs": 266,
+  "diff": 133,
+  "cjk": 133
+ },
+ {
+  "table": "hideoutdoodadcategory.datcl64",
+  "rows": 133,
+  "cols": 1,
+  "pairs": 133,
+  "diff": 133,
+  "cjk": 132
+ },
+ {
+  "table": "ancestraltrialitems.datcl64",
+  "rows": 45,
+  "cols": 3,
+  "pairs": 135,
+  "diff": 85,
+  "cjk": 130
+ },
+ {
+  "table": "passiveskilloverrides.datc64",
+  "rows": 343,
+  "cols": 2,
+  "pairs": 255,
+  "diff": 128,
+  "cjk": 128
+ },
+ {
+  "table": "harvestcraftoptions.datc64",
+  "rows": 74,
+  "cols": 4,
+  "pairs": 291,
+  "diff": 125,
+  "cjk": 125
+ },
+ {
+  "table": "passiveskilloverrides.datcl64",
+  "rows": 343,
+  "cols": 1,
+  "pairs": 128,
+  "diff": 125,
+  "cjk": 125
+ },
+ {
+  "table": "currencyexchangecategories.datc64",
+  "rows": 124,
+  "cols": 2,
+  "pairs": 248,
+  "diff": 124,
+  "cjk": 124
+ },
+ {
+  "table": "currencyexchangecategories.datcl64",
+  "rows": 124,
+  "cols": 1,
+  "pairs": 124,
+  "diff": 124,
+  "cjk": 124
+ },
+ {
+  "table": "synthesisrewardtypes.datc64",
+  "rows": 107,
+  "cols": 2,
+  "pairs": 214,
+  "diff": 107,
+  "cjk": 107
+ },
+ {
+  "table": "itemisedcorpse.datc64",
+  "rows": 114,
+  "cols": 1,
+  "pairs": 102,
+  "diff": 102,
+  "cjk": 102
+ },
+ {
+  "table": "betrayalupgrades.datc64",
+  "rows": 50,
+  "cols": 5,
+  "pairs": 248,
+  "diff": 99,
+  "cjk": 99
+ },
+ {
+  "table": "uitalktext.datc64",
+  "rows": 98,
+  "cols": 3,
+  "pairs": 291,
+  "diff": 98,
+  "cjk": 98
+ },
+ {
+  "table": "uitalktext.datcl64",
+  "rows": 98,
+  "cols": 1,
+  "pairs": 98,
+  "diff": 98,
+  "cjk": 98
+ },
+ {
+  "table": "achievementsetrewards.datcl64",
+  "rows": 329,
+  "cols": 1,
+  "pairs": 329,
+  "diff": 96,
+  "cjk": 96
+ },
+ {
+  "table": "lakerooms.datcl64",
+  "rows": 95,
+  "cols": 1,
+  "pairs": 93,
+  "diff": 93,
+  "cjk": 93
+ },
+ {
+  "table": "bestiarygenus.datc64",
+  "rows": 42,
+  "cols": 4,
+  "pairs": 146,
+  "diff": 84,
+  "cjk": 84
+ },
+ {
+  "table": "bestiarygenus.datcl64",
+  "rows": 42,
+  "cols": 2,
+  "pairs": 84,
+  "diff": 84,
+  "cjk": 84
+ },
+ {
+  "table": "delvecraftingmodifierdescriptions.datc64",
+  "rows": 83,
+  "cols": 2,
+  "pairs": 166,
+  "diff": 83,
+  "cjk": 83
+ },
+ {
+  "table": "expeditiondeals.datc64",
+  "rows": 82,
+  "cols": 2,
+  "pairs": 159,
+  "diff": 82,
+  "cjk": 82
+ },
+ {
+  "table": "keywordpopups.datc64",
+  "rows": 46,
+  "cols": 3,
+  "pairs": 126,
+  "diff": 80,
+  "cjk": 80
+ },
+ {
+  "table": "itemisednecropolispacks.datc64",
+  "rows": 79,
+  "cols": 1,
+  "pairs": 79,
+  "diff": 79,
+  "cjk": 79
+ },
+ {
+  "table": "craftingbenchoptions.datc64",
+  "rows": 829,
+  "cols": 1,
+  "pairs": 78,
+  "diff": 78,
+  "cjk": 78
+ },
+ {
+  "table": "keywordpopups.datcl64",
+  "rows": 46,
+  "cols": 2,
+  "pairs": 80,
+  "diff": 79,
+  "cjk": 78
+ },
+ {
+  "table": "ancestraltrialunits.datcl64",
+  "rows": 74,
+  "cols": 1,
+  "pairs": 74,
+  "diff": 74,
+  "cjk": 73
+ },
+ {
+  "table": "commands.datc64",
+  "rows": 71,
+  "cols": 2,
+  "pairs": 141,
+  "diff": 68,
+  "cjk": 68
+ },
+ {
+  "table": "commands.datcl64",
+  "rows": 71,
+  "cols": 1,
+  "pairs": 70,
+  "diff": 68,
+  "cjk": 68
+ },
+ {
+  "table": "craftingbenchoptions.datcl64",
+  "rows": 829,
+  "cols": 1,
+  "pairs": 78,
+  "diff": 78,
+  "cjk": 68
+ },
+ {
+  "table": "itemclasscategories.datc64",
+  "rows": 67,
+  "cols": 2,
+  "pairs": 134,
+  "diff": 67,
+  "cjk": 67
+ },
+ {
+  "table": "itemclasscategories.datcl64",
+  "rows": 67,
+  "cols": 1,
+  "pairs": 67,
+  "diff": 67,
+  "cjk": 67
+ },
+ {
+  "table": "incubators.datc64",
+  "rows": 63,
+  "cols": 1,
+  "pairs": 63,
+  "diff": 63,
+  "cjk": 63
+ },
+ {
+  "table": "tips.datc64",
+  "rows": 50,
+  "cols": 3,
+  "pairs": 112,
+  "diff": 62,
+  "cjk": 62
+ },
+ {
+  "table": "tips.datcl64",
+  "rows": 50,
+  "cols": 2,
+  "pairs": 62,
+  "diff": 62,
+  "cjk": 62
+ },
+ {
+  "table": "heistchestrewardtypes.datc64",
+  "rows": 28,
+  "cols": 4,
+  "pairs": 111,
+  "diff": 56,
+  "cjk": 56
+ },
+ {
+  "table": "heistchestrewardtypes.datcl64",
+  "rows": 28,
+  "cols": 3,
+  "pairs": 84,
+  "diff": 56,
+  "cjk": 56
+ },
+ {
+  "table": "byocrafting.datc64",
+  "rows": 39,
+  "cols": 5,
+  "pairs": 147,
+  "diff": 54,
+  "cjk": 54
+ },
+ {
+  "table": "tieredmicrotransactionsvisuals.datc64",
+  "rows": 53,
+  "cols": 3,
+  "pairs": 75,
+  "diff": 53,
+  "cjk": 53
+ },
+ {
+  "table": "tieredmicrotransactionsvisuals.datcl64",
+  "rows": 53,
+  "cols": 1,
+  "pairs": 53,
+  "diff": 53,
+  "cjk": 53
+ },
+ {
+  "table": "microtransactionslot.datc64",
+  "rows": 49,
+  "cols": 1,
+  "pairs": 49,
+  "diff": 48,
+  "cjk": 48
+ },
+ {
+  "table": "gemtags.datc64",
+  "rows": 54,
+  "cols": 2,
+  "pairs": 101,
+  "diff": 47,
+  "cjk": 47
+ },
+ {
+  "table": "gemtags.datcl64",
+  "rows": 54,
+  "cols": 1,
+  "pairs": 47,
+  "diff": 47,
+  "cjk": 47
+ },
+ {
+  "table": "villageshippingfailures.datc64",
+  "rows": 21,
+  "cols": 3,
+  "pairs": 61,
+  "diff": 40,
+  "cjk": 40
+ },
+ {
+  "table": "sanctumdeferredrewardcategories.datc64",
+  "rows": 37,
+  "cols": 2,
+  "pairs": 74,
+  "diff": 37,
+  "cjk": 37
+ },
+ {
+  "table": "sanctumdeferredrewardcategories.datcl64",
+  "rows": 37,
+  "cols": 1,
+  "pairs": 37,
+  "diff": 37,
+  "cjk": 37
+ },
+ {
+  "table": "descendancy.datc64",
+  "rows": 17,
+  "cols": 7,
+  "pairs": 101,
+  "diff": 35,
+  "cjk": 35
+ },
+ {
+  "table": "hideoutdoodadtags.datc64",
+  "rows": 34,
+  "cols": 2,
+  "pairs": 68,
+  "diff": 34,
+  "cjk": 34
+ },
+ {
+  "table": "hideoutdoodadtags.datcl64",
+  "rows": 34,
+  "cols": 1,
+  "pairs": 34,
+  "diff": 34,
+  "cjk": 34
+ },
+ {
+  "table": "advancedskillstutorial.datc64",
+  "rows": 33,
+  "cols": 4,
+  "pairs": 132,
+  "diff": 33,
+  "cjk": 33
+ },
+ {
+  "table": "advancedskillstutorial.datcl64",
+  "rows": 33,
+  "cols": 1,
+  "pairs": 33,
+  "diff": 33,
+  "cjk": 33
+ },
+ {
+  "table": "microtransactioncategory.datc64",
+  "rows": 33,
+  "cols": 1,
+  "pairs": 33,
+  "diff": 33,
+  "cjk": 33
+ },
+ {
+  "table": "microtransactioncategory.datcl64",
+  "rows": 33,
+  "cols": 1,
+  "pairs": 33,
+  "diff": 33,
+  "cjk": 33
+ },
+ {
+  "table": "realms.datc64",
+  "rows": 34,
+  "cols": 3,
+  "pairs": 102,
+  "diff": 60,
+  "cjk": 33
+ },
+ {
+  "table": "afflictionrewardtypevisuals.datc64",
+  "rows": 32,
+  "cols": 2,
+  "pairs": 64,
+  "diff": 32,
+  "cjk": 32
+ },
+ {
+  "table": "afflictionrewardtypevisuals.datcl64",
+  "rows": 32,
+  "cols": 1,
+  "pairs": 32,
+  "diff": 32,
+  "cjk": 32
+ },
+ {
+  "table": "descendancy.datcl64",
+  "rows": 17,
+  "cols": 3,
+  "pairs": 49,
+  "diff": 31,
+  "cjk": 30
+ },
+ {
+  "table": "necropoliscraftitemtypes.datc64",
+  "rows": 29,
+  "cols": 4,
+  "pairs": 110,
+  "diff": 29,
+  "cjk": 29
+ },
+ {
+  "table": "necropoliscraftitemtypes.datcl64",
+  "rows": 29,
+  "cols": 2,
+  "pairs": 58,
+  "diff": 29,
+  "cjk": 29
+ },
+ {
+  "table": "ancestraltrialtribes.datc64",
+  "rows": 11,
+  "cols": 9,
+  "pairs": 97,
+  "diff": 28,
+  "cjk": 28
+ },
+ {
+  "table": "ancestraltrialtribes.datcl64",
+  "rows": 11,
+  "cols": 6,
+  "pairs": 64,
+  "diff": 28,
+  "cjk": 28
+ },
+ {
+  "table": "mapseries.datc64",
+  "rows": 28,
+  "cols": 13,
+  "pairs": 207,
+  "diff": 28,
+  "cjk": 28
+ },
+ {
+  "table": "mapseries.datcl64",
+  "rows": 28,
+  "cols": 2,
+  "pairs": 30,
+  "diff": 28,
+  "cjk": 28
+ },
+ {
+  "table": "alternatepassiveskills.datcl64",
+  "rows": 381,
+  "cols": 1,
+  "pairs": 27,
+  "diff": 27,
+  "cjk": 27
+ },
+ {
+  "table": "ancestraltrialfielditems.datc64",
+  "rows": 27,
+  "cols": 1,
+  "pairs": 27,
+  "diff": 27,
+  "cjk": 27
+ },
+ {
+  "table": "ancestraltrialfielditems.datcl64",
+  "rows": 27,
+  "cols": 1,
+  "pairs": 27,
+  "diff": 27,
+  "cjk": 27
+ },
+ {
+  "table": "gamepadbutton.datc64",
+  "rows": 21,
+  "cols": 6,
+  "pairs": 112,
+  "diff": 34,
+  "cjk": 26
+ },
+ {
+  "table": "gamepadbutton.datcl64",
+  "rows": 21,
+  "cols": 4,
+  "pairs": 70,
+  "diff": 34,
+  "cjk": 26
+ },
+ {
+  "table": "tags.datc64",
+  "rows": 1389,
+  "cols": 2,
+  "pairs": 1415,
+  "diff": 26,
+  "cjk": 26
+ },
+ {
+  "table": "tags.datcl64",
+  "rows": 1389,
+  "cols": 1,
+  "pairs": 26,
+  "diff": 26,
+  "cjk": 26
+ },
+ {
+  "table": "villageexports.datc64",
+  "rows": 16,
+  "cols": 6,
+  "pairs": 78,
+  "diff": 26,
+  "cjk": 26
+ },
+ {
+  "table": "villageexports.datcl64",
+  "rows": 16,
+  "cols": 3,
+  "pairs": 42,
+  "diff": 26,
+  "cjk": 26
+ },
+ {
+  "table": "villagetownlayout.datc64",
+  "rows": 28,
+  "cols": 2,
+  "pairs": 53,
+  "diff": 25,
+  "cjk": 25
+ },
+ {
+  "table": "bestiarygroups.datc64",
+  "rows": 12,
+  "cols": 6,
+  "pairs": 72,
+  "diff": 24,
+  "cjk": 24
+ },
+ {
+  "table": "genericleaguerewardtypevisuals.datc64",
+  "rows": 24,
+  "cols": 2,
+  "pairs": 48,
+  "diff": 24,
+  "cjk": 24
+ },
+ {
+  "table": "genericleaguerewardtypevisuals.datcl64",
+  "rows": 24,
+  "cols": 1,
+  "pairs": 24,
+  "diff": 24,
+  "cjk": 24
+ },
+ {
+  "table": "bestiaryrecipecategories.datc64",
+  "rows": 22,
+  "cols": 2,
+  "pairs": 44,
+  "diff": 22,
+  "cjk": 22
+ },
+ {
+  "table": "bestiaryrecipecategories.datcl64",
+  "rows": 22,
+  "cols": 1,
+  "pairs": 22,
+  "diff": 22,
+  "cjk": 22
+ },
+ {
+  "table": "bindablevirtualkeys.datc64",
+  "rows": 92,
+  "cols": 2,
+  "pairs": 184,
+  "diff": 26,
+  "cjk": 22
+ },
+ {
+  "table": "bindablevirtualkeys.datcl64",
+  "rows": 92,
+  "cols": 2,
+  "pairs": 184,
+  "diff": 26,
+  "cjk": 22
+ },
+ {
+  "table": "craftingitemclasscategories.datc64",
+  "rows": 22,
+  "cols": 3,
+  "pairs": 58,
+  "diff": 22,
+  "cjk": 22
+ },
+ {
+  "table": "craftingitemclasscategories.datcl64",
+  "rows": 22,
+  "cols": 3,
+  "pairs": 58,
+  "diff": 22,
+  "cjk": 22
+ },
+ {
+  "table": "villagejobs.datc64",
+  "rows": 31,
+  "cols": 1,
+  "pairs": 22,
+  "diff": 22,
+  "cjk": 22
+ },
+ {
+  "table": "villageupgradecategories.datc64",
+  "rows": 11,
+  "cols": 5,
+  "pairs": 55,
+  "diff": 22,
+  "cjk": 22
+ },
+ {
+  "table": "villageupgradecategories.datcl64",
+  "rows": 11,
+  "cols": 3,
+  "pairs": 33,
+  "diff": 22,
+  "cjk": 22
+ },
+ {
+  "table": "characters.datc64",
+  "rows": 7,
+  "cols": 20,
+  "pairs": 139,
+  "diff": 21,
+  "cjk": 21
+ },
+ {
+  "table": "passiveskillstatcategories.datc64",
+  "rows": 20,
+  "cols": 2,
+  "pairs": 40,
+  "diff": 20,
+  "cjk": 20
+ },
+ {
+  "table": "passiveskillstatcategories.datcl64",
+  "rows": 20,
+  "cols": 2,
+  "pairs": 40,
+  "diff": 20,
+  "cjk": 20
+ },
+ {
+  "table": "alternatequalitytypes.datc64",
+  "rows": 18,
+  "cols": 2,
+  "pairs": 36,
+  "diff": 18,
+  "cjk": 18
+ },
+ {
+  "table": "heistjobs.datc64",
+  "rows": 9,
+  "cols": 7,
+  "pairs": 63,
+  "diff": 18,
+  "cjk": 18
+ },
+ {
+  "table": "relicinventorylayout.datc64",
+  "rows": 18,
+  "cols": 1,
+  "pairs": 18,
+  "diff": 18,
+  "cjk": 18
+ },
+ {
+  "table": "sanctumpersistenteffects.datc64",
+  "rows": 129,
+  "cols": 3,
+  "pairs": 387,
+  "diff": 17,
+  "cjk": 17
+ },
+ {
+  "table": "sanctumpersistenteffects.datcl64",
+  "rows": 129,
+  "cols": 1,
+  "pairs": 129,
+  "diff": 17,
+  "cjk": 17
+ },
+ {
+  "table": "stashtabaffinities.datc64",
+  "rows": 17,
+  "cols": 1,
+  "pairs": 17,
+  "diff": 17,
+  "cjk": 17
+ },
+ {
+  "table": "stashtabaffinities.datcl64",
+  "rows": 17,
+  "cols": 1,
+  "pairs": 17,
+  "diff": 17,
+  "cjk": 17
+ },
+ {
+  "table": "blightcraftingitems.datc64",
+  "rows": 16,
+  "cols": 1,
+  "pairs": 16,
+  "diff": 16,
+  "cjk": 16
+ },
+ {
+  "table": "blightcraftingitems.datcl64",
+  "rows": 16,
+  "cols": 1,
+  "pairs": 16,
+  "diff": 16,
+  "cjk": 16
+ },
+ {
+  "table": "brequelfruitrewardtypes.datc64",
+  "rows": 4,
+  "cols": 5,
+  "pairs": 20,
+  "diff": 16,
+  "cjk": 16
+ },
+ {
+  "table": "delvecraftingtags.datc64",
+  "rows": 16,
+  "cols": 1,
+  "pairs": 16,
+  "diff": 16,
+  "cjk": 16
+ },
+ {
+  "table": "delvecraftingtags.datcl64",
+  "rows": 16,
+  "cols": 1,
+  "pairs": 16,
+  "diff": 16,
+  "cjk": 16
+ },
+ {
+  "table": "mapconnections.datc64",
+  "rows": 133,
+  "cols": 1,
+  "pairs": 16,
+  "diff": 16,
+  "cjk": 16
+ },
+ {
+  "table": "mercenarysupports.datc64",
+  "rows": 266,
+  "cols": 2,
+  "pairs": 532,
+  "diff": 0,
+  "cjk": 16
+ },
+ {
+  "table": "mercenarysupports.datcl64",
+  "rows": 266,
+  "cols": 1,
+  "pairs": 266,
+  "diff": 0,
+  "cjk": 16
+ },
+ {
+  "table": "sanctumselectiondisplayoverride.datc64",
+  "rows": 122,
+  "cols": 4,
+  "pairs": 155,
+  "diff": 16,
+  "cjk": 16
+ },
+ {
+  "table": "sanctumselectiondisplayoverride.datcl64",
+  "rows": 122,
+  "cols": 2,
+  "pairs": 16,
+  "diff": 16,
+  "cjk": 16
+ },
+ {
+  "table": "hellscapepassives.datc64",
+  "rows": 15,
+  "cols": 5,
+  "pairs": 75,
+  "diff": 15,
+  "cjk": 15
+ },
+ {
+  "table": "hellscapepassives.datcl64",
+  "rows": 15,
+  "cols": 3,
+  "pairs": 45,
+  "diff": 15,
+  "cjk": 15
+ },
+ {
+  "table": "characters.datcl64",
+  "rows": 7,
+  "cols": 4,
+  "pairs": 28,
+  "diff": 14,
+  "cjk": 14
+ },
+ {
+  "table": "expeditionrelics.datc64",
+  "rows": 14,
+  "cols": 3,
+  "pairs": 42,
+  "diff": 14,
+  "cjk": 14
+ },
+ {
+  "table": "expeditionrelics.datcl64",
+  "rows": 14,
+  "cols": 2,
+  "pairs": 28,
+  "diff": 14,
+  "cjk": 14
+ },
+ {
+  "table": "mapstashspecialsubstashgroup.datc64",
+  "rows": 14,
+  "cols": 2,
+  "pairs": 28,
+  "diff": 14,
+  "cjk": 14
+ },
+ {
+  "table": "mapstashspecialsubstashgroup.datcl64",
+  "rows": 14,
+  "cols": 1,
+  "pairs": 14,
+  "diff": 14,
+  "cjk": 14
+ },
+ {
+  "table": "passiveskilltattootargetsets.datc64",
+  "rows": 10,
+  "cols": 3,
+  "pairs": 23,
+  "diff": 13,
+  "cjk": 13
+ },
+ {
+  "table": "villageshippingports.datc64",
+  "rows": 7,
+  "cols": 4,
+  "pairs": 26,
+  "diff": 13,
+  "cjk": 13
+ },
+ {
+  "table": "bestiarygroups.datcl64",
+  "rows": 12,
+  "cols": 2,
+  "pairs": 24,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "costtypes.datc64",
+  "rows": 13,
+  "cols": 2,
+  "pairs": 26,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "heistquestcontracts.datc64",
+  "rows": 34,
+  "cols": 1,
+  "pairs": 12,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "heistquestcontracts.datcl64",
+  "rows": 34,
+  "cols": 1,
+  "pairs": 12,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "leaguenames.datc64",
+  "rows": 6,
+  "cols": 3,
+  "pairs": 18,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "leaguenames.datcl64",
+  "rows": 6,
+  "cols": 3,
+  "pairs": 18,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "passiveskilltreetutorial.datc64",
+  "rows": 7,
+  "cols": 5,
+  "pairs": 31,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "recipeunlockdisplay.datcl64",
+  "rows": 130,
+  "cols": 1,
+  "pairs": 12,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "relicitemeffectvariations.datc64",
+  "rows": 13,
+  "cols": 3,
+  "pairs": 37,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "relicitemeffectvariations.datcl64",
+  "rows": 13,
+  "cols": 1,
+  "pairs": 12,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "warbandspackmonsters.datc64",
+  "rows": 3,
+  "cols": 13,
+  "pairs": 39,
+  "diff": 12,
+  "cjk": 12
+ },
+ {
+  "table": "archnemesismetarewards.datc64",
+  "rows": 11,
+  "cols": 3,
+  "pairs": 31,
+  "diff": 11,
+  "cjk": 11
+ },
+ {
+  "table": "necropolispackmodtiers.datc64",
+  "rows": 12,
+  "cols": 3,
+  "pairs": 34,
+  "diff": 11,
+  "cjk": 11
+ },
+ {
+  "table": "necropolispackmodtiers.datcl64",
+  "rows": 12,
+  "cols": 2,
+  "pairs": 23,
+  "diff": 11,
+  "cjk": 11
+ },
+ {
+  "table": "brequelencounterskills.datc64",
+  "rows": 10,
+  "cols": 3,
+  "pairs": 30,
+  "diff": 10,
+  "cjk": 10
+ },
+ {
+  "table": "brequelencounterskills.datcl64",
+  "rows": 10,
+  "cols": 1,
+  "pairs": 10,
+  "diff": 10,
+  "cjk": 10
+ },
+ {
+  "table": "delvebiomes.datc64",
+  "rows": 10,
+  "cols": 5,
+  "pairs": 50,
+  "diff": 10,
+  "cjk": 10
+ },
+ {
+  "table": "delvebiomes.datcl64",
+  "rows": 10,
+  "cols": 3,
+  "pairs": 30,
+  "diff": 10,
+  "cjk": 10
+ },
+ {
+  "table": "passiveskilltattootargetsets.datcl64",
+  "rows": 10,
+  "cols": 2,
+  "pairs": 20,
+  "diff": 10,
+  "cjk": 10
+ },
+ {
+  "table": "stashavailabilities.datc64",
+  "rows": 10,
+  "cols": 1,
+  "pairs": 10,
+  "diff": 10,
+  "cjk": 10
+ },
+ {
+  "table": "villagejobtypes.datc64",
+  "rows": 10,
+  "cols": 3,
+  "pairs": 27,
+  "diff": 10,
+  "cjk": 10
+ },
+ {
+  "table": "villagejobtypes.datcl64",
+  "rows": 10,
+  "cols": 2,
+  "pairs": 20,
+  "diff": 10,
+  "cjk": 10
+ },
+ {
+  "table": "dronetypes.datc64",
+  "rows": 3,
+  "cols": 4,
+  "pairs": 12,
+  "diff": 9,
+  "cjk": 9
+ },
+ {
+  "table": "heistjobs.datcl64",
+  "rows": 9,
+  "cols": 2,
+  "pairs": 18,
+  "diff": 9,
+  "cjk": 9
+ },
+ {
+  "table": "ultimatumencountertypes.datc64",
+  "rows": 5,
+  "cols": 3,
+  "pairs": 14,
+  "diff": 9,
+  "cjk": 9
+ },
+ {
+  "table": "ultimatumencountertypes.datcl64",
+  "rows": 5,
+  "cols": 3,
+  "pairs": 14,
+  "diff": 9,
+  "cjk": 9
+ },
+ {
+  "table": "votetype.datc64",
+  "rows": 3,
+  "cols": 4,
+  "pairs": 12,
+  "diff": 9,
+  "cjk": 9
+ },
+ {
+  "table": "warbandspackmonsters.datcl64",
+  "rows": 3,
+  "cols": 7,
+  "pairs": 21,
+  "diff": 9,
+  "cjk": 9
+ },
+ {
+  "table": "characterpaneldescriptionmodes.datc64",
+  "rows": 12,
+  "cols": 4,
+  "pairs": 41,
+  "diff": 7,
+  "cjk": 7
+ },
+ {
+  "table": "mercenaryattributes.datc64",
+  "rows": 7,
+  "cols": 3,
+  "pairs": 21,
+  "diff": 7,
+  "cjk": 7
+ },
+ {
+  "table": "typetags.datc64",
+  "rows": 7,
+  "cols": 3,
+  "pairs": 21,
+  "diff": 7,
+  "cjk": 7
+ },
+ {
+  "table": "typetags.datcl64",
+  "rows": 7,
+  "cols": 1,
+  "pairs": 7,
+  "diff": 7,
+  "cjk": 7
+ },
+ {
+  "table": "villageshippingports.datcl64",
+  "rows": 7,
+  "cols": 2,
+  "pairs": 14,
+  "diff": 7,
+  "cjk": 7
+ },
+ {
+  "table": "azmeriwoodsdusttype.datc64",
+  "rows": 3,
+  "cols": 4,
+  "pairs": 12,
+  "diff": 6,
+  "cjk": 6
+ },
+ {
+  "table": "characterpaneltabs.datc64",
+  "rows": 6,
+  "cols": 2,
+  "pairs": 12,
+  "diff": 6,
+  "cjk": 6
+ },
+ {
+  "table": "characterpaneltabs.datcl64",
+  "rows": 6,
+  "cols": 2,
+  "pairs": 12,
+  "diff": 6,
+  "cjk": 6
+ },
+ {
+  "table": "corpsetypetags.datc64",
+  "rows": 6,
+  "cols": 3,
+  "pairs": 18,
+  "diff": 6,
+  "cjk": 6
+ },
+ {
+  "table": "corpsetypetags.datcl64",
+  "rows": 6,
+  "cols": 1,
+  "pairs": 6,
+  "diff": 6,
+  "cjk": 6
+ },
+ {
+  "table": "lakemetaoptionsunlocktext.datc64",
+  "rows": 6,
+  "cols": 1,
+  "pairs": 6,
+  "diff": 6,
+  "cjk": 6
+ },
+ {
+  "table": "monstercategories.datc64",
+  "rows": 6,
+  "cols": 1,
+  "pairs": 6,
+  "diff": 6,
+  "cjk": 6
+ },
+ {
+  "table": "monstercategories.datcl64",
+  "rows": 6,
+  "cols": 1,
+  "pairs": 6,
+  "diff": 6,
+  "cjk": 6
+ },
+ {
+  "table": "passiveskilltreetutorial.datcl64",
+  "rows": 7,
+  "cols": 1,
+  "pairs": 6,
+  "diff": 6,
+  "cjk": 6
+ },
+ {
+  "table": "atlastrees.datc64",
+  "rows": 3,
+  "cols": 3,
+  "pairs": 8,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "betrayalchoices.datc64",
+  "rows": 5,
+  "cols": 2,
+  "pairs": 10,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "betrayalchoices.datcl64",
+  "rows": 5,
+  "cols": 2,
+  "pairs": 10,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "betrayaljobs.datc64",
+  "rows": 5,
+  "cols": 6,
+  "pairs": 28,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "betrayaljobs.datcl64",
+  "rows": 5,
+  "cols": 2,
+  "pairs": 10,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "crucibledifficulty.datc64",
+  "rows": 5,
+  "cols": 2,
+  "pairs": 10,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "crucibledifficulty.datcl64",
+  "rows": 5,
+  "cols": 2,
+  "pairs": 10,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "harvestcraftfilters.datc64",
+  "rows": 5,
+  "cols": 2,
+  "pairs": 10,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "harvestcraftfilters.datcl64",
+  "rows": 5,
+  "cols": 2,
+  "pairs": 10,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "stampchoice.datc64",
+  "rows": 98,
+  "cols": 2,
+  "pairs": 104,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "stampchoice.datcl64",
+  "rows": 98,
+  "cols": 1,
+  "pairs": 6,
+  "diff": 5,
+  "cjk": 5
+ },
+ {
+  "table": "ancestraltrialpositiontype.datc64",
+  "rows": 4,
+  "cols": 6,
+  "pairs": 24,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "ancestraltrialpositiontype.datcl64",
+  "rows": 4,
+  "cols": 2,
+  "pairs": 8,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "atlasvoidstoneslots.datc64",
+  "rows": 4,
+  "cols": 5,
+  "pairs": 20,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "breachstashtabsubstashgroup.datc64",
+  "rows": 4,
+  "cols": 3,
+  "pairs": 12,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "breachstashtabsubstashgroup.datcl64",
+  "rows": 4,
+  "cols": 2,
+  "pairs": 8,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "brequelfruitrewardtypes.datcl64",
+  "rows": 4,
+  "cols": 2,
+  "pairs": 8,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "expeditionfactions.datc64",
+  "rows": 4,
+  "cols": 4,
+  "pairs": 16,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "expeditionfactions.datcl64",
+  "rows": 4,
+  "cols": 1,
+  "pairs": 4,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "heistobjectivevaluedescriptions.datc64",
+  "rows": 5,
+  "cols": 1,
+  "pairs": 4,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "heistobjectivevaluedescriptions.datcl64",
+  "rows": 5,
+  "cols": 1,
+  "pairs": 4,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "labyrinths.datc64",
+  "rows": 4,
+  "cols": 1,
+  "pairs": 4,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "labyrinths.datcl64",
+  "rows": 4,
+  "cols": 1,
+  "pairs": 4,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "necropolispackimplicits.datc64",
+  "rows": 4,
+  "cols": 3,
+  "pairs": 12,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "necropolispackimplicits.datcl64",
+  "rows": 4,
+  "cols": 2,
+  "pairs": 8,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "playertradewhisperformats.datc64",
+  "rows": 4,
+  "cols": 2,
+  "pairs": 8,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "rarity.datc64",
+  "rows": 4,
+  "cols": 3,
+  "pairs": 12,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "rarity.datcl64",
+  "rows": 4,
+  "cols": 2,
+  "pairs": 8,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "sanctumfloors.datc64",
+  "rows": 4,
+  "cols": 4,
+  "pairs": 16,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "votestate.datc64",
+  "rows": 4,
+  "cols": 2,
+  "pairs": 8,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "votestate.datcl64",
+  "rows": 4,
+  "cols": 2,
+  "pairs": 8,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "achievementitemrewards.datc64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "achievementitemrewards.datcl64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "atlasprimordialaltarchoicetypes.datc64",
+  "rows": 3,
+  "cols": 6,
+  "pairs": 18,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "atlasprimordialaltarchoicetypes.datcl64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "atlasprimordialbossoptions.datc64",
+  "rows": 3,
+  "cols": 10,
+  "pairs": 30,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "atlasprimordialbossoptions.datcl64",
+  "rows": 3,
+  "cols": 1,
+  "pairs": 3,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "azmeriwoodsdusttype.datcl64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "betrayalranks.datc64",
+  "rows": 4,
+  "cols": 3,
+  "pairs": 10,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "betrayalranks.datcl64",
+  "rows": 4,
+  "cols": 2,
+  "pairs": 7,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "betrayalrelationshipstate.datc64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "betrayalrelationshipstate.datcl64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "deepwaterlockerlayout.datcl64",
+  "rows": 4,
+  "cols": 1,
+  "pairs": 4,
+  "diff": 4,
+  "cjk": 3
+ },
+ {
+  "table": "dronetypes.datcl64",
+  "rows": 3,
+  "cols": 1,
+  "pairs": 3,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "labyrinthbonusitems.datc64",
+  "rows": 3,
+  "cols": 1,
+  "pairs": 3,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "labyrinthbonusitems.datcl64",
+  "rows": 3,
+  "cols": 1,
+  "pairs": 3,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "mercenarybuildstatscategories.datc64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "mercenarybuildstatscategories.datcl64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "mousecursorsizesettings.datc64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "mousecursorsizesettings.datcl64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "sanctumdefenceicons.datc64",
+  "rows": 3,
+  "cols": 3,
+  "pairs": 9,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "sanctumdefenceicons.datcl64",
+  "rows": 3,
+  "cols": 1,
+  "pairs": 3,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "socketnotches.datc64",
+  "rows": 3,
+  "cols": 5,
+  "pairs": 15,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "socketnotches.datcl64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
+  "table": "atlastrees.datcl64",
+  "rows": 3,
+  "cols": 1,
+  "pairs": 2,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "battlepasstracks.datc64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 5,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "battlepasstracks.datcl64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 5,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "dynamiccraftingbenchtypes.datc64",
+  "rows": 3,
+  "cols": 5,
+  "pairs": 14,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "dynamiccraftingbenchtypes.datcl64",
+  "rows": 3,
+  "cols": 4,
+  "pairs": 11,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "microtransactionskillgemeffectslottypes.datc64",
+  "rows": 2,
+  "cols": 2,
+  "pairs": 4,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "microtransactionskillgemeffectslottypes.datcl64",
+  "rows": 2,
+  "cols": 2,
+  "pairs": 4,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "microtransactionslotadditionaldefaultoptions.datc64",
+  "rows": 2,
+  "cols": 2,
+  "pairs": 4,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "microtransactionslotadditionaldefaultoptions.datcl64",
+  "rows": 2,
+  "cols": 2,
+  "pairs": 4,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "questtrackergroup.datc64",
+  "rows": 2,
+  "cols": 2,
+  "pairs": 4,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "questtrackergroup.datcl64",
+  "rows": 2,
+  "cols": 2,
+  "pairs": 4,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "realms.datcl64",
+  "rows": 34,
+  "cols": 1,
+  "pairs": 34,
+  "diff": 29,
+  "cjk": 2
+ },
+ {
+  "table": "statistictrackingmicrotransactioncountertype.datc64",
+  "rows": 2,
+  "cols": 2,
+  "pairs": 4,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "statistictrackingmicrotransactioncountertype.datcl64",
+  "rows": 2,
+  "cols": 2,
+  "pairs": 4,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "ultimatumitemisedrewards.datc64",
+  "rows": 88,
+  "cols": 2,
+  "pairs": 90,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "ultimatumitemisedrewards.datcl64",
+  "rows": 88,
+  "cols": 1,
+  "pairs": 2,
+  "diff": 2,
+  "cjk": 2
+ },
+ {
+  "table": "characterpaneldescriptionmodes.datcl64",
+  "rows": 12,
+  "cols": 2,
+  "pairs": 17,
+  "diff": 1,
+  "cjk": 1
+ },
+ {
+  "table": "votetype.datcl64",
+  "rows": 3,
+  "cols": 1,
+  "pairs": 3,
+  "diff": 3,
+  "cjk": 1
+ },
+ {
+  "table": "acts.datc64",
+  "rows": 12,
+  "cols": 2,
+  "pairs": 24,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "archnemesismetarewards.datcl64",
+  "rows": 11,
+  "cols": 1,
+  "pairs": 9,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "atlasvoidstoneslots.datcl64",
+  "rows": 4,
+  "cols": 1,
+  "pairs": 4,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "betrayaltargets.datc64",
+  "rows": 18,
+  "cols": 2,
+  "pairs": 36,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "betrayaltargets.datcl64",
+  "rows": 18,
+  "cols": 1,
+  "pairs": 18,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "betrayalupgrades.datcl64",
+  "rows": 50,
+  "cols": 1,
+  "pairs": 50,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "buffvisuals.datc64",
+  "rows": 2468,
+  "cols": 2,
+  "pairs": 4215,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "chests.datc64",
+  "rows": 2572,
+  "cols": 2,
+  "pairs": 5142,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "craftingspreetype.datc64",
+  "rows": 82,
+  "cols": 1,
+  "pairs": 82,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "deepwaterlockerlayout.datc64",
+  "rows": 4,
+  "cols": 1,
+  "pairs": 4,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "deepwaterrooms.datc64",
+  "rows": 70,
+  "cols": 2,
+  "pairs": 140,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "faridunwishes.datc64",
+  "rows": 178,
+  "cols": 1,
+  "pairs": 178,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "labyrinthsecrets.datc64",
+  "rows": 58,
+  "cols": 2,
+  "pairs": 93,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "memorylinetype.datc64",
+  "rows": 9,
+  "cols": 1,
+  "pairs": 9,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "mercenaryattributes.datcl64",
+  "rows": 7,
+  "cols": 1,
+  "pairs": 7,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "mercenaryclasses.datc64",
+  "rows": 13,
+  "cols": 2,
+  "pairs": 26,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "mercenaryclasses.datcl64",
+  "rows": 13,
+  "cols": 1,
+  "pairs": 13,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "mods.datc64",
+  "rows": 40355,
+  "cols": 1,
+  "pairs": 40355,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "music.datc64",
+  "rows": 395,
+  "cols": 2,
+  "pairs": 787,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "mysteryboxes.datc64",
+  "rows": 98,
+  "cols": 2,
+  "pairs": 163,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "necropoliscraftbases.datc64",
+  "rows": 790,
+  "cols": 1,
+  "pairs": 790,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "notifications.datc64",
+  "rows": 42,
+  "cols": 1,
+  "pairs": 42,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "ritualrunetypes.datc64",
+  "rows": 82,
+  "cols": 1,
+  "pairs": 82,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "sanctumfloors.datcl64",
+  "rows": 4,
+  "cols": 1,
+  "pairs": 4,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "sanctumpersistenteffectcategories.datc64",
+  "rows": 8,
+  "cols": 2,
+  "pairs": 15,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "sanctumpersistenteffectcategories.datcl64",
+  "rows": 8,
+  "cols": 1,
+  "pairs": 8,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "ultimatumencounters.datc64",
+  "rows": 40,
+  "cols": 2,
+  "pairs": 42,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "ultimatumencounters.datcl64",
+  "rows": 40,
+  "cols": 1,
+  "pairs": 2,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "ultimatummodifiers.datc64",
+  "rows": 99,
+  "cols": 1,
+  "pairs": 99,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "ultimatummodifiers.datcl64",
+  "rows": 99,
+  "cols": 1,
+  "pairs": 2,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "worldpopupicontypes.datc64",
+  "rows": 29,
+  "cols": 2,
+  "pairs": 58,
+  "diff": 0,
+  "cjk": 0
+ }
+]

@@ -1,0 +1,20 @@
+# 二进制原始导出：可从 Content.ggpk 重新生成，不入库
+pairs/
+raw/
+raw_sd/
+
+# 构建产物
+tools/*/bin/
+tools/*/obj/
+tools/*/build.log
+tools/*/*.log
+
+# 大体积派生产物（43MB，可由 dumper 重跑）
+out/pairs.csv
+
+# 补丁输出（由 patch_dat.py 生成）与打包快照
+out/patch/
+releases/*.zip
+
+# 游戏本体
+*.ggpk
