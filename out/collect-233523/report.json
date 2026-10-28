@@ -1,0 +1,296 @@
+﻿{
+  "collected_at": "2026-10-28T23:35:23",
+  "patcher": "0.4.2",
+  "bundle_built": "2026-10-28T22:08:33",
+  "expected_game": "3.29.3b",
+  "expected_patch": "3.29.3.3",
+  "game": "3.29.3b",
+  "patch": "",
+  "container": {
+    "kind": "Bundles2",
+    "path": "Y:\\steam\\steamapps\\common\\Path of Exile\\Bundles2\\_.index.bin",
+    "size": 21619511
+  },
+  "files": [
+    {
+      "file": "active_skill_gem_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/active_skill_gem_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 992474,
+      "sha256": "6961c2907a22ae09c80382a36dfc7f4edbf61b310639190d6af8780e0b2eb830",
+      "state": "全量对照"
+    },
+    {
+      "file": "advanced_mod_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/advanced_mod_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 233652,
+      "sha256": "349cd2f7d2df76207db7da44e63b813d6d8e7ffbbffc0b2a649877050dbda73f",
+      "state": "全量对照"
+    },
+    {
+      "file": "atlas_relic_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/atlas_relic_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 10960,
+      "sha256": "da417a2854e833d0beb8c093dad86fd239d7b62ccf35ba6b7525a85fbcc4a03d",
+      "state": "全量对照"
+    },
+    {
+      "file": "atlas_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/atlas_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 3191980,
+      "sha256": "54c35bb55223b568a3ce3f30083aed19c40ce45b5b9239b2f067567999abe2ee",
+      "state": "外部改过"
+    },
+    {
+      "file": "chest_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/chest_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 218324,
+      "sha256": "ea4c35afa313f87ff77dba236159143d6ebba0ea26133fb67786e119b76a9cef",
+      "state": "外部改过"
+    },
+    {
+      "file": "deepwater_applied_adjacent_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/deepwater_applied_adjacent_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 8128,
+      "sha256": "754ba1c7a424a8de7e667c442d515d709b41eac9321ebc544683b6c8a73d5148",
+      "state": "全量对照"
+    },
+    {
+      "file": "deepwater_explicit_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/deepwater_explicit_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 72790,
+      "sha256": "f5c24d2fcababc7151a0ce553edad93a77468696373b8b664599d8f03ef0d080",
+      "state": "全量对照"
+    },
+    {
+      "file": "deepwater_implicit_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/deepwater_implicit_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 228226,
+      "sha256": "94866af5519e4d7073c46bdf0f2b06709797d2449800ab96bc77cce0a52c8939",
+      "state": "外部改过"
+    },
+    {
+      "file": "expedition_relic_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/expedition_relic_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 432392,
+      "sha256": "266c57559a4a758ba7d151073a792a3fd65ff33fde355fb33c0d1192ab7d881a",
+      "state": "外部改过"
+    },
+    {
+      "file": "gem_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/gem_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 3033302,
+      "sha256": "76dd1bb17f27abfc9c34ff9131357d4c9cc66270e451e8cc3dff912fbbe6f5a0",
+      "state": "全量对照"
+    },
+    {
+      "file": "graft_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/graft_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 385988,
+      "sha256": "889cbbec7a53ccda69b077a43386268d44a9fa50b8fc9919a799f9a83f89f496",
+      "state": "全量对照"
+    },
+    {
+      "file": "heist_equipment_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/heist_equipment_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 349778,
+      "sha256": "f29441d3d9ab070b6bbabf9eabf3553b8cc662310933413c4168992092bebe93",
+      "state": "全量对照"
+    },
+    {
+      "file": "leaguestone_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/leaguestone_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 545470,
+      "sha256": "51db8566f985ec560cd42eb266cc72e5fdbb504bfc343378d67be4dda48b2d72",
+      "state": "外部改过"
+    },
+    {
+      "file": "map_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/map_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 594718,
+      "sha256": "2e406bd9bd0f690639311ab6a195fb760c1b6491b1cf253374d6ac6e85931f43",
+      "state": "外部改过"
+    },
+    {
+      "file": "mercenary_support_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/mercenary_support_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 174776,
+      "sha256": "1cc311790e373481d5bbcf8abe392a6428a1ae86a35972f147ffb7800502cf47",
+      "state": "外部改过"
+    },
+    {
+      "file": "mirage_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/mirage_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 160406,
+      "sha256": "1fbddb2c670e7a1cf277223df040837f7dda4d330482a647206a3dc063a0ae6d",
+      "state": "全量对照"
+    },
+    {
+      "file": "monster_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/monster_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 46656,
+      "sha256": "759d9aa7f600d0c86da93489ae928fc43bb7d21e9f60262f4d495cd97050b93e",
+      "state": "外部改过"
+    },
+    {
+      "file": "necropolis_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/necropolis_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 450286,
+      "sha256": "acb018eee34f0551fce226d7fcbc3f2012c17695f10f7bbf8e05815d1c96222f",
+      "state": "外部改过"
+    },
+    {
+      "file": "passive_skill_aura_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/passive_skill_aura_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 79542,
+      "sha256": "5a6a60c6140cb61ffefb4a8176bcf7ddef554247ade7a243d09f2f81e2cbc0df",
+      "state": "全量对照"
+    },
+    {
+      "file": "passive_skill_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/passive_skill_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 438676,
+      "sha256": "c047c250b763da7d28d2ee6a7b4127de348b6a9c0ceee7ed9b4463efda34181c",
+      "state": "全量对照"
+    },
+    {
+      "file": "primordial_altar_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/primordial_altar_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 467094,
+      "sha256": "fe4eb87999021b85726cb619f8cbaba43fc0a8fc1f3e6fc0c3c6e9dac1f69abe",
+      "state": "外部改过"
+    },
+    {
+      "file": "sanctum_relic_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/sanctum_relic_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 136398,
+      "sha256": "27e71ab7ca72110da8303cd8c367887719148b3d46dad7b8a98bb67fc1f89ff3",
+      "state": "全量对照"
+    },
+    {
+      "file": "sentinel_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/sentinel_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 415260,
+      "sha256": "70c97c71d9a5db084cc9265499e5f40a1f2a67689db2bc173094be081ad9830e",
+      "state": "全量对照"
+    },
+    {
+      "file": "stat_descriptions.txt",
+      "path": "metadata/statdescriptions/stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 32564882,
+      "sha256": "601763a5b238edc8a01b2a078e0f962492498dcea8b214c26708e1faf2f9fbce",
+      "state": "外部改过"
+    },
+    {
+      "file": "tincture_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/tincture_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 323268,
+      "sha256": "16e1d480ad8f02fef0aa53e57f332d1b7bfa35b9619edf006e4501734cdd9609",
+      "state": "全量对照"
+    },
+    {
+      "file": "village_stat_descriptions.txt",
+      "path": "metadata/statdescriptions/village_stat_descriptions.txt",
+      "kind": "statdesc",
+      "missing": false,
+      "size": 167368,
+      "sha256": "a9304fba8bd33a1c565749f4a7d0b93986038360a0d632f97a334f1b87ec163c",
+      "state": "全量对照"
+    },
+    {
+      "file": "achievementitems.datc64",
+      "path": "data/traditional chinese/achievementitems.datc64",
+      "kind": "dat",
+      "missing": false,
+      "size": 1371102,
+      "sha256": "6a9490a77793f9262e91058534e49f7a72bc6d0c56351ac2338319afd5e965cc",
+      "state": "已打补丁"
+    },
+    {
+      "file": "clientstrings.datc64",
+      "path": "data/traditional chinese/clientstrings.datc64",
+      "kind": "dat",
+      "missing": false,
+      "size": 1279402,
+      "sha256": "a7ba8c37e46accc516d5c9fe60703140bc5073cfd115efe2f5739bbb1102cf63",
+      "state": "未知",
+      "dump": "files/clientstrings.datc64"
+    },
+    {
+      "file": "currencyitems.datc64",
+      "path": "data/traditional chinese/currencyitems.datc64",
+      "kind": "dat",
+      "missing": false,
+      "size": 518224,
+      "sha256": "d5a6d6983ba260cd06877eb2b1f5eaac01668b68c5b51f518d9361bfdd6a8509",
+      "state": "已打补丁"
+    },
+    {
+      "file": "incursionrooms.datc64",
+      "path": "data/traditional chinese/incursionrooms.datc64",
+      "kind": "dat",
+      "missing": false,
+      "size": 64734,
+      "sha256": "cdccc4cc27fd281bfe9427098007770285cbdb5d8f825a91171d519d9e895a03",
+      "state": "已打补丁"
+    },
+    {
+      "file": "uitalktext.datc64",
+      "path": "data/traditional chinese/uitalktext.datc64",
+      "kind": "dat",
+      "missing": false,
+      "size": 23916,
+      "sha256": "f43dfea570d780e4ed107d3062606494caa824ecc24033817a69f3452ff336d9",
+      "state": "已打补丁"
+    }
+  ]
+}

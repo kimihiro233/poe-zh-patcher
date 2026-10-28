@@ -8,9 +8,11 @@
 //
 // 设计要点：内嵌 bundle.gz（行级结构），运行时从 ggpk 当前内容原地改写目标行，
 // 不做整文件替换，所以三套 flavor 之间可以任意来回切，不会残留。
+using System.Buffers.Binary;
 using System.Diagnostics;
 using System.IO.Compression;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -212,6 +214,170 @@ internal sealed class SdEntry {
 internal sealed class DatEntry {
     public string Path = "", Table = "", ShaOrig = "", ShaPatch = "";
     public byte[] Orig = Array.Empty<byte>(), Patch = Array.Empty<byte>();
+    public List<DatEdit> Edits = new();
+}
+
+internal readonly struct DatEdit {
+    public readonly int Row, Rel;
+    public readonly string Old, New;
+    public DatEdit(int row, int rel, string oldText, string newText) { Row = row; Rel = rel; Old = oldText; New = newText; }
+}
+
+// ---------------------------------------------------------------- dat 表：叠到别人的底稿上
+//
+// .datc64 没法像 statdesc 那样整行文本重写：行区是定长的二进制，文本在池里。
+// 所以合并只做两件事 —— 把新串追加到池尾，把目标槽位的 8 字节指针改过去。
+// 行区与旧池逐字节不动，别人改过的行（换色、别的译文）一处都不碰。
+//
+// 能不能合，看两条：结构一致（行数 / 行宽 / 池起点），且每个要动的槽位，
+// 现存文本要么是原文、要么已经是我们的译文。缺一条就退回「未知」，整体拒写。
+internal static class DatMerge {
+    public sealed class View {
+        public byte[] Raw = Array.Empty<byte>();
+        public int RowCount, RowSize, PoolBase;
+    }
+
+    public static View Load(byte[] raw, string name) {
+        if (raw.Length < 12) throw new InvalidDataException($"{name}：文件过短");
+        var rows = BinaryPrimitives.ReadUInt32LittleEndian(raw);
+        if (rows == 0) return new View { Raw = raw, RowCount = 0, RowSize = 0, PoolBase = 4 };
+        var rc = checked((int)rows);
+        var rs = FindRowSize(raw, rc);
+        return new View { Raw = raw, RowCount = rc, RowSize = rs, PoolBase = 4 + rc * rs };
+    }
+
+    // 行宽没写在文件头里：从 1 试到 2048，看 4 + 行数×行宽 处是否正好是
+    // 8 个 0xBB（字符串池标记）。多个候选取行宽最大的，避免把行数据当池起点。
+    private static int FindRowSize(byte[] raw, int rows, int limit = 2048) {
+        var best = -1;
+        for (var rs = 1; rs < limit; rs++) {
+            var b = 4L + (long)rows * rs;
+            if (b + 8 > raw.Length) break;
+            var hit = true;
+            for (var k = 0; k < 8 && hit; k++) hit = raw[b + k] == 0xBB;
+            if (hit) best = rs;
+        }
+        if (best < 0) throw new InvalidDataException($"未找到字符串池标记（{raw.Length:N0} 字节, {rows} 行）");
+        return best;
+    }
+
+    private static ulong U64(View v, int row, int rel) =>
+        BinaryPrimitives.ReadUInt64LittleEndian(v.Raw.AsSpan(4 + row * v.RowSize + rel));
+
+    // 合法串起点：池首，或紧跟在上一条终止符之后（前两字节为 0）
+    private static bool IsStart(View v, int pos) {
+        if (pos == v.PoolBase + 8) return true;
+        if (pos < 4) return false;
+        return v.Raw[pos - 2] == 0 && v.Raw[pos - 1] == 0;
+    }
+
+    public static string? ReadAt(View v, long posL) {
+        var raw = v.Raw;
+        if (posL < 0 || posL >= raw.Length - 1) return null;
+        var pos = (int)posL;
+        if ((pos & 1) != 0 || !IsStart(v, pos)) return null;
+        var end = pos;
+        while (end + 1 < raw.Length && !(raw[end] == 0 && raw[end + 1] == 0)) end += 2;
+        if (end + 1 >= raw.Length) return null;
+        var s = Encoding.Unicode.GetString(raw, pos, end - pos);
+        foreach (var c in s) if (c < 32 && c != '\t' && c != '\n' && c != '\r') return null;
+        return s;
+    }
+
+    // 指针与真实串起点偶尔有 ±2 偏差（同一串在池里留有旧副本），精确失败就两侧各试一次
+    public static string? StringField(View v, int row, int rel) {
+        if (row < 0 || row >= v.RowCount || rel + 8 > v.RowSize) return null;
+        var off = U64(v, row, rel);
+        if (off < 8) return "";
+        foreach (var d in new[] { 0, -2, 2 }) {
+            var s = ReadAt(v, v.PoolBase + (long)off + d);
+            if (s is null) continue;
+            if (d != 0 && s.Length == 0) continue;
+            return s;
+        }
+        return null;
+    }
+
+    private static string Norm(string s) => s.Replace("\r\n", "\n");
+
+    private static string Short(string s) {
+        s = s.Replace("\n", "\\n");
+        return s.Length <= 60 ? s : s[..60] + "…";
+    }
+
+    public static bool TryCustomBase(DatEntry e, byte[] cur, out string why) {
+        why = "";
+        if (e.Edits.Count == 0) { why = "数据包里没有这个表的逐行改动，无法合并"; return false; }
+        View v, b;
+        try { v = Load(cur, e.Table); } catch (Exception ex) { why = ex.Message; return false; }
+        try { b = Load(e.Orig, e.Table + "（包内原文）"); } catch (Exception ex) { why = "包内原文读不出：" + ex.Message; return false; }
+        if (v.RowCount != b.RowCount) { why = $"行数 {v.RowCount:N0} ≠ 基线 {b.RowCount:N0}"; return false; }
+        if (v.RowSize != b.RowSize) { why = $"行宽 {v.RowSize} ≠ 基线 {b.RowSize}"; return false; }
+        var done = 0;
+        foreach (var ed in e.Edits) {
+            var s = StringField(v, ed.Row, ed.Rel);
+            if (s is null) { why = $"行 {ed.Row} 槽位 {ed.Rel} 读不出字符串"; return false; }
+            var t = Norm(s);
+            if (t == Norm(ed.New)) { done++; continue; }
+            if (t != Norm(ed.Old)) { why = $"行 {ed.Row} 文本已变：{Short(t)}"; return false; }
+        }
+        why = done == 0 ? "结构与待改行都一致" : $"结构与待改行都一致；{done}/{e.Edits.Count} 行已是本补丁文本";
+        return true;
+    }
+
+    /// revert=true 表示把我们的文本改回原文（保留对方自己的改动），用于「还原官方原文」
+    public static byte[] Apply(DatEntry e, byte[] cur, bool revert) {
+        var t = Load(cur, e.Table);
+        var buf = new List<byte>(cur.Length + 8192);
+        buf.AddRange(cur);
+        if (buf.Count % 2 != 0) buf.Add(0);
+        if (buf.Count < 2 || buf[^1] != 0 || buf[^2] != 0) { buf.Add(0); buf.Add(0); }
+
+        var plan = new List<(DatEdit Ed, string To)>();
+        foreach (var ed in e.Edits) {
+            var s = StringField(t, ed.Row, ed.Rel);
+            if (s is null) throw new InvalidDataException($"{e.Table} 行 {ed.Row} 槽位 {ed.Rel} 读不出字符串");
+            var from = revert ? ed.New : ed.Old;
+            var to = revert ? ed.Old : ed.New;
+            var now = Norm(s);
+            if (now == Norm(to)) continue;                     // 已经是目标文本
+            if (now != Norm(from)) throw new InvalidDataException($"{e.Table} 行 {ed.Row} 现值与预期不符：{Short(now)}");
+
+            // 追加前补 2 个 0：原文件末尾常有「空串哨兵」的指针正好等于池长，
+            // 不补的话它会读成我们新写的串，等于凭空改了别的行。
+            buf.Add(0); buf.Add(0);
+            var pos = buf.Count;
+            buf.AddRange(Encoding.Unicode.GetBytes(to));
+            buf.Add(0); buf.Add(0);
+            while (buf.Count % 2 != 0) buf.Add(0);
+
+            var slot = 4 + ed.Row * t.RowSize + ed.Rel;
+            BinaryPrimitives.WriteUInt64LittleEndian(CollectionsMarshal.AsSpan(buf).Slice(slot, 8), (ulong)(pos - t.PoolBase));
+            plan.Add((ed, to));
+        }
+
+        var outBytes = buf.ToArray();
+        Verify(cur, outBytes, t, plan);
+        return outBytes;
+    }
+
+    // 三重自检：结构不变 / 目标槽位回读正确 / 原文件范围内只有被改的 8 字节指针不同
+    private static void Verify(byte[] before, byte[] after, View t, List<(DatEdit Ed, string To)> plan) {
+        var t2 = Load(after, "verify");
+        if (t2.RowCount != t.RowCount || t2.RowSize != t.RowSize || t2.PoolBase != t.PoolBase)
+            throw new InvalidDataException("合并后结构改变");
+        foreach (var (ed, to) in plan)
+            if (StringField(t2, ed.Row, ed.Rel) != to)
+                throw new InvalidDataException($"合并后回读不符：行 {ed.Row} 槽位 {ed.Rel}");
+        var allowed = new HashSet<int>();
+        foreach (var (ed, _) in plan) {
+            var slot = 4 + ed.Row * t.RowSize + ed.Rel;
+            for (var k = 0; k < 8; k++) allowed.Add(slot + k);
+        }
+        for (var i = 0; i < before.Length; i++)
+            if (before[i] != after[i] && !allowed.Contains(i))
+                throw new InvalidDataException($"合并时意外改动了偏移 {i} 的字节");
+    }
 }
 
 // 目标容器。官方安装包是 Content.ggpk（单文件 ggpk），Steam / WeGame 版是
@@ -324,6 +490,8 @@ internal static class Program {
         if (Args.ContainsKey("markup-test")) return MarkupTest();
         // 外部改过的底稿演练：拿一份现成文件跑 TryCustomBase + Rewrite，只读不写
         if (Args.TryGetValue("sd-test", out var sdArg) && sdArg.Length > 0) return SdTest(sdArg);
+        // 外部改过的数据表演练：拿一份现成 .datc64 跑 TryCustomBase + Apply，只读不写
+        if (Args.TryGetValue("dat-test", out var datArg) && datArg.Length > 0) return DatTest(datArg);
 
         if (positional.Count == 0) {
             var auto = FindDefaultGgpk();
@@ -420,14 +588,23 @@ internal static class Program {
         }
 
         foreach (var e in root.GetProperty("dat").EnumerateArray()) {
-            _dat.Add(new DatEntry {
+            var ent = new DatEntry {
                 Path = e.GetProperty("path").GetString()!,
                 Table = e.GetProperty("table").GetString()!,
                 ShaOrig = e.GetProperty("sha_original").GetString()!,
                 ShaPatch = e.GetProperty("sha_patched").GetString()!,
                 Orig = Convert.FromBase64String(e.GetProperty("orig").GetString()!),
                 Patch = Convert.FromBase64String(e.GetProperty("patch").GetString()!),
-            });
+            };
+            if (e.TryGetProperty("edits", out var eds) && eds.ValueKind == JsonValueKind.Array) {
+                foreach (var arr in eds.EnumerateArray()) {
+                    if (arr.GetArrayLength() < 4) continue;
+                    ent.Edits.Add(new DatEdit(
+                        arr[0].GetInt32(), arr[1].GetInt32(),
+                        arr[2].GetString() ?? "", arr[3].GetString() ?? ""));
+                }
+            }
+            _dat.Add(ent);
         }
     }
 
@@ -477,6 +654,39 @@ internal static class Program {
         Console.WriteLine($"  改动 {changed} 行：沿用底稿标记 {kept}，还原官方标记 {restored}，异常 {bad}");
         Console.WriteLine($"  输出 sha256 {Sha(tgt)}");
         return bad == 0 ? 0 : 7;
+    }
+
+    // 拿一份真实的「外部改过」数据表跑一遍判定 + 合并，只打印不写入。
+    // 参数：--dat-test=文件路径（按文件名匹配数据包里的条目）
+    private static int DatTest(string path) {
+        var name = System.IO.Path.GetFileName(path);
+        var e = _dat.FirstOrDefault(x => x.Table == name);
+        if (e is null) { Console.WriteLine($"数据包里没有这个表：{name}"); return 1; }
+        if (!File.Exists(path)) { Console.WriteLine($"找不到文件：{path}"); return 1; }
+        var cur = File.ReadAllBytes(path);
+
+        var ok = DatMerge.TryCustomBase(e, cur, out var why);
+        var v = DatMerge.Load(cur, name);
+        var b = DatMerge.Load(e.Orig, name + "(包内原文)");
+        Console.WriteLine($"{name}");
+        Console.WriteLine($"  行数 {v.RowCount:N0} / 基线 {b.RowCount:N0}   行宽 {v.RowSize} / {b.RowSize}   待改槽位 {e.Edits.Count}");
+        Console.WriteLine($"  sha256 {Sha(cur)}");
+        Console.WriteLine($"  可叠改动判定：{(ok ? "是" : "否")}  （{why}）");
+        if (!ok) return 5;
+
+        var tgt = DatMerge.Apply(e, cur, revert: false);
+        var again = DatMerge.Apply(e, tgt, revert: false);       // 再叠一次应当是空操作
+        var idem = again.AsSpan().SequenceEqual(tgt);
+        Console.WriteLine($"  合并 {cur.Length:N0} → {tgt.Length:N0} B（+{tgt.Length - cur.Length}）  幂等：{(idem ? "是" : "否")}");
+        foreach (var ed in e.Edits) {
+            var before = DatMerge.StringField(v, ed.Row, ed.Rel) ?? "";
+            var after = DatMerge.StringField(DatMerge.Load(tgt, name), ed.Row, ed.Rel) ?? "";
+            Console.WriteLine($"  行 {ed.Row} 槽位 {ed.Rel}");
+            Console.WriteLine($"    底稿 {Clip(before)}");
+            Console.WriteLine($"    合并 {Clip(after)}");
+        }
+        Console.WriteLine($"  输出 sha256 {Sha(tgt)}");
+        return 0;
     }
 
     // ---------------------------------------------------------------- 标记层自检
@@ -874,6 +1084,11 @@ internal static class Program {
             it.Cur = cur;
             var sha = Sha(it.Cur);
             it.CurFlavor = sha == e.ShaOrig ? Flavor.Original : sha == e.ShaPatch ? Flavor.DualAll : Flavor.Unknown;
+            if (it.CurFlavor == Flavor.Unknown) {
+                // 数据表也走「叠文本」这条路：sha 认不出但结构没变，就只改我们要动的那几个槽位
+                if (DatMerge.TryCustomBase(e, cur, out var why)) it.CurFlavor = Flavor.Custom;
+                it.Why = why;
+            }
             list.Add(it);
         }
         return list;
@@ -1070,13 +1285,22 @@ internal static class Program {
             Console.WriteLine("  按当前数据包重写这些行，文件其余部分原样保留。");
         }
         var custom = todo.Where(i => i.CurFlavor == Flavor.Custom && !i.Legacy).ToList();
-        if (custom.Count > 0) {
+        var customSd = custom.Where(i => i.IsSd).ToList();
+        if (customSd.Count > 0) {
             Console.WriteLine();
-            Console.WriteLine($"其中 {custom.Count} 个文件的标记被外部程序改过（sha 对不上，但行数与文本层没变）：");
-            foreach (var u in custom.Take(6)) Console.WriteLine($"    {u.Label}  —  {u.Why}");
-            if (custom.Count > 6) Console.WriteLine($"    ... 还有 {custom.Count - 6} 个");
+            Console.WriteLine($"其中 {customSd.Count} 个文件的标记被外部程序改过（sha 对不上，但行数与文本层没变）：");
+            foreach (var u in customSd.Take(6)) Console.WriteLine($"    {u.Label}  —  {u.Why}");
+            if (customSd.Count > 6) Console.WriteLine($"    ... 还有 {customSd.Count - 6} 个");
             Console.WriteLine("  对它们只叠译文：留着标记的（换色/换标签）原样不动；");
             Console.WriteLine("  被整段删光的（原版有、这里寸草不生）按官方原样补回 —— 那是覆盖伤，不是风格。");
+        }
+        var customDat = custom.Where(i => !i.IsSd).ToList();
+        if (customDat.Count > 0) {
+            Console.WriteLine();
+            Console.WriteLine($"其中 {customDat.Count} 个数据表被外部程序改过（sha 对不上，但行数与待改行都没变）：");
+            foreach (var u in customDat.Take(6)) Console.WriteLine($"    {u.Label}  —  {u.Why}");
+            if (customDat.Count > 6) Console.WriteLine($"    ... 还有 {customDat.Count - 6} 个");
+            Console.WriteLine("  对它们只动我们那几处：新串追加到池尾、改指向，别人的行一个字节都不碰。");
         }
         Console.WriteLine();
 
@@ -1102,8 +1326,14 @@ internal static class Program {
                     expectSha = TargetSha(e, target, i.CurFlavor);
                 } else {
                     var e = i.Dat!;
-                    targetBytes = target == Flavor.Original ? e.Orig : e.Patch;
-                    expectSha = target == Flavor.Original ? e.ShaOrig : e.ShaPatch;
+                    if (i.CurFlavor == Flavor.Custom) {
+                        // 底稿是别人的：只把我们的改动叠上去；还原时反向叠回来，对方自己的改动保留
+                        targetBytes = DatMerge.Apply(e, i.Cur, revert: target == Flavor.Original);
+                        expectSha = null;
+                    } else {
+                        targetBytes = target == Flavor.Original ? e.Orig : e.Patch;
+                        expectSha = target == Flavor.Original ? e.ShaOrig : e.ShaPatch;
+                    }
                 }
                 var got = Sha(targetBytes);
                 if (expectSha is not null && got != expectSha) {
@@ -1416,7 +1646,11 @@ internal static class Program {
             sb.AppendLine($"  {i.Path}");
             sb.AppendLine($"  {i.Cur.Length:N0} B   sha256 {rec["sha256"]}");
 
-            if (!i.IsSd) { sb.AppendLine("  （数据表，未知状态说明版本不同，需要整份重做）"); sb.AppendLine(); continue; }
+            if (!i.IsSd) {
+                sb.AppendLine($"  （数据表，无法按行合并：{(i.Why.Length > 0 ? i.Why : "版本不同")}）");
+                sb.AppendLine();
+                continue;
+            }
 
             List<string> lines;
             try { lines = SplitLines(i.Cur); }

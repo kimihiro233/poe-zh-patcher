@@ -219,6 +219,8 @@ def main():
             "sha_patched": f["sha256_patched"],
             "orig": base64.b64encode(open(f["src"], "rb").read()).decode(),
             "patch": base64.b64encode(open(f["dst"], "rb").read()).decode(),
+            # 逐行改动：客户端那份 sha 认不出、但结构没变时，靠它把改动叠到别人的底稿上
+            "edits": [[e["row"], e["rel"], e["old"], e["new"]] for e in f.get("edits", [])],
         })
 
     lock = load("game.lock.json")

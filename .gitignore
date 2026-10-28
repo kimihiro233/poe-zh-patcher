@@ -35,3 +35,6 @@ out/out/
 
 # 游戏本体
 *.ggpk
+
+# WorkBuddy 会话/记忆目录（项目记录写在 notes/，这里不入库）
+.workbuddy/
