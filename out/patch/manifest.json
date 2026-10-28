@@ -1,6 +1,14 @@
 {
   "version": "0.2.0",
   "lang": "traditional chinese",
+  "game": {
+    "client_version": "3.29.3b",
+    "patch_version": "3.29.3.3",
+    "fingerprint": "1962f349c65322aedc9f826cf4974ffe8543bd72efceae51f251483e9d8fa155",
+    "locked_at": "2026-10-28T13:11:05",
+    "ggpk_size": 74730084326,
+    "source": "game.lock.json"
+  },
   "source": "out/fix-category-ui.csv",
   "total_edits": 10,
   "files": [

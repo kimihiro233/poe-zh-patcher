@@ -17,10 +17,13 @@
 ## 目录
 
 ```
-├─ VERSION                当前版本号（打 tag 的依据）
+├─ VERSION                译文版本号（打 tag 的依据）
+├─ game.lock.json         绑定的游戏版本 + 1961 个文件的 sha256 基线指纹
 ├─ REPORT.md              体检报告与修正方案（给人看）
 ├─ DATA-FINDINGS.md       二进制格式与流程（给下个赛季的自己看）
 ├─ tools/
+│  ├─ gameinfo.py         锁游戏版本：客户端版本号 + 语言文件/词缀文本指纹
+│  ├─ check_fixes.py      升级体检：旧修正稿在新语料里还成不成立
 │  ├─ dat64.py            .dat/.datc64 解析器，无 schema 依赖
 │  ├─ datwrite.py         .datc64 字符串重写器（追加式，三重自检）
 │  ├─ patch_dat.py        修正稿 → out/patch/*.dat + manifest.json
@@ -35,6 +38,63 @@
 ├─ releases/              版本快照（v0.1.0、v0.2.0…）
 └─ pairs/ raw_sd/ raw/    原始导出（可随时重建，不必备份）
 ```
+
+## 游戏版本 ↔ 译文版本
+
+一套译文只对**做过它的那一版客户端**负责。游戏一更新，英文原文可能改、行号可能移、
+表结构可能换，同一份 diff 套上去就写错行。所以每一版都锁两层：
+
+| 层 | 内容 | 用途 |
+|---|---|---|
+| 版本号 | 客户端 `3.29.3b` / patch `3.29.3.3`（从 `logs/LatestClient.txt` 取） | 给人看，一眼对上 |
+| 内容指纹 | 1916 个繁中语言文件 + 45 个词缀 txt 的 sha256 聚合 | 给机器判，热修不改版本号也能抓到 |
+
+```bash
+python tools/gameinfo.py          # 锁当前游戏 → game.lock.json
+python tools/gameinfo.py --check  # 只比对：版本/内容变了就返回 1（开局体检用）
+python tools/gameinfo.py --diff   # 列出到底哪些文件变了
+```
+
+`game.lock.json` 必须在**干净的游戏**上取（没有本项目补丁）。若检测到 ggpk 还留着旧补丁，
+`gameinfo.py` 会拒绝锁基线——否则指纹里混进我们自己的改动，就再也判断不了游戏是否更新过。
+
+补丁生成时，`game` 段被写进 `out/patch/manifest.json`；`patcher apply` 会拿它和当前客户端比对，
+**不一致直接中止（退出码 4）**，要强上得显式加 `--force`。加上原有的三态门禁
+（原始/已打补丁/未知），版本错配和内容错配各有一道闸。
+
+发布包命名带游戏版本：`poe-zh-v0.3.0+game3.29.3b.zip`。
+
+## 游戏更新后（换赛季）
+
+```bash
+GGPK="C:/Program Files (x86)/Grinding Gear Games/Path of Exile/Content.ggpk"
+
+# 0) 先把上一版补丁撤掉，回到干净客户端
+./tools/patcher/bin/Debug/net8.0/patcher.exe restore "$GGPK" out/patch/manifest.json
+
+# 1) 体检：版本变了哪些文件变了，一目了然
+python tools/gameinfo.py --diff
+
+# 2) 重新锁基线（旧锁自动留档到 out/game-lock-history/）
+python tools/gameinfo.py
+
+# 3) 重导 → 重解析 → 重跑体检（修正稿会显示哪些 key 已经失效）
+cd tools/dumper && dotnet build && ./bin/Debug/net8.0/dumper.exe pairs "$GGPK" ../../pairs diff_pairs.csv
+cd ../.. && python tools/extract_pairs.py pairs out/pairs.csv
+python tools/parse_statdesc.py raw_sd out/statdesc.csv
+
+# 4) 升级体检：哪些修正稿还能照用、哪些英文原文改了要重做
+python tools/check_fixes.py
+#    pending 还没打 / applied 已生效 / drift 原文变了要人工重判 / gone 条目没了
+
+# 5) 重生成补丁 → 写入
+python tools/patch_dat.py
+./tools/patcher/bin/Debug/net8.0/patcher.exe apply "$GGPK" out/patch/manifest.json
+```
+
+`patch_dat.py` 会逐表把 `pairs/zh` 的 sha256 和 `game.lock.json` 里记的值对齐，
+对不上就拒绝生成——所以「拿着旧补丁打新版本」在工具层面是走不通的，不用靠自觉。
+
 
 ## 一次完整的重跑
 

@@ -8,6 +8,7 @@
 """
 import csv
 import hashlib
+import json
 import os
 import shutil
 import sys
@@ -16,6 +17,7 @@ from datetime import datetime, timezone, timedelta
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VERSION = open(os.path.join(ROOT, "VERSION"), encoding="utf-8").read().strip()
+LOCK = os.path.join(ROOT, "game.lock.json")
 TZ = timezone(timedelta(hours=8))
 
 DOCS = ["README.md", "REPORT.md", "DATA-FINDINGS.md", "RESEARCH-FORUM.md"]
@@ -72,6 +74,22 @@ def main():
     if os.path.exists(mf):
         shutil.copy2(mf, os.path.join(rel_dir, "patch-manifest.json"))
         copied.append("out/patch/manifest.json")
+    # 修正稿的当前状态（pending/applied/drift/gone）
+    st = os.path.join(ROOT, "out", "fix-status.csv")
+    if os.path.exists(st):
+        shutil.copy2(st, os.path.join(rel_dir, "fix-status.csv"))
+        copied.append("out/fix-status.csv")
+    # 游戏版本锁：这一版译文对应哪个客户端
+    lock = None
+    if os.path.exists(LOCK):
+        lock = json.load(open(LOCK, encoding="utf-8"))
+        shutil.copy2(LOCK, os.path.join(rel_dir, "game.lock.json"))
+        copied.append("game.lock.json")
+
+    gv = (lock or {}).get("version", {})
+    gclient = gv.get("client_version") or "unknown"
+    gpatch = gv.get("patch_version") or "?"
+    stamp = "v%s+game%s" % (VERSION, gclient)
 
     # RELEASE.md
     mpath = os.path.join(ROOT, "out", "patch", "manifest.json")
@@ -80,10 +98,33 @@ def main():
         "# v%s" % VERSION,
         "",
         "- 打包时间：%s" % now.strftime("%Y-%m-%d %H:%M:%S %z"),
-        "- 游戏基线：Content.ggpk 74,730,084,326 B（2026-09-06 22:24）",
+        "- **适用游戏版本：%s**（patch %s）" % (gclient, gpatch),
         "- 状态：**%s**" % ("已向 ggpk 写入 .dat 补丁" if patched else "分析基线，尚未写入任何游戏文件"),
         "",
+        "## 对应的游戏版本",
+        "",
     ]
+    if lock:
+        lines += [
+            "| 项 | 值 |",
+            "|---|---|",
+            "| 客户端版本 | `%s` |" % gclient,
+            "| 补丁版本 | `%s` |" % gpatch,
+            "| 版本来源 | `%s` |" % gv.get("log", "?"),
+            "| 锁定时 ggpk 状态 | %s |" % ("已含本项目补丁" if lock.get("ggpk_state") == "patched" else "干净（原始）"),
+            "| Content.ggpk | %s B，mtime %s |" % (format(lock["ggpk"]["size"], ","), lock["ggpk"]["mtime"]),
+            "| 锁定文件数 | %d（语言 %d + 词缀 txt %d） |"
+            % (lock["counts"]["total"], lock["counts"]["lang_files"], lock["counts"]["statdesc_files"]),
+            "| 基线指纹 | `%s` |" % lock["fingerprint"],
+            "",
+            "指纹 = 上述每个文件 `path + sha256` 排序后聚合；只要有一处文本变化它就会变。",
+            "游戏更新后先跑 `python tools/gameinfo.py --diff` —— 它会指出哪些文件变了。",
+            "",
+            "**本版译文只对 %s 负责。**换版本必须重跑：`gameinfo` → 重导 → 重分析 → `patch_dat`。" % gclient,
+            "",
+        ]
+    else:
+        lines += ["> 未找到 `game.lock.json`：这一版没有绑定游戏版本，不要直接套到客户端上。", ""]
     if note:
         lines += ["> " + note, ""]
     lines += ["| 修正稿 | 条数 | 内容 |", "|---|---|---|"]
@@ -99,12 +140,12 @@ def main():
         "",
         "## 打包内容",
         "",
-        "文档 4 份 + 修正稿 %d 份 + 术语表 + MANIFEST.sha256。二进制原始导出不入档，可由 `tools/dumper` 重导。"
-        % sum(1 for n, _ in FIXES if os.path.exists(os.path.join(ROOT, "out", n))),
+        "文档 4 份 + 修正稿 %d 份 + 状态表 + 术语表 + game.lock.json + MANIFEST.sha256。"
+        % sum(1 for n, _ in FIXES if os.path.exists(os.path.join(ROOT, "out", n)))
+        + "二进制原始导出不入档（可由 `tools/dumper` 重导，且换版本后必须重导）。",
         "",
     ]
     if patched:
-        import json
         m = json.load(open(mpath, encoding="utf-8"))
         lines += ["## 已写入游戏（.dat 侧）", "",
                   "| 表 | 改动 | 原始 → 补丁字节 | sha256(补丁) |", "|---|---|---|---|"]
@@ -125,12 +166,12 @@ def main():
             f.write("%s  %s\n" % (sha256(os.path.join(rel_dir, name)), name))
 
     # zip
-    zpath = os.path.join(ROOT, "releases", "poe-zh-v%s.zip" % VERSION)
+    zpath = os.path.join(ROOT, "releases", "poe-zh-%s.zip" % stamp)
     with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as z:
         for name in files + ["MANIFEST.sha256"]:
-            z.write(os.path.join(rel_dir, name), "v%s/%s" % (VERSION, name))
+            z.write(os.path.join(rel_dir, name), "%s/%s" % (stamp, name))
 
-    print("归档目录：releases/v%s/（%d 个文件）" % (VERSION, len(files) + 1))
+    print("归档目录：releases/v%s/（%d 个文件）  游戏版本：%s" % (VERSION, len(files) + 1, gclient))
     for name in files:
         print("   %-32s %s" % (name, sha256(os.path.join(rel_dir, name))[:16]))
     print("压缩包：%s  %.1f KB" % (zpath, os.path.getsize(zpath) / 1024))

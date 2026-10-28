@@ -17,5 +17,8 @@ out/patch/*
 !out/patch/manifest.json
 releases/*.zip
 
+# 旧游戏锁留档（需要时可由 git 历史里的 game.lock.json 找回）
+out/game-lock-history/
+
 # 游戏本体
 *.ggpk

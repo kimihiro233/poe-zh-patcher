@@ -345,6 +345,53 @@ reason    = 一句话理由
 - 已知遗留：GGG 官方补丁器会覆盖被改文件（每次大版本重跑一次即可）；纯文本修改没有
   已被封禁的先例，但这条无法自证，属于用户自担的选择。
 
+### 版本绑定（v0.3.0）
+
+补丁能写进去，和补丁该不该写进去，是两件事。前者靠 sha256 门禁（内容对不对），
+后者靠版本绑定（是不是这一版的文本）。
+
+**版本从哪来**：GGG 的 exe 不带版本资源，`PathOfExile.exe` 的 `FileVersion` 是空的。
+唯一可靠的来源是客户端日志——
+
+```
+[HTTP2] User agent: PoE release/tags/3.29.3b Windows x64
+Web root: https://patch.poecdn.com/3.29.3.3/
+```
+
+**为什么版本号不够**：热修可以不改版本号就换文本，GGG 也经常这么干。所以同时锁内容指纹：
+1916 个繁中语言文件 + 45 个词缀 txt，共 1961 个 sha256，排序后聚合为一个值
+（`3.29.3b` 实测 `1962f349c65322ae…`）。任何一处文本变动都会让它变。
+
+**三道闸**：
+
+| 闸 | 拦什么 | 表现 |
+|---|---|---|
+| 版本比对 | 补丁 vs 当前客户端版本号不一致 | `apply` 中止，退出码 4，除非 `--force` |
+| 内容三态 | 目标文件既非原始也非补丁（游戏更新改过） | 全量预检不过就**一个文件都不写**（退出码 5） |
+| 基线校验 | `pairs/zh` 的手上文本 ≠ `game.lock.json` 记的 sha | `patch_dat.py` 拒绝生成补丁 |
+
+第三闸最容易被忽略：`game.lock.json` 若在「已打补丁的 ggpk」上取，指纹里就混进了我们
+自己的改动，之后永远判断不出游戏是否更新过。所以 `gameinfo.py` 会先检测补丁是否还在，
+在就不让锁（`--allow-patched` 才能强锁）。
+
+### 升级体检：修正稿还成不成立
+
+版本锁解决「能不能打」，`check_fixes.py` 解决「打完还算不算数」。178 条修正稿逐条对当前
+语料复议，四种结果：
+
+| 状态 | 含义 | 处理 |
+|---|---|---|
+| `pending` | 当前文本仍是旧值 | 正常，等打补丁 |
+| `applied` | 当前文本已是新值 | 已生效 |
+| `drift` | 两边都不是（英文原文被改写） | **必须人工重判**，不能照搬旧译文 |
+| `gone` | stat / 表行不存在 | 条目作废，从清单里摘掉 |
+
+`3.29.3b` 实测：**173 条 pending、5 条 hold、0 条 drift、0 条 gone**。
+说明这一版的分析基线是干净对上的——没有一条是拿着空气改的。
+
+这一步是「换赛季」时唯一不能省的：`drift` 的条目虽然位置还在，但英文已经换了说法，
+照抄旧译文就是新的错译。
+
 ---
 
 ## 七、建议的下一步
@@ -374,10 +421,14 @@ out/fix-order.csv                  10 条数值位置/语序统一
 out/fix-category.csv               41 条物品类别词修正稿（Jewellery/Item/Armour）
 out/fix-category-ui.csv            10 条 UI 侧类别词修正稿（已写入 ggpk）
 out/fix-category-hold.csv           5 条存疑，待拍板（Amulet 两套词 4 + 诗意文本 1）
-out/patch/                          已生成并写入的 5 个 .dat + manifest.json
+out/fix-status.csv                178 条修正稿的当前状态（pending/applied/drift/gone）
+out/patch/                          已生成并写入的 5 个 .dat + manifest.json（含 game 段）
 out/report-statdesc.md            词缀侧体检报告（含明细表）
 out/report-ui.md                  UI 侧体检报告
 out/direction-check.csv          108 条方向问题 + 11 条「中文比英文准，别动」
 out/report-*-issues.csv       2,921 条可当工单的问题清单
+game.lock.json                    游戏版本锁（3.29.3b，1961 个文件指纹）
 releases/v0.1.0/                  分析基线快照（未动游戏文件）
+releases/v0.2.0/                  回写链路打通（未绑游戏版本）
+releases/v0.3.0/                  版本绑定（3.29.3b）
 ```

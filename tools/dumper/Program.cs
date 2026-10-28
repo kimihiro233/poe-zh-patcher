@@ -51,6 +51,27 @@ if (args.Length > 0 && args[0] == "raw") {
     return;
 }
 
+// hash <ggpk> <filter> [--exact]
+// 输出 path \t size \t sha256，用于锁定游戏版本基线（不做任何写入）
+if (args.Length > 0 && args[0] == "hash") {
+    var gpath = args[1];
+    var filt = args[2];
+    var exact = args.Contains("--exact");
+    var keys = filt.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+    using var gh = new BundledGGPK(gpath, true);
+    var hits = gh.Index.Files.Values.Select(f => f.Path)
+        .Where(p => !string.IsNullOrEmpty(p) && (exact ? keys.Contains(p) : keys.Any(k => p.Contains(k, StringComparison.OrdinalIgnoreCase))))
+        .OrderBy(p => p, StringComparer.Ordinal).ToList();
+    Console.WriteLine($"hash matches: {hits.Count}");
+    foreach (var p in hits) {
+        if (!gh.Index.TryGetFile(p, out var rec)) { Console.WriteLine($"  MISS\t{p}"); continue; }
+        var data = rec.Read().ToArray();
+        var sha = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(data)).ToLowerInvariant();
+        Console.WriteLine($"  {p}\t{data.Length}\t{sha}");
+    }
+    return;
+}
+
 if (args.Length > 0 && args[0] == "cmp") {
     var gpath = args[1];
     var lang = args.Length > 2 ? args[2] : "traditional chinese";
