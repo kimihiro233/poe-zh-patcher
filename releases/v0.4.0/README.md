@@ -30,7 +30,7 @@
 │  ├─ datwrite.py         .datc64 字符串重写器（追加式，三重自检）
 │  ├─ patch_dat.py        修正稿 → out/patch/*.dat + manifest.json
 │  ├─ patch_sd.py         修正稿 → out/patch-sd/*.txt + manifest-sd.json（整文件替换）
-│  ├─ release.py          打版本快照到 releases/v<ver>/
+│  ├─ release.py          打版本快照到 releases/v<ver>/（zip 里额外带补丁器 exe）
 │  ├─ extract_pairs.py    成对抽取 EN/ZH 的 .dat 文本
 │  ├─ parse_statdesc.py   解析词缀/技能描述模板（纯文本）
 │  ├─ check_sd_syntax.py  词缀文件语法体检 + 「客户端被改过」指纹（--canon 比对基线）
