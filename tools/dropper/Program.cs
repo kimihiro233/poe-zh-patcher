@@ -744,6 +744,14 @@ internal static class Program {
         Directory.CreateDirectory(tmp);
         var copy = System.IO.Path.Combine(tmp, "_.index.bin");
         File.Copy(idxPath, copy);
+        // 自建 bundle 也要一起搬过去，否则库在副本里找不到它们，会新建一个空的 —— 那是演练环境的假象
+        var srcCustom = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(idxPath)!, "LibGGPK3");
+        if (Directory.Exists(srcCustom)) {
+            var dstCustom = System.IO.Path.Combine(tmp, "LibGGPK3");
+            Directory.CreateDirectory(dstCustom);
+            foreach (var f in Directory.GetFiles(srcCustom, "*.bundle.bin"))
+                File.Copy(f, System.IO.Path.Combine(dstCustom, System.IO.Path.GetFileName(f)), true);
+        }
         Console.WriteLine($"写入演练（只动临时副本，真实客户端一个字节不碰）");
         Console.WriteLine($"  源索引 {idxPath}");
         Console.WriteLine($"  演练目录 {tmp}");
@@ -753,18 +761,19 @@ internal static class Program {
         try {
             idx = new Idx(copy, parsePaths: false, bundleFactory: new DriveBundleFactory(tmp));
             Console.WriteLine($"  索引里 {idx.Files.Count:N0} 个文件 / {idx.Bundles.Length:N0} 个 bundle");
-            var recs = idx.Files.Values.Where(f => f.Size is > 0 and < (4 << 20)).Take(n).ToArray();
+            var recs = idx.Files.Where(kv => kv.Value.Size is > 0 and < (4 << 20)).Take(n).ToArray();
             Console.WriteLine($"  取 {recs.Length} 个文件依次写入");
             Console.WriteLine();
 
-            var expect = new Dictionary<LibBundle3.Records.FileRecord, string>();
+            var expect = new Dictionary<ulong, string>();       // pathHash → sha（重开后靠它找，FileRecord 对象会换）
             for (var i = 0; i < recs.Length; i++) {
-                var rec = recs[i];
+                var hash = recs[i].Key;
+                var rec = recs[i].Value;
                 var data = new byte[Math.Min(rec.Size + 17, 1 << 20)];
                 for (var j = 0; j < data.Length; j++) data[j] = (byte)(i * 31 + j);
                 try {
                     rec.Write(data, saveIndex: false);
-                    expect[rec] = Sha(data);
+                    expect[hash] = Sha(data);
                     Console.WriteLine($"  [{i + 1,2}/{recs.Length}] bundle#{rec.BundleRecord.BundleIndex,-5} {rec.Size,9:N0} → {data.Length,9:N0} B   ✓");
                 } catch (Exception ex) {
                     Console.WriteLine($"  [{i + 1,2}/{recs.Length}] bundle#{rec.BundleRecord.BundleIndex,-5} {rec.Size,9:N0} B   ✗ {ex.GetType().Name}: {ex.Message}");
@@ -782,17 +791,57 @@ internal static class Program {
                 bad++;
             }
 
-            var ok = 0;
-            foreach (var (rec, sha) in expect) {
-                try {
-                    if (Sha(rec.Read().ToArray()) == sha) ok++;
-                    else { Console.WriteLine($"  ✗ 回读不符：bundle#{rec.BundleRecord.BundleIndex}"); bad++; }
-                } catch (Exception ex) {
-                    Console.WriteLine($"  ✗ 回读失败：bundle#{rec.BundleRecord.BundleIndex} {ex.GetType().Name}: {ex.Message}");
-                    bad++;
+            // 用同一个内存对象回读是自欺：index 写错了它照样读得出来。
+            // 游戏是「关掉再重新解析磁盘上的 _.index.bin」，这里就按游戏的方式做。
+            Console.WriteLine();
+            Console.WriteLine("  重新解析磁盘 index（模拟游戏启动）");
+            idx.Dispose();
+            idx = null;
+            var re = new Idx(copy, parsePaths: false, bundleFactory: new DriveBundleFactory(tmp));
+            try {
+                var misaligned = 0;
+                var rbs = re.Bundles;
+                for (var i = 0; i < rbs.Length; i++)
+                    if (rbs.Span[i].BundleIndex != i) {
+                        Console.WriteLine($"  ✗ bundle 错位：第 {i} 个记录的 BundleIndex = {rbs.Span[i].BundleIndex}（{rbs.Span[i].Path}）");
+                        if (++misaligned >= 5) { Console.WriteLine("    ..."); break; }
+                    }
+                if (misaligned > 0) { Console.WriteLine($"  共 {misaligned} 处错位 —— 文件记录会指向别的 bundle，游戏读到垃圾"); bad += misaligned; }
+                else Console.WriteLine($"  bundle 记录 {rbs.Length:N0} 个，BundleIndex 全部与位置一致  ✓");
+
+                // 文件记录里的 offset 是「解压后空间」里的偏移，边界是 bundle 的 UncompressedSize
+                var overrun = 0;
+                var checkedFiles = 0;
+                foreach (var fr in re.Files.Values) {
+                    var br2 = fr.BundleRecord;
+                    if (!File.Exists(System.IO.Path.Combine(tmp, br2.Path))) continue;   // 原始 bundle 不在演练目录，跳过
+                    checkedFiles++;
+                    if (fr.Offset < 0 || fr.Size < 0 || fr.Offset + (long)fr.Size > br2.UncompressedSize) {
+                        Console.WriteLine($"  ✗ 越界：{br2.Path}  offset={fr.Offset:N0} + size={fr.Size:N0} > 解压空间 {br2.UncompressedSize:N0}");
+                        if (++overrun >= 5) { Console.WriteLine("    ..."); break; }
+                    }
                 }
+                if (overrun > 0) { Console.WriteLine($"  共 {overrun} 个文件记录越界"); bad += overrun; }
+                else Console.WriteLine($"  记录边界  {checkedFiles:N0} 个文件已核对，全部落在解压空间内  ✓");
+
+                var ok = 0;
+                var fail = 0;
+                foreach (var (h, sha) in expect) {
+                    if (!re.Files.TryGetValue(h, out var fr)) { Console.WriteLine("  ✗ 重开后找不到文件（pathHash 丢失）"); fail++; continue; }
+                    try {
+                        var got = Sha(fr.Read().ToArray());
+                        if (got == sha) ok++;
+                        else { Console.WriteLine($"  ✗ 重开后内容不符：bundle#{fr.BundleRecord.BundleIndex} {fr.BundleRecord.Path}"); fail++; }
+                    } catch (Exception ex) {
+                        Console.WriteLine($"  ✗ 重开后读不出：bundle#{fr.BundleRecord.BundleIndex} {fr.BundleRecord.Path} — {ex.GetType().Name}: {ex.Message}");
+                        fail++;
+                    }
+                }
+                Console.WriteLine($"  重开校验  {ok}/{expect.Count} 通过" + (fail > 0 ? $"，{fail} 个失败" : ""));
+                bad += fail;
+            } finally {
+                re.Dispose();
             }
-            Console.WriteLine($"  回读校验  {ok}/{expect.Count} 通过");
         } catch (Exception ex) {
             Console.WriteLine($"✗ 演练中断：{ex.GetType().Name}: {ex.Message}");
             Console.WriteLine(ex.StackTrace);
@@ -965,6 +1014,7 @@ internal static class Program {
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --writetest[=N]                  写入演练（在索引副本上写 N 个文件，不碰客户端）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --partial       只处理对得上的文件，跳过对不上的");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --plan          只演算校验，不写文件");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --only=<关键词>  只改文件名含该关键词的文件（最小验证用）");
     }
 
     private static void Pause() {
@@ -1430,6 +1480,21 @@ internal static class Program {
         var pool = partial ? items.Where(i => i.CurFlavor != Flavor.Unknown).ToList() : items;
         var todo = pool.Where(i => EffectiveFlavor(i, target) != i.CurFlavor).ToList();
         Console.WriteLine($"目标：{FlavorName(target)}    需要改动 {todo.Count} 个文件（可用 {pool.Count} / 共 {items.Count} 个）");
+
+        // --only=<关键词>：只动匹配的文件。用来在刚修好的客户端上做最小验证 ——
+        // 先打 1 个文件、启动游戏确认没问题，再全量。失败也只需要还原那一两个。
+        if (Args.TryGetValue("only", out var onlyPat) && onlyPat.Length > 0) {
+            var all = todo.Count;
+            todo = todo.Where(x =>
+                x.Label.Contains(onlyPat, StringComparison.OrdinalIgnoreCase) ||
+                x.Path.Contains(onlyPat, StringComparison.OrdinalIgnoreCase)).ToList();
+            Console.WriteLine($"  只处理匹配 \"{onlyPat}\" 的 {todo.Count} 个文件（本来要改 {all} 个）");
+            if (todo.Count == 0) {
+                Console.WriteLine("  没有匹配的文件，什么都没做。");
+                return 0;
+            }
+        }
+
         if (todo.Count == 0) { Console.WriteLine("已经就是这个版本，无需改动。"); return 0; }
 
         var legacy = todo.Where(i => i.CurFlavor == Flavor.Custom && i.Legacy).ToList();
