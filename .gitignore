@@ -20,5 +20,10 @@ releases/*.zip
 # 旧游戏锁留档（需要时可由 git 历史里的 game.lock.json 找回）
 out/game-lock-history/
 
+# 写入前的临时备份与回读校验导出
+out/backup/
+out/verify*/
+out/out/
+
 # 游戏本体
 *.ggpk
