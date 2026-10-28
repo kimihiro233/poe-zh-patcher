@@ -1,0 +1,383 @@
+{
+  "version": "0.4.0",
+  "kind": "statdescriptions",
+  "flavor": "dual-all",
+  "game": {
+    "log": "logs/LatestClient.txt",
+    "log_mtime": "2026-10-27T16:54:00",
+    "client_version": "3.29.3b",
+    "patch_version": "3.29.3.3",
+    "fingerprint": "1962f349c65322aedc9f826cf4974ffe8543bd72efceae51f251483e9d8fa155",
+    "locked_at": "2026-10-28T13:11:05",
+    "ggpk_size": 74730084326,
+    "source": "game.lock.json"
+  },
+  "fingerprint": "1962f349c65322aedc9f826cf4974ffe8543bd72efceae51f251483e9d8fa155",
+  "total_edits": 161,
+  "files": [
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/active_skill_gem_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_active_skill_gem_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_active_skill_gem_stat_descriptions.txt",
+      "sha256_original": "92bd41f9c68829663ab98615a91b61dd8e05f22d837b021f4f65b44e44ee983c",
+      "sha256_patched": "6961c2907a22ae09c80382a36dfc7f4edbf61b310639190d6af8780e0b2eb830",
+      "size_original": 938968,
+      "size_patched": 992474,
+      "edits": 2,
+      "sha256_variants": [
+        "8d9599e8aa60be9d29f77ce29a709a8f01a88df31d320eaf11b0abb4785ee30a"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/advanced_mod_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_advanced_mod_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_advanced_mod_stat_descriptions.txt",
+      "sha256_original": "5df83b3fbe253f141d2250b7631045ee19bc49aea94cee2429d8127e3c8878f8",
+      "sha256_patched": "349cd2f7d2df76207db7da44e63b813d6d8e7ffbbffc0b2a649877050dbda73f",
+      "size_original": 217602,
+      "size_patched": 233652,
+      "edits": 0,
+      "sha256_variants": [
+        "5df83b3fbe253f141d2250b7631045ee19bc49aea94cee2429d8127e3c8878f8"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/atlas_relic_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_atlas_relic_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_atlas_relic_stat_descriptions.txt",
+      "sha256_original": "a32b7f9ac05df6d8ea55f4f4ddc8b323934db66c6a6e084adc48c054ba582437",
+      "sha256_patched": "da417a2854e833d0beb8c093dad86fd239d7b62ccf35ba6b7525a85fbcc4a03d",
+      "size_original": 10488,
+      "size_patched": 10960,
+      "edits": 0,
+      "sha256_variants": [
+        "a32b7f9ac05df6d8ea55f4f4ddc8b323934db66c6a6e084adc48c054ba582437"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/atlas_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_atlas_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_atlas_stat_descriptions.txt",
+      "sha256_original": "df56cbf102e3028650caa1a136efb0e14e4d0f13dc7b7a8a610b344294645150",
+      "sha256_patched": "4fedd9689a955614f55f8468bc92343d3f176206f7770d3fef8cf22a2853ae1a",
+      "size_original": 2981106,
+      "size_patched": 3190044,
+      "edits": 5,
+      "sha256_variants": [
+        "bd64beb4886a881f9e21d70a0fec3e2dec9b89fd0f836484f095f76cfc5eb3b0"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/chest_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_chest_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_chest_stat_descriptions.txt",
+      "sha256_original": "9e43fdc286e09984ba65206400f4604faa2d25e9750b86abb7e0728a7e3b0c38",
+      "sha256_patched": "92ef53931480ee6a9291c4ea0389b2e241b7d395a52693ee1335be2908299b26",
+      "size_original": 202900,
+      "size_patched": 215684,
+      "edits": 0,
+      "sha256_variants": [
+        "9e43fdc286e09984ba65206400f4604faa2d25e9750b86abb7e0728a7e3b0c38"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/deepwater_applied_adjacent_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_deepwater_applied_adjacent_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_deepwater_applied_adjacent_stat_descriptions.txt",
+      "sha256_original": "8ec99182e431903e55ceeff1a728f91b53d8fbfeca48dde4731d7342bce878af",
+      "sha256_patched": "754ba1c7a424a8de7e667c442d515d709b41eac9321ebc544683b6c8a73d5148",
+      "size_original": 7698,
+      "size_patched": 8128,
+      "edits": 0,
+      "sha256_variants": [
+        "8ec99182e431903e55ceeff1a728f91b53d8fbfeca48dde4731d7342bce878af"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/deepwater_explicit_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_deepwater_explicit_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_deepwater_explicit_stat_descriptions.txt",
+      "sha256_original": "e640de5e802ad69ddc0ea02dffb86de8af8e8559aff2df7938075ccfb4e9f580",
+      "sha256_patched": "f5c24d2fcababc7151a0ce553edad93a77468696373b8b664599d8f03ef0d080",
+      "size_original": 67924,
+      "size_patched": 72790,
+      "edits": 0,
+      "sha256_variants": [
+        "e640de5e802ad69ddc0ea02dffb86de8af8e8559aff2df7938075ccfb4e9f580"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/deepwater_implicit_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_deepwater_implicit_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_deepwater_implicit_stat_descriptions.txt",
+      "sha256_original": "10dd9b5d8d095ea210439bd712e916881e71df290467282616057377a8744bff",
+      "sha256_patched": "e17efdaa15e06da0fdcd98f3f9b32b2566d7048aed91d49205fa6de0d040117c",
+      "size_original": 210938,
+      "size_patched": 226290,
+      "edits": 0,
+      "sha256_variants": [
+        "10dd9b5d8d095ea210439bd712e916881e71df290467282616057377a8744bff"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/expedition_relic_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_expedition_relic_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_expedition_relic_stat_descriptions.txt",
+      "sha256_original": "0abed886e0c9d396926d04bdd080128efda55a1ba1993be8d3a50b34ab742cf5",
+      "sha256_patched": "aec3e87058dcb15dff5c27147f2b4dc8dcc5b67bb9a00ce147349a7ea9bf6c81",
+      "size_original": 446200,
+      "size_patched": 477392,
+      "edits": 4,
+      "sha256_variants": [
+        "a5a00a583691ec990cce000945d274d1da108de024053ea3be2cebdb4bcff788"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/gem_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_gem_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_gem_stat_descriptions.txt",
+      "sha256_original": "fc7166d551487788a9dc20620c47a984a0404c3c5dafd9d4e9df6242853136b1",
+      "sha256_patched": "76dd1bb17f27abfc9c34ff9131357d4c9cc66270e451e8cc3dff912fbbe6f5a0",
+      "size_original": 2852588,
+      "size_patched": 3033302,
+      "edits": 10,
+      "sha256_variants": [
+        "da6f2e57d5fcd924256a472dc3a0846670860be5665b1579979a289596ae27e9"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/graft_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_graft_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_graft_stat_descriptions.txt",
+      "sha256_original": "a8b8f18ec0fa194de777a4f266fdf4e2da0b2f2a30b6c5aa8a05ef44db6f0908",
+      "sha256_patched": "889cbbec7a53ccda69b077a43386268d44a9fa50b8fc9919a799f9a83f89f496",
+      "size_original": 363234,
+      "size_patched": 385988,
+      "edits": 0,
+      "sha256_variants": [
+        "a8b8f18ec0fa194de777a4f266fdf4e2da0b2f2a30b6c5aa8a05ef44db6f0908"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/heist_equipment_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_heist_equipment_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_heist_equipment_stat_descriptions.txt",
+      "sha256_original": "c46dcd38ff02a2e698f33260d4931fef47ba963fa453865d7b0bacf11c2a7bab",
+      "sha256_patched": "f29441d3d9ab070b6bbabf9eabf3553b8cc662310933413c4168992092bebe93",
+      "size_original": 328702,
+      "size_patched": 349778,
+      "edits": 1,
+      "sha256_variants": [
+        "127e46a65ff3ad390267a7840a945731576dabfca139aee2849f469ba2f81d9c"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/leaguestone_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_leaguestone_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_leaguestone_stat_descriptions.txt",
+      "sha256_original": "1923ccfa886a5f2078ef9cc48853e3cef435a08d5db89273e42bc0c5c051af6e",
+      "sha256_patched": "4efd43fbd4b1a1dd8588ac5895b4ff0cdd7446cb95ca041e82f8e712fd5f843c",
+      "size_original": 506622,
+      "size_patched": 543534,
+      "edits": 4,
+      "sha256_variants": [
+        "bba0763ed9f3ee557580e626377987de96b7535afd7236385302fb120b713926"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/map_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_map_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_map_stat_descriptions.txt",
+      "sha256_original": "447cfea51eceea68bd7185f236859011a1039c6d153161811f96f5249a5756a4",
+      "sha256_patched": "153fa1cd0ef3cfb3d0c8dd97b7417acaca1103b1eb91a650a8d5162a0d02bff4",
+      "size_original": 556700,
+      "size_patched": 592782,
+      "edits": 14,
+      "sha256_variants": [
+        "6011451f7d20c7e5224ff3b2247604d6ad36c88d1f3454b6408594ec1067243c"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/mercenary_support_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_mercenary_support_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_mercenary_support_stat_descriptions.txt",
+      "sha256_original": "ecabb4a28c34b6b1ac35e650fc1417adaf22156a3d0a08dc6a5676ca85eb2757",
+      "sha256_patched": "f08fefff06143e12ee7dd3f8cf05f4d16d734b040a9a775b5889ebaf83f68a6d",
+      "size_original": 163418,
+      "size_patched": 174336,
+      "edits": 0,
+      "sha256_variants": [
+        "ecabb4a28c34b6b1ac35e650fc1417adaf22156a3d0a08dc6a5676ca85eb2757"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/mirage_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_mirage_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_mirage_stat_descriptions.txt",
+      "sha256_original": "5218d38d0a218519b11ea6db8deace84390cf73d879be446a972ec623433872d",
+      "sha256_patched": "1fbddb2c670e7a1cf277223df040837f7dda4d330482a647206a3dc063a0ae6d",
+      "size_original": 150106,
+      "size_patched": 160406,
+      "edits": 4,
+      "sha256_variants": [
+        "17babacba205840b90e2910a97935614eeade3756981d0a7a87bc777010e4ae0"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/monster_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_monster_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_monster_stat_descriptions.txt",
+      "sha256_original": "24f660a1ba1182b685fe49daae591219d2918f1e8ce1da4be005ecaaac268069",
+      "sha256_patched": "501806bbe944c8303af610b50162114f6a3bc1ea4aae6a64809016b2ab64a143",
+      "size_original": 44162,
+      "size_patched": 46216,
+      "edits": 0,
+      "sha256_variants": [
+        "24f660a1ba1182b685fe49daae591219d2918f1e8ce1da4be005ecaaac268069"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/necropolis_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_necropolis_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_necropolis_stat_descriptions.txt",
+      "sha256_original": "b226421b9a449022266a8a23aca1e429106008f050ba7d7dc7ac8f8b5777993f",
+      "sha256_patched": "d28aa2947c496ce617cd4e0db5921892f6365281845a2762e2333288a8080f88",
+      "size_original": 458362,
+      "size_patched": 482222,
+      "edits": 0,
+      "sha256_variants": [
+        "b226421b9a449022266a8a23aca1e429106008f050ba7d7dc7ac8f8b5777993f"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/passive_skill_aura_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_passive_skill_aura_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_passive_skill_aura_stat_descriptions.txt",
+      "sha256_original": "c32568f8dddfa66c7eff9c7ca59c8fbaf619cefef85e20848d9c6a32519e64b1",
+      "sha256_patched": "5a6a60c6140cb61ffefb4a8176bcf7ddef554247ade7a243d09f2f81e2cbc0df",
+      "size_original": 75134,
+      "size_patched": 79542,
+      "edits": 0,
+      "sha256_variants": [
+        "c32568f8dddfa66c7eff9c7ca59c8fbaf619cefef85e20848d9c6a32519e64b1"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/passive_skill_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_passive_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_passive_skill_stat_descriptions.txt",
+      "sha256_original": "98dcc8c9bba348b2b123a9db6391212d691fe1621fd870cb07259dcf9a7e886b",
+      "sha256_patched": "c047c250b763da7d28d2ee6a7b4127de348b6a9c0ceee7ed9b4463efda34181c",
+      "size_original": 410698,
+      "size_patched": 438676,
+      "edits": 0,
+      "sha256_variants": [
+        "98dcc8c9bba348b2b123a9db6391212d691fe1621fd870cb07259dcf9a7e886b"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/primordial_altar_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_primordial_altar_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_primordial_altar_stat_descriptions.txt",
+      "sha256_original": "d6ae9952258d23b51531d5c436e7598800ece53637392949d2c129a4e35beb45",
+      "sha256_patched": "e72bd195f29193d59132f7b0ab84a3bb50ea3040f8584672d330f938844433de",
+      "size_original": 431150,
+      "size_patched": 462386,
+      "edits": 0,
+      "sha256_variants": [
+        "d6ae9952258d23b51531d5c436e7598800ece53637392949d2c129a4e35beb45"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/sanctum_relic_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_sanctum_relic_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_sanctum_relic_stat_descriptions.txt",
+      "sha256_original": "e391fa33a09f68cb3e12ebabac5b9a71f54b9d952ce437524fa6c08837080d5d",
+      "sha256_patched": "27e71ab7ca72110da8303cd8c367887719148b3d46dad7b8a98bb67fc1f89ff3",
+      "size_original": 128328,
+      "size_patched": 136398,
+      "edits": 0,
+      "sha256_variants": [
+        "e391fa33a09f68cb3e12ebabac5b9a71f54b9d952ce437524fa6c08837080d5d"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/sentinel_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_sentinel_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_sentinel_stat_descriptions.txt",
+      "sha256_original": "f15dfbb7b737693e216c950fd448bc1c6ac331b54299571bd296f45d5b6a59b9",
+      "sha256_patched": "70c97c71d9a5db084cc9265499e5f40a1f2a67689db2bc173094be081ad9830e",
+      "size_original": 393094,
+      "size_patched": 415260,
+      "edits": 0,
+      "sha256_variants": [
+        "f15dfbb7b737693e216c950fd448bc1c6ac331b54299571bd296f45d5b6a59b9"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_stat_descriptions.txt",
+      "sha256_original": "93a81fb098854781d41e682fff67dae573ee43612c99ad5b22208d49270368f0",
+      "sha256_patched": "2e5b8cda0949529ad9741df5dc596bf27f501fb47bd49bd3f11fa5b9cfe0018a",
+      "size_original": 30725062,
+      "size_patched": 32538350,
+      "edits": 115,
+      "sha256_variants": [
+        "a563ea8dddda0a2ad3f9253d8e00f9513a8dd675c10bc5e9a1a80181d7cf44c1"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/tincture_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_tincture_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_tincture_stat_descriptions.txt",
+      "sha256_original": "4278067d21953b859eb158799dd44bf4c0b7f701da66fac98129aaa09f1be88d",
+      "sha256_patched": "16e1d480ad8f02fef0aa53e57f332d1b7bfa35b9619edf006e4501734cdd9609",
+      "size_original": 306492,
+      "size_patched": 323268,
+      "edits": 2,
+      "sha256_variants": [
+        "9e537dadf22399dc558c2052dac8597f43ff5cbb4c22ea55632c7eaf44e97b4f"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/village_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_village_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_village_stat_descriptions.txt",
+      "sha256_original": "15edc3ed46a214ddf59ce80c2aa2dee23bcd3f685b763ab0d96874e60508425d",
+      "sha256_patched": "a9304fba8bd33a1c565749f4a7d0b93986038360a0d632f97a334f1b87ec163c",
+      "size_original": 155776,
+      "size_patched": 167368,
+      "edits": 0,
+      "sha256_variants": [
+        "15edc3ed46a214ddf59ce80c2aa2dee23bcd3f685b763ab0d96874e60508425d"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+ "metadata/statdescriptions/stat_descriptions.txt": {
+  "270324": [
+   "法術擁有等同於你已裝備雙手武器{0]%物理傷害的附加法術傷害",
+   "法術擁有等同於你已裝備雙手武器{0]%物理傷害的附加法術傷害\\n  Spells have Added Spell Damage equal to {0}% of Physical Damage of\\nyour Equipped Two handed Weapon"
+  ]
+ }
+}

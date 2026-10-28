@@ -15,7 +15,15 @@ out/pairs.csv
 # 补丁输出（由 patch_dat.py 生成）与打包快照
 out/patch/*
 !out/patch/manifest.json
+out/patch-sd*/
 releases/*.zip
+
+# 补丁器构建产物（37 MB，dotnet publish 重新生成；发布包里带一份）
+dist/
+
+# 结构演练的回读镜像、异地采集包里的原始文件（只留分析报告）
+out/simtest/
+out/collect-*/files/
 
 # 旧游戏锁留档（需要时可由 git 历史里的 game.lock.json 找回）
 out/game-lock-history/

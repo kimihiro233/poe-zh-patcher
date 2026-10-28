@@ -1,0 +1,1547 @@
+// PoE 繁中改良汉化 · 拖放式补丁器
+//
+//   PoE-zh-Patcher.exe                       显示用法
+//   PoE-zh-Patcher.exe <Content.ggpk>        交互菜单（拖放走这条）
+//   PoE-zh-Patcher.exe <Content.ggpk> --set=translated|dual|dualall|original
+//   PoE-zh-Patcher.exe <Content.ggpk> --status
+//   PoE-zh-Patcher.exe <Content.ggpk> --selftest   校验数据与机器上的文件是否对得上
+//
+// 设计要点：内嵌 bundle.gz（行级结构），运行时从 ggpk 当前内容原地改写目标行，
+// 不做整文件替换，所以三套 flavor 之间可以任意来回切，不会残留。
+using System.Diagnostics;
+using System.IO.Compression;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
+using LibBundledGGPK3;
+using LibBundle3;
+using Idx = LibBundle3.Index;
+
+namespace PoeZhPatcher;
+
+internal enum Flavor { Original, Translated, Dual, DualAll, Custom, Unknown }
+
+// 标记层 / 文本层分离。
+//
+// statdesc 的引号内文本混着两类东西：标记层（<enchanted> / <rgb(…)>{{ }}）
+// 与文本层（其余字符，含 {0} 这类占位符）。译文只对文本层负责。
+// 客户端那份文件即使被第三方改过标记（换色、删标签），也能靠 Merge 把译文
+// 叠上去而一个标记都不动 —— 这就是 Flavor.Custom 的依据。
+internal static class Markup {
+    private const int MaxTag = 40;
+
+    private static bool IsMarkupAt(string s, int i, out int len) {
+        len = 0;
+        if (i + 1 < s.Length && ((s[i] == '{' && s[i + 1] == '{') || (s[i] == '}' && s[i + 1] == '}'))) {
+            len = 2;
+            return true;
+        }
+        if (s[i] == '<') {
+            for (var k = i + 1; k < s.Length && k - i <= MaxTag; k++) {
+                if (s[k] == '<') return false;
+                if (s[k] == '>') { len = k - i + 1; return true; }
+            }
+        }
+        return false;
+    }
+
+    private static List<(bool mk, string seg)> Tokens(string s) {
+        var list = new List<(bool, string)>();
+        var i = 0;
+        while (i < s.Length) {
+            if (IsMarkupAt(s, i, out var len)) {
+                list.Add((true, s.Substring(i, len)));
+                i += len;
+                continue;
+            }
+            var j = i;
+            while (j < s.Length && !IsMarkupAt(s, j, out _)) j++;
+            list.Add((false, s.Substring(i, j - i)));
+            i = j;
+        }
+        return list;
+    }
+
+    public static string Core(string s) {
+        var sb = new StringBuilder(s.Length);
+        foreach (var (mk, seg) in Tokens(s)) if (!mk) sb.Append(seg);
+        return sb.ToString();
+    }
+
+    private static string Seq(string s) {
+        var sb = new StringBuilder();
+        foreach (var (mk, seg) in Tokens(s)) if (mk) sb.Append('\u0001').Append(seg);
+        return sb.ToString();
+    }
+
+    public static bool SameMarkup(string a, string b) => Seq(a) == Seq(b);
+
+    /// 这一行一个标记都没有（原版有、这里没有 = 被整段删光）
+    public static bool IsBare(string s) => Seq(s).Length == 0;
+
+    // 把 old→new 的文本改动叠到 shell 上，shell 的标记层原样保留。
+    //
+    // 标记层三分法：
+    //   1 对方留着标记（换了颜色/标签）→ 沿用对方的，一个字节都不动
+    //   2 对方整段删光（原版有、现在一个标记都没有）→ 判为机械替换的破坏，还原原版标记
+    //   3 双方一致 → 原样
+    public static string Merge(string shell, string oldText, string newText, bool restoreBare = true) {
+        var cn = Core(shell);
+        var co = Core(oldText);
+        var ct = Core(newText);
+        if (cn != co)
+            throw new InvalidDataException(
+                $"这一行的文本层与数据包原文不符，拒绝合并\n    当前：{Clip(cn)}\n    原文：{Clip(co)}");
+        if (restoreBare && IsBare(shell) && !IsBare(oldText))
+            return newText;                 // 覆盖伤：按原版标记重建
+        // 底稿的标记与原文逐段相同 = 没被任何人动过，old→new 的差量（含标记层改动，
+        // 比如修官方笔误时补回漏掉的 }}）可以整套套用。
+        // 依据：标记序列 + 文本层都相同 → 两个字符串必然完全相同。
+        if (SameMarkup(shell, oldText)) return newText;
+        if (co == ct || cn == ct) return shell;
+
+        var ops = Opcodes(co, ct);
+
+        // shell 里每个位置是否属于文本层
+        var isLit = new List<bool>(shell.Length);
+        foreach (var (mk, seg) in Tokens(shell)) for (var k = 0; k < seg.Length; k++) isLit.Add(!mk);
+
+        var sb = new StringBuilder(shell.Length + 32);
+        int i = 0, ci = 0, n = shell.Length;
+
+        void Flush() {
+            while (i < n && !isLit[i]) { sb.Append(shell[i]); i++; }
+        }
+
+        foreach (var (tag, i1, i2, j1, j2) in ops) {
+            while (ci < i1) { Flush(); sb.Append(shell[i]); i++; ci++; }
+            if (tag == "equal") continue;
+            if (tag == "insert") {
+                // 插入落在当前位置、且不抢走后面的标记（"秒}}" 的追加要进到 }} 里面）
+                if (i1 == 0) Flush();
+                sb.Append(ct.Substring(j1, j2 - j1));
+                continue;
+            }
+            sb.Append(ct.Substring(j1, j2 - j1));
+            while (ci < i2) { Flush(); i++; ci++; }
+        }
+        while (i < n) { sb.Append(shell[i]); i++; }
+        return sb.ToString();
+    }
+
+    private static string Clip(string s) => s.Length <= 60 ? s : s[..60] + "…";
+
+    private static List<(string tag, int i1, int i2, int j1, int j2)> Opcodes(string a, string b) {
+        int n = a.Length, m = b.Length, p = 0;
+        while (p < n && p < m && a[p] == b[p]) p++;
+        int s = 0;
+        while (s < n - p && s < m - p && a[n - 1 - s] == b[m - 1 - s]) s++;
+        var midA = a.Substring(p, n - s - p);
+        var midB = b.Substring(p, m - s - p);
+        var ops = new List<(string, int, int, int, int)>();
+        if (p > 0) ops.Add(("equal", 0, p, 0, p));
+        if (midA.Length == 0 && midB.Length == 0) { }
+        else if (midA.Length == 0) ops.Add(("insert", p, p, p, p + midB.Length));
+        else if (midB.Length == 0) ops.Add(("delete", p, p + midA.Length, p, p));
+        else ops.AddRange(LcsOps(midA, midB, p, p));
+        if (s > 0) ops.Add(("equal", n - s, n, m - s, m));
+        return ops;
+    }
+
+    private static List<(string tag, int i1, int i2, int j1, int j2)> LcsOps(string a, string b, int oa, int ob) {
+        int n = a.Length, m = b.Length;
+        var dp = new int[n + 1, m + 1];
+        for (var i = n - 1; i >= 0; i--)
+            for (var j = m - 1; j >= 0; j--)
+                dp[i, j] = a[i] == b[j] ? dp[i + 1, j + 1] + 1 : Math.Max(dp[i + 1, j], dp[i, j + 1]);
+        var ops = new List<(string, int, int, int, int)>();
+        int x = 0, y = 0;
+        while (x < n && y < m) {
+            if (a[x] == b[y]) { x++; y++; continue; }
+            if (dp[x + 1, y] >= dp[x, y + 1]) {
+                var k = x;
+                while (x < n && (y >= m || dp[x + 1, y] >= dp[x, y + 1])) x++;
+                ops.Add(("delete", oa + k, oa + x, ob + y, ob + y));
+            } else {
+                var k = y;
+                while (y < m && (x >= n || dp[x, y + 1] > dp[x + 1, y])) y++;
+                ops.Add(("insert", oa + x, oa + x, ob + k, ob + y));
+            }
+        }
+        if (x < n) ops.Add(("delete", oa + x, oa + n, ob + y, ob + y));
+        if (y < m) ops.Add(("insert", oa + x, oa + x, ob + y, ob + m));
+        // 相邻的 delete+insert 合成 replace，保证单调递增
+        ops.Sort((u, v) => u.Item2 != v.Item2 ? u.Item2.CompareTo(v.Item2) : u.Item4.CompareTo(v.Item4));
+        var merged = new List<(string, int, int, int, int)>();
+        foreach (var op in ops) {
+            if (merged.Count > 0) {
+                var pv = merged[^1];
+                if (op.Item2 == pv.Item3 && op.Item4 == pv.Item5 && (pv.Item1 == "delete" || op.Item1 == "insert")) {
+                    merged[^1] = ("replace", pv.Item2, op.Item3, pv.Item4, op.Item5);
+                    continue;
+                }
+            }
+            merged.Add(op);
+        }
+        return merged;
+    }
+}
+
+internal sealed class Row {
+    public int No;
+    public string O = "";
+    public string? T;
+    public string? D;
+    public string? E;
+    // 上一版补丁写过、这一版已经换掉的文本。玩家升级补丁器后容器里留着旧字节，
+    // sha 认不出，但逐行文本能认出 —— 认出才敢覆盖，否则会判「未知」整体拒写。
+    public string[] Legacy = Array.Empty<string>();
+}
+
+internal sealed class SdEntry {
+    public string Path = "";
+    public string ShaOriginal = "", ShaDualAll = "";
+    public string? ShaTranslated, ShaDual;
+    public List<Row> Rows = new();
+    // 基线文件的行数 / 字节数：采集诊断时用来判断客户端那份是否整体错位
+    public int BaseLines;
+    public long BaseBytes;
+}
+
+internal sealed class DatEntry {
+    public string Path = "", Table = "", ShaOrig = "", ShaPatch = "";
+    public byte[] Orig = Array.Empty<byte>(), Patch = Array.Empty<byte>();
+}
+
+// 目标容器。官方安装包是 Content.ggpk（单文件 ggpk），Steam / WeGame 版是
+// Bundles2 目录（_.index.bin + 一堆 *.bundle.bin）。两者对外都只是「路径 → 字节」，
+// 所以抽一层，预检 / 改写 / 自检这些上层逻辑完全不区分。
+internal interface IContainer : IDisposable {
+    string Kind { get; }        // "ggpk" / "Bundles2"
+    string Display { get; }     // 展示用路径
+    string RootDir { get; }     // 游戏根目录
+    long Size { get; }
+    bool TryRead(string path, out byte[] bytes);
+    bool Write(string path, byte[] bytes);
+    void Flush();               // Bundles2 需要落 index；ggpk 立即生效
+}
+
+internal sealed class GgpkContainer : IContainer {
+    private readonly BundledGGPK _g;
+
+    public GgpkContainer(string path) {
+        Display = path;
+        _g = new BundledGGPK(path, true);
+        Size = new FileInfo(path).Length;
+    }
+
+    public string Kind => "ggpk";
+    public string Display { get; }
+    public string RootDir => Path.GetDirectoryName(Display)!;
+    public long Size { get; }
+
+    public bool TryRead(string p, out byte[] bytes) {
+        bytes = Array.Empty<byte>();
+        if (!_g.Index.TryGetFile(p, out var rec)) return false;
+        bytes = rec.Read().ToArray();
+        return true;
+    }
+
+    public bool Write(string p, byte[] bytes) {
+        if (!_g.Index.TryGetFile(p, out var rec)) return false;
+        rec.Write(bytes, true);      // ggpk 内部索引随写随存
+        return true;
+    }
+
+    public void Flush() { }
+    public void Dispose() => _g.Dispose();
+}
+
+internal sealed class BundlesContainer : IContainer {
+    private readonly Idx _index;
+
+    public BundlesContainer(string indexPath) {
+        IndexPath = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(indexPath))!, "_.index.bin");
+        RootDir = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetFullPath(indexPath)))!;
+        _index = new Idx(IndexPath, parsePaths: false, bundleFactory: new DriveBundleFactory(Path.GetDirectoryName(IndexPath)!));
+        Size = new FileInfo(IndexPath).Length;
+    }
+
+    public string IndexPath { get; }
+    public string Kind => "Bundles2";
+    public string Display => IndexPath;
+    public string RootDir { get; }
+    public long Size { get; }
+
+    public bool TryRead(string p, out byte[] bytes) {
+        bytes = Array.Empty<byte>();
+        if (!_index.TryGetFile(p, out var rec)) return false;
+        try { bytes = rec.Read().ToArray(); return true; }
+        catch { return false; }          // bundle 缺失 / 损坏
+    }
+
+    public bool Write(string p, byte[] bytes) {
+        if (!_index.TryGetFile(p, out var rec)) return false;
+        rec.Write(bytes, saveIndex: false);   // 统一在 Flush 里存一次 index
+        return true;
+    }
+
+    public void Flush() => _index.Save();
+    public void Dispose() => _index.Dispose();
+}
+
+internal static class Program {
+    private const string Indent = "  ";
+    private static readonly Dictionary<string, string> Args = new(StringComparer.OrdinalIgnoreCase);
+    private static string _target = "";      // Content.ggpk 或 Bundles2\_.index.bin
+    private static bool _restoreBare = true;   // 底稿标记被整段删光时补回官方标记（--keep-markup 关闭）
+    private static string _ver = "?";
+    private static string _bundleBuilt = "?";
+    private static string _gameClient = "?", _gamePatch = "", _gameLocked = "";
+    private static List<SdEntry> _sd = new();
+    private static List<DatEntry> _dat = new();
+
+    private static int Main(string[] raw) {
+        Console.OutputEncoding = Encoding.UTF8;
+        try { Console.Title = "PoE 繁中改良汉化"; } catch { }
+
+        var positional = new List<string>();
+        foreach (var a in raw) {
+            if (a.StartsWith("--", StringComparison.Ordinal)) {
+                var body = a[2..];
+                var eq = body.IndexOf('=');
+                if (eq < 0) Args[body] = "";
+                else Args[body[..eq]] = body[(eq + 1)..];
+            } else positional.Add(a);
+        }
+
+        LoadBundle();
+
+        _restoreBare = !Args.ContainsKey("keep-markup");
+
+        // 标记层合并自检：与 tools/markup.py 的用例逐条对齐，防止两侧实现漂移
+        if (Args.ContainsKey("markup-test")) return MarkupTest();
+        // 外部改过的底稿演练：拿一份现成文件跑 TryCustomBase + Rewrite，只读不写
+        if (Args.TryGetValue("sd-test", out var sdArg) && sdArg.Length > 0) return SdTest(sdArg);
+
+        if (positional.Count == 0) {
+            var auto = FindDefaultGgpk();
+            if (auto is null) {
+                PrintUsage();
+                Pause();
+                return 0;
+            }
+            Console.WriteLine($"自动找到游戏：{auto}");
+            Console.WriteLine();
+            positional.Add(auto);
+        }
+
+        var gp = ResolveTarget(positional[0]);
+        if (gp is null) {
+            Console.WriteLine($"这不像是 PoE 的数据：{positional[0]}");
+            Console.WriteLine("  可以是 Content.ggpk，也可以是 Bundles2 目录 / 其中的 _.index.bin。");
+            Pause();
+            return 1;
+        }
+        _target = gp;
+
+        var store = OpenContainer();
+        if (store is null) { Pause(); return 1; }
+        try {
+
+        var prog = Args.GetValueOrDefault("set");
+        if (prog is not null) {
+            var f = ParseFlavor(prog);
+            if (f is null) { Console.WriteLine($"未知版本名：{prog}（translated / dual / dualall / original）"); return 1; }
+            return RunInstall(store, f.Value);
+        }
+        if (Args.ContainsKey("status")) return ShowStatus(store);
+        if (Args.ContainsKey("selftest")) return SelfTest(store);
+        if (Args.ContainsKey("struct")) return StructTest(store, Preflight(store));
+        if (Args.ContainsKey("collect")) return Collect(store, Preflight(store));
+
+        // 拖放进来的默认路径：交互菜单（菜单返回即代表用户选了退出，不再多要一次按键）
+        return Menu(store);
+        } finally { CloseStore(); }
+    }
+
+    // ---------------------------------------------------------------- 数据包
+
+    private static void LoadBundle() {
+        var asm = Assembly.GetExecutingAssembly();
+        var name = asm.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith("bundle.gz", StringComparison.Ordinal))
+                   ?? throw new InvalidOperationException("内嵌数据包缺失");
+        using var s = asm.GetManifestResourceStream(name)!;
+        using var gz = new GZipStream(s, CompressionMode.Decompress);
+        using var ms = new MemoryStream();
+        gz.CopyTo(ms);
+
+        using var doc = JsonDocument.Parse(ms.ToArray());
+        var root = doc.RootElement;
+        _ver = root.GetProperty("version").GetString() ?? "?";
+        _bundleBuilt = root.GetProperty("built_at").GetString() ?? "?";
+        var game = root.GetProperty("game");
+        _gameClient = game.GetProperty("client_version").GetString() ?? "?";
+        _gamePatch = game.GetProperty("patch_version").GetString() ?? "";
+        _gameLocked = game.GetProperty("locked_at").GetString() ?? "";
+
+        foreach (var e in root.GetProperty("statdesc").EnumerateArray()) {
+            var ent = new SdEntry {
+                Path = e.GetProperty("path").GetString()!,
+                ShaOriginal = e.GetProperty("sha").GetProperty("original").GetString()!,
+                ShaDualAll = e.GetProperty("sha").GetProperty("dualall").GetString()!,
+            };
+            var sh = e.GetProperty("sha");
+            if (sh.GetProperty("translated").ValueKind == JsonValueKind.String) ent.ShaTranslated = sh.GetProperty("translated").GetString();
+            if (sh.GetProperty("dual").ValueKind == JsonValueKind.String) ent.ShaDual = sh.GetProperty("dual").GetString();
+            if (e.TryGetProperty("lines", out var ln) && ln.ValueKind == JsonValueKind.Number) ent.BaseLines = ln.GetInt32();
+            if (e.TryGetProperty("bytes", out var by) && by.ValueKind == JsonValueKind.Number) ent.BaseBytes = by.GetInt64();
+            foreach (var r in e.GetProperty("rows").EnumerateArray()) {
+                var arr = r.EnumerateArray().ToArray();
+                ent.Rows.Add(new Row {
+                    No = arr[0].GetInt32(),
+                    O = arr[1].GetString() ?? "",
+                    T = arr[2].ValueKind == JsonValueKind.String ? arr[2].GetString() : null,
+                    D = arr[3].ValueKind == JsonValueKind.String ? arr[3].GetString() : null,
+                    E = arr[4].ValueKind == JsonValueKind.String ? arr[4].GetString() : null,
+                });
+            }
+            if (e.TryGetProperty("legacy", out var lg) && lg.ValueKind == JsonValueKind.Object) {
+                foreach (var prop in lg.EnumerateObject()) {
+                    if (!int.TryParse(prop.Name, out var no)) continue;
+                    var row = ent.Rows.FirstOrDefault(x => x.No == no);
+                    if (row is null) continue;
+                    row.Legacy = prop.Value.EnumerateArray()
+                        .Select(v => v.GetString() ?? "").Where(s => s.Length > 0).ToArray();
+                }
+            }
+            _sd.Add(ent);
+        }
+
+        foreach (var e in root.GetProperty("dat").EnumerateArray()) {
+            _dat.Add(new DatEntry {
+                Path = e.GetProperty("path").GetString()!,
+                Table = e.GetProperty("table").GetString()!,
+                ShaOrig = e.GetProperty("sha_original").GetString()!,
+                ShaPatch = e.GetProperty("sha_patched").GetString()!,
+                Orig = Convert.FromBase64String(e.GetProperty("orig").GetString()!),
+                Patch = Convert.FromBase64String(e.GetProperty("patch").GetString()!),
+            });
+        }
+    }
+
+    // 拿一份真实的「外部改过」文件跑一遍判定 + 合并，只打印不写入。
+    // 参数：--sd-test=文件路径（按文件名匹配数据包里的条目）
+    private static int SdTest(string path) {
+        var name = System.IO.Path.GetFileName(path);
+        var e = _sd.FirstOrDefault(x => System.IO.Path.GetFileName(x.Path) == name);
+        if (e is null) { Console.WriteLine($"数据包里没有这个文件：{name}"); return 1; }
+        if (!File.Exists(path)) { Console.WriteLine($"找不到文件：{path}"); return 1; }
+        var cur = File.ReadAllBytes(path);
+
+        var ok = TryCustomBase(e, cur, out var why, out var knownOnly);
+        Console.WriteLine($"{name}");
+        Console.WriteLine($"  行数 {SplitLines(cur).Count:N0} / 基线 {e.BaseLines:N0}   待改行 {e.Rows.Count}");
+        Console.WriteLine($"  可叠文本判定：{(ok ? "是" : "否")}  （{why}）");
+        if (ok && !knownOnly) Console.WriteLine("  注意：这一份含旧版补丁文本，会按当前数据包重写");
+        if (!ok) return 5;
+
+        var tgt = Rewrite(e, cur, Flavor.Custom, Flavor.Translated);
+        var a = SplitLines(cur);
+        var b = SplitLines(tgt);
+        var changed = 0;
+        var restored = 0;
+        var kept = 0;
+        var bad = 0;
+        for (var i = 0; i < Math.Min(a.Count, b.Count); i++) {
+            if (a[i] == b[i]) continue;
+            changed++;
+            var (j1, k1) = TextSpan(a[i]);
+            var (j2, k2) = TextSpan(b[i]);
+            var was = a[i][j1..k1];
+            var now = b[i][j2..k2];
+            if (Markup.SameMarkup(was, now)) {
+                kept++;                                  // 标记原样沿用了底稿
+            } else if (Markup.IsBare(was)) {
+                restored++;                              // 底稿裸文本 → 补回官方标记
+            } else {
+                bad++;                                   // 其它任何标记变动都不该发生
+            }
+            if (changed <= 6) {
+                Console.WriteLine($"  行{i + 1}");
+                Console.WriteLine($"    底稿 {Clip(was)}");
+                Console.WriteLine($"    合并 {Clip(now)}");
+            }
+        }
+        Console.WriteLine($"  改动 {changed} 行：沿用底稿标记 {kept}，还原官方标记 {restored}，异常 {bad}");
+        Console.WriteLine($"  输出 sha256 {Sha(tgt)}");
+        return bad == 0 ? 0 : 7;
+    }
+
+    // ---------------------------------------------------------------- 标记层自检
+
+    private static int MarkupTest() {
+        var cases = new (string shell, string oldT, string newT, string want)[] {
+            ("<enchanted>{{稀有珠寶}}</enchanted>", "<enchanted>{{稀有珠寶}}</enchanted>",
+             "<enchanted>{{稀有飾品}}</enchanted>", "<enchanted>{{稀有飾品}}</enchanted>"),
+            ("發掘保險箱含有 1 個額外稀有珠寶", "<enchanted>{{發掘保險箱含有 1 個額外稀有珠寶}}",
+             "<enchanted>{{發掘保險箱含有 1 個額外稀有飾品}}",
+             "<enchanted>{{發掘保險箱含有 1 個額外稀有飾品}}"),
+            ("稀有珠寶", "稀有珠寶", "稀有飾品", "稀有飾品"),
+            ("<rgb(209,46,46)>{{增加 20% 伤害}}", "<nemesismod>{{增加 20% 伤害}}",
+             "<nemesismod>{{增加 25% 伤害}}", "<rgb(209,46,46)>{{增加 25% 伤害}}"),
+            ("{{發掘保險箱含有 1 個額外稀有珠寶}}", "<enchanted>{{發掘保險箱含有 1 個額外稀有珠寶}}",
+             "<enchanted>{{發掘保險箱含有 1 個額外稀有飾品}}", "{{發掘保險箱含有 1 個額外稀有飾品}}"),
+            ("<enchanted>{{有 5% 機率}}</enchanted>", "<enchanted>{{有 5% 機率}}</enchanted>",
+             "<enchanted>{{有 5% 的機率}}</enchanted>", "<enchanted>{{有 5% 的機率}}</enchanted>"),
+            ("<rgb(1,2,3)>{{相同}}", "<enchanted>{{相同}}", "<enchanted>{{相同}}", "<rgb(1,2,3)>{{相同}}"),
+            ("<rgb(200,200,200)>{{每秒造成 {0} 點傷害，持續 {1} 秒}}",
+             "<normal>{{每秒造成 {0} 點傷害，持續 {1} 秒}}",
+             "<normal>{{每秒造成 {0} 點傷害，持續 {1} 秒，可疊加}}",
+             "<rgb(200,200,200)>{{每秒造成 {0} 點傷害，持續 {1} 秒，可疊加}}"),
+            // 修官方笔误：{0] → {0}（标记层没动，纯文本）
+            ("法術擁有等同於你已裝備雙手武器{0]%物理傷害的附加法術傷害",
+             "法術擁有等同於你已裝備雙手武器{0]%物理傷害的附加法術傷害",
+             "法術擁有等同於你已裝備雙手武器{0}%物理傷害的附加法術傷害",
+             "法術擁有等同於你已裝備雙手武器{0}%物理傷害的附加法術傷害"),
+            // 修官方笔误：漏掉的 }} 要补回来（底稿标记与原文一致 = 没被动过，可整套套用）
+            ("<enchanted>{{몬스터가 떨어뜨리는 아이템의 수량 {0}% 감소",
+             "<enchanted>{{몬스터가 떨어뜨리는 아이템의 수량 {0}% 감소",
+             "<enchanted>{{몬스터가 떨어뜨리는 아이템의 수량 {0}% 감소}}",
+             "<enchanted>{{몬스터가 떨어뜨리는 아이템의 수량 {0}% 감소}}"),
+            // 同一行的漏 }}，但底稿被别人换了颜色 → 不补 }}，保留对方的样式
+            ("<rgb(1,2,3)>{{몬스터가 떨어뜨리는 아이템의 수량 {0}% 감소",
+             "<enchanted>{{몬스터가 떨어뜨리는 아이템의 수량 {0}% 감소",
+             "<enchanted>{{몬스터가 떨어뜨리는 아이템의 수량 {0}% 감소}}",
+             "<rgb(1,2,3)>{{몬스터가 떨어뜨리는 아이템의 수량 {0}% 감소"),
+        };
+        var bad = 0;
+        foreach (var (shell, o, n, want) in cases) {
+            string got;
+            try { got = Markup.Merge(shell, o, n); }
+            catch (Exception ex) { got = "!" + ex.Message; }
+            var ok = got == want;
+            if (!ok) bad++;
+            Console.WriteLine($"  [{(ok ? "ok " : "FAIL")}] {Clip(shell)}  ->  {Clip(got)}");
+            if (!ok) Console.WriteLine($"         want {Clip(want)}");
+        }
+        Console.WriteLine($"markup-test: {cases.Length - bad}/{cases.Length} passed");
+        return bad == 0 ? 0 : 7;
+    }
+
+    // ---------------------------------------------------------------- 基础
+
+    private static string Sha(byte[] b) => Convert.ToHexString(SHA256.HashData(b)).ToLowerInvariant();
+
+    private static string FlavorName(Flavor f) => f switch {
+        Flavor.Original => "官方原文",
+        Flavor.Translated => "纯译文",
+        Flavor.Dual => "对照版",
+        Flavor.DualAll => "全量对照",
+        _ => "未知",
+    };
+
+    private static Flavor? ParseFlavor(string s) => s.ToLowerInvariant() switch {
+        "translated" or "pure" or "1" => Flavor.Translated,
+        "dual" or "2" => Flavor.Dual,
+        "dualall" or "dual-all" or "3" => Flavor.DualAll,
+        "original" or "restore" or "4" => Flavor.Original,
+        _ => null,
+    };
+
+    // 双击启动时（没有拖放参数）自动找游戏
+    private static readonly string[] GuessDirs = {
+        // 官方独立安装包（单文件 ggpk）
+        @"C:\Program Files (x86)\Grinding Gear Games\Path of Exile",
+        @"C:\Program Files\Grinding Gear Games\Path of Exile",
+        @"D:\Grinding Gear Games\Path of Exile",
+        @"E:\Grinding Gear Games\Path of Exile",
+        @"D:\Games\Path of Exile",
+        @"E:\Games\Path of Exile",
+        // Steam（Bundles2 目录）
+        @"C:\Program Files (x86)\Steam\steamapps\common\Path of Exile",
+        @"D:\SteamLibrary\steamapps\common\Path of Exile",
+        @"E:\SteamLibrary\steamapps\common\Path of Exile",
+        @"D:\Steam\steamapps\common\Path of Exile",
+        @"E:\Steam\steamapps\common\Path of Exile",
+        // 腾讯 WeGame 国服（同样是 Bundles2 目录）
+        @"E:\games\WeGameApps\流放之路",
+        @"C:\games\WeGameApps\流放之路",
+    };
+
+    private static string? FindDefaultGgpk() {
+        foreach (var d in GuessDirs) {
+            var ggpk = System.IO.Path.Combine(d, "Content.ggpk");
+            if (File.Exists(ggpk)) return ggpk;
+            var idx = System.IO.Path.Combine(d, "Bundles2", "_.index.bin");
+            if (File.Exists(idx)) return idx;
+        }
+        return null;
+    }
+
+    // 拖放目标归一到「真正要改的那个文件」：Content.ggpk 或 Bundles2/_.index.bin
+    private static string? ResolveTarget(string p) {
+        if (Directory.Exists(p)) {
+            foreach (var rel in new[] { "Content.ggpk", "_.index.bin", @"Bundles2\_.index.bin" }) {
+                var c = System.IO.Path.Combine(p, rel);
+                if (File.Exists(c)) return c;
+            }
+            return null;
+        }
+        return File.Exists(p) ? p : null;
+    }
+
+    private static IContainer? _store;
+
+    // Steam/Bundles2 的 _.index.bin 只能被一个写句柄打开，所以同一时刻只留一个
+    private static void CloseStore() {
+        try { _store?.Dispose(); } catch { }
+        _store = null;
+    }
+
+    private static IContainer? Reopen() { CloseStore(); return OpenContainer(); }
+
+    private static IContainer? OpenContainer() {
+        CloseStore();
+        try {
+            _store = System.IO.Path.GetFileName(_target).Equals("_.index.bin", StringComparison.OrdinalIgnoreCase)
+                ? new BundlesContainer(_target)
+                : new GgpkContainer(_target);
+            return _store;
+        } catch (Exception ex) {
+            Console.WriteLine($"打开数据失败：{ex.Message}");
+            Console.WriteLine("  · 游戏是否还在运行？");
+            Console.WriteLine("  · 是否需要以管理员身份运行？");
+            Console.WriteLine("  · Steam 版需要 Bundles2 目录里的 _.index.bin 和对应 .bundle.bin");
+            return null;
+        }
+    }
+
+    private static void PrintUsage() {
+        Console.WriteLine($"PoE 繁中改良汉化 补丁器  v{_ver}");
+        Console.WriteLine();
+        Console.WriteLine("把下面任意一个拖到本程序上：");
+        Console.WriteLine("  · 官方独立端：游戏目录里的 Content.ggpk");
+        Console.WriteLine("  · Steam 端  ：游戏目录里的 Bundles2 目录（内含 _.index.bin）");
+        Console.WriteLine();
+        Console.WriteLine("直接双击也可以，会自动找默认安装路径。");
+        Console.WriteLine();
+        Console.WriteLine("命令行：");
+        Console.WriteLine("  PoE-zh-Patcher.exe <Content.ggpk | Bundles2>              交互菜单");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated                 纯译文");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=dual                       对照版");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=dualall                    全量对照");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=original                   还原官方原文");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --status                         只看状态");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --selftest                       数据与文件对得上吗");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --struct                         结构演练（只验读写通道）");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --collect [--out=目录]           采集诊断包（只读，发给作者排查）");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --partial       只处理对得上的文件，跳过对不上的");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --plan          只演算校验，不写文件");
+    }
+
+    private static void Pause() {
+        if (Console.IsInputRedirected) return;
+        Console.WriteLine();
+        Console.Write("按任意键退出...");
+        try { Console.ReadKey(true); } catch { }
+        Console.WriteLine();
+    }
+
+    private static (string client, string patch) DetectGameVersion() {
+        // ggpk 在游戏根目录；Steam 的 _.index.bin 在 Bundles2 下，日志在上一级
+        var dirs = new List<string> { System.IO.Path.GetDirectoryName(_target)! };
+        var up = System.IO.Path.GetDirectoryName(dirs[0]);
+        if (up is not null) dirs.Add(up);
+        foreach (var dir in dirs)
+        foreach (var rel in new[] { "logs/LatestClient.txt", "logs/Client.txt" }) {
+            var p = System.IO.Path.Combine(dir, rel);
+            if (!File.Exists(p)) continue;
+            string? c = null, pa = null;
+            try {
+                foreach (var line in File.ReadLines(p)) {
+                    var m = System.Text.RegularExpressions.Regex.Match(line, @"User agent: PoE release/tags/([\w.\-]+)");
+                    if (m.Success) c = m.Groups[1].Value;
+                    m = System.Text.RegularExpressions.Regex.Match(line, @"Web root: https://patch\.poecdn\.com/([\w.\-]+)/");
+                    if (m.Success) pa = m.Groups[1].Value;
+                }
+            } catch { }
+            if (c is not null) return (c, pa ?? "");
+        }
+        return ("", "");
+    }
+
+    private static bool VersionOk() {
+        var (c, pa) = DetectGameVersion();
+        if (c.Length == 0) return true;                 // 拿不到就不拦
+        if (c != _gameClient) return false;
+        if (pa.Length > 0 && _gamePatch.Length > 0 && pa != _gamePatch) return false;
+        return true;
+    }
+
+    // ---------------------------------------------------------------- 文本层
+
+    private static List<string> SplitLines(byte[] b) {
+        if (b.Length < 2 || b[0] != 0xFF || b[1] != 0xFE)
+            throw new InvalidDataException("不是 UTF-16LE 带 BOM 的文件");
+        var s = Encoding.Unicode.GetString(b, 2, b.Length - 2);
+        return s.Split(new[] { "\r\n" }, StringSplitOptions.None).ToList();
+    }
+
+    private static byte[] Encode(List<string> lines) {
+        var text = string.Join("\r\n", lines);
+        var body = Encoding.Unicode.GetBytes(text);
+        var res = new byte[body.Length + 2];
+        res[0] = 0xFF; res[1] = 0xFE;
+        body.CopyTo(res, 2);
+        return res;
+    }
+
+    private static (int j, int k) TextSpan(string raw) {
+        var i = raw.IndexOf(" \"", StringComparison.Ordinal);
+        if (i < 0) return (-1, -1);
+        var j = i + 2;
+        var k = j;
+        while (k < raw.Length) {
+            var c = raw[k];
+            if (c == '\\') { k += 2; continue; }
+            if (c == '"') break;
+            k++;
+        }
+        return (j, k);
+    }
+
+    private static string DualAllText(Row r) =>
+        r.E is null ? (r.T ?? r.O) : (r.T ?? r.O) + "\\n" + Indent + r.E;
+
+    /// 这一行现有的文本层，对应我们已知的哪一版文本（原文/译文/对照/全量对照）。
+    /// 外部改过标记的底稿靠它辨认当前处在哪个状态。
+    private static string? KnownText(Row r, string core) {
+        foreach (var c in new[] { r.O, r.T, r.D, DualAllText(r) }) {
+            if (c is not null && Markup.Core(c) == core) return c;
+        }
+        foreach (var c in r.Legacy) {
+            if (Markup.Core(c) == core) return c;
+        }
+        return null;
+    }
+
+    // 这一行只是「上一版补丁写的」，不是当前四态里的任何一种
+    private static bool IsLegacyOnly(Row r, string core) {
+        foreach (var c in new[] { r.O, r.T, r.D, DualAllText(r) }) {
+            if (c is not null && Markup.Core(c) == core) return false;
+        }
+        return true;
+    }
+
+    private static string TextFor(Row r, Flavor f) => f switch {
+        Flavor.Original => r.O,
+        Flavor.Translated => r.T ?? r.O,
+        Flavor.Dual => r.D ?? r.T ?? r.O,
+        Flavor.DualAll => r.E is null ? (r.T ?? r.O) : (r.T ?? r.O) + "\\n" + Indent + r.E,
+        _ => throw new ArgumentOutOfRangeException(nameof(f)),
+    };
+
+    // 外部改过的底稿没有「预期 sha」——生成结果是什么就是什么，只能在生成后自洽比对
+    private static string? TargetSha(SdEntry e, Flavor f, Flavor curF = Flavor.Original) {
+        if (curF == Flavor.Custom) return null;
+        return f switch {
+            Flavor.Original => e.ShaOriginal,
+            Flavor.Translated => e.ShaTranslated ?? e.ShaOriginal,
+            Flavor.Dual => e.ShaDual ?? e.ShaOriginal,
+            _ => e.ShaDualAll,
+        };
+    }
+
+    private static Flavor Detect(SdEntry e, string sha) {
+        if (sha == e.ShaOriginal) return Flavor.Original;
+        if (e.ShaTranslated is not null && sha == e.ShaTranslated) return Flavor.Translated;
+        if (e.ShaDual is not null && sha == e.ShaDual) return Flavor.Dual;
+        if (sha == e.ShaDualAll) return Flavor.DualAll;
+        return Flavor.Unknown;
+    }
+
+    private static byte[] Rewrite(SdEntry e, byte[] cur, Flavor curF, Flavor tgtF) {
+        var lines = SplitLines(cur);
+        foreach (var r in e.Rows) {
+            if (r.No >= lines.Count)
+                throw new InvalidDataException($"{e.Path}:{r.No + 1} 行超出文件范围");
+            var raw = lines[r.No];
+            var (j, k) = TextSpan(raw);
+            if (j < 0 || k <= j)
+                throw new InvalidDataException($"{e.Path}:{r.No + 1} 行内找不到引号文本");
+            var now = raw[j..k];
+
+            if (curF == Flavor.Custom) {
+                // 外部改过标记：以「这一行现在是什么文本」认状态，只叠文本层。
+                var known = KnownText(r, Markup.Core(now))
+                    ?? throw new InvalidDataException(
+                        $"{e.Path}:{r.No + 1} 认不出这行是哪一版文本\n    当前：{Clip(now)}");
+                var want = TextFor(r, tgtF);
+                var merged = Markup.Merge(now, known, want, _restoreBare);
+                if (Markup.Core(merged) != Markup.Core(want))
+                    throw new InvalidDataException($"{e.Path}:{r.No + 1} 合并后文本层与目标不符");
+                if (merged == now) continue;
+                lines[r.No] = raw[..j] + merged + raw[k..];
+                continue;
+            }
+
+            var expect = TextFor(r, curF);
+            var target = TextFor(r, tgtF);
+            if (expect == target) continue;
+            if (now != expect)
+                throw new InvalidDataException(
+                    $"{e.Path}:{r.No + 1} 内容与预期不符\n    当前：{Clip(now)}\n    预期：{Clip(expect)}");
+            lines[r.No] = raw[..j] + target + raw[k..];
+        }
+        return Encode(lines);
+    }
+
+    private static string Clip(string s) {
+        s = s.Replace("\n", "\\n");
+        return s.Length <= 70 ? s : s[..70] + "…";
+    }
+
+    // ---------------------------------------------------------------- 预检
+
+    private sealed class Item {
+        public string Label = "";
+        public string Path = "";
+        public bool IsSd;
+        public bool Missing;             // 容器里根本没有这个文件（客户端版本不同）
+        public SdEntry? Sd;
+        public DatEntry? Dat;
+        public byte[] Cur = Array.Empty<byte>();
+        public Flavor CurFlavor;
+        public string Why = "";          // 判成「未知」或被判成「外部改过」的依据，展示用
+        public bool Legacy;              // 认出来了：里面是上一版补丁写的文本
+    }
+
+    // 外部改过标记的底稿：sha 对不上，但**结构没变**——
+    // 行数与基线一致，且每个要动的行，文本层要么是原文、要么已是译文。
+    // 这种情况不该拒写：只叠文本、标记照旧，就不会碰到别人的颜色体系。
+    private static bool TryCustomBase(SdEntry e, byte[] cur, out string why, out bool legacyOnly) {
+        why = "";
+        legacyOnly = false;
+        List<string> lines;
+        try { lines = SplitLines(cur); } catch (Exception ex) { why = ex.Message; return false; }
+        if (e.BaseLines > 0 && lines.Count != e.BaseLines) {
+            why = $"行数 {lines.Count:N0} ≠ 基线 {e.BaseLines:N0}";
+            return false;
+        }
+        foreach (var r in e.Rows) {
+            if (r.No < 0 || r.No >= lines.Count) { why = $"第 {r.No + 1} 行超出文件范围"; return false; }
+            var (j, k) = TextSpan(lines[r.No]);
+            if (j < 0) { why = $"第 {r.No + 1} 行找不到引号文本"; return false; }
+            var cn = Markup.Core(lines[r.No][j..k]);
+            if (KnownText(r, cn) is null) { why = $"第 {r.No + 1} 行文本已变：{cn}"; return false; }
+        }
+        var tags = 0;
+        var legacyRows = 0;
+        foreach (var r in e.Rows) {
+            var (j, k) = TextSpan(lines[r.No]);
+            if (j < 0) continue;
+            if (!Markup.SameMarkup(lines[r.No][j..k], r.O)) tags++;
+            if (IsLegacyOnly(r, Markup.Core(lines[r.No][j..k]))) legacyRows++;
+        }
+        why = tags == 0 ? "文本层一致" : $"{tags}/{e.Rows.Count} 行的标记与官方不同";
+        if (legacyRows > 0) why += $"；{legacyRows} 行是旧版补丁写的";
+        legacyOnly = legacyRows == 0;
+        return true;
+    }
+
+    private static List<Item> Preflight(IContainer store) {
+        var list = new List<Item>();
+        foreach (var e in _sd) {
+            var it = new Item { Label = System.IO.Path.GetFileName(e.Path), Path = e.Path, IsSd = true, Sd = e };
+            if (!store.TryRead(e.Path, out var cur)) { it.Missing = true; it.CurFlavor = Flavor.Unknown; it.Cur = Array.Empty<byte>(); list.Add(it); continue; }
+            it.Cur = cur;
+            it.CurFlavor = Detect(e, Sha(it.Cur));
+            var why = "";
+            if (it.CurFlavor == Flavor.Unknown) {
+                if (TryCustomBase(e, cur, out why, out var knownOnly)) {
+                    it.CurFlavor = Flavor.Custom;
+                    it.Legacy = !knownOnly;      // 只有旧版补丁才会用到 legacy 文本
+                }
+                it.Why = why;
+            }
+            list.Add(it);
+        }
+        foreach (var e in _dat) {
+            var it = new Item { Label = e.Table, Path = e.Path, IsSd = false, Dat = e };
+            if (!store.TryRead(e.Path, out var cur)) { it.Missing = true; it.CurFlavor = Flavor.Unknown; it.Cur = Array.Empty<byte>(); list.Add(it); continue; }
+            it.Cur = cur;
+            var sha = Sha(it.Cur);
+            it.CurFlavor = sha == e.ShaOrig ? Flavor.Original : sha == e.ShaPatch ? Flavor.DualAll : Flavor.Unknown;
+            list.Add(it);
+        }
+        return list;
+    }
+
+    private static string ShowFlavor(Item i) => i.CurFlavor switch {
+        Flavor.Unknown => "未知",
+        Flavor.Custom => i.Legacy ? "旧版补丁" : "外部改过",
+        _ when !i.IsSd && i.CurFlavor != Flavor.Original => "已打补丁",
+        _ => FlavorName(i.CurFlavor),
+    };
+
+    private static string Summary(List<Item> items) {
+        var c = items.GroupBy(ShowFlavor).OrderBy(g => g.Key)
+            .Select(g => $"{g.Key} {g.Count()}");
+        return string.Join(" / ", c);
+    }
+
+    private static void PrintHeader(List<Item> items, IContainer? store = null) {
+        var (c, pa) = DetectGameVersion();
+        var ok = VersionOk();
+        Console.WriteLine(new string('=', 66));
+        Console.WriteLine($" PoE 繁中改良汉化 补丁器  v{_ver}");
+        Console.WriteLine(new string('=', 66));
+        Console.WriteLine($" 数据包    {_bundleBuilt}   （适用游戏 {_gameClient}{( _gamePatch.Length > 0 ? " / patch " + _gamePatch : "")}）");
+        if (c.Length == 0)
+            Console.WriteLine(" 游戏版本  (读不到 logs/LatestClient.txt，跳过版本核对)");
+        else
+            Console.WriteLine($" 游戏版本  {c}{(pa.Length > 0 ? " / patch " + pa : "")}   {(ok ? "✓ 与数据包一致" : "✗ 与数据包不一致")}");
+        if (store is not null) {
+            Console.WriteLine($" 目标      [{store.Kind}] {store.Display}");
+            Console.WriteLine($"           {store.Size:N0} B");
+        }
+        if (items.Count > 0) Console.WriteLine($" 当前状态  {Summary(items)}");
+        Console.WriteLine();
+    }
+
+    // ---------------------------------------------------------------- 主流程
+
+    private static int Menu(IContainer store) {
+        var items = Preflight(store);
+        while (true) {
+            try { if (!Console.IsOutputRedirected) Console.Clear(); } catch { }
+            PrintHeader(items, store);
+            var missing = items.Count(i => i.Missing);
+            var unknown = items.Count(i => i.CurFlavor == Flavor.Unknown && !i.Missing);
+            if (missing > 0 || unknown > 0) {
+                if (missing > 0) {
+                    Console.WriteLine($" ! 有 {missing} 个目标文件在这个客户端里找不到（多半是版本不同）。");
+                }
+                if (unknown > 0) {
+                    Console.WriteLine($" ! 有 {unknown} 个文件既不是原文也不是已知版本，内容与数据包不符。");
+                }
+                Console.WriteLine("   这时不会写入任何内容。数据包只适用于繁中客户端对应版本。");
+                Console.WriteLine();
+            }
+            Console.WriteLine("  [1] 纯译文        —— 日常游玩，160 处修正");
+            Console.WriteLine("  [2] 对照版        —— 修正过的 160 行下方显示英文原文");
+            Console.WriteLine("  [3] 全量对照      —— 所有词缀下方显示英文原文（体积最大）");
+            Console.WriteLine("  [4] 还原官方原文  —— 撤销全部修改");
+            Console.WriteLine("  [t] 结构演练      —— 只验证读写通道（改写后原样写回），不改内容");
+            Console.WriteLine("  [c] 采集诊断包    —— 把这份客户端的原文与对比结果打包（只读，给作者排查）");
+            Console.WriteLine("  [s] 刷新状态");
+            Console.WriteLine("  [0] 退出");
+            Console.WriteLine();
+            Console.Write(" 请选择：");
+            var key = ReadKeyLine();
+            if (key is null) return 0;
+            var k = key.Trim().ToLowerInvariant();
+
+            if (k is "0" or "q") return 0;
+            if (k is "s" or "") {
+                if (Reopen() is not null) items = Preflight(_store!);
+                continue;
+            }
+            if (k is "c") {
+                Collect(store, items);
+                Console.WriteLine();
+                Console.WriteLine(" 按回车返回菜单");
+                ReadKeyLine();
+                continue;
+            }
+            if (k is "t") {
+                var rt = StructTest(store, items);
+                Console.WriteLine();
+                Console.WriteLine(" 按回车返回菜单");
+                ReadKeyLine();
+                Reopen();
+                items = Preflight(_store!);
+                continue;
+            }
+
+            Flavor? target = k switch {
+                "1" => Flavor.Translated,
+                "2" => Flavor.Dual,
+                "3" => Flavor.DualAll,
+                "4" => Flavor.Original,
+                _ => null,
+            };
+            if (target is null) { Console.WriteLine(" 没看懂，回车继续"); ReadKeyLine(); continue; }
+
+            var bad = items.Count(i => i.CurFlavor == Flavor.Unknown);
+            var partial = false;
+            if (bad > 0) {
+                Console.WriteLine();
+                Console.WriteLine($" 有 {bad} 个文件与数据包对不上（客户端版本不同），正常安装会整体拒绝写入。");
+                Console.Write(" 只处理对得上的那些？(y = 部分安装，其余保持官方原文 / 回车 = 放弃)：");
+                var a = ReadKeyLine();
+                if (a is null || !a.Trim().Equals("y", StringComparison.OrdinalIgnoreCase)) continue;
+                partial = true;
+            }
+
+            var r = ApplyInPlace(store, items, target.Value, partial);
+            if (r != 0) { Console.WriteLine(); Console.WriteLine(" 按回车返回菜单"); ReadKeyLine(); }
+            if (Reopen() is not null) items = Preflight(_store!);
+        }
+    }
+
+    private static string? ReadKeyLine() {
+        try {
+            if (Console.IsInputRedirected) {
+                var l = Console.ReadLine();
+                return l;
+            }
+            return Console.ReadLine();
+        } catch { return null; }
+    }
+
+    private static int RunInstall(IContainer store, Flavor f) {
+        var items = Preflight(store);
+        PrintHeader(items, store);
+        return ApplyInPlace(store, items, f, Args.ContainsKey("partial"));
+    }
+
+    private static int ShowStatus(IContainer store) {
+        var items = Preflight(store);
+        PrintHeader(items, store);
+        foreach (var i in items)
+            Console.WriteLine($"  {i.Label,-46} {(i.Missing ? "缺失" : ShowFlavor(i)),-8} {i.Cur.Length,12:N0} B"
+                              + (i.Why.Length > 0 ? "   " + i.Why : ""));
+        return 0;
+    }
+
+    private static int ApplyInPlace(IContainer store, List<Item> items, Flavor target, bool partial = false) {
+        var missing = items.Where(i => i.Missing).ToList();
+        var unknown = items.Where(i => i.CurFlavor == Flavor.Unknown && !i.Missing).ToList();
+        var skip = missing.Concat(unknown).ToList();
+
+        if (skip.Count > 0) {
+            if (!partial) {
+                if (missing.Count > 0) {
+                    Console.WriteLine($"中止：{missing.Count} 个目标文件在 {store.Kind} 里找不到，一个都没写。");
+                    foreach (var u in missing.Take(6)) Console.WriteLine($"    {u.Label}");
+                    if (missing.Count > 6) Console.WriteLine($"    ... 还有 {missing.Count - 6} 个");
+                    Console.WriteLine("  这通常是客户端语言/版本与数据包不同（国服简中、Steam 刚更新等）。");
+                }
+                if (unknown.Count > 0) {
+                    Console.WriteLine($"中止：{unknown.Count} 个文件内容与数据包不符，一个都没写。");
+                    foreach (var u in unknown.Take(8)) Console.WriteLine($"    {u.Label}  {u.Cur.Length:N0} B");
+                    if (unknown.Count > 8) Console.WriteLine($"    ... 还有 {unknown.Count - 8} 个");
+                    Console.WriteLine("  可能游戏更新过，或这是简中客户端。");
+                }
+                Console.WriteLine("  想先验通道可以用 --struct；只想先翻能对上的那些，可以用 --partial（跳过对不上的）。");
+                return 5;
+            }
+            Console.WriteLine($"部分安装：跳过 {skip.Count} 个与数据包不符的文件，它们保持官方原文");
+            foreach (var u in skip.Take(10)) Console.WriteLine($"    跳过 {u.Label}");
+            if (skip.Count > 10) Console.WriteLine($"    ... 还有 {skip.Count - 10} 个");
+            Console.WriteLine("  （想把这些也翻掉，用 --collect 采集诊断包发给作者适配）");
+            Console.WriteLine();
+        }
+
+        if (!VersionOk()) {
+            if (!partial) {
+                Console.WriteLine($"中止：游戏版本与数据包不一致（数据包 {_gameClient}）。");
+                Console.WriteLine("  重启游戏让它更新一次日志，或等新版数据包。");
+                return 4;
+            }
+            Console.WriteLine($"注意：游戏版本与数据包不一致（数据包 {_gameClient}），部分安装会跳过对不上的文件。");
+            Console.WriteLine();
+        }
+
+        var pool = partial ? items.Where(i => i.CurFlavor != Flavor.Unknown).ToList() : items;
+        var todo = pool.Where(i => EffectiveFlavor(i, target) != i.CurFlavor).ToList();
+        Console.WriteLine($"目标：{FlavorName(target)}    需要改动 {todo.Count} 个文件（可用 {pool.Count} / 共 {items.Count} 个）");
+        if (todo.Count == 0) { Console.WriteLine("已经就是这个版本，无需改动。"); return 0; }
+
+        var legacy = todo.Where(i => i.CurFlavor == Flavor.Custom && i.Legacy).ToList();
+        if (legacy.Count > 0) {
+            Console.WriteLine();
+            Console.WriteLine($"其中 {legacy.Count} 个文件是上一版补丁写的（sha 对不上，但逐行认得出来）：");
+            foreach (var u in legacy.Take(6)) Console.WriteLine($"    {u.Label}  —  {u.Why}");
+            if (legacy.Count > 6) Console.WriteLine($"    ... 还有 {legacy.Count - 6} 个");
+            Console.WriteLine("  按当前数据包重写这些行，文件其余部分原样保留。");
+        }
+        var custom = todo.Where(i => i.CurFlavor == Flavor.Custom && !i.Legacy).ToList();
+        if (custom.Count > 0) {
+            Console.WriteLine();
+            Console.WriteLine($"其中 {custom.Count} 个文件的标记被外部程序改过（sha 对不上，但行数与文本层没变）：");
+            foreach (var u in custom.Take(6)) Console.WriteLine($"    {u.Label}  —  {u.Why}");
+            if (custom.Count > 6) Console.WriteLine($"    ... 还有 {custom.Count - 6} 个");
+            Console.WriteLine("  对它们只叠译文：留着标记的（换色/换标签）原样不动；");
+            Console.WriteLine("  被整段删光的（原版有、这里寸草不生）按官方原样补回 —— 那是覆盖伤，不是风格。");
+        }
+        Console.WriteLine();
+
+        var plan = Args.ContainsKey("plan");
+        var backupRoot = System.IO.Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "PoE-zh-汉化", "backup", DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        var sw = Stopwatch.StartNew();
+        var nDone = 0;
+        var nFail = 0;
+        var idx = 0;
+        var written = new List<(Item it, string sha)>();
+        if (plan) Console.WriteLine("（--plan：只演算并校验，不写任何文件）");
+        foreach (var i in todo) {
+            idx++;
+            var label = i.Label.Length > 44 ? i.Label[..44] : i.Label;
+            try {
+                byte[] targetBytes;
+                string? expectSha;
+                if (i.IsSd) {
+                    var e = i.Sd!;
+                    targetBytes = Rewrite(e, i.Cur, i.CurFlavor, target);
+                    expectSha = TargetSha(e, target, i.CurFlavor);
+                } else {
+                    var e = i.Dat!;
+                    targetBytes = target == Flavor.Original ? e.Orig : e.Patch;
+                    expectSha = target == Flavor.Original ? e.ShaOrig : e.ShaPatch;
+                }
+                var got = Sha(targetBytes);
+                if (expectSha is not null && got != expectSha) {
+                    Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} ✗ 生成内容 sha 不符（拒绝写入）");
+                    nFail++;
+                    continue;
+                }
+                expectSha ??= got;       // 外部改过的底稿：结果自带身份，回读就拿它比
+                if (plan) {
+                    // 外部改过的底稿没有预期 sha，但可以顺手核对「算出来的和标准产物是不是同一份」
+                    var hint = i.IsSd ? TargetSha(i.Sd!, target) : (target == Flavor.Original ? i.Dat!.ShaOrig : i.Dat!.ShaPatch);
+                    var same = hint is not null && hint == got;
+                    Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} {ShowFlavor(i)} → {FlavorName(EffectiveFlavor(i, target))}  ✓ 演算通过"
+                                      + (same ? "" : "（与标准产物不同，按底稿内容生成）"));
+                    nDone++;
+                    continue;
+                }
+                Directory.CreateDirectory(backupRoot);
+                File.WriteAllBytes(System.IO.Path.Combine(backupRoot, SafeName(i.Label)), i.Cur);
+
+                var t0 = Stopwatch.StartNew();
+                if (!store.Write(i.Path, targetBytes)) {
+                    Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} ✗ {store.Kind} 里找不到");
+                    nFail++;
+                    continue;
+                }
+                written.Add((i, expectSha!));
+                Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} {ShowFlavor(i)} → {FlavorName(EffectiveFlavor(i, target))}  {t0.ElapsedMilliseconds} ms");
+                nDone++;
+            } catch (Exception ex) {
+                Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} ✗ {ex.Message}");
+                nFail++;
+            }
+        }
+
+        // Bundles2 的 index 是最后统一落盘的；ggpk 每写一次就已经进文件
+        if (written.Count > 0) {
+            var tf = Stopwatch.StartNew();
+            store.Flush();
+            Console.WriteLine($"  落盘索引  {store.Kind}  {tf.ElapsedMilliseconds} ms");
+        }
+
+        // 回读校验：写完再从容器里读回来比 sha
+        var nBack = 0;
+        foreach (var (it, sha) in written) {
+            try {
+                if (!store.TryRead(it.Path, out var back)) { Console.WriteLine($"  ✗ 回读失败：{it.Label}"); nFail++; continue; }
+                if (Sha(back) != sha) { Console.WriteLine($"  ✗ 回读不符：{it.Label}"); nFail++; continue; }
+                nBack++;
+            } catch (Exception ex) {
+                Console.WriteLine($"  ✗ 回读异常：{it.Label} {ex.Message}");
+                nFail++;
+            }
+        }
+
+        Console.WriteLine();
+        Console.WriteLine(plan
+            ? $"演算 {nDone} 个（未写入任何文件），失败 {nFail} 个，用时 {sw.Elapsed.TotalSeconds:F1} s"
+            : $"完成 {nDone} 个，回读通过 {nBack} 个，失败 {nFail} 个，用时 {sw.Elapsed.TotalSeconds:F1} s");
+        if (!plan && nDone > 0) Console.WriteLine($"备份：{backupRoot}");
+        if (nFail == 0 && !plan) {
+            Console.WriteLine();
+            Console.WriteLine("现在可以启动游戏了。");
+            if (target != Flavor.Original) Console.WriteLine("想换版本或还原，随时再把数据拖进来。");
+            if (partial)
+                Console.WriteLine($"注意：跳过的 {skip.Count} 个文件仍是官方原文。要连它们一起翻，用 [c] 采集诊断包发给作者。");
+        }
+        return nFail == 0 ? 0 : 3;
+    }
+
+    private static Flavor EffectiveFlavor(Item i, Flavor target) {
+        // dat 表只有「原文 / 已打补丁」两态：三个 flavor 共用同一份补丁字节
+        if (!i.IsSd) return target == Flavor.Original ? Flavor.Original : Flavor.DualAll;
+        var e = i.Sd!;
+        // 该文件在这个 flavor 下没有专门内容时，等于原文
+        return target switch {
+            Flavor.Translated => e.ShaTranslated is null ? Flavor.Original : Flavor.Translated,
+            Flavor.Dual => e.ShaDual is null ? Flavor.Original : Flavor.Dual,
+            _ => target,
+        };
+    }
+
+    private static string SafeName(string s) {
+        foreach (var c in System.IO.Path.GetInvalidFileNameChars()) s = s.Replace(c, '_');
+        return s;
+    }
+
+    // ---------------------------------------------------------------- 自检
+
+    private static int SelfTest(IContainer store) {
+        var items = Preflight(store);
+        PrintHeader(items, store);
+        Console.WriteLine("自检：从当前内容重建四个版本，逐个比对内嵌的 sha256");
+        Console.WriteLine();
+
+        var notOriginal = items.Where(i => i.CurFlavor != Flavor.Original).ToList();
+        if (notOriginal.Count > 0) {
+            Console.WriteLine($"注意：{notOriginal.Count} 个文件不是原文状态，只能验证可逆的那部分。");
+            Console.WriteLine();
+        }
+
+        var bad = 0;
+        var tested = 0;
+        foreach (var i in items) {
+            if (i.CurFlavor == Flavor.Unknown) { Console.WriteLine($"  跳过 {i.Label}（状态未知）"); continue; }
+            var flavors = i.IsSd
+                ? new[] { Flavor.Translated, Flavor.Dual, Flavor.DualAll, Flavor.Original }
+                : new[] { Flavor.DualAll, Flavor.Original };
+            foreach (var f in flavors) {
+                if (i.IsSd && EffectiveFlavor(i, f) != f) continue;
+                if (!i.IsSd && f != Flavor.Original && f != Flavor.DualAll) continue;
+                byte[] got;
+                try {
+                    got = i.IsSd
+                        ? Rewrite(i.Sd!, i.Cur, i.CurFlavor, f)
+                        : (f == Flavor.Original ? i.Dat!.Orig : i.Dat!.Patch);
+                } catch (Exception ex) {
+                    Console.WriteLine($"  ✗ {i.Label} → {FlavorName(f)}：{ex.Message}");
+                    bad++;
+                    continue;
+                }
+                var expect = i.IsSd ? TargetSha(i.Sd!, f, i.CurFlavor) : (f == Flavor.Original ? i.Dat!.ShaOrig : i.Dat!.ShaPatch);
+                tested++;
+                if (expect is null) continue;      // 外部改过的底稿：没有预期 sha，能生成即通过
+                if (Sha(got) != expect) {
+                    Console.WriteLine($"  ✗ {i.Label} → {FlavorName(f)}：sha 不符");
+                    bad++;
+                }
+            }
+        }
+        Console.WriteLine();
+        Console.WriteLine($"自检完成：{tested} 项，异常 {bad}");
+        return bad == 0 ? 0 : 6;
+    }
+
+    // ---------------------------------------------------------------- 结构演练
+    //
+    // 只验证「读 → 写 → 落盘 → 重新打开读回」这条通道，不碰译文内容。
+    // 国服（简中）也能跑，用来模拟 Steam 的 Bundles2 结构：
+    // 它的 statdescriptions 与数据包对不上，装不了译文，但读写机制完全一样。
+
+    private static int StructTest(IContainer store, List<Item> items) {
+        PrintHeader(items, store);
+
+        var orig = new Dictionary<string, byte[]>();
+        foreach (var i in items.Where(x => !x.Missing)) orig[i.Path] = i.Cur;
+
+        Console.WriteLine($"结构演练：{orig.Count} 个目标文件（缺失 {items.Count - orig.Count} 个跳过）");
+        Console.WriteLine("  1) 原样写回 → 落盘索引 → 重开校验 sha 不变");
+        Console.WriteLine("  2) 抽样改 1 个文件 → 落盘 → 重开校验已变 → 写回原样 → 再校验复原");
+        Console.WriteLine("  不改译文，只验通道。");
+        Console.WriteLine();
+        if (orig.Count == 0) { Console.WriteLine("没有可用的目标文件。"); return 6; }
+
+        CloseStore();          // 让出 index 文件，后面每一步都新开容器
+        var bad = 0;
+        var sw = Stopwatch.StartNew();
+        var before = Snap();
+
+        // --- 1) 原样写回
+        using (var s = OpenContainer()) {
+            if (s is null) return 6;
+            var n = 0;
+            foreach (var kv in orig) {
+                if (!s.Write(kv.Key, kv.Value)) { Console.WriteLine($"  ✗ 写入失败 {kv.Key}"); bad++; continue; }
+                n++;
+            }
+            var t = Stopwatch.StartNew();
+            s.Flush();
+            Console.WriteLine($"  写入 {n} 个 + 落盘 {t.ElapsedMilliseconds} ms（合计 {sw.Elapsed.TotalSeconds:F1} s）");
+        }
+
+        using (var s = OpenContainer()) {
+            if (s is null) return 6;
+            var ok = 0;
+            foreach (var kv in orig) {
+                if (!s.TryRead(kv.Key, out var b)) { Console.WriteLine($"  ✗ 重开后读不到 {System.IO.Path.GetFileName(kv.Key)}"); bad++; continue; }
+                if (Sha(b) != Sha(kv.Value)) { Console.WriteLine($"  ✗ 重开后内容变了 {System.IO.Path.GetFileName(kv.Key)}"); bad++; continue; }
+                ok++;
+            }
+            Console.WriteLine($"  重开校验 {ok}/{orig.Count} 一致");
+        }
+
+        // --- 2) 真改一次再复原
+        var probe = orig.Keys.First();
+        var mod = orig[probe].Concat(new byte[] { 0x20, 0x00 }).ToArray();
+        using (var s = OpenContainer()) {
+            if (s is null) return 6;
+            if (!s.Write(probe, mod)) { Console.WriteLine("  ✗ 写入失败"); bad++; }
+            s.Flush();
+        }
+        using (var s = OpenContainer()) {
+            if (s is null) return 6;
+            if (!s.TryRead(probe, out var b)) { Console.WriteLine("  ✗ 改动后读不到"); bad++; }
+            else if (Sha(b) == Sha(orig[probe])) { Console.WriteLine("  ✗ 改动没生效（写入通道可能是假的）"); bad++; }
+            else Console.WriteLine($"  ✓ 改动生效 {System.IO.Path.GetFileName(probe)}  {orig[probe].Length:N0} → {b.Length:N0} B");
+        }
+        using (var s = OpenContainer()) {
+            if (s is null) return 6;
+            if (!s.Write(probe, orig[probe])) { Console.WriteLine("  ✗ 复原写入失败"); bad++; }
+            s.Flush();
+        }
+        using (var s = OpenContainer()) {
+            if (s is null) return 6;
+            if (s.TryRead(probe, out var b) && Sha(b) == Sha(orig[probe]))
+                Console.WriteLine($"  ✓ 复原成功 {System.IO.Path.GetFileName(probe)}");
+            else { Console.WriteLine("  ✗ 复原失败"); bad++; }
+        }
+
+        var after = Snap();
+        Console.WriteLine();
+        if (store.Kind == "Bundles2") {
+            Console.WriteLine($"  _.index.bin  {before.idx:N0} → {after.idx:N0} B（Δ {after.idx - before.idx:+#;-#;0}）");
+            Console.WriteLine($"  自建 bundle   {before.nb} 个 → {after.nb} 个（新增 {after.nb - before.nb}）");
+            Console.WriteLine($"  新 bundle 卷  {before.bytes:N0} → {after.bytes:N0} B（Δ {(after.bytes - before.bytes) / 1024.0:N0} KB）");
+        } else {
+            Console.WriteLine($"  ggpk  {before.idx:N0} → {after.idx:N0} B（Δ {after.idx - before.idx:+#;-#;0}）");
+        }
+        Console.WriteLine();
+        Console.WriteLine($"结构演练完成：{orig.Count} 个文件，异常 {bad}，用时 {sw.Elapsed.TotalSeconds:F1} s");
+        return bad == 0 ? 0 : 6;
+    }
+
+    // ---------------------------------------------------------------- 采集诊断包
+    //
+    // 在异地机器上跑一次，把「客户端版本 + 每个目标文件的状态 + 对不上的文件的原文
+    // 与逐行对照」打成一个 zip。作者拿这个就能针对那份客户端重做数据包，不用远程连。
+    // 全程只读，不写容器。
+
+    private static string ClassifyText(Row r, string now) {
+        if (now == TextFor(r, Flavor.Original)) return "原文";
+        if (r.T is not null && now == TextFor(r, Flavor.Translated)) return "纯译文";
+        if (r.D is not null && now == TextFor(r, Flavor.Dual)) return "对照";
+        if (now == TextFor(r, Flavor.DualAll)) return "全量对照";
+        return "其它";
+    }
+
+    private static string LineText(List<string> lines, int no) {
+        if (no < 0 || no >= lines.Count) return "";
+        var raw = lines[no];
+        var (j, k) = TextSpan(raw);
+        return j >= 0 && k > j ? raw[j..k] : "";
+    }
+
+    private static int Collect(IContainer store, List<Item> items) {
+        var stamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
+        var dir = Args.GetValueOrDefault("out");
+        if (string.IsNullOrWhiteSpace(dir)) {
+            // 优先放在 exe 旁边（用户刚从这里启动，最容易找到），
+            // 不可写就退到桌面、当前目录。
+            var exeDir = "";
+            try { exeDir = System.IO.Path.GetDirectoryName(Environment.ProcessPath ?? "") ?? ""; } catch { }
+            var candidates = new[] {
+                exeDir,
+                Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
+                Directory.GetCurrentDirectory(),
+            };
+            foreach (var c in candidates) {
+                if (string.IsNullOrWhiteSpace(c)) continue;
+                var probe = System.IO.Path.Combine(c, $"poe-zh-collect-{stamp}");
+                try { Directory.CreateDirectory(probe); dir = probe; break; } catch { }
+            }
+            if (string.IsNullOrWhiteSpace(dir))
+                dir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"poe-zh-collect-{stamp}");
+        }
+        dir = System.IO.Path.GetFullPath(dir);
+        var dumpDir = System.IO.Path.Combine(dir, "files");
+        Directory.CreateDirectory(dumpDir);
+
+        var (client, patch) = DetectGameVersion();
+        var sb = new StringBuilder();
+        var files = new List<Dictionary<string, object?>>();
+        var unknown = items.Where(i => i.CurFlavor == Flavor.Unknown && !i.Missing).ToList();
+        var missing = items.Where(i => i.Missing).ToList();
+
+        sb.AppendLine("PoE 繁中改良汉化 · 采集报告");
+        sb.AppendLine($"采集时间    {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+        sb.AppendLine($"补丁器版本  {_ver}（数据包构建于 {_bundleBuilt}）");
+        sb.AppendLine($"数据包适用  游戏 {_gameClient}{(_gamePatch.Length > 0 ? " / patch " + _gamePatch : "")}");
+        sb.AppendLine($"游戏版本    {(client.Length == 0 ? "(读不到 logs/LatestClient.txt)" : client + (patch.Length > 0 ? " / patch " + patch : ""))}" +
+                      (client.Length > 0 ? (VersionOk() ? "  ✓ 与数据包一致" : "  ✗ 与数据包不一致") : ""));
+        sb.AppendLine($"目标        [{store.Kind}] {store.Display}");
+        sb.AppendLine($"容器大小    {store.Size:N0} B");
+        sb.AppendLine();
+        sb.AppendLine($"目标文件 {items.Count} 个：{Summary(items)}");
+        sb.AppendLine($"对不上的（未知）{unknown.Count} 个，缺失 {missing.Count} 个。");
+        sb.AppendLine();
+
+        foreach (var i in items) {
+            var rec = new Dictionary<string, object?> {
+                ["file"] = i.Label,
+                ["path"] = i.Path,
+                ["kind"] = i.IsSd ? "statdesc" : "dat",
+                ["missing"] = i.Missing,
+                ["size"] = i.Cur.Length,
+                ["sha256"] = i.Cur.Length > 0 ? Sha(i.Cur) : "",
+                ["state"] = ShowFlavor(i),
+            };
+            files.Add(rec);
+
+            if (i.Missing || i.CurFlavor != Flavor.Unknown) continue;
+
+            // 未知文件：落原文 + 逐行核对我们想改的那几行，看是否还落在原处
+            var dump = System.IO.Path.Combine(dumpDir, i.Label);
+            try { File.WriteAllBytes(dump, i.Cur); rec["dump"] = "files/" + i.Label; }
+            catch (Exception ex) { rec["dump_error"] = ex.Message; }
+
+            sb.AppendLine(new string('-', 70));
+            sb.AppendLine($"{i.Label}");
+            sb.AppendLine($"  {i.Path}");
+            sb.AppendLine($"  {i.Cur.Length:N0} B   sha256 {rec["sha256"]}");
+
+            if (!i.IsSd) { sb.AppendLine("  （数据表，未知状态说明版本不同，需要整份重做）"); sb.AppendLine(); continue; }
+
+            List<string> lines;
+            try { lines = SplitLines(i.Cur); }
+            catch (Exception ex) { sb.AppendLine($"  ! 解不开：{ex.Message}"); sb.AppendLine(); continue; }
+
+            var stat = new Dictionary<string, int>();
+            var rows = new List<Dictionary<string, object?>>();
+            foreach (var r in i.Sd!.Rows) {
+                string kind, now;
+                if (r.No >= lines.Count) { kind = "行号越界"; now = ""; }
+                else {
+                    now = LineText(lines, r.No);
+                    kind = ClassifyText(r, now);
+                }
+                stat[kind] = stat.GetValueOrDefault(kind) + 1;
+
+                // 对不上的行：在附近 ±40 行找同一段文本，看是不是整体错位（插入/删除行导致）
+                var off = 0;
+                var foundAt = 0;
+                if ((kind is "其它" or "行号越界") && !string.IsNullOrWhiteSpace(r.O)) {
+                    var lo = Math.Max(0, r.No - 40);
+                    var hi = Math.Min(lines.Count - 1, r.No + 40);
+                    for (var q = lo; q <= hi; q++) {
+                        if (q == r.No) continue;
+                        if (LineText(lines, q) == r.O) { off = q - r.No; foundAt = q + 1; break; }
+                    }
+                }
+                rows.Add(new Dictionary<string, object?> {
+                    ["line"] = r.No + 1, ["kind"] = kind,
+                    ["expect_original"] = Clip(r.O), ["actual"] = Clip(now),
+                    ["offset"] = off, ["found_at"] = foundAt,
+                });
+            }
+            rec["rows"] = rows;
+
+            var bl = i.Sd.BaseLines;
+            sb.AppendLine(bl > 0
+                ? $"  本文件 {i.Cur.Length:N0} B / {lines.Count:N0} 行；基线 {i.Sd.BaseBytes:N0} B / {bl:N0} 行（行数差 {lines.Count - bl:+#;-#;0}）"
+                : $"  本文件 {i.Cur.Length:N0} B / {lines.Count:N0} 行");
+            sb.AppendLine($"  要改 {i.Sd.Rows.Count} 行");
+            sb.AppendLine($"  逐行核对：{string.Join(" / ", stat.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}"))}");
+
+            var badRows = rows.Where(x => (string?)x["kind"] is "其它" or "行号越界").ToList();
+            var shifted = badRows.Where(x => (int)x["offset"]! != 0).ToList();
+            if (shifted.Count > 0) {
+                var top = shifted.GroupBy(x => (int)x["offset"]!).OrderByDescending(g => g.Count()).First();
+                sb.AppendLine($"  错位探测：{shifted.Count} 行能在附近找到同一段文本，最常见的偏移是 {top.Key:+#;-#;0} 行（{top.Count()} 行）");
+            }
+            if (badRows.Count == 0)
+                sb.AppendLine("  → 所有目标行都能对上，这份客户端可以直接做行级改写（只差把 sha 基线更新进去）");
+            else {
+                sb.AppendLine($"  → 有 {badRows.Count} 行对不上：");
+                foreach (var b in badRows.Take(20)) {
+                    var tail = (int)b["offset"]! != 0 ? $"   → 在第 {b["found_at"]} 行找到（{(int)b["offset"]!:+#;-#;0}）" : "";
+                    sb.AppendLine($"      第 {(int)b["line"]!} 行  实际：{b["actual"]}   预期：{b["expect_original"]}{tail}");
+                }
+                if (badRows.Count > 20) sb.AppendLine($"      ... 还有 {badRows.Count - 20} 行");
+            }
+            sb.AppendLine();
+        }
+
+        if (unknown.Count == 0)
+            sb.AppendLine("（没有未知文件，数据包与这份客户端完全对得上）");
+
+        // 客户端日志前 60 行，方便看版本与语言
+        try {
+            var root = store.RootDir;
+            foreach (var rel in new[] { "logs/LatestClient.txt", "logs/Client.txt" }) {
+                var p = System.IO.Path.Combine(root, rel);
+                if (!File.Exists(p)) continue;
+                var head = File.ReadLines(p).Take(60).ToArray();
+                File.WriteAllLines(System.IO.Path.Combine(dir, "client-log.txt"), head, Encoding.UTF8);
+                break;
+            }
+        } catch { }
+
+        var readme = new[]
+        {
+            "这个文件夹是 PoE 繁中汉化补丁器生成的采集包，只用于让作者针对你的客户端重做数据包。",
+            "",
+            "请把整个文件夹（或同级的 .zip）发回给作者。内容说明：",
+            "  report.txt     —— 客户端版本、每个文件的状态、对不上的文件的逐行对照",
+            "  report.json    —— 同样的内容，机器可读",
+            "  files/         —— 状态对不上的那几个词缀文件原文（UTF-16 文本）",
+            "  client-log.txt —— 客户端日志开头几行，含版本号",
+            "",
+            "采集过程只读，没有改动游戏文件。",
+        };
+        File.WriteAllLines(System.IO.Path.Combine(dir, "README.txt"), readme, Encoding.UTF8);
+        File.WriteAllText(System.IO.Path.Combine(dir, "report.txt"), sb.ToString(), Encoding.UTF8);
+        File.WriteAllText(System.IO.Path.Combine(dir, "report.json"),
+            JsonSerializer.Serialize(new {
+                collected_at = DateTime.Now.ToString("s"),
+                patcher = _ver, bundle_built = _bundleBuilt,
+                expected_game = _gameClient, expected_patch = _gamePatch,
+                game = client, patch,
+                container = new { kind = store.Kind, path = store.Display, size = store.Size },
+                files,
+            }, new JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }),
+            Encoding.UTF8);
+
+        var zip = dir.TrimEnd('\\', '/') + ".zip";
+        try {
+            if (File.Exists(zip)) File.Delete(zip);
+            ZipFile.CreateFromDirectory(dir, zip, CompressionLevel.Optimal, false);
+        } catch (Exception ex) {
+            Console.WriteLine($"（打包 zip 失败：{ex.Message}，直接把文件夹发回也行）");
+            zip = "";
+        }
+
+        Console.WriteLine();
+        Console.WriteLine($"采集完成：未知 {unknown.Count} 个 / 缺失 {missing.Count} 个 / 其余与数据包一致");
+        Console.WriteLine($"  文件夹  {dir}");
+        if (zip.Length > 0) Console.WriteLine($"  压缩包  {zip}   {new FileInfo(zip).Length:N0} B");
+        Console.WriteLine();
+        Console.WriteLine("把这个 zip 发回给作者即可（里面不含游戏本体，只有你说的那几个词缀文件）。");
+        return 0;
+    }
+
+    private static (long idx, int nb, long bytes) Snap() {
+        if (!System.IO.Path.GetFileName(_target).Equals("_.index.bin", StringComparison.OrdinalIgnoreCase))
+            return (new FileInfo(_target).Length, 0, 0);
+        var dir = System.IO.Path.GetDirectoryName(_target)!;
+        var nbDir = System.IO.Path.Combine(dir, "LibGGPK3");
+        var files = Directory.Exists(nbDir) ? Directory.GetFiles(nbDir, "*.bundle.bin") : Array.Empty<string>();
+        return (new FileInfo(_target).Length, files.Length, files.Sum(f => new FileInfo(f).Length));
+    }
+}

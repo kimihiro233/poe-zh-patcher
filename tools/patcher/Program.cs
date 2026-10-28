@@ -43,7 +43,15 @@ var root = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(man
 using var doc = JsonDocument.Parse(File.ReadAllText(manifestPath));
 var rootEl = doc.RootElement;
 var files = rootEl.GetProperty("files").EnumerateArray().ToList();
-if (only is not null) files = files.Where(f => only.Contains(f.GetProperty("table").GetString()!)).ToList();
+
+// 每条目的显示名：datc64 用 table 字段，statdescriptions 整文件替换没有 table，
+// 就用 ggpk 路径的文件名。--only= 也按这个名字过滤。
+static string NameOf(JsonElement f) =>
+    f.TryGetProperty("table", out var t) && t.GetString() is { Length: > 0 } s
+        ? s
+        : Path.GetFileName(f.GetProperty("path_in_ggpk").GetString()!);
+
+if (only is not null) files = files.Where(f => only.Contains(NameOf(f))).ToList();
 
 static string Sha(byte[] b) => Convert.ToHexString(SHA256.HashData(b)).ToLowerInvariant();
 static byte[] ReadAll(string p) => File.ReadAllBytes(p);
@@ -113,26 +121,39 @@ var index = ggpk.Index;
 Console.WriteLine($"index: {index.Files.Count} 个文件\n");
 
 // ---- 第一遍：只读判定，全量预检 ----
-var plan = new List<(JsonElement f, string table, string rel, string shaOrig, string shaNew, string dst, byte[] cur, string state)>();
+var plan = new List<(JsonElement f, string table, string rel, string shaOrig, string shaNew, string dst, string src, byte[] cur, string state)>();
 foreach (var f in files) {
-    var table = f.GetProperty("table").GetString()!;
+    var table = NameOf(f);
     var rel = f.GetProperty("path_in_ggpk").GetString()!;
     var shaOrig = f.GetProperty("sha256_original").GetString()!;
     var shaNew = f.GetProperty("sha256_patched").GetString()!;
     var dst = Path.GetFullPath(Path.Combine(root, f.GetProperty("dst").GetString()!));
+    var src = f.TryGetProperty("src", out var sv) && sv.GetString() is { Length: > 0 } sp
+        ? Path.GetFullPath(Path.Combine(root, sp))
+        : Path.GetFullPath(Path.Combine(root, "pairs", "zh", table));
     if (!index.TryGetFile(rel, out var rec)) {
-        plan.Add((f, table, rel, shaOrig, shaNew, dst, Array.Empty<byte>(), "缺失"));
+        plan.Add((f, table, rel, shaOrig, shaNew, dst, src, Array.Empty<byte>(), "缺失"));
         continue;
     }
     var cur = rec.Read().ToArray();
     var shaCur = Sha(cur);
-    var state = shaCur == shaOrig ? "原始" : shaCur == shaNew ? "已打补丁" : "未知";
-    plan.Add((f, table, rel, shaOrig, shaNew, dst, cur, state));
+    // sha256_variants：同一份文件的另一种已知形态（比如 statdescriptions 的
+    // 「纯译文版」与「对照版」互为变体）。命中变体不算未知，可以直接覆盖。
+    var isVariant = f.TryGetProperty("sha256_variants", out var vv) && vv.ValueKind == JsonValueKind.Array
+        && vv.EnumerateArray().Any(x => x.GetString() == shaCur);
+    var state = shaCur == shaOrig ? "原始"
+        : shaCur == shaNew ? "已打补丁"
+        : isVariant ? "其它版本"
+        : "未知";
+    plan.Add((f, table, rel, shaOrig, shaNew, dst, src, cur, state));
 }
 
-int nOrig = 0, nPatch = 0, nUnknown = 0, nDone = 0, nFail = 0;
+int nOrig = 0, nPatch = 0, nUnknown = 0, nOther = 0, nDone = 0, nFail = 0;
 foreach (var p in plan) {
-    if (p.state == "原始") nOrig++; else if (p.state == "已打补丁") nPatch++; else nUnknown++;
+    if (p.state == "原始") nOrig++;
+    else if (p.state == "已打补丁") nPatch++;
+    else if (p.state == "其它版本") nOther++;
+    else nUnknown++;
     Console.WriteLine($"  {p.table,-26} {p.state,-10} {p.cur.Length,10:N0} B  {p.rel}");
 }
 
@@ -152,7 +173,7 @@ foreach (var p in plan) {
 
     if (mode == "restore") {
         if (p.state == "原始") { Console.WriteLine($"  {p.table,-26} = 已是原始内容，跳过"); continue; }
-        var orig = Path.GetFullPath(Path.Combine(root, "pairs", "zh", p.table));
+        var orig = p.src;
         if (!File.Exists(orig)) { Console.WriteLine($"  {p.table,-26} ! 找不到原始文件 {orig}"); nFail++; continue; }
         var bytes = ReadAll(orig);
         if (Sha(bytes) != p.shaOrig) { Console.WriteLine($"  {p.table,-26} ! 原始文件 sha 与 manifest 不符，拒绝还原"); nFail++; continue; }
@@ -166,6 +187,7 @@ foreach (var p in plan) {
     }
 
     if (p.state == "已打补丁") { Console.WriteLine($"  {p.table,-26} = 已是补丁内容，跳过"); continue; }
+    if (p.state == "其它版本") Console.WriteLine($"  {p.table,-26} ~ 当前是另一版本，覆盖");
     if (!File.Exists(p.dst)) { Console.WriteLine($"  {p.table,-26} ! 缺补丁文件 {p.dst}"); nFail++; continue; }
     var patch = ReadAll(p.dst);
     if (Sha(patch) != p.shaNew) { Console.WriteLine($"  {p.table,-26} ! 补丁文件 sha 与 manifest 不符，拒绝写入"); nFail++; continue; }
@@ -180,6 +202,6 @@ foreach (var p in plan) {
 }
 
 Console.WriteLine();
-Console.WriteLine($"统计：原始 {nOrig} / 已打补丁 {nPatch} / 未知 {nUnknown} / 本次完成 {nDone} / 失败 {nFail}");
+Console.WriteLine($"统计：原始 {nOrig} / 已打补丁 {nPatch} / 其它版本 {nOther} / 未知 {nUnknown} / 本次完成 {nDone} / 失败 {nFail}");
 Console.WriteLine($"备份：{backupDir}");
 return nFail == 0 ? 0 : 3;
