@@ -394,8 +394,11 @@ internal interface IContainer : IDisposable {
     void Flush();               // 一次落盘；ggpk 与 Bundles2 都是收起改动后统一存
     bool IsSelfBundle(string path);            // 这个文件是不是挂在历史自建 bundle 上
     void Detach();                             // 换一条全新命名的自建 bundle 承接本次写入
+    string? LastBundle { get; }                // 本次新建的自建 bundle 文件名（回滚时要删它）
     void DumpBundles(bool all);                // 诊断：列出索引里的 bundle 记录
     bool Alive { get; }         // 容器还活着吗（采集/演练会中途换容器，旧句柄不能再写）
+    string IndexFile { get; }   // 索引所在的物理文件：Bundles2 是 _.index.bin，ggpk 是 Content.ggpk
+    void TrimAfterCommit();     // 提交之后才清孤儿 bundle（先删文件再回滚 = 把记录变成悬空）
 }
 
 internal sealed class GgpkContainer : IContainer {
@@ -434,9 +437,14 @@ internal sealed class GgpkContainer : IContainer {
     }
     public bool IsSelfBundle(string p) =>
         _g.Index.TryGetFile(p, out var rec) && BundleHygiene.IsSelf(rec);
+    public string? LastBundle { get; private set; }
+    public string IndexFile => Display;
+    // ggpk 的写入直接在容器内腾空闲块，没有独立的 bundle 文件要清
+    public void TrimAfterCommit() { }
     public void DumpBundles(bool all) => BundleHygiene.Dump(_g.Index, all);
     public void Detach() {
         var r = BundleHygiene.Detach(_g.Index);
+        LastBundle = r.Name.Length > 0 ? r.Name : null;
         if (r.Retired > 0) Console.WriteLine($"  自建 bundle 换新：{r.Name}（旧记录 {r.Retired} 条不再使用）");
         if (r.Error is not null) Console.WriteLine($"  ! 无法新建自建 bundle：{r.Error}");
     }
@@ -484,13 +492,19 @@ internal sealed class BundlesContainer : IContainer {
     public void Flush() {
         BundleHygiene.DropEmpty(_index);
         _index.Save();
-        BundleHygiene.TrimOrphans(_index, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(IndexPath)!, "LibGGPK3"));
     }
     public bool IsSelfBundle(string p) =>
         _index.TryGetFile(p, out var rec) && BundleHygiene.IsSelf(rec);
+    public string? LastBundle { get; private set; }
+    public string IndexFile => IndexPath;
+    // 必须在「重新打开校验通过」之后再清：先删文件、再回滚索引，那些记录就变成悬空的，
+    // 游戏读到它们就是一条读不出来的文件。顺序反过来才是安全的。
+    public void TrimAfterCommit() =>
+        BundleHygiene.TrimOrphans(_index, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(IndexPath)!, "LibGGPK3"));
     public void DumpBundles(bool all) => BundleHygiene.Dump(_index, all);
     public void Detach() {
         var r = BundleHygiene.Detach(_index);
+        LastBundle = r.Name.Length > 0 ? r.Name : null;
         if (r.Retired > 0) Console.WriteLine($"  自建 bundle 换新：{r.Name}（旧记录 {r.Retired} 条不再使用）");
         if (r.Error is not null) Console.WriteLine($"  ! 无法新建自建 bundle：{r.Error}");
     }
@@ -565,6 +579,19 @@ internal static class Program {
         }
         _target = gp;
 
+        // 上次写入没走完？先把客户端还原到写前状态，再谈别的。
+        // 必须在打开容器之前做：回滚要覆盖 _.index.bin，句柄被占着就换不回去。
+        var rec = Txn.Recover(gp);
+        if (rec.Recovered) {
+            Console.WriteLine();
+            Console.WriteLine("==============================================================");
+            Console.WriteLine($" 检测到上次写入没有正常结束：{rec.Message}");
+            Console.WriteLine($" 已回滚到写入前的状态{(rec.RestoredFiles > 0 ? $"（涉及 {rec.RestoredFiles} 个文件）" : "")}，客户端可以正常启动。");
+            Console.WriteLine(" 直接重新运行本程序即可，不用先验证游戏完整性。");
+            Console.WriteLine("==============================================================");
+            Console.WriteLine();
+        }
+
         // 写入通道演练：在临时目录的索引副本上写一遍，不碰真实客户端
         if (Args.ContainsKey("writetest")) return WriteTest(Args.GetValueOrDefault("writetest") ?? "");
 
@@ -599,6 +626,9 @@ internal static class Program {
             store.DumpBundles(false);
             return 0;
         }
+        // 备份：安装时被覆盖掉的「原字节」都留在这里，随时可以整份写回去
+        if (Args.ContainsKey("backups")) return ShowBackups(store);
+        if (Args.TryGetValue("restore-backup", out var rbArg)) return RestoreBackup(store, rbArg);
         // 把容器里的文件原样导出来看（排查结构问题用，只读不写）
         if (Args.TryGetValue("dump", out var dumpArg) && dumpArg.Length > 0) return Dump(store, dumpArg);
         if (Args.ContainsKey("selftest")) return SelfTest(store);
@@ -1089,6 +1119,11 @@ internal static class Program {
 
     private static IContainer? _store;
     private static bool _detachedThisRun;    // 本次运行是否已经换过自建 bundle（一次运行只换一条）
+    private static Txn? _txn;                // 当前写入事务；容器在写入途中新建的 bundle 要登记到它上面
+
+    // 没有索引还原点也允许写：只给老式 Content.ggpk（74 GB，整份复制不现实）留的口子，
+    // 必须显式加 --allow-no-rollback，默认一律拒绝。
+    private static bool AllowNoRollback() => Args.ContainsKey("allow-no-rollback");
 
     // Steam/Bundles2 的 _.index.bin 只能被一个写句柄打开，所以同一时刻只留一个
     private static void CloseStore() {
@@ -1141,6 +1176,14 @@ internal static class Program {
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --only=<关键词>  只改文件名含该关键词的文件（最小验证用）");
         Console.WriteLine("  PoE-zh-Patcher.exe --data-test=<基线目录>                 数据包自检（不需要游戏：拿官方原文重算一遍，比对发布 sha）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --locale-only[=original]        只处理语系与国旗，不碰译文");
+        Console.WriteLine();
+        Console.WriteLine("安全相关：");
+        Console.WriteLine("  --on-modified=merge|ours|original|skip   遇到被别的汉化改过的文件怎么办（默认 merge）");
+        Console.WriteLine("                                           merge 只叠译文、ours 换成我们的、original 退回官方原文");
+        Console.WriteLine("  <...> --backups                          看有哪些备份（被覆盖前的原字节）");
+        Console.WriteLine("  <...> --restore-backup=<时间戳|latest>   把某次备份整份写回去");
+        Console.WriteLine("  每次写入前都会复制一份 _.index.bin 当还原点；写坏了自动整份退回。");
+        Console.WriteLine("  排障用：--simulate-fail=N 故意在第 N 个文件失败，验证退回流程（不写坏客户端）");
     }
 
     private static void Pause() {
@@ -1286,7 +1329,7 @@ internal static class Program {
         return Flavor.Unknown;
     }
 
-    private static byte[] Rewrite(SdEntry e, byte[] cur, Flavor curF, Flavor tgtF) {
+    private static byte[] Rewrite(SdEntry e, byte[] cur, Flavor curF, Flavor tgtF, bool forceOurs = false) {
         var lines = SplitLines(cur);
         foreach (var r in e.Rows) {
             if (r.No >= lines.Count)
@@ -1303,7 +1346,7 @@ internal static class Program {
                     ?? throw new InvalidDataException(
                         $"{e.Path}:{r.No + 1} 认不出这行是哪一版文本\n    当前：{Clip(now)}");
                 var want = TextFor(r, tgtF);
-                var merged = Markup.Merge(now, known, want, _restoreBare);
+                var merged = Markup.Merge(now, known, want, _restoreBare || forceOurs);
                 if (Markup.Core(merged) != Markup.Core(want))
                     throw new InvalidDataException($"{e.Path}:{r.No + 1} 合并后文本层与目标不符");
                 if (merged == now) continue;
@@ -1318,6 +1361,32 @@ internal static class Program {
                 throw new InvalidDataException(
                     $"{e.Path}:{r.No + 1} 内容与预期不符\n    当前：{Clip(now)}\n    预期：{Clip(expect)}");
             lines[r.No] = raw[..j] + target + raw[k..];
+        }
+        return Encode(lines);
+    }
+
+    // 认不出结构的文件（别的汉化改过、或版本错位）：把「我们写进去过的行」逐行撤回官方原文。
+    // 只碰 rows —— 也就是数据包里记录的那几行；其余行一个字节不动。
+    // 认不出的行保持原样（它可能是别人翻的，撤掉等于破坏别人的成果）。
+    // 结果是「官方原文 + 别人的译文」混排，但文件结构完整、游戏能读，比整份跳过更接近还原。
+    private static byte[] RewriteUnknownToOriginal(SdEntry e, byte[] cur, out int nRev, out int nKeep) {
+        var lines = SplitLines(cur);
+        nRev = 0;
+        nKeep = 0;
+        foreach (var r in e.Rows) {
+            if (r.No < 0 || r.No >= lines.Count) { nKeep++; continue; }
+            var raw = lines[r.No];
+            var (j, k) = TextSpan(raw);
+            if (j < 0 || k <= j) { nKeep++; continue; }
+            var now = raw[j..k];
+            var core = Markup.Core(now);
+            if (core == Markup.Core(r.O)) continue;                 // 已经是原文
+            var known = KnownText(r, core);
+            if (known is null) { nKeep++; continue; }               // 不是我们写的，别动
+            var merged = Markup.Merge(now, known, r.O, _restoreBare);
+            if (merged == now) continue;
+            lines[r.No] = raw[..j] + merged + raw[k..];
+            nRev++;
         }
         return Encode(lines);
     }
@@ -1491,6 +1560,7 @@ internal static class Program {
             Console.WriteLine("  [4] 还原官方原文  —— 撤销全部修改");
             Console.WriteLine("  [t] 结构演练      —— 只验证读写通道（改写后原样写回），不改内容");
             Console.WriteLine("  [c] 采集诊断包    —— 把这份客户端的原文与对比结果打包（只读，给作者排查）");
+            Console.WriteLine("  [b] 备份与还原    —— 看每次安装前的原始内容，整份写回去");
             Console.WriteLine("  [s] 刷新状态");
             Console.WriteLine("  [0] 退出");
             Console.WriteLine();
@@ -1514,6 +1584,30 @@ internal static class Program {
             }
             if (k is "t") {
                 var rt = StructTest(store, items);
+                Console.WriteLine();
+                Console.WriteLine(" 按回车返回菜单");
+                ReadKeyLine();
+                Reopen();
+                items = Preflight(_store!);
+                continue;
+            }
+            if (k is "b") {
+                var sets = BackupStore.List(store.IndexFile);
+                if (sets.Count == 0) {
+                    Console.WriteLine(" 还没有备份。每次安装前，被覆盖的那份内容会自动存在 .poe-zh/backup/ 下。");
+                } else {
+                    Console.WriteLine();
+                    for (var n = 0; n < sets.Count; n++)
+                        Console.WriteLine($"  [{n + 1}] {sets[n].Stamp}   {sets[n].Items.Count} 个文件  {sets[n].Items.Sum(x => x.Bytes) / 1048576.0:F1} MB");
+                    Console.Write(" 要把哪一份写回去？(序号 / 回车 = 取消)：");
+                    var pick = ReadKeyLine()?.Trim();
+                    if (int.TryParse(pick, out var pi) && pi >= 1 && pi <= sets.Count) {
+                        Console.Write($" 确认用 {sets[pi - 1].Stamp} 覆盖当前的译文？(y = 确认)：");
+                        if ((ReadKeyLine() ?? "").Trim().ToLowerInvariant() is "y" or "yes") {
+                            RestoreBackup(store, sets[pi - 1].Stamp);
+                        }
+                    }
+                }
                 Console.WriteLine();
                 Console.WriteLine(" 按回车返回菜单");
                 ReadKeyLine();
@@ -1611,7 +1705,24 @@ internal static class Program {
         var missing = items.Where(i => i.Missing).ToList();
         var broken = items.Where(i => i.Broken).ToList();
         var unknown = items.Where(i => i.CurFlavor == Flavor.Unknown && !i.Missing && !i.Broken).ToList();
-        var skip = missing.Concat(broken).Concat(unknown).ToList();
+
+        // 遇到「被别人改过、和我们的基线对不上」的文件，只有四条路，没有第五条：
+        //   merge    在对得上结构的前提下，只把译文叠上去，别人的改动一律保留（默认）
+        //   ours     整份换成我们验过的成品（会盖掉别人的改动，但原字节先备份）
+        //   original 还原成官方原文（等于把这个文件的汉化撤销掉）
+        //   skip     一个字都不动，保持它现在能被游戏读到的样子
+        // 无论哪条，容器里最终都必须是「一份完整可读的文件」，绝不能是两种内容拼出来的半成品。
+        var policy = ParsePolicy(Args.GetValueOrDefault("on-modified"));
+        // .dat 表内嵌了官方原文与成品两套字节，所以 Unknown 也能整份换；
+        // statdesc 没有内嵌原文字节，能做的只有「逐行把我们写过的行撤回去」——
+        // 认不出的行（别的汉化写的）一个字节都不动，所以它仍然是完整可读的一份文件。
+        var forced = policy switch {
+            Policy.Ours => unknown.Where(i => !i.IsSd).ToList(),
+            Policy.Original => unknown.ToList(),
+            // 整体还原时也尽量退回原文，否则「还原」会卡在几个认不出的文件上走不下去
+            _ => target == Flavor.Original ? unknown.ToList() : new List<Item>(),
+        };
+        var skip = missing.Concat(broken).Concat(unknown.Except(forced)).ToList();
 
         if (broken.Count > 0) {
             Console.WriteLine();
@@ -1634,9 +1745,13 @@ internal static class Program {
                 }
                 if (unknown.Count > 0) {
                     Console.WriteLine($"中止：{unknown.Count} 个文件内容与数据包不符，一个都没写。");
-                    foreach (var u in unknown.Take(8)) Console.WriteLine($"    {u.Label}  {u.Cur.Length:N0} B");
+                    foreach (var u in unknown.Take(8)) Console.WriteLine($"    {u.Label}  {u.Cur.Length:N0} B  {u.Why}");
                     if (unknown.Count > 8) Console.WriteLine($"    ... 还有 {unknown.Count - 8} 个");
-                    Console.WriteLine("  可能游戏更新过，或这是简中客户端。");
+                    Console.WriteLine("  可能游戏更新过、这是简中客户端，或者被别的汉化改过。现在三种选择：");
+                    Console.WriteLine("    --on-modified=skip      保持它们现在的样子（游戏能正常读），只翻能对上的");
+                    Console.WriteLine("    --on-modified=ours      整份换成我们验过的版本（原字节会先备份）");
+                    Console.WriteLine("    --on-modified=original  把这几个还原成官方原文（撤销它们的汉化）");
+                    Console.WriteLine("  后面两种只对 .dat 表有效；statdesc 的原文丢了就重建不出来，仍然会跳过。");
                 }
                 Console.WriteLine("  想先验通道可以用 --struct；只想先翻能对上的那些，可以用 --partial（跳过对不上的）。");
                 return 5;
@@ -1659,7 +1774,13 @@ internal static class Program {
         }
 
         var plan = Args.ContainsKey("plan");
-        var pool = partial ? items.Where(i => i.CurFlavor != Flavor.Unknown).ToList() : items;
+        var pool = partial
+            ? items.Where(i => i.CurFlavor != Flavor.Unknown || forced.Contains(i)).ToList()
+            : items;
+        if (forced.Count > 0 && !partial) {
+            Console.WriteLine($"  按 --on-modified={PolicyName(policy)} 处理 {forced.Count} 个对不上基线的数据表"
+                              + "（原字节会先备份，随时可以还原）");
+        }
 
         // 历史自建 bundle（历次运行留下的 LibGGPK3/N）里记的 offset / UncompressedSize
         // 已经和物理文件对不上：复用它就是 Buffer Underflow 的来源。
@@ -1698,8 +1819,30 @@ internal static class Program {
             // 文件早就是全量对照了，语系却一次都没写进去过。以前这里直接 return，
             // 于是「重跑一次新补丁器」永远补不上语系。
             if (!Args.ContainsKey("plan")) {
-                var extra = ApplyLocale(store, target);
-                if (extra > 0) return 3;
+                // 语系与国旗同样是「写文件」，所以同样要有还原点：写坏了也是游戏读不出来。
+                var t2 = Txn.Begin(store.IndexFile);
+                if (t2 is null && !AllowNoRollback()) {
+                    Console.WriteLine("中止：无法为索引创建还原点，语系与国旗一个字都没写。");
+                    Console.WriteLine("  （老式 Content.ggpk 单文件没法整份备份。确实要写，加 --allow-no-rollback。）");
+                    return 7;
+                }
+                var n0 = 0;
+                _txn = t2;
+                try {
+                    n0 = ApplyLocale(store, target);
+                    if (t2 is not null) t2.MarkSaved();
+                } catch (Exception ex) {
+                    Console.WriteLine($"  ✗ {ex.GetType().Name}: {ex.Message}");
+                    n0 = 1;
+                } finally { _txn = null; }
+                if (n0 > 0) {
+                    var err = t2?.Rollback();
+                    Console.WriteLine(err is null
+                        ? "  已回滚，语系与国旗保持原样，游戏照常能读。"
+                        : $"  ! 回滚时出错：{err}（备份在 {t2?.Dir}）");
+                    return 3;
+                }
+                t2?.Commit();
                 Console.WriteLine();
                 Console.WriteLine("现在可以启动游戏了。");
             }
@@ -1734,37 +1877,84 @@ internal static class Program {
         }
         Console.WriteLine();
 
-        // 到这里确定要写了，才换新 bundle：一次写入只落一条新记录，绝不碰历史记录
-        if (!plan && inherited.Count > 0) { store.Detach(); _detachedThisRun = true; }
+        // ---- 事务开始：先拿到「退路」，再动第一个字节 ----
+        // 没有索引备份就不写：宁可这次不装，也不能留下一个游戏读不出来的客户端。
+        Txn? txn = null;
+        BackupSet? backupSet = null;
+        if (!plan) {
+            txn = Txn.Begin(store.IndexFile);
+            if (txn is null && !AllowNoRollback()) {
+                Console.WriteLine("中止：无法为索引创建还原点（_.index.bin 复制失败，或它不是 Bundles2 容器），一个字节都没写。");
+                Console.WriteLine($"  目标：{store.IndexFile}");
+                Console.WriteLine("  · 确认游戏已退出、磁盘还有空间（索引约 20 MB）");
+                Console.WriteLine("  · 老式 Content.ggpk 单文件没法整份备份，确实要写请加 --allow-no-rollback");
+                return 7;
+            }
+            if (txn is not null) {
+                Console.WriteLine($"  还原点：{txn.Dir}");
+                _txn = txn;
+            } else {
+                Console.WriteLine("  注意：这个容器没法整份备份索引，只提供文件级备份。写入失败时请按提示手动还原。");
+            }
+            backupSet = BackupStore.Create(store.IndexFile);
+        }
 
-        var backupRoot = System.IO.Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "PoE-zh-汉化", "backup", DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        // 到这里确定要写了，才换新 bundle：一次写入只落一条新记录，绝不碰历史记录
+        if (!plan && inherited.Count > 0) {
+            store.Detach();
+            _detachedThisRun = true;
+            txn?.AddBundle(store.LastBundle);
+        }
+
+        var backupRoot = backupSet?.Dir ?? "";
         var sw = Stopwatch.StartNew();
         var nDone = 0;
         var nFail = 0;
         var idx = 0;
         var written = new List<(Item it, string sha)>();
+        // 演练用：故意在第 N 个文件上失败，验证「一失败就整份退回」这条路真的能走通。
+        // 只在手动排障时用，正常安装不会传。
+        var simFail = int.TryParse(Args.GetValueOrDefault("simulate-fail"), out var sf) ? sf : 0;
         if (plan) Console.WriteLine("（--plan：只演算并校验，不写任何文件）");
         foreach (var i in todo) {
             idx++;
             var label = i.Label.Length > 44 ? i.Label[..44] : i.Label;
             try {
+                if (simFail > 0 && idx == simFail)
+                    throw new InvalidOperationException($"模拟第 {idx} 个文件写入失败（--simulate-fail）");
                 byte[] targetBytes;
                 string? expectSha;
+                // --on-modified=original：被外部改过的文件一律退回官方原文，与目标版本无关
+                var effTarget = policy == Policy.Original && i.CurFlavor is Flavor.Custom or Flavor.Unknown
+                    ? Flavor.Original
+                    : target;
+                var others = i.CurFlavor is Flavor.Custom or Flavor.Unknown;
                 if (i.IsSd) {
                     var e = i.Sd!;
-                    targetBytes = Rewrite(e, i.Cur, i.CurFlavor, target);
-                    expectSha = TargetSha(e, target, i.CurFlavor);
+                    if (i.CurFlavor == Flavor.Unknown) {
+                        // 行数/文本都对不上，重建不出「整份原文」。能做的只有逐行把我们写过的行撤回去，
+                        // 认不出的行（别的汉化写的）原样保留 —— 文件仍然完整可读，不会变成半截。
+                        targetBytes = RewriteUnknownToOriginal(e, i.Cur, out var nRev, out var nKeep);
+                        expectSha = null;
+                        Console.WriteLine($"  {label,-46} 逐行退回原文：撤销 {nRev} 行，{nKeep} 行认不出（保持原样）");
+                    } else {
+                        // 底稿是别人的：merge 只叠文本层（别人的标记/颜色原样保留）；
+                        // ours 连标记一起换回我们的，等于用我们的版本覆盖这一行
+                        targetBytes = Rewrite(e, i.Cur, i.CurFlavor, effTarget,
+                                              forceOurs: policy == Policy.Ours && i.CurFlavor == Flavor.Custom);
+                        expectSha = TargetSha(e, effTarget, i.CurFlavor);
+                    }
                 } else {
                     var e = i.Dat!;
-                    if (i.CurFlavor == Flavor.Custom) {
+                    if (others && policy == Policy.Merge && i.CurFlavor == Flavor.Custom) {
                         // 底稿是别人的：只把我们的改动叠上去；还原时反向叠回来，对方自己的改动保留
-                        targetBytes = DatMerge.Apply(e, i.Cur, revert: target == Flavor.Original);
+                        targetBytes = DatMerge.Apply(e, i.Cur, revert: effTarget == Flavor.Original);
                         expectSha = null;
                     } else {
-                        targetBytes = target == Flavor.Original ? e.Orig : e.Patch;
-                        expectSha = target == Flavor.Original ? e.ShaOrig : e.ShaPatch;
+                        // 其余情况都用数据包里验过的整份字节：官方原文或我们的成品。
+                        // 别人的改动不会有一处混进来 —— 这比「合并出个四不像」安全。
+                        targetBytes = effTarget == Flavor.Original ? e.Orig : e.Patch;
+                        expectSha = effTarget == Flavor.Original ? e.ShaOrig : e.ShaPatch;
                     }
                 }
                 var got = Sha(targetBytes);
@@ -1789,8 +1979,9 @@ internal static class Program {
                     nDone++;
                     continue;
                 }
-                Directory.CreateDirectory(backupRoot);
-                File.WriteAllBytes(System.IO.Path.Combine(backupRoot, SafeName(i.Label)), i.Cur);
+                // 覆盖之前先把「现在这份」落盘。如果它是别的汉化改过的，
+                // 这份字节在这台机器之外不存在第二个副本，丢了就永久没了。
+                if (backupSet is not null) BackupStore.Add(backupSet, i.Path, i.Cur, ShowFlavor(i));
 
                 var t0 = Stopwatch.StartNew();
                 if (!store.Write(i.Path, targetBytes)) {
@@ -1799,7 +1990,8 @@ internal static class Program {
                     continue;
                 }
                 written.Add((i, expectSha!));
-                Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} {ShowFlavor(i)} → {FlavorName(EffectiveFlavor(i, target))}  {t0.ElapsedMilliseconds} ms");
+                txn?.AddWritten(i.Path, expectSha!);
+                Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} {ShowFlavor(i)} → {FlavorName(EffectiveFlavor(i, effTarget))}  {t0.ElapsedMilliseconds} ms");
                 nDone++;
             } catch (Exception ex) {
                 Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} ✗ {ex.GetType().Name}: {ex.Message}");
@@ -1814,11 +2006,15 @@ internal static class Program {
         // Bundles2 的 index 是最后统一落盘的；ggpk 每写一次就已经进文件
         if (written.Count > 0) {
             var tf = Stopwatch.StartNew();
-            store.Flush();
-            Console.WriteLine($"  落盘索引  {store.Kind}  {tf.ElapsedMilliseconds} ms");
+            try {
+                store.Flush();
+                txn?.MarkSaved();      // 索引已经落盘，从这一刻起「写」成功了
+                Console.WriteLine($"  落盘索引  {store.Kind}  {tf.ElapsedMilliseconds} ms");
+            } catch (Exception ex) {
+                Console.WriteLine($"  ✗ 索引落盘失败：{ex.GetType().Name}: {ex.Message}");
+                nFail++;
+            }
         }
-
-        // 回读校验放在最后：要关掉索引重新打开再读，否则是拿同一个内存对象自证清白
 
         // ---- 语系与国旗 ----
         if (!plan && nFail == 0) nFail += ApplyLocale(store, target);
@@ -1827,19 +2023,48 @@ internal static class Program {
         // 以前是拿同一个内存索引对象回读，索引写错了也照样读得出来（假阳性），
         // 而这个错要到游戏启动时才炸成 bad allocation / Buffer Underflow。
         var nBack = 0;
-        if (!plan && written.Count > 0) nBack = ReloadVerify(written, ref nFail);
+        if (!plan && written.Count > 0 && nFail == 0) nBack = ReloadVerify(written, ref nFail);
 
         Console.WriteLine();
+
+        // ---- 判定：要么整份成功，要么整份退回。不存在「一半新一半旧」这种状态。----
+        if (!plan) {
+            _txn = null;
+            if (nFail > 0) {
+                Console.WriteLine("  有项目没有通过校验，正在整份退回写入前的状态 …");
+                CloseStore();                       // 先放掉写句柄，免得库在 Dispose 时又往盘上补一笔
+                var err = txn?.Rollback();
+                if (txn is null) {
+                    Console.WriteLine("  ! 这个容器没有索引备份，没法自动回滚。");
+                    Console.WriteLine($"    被覆盖的原始内容在：{backupRoot}");
+                    Console.WriteLine("    Steam 版可以「验证文件完整性」，只会重下 _.index.bin（约 20 MB）。");
+                } else if (err is null) {
+                    Console.WriteLine("  ✓ 已回滚：索引和本次新建的 bundle 都退回去了，游戏能读到写入前的内容。");
+                    Console.WriteLine("    直接重跑本程序即可，不需要验证游戏完整性。");
+                } else {
+                    Console.WriteLine($"  ! 回滚时有问题：{err}");
+                    Console.WriteLine($"    索引备份在：{txn.Dir}");
+                }
+                Console.WriteLine($"失败 {nFail} 个，{nDone} 个已写的已一并撤销 —— 客户端仍是写入前的状态。");
+                return 3;
+            }
+            txn?.Commit();
+            if (backupSet is not null) BackupStore.DropIfEmpty(backupSet);
+            try { store.TrimAfterCommit(); } catch (Exception ex) {
+                Console.WriteLine($"  ! 清理旧 bundle 时出错（不影响游戏）：{ex.Message}");
+            }
+        }
+
         Console.WriteLine(plan
             ? $"演算 {nDone} 个（未写入任何文件），失败 {nFail} 个，用时 {sw.Elapsed.TotalSeconds:F1} s"
             : $"完成 {nDone} 个，回读通过 {nBack} 个，失败 {nFail} 个，用时 {sw.Elapsed.TotalSeconds:F1} s");
-        if (!plan && nDone > 0) Console.WriteLine($"备份：{backupRoot}");
+        if (!plan && nDone > 0 && backupRoot.Length > 0) Console.WriteLine($"备份：{backupRoot}（用 --restore-backup 可以整份写回去）");
         if (nFail == 0 && !plan) {
             Console.WriteLine();
             Console.WriteLine("现在可以启动游戏了。");
             if (target != Flavor.Original) Console.WriteLine("想换版本或还原，随时再把数据拖进来。");
             if (partial)
-                Console.WriteLine($"注意：跳过的 {skip.Count} 个文件仍是官方原文。要连它们一起翻，用 [c] 采集诊断包发给作者。");
+                Console.WriteLine($"注意：跳过的 {skip.Count} 个文件保持原样（没有改动过）。要连它们一起翻，用 --on-modified=ours 或采集诊断包。");
         }
         return nFail == 0 ? 0 : 3;
     }
@@ -1888,7 +2113,9 @@ internal static class Program {
 
         // 语系与国旗也是写文件，同样要落在新 bundle 上。已经换过就不再换（一次运行只留一条新记录）。
         if (!_detachedThisRun && (store.IsSelfBundle(LanguageSwitch.Path) || store.IsSelfBundle(FlagIcon.Path))) {
-            store.Detach(); _detachedThisRun = true;
+            store.Detach();
+            _detachedThisRun = true;
+            _txn?.AddBundle(store.LastBundle);
         }
 
         if (store.TryRead(LanguageSwitch.Path, out var langCur, out var langErr)) {
@@ -1925,8 +2152,7 @@ internal static class Program {
         return nFail;
     }
 
-    private static Flavor EffectiveFlavor(Item i, Flavor target) {
-        // dat 表只有「原文 / 已打补丁」两态：三个 flavor 共用同一份补丁字节
+    private static Flavor EffectiveFlavor(Item i, Flavor target) {        // dat 表只有「原文 / 已打补丁」两态：三个 flavor 共用同一份补丁字节
         if (!i.IsSd) return target == Flavor.Original ? Flavor.Original : Flavor.DualAll;
         var e = i.Sd!;
         // 该文件在这个 flavor 下没有专门内容时，等于原文
@@ -1935,6 +2161,113 @@ internal static class Program {
             Flavor.Dual => e.ShaDual is null ? Flavor.Original : Flavor.Dual,
             _ => target,
         };
+    }
+
+    // 遇到「被别人改过、与数据包对不上」的文件时的处置方式。见 ApplyInPlace 开头。
+    private enum Policy { Merge, Ours, Original, Skip }
+
+    private static Policy ParsePolicy(string? s) => (s ?? "").Trim().ToLowerInvariant() switch {
+        "" or "merge" => Policy.Merge,
+        "ours" or "mine" => Policy.Ours,
+        "original" or "orig" or "restore" => Policy.Original,
+        "skip" or "off" => Policy.Skip,
+        _ => Policy.Merge,
+    };
+
+    private static string PolicyName(Policy p) => p switch {
+        Policy.Ours => "ours",
+        Policy.Original => "original",
+        Policy.Skip => "skip",
+        _ => "merge",
+    };
+
+    // ---------------------------------------------------------------- 备份与还原
+    //
+    // 事务管的是「索引还能不能读」；这份备份管的是另一件事：被我们覆盖掉的那份内容
+    // 本身还有没有。尤其是别的汉化改过、和我们对不上的文件 —— 那份字节只存在于这台机器上。
+
+    private static int ShowBackups(IContainer store) {
+        var all = BackupStore.List(store.IndexFile);
+        if (all.Count == 0) {
+            Console.WriteLine("还没有备份。装补丁时会自动把「被覆盖前的原字节」存到 .poe-zh/backup/ 下。");
+            return 0;
+        }
+        Console.WriteLine($"备份根目录：{BackupStore.RootFor(store.IndexFile)}");
+        Console.WriteLine();
+        foreach (var s in all) {
+            Console.WriteLine($"  [{s.Stamp}]  {s.Items.Count} 个文件  {s.Items.Sum(i => i.Bytes) / 1048576.0:F1} MB");
+            if (ReferenceEquals(s, all[0])) {
+                foreach (var it in s.Items.Take(6)) Console.WriteLine($"      {it.Flavor,-8} {it.Path}");
+                if (s.Items.Count > 6) Console.WriteLine($"      ... 还有 {s.Items.Count - 6} 个");
+            }
+        }
+        Console.WriteLine();
+        Console.WriteLine("整份写回去：PoE-zh-Patcher.exe <目标> --restore-backup=latest");
+        return 0;
+    }
+
+    private static int RestoreBackup(IContainer store, string which) {
+        if (!store.Alive) {
+            Console.WriteLine("容器已经释放，请重新运行本程序。");
+            return 6;
+        }
+        var set = BackupStore.Find(store.IndexFile, which);
+        if (set is null) {
+            Console.WriteLine($"找不到备份集「{which}」，用 --backups 看看有哪些。");
+            return 1;
+        }
+        Console.WriteLine($"用备份 [{set.Stamp}] 写回 {set.Items.Count} 个文件");
+        Console.WriteLine($"  来源：{set.Dir}");
+        Console.WriteLine("  （写之前会再建一个还原点，写坏了同样能退回来）");
+        Console.WriteLine();
+
+        var txn = Txn.Begin(store.IndexFile);
+        if (txn is null && !AllowNoRollback()) {
+            Console.WriteLine("中止：无法为索引创建还原点，一个字节都没写。");
+            return 7;
+        }
+        _txn = txn;
+        try {
+            store.Detach();
+            _detachedThisRun = true;
+            txn?.AddBundle(store.LastBundle);
+
+            var done = new List<(Item it, string sha)>();
+            foreach (var it in set.Items) {
+                var bytes = BackupStore.Read(set, it);
+                if (bytes is null) { Console.WriteLine($"  ✗ {it.Path}：备份文件不见了"); continue; }
+                if (!store.Write(it.Path, bytes)) {
+                    Console.WriteLine($"  ✗ {it.Path}：容器里找不到这条记录");
+                    continue;
+                }
+                var sha = Sha(bytes);
+                txn?.AddWritten(it.Path, sha);
+                done.Add((new Item { Label = System.IO.Path.GetFileName(it.Path), Path = it.Path }, sha));
+                Console.WriteLine($"  {it.Path,-58} ← {it.Flavor}");
+            }
+            if (done.Count == 0) {
+                Console.WriteLine("  一个都没写回去。");
+                txn?.Rollback();
+                return 3;
+            }
+            store.Flush();
+            txn?.MarkSaved();
+
+            var nFail = 0;
+            ReloadVerify(done, ref nFail);
+            if (nFail > 0) {
+                Console.WriteLine("  回读没通过，正在整份退回 …");
+                CloseStore();
+                var err = txn?.Rollback();
+                Console.WriteLine(err is null ? "  ✓ 已回滚，客户端保持原样。" : $"  ! 回滚出错：{err}");
+                return 3;
+            }
+            txn?.Commit();
+            try { store.TrimAfterCommit(); } catch { }
+            Console.WriteLine();
+            Console.WriteLine($"已把 {set.Stamp} 的内容写回去。想再装汉化，直接跑一次安装即可。");
+            return 0;
+        } finally { _txn = null; }
     }
 
     private static string SafeName(string s) {
