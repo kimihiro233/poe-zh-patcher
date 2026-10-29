@@ -392,7 +392,9 @@ internal interface IContainer : IDisposable {
     bool TryRead(string path, out byte[] bytes, out string? error);   // error 非空 = 路径在但数据读不出来
     bool Write(string path, byte[] bytes);
     void Flush();               // 一次落盘；ggpk 与 Bundles2 都是收起改动后统一存
-    int Sanitize();             // 把重名/悬空的自建 bundle 记录收成一个；返回归并掉的条数
+    bool IsSelfBundle(string path);            // 这个文件是不是挂在历史自建 bundle 上
+    void Detach();                             // 换一条全新命名的自建 bundle 承接本次写入
+    void DumpBundles(bool all);                // 诊断：列出索引里的 bundle 记录
     bool Alive { get; }         // 容器还活着吗（采集/演练会中途换容器，旧句柄不能再写）
 }
 
@@ -426,12 +428,17 @@ internal sealed class GgpkContainer : IContainer {
         return true;                          // 每次都要腾/让空闲块，历史上就是这么把自建 bundle 弄没的
     }
 
-    public void Flush() => _g.Index.Save();
-    public int Sanitize() {
-        var r = BundleHygiene.Consolidate(_g.Index);
-        if (r.Removed > 0) Console.WriteLine($"  自建 bundle 记录归并：{r.SelfMade.Count} → {r.SelfMade.Count - r.Removed}");
-        if (r.Error is not null) Console.WriteLine($"  ! 自建 bundle 无法就地整理：{r.Error}");
-        return r.Removed;
+    public void Flush() {
+        BundleHygiene.DropEmpty(_g.Index);
+        _g.Index.Save();
+    }
+    public bool IsSelfBundle(string p) =>
+        _g.Index.TryGetFile(p, out var rec) && BundleHygiene.IsSelf(rec);
+    public void DumpBundles(bool all) => BundleHygiene.Dump(_g.Index, all);
+    public void Detach() {
+        var r = BundleHygiene.Detach(_g.Index);
+        if (r.Retired > 0) Console.WriteLine($"  自建 bundle 换新：{r.Name}（旧记录 {r.Retired} 条不再使用）");
+        if (r.Error is not null) Console.WriteLine($"  ! 无法新建自建 bundle：{r.Error}");
     }
     private bool _dead;
     public bool Alive => !_dead;
@@ -474,12 +481,18 @@ internal sealed class BundlesContainer : IContainer {
         return true;
     }
 
-    public void Flush() => _index.Save();
-    public int Sanitize() {
-        var r = BundleHygiene.Consolidate(_index);
-        if (r.Removed > 0) Console.WriteLine($"  自建 bundle 记录归并：{r.SelfMade.Count} → {r.SelfMade.Count - r.Removed}");
-        if (r.Error is not null) Console.WriteLine($"  ! 自建 bundle 无法就地整理：{r.Error}");
-        return r.Removed;
+    public void Flush() {
+        BundleHygiene.DropEmpty(_index);
+        _index.Save();
+        BundleHygiene.TrimOrphans(_index, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(IndexPath)!, "LibGGPK3"));
+    }
+    public bool IsSelfBundle(string p) =>
+        _index.TryGetFile(p, out var rec) && BundleHygiene.IsSelf(rec);
+    public void DumpBundles(bool all) => BundleHygiene.Dump(_index, all);
+    public void Detach() {
+        var r = BundleHygiene.Detach(_index);
+        if (r.Retired > 0) Console.WriteLine($"  自建 bundle 换新：{r.Name}（旧记录 {r.Retired} 条不再使用）");
+        if (r.Error is not null) Console.WriteLine($"  ! 无法新建自建 bundle：{r.Error}");
     }
     private bool _dead;
     public bool Alive => !_dead;
@@ -576,6 +589,16 @@ internal static class Program {
             return RunInstall(store, f.Value);
         }
         if (Args.ContainsKey("status")) return ShowStatus(store);
+        // 诊断：索引里的 bundle 记录长什么样（自建记录全列，--all 连游戏自带的也列）
+        if (Args.ContainsKey("bundles")) {
+            store.DumpBundles(Args.GetValueOrDefault("bundles") is "all");
+            return 0;
+        }
+        if (Args.ContainsKey("detach-test")) {
+            store.Detach();
+            store.DumpBundles(false);
+            return 0;
+        }
         // 把容器里的文件原样导出来看（排查结构问题用，只读不写）
         if (Args.TryGetValue("dump", out var dumpArg) && dumpArg.Length > 0) return Dump(store, dumpArg);
         if (Args.ContainsKey("selftest")) return SelfTest(store);
@@ -1065,11 +1088,13 @@ internal static class Program {
     }
 
     private static IContainer? _store;
+    private static bool _detachedThisRun;    // 本次运行是否已经换过自建 bundle（一次运行只换一条）
 
     // Steam/Bundles2 的 _.index.bin 只能被一个写句柄打开，所以同一时刻只留一个
     private static void CloseStore() {
         try { _store?.Dispose(); } catch { }
         _store = null;
+        _detachedThisRun = false;
     }
 
     private static IContainer? Reopen() { CloseStore(); return OpenContainer(); }
@@ -1110,6 +1135,7 @@ internal static class Program {
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --struct                         结构演练（只验读写通道）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --collect [--out=目录]           采集诊断包（只读，发给作者排查）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --writetest[=N]                  写入演练（在索引副本上写 N 个文件，不碰客户端）");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --bundles[=all]                 看索引里的 bundle 记录（排查 bad allocation / Buffer Underflow）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --partial       只处理对得上的文件，跳过对不上的");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --plan          只演算校验，不写文件");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --only=<关键词>  只改文件名含该关键词的文件（最小验证用）");
@@ -1316,6 +1342,7 @@ internal static class Program {
         public Flavor CurFlavor;
         public string Why = "";          // 判成「未知」或被判成「外部改过」的依据，展示用
         public bool Legacy;              // 认出来了：里面是上一版补丁写的文本
+        public bool Force;               // 还挂在旧的自建 bundle 上：不管状态如何都重写一遍搬进新 bundle
     }
 
     // 外部改过标记的底稿：sha 对不上，但**结构没变**——
@@ -1592,7 +1619,9 @@ internal static class Program {
             foreach (var u in broken.Take(6)) Console.WriteLine($"    {u.Label}  —  {u.BrokenWhy}");
             if (broken.Count > 6) Console.WriteLine($"    ... 还有 {broken.Count - 6} 个");
             Console.WriteLine("  这些文件的索引记录指向一个已经被删掉的自建 bundle（Bundles2/LibGGPK3/*.bundle.bin）。");
-            Console.WriteLine("  内容无法在本机重建，先修客户端再打补丁。");
+            Console.WriteLine("  内容无法在本机重建，先修客户端再打补丁：");
+            Console.WriteLine("    Steam 版 → 库 → 右键游戏 → 属性 → 已安装文件 → 验证文件完整性");
+            Console.WriteLine("    （只会重下 _.index.bin，约 20 MB；我们写的 bundle 不在清单里，删掉不影响校验）");
         }
 
         if (skip.Count > 0) {
@@ -1629,8 +1658,24 @@ internal static class Program {
             Console.WriteLine();
         }
 
+        var plan = Args.ContainsKey("plan");
         var pool = partial ? items.Where(i => i.CurFlavor != Flavor.Unknown).ToList() : items;
-        var todo = pool.Where(i => EffectiveFlavor(i, target) != i.CurFlavor).ToList();
+
+        // 历史自建 bundle（历次运行留下的 LibGGPK3/N）里记的 offset / UncompressedSize
+        // 已经和物理文件对不上：复用它就是 Buffer Underflow 的来源。
+        // 先只做只读清点，把还挂在旧记录上的文件圈出来；确认真的要写之后才换新 bundle。
+        var inherited = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        if (!plan)
+            foreach (var i in items)
+                if (store.IsSelfBundle(i.Path)) inherited.Add(i.Path);
+        if (inherited.Count > 0) {
+            var movable = items.Count(i => inherited.Contains(i.Path) && i.CurFlavor != Flavor.Unknown);
+            foreach (var i in items)
+                if (inherited.Contains(i.Path) && i.CurFlavor != Flavor.Unknown) i.Force = true;
+            Console.WriteLine($"  {inherited.Count} 个文件还挂在历史自建 bundle 上，其中 {movable} 个可以重新落一遍");
+        }
+
+        var todo = pool.Where(i => i.Force || EffectiveFlavor(i, target) != i.CurFlavor).ToList();
         Console.WriteLine($"目标：{FlavorName(target)}    需要改动 {todo.Count} 个文件（可用 {pool.Count} / 共 {items.Count} 个）");
 
         // --only=<关键词>：只动匹配的文件。用来在刚修好的客户端上做最小验证 ——
@@ -1689,8 +1734,9 @@ internal static class Program {
         }
         Console.WriteLine();
 
-        var plan = Args.ContainsKey("plan");
-        if (!plan) store.Sanitize();   // 重名的自建 bundle 记录不收拾干净，写入时的清理会连带删掉活文件
+        // 到这里确定要写了，才换新 bundle：一次写入只落一条新记录，绝不碰历史记录
+        if (!plan && inherited.Count > 0) { store.Detach(); _detachedThisRun = true; }
+
         var backupRoot = System.IO.Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             "PoE-zh-汉化", "backup", DateTime.Now.ToString("yyyyMMdd-HHmmss"));
@@ -1772,21 +1818,16 @@ internal static class Program {
             Console.WriteLine($"  落盘索引  {store.Kind}  {tf.ElapsedMilliseconds} ms");
         }
 
-        // 回读校验：写完再从容器里读回来比 sha
-        var nBack = 0;
-        foreach (var (it, sha) in written) {
-            try {
-                if (!store.TryRead(it.Path, out var back)) { Console.WriteLine($"  ✗ 回读失败：{it.Label}"); nFail++; continue; }
-                if (Sha(back) != sha) { Console.WriteLine($"  ✗ 回读不符：{it.Label}"); nFail++; continue; }
-                nBack++;
-            } catch (Exception ex) {
-                Console.WriteLine($"  ✗ 回读异常：{it.Label} {ex.Message}");
-                nFail++;
-            }
-        }
+        // 回读校验放在最后：要关掉索引重新打开再读，否则是拿同一个内存对象自证清白
 
         // ---- 语系与国旗 ----
         if (!plan && nFail == 0) nFail += ApplyLocale(store, target);
+
+        // ---- 落盘校验：关掉索引重新打开，按游戏的启动方式把写过的文件逐个读回来 ----
+        // 以前是拿同一个内存索引对象回读，索引写错了也照样读得出来（假阳性），
+        // 而这个错要到游戏启动时才炸成 bad allocation / Buffer Underflow。
+        var nBack = 0;
+        if (!plan && written.Count > 0) nBack = ReloadVerify(written, ref nFail);
 
         Console.WriteLine();
         Console.WriteLine(plan
@@ -1803,12 +1844,52 @@ internal static class Program {
         return nFail == 0 ? 0 : 3;
     }
 
+    // 落盘校验：关掉索引、重新打开，再按路径把写过的文件读回来比 sha。
+    // 这是唯一能发现「索引记录写错」的检查 —— 同一个内存索引对象回读永远是对的。
+    private static int ReloadVerify(List<(Item it, string sha)> written, ref int nFail) {
+        Console.WriteLine();
+        Console.WriteLine("  关掉索引重新打开，逐个回读校验 …");
+        if (Reopen() is null) {
+            Console.WriteLine("  ✗ 索引重新打开失败，客户端已无法按游戏的方式读取");
+            Console.WriteLine("    Steam 版：Steam 库 → 右键游戏 → 属性 → 已安装文件 → 验证文件完整性（只会重下 _.index.bin，约 20 MB）");
+            nFail += written.Count;
+            return 0;
+        }
+        var s = _store!;
+        var ok = 0;
+        foreach (var (it, sha) in written) {
+            try {
+                if (!s.TryRead(it.Path, out var back, out var err)) {
+                    Console.WriteLine($"  ✗ {it.Label,-46} 读不出来：{err ?? "索引里找不到"}");
+                    nFail++;
+                    continue;
+                }
+                if (Sha(back) != sha) {
+                    Console.WriteLine($"  ✗ {it.Label,-46} 落盘内容与写入的不一致（{back.Length:N0} B）");
+                    nFail++;
+                    continue;
+                }
+                ok++;
+            } catch (Exception ex) {
+                Console.WriteLine($"  ✗ {it.Label,-46} 回读异常：{ex.GetType().Name}: {ex.Message}");
+                nFail++;
+            }
+        }
+        Console.WriteLine($"  重新打开后回读：{ok}/{written.Count} 通过");
+        return ok;
+    }
+
     // 语系与国旗：译文写完之后的两步收尾，等价于 PoeChinese3 做的那两件事。
     // 不做语系这一步，译文写得再全，游戏里还是英文（或法文）。
     // 装补丁 → 启用；还原 → 关掉；已是目标状态就不写（幂等）。
     private static int ApplyLocale(IContainer store, Flavor target) {
         var nFail = 0;
         var want = target != Flavor.Original;
+
+        // 语系与国旗也是写文件，同样要落在新 bundle 上。已经换过就不再换（一次运行只留一条新记录）。
+        if (!_detachedThisRun && (store.IsSelfBundle(LanguageSwitch.Path) || store.IsSelfBundle(FlagIcon.Path))) {
+            store.Detach(); _detachedThisRun = true;
+        }
 
         if (store.TryRead(LanguageSwitch.Path, out var langCur, out var langErr)) {
             if (LanguageSwitch.TryBuild(langCur, want, out var langNext, out var langMsg)) {
