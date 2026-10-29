@@ -399,16 +399,40 @@ internal interface IContainer : IDisposable {
     bool Alive { get; }         // 容器还活着吗（采集/演练会中途换容器，旧句柄不能再写）
     string IndexFile { get; }   // 索引所在的物理文件：Bundles2 是 _.index.bin，ggpk 是 Content.ggpk
     void TrimAfterCommit();     // 提交之后才清孤儿 bundle（先删文件再回滚 = 把记录变成悬空）
+    GgpkUndo? Undo { get; }     // ggpk 的逐字节撤销日志；Bundles2 没有（它整份复制索引就够）
 }
 
 internal sealed class GgpkContainer : IContainer {
     private readonly BundledGGPK _g;
+    private readonly FileStream? _fs;
+    private readonly GgpkUndo? _undo;
 
     public GgpkContainer(string path) {
         Display = path;
-        _g = new BundledGGPK(path, true);
-        Size = new FileInfo(path).Length;
+        var full = System.IO.Path.GetFullPath(path);
+
+        // 自己开流再包一层「写入前记账」的代理：库的所有写入都会先落到 Undo 里，
+        // 然后才真正改动文件。这一层就是 74 GB 单文件能全身而退的原因。
+        var fs = new FileStream(full, FileMode.Open, FileAccess.ReadWrite, FileShare.Read, 1 << 16, FileOptions.None);
+        var undo = GgpkUndo.ForOpen(full);
+        try {
+            _g = new BundledGGPK(undo.Wrap(fs), leaveOpen: true, parsePathsInIndex: true);
+            _fs = fs;
+            _undo = undo;
+        } catch (Exception ex) {
+            // 库改版、不接受自建流：退回原来的开法。这样只读功能照旧，
+            // 但这次没有逐字节还原点 —— 上层会因为拿不到还原点而拒绝写入。
+            Console.WriteLine($"  ! 接管 ggpk 写入通道失败（{ex.GetType().Name}: {ex.Message}）");
+            Console.WriteLine("    这次没法给 ggpk 留还原点，安装会被拒绝；--status / --backups 这类只读功能不受影响。");
+            try { fs.Dispose(); } catch { }
+            undo.Abandon();
+            _undo = null;
+            _fs = null;
+            _g = new BundledGGPK(full, true);
+        }
+        Size = new FileInfo(full).Length;
     }
+
 
     public string Kind => "ggpk";
     public string Display { get; }
@@ -438,6 +462,7 @@ internal sealed class GgpkContainer : IContainer {
     public bool IsSelfBundle(string p) =>
         _g.Index.TryGetFile(p, out var rec) && BundleHygiene.IsSelf(rec);
     public string? LastBundle { get; private set; }
+    public GgpkUndo? Undo => _undo;
     public string IndexFile => Display;
     // ggpk 的写入直接在容器内腾空闲块，没有独立的 bundle 文件要清
     public void TrimAfterCommit() { }
@@ -453,7 +478,9 @@ internal sealed class GgpkContainer : IContainer {
     public void Dispose() {
         if (_dead) return;
         _dead = true;
-        _g.Dispose();
+        try { _g.Dispose(); } catch { }
+        try { _fs?.Dispose(); } catch { }
+        _undo?.TrimIfEmpty();       // 只看状态、没写过：把空日志删掉
     }
 }
 
@@ -501,6 +528,7 @@ internal sealed class BundlesContainer : IContainer {
     // 游戏读到它们就是一条读不出来的文件。顺序反过来才是安全的。
     public void TrimAfterCommit() =>
         BundleHygiene.TrimOrphans(_index, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(IndexPath)!, "LibGGPK3"));
+    public GgpkUndo? Undo => null;       // Bundles2 整份复制 _.index.bin 就够，不需要逐字节日志
     public void DumpBundles(bool all) => BundleHygiene.Dump(_index, all);
     public void Detach() {
         var r = BundleHygiene.Detach(_index);
@@ -548,6 +576,8 @@ internal static class Program {
 
         // 标记层合并自检：与 tools/markup.py 的用例逐条对齐，防止两侧实现漂移
         if (Args.ContainsKey("markup-test")) return MarkupTest();
+        // ggpk 逐字节还原自检：不碰真实客户端，在临时目录里造一份「同结构」的文件跑
+        if (Args.ContainsKey("undo-test")) return UndoTest();
         // 外部改过的底稿演练：拿一份现成文件跑 TryCustomBase + Rewrite，只读不写
         if (Args.TryGetValue("sd-test", out var sdArg) && sdArg.Length > 0) return SdTest(sdArg);
         // 外部改过的数据表演练：拿一份现成 .datc64 跑 TryCustomBase + Apply，只读不写
@@ -580,8 +610,8 @@ internal static class Program {
         _target = gp;
 
         // 上次写入没走完？先把客户端还原到写前状态，再谈别的。
-        // 必须在打开容器之前做：回滚要覆盖 _.index.bin，句柄被占着就换不回去。
-        var rec = Txn.Recover(gp);
+        // 必须在打开容器之前做：回滚要覆盖 _.index.bin / Content.ggpk，句柄被占着就换不回去。
+        var rec = GgpkUndo.IsGgpk(gp) ? GgpkUndo.Recover(gp) : Txn.Recover(gp);
         if (rec.Recovered) {
             Console.WriteLine();
             Console.WriteLine("==============================================================");
@@ -594,6 +624,16 @@ internal static class Program {
 
         // 写入通道演练：在临时目录的索引副本上写一遍，不碰真实客户端
         if (Args.ContainsKey("writetest")) return WriteTest(Args.GetValueOrDefault("writetest") ?? "");
+
+        // 把整个 ggpk 退回某次安装之前：不打开容器，文件要独占写句柄
+        if (Args.TryGetValue("restore-ggpk", out var rgArg)) {
+            if (!GgpkUndo.IsGgpk(gp)) {
+                Console.WriteLine("--restore-ggpk 只对官方独立端的 Content.ggpk 有效。");
+                Console.WriteLine("  Steam/WeGame 的 Bundles2 请用 --restore-backup（它整份复制 _.index.bin，还原更彻底）。");
+                return 1;
+            }
+            return RestoreGgpk(gp, rgArg.Length == 0 ? "latest" : rgArg, ask: !Args.ContainsKey("yes"));
+        }
 
         var store = OpenContainer();
         if (store is null) { Pause(); return 1; }
@@ -1006,6 +1046,103 @@ internal static class Program {
 
     // ---------------------------------------------------------------- 标记层自检
 
+    // ---------------------------------------------------------------- ggpk 逐字节还原自检
+    //
+    // 老式 Content.ggpk 没法在别的机器上复现，所以这里用一份「结构相同」的假文件验证引擎：
+    //   原地覆盖、多块重叠、写到末尾之外（追加）三种写入混在一起，模拟三种收尾：
+    //   A) 写到一半进程没了（不提交）→ 下次启动 Recover 必须退回原样
+    //   B) 写完提交 → 之后用 --restore-ggpk 退回原样
+    //   C) 同一块被反复覆盖（区间去重）→ 退回的仍是最早那份原字节
+    private static int UndoTest() {
+        var root = Path.Combine(Path.GetTempPath(), "poezh-undo-" + DateTime.Now.ToString("HHmmssfff"));
+        Directory.CreateDirectory(root);
+        var path = Path.Combine(root, "Content.ggpk");
+        const long dataStart = 2 << 20;
+        const long bodyLen = 8 << 20;
+        var rnd = new Random(20261029);
+        var orig = new byte[bodyLen];
+        rnd.NextBytes(orig);
+        File.WriteAllBytes(path, orig);
+        var bad = 0;
+        Console.WriteLine($"自检文件 {path}  {orig.Length:N0} B");
+
+        void Check(string what, bool ok, string extra = "") {
+            Console.WriteLine($"  {(ok ? "✓" : "✗")} {what}{(extra.Length > 0 ? "  " + extra : "")}");
+            if (!ok) bad++;
+        }
+        byte[] Rnd(int n) { var b = new byte[n]; rnd.NextBytes(b); return b; }
+
+        // 当前 8 MB 内容里，[0, min(len,8MB)) 必须还是原来的字节
+        bool SameAsOrig(string why) {
+            var now = File.ReadAllBytes(path);
+            if (now.Length < bodyLen) { Console.WriteLine($"    ! 文件比原来短：{now.Length:N0} < {bodyLen:N0}"); return false; }
+            for (long i = 0; i < bodyLen; i++)
+                if (now[i] != orig[i]) {
+                    Console.WriteLine($"    ! {why}：第 {i:N0} 个字节不一样（{orig[i]:X2} → {now[i]:X2}）");
+                    return false;
+                }
+            return true;
+        }
+
+        // ---- A) 写到一半断电
+        var u = GgpkUndo.Begin(path);
+        using (var fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)) {
+            var st = u.Wrap(fs);
+            void Put(long off, byte[] b) { st.Position = off; st.Write(b, 0, b.Length); }
+            Put(1 << 20, Rnd(4096));                       // 靠前的一块
+            Put(dataStart + 100, Rnd(4096));                // 记一份原文
+            Put(dataStart + 200, Rnd(4096));                // 重叠：只该记第一次没记到的部分
+            Put(dataStart + 200, Rnd(64));                  // 同一块再改一次
+            Put(bodyLen + (5 << 20), Rnd(8192));            // 追加到末尾之外
+            st.Flush();
+            Console.WriteLine($"  写了 5 次：日志记下 {u.Bytes:N0} B 原文");
+            foreach (var (off, len) in GgpkUndo.ReadRecords(u.Dir))
+                Console.WriteLine($"      记录 [{off:N0}, +{len:N0})");
+            Console.WriteLine("  … 现在模拟进程被杀");
+        }
+        u.SimulateCrash();
+        var rec = GgpkUndo.Recover(path);
+        Check("启动自愈：认出了没走完的写入", rec.Recovered, rec.Message);
+        Check("自愈后 8 MB 内容逐字节回到写前", SameAsOrig("自愈后"));
+
+        // ---- B) 正常写完提交，再用快照退回去
+        File.WriteAllBytes(path, orig);         // 复位
+        var u2 = GgpkUndo.Begin(path);
+        var fs2 = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
+        var st2 = u2.Wrap(fs2);
+        var mod = orig[(int)(dataStart + 100)..(int)(dataStart + 100 + 4096)];
+        rnd.NextBytes(mod);
+        st2.Position = dataStart + 100;
+        st2.Write(mod, 0, mod.Length);
+        st2.Flush();
+        Console.WriteLine($"  正常写入 4 KB，日志 {u2.Bytes:N0} B");
+        var err = u2.Commit();
+        fs2.Dispose();
+        Check("提交成功", err is null, err ?? "");
+        Check("提交后内容确实变了", !SameAsOrig("提交后"));
+
+        var snap = GgpkUndo.Find(path, "latest");
+        Check("能找到刚提交的快照", snap is not null);
+        if (snap is not null) {
+            var e2 = GgpkUndo.Restore(path, snap, out var bn);
+            Check("用快照退回去", e2 is null, e2 ?? $"{bn} 块");
+            Check("退回后 8 MB 内容逐字节回到写前", SameAsOrig("退回后"));
+        }
+
+        // ---- C) 只读打开不该留下垃圾
+        var u3 = GgpkUndo.Begin(path);
+        var before = Directory.GetDirectories(GgpkUndo.RootFor(path)).Length;
+        u3.TrimIfEmpty();
+        var after = Directory.GetDirectories(GgpkUndo.RootFor(path)).Length;
+        Check("只读会话的空日志会被清掉", after == before - 1, $"{before} → {after}");
+
+        Console.WriteLine();
+        Console.WriteLine($"日志目录还剩 {Directory.GetDirectories(GgpkUndo.RootFor(path)).Length} 份（提交过的快照会留着当后悔药）");
+        Console.WriteLine($"ggpk 逐字节还原自检：{(bad == 0 ? "全部通过" : $"{bad} 项失败")}");
+        try { Directory.Delete(root, recursive: true); } catch { }
+        return bad == 0 ? 0 : 6;
+    }
+
     private static int MarkupTest() {
         var cases = new (string shell, string oldT, string newT, string want)[] {
             ("<enchanted>{{稀有珠寶}}</enchanted>", "<enchanted>{{稀有珠寶}}</enchanted>",
@@ -1119,10 +1256,14 @@ internal static class Program {
 
     private static IContainer? _store;
     private static bool _detachedThisRun;    // 本次运行是否已经换过自建 bundle（一次运行只换一条）
-    private static Txn? _txn;                // 当前写入事务；容器在写入途中新建的 bundle 要登记到它上面
+    private static IRollback? _txn;          // 当前写入事务；容器在写入途中新建的 bundle 要登记到它上面
 
-    // 没有索引还原点也允许写：只给老式 Content.ggpk（74 GB，整份复制不现实）留的口子，
-    // 必须显式加 --allow-no-rollback，默认一律拒绝。
+    // 还原点：Bundles2 复制 20 MB 的 _.index.bin；ggpk 74 GB 复制不了，
+    // 用容器自带的那份逐字节撤销日志（索引区整段 + 数据区逐块）。
+    private static IRollback? BeginRollback(IContainer store) =>
+        store.Kind == "ggpk" ? store.Undo : Txn.Begin(store.IndexFile);
+
+    // 索引复制都失败还硬要写：只留一个必须显式加的口子，默认一律拒绝。
     private static bool AllowNoRollback() => Args.ContainsKey("allow-no-rollback");
 
     // Steam/Bundles2 的 _.index.bin 只能被一个写句柄打开，所以同一时刻只留一个
@@ -1180,9 +1321,11 @@ internal static class Program {
         Console.WriteLine("安全相关：");
         Console.WriteLine("  --on-modified=merge|ours|original|skip   遇到被别的汉化改过的文件怎么办（默认 merge）");
         Console.WriteLine("                                           merge 只叠译文、ours 换成我们的、original 退回官方原文");
-        Console.WriteLine("  <...> --backups                          看有哪些备份（被覆盖前的原字节）");
-        Console.WriteLine("  <...> --restore-backup=<时间戳|latest>   把某次备份整份写回去");
-        Console.WriteLine("  每次写入前都会复制一份 _.index.bin 当还原点；写坏了自动整份退回。");
+        Console.WriteLine("  <...> --backups                          看有哪些还原点（整份 / 单个文件）");
+        Console.WriteLine("  <...> --restore-backup=<时间戳|latest>   把某次备份的文件整份写回去");
+        Console.WriteLine("  <Content.ggpk> --restore-ggpk[=时间戳]    把整个 ggpk 退回那次安装之前（游戏打不开时用）");
+        Console.WriteLine("  每次写入前都留还原点：Bundles2 复制 _.index.bin；ggpk 抄索引区 + 逐块记原字节。");
+        Console.WriteLine("  写坏了自动整份退回；进程被杀 / 断电也能在下次启动时自动退回。");
         Console.WriteLine("  排障用：--simulate-fail=N 故意在第 N 个文件失败，验证退回流程（不写坏客户端）");
     }
 
@@ -1592,19 +1735,31 @@ internal static class Program {
                 continue;
             }
             if (k is "b") {
+                var snaps = GgpkUndo.List(store.IndexFile);
                 var sets = BackupStore.List(store.IndexFile);
-                if (sets.Count == 0) {
-                    Console.WriteLine(" 还没有备份。每次安装前，被覆盖的那份内容会自动存在 .poe-zh/backup/ 下。");
+                if (snaps.Count == 0 && sets.Count == 0) {
+                    Console.WriteLine(" 还没有还原点。每次安装前，被覆盖的那份内容会自动存到 .poe-zh/ 下。");
                 } else {
                     Console.WriteLine();
-                    for (var n = 0; n < sets.Count; n++)
-                        Console.WriteLine($"  [{n + 1}] {sets[n].Stamp}   {sets[n].Items.Count} 个文件  {sets[n].Items.Sum(x => x.Bytes) / 1048576.0:F1} MB");
-                    Console.Write(" 要把哪一份写回去？(序号 / 回车 = 取消)：");
+                    if (snaps.Count > 0) {
+                        Console.WriteLine(" 整份：把整个 ggpk 退回那次安装之前（游戏打不开就用这个）");
+                        for (var n = 0; n < snaps.Count; n++)
+                            Console.WriteLine($"   [{n + 1}] {snaps[n].Stamp}   {snaps[n].Created}   {snaps[n].RecordBytes / 1048576.0:F1} MB");
+                    }
+                    if (sets.Count > 0) {
+                        Console.WriteLine(" 单个：只把被覆盖过的那几个文件写回去");
+                        for (var n = 0; n < sets.Count; n++)
+                            Console.WriteLine($"   [{snaps.Count + n + 1}] {sets[n].Stamp}   {sets[n].Items.Count} 个文件");
+                    }
+                    Console.Write(" 选哪个？(序号 / 回车 = 取消)：");
                     var pick = ReadKeyLine()?.Trim();
-                    if (int.TryParse(pick, out var pi) && pi >= 1 && pi <= sets.Count) {
-                        Console.Write($" 确认用 {sets[pi - 1].Stamp} 覆盖当前的译文？(y = 确认)：");
-                        if ((ReadKeyLine() ?? "").Trim().ToLowerInvariant() is "y" or "yes") {
-                            RestoreBackup(store, sets[pi - 1].Stamp);
+                    if (int.TryParse(pick, out var pi) && pi >= 1 && pi <= snaps.Count + sets.Count) {
+                        if (pi <= snaps.Count) {
+                            RestoreGgpk(store.IndexFile, snaps[pi - 1].Stamp, ask: true);
+                        } else {
+                            Console.Write($" 确认用 {sets[pi - snaps.Count - 1].Stamp} 覆盖当前的译文？(y = 确认)：");
+                            if ((ReadKeyLine() ?? "").Trim().ToLowerInvariant() is "y" or "yes")
+                                RestoreBackup(store, sets[pi - snaps.Count - 1].Stamp);
                         }
                     }
                 }
@@ -1820,10 +1975,10 @@ internal static class Program {
             // 于是「重跑一次新补丁器」永远补不上语系。
             if (!Args.ContainsKey("plan")) {
                 // 语系与国旗同样是「写文件」，所以同样要有还原点：写坏了也是游戏读不出来。
-                var t2 = Txn.Begin(store.IndexFile);
+                var t2 = BeginRollback(store);
                 if (t2 is null && !AllowNoRollback()) {
-                    Console.WriteLine("中止：无法为索引创建还原点，语系与国旗一个字都没写。");
-                    Console.WriteLine("  （老式 Content.ggpk 单文件没法整份备份。确实要写，加 --allow-no-rollback。）");
+                    Console.WriteLine("中止：无法创建还原点，语系与国旗一个字都没写。");
+                    Console.WriteLine("  · 确认游戏已退出、磁盘还有空间（索引约 20 MB）");
                     return 7;
                 }
                 var n0 = 0;
@@ -1836,6 +1991,7 @@ internal static class Program {
                     n0 = 1;
                 } finally { _txn = null; }
                 if (n0 > 0) {
+                    CloseStore();            // 回滚要独占写句柄，两个容器都是
                     var err = t2?.Rollback();
                     Console.WriteLine(err is null
                         ? "  已回滚，语系与国旗保持原样，游戏照常能读。"
@@ -1878,16 +2034,15 @@ internal static class Program {
         Console.WriteLine();
 
         // ---- 事务开始：先拿到「退路」，再动第一个字节 ----
-        // 没有索引备份就不写：宁可这次不装，也不能留下一个游戏读不出来的客户端。
-        Txn? txn = null;
+        // 没有还原点就不写：宁可这次不装，也不能留下一个游戏读不出来的客户端。
+        IRollback? txn = null;
         BackupSet? backupSet = null;
         if (!plan) {
-            txn = Txn.Begin(store.IndexFile);
+            txn = BeginRollback(store);
             if (txn is null && !AllowNoRollback()) {
-                Console.WriteLine("中止：无法为索引创建还原点（_.index.bin 复制失败，或它不是 Bundles2 容器），一个字节都没写。");
+                Console.WriteLine("中止：无法创建还原点（_.index.bin 复制失败，或磁盘满了），一个字节都没写。");
                 Console.WriteLine($"  目标：{store.IndexFile}");
                 Console.WriteLine("  · 确认游戏已退出、磁盘还有空间（索引约 20 MB）");
-                Console.WriteLine("  · 老式 Content.ggpk 单文件没法整份备份，确实要写请加 --allow-no-rollback");
                 return 7;
             }
             if (txn is not null) {
@@ -2035,15 +2190,16 @@ internal static class Program {
                 CloseStore();                       // 先放掉写句柄，免得库在 Dispose 时又往盘上补一笔
                 var err = txn?.Rollback();
                 if (txn is null) {
-                    Console.WriteLine("  ! 这个容器没有索引备份，没法自动回滚。");
+                    Console.WriteLine("  ! 这个容器没有还原点，没法自动回滚。");
                     Console.WriteLine($"    被覆盖的原始内容在：{backupRoot}");
-                    Console.WriteLine("    Steam 版可以「验证文件完整性」，只会重下 _.index.bin（约 20 MB）。");
+                    if (store.Kind == "Bundles2")
+                        Console.WriteLine("    Steam 版可以「验证文件完整性」，只会重下 _.index.bin（约 20 MB）。");
                 } else if (err is null) {
                     Console.WriteLine("  ✓ 已回滚：索引和本次新建的 bundle 都退回去了，游戏能读到写入前的内容。");
                     Console.WriteLine("    直接重跑本程序即可，不需要验证游戏完整性。");
                 } else {
                     Console.WriteLine($"  ! 回滚时有问题：{err}");
-                    Console.WriteLine($"    索引备份在：{txn.Dir}");
+                    Console.WriteLine($"    还原点在：{txn.Dir}（用 --restore-ggpk / --backups 可以再退一次）");
                 }
                 Console.WriteLine($"失败 {nFail} 个，{nDone} 个已写的已一并撤销 —— 客户端仍是写入前的状态。");
                 return 3;
@@ -2187,12 +2343,28 @@ internal static class Program {
     // 本身还有没有。尤其是别的汉化改过、和我们对不上的文件 —— 那份字节只存在于这台机器上。
 
     private static int ShowBackups(IContainer store) {
+        var snaps = GgpkUndo.List(store.IndexFile);
+        if (snaps.Count > 0) {
+            Console.WriteLine($"ggpk 整份还原点：{GgpkUndo.RootFor(store.IndexFile)}");
+            Console.WriteLine("  （写入前把索引区整段抄下来 + 数据区逐块记下原字节，能把整个 ggpk 退回那一刻）");
+            Console.WriteLine();
+            foreach (var m in snaps) {
+                var mb = m.RecordBytes / 1048576.0;
+                var state = m.Phase == "restored" ? "已还原过" : "可用";
+                Console.WriteLine($"  [{m.Stamp}]  {m.Created}  {mb:F1} MB  {state}");
+                Console.WriteLine($"      写入前 {m.OrigLength:N0} B → 写入后 {m.SavedLength:N0} B，{m.Records} 块原地覆盖");
+            }
+            Console.WriteLine();
+            Console.WriteLine("整份退回去：PoE-zh-Patcher.exe <Content.ggpk> --restore-ggpk=latest");
+            Console.WriteLine();
+        }
+
         var all = BackupStore.List(store.IndexFile);
         if (all.Count == 0) {
-            Console.WriteLine("还没有备份。装补丁时会自动把「被覆盖前的原字节」存到 .poe-zh/backup/ 下。");
+            Console.WriteLine("还没有文件级备份。装补丁时会自动把「被覆盖前的原字节」存到 .poe-zh/backup/ 下。");
             return 0;
         }
-        Console.WriteLine($"备份根目录：{BackupStore.RootFor(store.IndexFile)}");
+        Console.WriteLine($"文件级备份：{BackupStore.RootFor(store.IndexFile)}");
         Console.WriteLine();
         foreach (var s in all) {
             Console.WriteLine($"  [{s.Stamp}]  {s.Items.Count} 个文件  {s.Items.Sum(i => i.Bytes) / 1048576.0:F1} MB");
@@ -2203,6 +2375,38 @@ internal static class Program {
         }
         Console.WriteLine();
         Console.WriteLine("整份写回去：PoE-zh-Patcher.exe <目标> --restore-backup=latest");
+        return 0;
+    }
+
+    // 把整个 ggpk 退回某次安装之前。不需要 Steam、不需要重下 74 GB ——
+    // 索引区整段写回 + 数据区逐块写回，写完再校验索引区 sha。
+    private static int RestoreGgpk(string target, string which, bool ask) {
+        var m = GgpkUndo.Find(target, which);
+        if (m is null) {
+            Console.WriteLine($"找不到 ggpk 还原点「{which}」，用 --backups 看看有哪些。");
+            return 1;
+        }
+        var mb = m.RecordBytes / 1048576.0;
+        Console.WriteLine($"用还原点 [{m.Stamp}]（{m.Created}，{mb:F1} MB）退回 {m.Target}");
+        Console.WriteLine($"  那时长度 {m.OrigLength:N0} B，现在是 {new FileInfo(m.Target).Length:N0} B");
+        if (ask) {
+            Console.WriteLine("  这份快照只对「装完之后没再更新过」的客户端有效。");
+            Console.Write("  确认退回？(y = 确认)：");
+            if ((ReadKeyLine() ?? "").Trim().ToLowerInvariant() is not ("y" or "yes")) {
+                Console.WriteLine("  已取消，一个字节都没改。");
+                return 0;
+            }
+        }
+        CloseStore();                 // 还原要独占写句柄
+        var err = GgpkUndo.Restore(target, m, out var blocks);
+        if (err is not null) {
+            Console.WriteLine($"  ✗ 还原时出错：{err}");
+            Console.WriteLine($"    快照还留着：{Path.Combine(GgpkUndo.RootFor(target), m.Stamp)}");
+            Console.WriteLine("    可以再跑一次 --restore-ggpk；实在不行就重装客户端。");
+            return 3;
+        }
+        Console.WriteLine($"  ✓ 已退回：{blocks} 块原字节写回并逐块读回比对一致，游戏读到的就是那一刻的内容。");
+        Console.WriteLine("    现在可以启动游戏了。");
         return 0;
     }
 
@@ -2221,9 +2425,9 @@ internal static class Program {
         Console.WriteLine("  （写之前会再建一个还原点，写坏了同样能退回来）");
         Console.WriteLine();
 
-        var txn = Txn.Begin(store.IndexFile);
+        var txn = BeginRollback(store);
         if (txn is null && !AllowNoRollback()) {
-            Console.WriteLine("中止：无法为索引创建还原点，一个字节都没写。");
+            Console.WriteLine("中止：无法创建还原点，一个字节都没写。");
             return 7;
         }
         _txn = txn;
@@ -2247,6 +2451,7 @@ internal static class Program {
             }
             if (done.Count == 0) {
                 Console.WriteLine("  一个都没写回去。");
+                CloseStore();
                 txn?.Rollback();
                 return 3;
             }
@@ -2408,6 +2613,8 @@ internal static class Program {
         }
         Console.WriteLine();
         Console.WriteLine($"结构演练完成：{orig.Count} 个文件，异常 {bad}，用时 {sw.Elapsed.TotalSeconds:F1} s");
+        // 演练已经把原样写回去了：把 ggpk 的日志丢掉，免得下次启动误以为上次没走完
+        if (store.Kind == "ggpk") GgpkUndo.Active?.Abandon();
         return bad == 0 ? 0 : 6;
     }
 

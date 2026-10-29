@@ -24,6 +24,7 @@
     <EmbeddedResource Include="..\pack\bundle.gz" LogicalName="bundle.gz" />
     <Compile Include="..\shared\BundleHygiene.cs" Link="BundleHygiene.cs" />
     <Compile Include="..\shared\Safety.cs" Link="Safety.cs" />
+    <Compile Include="..\shared\GgpkUndo.cs" Link="GgpkUndo.cs" />
     <Compile Include="..\shared\LanguageSwitch.cs" Link="LanguageSwitch.cs" />
     <Compile Include="..\shared\FlagIcon.cs" Link="FlagIcon.cs" />
   </ItemGroup>

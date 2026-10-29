@@ -1,5 +1,8 @@
 // 写入安全层：**任何情况下不能让客户端变成「游戏读不出来」的状态**。
 //
+// 这个文件管的是 Bundles2（Steam / WeGame）：索引就是 20 MB 的 _.index.bin，整份复制最快。
+// 官方独立端的 Content.ggpk（74 GB）走 GgpkUndo.cs，思路相同但换成了逐字节日志。
+//
 // 现实的失败模式不是「写错一个字节」，而是写到一半断掉：
 // 断电、任务管理器结束进程、磁盘满、库自己抛异常。LibBundle3 的 Index.Save() 是把
 // 20 MB 的 _.index.bin 整个覆盖重写，一旦中途停止，索引就是半截 —— 游戏直接读不了。
@@ -37,7 +40,20 @@ internal sealed class RecoverResult {
     public int RestoredFiles;
 }
 
-internal sealed class Txn {
+// 「后悔药」的统一接口。上层（安装 / 还原 / 只改语系）只关心三件事：
+// 写坏了能不能退、退的时候要不要登记新 bundle、退完能不能提交。
+// Bundles2 用 Txn（整份复制 20 MB 的 _.index.bin），Content.ggpk 用 GgpkUndo
+// （74 GB 复制不了，改成「写之前逐块记下被覆盖的原字节」）。
+internal interface IRollback {
+    string Dir { get; }
+    void AddBundle(string? name);
+    void AddWritten(string path, string sha);
+    void MarkSaved();
+    string? Commit();
+    string? Rollback();
+}
+
+internal sealed class Txn : IRollback {
     public const string DirName = ".poe-zh";
     private const string JournalName = "txn.json";
     private const long MaxIndexBackup = 512L * 1024 * 1024;   // 超过这个尺寸不做整份备份（Content.ggpk）
@@ -102,11 +118,12 @@ internal sealed class Txn {
     }
 
     /// <summary>校验通过：删 journal，留下最近的备份作为后悔药。</summary>
-    public void Commit() {
-        if (_done) return;
+    public string? Commit() {
+        if (_done) return null;
         _done = true;
         try { File.Delete(JournalPath); } catch { }
         PruneBackups(keep: 3);
+        return null;
     }
 
     /// <summary>
