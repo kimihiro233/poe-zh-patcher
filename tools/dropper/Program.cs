@@ -527,6 +527,9 @@ internal static class Program {
         if (Args.TryGetValue("dat-test", out var datArg) && datArg.Length > 0) return DatTest(datArg);
         // 数据包自检：不需要游戏，拿官方基线文件把每条重新生成一遍，比对发布产物 sha
         if (Args.TryGetValue("data-test", out var dataArg) && dataArg.Length > 0) return DataTest(dataArg);
+        // 语系 / 国旗切换的往返自检：拿一份现成文件跑「启用 → 还原」，比对是否逐字节回原样
+        if (Args.TryGetValue("lang-test", out var langT) && langT.Length > 0) return LangTest(langT);
+        if (Args.TryGetValue("flag-test", out var flagT) && flagT.Length > 0) return FlagTest(flagT);
 
         if (positional.Count == 0) {
             var auto = FindDefaultGgpk();
@@ -556,6 +559,16 @@ internal static class Program {
         if (store is null) { Pause(); return 1; }
         try {
 
+        // --locale-only[=original]：只处理语系与国旗，不碰任何译文。
+        // 译文早就装好、只差「游戏里还是英文」的时候用它，也方便单独验证这两步。
+        if (Args.TryGetValue("locale-only", out var locOnly)) {
+            var lt = locOnly.Trim().Equals("original", StringComparison.OrdinalIgnoreCase) ? Flavor.Original : Flavor.DualAll;
+            var nf = ApplyLocale(store, lt);
+            Console.WriteLine();
+            Console.WriteLine(nf == 0 ? "语系与国旗处理完成。" : $"语系与国旗有 {nf} 处失败。");
+            return nf == 0 ? 0 : 3;
+        }
+
         var prog = Args.GetValueOrDefault("set");
         if (prog is not null) {
             var f = ParseFlavor(prog);
@@ -563,6 +576,8 @@ internal static class Program {
             return RunInstall(store, f.Value);
         }
         if (Args.ContainsKey("status")) return ShowStatus(store);
+        // 把容器里的文件原样导出来看（排查结构问题用，只读不写）
+        if (Args.TryGetValue("dump", out var dumpArg) && dumpArg.Length > 0) return Dump(store, dumpArg);
         if (Args.ContainsKey("selftest")) return SelfTest(store);
         if (Args.ContainsKey("struct")) return StructTest(store, Preflight(store));
         if (Args.ContainsKey("collect")) return Collect(store, Preflight(store));
@@ -644,6 +659,49 @@ internal static class Program {
             }
             _dat.Add(ent);
         }
+    }
+
+    // 语系切换自检：拿 data/languages.dat 的一份实文件，跑「启用 → 还原」，要求逐字节回到原样
+    private static int LangTest(string path) {
+        if (!File.Exists(path)) { Console.WriteLine($"找不到文件：{path}"); return 1; }
+        var cur = File.ReadAllBytes(path);
+        Console.WriteLine($"languages.dat  {cur.Length:N0} B");
+        var st = LanguageSwitch.Detect(cur);
+        Console.WriteLine($"  当前    {LanguageSwitch.Describe(st)}");
+        if (st == LanguageSwitch.State.Unknown) return 5;
+
+        var on = LanguageSwitch.Swap(cur);
+        if (on is null) { Console.WriteLine("  ✗ 对调失败（定位不到两行）"); return 5; }
+        var st2 = LanguageSwitch.Detect(on);
+        Console.WriteLine($"  启用后  {LanguageSwitch.Describe(st2)}  {on.Length:N0} B");
+        if (st2 != LanguageSwitch.State.Applied) { Console.WriteLine("  ✗ 启用后状态不对"); return 5; }
+
+        var back = LanguageSwitch.Swap(on);
+        if (back is null || !back.AsSpan().SequenceEqual(cur)) { Console.WriteLine("  ✗ 还原后没有逐字节回到原样"); return 5; }
+        Console.WriteLine("  还原后  逐字节回到原样 ✓");
+        return 0;
+    }
+
+    private static int FlagTest(string path) {
+        if (!File.Exists(path)) { Console.WriteLine($"找不到文件：{path}"); return 1; }
+        var cur = File.ReadAllBytes(path);
+        Console.WriteLine($"uiimages1.txt  {cur.Length:N0} B");
+        var st = FlagIcon.Detect(cur);
+        Console.WriteLine($"  当前    {FlagIcon.Describe(st)}");
+        if (st == FlagIcon.State.Unknown) return 5;
+
+        if (!FlagIcon.TryBuild(cur, true, out var on, out var msg)) { Console.WriteLine($"  ! {msg}"); return 5; }
+        var st2 = FlagIcon.Detect(on!);
+        Console.WriteLine($"  启用后  {FlagIcon.Describe(st2)}  {on!.Length:N0} B");
+        if (st2 != FlagIcon.State.Applied) { Console.WriteLine("  ✗ 启用后状态不对"); return 5; }
+
+        if (!FlagIcon.TryBuild(on!, false, out var back, out var msg2)) { Console.WriteLine($"  ! {msg2}"); return 5; }
+        if (back is null || !back.AsSpan().SequenceEqual(cur)) {
+            Console.WriteLine($"  ✗ 还原后与原文件不同（{back?.Length ?? 0:N0} B vs {cur.Length:N0} B）");
+            return 5;
+        }
+        Console.WriteLine("  还原后  逐字节回到原样 ✓");
+        return 0;
     }
 
     // 数据包自检：不需要游戏客户端。拿基线文件（raw_sd 里的繁中原版）把每一条重新生成成
@@ -1056,6 +1114,7 @@ internal static class Program {
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --plan          只演算校验，不写文件");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --only=<关键词>  只改文件名含该关键词的文件（最小验证用）");
         Console.WriteLine("  PoE-zh-Patcher.exe --data-test=<基线目录>                 数据包自检（不需要游戏：拿官方原文重算一遍，比对发布 sha）");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --locale-only[=original]        只处理语系与国旗，不碰译文");
     }
 
     private static void Pause() {
@@ -1478,6 +1537,23 @@ internal static class Program {
         return ApplyInPlace(store, items, f, Args.ContainsKey("partial"));
     }
 
+    // 容器里的文件原样导出（逗号分隔多个），排查结构与编码问题用，只读
+    private static int Dump(IContainer store, string inner) {
+        var dir = Args.GetValueOrDefault("out") ?? "";
+        if (dir.Length == 0) dir = "dump";
+        Directory.CreateDirectory(dir);
+        foreach (var p in inner.Split(',', StringSplitOptions.RemoveEmptyEntries)) {
+            if (!store.TryRead(p.Trim(), out var b, out var err)) {
+                Console.WriteLine($"  ✗ {p,-46} {err ?? "找不到"}");
+                continue;
+            }
+            var f = System.IO.Path.Combine(dir, System.IO.Path.GetFileName(p.Trim()));
+            File.WriteAllBytes(f, b);
+            Console.WriteLine($"  {p.Trim(),-46} {b.Length,10:N0} B -> {f}");
+        }
+        return 0;
+    }
+
     private static int ShowStatus(IContainer store) {
         var items = Preflight(store);
         PrintHeader(items, store);
@@ -1571,7 +1647,19 @@ internal static class Program {
             }
         }
 
-        if (todo.Count == 0) { Console.WriteLine("已经就是这个版本，无需改动。"); return 0; }
+        if (todo.Count == 0) {
+            Console.WriteLine("已经就是这个版本，无需改动。");
+            // 译文不用动，但语系/国旗可能还没处理 —— 用旧版补丁器打过的客户端就是这种状态：
+            // 文件早就是全量对照了，语系却一次都没写进去过。以前这里直接 return，
+            // 于是「重跑一次新补丁器」永远补不上语系。
+            if (!Args.ContainsKey("plan")) {
+                var extra = ApplyLocale(store, target);
+                if (extra > 0) return 3;
+                Console.WriteLine();
+                Console.WriteLine("现在可以启动游戏了。");
+            }
+            return 0;
+        }
 
         var legacy = todo.Where(i => i.CurFlavor == Flavor.Custom && i.Legacy).ToList();
         if (legacy.Count > 0) {
@@ -1697,49 +1785,8 @@ internal static class Program {
             }
         }
 
-        // ---- 启用 / 还原繁中语系（等价于 PoeChinese3 的那一步）----
-        // 不做这一步，打完补丁游戏里还是英文，必须再跑一次 PoeChinese3 才看得见中文。
-        // 装补丁 → 启用；还原 → 关掉。已经是对应状态就跳过（幂等）。
-        // 补丁本身有失败时不动语系：免得「语系切到繁中、译文却没写全」这种半截状态
-        if (!plan && nFail == 0) {
-            var want = target != Flavor.Original;
-            if (store.TryRead(LanguageSwitch.Path, out var langCur, out var langErr)) {
-                if (LanguageSwitch.TryBuild(langCur, want, out var langNext, out var langMsg)) {
-                    if (store.Write(LanguageSwitch.Path, langNext!)) {
-                        store.Flush();
-                        var ok = store.TryRead(LanguageSwitch.Path, out var langBack) && Sha(langBack) == Sha(langNext!);
-                        if (ok) Console.WriteLine($"  {LanguageSwitch.Path,-46} -> {langMsg}");
-                        else { Console.WriteLine($"  ✗ {LanguageSwitch.Path} 回读不符，语系可能没写进去"); nFail++; }
-                    } else { Console.WriteLine($"  ✗ {LanguageSwitch.Path} 写入失败"); nFail++; }
-                } else {
-                    Console.WriteLine($"  {LanguageSwitch.Path,-46} = {langMsg}");
-                }
-            } else {
-                Console.WriteLine($"  ! 读不到 {LanguageSwitch.Path}（{langErr ?? "路径不存在"}），语系未处理");
-            }
-        }
-
-        // ---- 语言选择界面的国旗 ----
-        // 语系切到繁中之后，列表里那一项的代码是 fr，配图却还是法国国旗。
-        // 图集里本来就有五星红旗（zhCN），把 fr 那两行的坐标改成 zhCN 的即可，
-        // 不碰任何 DDS。详见 tools/shared/FlagIcon.cs。
-        if (!plan && nFail == 0) {
-            var wantFlag = target != Flavor.Original;
-            if (store.TryRead(FlagIcon.Path, out var flagCur, out var flagErr)) {
-                if (FlagIcon.TryBuild(flagCur, wantFlag, out var flagNext, out var flagMsg)) {
-                    if (store.Write(FlagIcon.Path, flagNext!)) {
-                        store.Flush();
-                        var ok = store.TryRead(FlagIcon.Path, out var flagBack) && Sha(flagBack) == Sha(flagNext!);
-                        if (ok) Console.WriteLine($"  {FlagIcon.Path,-46} -> {flagMsg}");
-                        else { Console.WriteLine($"  ✗ {FlagIcon.Path} 回读不符，国旗可能没写进去"); nFail++; }
-                    } else { Console.WriteLine($"  ✗ {FlagIcon.Path} 写入失败"); nFail++; }
-                } else {
-                    Console.WriteLine($"  {FlagIcon.Path,-46} = {flagMsg}");
-                }
-            } else {
-                Console.WriteLine($"  ! 读不到 {FlagIcon.Path}（{flagErr ?? "路径不存在"}），国旗未处理");
-            }
-        }
+        // ---- 语系与国旗 ----
+        if (!plan && nFail == 0) nFail += ApplyLocale(store, target);
 
         Console.WriteLine();
         Console.WriteLine(plan
@@ -1754,6 +1801,47 @@ internal static class Program {
                 Console.WriteLine($"注意：跳过的 {skip.Count} 个文件仍是官方原文。要连它们一起翻，用 [c] 采集诊断包发给作者。");
         }
         return nFail == 0 ? 0 : 3;
+    }
+
+    // 语系与国旗：译文写完之后的两步收尾，等价于 PoeChinese3 做的那两件事。
+    // 不做语系这一步，译文写得再全，游戏里还是英文（或法文）。
+    // 装补丁 → 启用；还原 → 关掉；已是目标状态就不写（幂等）。
+    private static int ApplyLocale(IContainer store, Flavor target) {
+        var nFail = 0;
+        var want = target != Flavor.Original;
+
+        if (store.TryRead(LanguageSwitch.Path, out var langCur, out var langErr)) {
+            if (LanguageSwitch.TryBuild(langCur, want, out var langNext, out var langMsg)) {
+                if (store.Write(LanguageSwitch.Path, langNext!)) {
+                    store.Flush();
+                    var ok = store.TryRead(LanguageSwitch.Path, out var langBack) && Sha(langBack) == Sha(langNext!);
+                    if (ok) Console.WriteLine($"  {LanguageSwitch.Path,-46} -> {langMsg}");
+                    else { Console.WriteLine($"  ✗ {LanguageSwitch.Path} 回读不符，语系可能没写进去"); nFail++; }
+                } else { Console.WriteLine($"  ✗ {LanguageSwitch.Path} 写入失败"); nFail++; }
+            } else {
+                Console.WriteLine($"  {LanguageSwitch.Path,-46} = {langMsg}");
+            }
+        } else {
+            Console.WriteLine($"  ! 读不到 {LanguageSwitch.Path}（{langErr ?? "路径不存在"}），语系未处理");
+        }
+
+        // 语系切到繁中之后，列表那一项的语言代码仍是 fr，配图会拿法国国旗。
+        // 图集里本来就有五星红旗（zhCN），把两行的图标名对调即可，不碰任何 DDS。
+        if (store.TryRead(FlagIcon.Path, out var flagCur, out var flagErr)) {
+            if (FlagIcon.TryBuild(flagCur, want, out var flagNext, out var flagMsg)) {
+                if (store.Write(FlagIcon.Path, flagNext!)) {
+                    store.Flush();
+                    var ok = store.TryRead(FlagIcon.Path, out var flagBack) && Sha(flagBack) == Sha(flagNext!);
+                    if (ok) Console.WriteLine($"  {FlagIcon.Path,-46} -> {flagMsg}");
+                    else { Console.WriteLine($"  ✗ {FlagIcon.Path} 回读不符，国旗可能没写进去"); nFail++; }
+                } else { Console.WriteLine($"  ✗ {FlagIcon.Path} 写入失败"); nFail++; }
+            } else {
+                Console.WriteLine($"  {FlagIcon.Path,-46} = {flagMsg}");
+            }
+        } else {
+            Console.WriteLine($"  ! 读不到 {FlagIcon.Path}（{flagErr ?? "路径不存在"}），国旗未处理");
+        }
+        return nFail;
     }
 
     private static Flavor EffectiveFlavor(Item i, Flavor target) {

@@ -93,6 +93,7 @@ python tools/gameinfo.py --diff   # 列出到底哪些文件变了
 | v0.4.2 | **3.29.3b / patch 3.29.3.3** | 修 3.29 新语法：技能类 19 个文件（aura/buff/curse/minion/skill…）以前整份读成 0 块、从没进过补丁，全量对照补到 42 文件 / 26635 行 |
 | v0.4.3 | **3.29.3b / patch 3.29.3.3** | 占位符漏失补回（`{n}`/`%` 丢了，三套产物各 181 处）、对照版按 `\n` 分组穿插、补丁工具自带语系启用（不再需要 PoeChinese3）、国旗换五星红旗、产物 sha 持久账本 |
 | v0.4.4 | **3.29.3b / patch 3.29.3.3** | 补丁器补齐 v0.4.3 的穿插规则：25 个文件在全新客户端上被判「生成内容 sha 不符」整体拒写（978 行受影响）；新增 `--data-test` 数据包自检 |
+| v0.4.5 | **3.29.3b / patch 3.29.3.3** | 语系切换从没生效过：换成官方做法（对调语言名而非代码）、修好「无需改动」时跳过语系的门槛、国旗改成对调图标名不再写死坐标；新增 `--locale-only` / `--lang-test` / `--flag-test` |
 
 ## 游戏更新后（换赛季）
 
@@ -172,42 +173,52 @@ python tools/glossary.py out/statdesc.csv out/glossary.csv
 ### 语系：为什么以前打完补丁还要跑一次 PoeChinese3
 
 客户端能不能看到中文，**不取决于我们往 `metadata/statdescriptions` 里写了多少中文**，
-而取决于 `data/languages.dat` 里两行的语言代码：
+而取决于 `data/languages.dat` —— 游戏语言列表就是这张表的 11 行。
+
+客户端按这一行的**语言名**去找 `data/<语言名>/` 下的文件（采集包里那条
+`data/traditional chinese/uitalktext.datc64` 就是证据）；语言代码（`fr` / `zh-TW`）
+只是配置值 `language=fr` 和国旗图标用的。所以 PoeChinese3 换的不是代码，是名字：
 
 ```
-French 行              原本 code = "fr"
-Traditional Chinese 行  原本 code = "zh-TW"
+French 行              原本：French / Français        code = fr
+Traditional Chinese 行  原本：Traditional Chinese / 繁體中文   code = zh-TW
+        ↓ 把两行的「显示名 + 本地名」整对调
+French 行              Traditional Chinese / 繁體中文   code 仍是 fr
+Traditional Chinese 行  French / Français              code 仍是 zh-TW
 ```
 
-把这两个 code 对调，客户端语言列表里「第二个（法国国旗）」那一项就会去加载繁中数据。
-官方客户端本来就有繁中这一项，只是入口指在法语上——所以 PoeChinese3 才敢说
+换完之后语言列表第二项写着「繁體中文」，选它就去读 `data/traditional chinese/`
+—— 官方繁中加上我们写进去的译文；配置里仍然记着 `language=fr`，用户配置一个字都不用改。
+官方客户端本来就有繁中这一项，只是入口指在法语上，所以 PoeChinese3 才敢说
 「只启用语系、其余文件均未修改」，游戏更新后也不用重打。
 
 现在装补丁时**自动做这一步**（`[1]`/`[2]`/`[3]` 启用，`[4]` 还原时关掉），
-已经是对应状态就跳过，不重复写。判断依据是 `fr` 这个 code 落在 `French` 前面还是后面，
-结构对不上（多半是游戏更新过）就整段跳过并提示，绝不硬写。
+已经是对应状态就跳过，不重复写；连「译文早就是最新、无需改动」的情况也会补做
+（旧版补丁器打过的客户端就是这种状态）。结构对不上（多半是游戏更新过）就整段跳过并提示，绝不硬写。
 
 实现见 `tools/shared/LanguageSwitch.cs`，patcher 与 dropper 共用；`--status` 会报一行「语系：…」。
+只想单独处理这一步，用 `--locale-only`（还原用 `--locale-only=original`）。
+
+> v0.4.4 及更早的实现是错的：交换的是 `fr` 与 `zh-TW` 两个**代码**，而且判定条件在真实文件里
+> 永远不成立，`Detect` 一直返回「无法识别」直接跳过 —— 语系从来没被写进去过，所以游戏里一直是英文/法文。
 
 ### 国旗：语言列表里那一项不该是法国国旗
 
 语系切到繁中之后，语言列表第二项的标签写着「繁體中文」，配图却还是法国国旗——因为
-客户端是按**语言代码**去拼图标名的（`FlagIcons/<code>`，code 就是 `languages.dat` 里
-那一行的第四个字段，也就是被换过来的 `fr`）。
+客户端是按**语言代码**去拼图标名的（`FlagIcons/<code>`，这里的 code 仍然是 `fr`）。
 
 游戏图集里本来就有五星红旗：`zhCN`（简体中文）那一项。`art/uiimages1.txt` 是图集索引，
 每个图标一行，末尾四个数是贴图上的矩形：
 
 ```
-"…/FlagIcons/fr"   "…/FlagIcons/1.dds"    840 0 914 49     ← 法国国旗
+"…/FlagIcons/fr"   "…/FlagIcons/1.dds"    252 0 326 49     ← 法国国旗（3.25 版坐标）
 "…/FlagIcons/zhCN" "…/FlagIcons/1.dds"    756 0 830 49     ← 五星红旗
-"…/FlagIcons/4K/fr"   "…/FlagIcons/4K/2.dds" 0 152 101 219
-"…/FlagIcons/4K/zhCN" "…/FlagIcons/4K/2.dds" 111 76 212 143
 ```
 
-两张图集里 `fr` 与 `zhCN` 的矩形尺寸完全一致（74×49 / 101×67），所以只要把 `fr`
-那两行的坐标改成 `zhCN` 的坐标，画面就是五星红旗，尺寸、比例、画风和别的国旗全都对得上。
-**一个字节的贴图都不用重编码**，也不碰任何 `.dds`。
+fr 的坐标每个版本都不一样（3.25 是 252，3.29 是 840），所以**不能写死坐标**。
+做法是把 `fr` 与 `zhCN` 两行的**图标名对调**：客户端去取 `fr` 时拿到的是写着 `zhCN`
+的那一行（五星红旗），一个贴图字节都不用碰，也不依赖任何坐标，再换一次就回到原样。
+这与 PoeChinese3 的做法一致（它换的是 `fr` ↔ `zhTW`，青天白日旗）。
 
 实现见 `tools/shared/FlagIcon.cs`（同样 patcher 与 dropper 共用）：只在字节层替换那两行，
 其余 600 万字节原样拷贝；`--status` 报一行「国旗：…」，装补丁时启用、`[4]` 还原时改回法国国旗，
