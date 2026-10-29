@@ -1259,7 +1259,7 @@ internal static class Program {
     private static IRollback? _txn;          // 当前写入事务；容器在写入途中新建的 bundle 要登记到它上面
 
     // 还原点：Bundles2 复制 20 MB 的 _.index.bin；ggpk 74 GB 复制不了，
-    // 用容器自带的那份逐字节撤销日志（索引区整段 + 数据区逐块）。
+    // 用容器自带的那份逐字节撤销日志（写前记下被覆盖的每一块原文）。
     private static IRollback? BeginRollback(IContainer store) =>
         store.Kind == "ggpk" ? store.Undo : Txn.Begin(store.IndexFile);
 
@@ -2346,7 +2346,7 @@ internal static class Program {
         var snaps = GgpkUndo.List(store.IndexFile);
         if (snaps.Count > 0) {
             Console.WriteLine($"ggpk 整份还原点：{GgpkUndo.RootFor(store.IndexFile)}");
-            Console.WriteLine("  （写入前把索引区整段抄下来 + 数据区逐块记下原字节，能把整个 ggpk 退回那一刻）");
+            Console.WriteLine("  （写入前逐块记下被覆盖的原字节，能把整个 ggpk 退回那一刻）");
             Console.WriteLine();
             foreach (var m in snaps) {
                 var mb = m.RecordBytes / 1048576.0;
@@ -2379,7 +2379,7 @@ internal static class Program {
     }
 
     // 把整个 ggpk 退回某次安装之前。不需要 Steam、不需要重下 74 GB ——
-    // 索引区整段写回 + 数据区逐块写回，写完再校验索引区 sha。
+    // 逐块写回原字节，每块写完立刻读回来比对。
     private static int RestoreGgpk(string target, string which, bool ask) {
         var m = GgpkUndo.Find(target, which);
         if (m is null) {
