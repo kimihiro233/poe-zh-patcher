@@ -107,6 +107,38 @@ description
 因为它是纯文本，**改起来的代价远低于 .dat**：不需要重打包 bundle 之外的二进制操作，
 diff 也可读。但改动必须保持变体数量与顺序不变，否则整块错位。
 
+### 3.29 起两套语法并存（v0.4.2 修的坑）
+
+技能那一批文件（aura / banner_aura / beam / brand / buff / curse / debuff / minion 四件套 /
+offering / secondary_debuff / single_minion_spell / skill / vaal_side_area / variable_duration
+等 19 个）改成了新写法：**块名直接跟在 `description` 后面**。
+
+```
+include "Metadata/StatDescriptions/skill_stat_descriptions.txt"
+has_identifiers
+
+description physical_damage_incr
+	1 physical_damage_+%
+	2
+		1|# "You and nearby allies gain {0}% increased Physical Damage"
+		#|-1 "You and nearby allies gain {0}% reduced Physical Damage" negate 1
+	lang "Traditional Chinese"
+	2
+		1|# "你與附近的友方獲得 {0}% 物理傷害"
+		#|-1 "你與附近的友方減少 {0}% 物理傷害" negate 1
+```
+
+- 老写法 `description` 独占一行，新写法 `description <块名>`；其后 `\t1 <stat_id>`、
+  变体数、`\t\t` 变体、`lang "X"` 全部一致。
+- 判据写成 `lines[i] != "description"` 时，整份新文件会被读成 **0 个块**，于是既不进修正稿
+  也不进对照包。v0.4.1 及以前全量对照只有 26 个文件、技能只能看到中文，根因就在这里。
+  单是 `skill_stat_descriptions.txt` 就有 75,316 行 / 1,731 块 / 3,056 繁中行被漏掉。
+- 三个例外不必处理：`deepwater_stat_descriptions.txt`、`vaal_side_area_stat_descriptions.txt`
+  只有一行 `include` 转发到 map；`skillpopup_stat_filters.txt` 是 `group { … }` 过滤规则，
+  不是描述文件。
+- `include` 是层级引用（skill_stat 又 include 了 active_skill_gem），但每个文件自身仍带完整
+  多语言段，按文件独立处理即可，不需要展开 include。
+
 ---
 
 ## 四、LibDat2 + schema 这条路（结论：放弃）

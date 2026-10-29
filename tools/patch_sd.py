@@ -114,9 +114,15 @@ def parse_blocks(path: str):
     blocks = []
     i = 0
     while i < n:
-        if lines[i] != "description":
+        # 3.29 起部分文件（技能/光环/诅咒/召唤那一批）改用新语法：
+        #   description physical_damage_incr      <- 块名写在同一行
+        #       1 physical_damage_+%
+        # 老语法是 `description` 独占一行。只认老写法会把整份文件读成 0 块，
+        # 于是这些文件从来没进过补丁包（技能只能看到中文就是这么来的）。
+        if lines[i] != "description" and not lines[i].startswith("description "):
             i += 1
             continue
+        head_name = lines[i][len("description"):].strip()
         i += 1
         stat_ids = ""
         first = True
@@ -129,6 +135,8 @@ def parse_blocks(path: str):
                 stat_ids = s
                 first = False
             i += 1
+        if not stat_ids:
+            stat_ids = head_name     # 新语法只有块名、没有 stat id 时用它定位
         langs = []
         cur = ""
         while i < n and lines[i].startswith("\t"):
