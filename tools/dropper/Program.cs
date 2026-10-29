@@ -525,6 +525,8 @@ internal static class Program {
         if (Args.TryGetValue("sd-test", out var sdArg) && sdArg.Length > 0) return SdTest(sdArg);
         // 外部改过的数据表演练：拿一份现成 .datc64 跑 TryCustomBase + Apply，只读不写
         if (Args.TryGetValue("dat-test", out var datArg) && datArg.Length > 0) return DatTest(datArg);
+        // 数据包自检：不需要游戏，拿官方基线文件把每条重新生成一遍，比对发布产物 sha
+        if (Args.TryGetValue("data-test", out var dataArg) && dataArg.Length > 0) return DataTest(dataArg);
 
         if (positional.Count == 0) {
             var auto = FindDefaultGgpk();
@@ -642,6 +644,44 @@ internal static class Program {
             }
             _dat.Add(ent);
         }
+    }
+
+    // 数据包自检：不需要游戏客户端。拿基线文件（raw_sd 里的繁中原版）把每一条重新生成成
+    // 「全量对照」，比对发布产物 sha —— 生成端（patch_sd.py）与补丁器（这里）只要有一处
+    // 拼法不同，全新客户端就会在写入前被判「生成内容 sha 不符」整体拒写。这个测试提前拦住它。
+    private static int DataTest(string dir) {
+        Console.WriteLine($"数据包 {_ver}（{_bundleBuilt}）  基线目录 {dir}");
+        var ok = 0;
+        var bad = 0;
+        foreach (var e in _sd) {
+            var name = System.IO.Path.GetFileName(e.Path);
+            var p = System.IO.Path.Combine(dir, "metadata_statdescriptions_" + name);
+            if (!File.Exists(p)) p = System.IO.Path.Combine(dir, name);
+            if (!File.Exists(p)) { Console.WriteLine($"  ? {name,-52} 基线文件缺失"); bad++; continue; }
+            var cur = File.ReadAllBytes(p);
+            var s0 = Sha(cur);
+            if (s0 != e.ShaOriginal) {
+                Console.WriteLine($"  ! {name,-52} 基线不是官方原文（{s0[..12]}）");
+                bad++;
+                continue;
+            }
+            byte[] tgt;
+            try { tgt = Rewrite(e, cur, Flavor.Original, Flavor.DualAll); }
+            catch (Exception ex) {
+                Console.WriteLine($"  ✗ {name,-52} {ex.GetType().Name}: {ex.Message}");
+                bad++;
+                continue;
+            }
+            var got = Sha(tgt);
+            if (got != e.ShaDualAll) {
+                Console.WriteLine($"  ✗ {name,-52} 生成 {got[..12]} ≠ 产物 {e.ShaDualAll[..12]}");
+                bad++;
+                continue;
+            }
+            ok++;
+        }
+        Console.WriteLine($"  通过 {ok} / {_sd.Count}，异常 {bad}");
+        return bad == 0 ? 0 : 4;
     }
 
     // 拿一份真实的「外部改过」文件跑一遍判定 + 合并，只打印不写入。
@@ -1015,6 +1055,7 @@ internal static class Program {
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --partial       只处理对得上的文件，跳过对不上的");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --plan          只演算校验，不写文件");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --only=<关键词>  只改文件名含该关键词的文件（最小验证用）");
+        Console.WriteLine("  PoE-zh-Patcher.exe --data-test=<基线目录>                 数据包自检（不需要游戏：拿官方原文重算一遍，比对发布 sha）");
     }
 
     private static void Pause() {
@@ -1088,8 +1129,30 @@ internal static class Program {
         return (j, k);
     }
 
+    // 文本内换行是字面「反斜杠 + n」两个字符，不是 0x0A
+    private const string Nl = "\\n";
+
     private static string DualAllText(Row r) =>
-        r.E is null ? (r.T ?? r.O) : (r.T ?? r.O) + "\\n" + Indent + r.E;
+        r.E is null ? (r.T ?? r.O) : DualBody(r.T ?? r.O, r.E);
+
+    // 与 tools/patch_sd.py 的 dual_body 逐字对齐 —— 这里少一层缩进，整份文件就对不上，
+    // 全新客户端走 sha 校验时会被判「生成内容 sha 不符」整体拒写。
+    // 中文段数与英文段数相同：一组中文配一组英文，逐组穿插；
+    // 不同（实测 135 行）：整段英文附在末尾，但每一组都补缩进，不能顶格。
+    private static string DualBody(string body, string en) {
+        var zh = body.Split(Nl);
+        var ee = en.Split(Nl);
+        if (ee.Length > 0 && body.Contains(Indent + ee[0])) return body;
+        if (zh.Length == ee.Length) {
+            var outp = new List<string>(zh.Length * 2);
+            for (var i = 0; i < zh.Length; i++) {
+                outp.Add(zh[i]);
+                if (ee[i].Length > 0) outp.Add(Indent + ee[i]);
+            }
+            return string.Join(Nl, outp);
+        }
+        return body + Nl + Indent + string.Join(Nl + Indent, ee);
+    }
 
     /// 这一行现有的文本层，对应我们已知的哪一版文本（原文/译文/对照/全量对照）。
     /// 外部改过标记的底稿靠它辨认当前处在哪个状态。
@@ -1115,7 +1178,7 @@ internal static class Program {
         Flavor.Original => r.O,
         Flavor.Translated => r.T ?? r.O,
         Flavor.Dual => r.D ?? r.T ?? r.O,
-        Flavor.DualAll => r.E is null ? (r.T ?? r.O) : (r.T ?? r.O) + "\\n" + Indent + r.E,
+        Flavor.DualAll => DualAllText(r),
         _ => throw new ArgumentOutOfRangeException(nameof(f)),
     };
 
@@ -1573,6 +1636,12 @@ internal static class Program {
                 var got = Sha(targetBytes);
                 if (expectSha is not null && got != expectSha) {
                     Console.WriteLine($"  [{idx,2}/{todo.Count}] {label,-46} ✗ 生成内容 sha 不符（拒绝写入）");
+                    // 逐行文本都对得上，只有「没动的部分」不同 —— 那是客户端文件本身和我们的基线不是同一份
+                    var hint = i.IsSd
+                        ? $"客户端 {SplitLines(i.Cur).Count:N0} 行 / 基线 {i.Sd!.BaseLines:N0} 行"
+                        : "字节数不同";
+                    Console.WriteLine($"      未改动的部分和基线不一致（{hint}）：这份客户端不是数据包锁定的 {_gameClient} 版本，");
+                    Console.WriteLine($"      按它写会得到一份谁都没验过的混合文件，所以不写。先升级补丁器；补丁器已是最新就重新采集。");
                     nFail++;
                     continue;
                 }
