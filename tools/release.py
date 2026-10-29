@@ -36,6 +36,12 @@ FIXES = [
     ("fix-category-ui.csv", "物品类别词·UI 表侧（.dat 回写）"),
     ("fix-category-hold.csv", "存疑未改（待拍板）"),
     ("fix-typo.csv", "原件笔误（繁中占位符 {0] → {0}）"),
+    ("fix-placeholder.csv", "占位符漏失（{n} / % 丢了，补回；含一条繁体错字）"),
+]
+# 体检报告：不是修正稿，是「为什么改这些」的证据，随包入档
+REPORTS = [
+    ("out/placeholder-check.md", "占位符漏失全库排查（216 条按后果分级）"),
+    ("out/variant-check.md", "中英变体条件不一致排查（58 处）"),
 ]
 # 词缀补丁清单：三套 flavor 各自一份，记录写进游戏的是哪些字节
 SD_MANIFESTS = [
@@ -79,6 +85,13 @@ def main():
         if os.path.exists(src):
             shutil.copy2(src, os.path.join(rel_dir, name))
             copied.append("out/" + name)
+    n_reports = 0
+    for rel, _ in REPORTS:
+        src = os.path.join(ROOT, rel)
+        if os.path.exists(src):
+            shutil.copy2(src, os.path.join(rel_dir, os.path.basename(rel)))
+            copied.append(rel)
+            n_reports += 1
     shutil.copy2(os.path.join(ROOT, "out", "glossary.csv"), os.path.join(rel_dir, "glossary.csv"))
     copied.append("out/glossary.csv")
     # 补丁清单：记录本版本往游戏里写了哪些字节
@@ -127,6 +140,7 @@ def main():
         wheels.append("词缀文本 %d 文件 / %d 处" % (sd_files, sd_edits))
     if patched:
         wheels.append(".dat %d 表 / %d 处" % (dat_files, dat_edits))
+    wheels.append("语系 1 文件 + 国旗 1 文件")
     lines = [
         "# v%s" % VERSION,
         "",
@@ -171,10 +185,20 @@ def main():
         "",
         "`glossary.csv` 共 %d 条。" % count(os.path.join(ROOT, "out", "glossary.csv")),
         "",
+        "## 体检报告",
+        "",
+    ]
+    for rel, desc in REPORTS:
+        if os.path.exists(os.path.join(ROOT, rel)):
+            lines.append("- `%s` —— %s" % (os.path.basename(rel), desc))
+    if n_reports == 0:
+        lines.append("（本版未附）")
+    lines += [
+        "",
         "## 打包内容",
         "",
-        "文档 4 份 + 修正稿 %d 份 + 状态表 + 术语表 + 补丁清单 + game.lock.json + MANIFEST.sha256"
-        % sum(1 for n, _ in FIXES if os.path.exists(os.path.join(ROOT, "out", n)))
+        "文档 4 份 + 修正稿 %d 份 + 状态表 + 术语表 + 体检报告 %d 份 + 补丁清单 + game.lock.json + MANIFEST.sha256"
+        % (sum(1 for n, _ in FIXES if os.path.exists(os.path.join(ROOT, "out", n))), n_reports)
         + (os.path.exists(EXE) and with_exe) * " + `PoE-zh-Patcher.exe`（zip 根目录，不进归档目录）"
         + "。二进制原始导出不入档（可由 `tools/dumper` 重导，且换版本后必须重导）。",
         "",
@@ -203,6 +227,27 @@ def main():
         lines += ["",
                   "写入方式：`patcher apply`（LibBundledGGPK3），每个文件写入后从 ggpk 重读比对 sha256；",
                   "回滚：`patcher restore`。逐条改动见 `out/patch/manifest.json`。", ""]
+
+    # 语系 / 国旗：不在上面两张清单里（它们不是译文文件），但补丁器会一起改
+    lines += [
+        "## 已写入游戏（客户端配置侧）",
+        "",
+        "这两步不是译文，但**不做就看不到中文 / 图标对不上**，所以由补丁器一并处理，",
+        "已经是对应状态就跳过，`[4] 还原` 时一并改回。",
+        "",
+        "| 文件 | 改什么 | 为什么 |",
+        "|---|---|---|",
+        "| `data/languages.dat` | `French` 与 `Traditional Chinese` 两行的语言代码对调（`fr` ↔ `zh-TW`） | 客户端语言列表第二项（法国国旗）改为加载繁中数据。不这么做，打完补丁游戏里还是英文，必须再跑一次 PoeChinese3 |",
+        "| `art/uiimages1.txt` | `FlagIcons/fr` 与 `FlagIcons/4K/fr` 两行的图集坐标改指 `zhCN` 区域 | 上一步之后那一项的标签是「繁體中文」，配图却还是法国国旗。图集里本来就有五星红旗，且两处矩形尺寸一致（74×49 / 101×67），只改坐标、不动任何 DDS |",
+        "",
+        "两份文件都是**字节级最小替换**：`languages.dat` 交换两段等长字符串（696 B 长度守恒），",
+        "`uiimages1.txt` 只重编那两行（6 MB 里其余字节原样拷贝）。结构对不上（多半是游戏更新过）",
+        "一律跳过并提示，不硬写。实现见 `tools/shared/LanguageSwitch.cs` 与 `tools/shared/FlagIcon.cs`。",
+        "",
+        "已知副作用：语言列表里「简体中文」那一项本来就是五星红旗，换完会有两面；",
+        "那一项没有对应的数据目录（客户端只有 `data/traditional chinese/`），选了只会回落到英文。",
+        "",
+    ]
 
     open(os.path.join(rel_dir, "RELEASE.md"), "w", encoding="utf-8").write("\n".join(lines))
 

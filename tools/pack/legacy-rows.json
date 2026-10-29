@@ -1,8 +1,137 @@
 {
+ "metadata/statdescriptions/active_skill_gem_stat_descriptions.txt": {
+  "13244": [
+   "投射物有 {0}% 機率返回你",
+   "投射物有 {0}% 機率返回你\\n  Projectiles have {1}% chance to Return to you"
+  ]
+ },
+ "metadata/statdescriptions/advanced_mod_stat_descriptions.txt": {},
+ "metadata/statdescriptions/atlas_relic_stat_descriptions.txt": {},
+ "metadata/statdescriptions/atlas_stat_descriptions.txt": {
+  "29100": [
+   "你地圖中的機會石改為掉落傳奇物品",
+   "你地圖中的機會石改為掉落傳奇物品\\n  {0}% chance for Orbs of Chance to drop as Unique Items instead in your Maps"
+  ]
+ },
+ "metadata/statdescriptions/aura_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/banner_aura_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/beam_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/brand_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/buff_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/chest_stat_descriptions.txt": {
+  "333": [
+   "被 {1} 群魔法怪物守衛著",
+   "被 {1} 群魔法怪物守衛著\\n  Guarded by {0} packs of Magic Monsters"
+  ],
+  "335": [
+   "被 {1} 群稀有怪物守衛著",
+   "被 {1} 群稀有怪物守衛著\\n  Guarded by {0} packs of Rare Monsters"
+  ]
+ },
+ "metadata/statdescriptions/curse_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/debuff_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/deepwater_applied_adjacent_stat_descriptions.txt": {},
+ "metadata/statdescriptions/deepwater_explicit_stat_descriptions.txt": {},
+ "metadata/statdescriptions/deepwater_implicit_stat_descriptions.txt": {},
+ "metadata/statdescriptions/expedition_relic_stat_descriptions.txt": {},
+ "metadata/statdescriptions/gem_stat_descriptions.txt": {
+  "32469": [
+   "當你的保護被破壞時觸發被輔助的技能",
+   "當你的保護被破壞時觸發被輔助的技能\\n  {0}% chance to Trigger this Supported Spell when your Ward Breaks"
+  ]
+ },
+ "metadata/statdescriptions/graft_stat_descriptions.txt": {},
+ "metadata/statdescriptions/heist_equipment_stat_descriptions.txt": {},
+ "metadata/statdescriptions/leaguestone_stat_descriptions.txt": {
+  "2567": [
+   "下個區域額外含有 1 座神殿",
+   "下個區域額外含有 1 座神殿\\n  Next Area will contain up to {0} additional Shrine"
+  ]
+ },
+ "metadata/statdescriptions/map_stat_descriptions.txt": {},
+ "metadata/statdescriptions/mercenary_support_stat_descriptions.txt": {},
+ "metadata/statdescriptions/minion_attack_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/minion_skill_stat_descriptions.txt": {
+  "11209": [
+   "奪魂鐮使你非奪魂鐮召喚物造成 {0} 更多傷害",
+   "奪魂鐮使你非奪魂鐮召喚物造成 {0} 更多傷害\\n  Reapers cause your Non-Reaper Minions to deal {0}% more Damage"
+  ],
+  "11210": [
+   "奪魂鐮使你非奪魂鐮召喚物造成 {0} 更少傷害",
+   "奪魂鐮使你非奪魂鐮召喚物造成 {0} 更少傷害\\n  Reapers cause your Non-Reaper Minions to deal {0}% less Damage"
+  ]
+ },
+ "metadata/statdescriptions/minion_spell_damage_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/minion_spell_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/mirage_stat_descriptions.txt": {},
+ "metadata/statdescriptions/monster_stat_descriptions.txt": {},
+ "metadata/statdescriptions/necropolis_stat_descriptions.txt": {},
+ "metadata/statdescriptions/offering_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/passive_skill_aura_stat_descriptions.txt": {},
+ "metadata/statdescriptions/passive_skill_stat_descriptions.txt": {
+  "3713": [
+   "敏捷不提供固有的閃避值加成\\n每 15 點敏捷 +1 法術傷害壓抑率",
+   "敏捷不提供固有的閃避值加成\\n每 15 點敏捷 +1 法術傷害壓抑率\\n  Dexterity provides no inherent bonus to Evasion Rating\\n+1% Chance to Suppress Spell Damage per 15 Dexterity"
+  ]
+ },
+ "metadata/statdescriptions/primordial_altar_stat_descriptions.txt": {},
+ "metadata/statdescriptions/sanctum_relic_stat_descriptions.txt": {},
+ "metadata/statdescriptions/secondary_debuff_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/sentinel_stat_descriptions.txt": {},
+ "metadata/statdescriptions/single_minion_spell_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/skill_stat_descriptions.txt": {
+  "18714": [
+   "秘能波動增加 {0}% 施放速度\\n秘能波動增加 {0}% 魔力恢復率",
+   "秘能波動增加 {0}% 施放速度\\n秘能波動增加 {0}% 魔力恢復率\\n  Arcane Surge grants {0}% increased Cast Speed\\nArcane Surge grants {1}% increased Mana Regeneration rate"
+  ],
+  "1923": [
+   "當觸發時使用此技能投擲 {0} 個陷阱",
+   "當觸發時使用此技能投擲 {0} 個陷阱\\n  Throws up to {1} Traps which use this Skill when Triggered"
+  ],
+  "56039": [
+   "每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更多傷害",
+   "每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更多傷害\\n  Ragestorm deals {0}% more Damage per {1} Rage Sacrificed"
+  ],
+  "56040": [
+   "每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更少傷害",
+   "每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更少傷害\\n  Ragestorm deals {0}% less Damage per {1} Rage Sacrificed"
+  ],
+  "59917": [
+   "每個投射物有介在 10% 更多至 10% 更少投射物速度",
+   "每個投射物有介在 10% 更多至 10% 更少投射物速度\\n  Each Projectile has between {0}% more and {0}% less Projectile Speed"
+  ],
+  "9848": [
+   "移動或你立即傳送時，\\n每 {0} 秒失去 1 強化",
+   "移動或你立即傳送時，\\n每 {0} 秒失去 1 強化\\n  Loses 1 Intensity every {0} seconds while moving\\nLoses {1} Intensity immediately if you teleport"
+  ]
+ },
  "metadata/statdescriptions/stat_descriptions.txt": {
+  "183019": [
+   "若你近期有壓抑法術傷害，",
+   "若你近期有壓抑法術傷害，\\n  {0:+d}% to all maximum Elemental Resistances if you've Suppressed Spell Damage Recently"
+  ],
+  "248427": [
+   "機會石改為掉落古變石",
+   "機會石改為掉落古變石\\n  {0}% chance for Orbs of Chance to drop as Ancient Orbs instead"
+  ],
+  "248466": [
+   "混沌石改為掉落神聖石",
+   "混沌石改為掉落神聖石\\n  {0}% chance for Chaos Orbs to drop as Divine Orbs instead"
+  ],
+  "248545": [
+   "重鑄石改為掉落無效石",
+   "重鑄石改為掉落無效石\\n  {0}% chance for Orbs of Scouring to drop as Orbs of Annulment instead"
+  ],
   "270324": [
    "法術擁有等同於你已裝備雙手武器{0]%物理傷害的附加法術傷害",
    "法術擁有等同於你已裝備雙手武器{0]%物理傷害的附加法術傷害\\n  Spells have Added Spell Damage equal to {0}% of Physical Damage of\\nyour Equipped Two handed Weapon"
+  ],
+  "365356": [
+   "瓦爾容器包含 1 張瓦爾密殿",
+   "瓦爾容器包含 1 張瓦爾密殿\\n  Vaal Vessel contains {0} additional Vaal Temple Maps"
   ]
- }
+ },
+ "metadata/statdescriptions/tincture_stat_descriptions.txt": {},
+ "metadata/statdescriptions/variable_duration_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/village_stat_descriptions.txt": {}
 }

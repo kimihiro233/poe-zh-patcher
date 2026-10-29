@@ -16,6 +16,7 @@
 路径优先级：--ggpk 参数 > POE_DIR 环境变量 > 默认安装路径。
 """
 import argparse
+import glob
 import hashlib
 import json
 import os
@@ -152,26 +153,81 @@ def collect(game_dir):
     }
 
 
-def patched_shas():
-    """本项目补丁写入后的 sha256 集合：用来把「我们改的」和「游戏改的」分开。"""
-    mp = os.path.join(ROOT, "out", "patch", "manifest.json")
-    if not os.path.exists(mp):
-        return {}
-    m = json.load(open(mp, encoding="utf-8"))
-    return {f["path_in_ggpk"]: f["sha256_patched"] for f in m.get("files", [])}
+def patch_index():
+    """本项目所有补丁写出来的 sha256：path_in_ggpk -> {original, patched, label}。
 
-
-def compare(old, new, patched=None):
-    """返回 (状态, 明细, 本项补丁条数)。
-
-    状态：same / version_changed / content_changed / new
-    我们自己打进去的补丁也会让文件 sha 变，那不是「游戏更新」，
-    比对时必须剔除，否则每次 check 都误报。
+    两条链路各有一份 manifest（`out/patch` 管 .dat，`out/patch-sd*` 管词缀 txt）。
+    早先只读前一份，后果有两个，都不轻：
+      1. `--check` 把装好的词缀补丁当成「游戏更新过」——实测一次误报 42 个文件；
+      2. 锁基线那道闸拦不住脏客户端，补丁的 sha 会被静默锁进基线，指纹从此失去意义。
     """
-    patched = patched or {}
+    idx = {}
+    paths = [os.path.join(ROOT, "out", "patch", "manifest.json")]
+    paths += sorted(glob.glob(os.path.join(ROOT, "out", "patch-sd*", "manifest*.json")))
+    for mp in paths:
+        if not os.path.exists(mp):
+            continue
+        try:
+            m = json.load(open(mp, encoding="utf-8"))
+        except Exception:
+            continue
+        for f in m.get("files", []):
+            p = f.get("path_in_ggpk")
+            if not p:
+                continue
+            e = idx.setdefault(p, {"original": None, "patched": set(), "label": None})
+            if e["original"] is None and f.get("sha256_original"):
+                e["original"] = f["sha256_original"]
+            for sha in [f.get("sha256_patched")] + list(f.get("sha256_variants") or []):
+                if sha:
+                    e["patched"].add(sha)
+            if e["label"] is None:
+                e["label"] = f.get("table") or os.path.basename(p)
+    # 持久账本：manifest 只记「上一版产物」的形态，改两轮译文就会把更早的 sha 挤掉。
+    # 客户端里装着的往往是某个中间构建，manifest 认不出来就当成游戏侧变动。
+    # 账本由 patch_sd.py 维护，只增不减，且入库（out/ 会被清理）。
+    lp = os.path.join(ROOT, "tools", "sd-sha-ledger.json")
+    if os.path.exists(lp):
+        try:
+            ledger = json.load(open(lp, encoding="utf-8"))
+        except Exception:
+            ledger = {}
+        for p, shas in ledger.items():
+            e = idx.setdefault(p, {"original": None, "patched": set(), "label": None})
+            for sha in shas or []:
+                if sha:
+                    e["patched"].add(sha)
+    return idx
+
+
+def normalize_files(files, idx, old_files=None):
+    """把「本项目补丁写进去的 sha」换回原文 sha，得到能与基线对齐的指纹。
+
+    只有这条记录确实指向基线时才替换（manifest 里的 original == 锁里的 sha）：
+    否则「游戏换了版本、我们恰好也打过补丁」这种真变动会被悄悄吃掉。
+    返回 (归一化后的 files, 被替换的文件数)。
+    """
+    out, n = {}, 0
+    for p, v in files.items():
+        e = idx.get(p)
+        if e and v["sha256"] in e["patched"] and e["original"]:
+            if old_files is None or (old_files.get(p) or {}).get("sha256") == e["original"]:
+                out[p] = {"size": v["size"], "sha256": e["original"]}
+                n += 1
+                continue
+        out[p] = v
+    return out, n
+
+
+def compare(old, new):
+    """返回 (状态, 明细)。状态：same / version_changed / content_changed / new
+
+    调用前已按 normalize_files() 把本项目补丁的 sha 归一化回原文，
+    所以这里剩下的差异都是游戏侧的，不再需要「剔除补丁」的特判。
+    """
     if not old:
-        return "new", [], 0
-    rows, n_patch = [], 0
+        return "new", []
+    rows = []
     of, nf = old.get("files", {}), new["files"]
     for p in sorted(set(of) | set(nf)):
         a, b = of.get(p), nf.get(p)
@@ -180,38 +236,31 @@ def compare(old, new, patched=None):
         elif b is None:
             rows.append(("-", p, a["sha256"][:12], "-"))
         elif a["sha256"] != b["sha256"]:
-            if patched.get(p) == b["sha256"]:
-                n_patch += 1
-            else:
-                rows.append(("~", p, a["sha256"][:12], b["sha256"][:12]))
+            rows.append(("~", p, a["sha256"][:12], b["sha256"][:12]))
     ov, nv = old.get("version", {}), new.get("version", {})
     vchange = ov.get("client_version") != nv.get("client_version") or \
               ov.get("patch_version") != nv.get("patch_version")
     if not rows and not vchange:
-        return "same", [], n_patch
+        return "same", []
     if rows:
-        return "content_changed", rows, n_patch
-    return "version_changed", [], n_patch
+        return "content_changed", rows
+    return "version_changed", []
 
 
-def patched_tables(new_files):
-    """当前 ggpk 里哪些文件已是「我们打的补丁」状态。
+def patched_files(files, idx):
+    """当前 ggpk 里哪些文件已是「我们打的补丁」状态（.dat 与词缀 txt 都算）。
 
     基线锁必须在干净的游戏上取。如果 ggpk 还留着上一版补丁，锁进去的 sha256
     会混进我们自己的改动，之后就没法用它判断「游戏是否更新过」。
     """
-    mp = os.path.join(ROOT, "out", "patch", "manifest.json")
-    if not os.path.exists(mp):
-        return []
-    m = json.load(open(mp, encoding="utf-8"))
     hit = []
-    for f in m.get("files", []):
-        cur = new_files.get(f["path_in_ggpk"])
-        if not cur:
+    for p, e in idx.items():
+        cur = files.get(p)
+        if not cur or not e["original"] or not e["patched"]:
             continue
-        if cur["sha256"] == f["sha256_patched"] and f["sha256_patched"] != f["sha256_original"]:
-            hit.append(f["table"])
-    return hit
+        if cur["sha256"] in e["patched"] and cur["sha256"] != e["original"]:
+            hit.append(e["label"])
+    return sorted(set(hit))
 
 
 def main():
@@ -228,39 +277,45 @@ def main():
     v = new["version"]
     print("客户端版本：%s   补丁版本：%s   （来源 %s）"
           % (v.get("client_version", "?"), v.get("patch_version", "?"), v.get("log", "?")))
-    old_peek = None
+
+    old = None
     if os.path.exists(LOCK):
         try:
-            old_peek = json.load(open(LOCK, encoding="utf-8"))
+            old = json.load(open(LOCK, encoding="utf-8"))
         except Exception:
-            old_peek = None
+            old = None
+
+    # 先归一化：本项目补丁写进去的字节换回原文 sha，指纹才和基线可比
+    idx = patch_index()
+    norm, n_norm = normalize_files(new["files"], idx, (old or {}).get("files"))
+    new_cmp = dict(new, files=norm, fingerprint=fingerprint(norm))
+
     print("语言文件 %d 个 + 词缀 txt %d 个" % (new["counts"]["lang_files"], new["counts"]["statdesc_files"]))
-    print("当前指纹：%s" % new["fingerprint"][:16])
-    if old_peek:
+    print("当前指纹：%s%s"
+          % (new_cmp["fingerprint"][:16],
+             "  （已剔除本项目补丁 %d 个文件）" % n_norm if n_norm else ""))
+    if old:
         print("锁定指纹：%s%s"
-              % (old_peek.get("fingerprint", "")[:16],
-                 "  （与当前一致）" if old_peek.get("fingerprint") == new["fingerprint"] else "  （与当前不同）"))
+              % (old.get("fingerprint", "")[:16],
+                 "  （与当前一致）" if old.get("fingerprint") == new_cmp["fingerprint"] else "  （与当前不同）"))
     print("Content.ggpk %s B" % format(new["ggpk"]["size"], ","))
 
-    dirty = patched_tables(new["files"])
-    new["ggpk_state"] = "patched" if dirty else "clean"
+    dirty = patched_files(new["files"], idx)
+    new_cmp["ggpk_state"] = "patched" if dirty else "clean"
     if dirty:
-        print("当前 ggpk 里已有本项目的补丁：%s" % ", ".join(dirty))
+        head = "、".join(dirty[:6])
+        more = "…等 %d 个" % len(dirty) if len(dirty) > 6 else ""
+        print("当前 ggpk 里已有本项目的补丁：%s%s" % (head, more))
         if not a.allow_patched and not a.check:
             print("  拒绝锁基线：请在干净的游戏上取（先 patcher restore），")
             print("  否则指纹会混进我们自己的改动，失去「游戏是否更新过」的判断力。")
             print("  确实要强锁：--allow-patched")
             return 6
 
-    old = None
-    if os.path.exists(LOCK):
-        old = json.load(open(LOCK, encoding="utf-8"))
-
-    state, rows, n_patch = compare(old, new, patched_shas())
+    state, rows = compare(old, new_cmp)
     label = {"new": "首次锁定", "same": "与上次一致", "version_changed": "版本号变了，内容未变",
              "content_changed": "游戏内容有变化"}[state]
-    extra = "，另有 %d 个文件是本项目补丁（已剔除）" % n_patch if n_patch else ""
-    print("对比上次：%s（%d 个游戏侧变动%s）" % (label, len(rows), extra))
+    print("对比上次：%s（%d 个游戏侧变动）" % (label, len(rows)))
 
     if rows and (a.diff or a.check):
         for op, p, x, y in rows[:40]:
@@ -281,7 +336,7 @@ def main():
                                % (tag, old.get("locked_at", "0").replace(":", "")))
             json.dump(old, open(dst, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
             print("  旧锁已留档：%s" % os.path.relpath(dst, ROOT).replace("\\", "/"))
-        json.dump(new, open(LOCK, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+        json.dump(new_cmp, open(LOCK, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
         print("已写入 %s" % os.path.relpath(LOCK, ROOT).replace("\\", "/"))
     return 0
 

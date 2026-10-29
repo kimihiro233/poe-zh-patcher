@@ -1421,6 +1421,19 @@ internal static class Program {
         foreach (var i in items)
             Console.WriteLine($"  {i.Label,-46} {(i.Missing ? "缺失" : ShowFlavor(i)),-8} {i.Cur.Length,12:N0} B"
                               + (i.Why.Length > 0 ? "   " + i.Why : ""));
+        // 语系这一项不在 items 里（它不是译文文件），单独报一行：
+        // 没启用的话，就算译文全都装好了，游戏里看到的还是英文。
+        var langLabel = "[语系] " + LanguageSwitch.Path;
+        if (store.TryRead(LanguageSwitch.Path, out var lang, out _))
+            Console.WriteLine($"  {langLabel,-46} {LanguageSwitch.Describe(LanguageSwitch.Detect(lang))}");
+        else
+            Console.WriteLine($"  {langLabel,-46} 读不到，装补丁时会跳过语系切换");
+        // 国旗同理：繁中那一项的语言代码是 fr，配图默认还是法国国旗
+        var flagLabel = "[国旗] " + FlagIcon.Path;
+        if (store.TryRead(FlagIcon.Path, out var flag, out _))
+            Console.WriteLine($"  {flagLabel,-46} {FlagIcon.Describe(FlagIcon.Detect(flag))}");
+        else
+            Console.WriteLine($"  {flagLabel,-46} 读不到，装补丁时会跳过国旗替换");
         return 0;
     }
 
@@ -1612,6 +1625,50 @@ internal static class Program {
             } catch (Exception ex) {
                 Console.WriteLine($"  ✗ 回读异常：{it.Label} {ex.Message}");
                 nFail++;
+            }
+        }
+
+        // ---- 启用 / 还原繁中语系（等价于 PoeChinese3 的那一步）----
+        // 不做这一步，打完补丁游戏里还是英文，必须再跑一次 PoeChinese3 才看得见中文。
+        // 装补丁 → 启用；还原 → 关掉。已经是对应状态就跳过（幂等）。
+        // 补丁本身有失败时不动语系：免得「语系切到繁中、译文却没写全」这种半截状态
+        if (!plan && nFail == 0) {
+            var want = target != Flavor.Original;
+            if (store.TryRead(LanguageSwitch.Path, out var langCur, out var langErr)) {
+                if (LanguageSwitch.TryBuild(langCur, want, out var langNext, out var langMsg)) {
+                    if (store.Write(LanguageSwitch.Path, langNext!)) {
+                        store.Flush();
+                        var ok = store.TryRead(LanguageSwitch.Path, out var langBack) && Sha(langBack) == Sha(langNext!);
+                        if (ok) Console.WriteLine($"  {LanguageSwitch.Path,-46} -> {langMsg}");
+                        else { Console.WriteLine($"  ✗ {LanguageSwitch.Path} 回读不符，语系可能没写进去"); nFail++; }
+                    } else { Console.WriteLine($"  ✗ {LanguageSwitch.Path} 写入失败"); nFail++; }
+                } else {
+                    Console.WriteLine($"  {LanguageSwitch.Path,-46} = {langMsg}");
+                }
+            } else {
+                Console.WriteLine($"  ! 读不到 {LanguageSwitch.Path}（{langErr ?? "路径不存在"}），语系未处理");
+            }
+        }
+
+        // ---- 语言选择界面的国旗 ----
+        // 语系切到繁中之后，列表里那一项的代码是 fr，配图却还是法国国旗。
+        // 图集里本来就有五星红旗（zhCN），把 fr 那两行的坐标改成 zhCN 的即可，
+        // 不碰任何 DDS。详见 tools/shared/FlagIcon.cs。
+        if (!plan && nFail == 0) {
+            var wantFlag = target != Flavor.Original;
+            if (store.TryRead(FlagIcon.Path, out var flagCur, out var flagErr)) {
+                if (FlagIcon.TryBuild(flagCur, wantFlag, out var flagNext, out var flagMsg)) {
+                    if (store.Write(FlagIcon.Path, flagNext!)) {
+                        store.Flush();
+                        var ok = store.TryRead(FlagIcon.Path, out var flagBack) && Sha(flagBack) == Sha(flagNext!);
+                        if (ok) Console.WriteLine($"  {FlagIcon.Path,-46} -> {flagMsg}");
+                        else { Console.WriteLine($"  ✗ {FlagIcon.Path} 回读不符，国旗可能没写进去"); nFail++; }
+                    } else { Console.WriteLine($"  ✗ {FlagIcon.Path} 写入失败"); nFail++; }
+                } else {
+                    Console.WriteLine($"  {FlagIcon.Path,-46} = {flagMsg}");
+                }
+            } else {
+                Console.WriteLine($"  ! 读不到 {FlagIcon.Path}（{flagErr ?? "路径不存在"}），国旗未处理");
             }
         }
 

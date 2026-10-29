@@ -23,6 +23,8 @@
     <None Include="..\lib\oo2core.dll" Link="oo2core.dll" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="..\pack\bundle.gz" LogicalName="bundle.gz" />
     <Compile Include="..\shared\BundleHygiene.cs" Link="BundleHygiene.cs" />
+    <Compile Include="..\shared\LanguageSwitch.cs" Link="LanguageSwitch.cs" />
+    <Compile Include="..\shared\FlagIcon.cs" Link="FlagIcon.cs" />
   </ItemGroup>
 
 </Project>

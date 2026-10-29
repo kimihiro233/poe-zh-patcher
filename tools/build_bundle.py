@@ -172,13 +172,21 @@ def main():
             x = x_txt.get(no, o)
             t = t_txt.get(no, o)
             d = d_txt.get(no, t)
-            # 拆出英文原文：dualall 行 = 基线 + "\n" + 两空格 + 英文
+            # 拆出英文原文：对照行是「一组中文 + 一组两空格缩进的英文」交替穿插，
+            # 英文组一定以两格缩进开头（原文里 0 个段以两空格开头），按前缀就能分开。
             e = None
             base = t if t else o
             if x != base:
-                if not x.startswith(base + NL + DUAL_INDENT):
-                    raise SystemExit(f"{rel}:{no + 1} dualall 行不是「基线+英文」：{x[:60]!r}")
-                e = x[len(base) + len(NL) + len(DUAL_INDENT):]
+                zh_segs, en_segs = [], []
+                for seg in x.split(NL):
+                    if seg.startswith(DUAL_INDENT):
+                        en_segs.append(seg[len(DUAL_INDENT):])
+                    else:
+                        zh_segs.append(seg)
+                if NL.join(zh_segs) != base:
+                    raise SystemExit(
+                        f"{rel}:{no + 1} dualall 行拆不出基线：{x[:60]!r}")
+                e = NL.join(en_segs)
                 if not e.strip():
                     raise SystemExit(f"{rel}:{no + 1} 英文为空")
             else:

@@ -49,6 +49,9 @@ VERSION = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__fi
                encoding="utf-8").read().strip()
 OUT_DIR = "out/patch-sd"
 MANIFEST = "out/patch-sd/manifest-sd.json"
+# 历代产物 sha 的持久账本（入库，只增不减）：out/ 会被清理，manifest 每次重写，
+# 只有这里能记住「客户端里可能装着的那些中间构建」。
+LEDGER = "tools/sd-sha-ledger.json"
 DUAL_DIR = "out/patch-sd-dual"
 DUAL_MANIFEST = "out/patch-sd-dual/manifest-sd-dual.json"
 DUAL_ALL_DIR = "out/patch-sd-dual-all"
@@ -63,6 +66,30 @@ DUAL_INDENT = "  "
 # 后面的内容当成新行，繁中段被跳过、回退到默认英文段（表现为 "Allocates <中文名> 无法使用的值"）。
 NL = "\\n"
 
+
+def dual_body(body: str, en: str) -> str:
+    """把英文原文按 \\n 分组插到中文各组之后——一组中文配一组英文。
+
+    早先是「整段英文堆在整段中文后面」，两处别扭：
+      1. 中文 3 组、英文 3 组的块（元素超载这种），显示成 3 行中文 + 3 行英文，
+         对照关系要靠数行数才对得上；
+      2. 只有第一行拿到缩进，后面几组英文顶格，看着像凭空多出几条词缀。
+
+    段数一致就逐组穿插；不一致（实测 135 行，如中文 1 组 / 英文 2 组）退回
+    「整段附在末尾」，但每一组都补缩进，至少不会顶格。
+    """
+    zh, ee = body.split(NL), en.split(NL)
+    if ee and (DUAL_INDENT + ee[0]) in body:
+        return body                     # 已经插过（shell 模式底稿可能自带对照）
+    if len(zh) == len(ee):
+        out = []
+        for a, b in zip(zh, ee):
+            out.append(a)
+            if b:
+                out.append(DUAL_INDENT + b)
+        return NL.join(out)
+    return body + NL + DUAL_INDENT + (NL + DUAL_INDENT).join(ee)
+
 BATCHES = [
     "fix-direction",
     "fix-mult",
@@ -71,6 +98,7 @@ BATCHES = [
     "fix-wording",
     "fix-additive-rev",
     "fix-category",
+    "fix-placeholder",   # 占位符漏失/编号错位（{0} 丢了、写死数字、少 %）
     "fix-typo",          # 原件自带笔误（占位符打错）。放最后：它不该和译文措辞批次抢同一行
 ]
 
@@ -363,10 +391,10 @@ def build_bytes(sf: SdFile, dual: bool = False, all_lines: bool = False):
                 continue
             raw = lines[no]
             j, k = text_span(raw)
-            body = raw[j:k]
-            if body.endswith(NL + DUAL_INDENT + en):
+            new = dual_body(raw[j:k], en)
+            if new == raw[j:k]:
                 continue
-            lines[no] = raw[:j] + body + NL + DUAL_INDENT + en + raw[k:]
+            lines[no] = raw[:j] + new + raw[k:]
 
     return b"\xff\xfe" + "\r\n".join(lines).encode("utf-16-le"), real
 
@@ -516,6 +544,40 @@ def main():
 
     os.makedirs(out_dir, exist_ok=True)
     base_dir = os.path.join(out_dir, "bases")
+    # 历代产物的 sha 都要滚进 variants：改一次译文就多一个「未知形态」，
+    # gameinfo 的指纹归一化会把它当成游戏侧变动（今天刚踩过）。
+    # 来源三处：当前 manifest、releases/v*/ 里发过版的清单、持久账本。
+    prev_man = {}
+
+    def _absorb(path):
+        try:
+            m = json.load(open(path, encoding="utf-8"))
+        except Exception:
+            return
+        for e in m.get("files", []):
+            p = e.get("path_in_ggpk")
+            if not p:
+                continue
+            slot = prev_man.setdefault(p, [])
+            for sha in [e.get("sha256_patched")] + list(e.get("sha256_variants") or []):
+                if sha and sha not in slot:
+                    slot.append(sha)
+
+    def _absorb_ledger(path):
+        try:
+            m = json.load(open(path, encoding="utf-8"))
+        except Exception:
+            return
+        for p, shas in m.items():
+            slot = prev_man.setdefault(p, [])
+            for sha in shas or []:
+                if sha and sha not in slot:
+                    slot.append(sha)
+
+    _absorb(manifest)
+    for hist in sorted(glob.glob(os.path.join("releases", "v*", "statdesc-manifest-*.json"))):
+        _absorb(hist)
+    _absorb_ledger(LEDGER)
     entries = []
     for name, sf in sorted(files.items()):
         if not sf.edits and not (dual and all_lines):
@@ -536,6 +598,13 @@ def main():
         if src_b == dst_b:
             continue
         dst = os.path.join(out_dir, name)
+        # 上一版产物也是「已知形态」：改了译文之后，容器里留着的旧字节不该被判成未知内容
+        # （判成未知 = 整体拒写；判成旧版 = 就地重写）。gameinfo 的指纹归一化也靠它。
+        prev_sha = None
+        if os.path.exists(dst):
+            prev = open(dst, "rb").read()
+            if prev != dst_b:
+                prev_sha = hashlib.sha256(prev).hexdigest()
         open(dst, "wb").write(dst_b)
         entry = {
             "kind": "file_replace",
@@ -550,9 +619,17 @@ def main():
         }
         if name in shell_map:
             entry["base"] = label
+        variants = []
         if dual and base_b != dst_b:
             # 纯译文版也是「已知形态」：从对照版切回纯译文不该被判成未知内容
-            entry["sha256_variants"] = [hashlib.sha256(base_b).hexdigest()]
+            variants.append(hashlib.sha256(base_b).hexdigest())
+        if prev_sha and prev_sha not in variants:
+            variants.append(prev_sha)
+        for sha in prev_man.get(entry["path_in_ggpk"], []):
+            if sha and sha not in variants and sha != entry["sha256_patched"]:
+                variants.append(sha)
+        if variants:
+            entry["sha256_variants"] = variants[:8]
         entries.append(entry)
 
     lock = json.load(open("game.lock.json", encoding="utf-8"))
@@ -571,6 +648,16 @@ def main():
                       "policy": "text-only-merge",
                       "note": "以目标机现有文件为底稿，只叠文本层；标记层（颜色/标签）保持底稿原样"}
     json.dump(mf, open(manifest, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    # 账本只增不减：本次产物 + 历代已知形态都记上，下一轮就算 manifest 被覆盖也认得出来
+    ledger = {p: list(v) for p, v in prev_man.items()}
+    for e in entries:
+        slot = ledger.setdefault(e["path_in_ggpk"], [])
+        for sha in [e["sha256_patched"]] + list(e.get("sha256_variants") or []):
+            if sha and sha not in slot:
+                slot.append(sha)
+    ledger = {p: v for p, v in sorted(ledger.items()) if v}
+    json.dump(ledger, open(LEDGER, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    print(f"-> {LEDGER} ({sum(len(v) for v in ledger.values())} 个历史形态 / {len(ledger)} 文件)")
     print(f"-> {out_dir}/ ({len(entries)} 文件, {mf['total_edits']} 处)")
     print(f"-> {manifest}")
 

@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <None Include="..\lib\oo2core.dll" Link="oo2core.dll" CopyToOutputDirectory="PreserveNewest" />
+    <Compile Include="..\shared\LanguageSwitch.cs" Link="LanguageSwitch.cs" />
+    <Compile Include="..\shared\FlagIcon.cs" Link="FlagIcon.cs" />
   </ItemGroup>
 
 </Project>

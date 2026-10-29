@@ -201,7 +201,59 @@ foreach (var p in plan) {
     nDone++;
 }
 
+// ---- 启用 / 还原繁中语系 ----
+// 这一步不碰的话，打完补丁游戏里仍然是英文（或法语），必须再跑一次 PoeChinese3 才看得见中文。
+// 详见 tools/shared/LanguageSwitch.cs：把 languages.dat 里 French 与 Traditional Chinese
+// 两行的语言代码对调，客户端「第二个（法国国旗）」那一项就会去加载繁中数据。
+var langState = "缺失";
+if (index.TryGetFile(LanguageSwitch.Path, out var langRec)) {
+    var cur = langRec.Read().ToArray();
+    var st = LanguageSwitch.Detect(cur);
+    langState = LanguageSwitch.Describe(st);
+    // 补丁本身有失败时不动语系：免得「语系切到繁中、译文却没写全」这种半截状态
+    if (mode != "status" && nFail == 0) {
+        var want = mode == "apply";
+        if (LanguageSwitch.TryBuild(cur, want, out var next, out var msg)) {
+            langRec.Write(next!, true);
+            var back = langRec.Read().ToArray();
+            if (Sha(back) != Sha(next!)) { Console.WriteLine($"  languages.dat            x 写入后回读不符"); nFail++; }
+            else { Console.WriteLine($"  languages.dat            -> {msg}"); nDone++; }
+        } else {
+            Console.WriteLine($"  languages.dat            = {msg}");
+        }
+        langState = LanguageSwitch.Describe(LanguageSwitch.Detect(langRec.Read().ToArray()));
+    }
+} else {
+    Console.WriteLine($"  ! 容器里找不到 {LanguageSwitch.Path}，语系未处理");
+}
+
+// ---- 语言选择界面的国旗 ----
+// 语系切到繁中之后，语言列表里那一项的代码是 fr，配图却还是法国国旗。
+// 图集里本来就有五星红旗（zhCN），把 fr 那两行的坐标改成 zhCN 的即可，
+// 不碰任何 DDS。详见 tools/shared/FlagIcon.cs。
+var flagState = "缺失";
+if (index.TryGetFile(FlagIcon.Path, out var flagRec)) {
+    var cur = flagRec.Read().ToArray();
+    flagState = FlagIcon.Describe(FlagIcon.Detect(cur));
+    if (mode != "status" && nFail == 0) {
+        var want = mode == "apply";
+        if (FlagIcon.TryBuild(cur, want, out var next, out var msg)) {
+            flagRec.Write(next!, true);
+            var back = flagRec.Read().ToArray();
+            if (Sha(back) != Sha(next!)) { Console.WriteLine($"  uiimages1.txt            x 写入后回读不符"); nFail++; }
+            else { Console.WriteLine($"  uiimages1.txt            -> {msg}"); nDone++; }
+        } else {
+            Console.WriteLine($"  uiimages1.txt            = {msg}");
+        }
+        flagState = FlagIcon.Describe(FlagIcon.Detect(flagRec.Read().ToArray()));
+    }
+} else {
+    Console.WriteLine($"  ! 容器里找不到 {FlagIcon.Path}，国旗未处理");
+}
+
 Console.WriteLine();
 Console.WriteLine($"统计：原始 {nOrig} / 已打补丁 {nPatch} / 其它版本 {nOther} / 未知 {nUnknown} / 本次完成 {nDone} / 失败 {nFail}");
+Console.WriteLine($"语系：{langState}");
+Console.WriteLine($"国旗：{flagState}");
 Console.WriteLine($"备份：{backupDir}");
 return nFail == 0 ? 0 : 3;

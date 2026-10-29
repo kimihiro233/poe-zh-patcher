@@ -1,0 +1,256 @@
+﻿batch,line,state,stat_ids,table,row,slot,en,zh_old,zh_new,current,note
+fix-direction,1,pending,support_trap_and_mine_damage_+%_final,,,,,"正 被輔助的技能造成 {0}% 更多陷阱和地雷傷害
+负 被輔助的技能造成 {0}% 更多陷阱和地雷傷害","正 被輔助的技能造成 {0}% 更多陷阱和地雷傷害
+负 被輔助的技能造成 {0}% 更少陷阱和地雷傷害",被輔助的技能造成 {0}% 更多陷阱和地雷傷害,
+fix-direction,2,pending,heist_contract_npc_agility_experience_gain_+%,,,,,"正 增加 {0}% 獲得靈敏經驗值
+负 增加 {0}% 獲得靈敏經驗值","正 增加 {0}% 獲得靈敏經驗值
+负 減少 {0}% 獲得靈敏經驗值",增加 {0}% 獲得靈敏經驗值,
+fix-direction,3,pending,local_charges_added_+%,,,,,"正 增加 {0}% 充能恢復
+负 增加 {0}% 充能恢復","正 增加 {0}% 充能恢復
+负 減少 {0}% 充能恢復",增加 {0}% 充能恢復,
+fix-direction,4,pending,local_flask_effect_+% local_flask_consume_flask_effect_+%_when_used,,,,,"正 增加 {0}% 效果。使用時 -1% 此數值
+负 增加 {0}% 效果。使用時 -1% 此數值","正 增加 {0}% 效果。使用時 -1% 此數值
+负 減少 {0}% 效果。使用時 -1% 此數值",增加 {0}% 效果 ⏎ 增加 {0}% 效果。使用時 -1% 此數值 ⏎ 減少 {0}% 效果,
+fix-direction,5,pending,support_minion_maximum_life_+%_final,,,,,"正 召喚物有 {0}% 更多最大生命
+负 召喚物有 {0}% 更多最大生命","正 召喚物有 {0}% 更多最大生命
+负 召喚物有 {0}% 更少最大生命",召喚物有 {0}% 更多最大生命 ⏎ 被輔助的技能有 {0}% 更多召喚物最大生命 ⏎ 被輔助的技能有 {0}% 更少召喚物最大生命,
+fix-direction,6,pending,melee_cold_damage_+%,,,,,"正 增加 {0}% 近戰冰冷傷害
+负 增加 {0}% 近戰冰冷傷害","正 增加 {0}% 近戰冰冷傷害
+负 減少 {0}% 近戰冰冷傷害",增加 {0}% 近戰冰冷傷害,
+fix-direction,7,pending,weapon_elemental_damage_+%_while_using_flask,,,,,"正 任何藥劑效果持續時間內，增加 {0}% 武器的元素傷害
+负 任何藥劑效果持續時間內，增加 {0}% 武器的元素傷害","正 任何藥劑效果持續時間內，增加 {0}% 武器的元素傷害
+负 任何藥劑效果持續時間內，減少 {0}% 武器的元素傷害",任何藥劑效果持續時間內，增加 {0}% 武器的元素傷害,
+fix-direction,8,pending,arcanist_brand_cast_speed_+%,,,,,"正 奧術烙印增加 {0}% 施放速度
+负 奧術烙印增加 {0}% 施放速度","正 奧術烙印增加 {0}% 施放速度
+负 奧術烙印減少 {0}% 施放速度",奧術烙印增加 {0}% 施放速度,
+fix-direction,9,pending,attack_ailment_damage_+%_while_wielding_claw,,,,,"正 持爪時攻擊技能增加 {0}% 異常狀態傷害
+负 持爪時攻擊技能增加 {0}% 異常狀態傷害","正 持爪時攻擊技能增加 {0}% 異常狀態傷害
+负 持爪時攻擊技能減少 {0}% 異常狀態傷害",持爪時攻擊技能增加 {0}% 異常狀態傷害,
+fix-direction,10,pending,aura_effect_on_self_from_skills_+%_per_herald_effecting_you,,,,,"正 每個影響你的捷光環，\n減少 {0}% 你身上來自你技能的光環效果，最多 40%
+负 來自你技能的光環會根據\n每一影響你的捷光環降低{0}%作用於你的效果","正 每個影響你的捷光環，\n增加 {0}% 你身上來自你技能的光環效果，最多 40%
+负 來自你技能的光環會根據\n每一影響你的捷光環降低{0}%作用於你的效果",來自你技能的光環會根據\n每一影響你的捷光環降低{0}%作用於你的效果 ⏎ 每個影響你的捷光環，\n減少 {0}% 你身上來自你技能的光環效果，最多 40%,
+fix-direction,11,pending,base_attack_skill_cost_efficiency_+%,,,,,"正 增加 {0}% 攻擊的消耗效用
+负 增加 {0}% 攻擊的消耗效用","正 增加 {0}% 攻擊的消耗效用
+负 減少 {0}% 攻擊的消耗效用",增加 {0}% 攻擊的消耗效用,
+fix-direction,12,pending,base_mana_cost_efficiency_+%_per_10_devotion,,,,,"正 每 10 個奉獻增加 {0}% 魔力消耗效用
+负 每 10 個奉獻增加 {0}% 魔力消耗效用","正 每 10 個奉獻增加 {0}% 魔力消耗效用
+负 每 10 個奉獻減少 {0}% 魔力消耗效用",每 10 個奉獻增加 {0}% 魔力消耗效用,
+fix-direction,13,pending,base_mana_cost_efficiency_+%_while_on_low_mana,,,,,"正 貧魔時增加 {0}% 魔力消耗效用
+负 貧魔時增加 {0}% 魔力消耗效用","正 貧魔時增加 {0}% 魔力消耗效用
+负 貧魔時減少 {0}% 魔力消耗效用",貧魔時增加 {0}% 魔力消耗效用,
+fix-direction,14,pending,defences_+%_while_wielding_staff,,,,,"正 持長杖時，增加 {0}% 防禦
+负 持長杖時，增加 {0}% 防禦f","正 持長杖時，增加 {0}% 防禦
+负 持長杖時，減少 {0}% 防禦f",持長杖時，增加 {0}% 防禦 ⏎ 持長杖時，增加 {0}% 防禦f,
+fix-direction,15,pending,energy_shield_from_helmet_+%,,,,,"正 增加 {0}% 裝備的頭盔的能量護盾
+负 增加 {0}% 裝備的頭盔的能量護盾","正 增加 {0}% 裝備的頭盔的能量護盾
+负 減少 {0}% 裝備的頭盔的能量護盾",增加 {0}% 裝備的頭盔的能量護盾,
+fix-direction,16,pending,hallowing_flame_magnitude_+%_per_2%_attack_block_chance,,,,,"正 每2%攻擊格擋機率，增加{0}%你施加的聖徒烈火幅度
+负 每2%攻擊格擋機率，增加{0}%你施加的聖徒烈火幅度","正 每2%攻擊格擋機率，增加{0}%你施加的聖徒烈火幅度
+负 每2%攻擊格擋機率，減少{0}%你施加的聖徒烈火幅度",每2%攻擊格擋機率，增加{0}%你施加的聖徒烈火幅度,
+fix-direction,17,pending,spell_damage_+%_while_you_have_arcane_surge,,,,,"正 當你有秘能波動時增加 {0}% 法術傷害
+负 當你有秘能波動時增加 {0}% 法術傷害","正 當你有秘能波動時增加 {0}% 法術傷害
+负 當你有秘能波動時減少 {0}% 法術傷害",當你有秘能波動時增加 {0}% 法術傷害,
+fix-direction,18,pending,unattached_sigil_attachment_range_+%_per_second,,,,,"正 未附著的烙印每秒減少 {0}% 烙印附著距離
+负 未附著的烙印每秒減少{0}%烙印附著範圍","正 未附著的烙印每秒增加 {0}% 烙印附著距離
+负 未附著的烙印每秒減少{0}%烙印附著範圍",未附著的烙印每秒減少 {0}% 烙印附著距離 ⏎ 未附著的烙印每秒減少{0}%烙印附著範圍,
+fix-direction,19,pending,unique_quiver_chill_as_though_damage_+%_final,,,,,"正 冰緩敵人有如造成 {0}% 更多傷害
+负 冰緩敵人有如造成 {0}% 更多傷害","正 冰緩敵人有如造成 {0}% 更多傷害
+负 冰緩敵人有如造成 {0}% 更少傷害",冰緩敵人有如造成 {0}% 更多傷害,
+fix-mult,1,pending,map_unique_monster_tribute_multiplier_final_+%,,,,Unique Monsters slain at Ritual Altars in your Maps grant {0}% less Tribute,你地圖中的傳奇怪物在祭祀神壇被擊殺時，獲得的貢禮減少 {0}%,你地圖中的傳奇怪物在祭祀神壇被擊殺時，獲得 {0}% 更少貢禮,你地圖中的傳奇怪物在祭祀神壇被擊殺時，獲得的貢禮減少 {0}%,
+fix-mult,2,pending,map_unique_monster_tribute_multiplier_final_+%,,,,Unique Monsters slain at Ritual Altars in your Maps grant {0}% more Tribute,你地圖中的傳奇怪物在祭祀神壇被擊殺時，獲得的貢禮增加 {0}%,你地圖中的傳奇怪物在祭祀神壇被擊殺時，獲得 {0}% 更多貢禮,你地圖中的傳奇怪物在祭祀神壇被擊殺時，獲得的貢禮增加 {0}%,
+fix-mult,3,pending,support_inspiration_mana_cost_+%_final,,,,Supported Skills have {0}% more Mana Cost,被輔助的技能增加 {0}% 魔力消耗,被輔助的技能有 {0}% 更多魔力消耗,被輔助的技能增加 {0}% 魔力消耗,
+fix-mult,4,pending,support_inspiration_mana_cost_+%_final,,,,Supported Skills have {0}% less Mana Cost,被輔助的技能有減少 {0}% 魔力消耗,被輔助的技能有 {0}% 更少魔力消耗,被輔助的技能有減少 {0}% 魔力消耗,
+fix-mult,5,pending,skill_used_by_sacred_wisp_damage_+%_final,,,,Supported Skills deal {0}% more Damage when used by Sacred Wisps,被輔助的技能被聖潔妖精使用時，造成的傷害增加 {0}%,被輔助的技能被聖潔妖精使用時，造成 {0}% 更多傷害,被輔助的技能被聖潔妖精使用時，造成的傷害增加 {0}%,
+fix-mult,6,pending,skill_used_by_sacred_wisp_damage_+%_final,,,,Supported Skills deal {0}% less Damage when used by Sacred Wisps,被輔助的技能被聖潔妖精使用時，造成的傷害減少 {0}%,被輔助的技能被聖潔妖精使用時，造成 {0}% 更少傷害,被輔助的技能被聖潔妖精使用時，造成的傷害減少 {0}%,
+fix-mult,7,pending,map_leaguestone_beyond_monster_item_quantity_and_rarity_+%_final,,,,Monsters from Beyond in next Area will have {0}% more Quantity and Rarity of Dropped Items,下個區域超越怪物增加 {0}% 物品掉落數量和物品稀有度,下個區域的超越怪物有 {0}% 更多物品掉落數量和物品稀有度,下個區域超越怪物增加 {0}% 物品掉落數量和物品稀有度,
+fix-mult,8,pending,map_leaguestone_beyond_monster_item_quantity_and_rarity_+%_final,,,,Monsters from Beyond in next Area will have {0}% less Quantity and Rarity of Dropped Items,下個區域超越怪物減少 {0}% 物品掉落數量和物品稀有度,下個區域的超越怪物有 {0}% 更少物品掉落數量和物品稀有度,下個區域超越怪物減少 {0}% 物品掉落數量和物品稀有度,
+fix-mult,9,pending,map_leaguestone_imprisoned_monsters_item_rarity_+%_final,,,,{0}% more Rarity of Items Dropped by Imprisoned Monsters in next Area,下個區域受精髓禁錮的怪物增加 {0}% 掉落物品稀有度,下個區域受精髓禁錮的怪物有 {0}% 更多掉落物品稀有度,下個區域受精髓禁錮的怪物增加 {0}% 掉落物品稀有度,
+fix-mult,10,pending,map_currency_drop_chance_+%_final_from_uber_mod,,,,{}% more Currency found in Area,區域內掉落的通貨增加 {}%,區域內可找到 {}% 更多通貨,區域內掉落的通貨增加 {}%,
+fix-mult,11,pending,map_currency_drop_chance_+%_final_from_uber_mod,,,,{}% less Currency found in Area,區域內掉落的通貨減少 {}%,區域內可找到 {}% 更少通貨,區域內掉落的通貨減少 {}%,
+fix-mult,12,pending,map_divination_card_drop_chance_+%_final_from_quality,,,,{}% less Divination Cards found in Area,區域內掉落的命運卡減少 {}%,區域內可找到 {}% 更少命運卡,區域內掉落的命運卡減少 {}%,
+fix-mult,13,pending,map_map_drop_chance_+%_final_from_faridun_wish,,,,{0}% more Maps found in Area,增加{0}%區域內找到的地圖,區域內可找到 {0}% 更多地圖,增加{0}%區域內找到的地圖,
+fix-mult,14,pending,map_map_drop_chance_+%_final_from_faridun_wish,,,,{0}% less Maps found in Area,減少{0}%區域內找到的地圖,區域內可找到 {0}% 更少地圖,減少{0}%區域內找到的地圖,
+fix-mult,15,pending,map_map_item_drop_chance_+%_final_from_uber_mod,,,,{}% more Maps found in Area,區域內掉落的地圖增加 {}%,區域內可找到 {}% 更多地圖,區域內掉落的地圖增加 {}%,
+fix-mult,16,pending,map_map_item_drop_chance_+%_final_from_uber_mod,,,,{}% less Maps found in Area,區域內掉落的地圖減少 {}%,區域內可找到 {}% 更少地圖,區域內掉落的地圖減少 {}%,
+fix-mult,17,pending,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% more Scarabs found in Area,增加{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更多聖甲蟲,增加{0}%區域內找到的聖甲蟲,
+fix-mult,18,pending,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% less Scarabs found in Area,減少{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更少聖甲蟲,減少{0}%區域內找到的聖甲蟲,
+fix-mult,19,pending,map_scarab_drop_chance_+%_final_from_uber_mod,,,,{}% more Scarabs found in Area,區域內掉落的聖甲蟲增加 {}%,區域內可找到 {}% 更多聖甲蟲,區域內掉落的聖甲蟲增加 {}%,
+fix-mult,20,pending,map_scarab_drop_chance_+%_final_from_uber_mod,,,,{}% less Scarabs found in Area,區域內掉落的聖甲蟲減少 {}%,區域內可找到 {}% 更少聖甲蟲,區域內掉落的聖甲蟲減少 {}%,
+fix-mult,21,pending,map_map_drop_chance_+%_final_from_faridun_wish,,,,{0}% more Maps found in Area,增加{0}%區域內找到的地圖,區域內可找到 {0}% 更多地圖,增加{0}%區域內找到的地圖,
+fix-mult,22,pending,map_map_drop_chance_+%_final_from_faridun_wish,,,,{0}% less Maps found in Area,減少{0}%區域內找到的地圖,區域內可找到 {0}% 更少地圖,減少{0}%區域內找到的地圖,
+fix-mult,23,pending,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% more Scarabs found in Area,增加{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更多聖甲蟲,增加{0}%區域內找到的聖甲蟲,
+fix-mult,24,pending,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% less Scarabs found in Area,減少{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更少聖甲蟲,減少{0}%區域內找到的聖甲蟲,
+fix-mult,25,pending,gladiator_accuracy_rating_+%_final_while_wielding_sword,,,,{0}% more Accuracy Rating while wielding a Sword,持劍時，命中值增加 {0}%,持劍時有 {0}% 更多命中值,持劍時，命中值增加 {0}%,
+fix-mult,26,pending,gladiator_accuracy_rating_+%_final_while_wielding_sword,,,,{0}% less Accuracy Rating while wielding a Sword,持劍時，命中值減少 {0}%,持劍時有 {0}% 更少命中值,持劍時，命中值減少 {0}%,
+fix-mult,27,pending,ailment_bearer_elemental_damage_+%_final,,,,{0}% more Elemental Damage while Unbound,無縛狀態下，增加 {0}% 元素傷害,無縛狀態下，{0}% 更多元素傷害,無縛狀態下，增加 {0}% 元素傷害,
+fix-mult,28,pending,ailment_bearer_elemental_damage_+%_final,,,,{0}% less Elemental Damage while Unbound,無縛狀態下，減少 {0}% 元素傷害,無縛狀態下，{0}% 更少元素傷害,無縛狀態下，減少 {0}% 元素傷害,
+fix-mult,29,pending,alternate_ascendancy_herald_buff_effect_+%_final_per_1%_mana_reserved,,,,Herald Skills have {0}% more Buff Effect for every 1% of Maximum Mana they Reserve,捷光環技能每保留 1% 最大魔力，其增益效果提高 {0}%,捷光環技能每保留 1% 最大魔力，即有 {0}% 更多增益效果,捷光環技能每保留 1% 最大魔力，其增益效果提高 {0}%,
+fix-mult,30,pending,alternate_ascendancy_herald_minion_and_herald_damage_+%_final_per_1%_life_reserved,,,,Herald Skills and Minions from Herald Skills deal {0}% more Damage for every 1% of Maximum Life those Skills Reserve,捷光環技能與由捷光環技能召喚的召喚物每保留 1% 最大生命，造成的傷害提高 {0}%,捷光環技能與由其召喚的召喚物每保留 1% 最大生命，即造成 {0}% 更多傷害,捷光環技能與由捷光環技能召喚的召喚物每保留 1% 最大生命，造成的傷害提高 {0}%,
+fix-mult,31,pending,gladiator_area_of_effect_+%_final_while_wielding_mace,,,,{0}% more Area of Effect while wielding a Mace or Sceptre,持錘或權杖時，範圍效果增加 {0}%,持錘或權杖時，{0}% 更多範圍效果,持錘或權杖時，範圍效果增加 {0}%,
+fix-mult,32,pending,gladiator_area_of_effect_+%_final_while_wielding_mace,,,,{0}% less Area of Effect while wielding a Mace or Sceptre,持錘或權杖時，範圍效果減少 {0}%,持錘或權杖時，{0}% 更少範圍效果,持錘或權杖時，範圍效果減少 {0}%,
+fix-mult,33,pending,damage_+%_final_to_grant_packmate_on_death,,,,{0}% more Damage granted to Pack members on death,死亡時怪物群成員傷害增加 {0}%,死亡時賦予怪物群成員 {0}% 更多傷害,死亡時怪物群成員傷害增加 {0}%,
+fix-mult,34,pending,damage_+%_final_to_grant_packmate_on_death,,,,{0}% less Damage granted to Pack members on death,死亡時怪物群成員傷害減少 {0}%,死亡時賦予怪物群成員 {0}% 更少傷害,死亡時怪物群成員傷害減少 {0}%,
+fix-mult,35,pending,deadeye_accuracy_rating_+%_final_per_frenzy_charge,,,,{0}% less Accuracy Rating per Frenzy Charge,每顆狂怒球減少 {0}% 命中值,每顆狂怒球有 {0}% 更少命中值,每顆狂怒球減少 {0}% 命中值,
+fix-mult,36,pending,gladiator_critical_strike_chance_+%_final_while_wielding_dagger,,,,{0}% more Critical Strike Chance while wielding a Dagger,持匕首時，增加 {0}% 暴擊率,持匕首時，{0}% 更多暴擊率,持匕首時，增加 {0}% 暴擊率,
+fix-mult,37,pending,gladiator_critical_strike_chance_+%_final_while_wielding_dagger,,,,{0}% less Critical Strike Chance while wielding a Dagger,持匕首時，減少 {0}% 暴擊率,持匕首時，{0}% 更少暴擊率,持匕首時，減少 {0}% 暴擊率,
+fix-mult,38,pending,map_leaguestone_beyond_monster_item_quantity_and_rarity_+%_final,,,,Monsters from Beyond have {0}% more Quantity and Rarity of Dropped Items,超越怪物增加 {0}% 物品掉落數量和物品稀有度,超越怪物有 {0}% 更多物品掉落數量和物品稀有度,超越怪物增加 {0}% 物品掉落數量和物品稀有度,
+fix-mult,39,pending,map_leaguestone_beyond_monster_item_quantity_and_rarity_+%_final,,,,Monsters from Beyond have {0}% less Quantity and Rarity of Dropped Items,超越怪物減少 {0}% 物品掉落數量和物品稀有度,超越怪物有 {0}% 更少物品掉落數量和物品稀有度,超越怪物減少 {0}% 物品掉落數量和物品稀有度,
+fix-mult,40,pending,map_leaguestone_imprisoned_monsters_item_rarity_+%_final,,,,{0}% more Rarity of Items Dropped by Imprisoned Monsters,受精髓禁錮的怪物增加 {0}% 掉落物品稀有度,受精髓禁錮的怪物有 {0}% 更多掉落物品稀有度,受精髓禁錮的怪物增加 {0}% 掉落物品稀有度,
+fix-mult,41,pending,map_monster_item_rarity_+permyriad_final_per_empowered_soul,,,,"Monsters have {0}% more Rarity of items dropped for each Empowered Soul, up to 500%",怪物每擁有 1 個強化靈魂，增加 {0}% 物品掉落稀有度，最多 500%,怪物每擁有 1 個強化靈魂，就有 {0}% 更多物品掉落稀有度，最多 500%,怪物每擁有 1 個強化靈魂，增加 {0}% 物品掉落稀有度，最多 500%,
+fix-mult,42,pending,monster_damage_+%_final_per_alive_packmate,,,,{0}% more Damage for each alive Monster in Pack,怪物群中每隻存活的怪物使傷害增加 {0}%,怪物群中每隻存活的怪物使其造成 {0}% 更多傷害,怪物群中每隻存活的怪物使傷害增加 {0}%,
+fix-mult,43,pending,monster_damage_+%_final_per_alive_packmate,,,,{0}% less Damage for each alive Monster in Pack,怪物群中每隻存活的怪物使傷害減少 {0}%,怪物群中每隻存活的怪物使其造成 {0}% 更少傷害,怪物群中每隻存活的怪物使傷害減少 {0}%,
+fix-mult,44,pending,necromancer_minion_damage_+%_final,,,,Minions deal {0}% more Damage,召喚物造成的傷害增加 {0}%,召喚物造成 {0}% 更多傷害,召喚物造成的傷害增加 {0}%,
+fix-mult,45,pending,necromancer_minion_damage_+%_final,,,,Minions deal {0}% less Damage,召喚物造成的傷害減少 {0}%,召喚物造成 {0}% 更少傷害,召喚物造成的傷害減少 {0}%,
+fix-mult,46,pending,strongest_packmate_multiplier_+%_final,,,,{0}% more Damage for the Strongest Pack member,最強的怪物群成員傷害增加 {0}%,最強的怪物群成員造成 {0}% 更多傷害,最強的怪物群成員傷害增加 {0}%,
+fix-mult,47,pending,strongest_packmate_multiplier_+%_final,,,,{0}% less Damage for the Strongest Pack member,最強的怪物群成員傷害減少 {0}%,最強的怪物群成員造成 {0}% 更少傷害,最強的怪物群成員傷害減少 {0}%,
+fix-mult,48,pending,tincture_bleeding_damage_+%_final_vs_non_bleeding_enemies,,,,Bleeding inflicted with Melee Weapons on non-Bleeding Enemies deals {0}% more Damage,用近戰武器對未流血敵人造成的流血，傷害增加 {0}%,以近戰武器施加於未流血敵人的流血，造成 {0}% 更多傷害,用近戰武器對未流血敵人造成的流血，傷害增加 {0}%,
+fix-mult,49,pending,tincture_bleeding_damage_+%_final_vs_non_bleeding_enemies,,,,Bleeding inflicted with Melee Weapons on non-Bleeding Enemies deals {0}% less Damage,用近戰武器對未流血敵人造成的流血，傷害減少 {0}%,以近戰武器施加於未流血敵人的流血，造成 {0}% 更少傷害,用近戰武器對未流血敵人造成的流血，傷害減少 {0}%,
+fix-additive-rev,1,pending,physical_damage_+%_per_frenzy_charge,,,,{0}% increased Physical Damage per Frenzy Charge,每一狂怒球造成{0}%更多物理傷害,每顆狂怒球增加 {0}% 物理傷害,每一狂怒球造成{0}%更多物理傷害,
+fix-additive-rev,2,pending,physical_damage_+%_per_frenzy_charge,,,,{0}% reduced Physical Damage per Frenzy Charge,每一狂怒球造成{0}%更少物理傷害,每顆狂怒球減少 {0}% 物理傷害,每一狂怒球造成{0}%更少物理傷害,
+fix-additive-rev,3,pending,map_boss_damage_+%_per_divination_card,,,,Final Map Boss deals increased Damage per stolen Divination Card,每張盜竊命運卡會使最終地圖頭目造成更多傷害,每張盜竊命運卡使最終地圖頭目的傷害增加,每張盜竊命運卡會使最終地圖頭目造成更多傷害,
+fix-additive-rev,4,pending,display_map_boss_gives_experience_+%,,,,Unique Boss gives {0}% increased Experience,傳奇頭目給予 {0}% 更多經驗值,傳奇頭目給予的經驗值增加 {0}%,傳奇頭目給予 {0}% 更多經驗值,
+fix-additive-rev,5,pending,map_unique_item_drop_chance_+%,,,,{0}% increased Unique Items found in Area,區域掉落 {0}% 更多傳奇道具,區域內找到的傳奇物品增加 {0}%,區域掉落 {0}% 更多傳奇道具,
+fix-wording,1,pending,map_unique_monster_X_special_rewards,,,,Unique Monsters in Area have an additional Reward\nUnique Monsters in Area are more Difficult for each Reward they have,區域內的傳奇怪物有 1 個額外獎勵\n區域內的傳奇怪物會根據每個獎勵增加難度,區域內的傳奇怪物有 1 個額外獎勵\n區域內每有一個獎勵，傳奇怪物的難度就更高,區域內的傳奇怪物有 1 個額外獎勵\n區域內的傳奇怪物會根據每個獎勵增加難度,
+fix-wording,2,pending,map_unique_monster_X_special_rewards,,,,Unique Monsters in Area have {0} additional Rewards\nUnique Monsters in Area are more Difficult for each Reward they have,區域內的傳奇怪物有 {0} 個額外獎勵\n區域內的傳奇怪物會根據每個獎勵增加難度,區域內的傳奇怪物有 {0} 個額外獎勵\n區域內每有一個獎勵，傳奇怪物的難度就更高,區域內的傳奇怪物有 {0} 個額外獎勵\n區域內的傳奇怪物會根據每個獎勵增加難度,
+fix-wording,3,pending,map_metamorph_itemised_boss_more_difficult,,,,Metamorph Boss Organs found in Area construct more difficult Metamorph Bosses,區域內鍊魔頭目掉落的器官可構成更困難的鍊魔頭目,區域內鍊魔頭目掉落的器官可構成難度更高的鍊魔頭目,區域內鍊魔頭目掉落的器官可構成更困難的鍊魔頭目,
+fix-wording,4,pending,all_skill_gem_quality_+,,,,{0:+d}% to Quality of all Skill Gems,全部技能寶石品質 {0:+d}%,全部主動技能寶石品質 {0:+d}%,全部技能寶石品質 {0:+d}%,
+fix-wording,5,pending,all_skill_gem_level_+,,,,{0:+d} to Level of all Skill Gems,全部技能寶石等級 {0:+d},全部主動技能寶石等級 {0:+d},全部技能寶石等級 {0:+d},
+fix-gem,1,pending,local_socketed_skill_gem_level_+1_per_x_player_levels,,,,+1 to Level of Socketed Skill Gems per {0} Player Levels,玩家每 {0} 等級，插槽中的技能寶石等級 +1,玩家每 {0} 等級，插槽中的主動技能寶石等級 +1,玩家每 {0} 等級，插槽中的技能寶石等級 +1,
+fix-gem,2,pending,local_socketed_active_skill_gem_level_+,,,,{0:+d} to Level of Socketed Skill Gems,此物品插槽中技能寶石等級 {0:+d},此物品插槽中主動技能寶石等級 {0:+d},此物品插槽中技能寶石等級 {0:+d},
+fix-gem,3,pending,local_socketed_active_skill_gem_quality_+,,,,{0:+d}% to Quality of Socketed Skill Gems,插槽中技能寶石品質 {0:+d}%,插槽中主動技能寶石品質 {0:+d}%,插槽中技能寶石品質 {0:+d}%,
+fix-gem,4,pending,spell_skill_gem_level_+,,,,{0:+d} to Level of all Spell Skill Gems,全部法術技能寶石等級 {0:+d},全部法術主動技能寶石等級 {0:+d},全部法術技能寶石等級 {0:+d},
+fix-gem,5,pending,physical_spell_skill_gem_level_+,,,,{0:+d} to Level of all Physical Spell Skill Gems,全部物理法術技能寶石等級 {0:+d},全部物理法術主動技能寶石等級 {0:+d},全部物理法術技能寶石等級 {0:+d},
+fix-gem,6,pending,fire_spell_skill_gem_level_+,,,,{0:+d} to Level of all Fire Spell Skill Gems,全部火焰法術技能寶石等級 {0:+d},全部火焰法術主動技能寶石等級 {0:+d},全部火焰法術技能寶石等級 {0:+d},
+fix-gem,7,pending,cold_spell_skill_gem_level_+,,,,{0:+d} to Level of all Cold Spell Skill Gems,全部冰冷法術技能寶石等級 {0:+d},全部冰冷法術主動技能寶石等級 {0:+d},全部冰冷法術技能寶石等級 {0:+d},
+fix-gem,8,pending,lightning_spell_skill_gem_level_+,,,,{0:+d} to Level of all Lightning Spell Skill Gems,全部閃電法術技能寶石等級 {0:+d},全部閃電法術主動技能寶石等級 {0:+d},全部閃電法術技能寶石等級 {0:+d},
+fix-gem,9,pending,chaos_spell_skill_gem_level_+,,,,{0:+d} to Level of all Chaos Spell Skill Gems,全部混沌法術技能寶石等級 {0:+d},全部混沌法術主動技能寶石等級 {0:+d},全部混沌法術技能寶石等級 {0:+d},
+fix-gem,10,pending,minion_skill_gem_level_+,,,,{0:+d} to Level of all Minion Skill Gems,全部召喚物技能寶石 {0:+d} 等級,全部召喚物主動技能寶石 {0:+d} 等級,全部召喚物技能寶石 {0:+d} 等級,
+fix-gem,11,pending,chaos_skill_gem_level_+_if_6_hunter_items,,,,{0:+d} to Level of all Chaos Skill Gems if 6 Hunter Items are Equipped,若裝備 6 種狩獵者之物，所有混沌技能寶石的等級 {0:+d},若裝備 6 種狩獵者之物，所有混沌主動技能寶石的等級 {0:+d},若裝備 6 種狩獵者之物，所有混沌技能寶石的等級 {0:+d},
+fix-gem,12,pending,cold_skill_gem_level_+_if_6_redeemer_items,,,,{0:+d} to Level of all Cold Skill Gems if 6 Redeemer Items are Equipped,若裝備 6 種救贖者之物，所有冰冷技能寶石的等級 {0:+d},若裝備 6 種救贖者之物，所有冰冷主動技能寶石的等級 {0:+d},若裝備 6 種救贖者之物，所有冰冷技能寶石的等級 {0:+d},
+fix-gem,13,pending,fire_skill_gem_level_+_if_6_warlord_items,,,,{0:+d} to Level of all Fire Skill Gems if 6 Warlord Items are Equipped,若裝備 6 種總督軍之物，所有火焰技能寶石的等級 {0:+d},若裝備 6 種總督軍之物，所有火焰主動技能寶石的等級 {0:+d},若裝備 6 種總督軍之物，所有火焰技能寶石的等級 {0:+d},
+fix-gem,14,pending,lightning_skill_gem_level_+_if_6_crusader_items,,,,{0:+d} to Level of all Lightning Skill Gems if 6 Crusader Items are Equipped,若裝備 6 種聖戰軍王之物，所有閃電技能寶石的等級 {0:+d},若裝備 6 種聖戰軍王之物，所有閃電主動技能寶石的等級 {0:+d},若裝備 6 種聖戰軍王之物，所有閃電技能寶石的等級 {0:+d},
+fix-gem,15,pending,physical_skill_gem_level_+_if_6_elder_items,,,,{0:+d} to Level of all Physical Skill Gems if 6 Elder Items are Equipped,若裝備 6 種尊師之物，所有物理技能寶石的等級 {0:+d},若裝備 6 種尊師之物，所有物理主動技能寶石的等級 {0:+d},若裝備 6 種尊師之物，所有物理技能寶石的等級 {0:+d},
+fix-gem,16,pending,all_skill_gem_level_+,,,,{0:+d} to Level of all Skill Gems,全部技能寶石等級 {0:+d},全部主動技能寶石等級 {0:+d},全部技能寶石等級 {0:+d},
+fix-gem,17,pending,all_skill_gem_quality_+,,,,{0:+d}% to Quality of all Skill Gems,全部技能寶石品質 {0:+d}%,全部主動技能寶石品質 {0:+d}%,全部技能寶石品質 {0:+d}%,
+fix-gem,18,pending,base_elemental_skill_gem_level_+_if_6_unique_influence_amoung_equipped_non_amulet_items,,,,{0:+d} to Level of all Elemental Skill Gems if the stars are aligned,發生行列眾星時，所有元素技能寶石等級 {0:+d},發生行列眾星時，所有元素主動技能寶石等級 {0:+d},發生行列眾星時，所有元素技能寶石等級 {0:+d},
+fix-gem,19,pending,chaos_skill_gem_level_+,,,,{0:+d} to Level of all Chaos Skill Gems,全部混沌技能寶石等級 {0:+d},全部混沌主動技能寶石等級 {0:+d},全部混沌技能寶石等級 {0:+d},
+fix-gem,20,pending,cold_skill_gem_level_+_if_at_least_4_foulborn_uniques_equipped,,,,{0:+d} to Level of all Cold Skill Gems if at least 4 Foulborn Unique Items are Equipped,如果至少裝備了4件穢生傳奇物品，全部冰冷技能寶石等級 {0:+d},如果至少裝備了4件穢生傳奇物品，全部冰冷主動技能寶石等級 {0:+d},如果至少裝備了4件穢生傳奇物品，全部冰冷技能寶石等級 {0:+d},
+fix-gem,21,pending,cold_skill_gem_level_+,,,,{0:+d} to Level of all Cold Skill Gems,全部冰冷技能寶石等級 {0:+d},全部冰冷主動技能寶石等級 {0:+d},全部冰冷技能寶石等級 {0:+d},
+fix-gem,22,pending,curse_skill_gem_level_+,,,,{0:+d} to Level of all Curse Skill Gems,全部詛咒技能寶石等級{0:+d},全部詛咒主動技能寶石等級{0:+d},全部詛咒技能寶石等級{0:+d},
+fix-gem,23,pending,dexterity_skill_gem_level_+,,,,{0:+d} to Level of all Dexterity Skill Gems,全部敏捷技能寶石等級 {0:+d},全部敏捷主動技能寶石等級 {0:+d},全部敏捷技能寶石等級 {0:+d},
+fix-gem,24,pending,fire_skill_gem_level_+,,,,{0:+d} to Level of all Fire Skill Gems,全部火焰技能寶石等級 {0:+d},全部火焰主動技能寶石等級 {0:+d},全部火焰技能寶石等級 {0:+d},
+fix-gem,25,pending,herald_skill_gem_level_+,,,,{0:+d} to Level of all Herald Skill Gems,所有捷光環技能寶石的等級 {0:+d},所有捷光環主動技能寶石的等級 {0:+d},所有捷光環技能寶石的等級 {0:+d},
+fix-gem,26,pending,intelligence_skill_gem_level_+,,,,{0:+d} to Level of all Intelligence Skill Gems,全部智慧技能寶石等級 {0:+d},全部智慧主動技能寶石等級 {0:+d},全部智慧技能寶石等級 {0:+d},
+fix-gem,27,pending,lightning_skill_gem_level_+_if_at_least_4_foulborn_uniques_equipped,,,,{0:+d} to Level of all Lightning Skill Gems if at least 4 Foulborn Unique Items are Equipped,如果至少裝備了4件穢生傳奇物品，全部閃電技能寶石等級 {0:+d},如果至少裝備了4件穢生傳奇物品，全部閃電主動技能寶石等級 {0:+d},如果至少裝備了4件穢生傳奇物品，全部閃電技能寶石等級 {0:+d},
+fix-gem,28,pending,lightning_skill_gem_level_+,,,,{0:+d} to Level of all Lightning Skill Gems,全部閃電技能寶石等級 {0:+d},全部閃電主動技能寶石等級 {0:+d},全部閃電技能寶石等級 {0:+d},
+fix-gem,29,pending,link_skill_gem_level_+,,,,{0:+d} to Level of all Link Skill Gems,全部連結技能寶石等級 {0:+d},全部連結主動技能寶石等級 {0:+d},全部連結技能寶石等級 {0:+d},
+fix-gem,30,pending,local_socketed_gem_level_+_per_filled_socket,,,,{:+d} to level of Socketed Skill Gems per Socketed Gem,每顆插槽中的寶石，插槽技能寶石等級 {:+d},每顆插槽中的寶石，插槽中主動技能寶石等級 {:+d},每顆插槽中的寶石，插槽技能寶石等級 {:+d},
+fix-gem,31,pending,melee_skill_gem_level_+,,,,{0:+d} to Level of all Melee Skill Gems,全部近戰技能寶石等級 {0:+d},全部近戰主動技能寶石等級 {0:+d},全部近戰技能寶石等級 {0:+d},
+fix-gem,32,pending,minion_skill_gem_quality_+,,,,{0:+d}% to Quality of all Minion Skill Gems,所有召喚物技能寶石的品質 {0:+d}%,所有召喚物主動技能寶石的品質 {0:+d}%,所有召喚物技能寶石的品質 {0:+d}%,
+fix-gem,33,pending,physical_skill_gem_level_+,,,,{0:+d} to Level of all Physical Skill Gems,全部物理技能寶石等級 {0:+d},全部物理主動技能寶石等級 {0:+d},全部物理技能寶石等級 {0:+d},
+fix-gem,34,pending,strength_skill_gem_level_+,,,,{0:+d} to Level of all Strength Skill Gems,全部力量技能寶石等級 {0:+d},全部力量主動技能寶石等級 {0:+d},全部力量技能寶石等級 {0:+d},
+fix-order,1,pending,supported_chaos_skill_gem_level_+,,,,{0:+d} to Level of Supported Chaos Skill Gems,{0:+d} 被輔助混沌技能寶石的等級,被輔助混沌技能寶石等級 {0:+d},{0:+d} 被輔助混沌技能寶石的等級,
+fix-order,2,pending,supported_elemental_skill_gem_level_+,,,,{0:+d} to Level of Supported Elemental Skill Gems,{0:+d} 被輔助元素技能寶石的等級,被輔助元素技能寶石等級 {0:+d},{0:+d} 被輔助元素技能寶石的等級,
+fix-order,3,pending,supported_minion_skill_gem_level_+,,,,{0:+d} to Level of Supported Minion Skill Gems,{0:+d} 被輔助召喚物技能寶石的等級,被輔助召喚物技能寶石等級 {0:+d},{0:+d} 被輔助召喚物技能寶石的等級,
+fix-order,4,pending,supported_physical_skill_gem_level_+,,,,{0:+d} to Level of Supported Physical Skill Gems,{0:+d} 被輔助物理技能寶石的等級,被輔助物理技能寶石等級 {0:+d},{0:+d} 被輔助物理技能寶石的等級,
+fix-order,5,pending,supported_strike_skill_gem_level_+,,,,{0:+d} to Level of Supported Strike Skill Gems,{0:+d} 被輔助打擊技能寶石的等級,被輔助打擊技能寶石等級 {0:+d},{0:+d} 被輔助打擊技能寶石的等級,
+fix-order,6,pending,local_socketed_physical_gem_level_+,,,,{0:+d} to Level of Socketed Physical Gems,{0:+d} 插槽中全部物理寶石的等級,插槽中物理寶石等級 {0:+d},{0:+d} 插槽中全部物理寶石的等級,
+fix-order,7,pending,aura_skill_gem_level_+,,,,{0:+d} to Level of all Aura Skill Gems,{0:+d}所有光環技能寶石等級,所有光環主動技能寶石等級 {0:+d},{0:+d}所有光環技能寶石等級,
+fix-order,8,pending,critical_support_gem_level_+,,,,{0:+d} to Level of all Critical Support Gems,{0:+d} 全部暴擊輔助寶石的等級,全部暴擊輔助寶石等級 {0:+d},{0:+d} 全部暴擊輔助寶石的等級,
+fix-order,9,pending,totem_skill_gem_level_+,,,,{0:+d} to Level of all Totem Skill Gems,{0:+d} 全部圖騰技能寶石的等級,全部圖騰主動技能寶石等級 {0:+d},{0:+d} 全部圖騰技能寶石的等級,
+fix-order,10,pending,vaal_skill_gem_level_+,,,,{0:+d} to Level of all Vaal Skill Gems,{0:+d} 全部瓦爾技能寶石的等級,全部瓦爾主動技能寶石等級 {0:+d},{0:+d} 全部瓦爾技能寶石的等級,
+fix-category,1,pending,map_harvest_double_item_quant_and_rarity_bonuses_for_seeds,,,,Harvests in your Maps have Doubled bonuses to Item Quantity and Rarity,你地圖中的豐收對道具數量和稀有度有 2 倍加成,你地圖中的豐收對物品數量和稀有度有 2 倍加成,你地圖中的豐收對道具數量和稀有度有 2 倍加成,
+fix-category,2,pending,map_strongboxes_drop_x_additional_rare_items,,,,Strongboxes in your Maps will each contain an additional random Rare Item,你地圖中的每個保險箱含有 1 個額外隨機稀有道具,你地圖中的每個保險箱含有 1 個額外隨機稀有物品,你地圖中的每個保險箱含有 1 個額外隨機稀有道具,
+fix-category,3,pending,map_strongboxes_drop_x_additional_rare_items,,,,Strongboxes in your Maps will each contain {0} additional random Rare Items,你地圖中的每個保險箱含有 {0} 個額外隨機稀有道具,你地圖中的每個保險箱含有 {0} 個額外隨機稀有物品,你地圖中的每個保險箱含有 {0} 個額外隨機稀有道具,
+fix-category,4,pending,expedition_chest_%_to_drop_rare_jewellery,,,,<enchanted>{{Excavated Chests have {0}% chance to contain an additional Rare Jewellery Item}},<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外稀有珠寶}},<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外稀有飾品}},<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外稀有珠寶}},
+fix-category,5,pending,expedition_chest_%_to_drop_rare_jewellery,,,,<enchanted>{{Excavated Chests contain an additional Rare Jewellery Item}},<enchanted>{{發掘保險箱含有 1 個額外稀有珠寶}},<enchanted>{{發掘保險箱含有 1 個額外稀有飾品}},<enchanted>{{發掘保險箱含有 1 個額外稀有珠寶}},
+fix-category,6,pending,expedition_elite_%_to_drop_rare_jewellery,,,,<enchanted>{{Runic Monsters have {0}% chance to drop an additional Rare Jewellery Item}},<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外稀有珠寶}},<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外稀有飾品}},<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外稀有珠寶}},
+fix-category,7,pending,expedition_elite_%_to_drop_rare_jewellery,,,,<enchanted>{{Runic Monsters drop an additional Rare Jewellery Item}},<enchanted>{{符文怪物掉落 1 個額外稀有珠寶}},<enchanted>{{符文怪物掉落 1 個額外稀有飾品}},<enchanted>{{符文怪物掉落 1 個額外稀有珠寶}},
+fix-category,8,pending,map_area_contains_jewellery_chest,,,,Next Area will contain an additional Perandus Jewellery Box,下一個區域將含有 1 個普蘭德斯珠寶箱,下一個區域將含有 1 個普蘭德斯飾品箱,下一個區域將含有 1 個普蘭德斯珠寶箱,
+fix-category,9,pending,attack_damage_+%_per_explicit_map_mod_affecting_area,,,,{0}% increased Attack Damage for each Map Item Modifier affecting the Area,每個影響該地區地圖道具的詞綴，增加 {0}% 攻擊傷害,每個影響該地區地圖物品的詞綴，增加 {0}% 攻擊傷害,每個影響該地區地圖道具的詞綴，增加 {0}% 攻擊傷害,
+fix-category,10,pending,attack_speed_+%_per_explicit_map_mod_affecting_area,,,,{0}% increased Attack Speed for each Map Item Modifier affecting the Area,每個影響該地區地圖道具的詞綴，增加 {0}% 攻擊速度,每個影響該地區地圖物品的詞綴，增加 {0}% 攻擊速度,每個影響該地區地圖道具的詞綴，增加 {0}% 攻擊速度,
+fix-category,11,pending,brequel_equipment_fruit_armour_chance_+%,,,,{0}% increased chance for Birthed Equipment to be Armour,產出的裝備成為防具的機率提高 {0}%,產出的裝備成為護甲的機率提高 {0}%,產出的裝備成為防具的機率提高 {0}%,
+fix-category,12,pending,brequel_equipment_fruit_armour_chance_+%,,,,{0}% reduced chance for Birthed Equipment to be Armour,產出的裝備成為防具的機率降低 {0}%,產出的裝備成為護甲的機率降低 {0}%,產出的裝備成為防具的機率降低 {0}%,
+fix-category,13,pending,brequel_unique_fruit_armour_chance_+%,,,,{0}% increased chance for Birthed Unique Items to be Armour,產出的傳奇物品成為防具的機率提高 {0}%,產出的傳奇物品成為護甲的機率提高 {0}%,產出的傳奇物品成為防具的機率提高 {0}%,
+fix-category,14,pending,brequel_unique_fruit_armour_chance_+%,,,,{0}% reduced chance for Birthed Unique Items to be Armour,產出的傳奇物品成為防具的機率降低 {0}%,產出的傳奇物品成為護甲的機率降低 {0}%,產出的傳奇物品成為防具的機率降低 {0}%,
+fix-category,15,pending,brequel_unique_fruit_weapon_and_armour_X_lucky_socket_number_and_links_rolls,,,,Birthed Unique Weapons and Armour roll Sockets and Links +{0} times keeping the best outcome,產出的傳奇武器與防具會額外擲出插槽與連結 {0} 次並取其最佳結果,產出的傳奇武器與護甲會額外擲出插槽與連結 {0} 次並取其最佳結果,產出的傳奇武器與防具會額外擲出插槽與連結 {0} 次並取其最佳結果,
+fix-category,16,pending,brequel_unique_fruit_weapon_and_armour_random_quality,,,,Birthed Unique Weapons and Armour have a random amount of Quality,產出的傳奇武器與防具具有隨機品質值,產出的傳奇武器與護甲具有隨機品質值,產出的傳奇武器與防具具有隨機品質值,
+fix-category,17,pending,chest_drop_additional_corrupted_item_divination_cards,,,,Contains additional Divination Cards that give Corrupted Items,額外含有授予腐化道具的命運卡,額外含有授予腐化物品的命運卡,額外含有授予腐化道具的命運卡,
+fix-category,18,pending,defences_from_animated_guardians_items_apply_to_animated_weapon,,,,Defences of Items attached to Animated Guardian also apply to Animated Weapons,幻化守衛上附加的防禦道具也套用至幻化武器,幻化守衛上附加的防禦物品也套用至幻化武器,幻化守衛上附加的防禦道具也套用至幻化武器,
+fix-category,19,pending,heist_additional_armour_rewards_from_reward_chests_%,,,,{0}% chance to receive additional Armour items when opening a Reward Chest in a Heist,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外護甲道具,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外護甲物品,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外護甲道具,
+fix-category,20,pending,heist_additional_corrupted_rewards_from_reward_chests_%,,,,{0}% chance to receive additional Corrupted items when opening a Reward Chest in a Heist,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外已汙染的道具,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外已汙染的物品,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外已汙染的道具,
+fix-category,21,pending,heist_additional_uniques_rewards_from_reward_chests_%,,,,{0}% chance to receive additional Unique items when opening a Reward Chest in a Heist,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外傳奇道具,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外傳奇物品,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外傳奇道具,
+fix-category,22,pending,heist_items_are_fully_linked_%,,,,{0}% chance in Heists for Items to drop fully linked,劫盜中有 {0}% 機率掉落最大連線的道具,劫盜中有 {0}% 機率掉落最大連線的物品,劫盜中有 {0}% 機率掉落最大連線的道具,
+fix-category,23,pending,heist_items_are_fully_linked_%,,,,Items in Heists drop fully linked,劫盜中掉落最大連線的道具,劫盜中掉落最大連線的物品,劫盜中掉落最大連線的道具,
+fix-category,24,pending,heist_items_drop_corrupted_%,,,,{0}% chance in Heists for Items to drop Corrupted,劫盜中有 {0}% 機率掉落已汙染的道具,劫盜中有 {0}% 機率掉落已汙染的物品,劫盜中有 {0}% 機率掉落已汙染的道具,
+fix-category,25,pending,heist_items_drop_corrupted_%,,,,Items in Heists drop Corrupted,劫盜中掉落已汙染的道具,劫盜中掉落已汙染的物品,劫盜中掉落已汙染的道具,
+fix-category,26,pending,heist_items_drop_identified_%,,,,{0}% chance in Heists for Items to drop Identified,劫盜中有 {0}% 機率掉落已鑑定道具,劫盜中有 {0}% 機率掉落已鑑定物品,劫盜中有 {0}% 機率掉落已鑑定道具,
+fix-category,27,pending,heist_items_drop_identified_%,,,,Items in Heists drop Identified,劫盜中掉落已鑑定道具,劫盜中掉落已鑑定物品,劫盜中掉落已鑑定道具,
+fix-category,28,pending,heist_items_have_elder_influence_%,,,,{0}% chance in Heists for Items to drop with Elder Influence,劫盜中有 {0}% 機率掉落的道具有尊師勢力,劫盜中有 {0}% 機率掉落的物品有尊師勢力,劫盜中有 {0}% 機率掉落的道具有尊師勢力,
+fix-category,29,pending,heist_items_have_elder_influence_%,,,,Items in Heists drop with Elder Influence,劫盜中掉落的道具有尊師勢力,劫盜中掉落的物品有尊師勢力,劫盜中掉落的道具有尊師勢力,
+fix-category,30,pending,heist_items_have_shaper_influence_%,,,,{0}% chance in Heists for Items to drop with Shaper Influence,劫盜中有 {0}% 機率掉落的道具有塑界者勢力,劫盜中有 {0}% 機率掉落的物品有塑界者勢力,劫盜中有 {0}% 機率掉落的道具有塑界者勢力,
+fix-category,31,pending,heist_items_have_shaper_influence_%,,,,Items in Heists drop with Shaper Influence,劫盜中掉落的道具有塑界者勢力,劫盜中掉落的物品有塑界者勢力,劫盜中掉落的道具有塑界者勢力,
+fix-category,32,pending,map_area_contains_jewellery_chest,,,,Area contains an additional Perandus Jewellery Box,區域含有 1 個普蘭德斯珠寶箱,區域含有 1 個普蘭德斯飾品箱,區域含有 1 個普蘭德斯珠寶箱,
+fix-category,33,pending,map_possessed_monsters_drop_unique_chance_%,,,,The First 3 Possessed Monsters have a {0}% chance to drop an additional Unique Item,最初 3 個被附身的怪物有 {0}% 機率掉落 1 個額外傳奇道具,最初 3 個被附身的怪物有 {0}% 機率掉落 1 個額外傳奇物品,最初 3 個被附身的怪物有 {0}% 機率掉落 1 個額外傳奇道具,
+fix-category,34,pending,map_possessed_monsters_drop_unique_chance_%,,,,The First 3 Possessed Monsters drop an additional Unique Item,最初 3 個被附身的怪物掉落 1 個額外傳奇道具,最初 3 個被附身的怪物掉落 1 個額外傳奇物品,最初 3 個被附身的怪物掉落 1 個額外傳奇道具,
+fix-category,35,pending,map_unique_item_drop_chance_+%,,,,{0}% increased Unique Items found in Area,區域掉落 {0}% 更多傳奇道具,區域掉落 {0}% 更多傳奇物品,區域掉落 {0}% 更多傳奇道具,
+fix-category,36,pending,map_vaal_vessel_drop_X_divination_cards,,,,Vaal Vessel contains an additional Divination Card that give Corrupted Items,瓦爾容器包含 1 個額外給予已汙染道具的命運卡,瓦爾容器包含 1 個額外給予已汙染物品的命運卡,瓦爾容器包含 1 個額外給予已汙染道具的命運卡,
+fix-category,37,pending,map_vaal_vessel_drop_X_divination_cards,,,,Vaal Vessel contains {0} additional Divination Cards that give Corrupted Items,瓦爾容器包含 {0} 個額外給予已汙染道具的命運卡,瓦爾容器包含 {0} 個額外給予已汙染物品的命運卡,瓦爾容器包含 {0} 個額外給予已汙染道具的命運卡,
+fix-category,38,pending,map_vaal_vessel_drop_x_double_implicit_corrupted_uniques,,,,Vaal Vessel contains an additional Corrupted Unique Item with two Implicit Modifiers,瓦爾容器包含 1 格額外有兩個固定詞綴的已汙染傳奇道具,瓦爾容器包含 1 格額外有兩個固定詞綴的已汙染傳奇物品,瓦爾容器包含 1 格額外有兩個固定詞綴的已汙染傳奇道具,
+fix-category,39,pending,map_vaal_vessel_drop_x_double_implicit_corrupted_uniques,,,,Vaal Vessel contains {0} additional Corrupted Unique Items with two Implicit Modifiers,瓦爾容器包含 {0} 格額外有兩個固定詞綴的已汙染傳奇道具,瓦爾容器包含 {0} 格額外有兩個固定詞綴的已汙染傳奇物品,瓦爾容器包含 {0} 格額外有兩個固定詞綴的已汙染傳奇道具,
+fix-category,40,pending,physical_damage_+%_per_explicit_map_mod_affecting_area,,,,{0}% increased Physical Damage for each Map Item Modifier affecting the Area,每個影響該地區地圖道具的詞綴，增加 {0}% 物理傷害,每個影響該地區地圖物品的詞綴，增加 {0}% 物理傷害,每個影響該地區地圖道具的詞綴，增加 {0}% 物理傷害,
+fix-category,41,pending,ward_from_armour_item_+%,,,,{0}% increased Ward from Equipped Armour Items,{0}%增加裝備道具所賦予的保護,{0}%增加裝備物品所賦予的保護,{0}%增加裝備道具所賦予的保護,
+fix-category-hold,1,hold,brequel_equipment_fruit_amulet_chance_+%,,,,{0}% increased chance for Birthed Equipment to be Amulets,產出的裝備成為護身符的機率提高 {0}%,產出的裝備成為項鍊的機率提高 {0}%,,待拍板，本来就未定稿
+fix-category-hold,2,hold,brequel_equipment_fruit_amulet_chance_+%,,,,{0}% reduced chance for Birthed Equipment to be Amulets,產出的裝備成為護身符的機率降低 {0}%,產出的裝備成為項鍊的機率降低 {0}%,,待拍板，本来就未定稿
+fix-category-hold,3,hold,brequel_unique_fruit_amulet_chance_+%,,,,{0}% increased chance for Birthed Unique Items to be Amulets,產出的傳奇物品成為護身符的機率提高 {0}%,產出的傳奇物品成為項鍊的機率提高 {0}%,,待拍板，本来就未定稿
+fix-category-hold,4,hold,brequel_unique_fruit_amulet_chance_+%,,,,{0}% reduced chance for Birthed Unique Items to be Amulets,產出的傳奇物品成為護身符的機率降低 {0}%,產出的傳奇物品成為項鍊的機率降低 {0}%,,待拍板，本来就未定稿
+fix-category-hold,5,hold,,flavourtext.datc64,1351,12,"<size:23>{Vintage or crafted, Glittering and shiny
+Dusty or glittering, huge or tiny
+Secured within a chest 
+or unearthed from your mining
+Find jewellery everywhere, 
+no need for divining!
+So why is it so hard 
+to figure out which one to wear?
+This one makes me stronger, 
+but does it match my hair?}","<size:23> {復古或手工製作，閃閃發光和有光澤
+塵土飛揚或閃閃發光，巨大或微小
+固定在胸部
+或從你的採礦中發掘出來
+隨處可見珠寶，
+無需占卜！
+那為什麼這麼難
+找出穿哪一件？
+這使我更堅強
+但是它和我的頭髮匹配嗎？}","<size:23> {復古或手工製作，閃閃發光和有光澤
+塵土飛揚或閃閃發光，巨大或微小
+固定在胸部
+或從你的採礦中發掘出來
+隨處可見珠寶，
+無需占卜！
+那為什麼這麼難
+找出穿哪一件？
+這使我更堅強
+但是它和我的頭髮匹配嗎？}",,待拍板，本来就未定稿
+fix-category-ui,1,pending,,achievementitems.datc64,2947,16,Perandus Jewellery Box,普蘭德斯珠寶箱,普蘭德斯飾品箱,普蘭德斯珠寶箱,
+fix-category-ui,2,pending,,achievementitems.datc64,3012,16,Any Unique Jewellery,任一傳奇珠寶,任一傳奇飾品,任一傳奇珠寶,
+fix-category-ui,3,pending,,achievementitems.datc64,4049,16,Perandus Jewellery Box,普蘭德斯珠寶箱,普蘭德斯飾品箱,普蘭德斯珠寶箱,
+fix-category-ui,4,pending,,achievementitems.datc64,5688,16,Jewellery Item Chests,珠寶箱,飾品寶箱,珠寶箱,
+fix-category-ui,5,pending,,achievementitems.datc64,7298,16,Jewellery,珠寶,飾品,珠寶,
+fix-category-ui,6,pending,,clientstrings.datc64,7910,8,"Each additional player party member increases the quantity of certain items found,
+such as Armour, Jewellery, Currency, Gold, Gems and Unique Items.","每個額外的隊伍成員玩家會增加找到的特定物品數量，
+像是護甲、珠寶、通貨、金幣、寶石和傳奇物品。","每個額外的隊伍成員玩家會增加找到的特定物品數量，
+像是護甲、飾品、通貨、金幣、寶石和傳奇物品。","每個額外的隊伍成員玩家會增加找到的特定物品數量，
+像是護甲、珠寶、通貨、金幣、寶石和傳奇物品。",
+fix-category-ui,7,pending,,currencyitems.datc64,1932,72,"<whiteitem>{Experimented Jewellery}
+<default>{Item Level:} <normal>{86}","<whiteitem>{實驗性珠寶}
+<default>{物品等級:} <normal>{86}","<whiteitem>{實驗性飾品}
+<default>{物品等級:} <normal>{86}","<whiteitem>{實驗性珠寶}
+<default>{物品等級:} <normal>{86}",
+fix-category-ui,8,pending,,currencyitems.datc64,1933,56,"<whiteitem>{Experimented Jewellery}
+<default>{Item Level:} <normal>{86}","<whiteitem>{實驗性珠寶}
+<default>{物品等級:} <normal>{86}","<whiteitem>{實驗性飾品}
+<default>{物品等級:} <normal>{86}","<whiteitem>{實驗性珠寶}
+<default>{物品等級:} <normal>{86}",
+fix-category-ui,9,pending,,incursionrooms.datc64,50,8,Jewellery Forge,珠寶冶煉室,飾品冶煉室,珠寶冶煉室,
+fix-category-ui,10,pending,,uitalktext.datc64,54,20,They should call that room Zalatl's jewellery box! Imagine what their value will be today!,他們應該叫那個房間是札爾特的珠寶盒！想像一下它們現今的價值！,他們應該叫那個房間是札爾特的飾品盒！想像一下它們現今的價值！,他們應該叫那個房間是札爾特的珠寶盒！想像一下它們現今的價值！,

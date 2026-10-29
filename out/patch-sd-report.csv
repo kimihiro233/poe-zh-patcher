@@ -161,4 +161,24 @@ fix-category#38,map_vaal_vessel_drop_x_double_implicit_corrupted_uniques,瓦爾�
 fix-category#39,map_vaal_vessel_drop_x_double_implicit_corrupted_uniques,瓦爾容器包含 {0} 格額外有兩個固定詞綴的已汙染傳奇道具,✓ stat_descriptions.txt:365423
 fix-category#40,physical_damage_+%_per_explicit_map_mod_affecting_area,每個影響該地區地圖道具的詞綴，增加 {0}% 物理傷害,✓ stat_descriptions.txt:387594
 fix-category#41,ward_from_armour_item_+%,{0}%增加裝備道具所賦予的保護,✓ stat_descriptions.txt:425986
+fix-placeholder#1,deepwater_chance_to_ancient_%,機會石改為掉落古變石,✓ stat_descriptions.txt:248428
+fix-placeholder#2,deepwater_chaos_to_divine_%,混沌石改為掉落神聖石,✓ stat_descriptions.txt:248467
+fix-placeholder#3,deepwater_scour_to_annulment_%,重鑄石改為掉落無效石,✓ stat_descriptions.txt:248546
+fix-placeholder#4,map_orb_of_chance_to_unique_item_%,你地圖中的機會石改為掉落傳奇物品,✓ atlas_stat_descriptions.txt:29101
+fix-placeholder#5,projectiles_return projectile_return_%_chance,投射物有 {0}% 機率返回你,✓ active_skill_gem_stat_descriptions.txt:13245
+fix-placeholder#6,is_trap number_of_traps_to_throw,當觸發時使用此技能投擲 {0} 個陷阱,✓ skill_stat_descriptions.txt:1924
+fix-placeholder#7,rage_slash_damage_+%_final_per_amount_of_rage_sacrificed rage_slash_rage_sacrifice_per_damage_bonus,每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更多傷害,✓ skill_stat_descriptions.txt:56040
+fix-placeholder#8,rage_slash_damage_+%_final_per_amount_of_rage_sacrificed rage_slash_rage_sacrifice_per_damage_bonus,每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更少傷害,✓ skill_stat_descriptions.txt:56041
+fix-placeholder#9,spectral_throw_an_spectral_helix_active_skill_projectile_speed_+%_variation_final,每個投射物有介在 10% 更多至 10% 更少投射物速度,✓ skill_stat_descriptions.txt:59918
+fix-placeholder#10,virtual_intensity_loss_ms_while_moving_interval virtual_intensity_lost_on_teleport,移動或你立即傳送時，\n每 {0} 秒失去 1 強化,✓ skill_stat_descriptions.txt:9849
+fix-placeholder#11,additional_maximum_all_elemental_resistances_%_if_suppressed_spell_recently,若你近期有壓抑法術傷害，,✓ stat_descriptions.txt:183020
+fix-placeholder#12,map_vaal_vessel_drop_X_vaal_temple_maps,瓦爾容器包含 1 張瓦爾密殿,✓ stat_descriptions.txt:365357
+fix-placeholder#13,number_of_packs_to_summon number_of_monsters_to_summon summoned_monster_rarity,被 {1} 群魔法怪物守衛著,✓ chest_stat_descriptions.txt:334
+fix-placeholder#14,number_of_packs_to_summon number_of_monsters_to_summon summoned_monster_rarity,被 {1} 群稀有怪物守衛著,✓ chest_stat_descriptions.txt:336
+fix-placeholder#15,active_skill_non_reaper_minion_damage_+%_final,奪魂鐮使你非奪魂鐮召喚物造成 {0} 更多傷害,✓ minion_skill_stat_descriptions.txt:11210
+fix-placeholder#16,active_skill_non_reaper_minion_damage_+%_final,奪魂鐮使你非奪魂鐮召喚物造成 {0} 更少傷害,✓ minion_skill_stat_descriptions.txt:11211
+fix-placeholder#17,keystone_magebane,敏捷不提供固有的閃避值加成\n每 15 點敏捷 +1 法術傷害壓抑率,✓ passive_skill_stat_descriptions.txt:3714
+fix-placeholder#18,trigger_on_ward_break_%_chance,當你的保護被破壞時觸發被輔助的技能,✓ gem_stat_descriptions.txt:32470
+fix-placeholder#19,support_arcane_surge_cast_speed_+% support_arcane_surge_mana_regeneration_rate_+%,秘能波動增加 {0}% 施放速度\n秘能波動增加 {0}% 魔力恢復率,✓ skill_stat_descriptions.txt:18715
+fix-placeholder#20,map_leaguestone_additional_shrines,下個區域額外含有 1 座神殿,✓ leaguestone_stat_descriptions.txt:2568
 fix-typo#1,gain_%_of_two_hand_weapon_physical_damage_as_added_spell_damage,法術擁有等同於你已裝備雙手武器{0]%物理傷害的附加法術傷害,✓ stat_descriptions.txt:270325

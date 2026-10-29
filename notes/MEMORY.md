@@ -145,3 +145,56 @@
 - 数据备注：more→「提高」全库仅 2 条（即莉莉亚，孤例）；「提高」92% 对 increased，
   是 increased 的次要变体；more 主译「更多」(97.5%)。「提升」36 条两头混用，待后续一致性整治。
 - 术语表 `out/glossary.csv`（48 条，含 Mana Reservation Efficiency=保留效用）。
+
+## 已知问题：对照版长行会被面板软折行（2026-10-29 记录，用户决定暂不处理）
+
+- 面板宽度约 **100 个半角字符**。对照版追加的英文单段超过这个宽度就会被**软折行**，
+  折出来的那截**不带缩进**，看着像凭空多出一条词缀。
+- 实例：`keystone_elemental_overload`（元素超载）英文首段 103 字符，
+  在 `…with Hits / and Ailments` 处被折断，`and Ailments` 顶格。
+  中文首段 30 个全角字符（≈60 半角）**不超宽**，所以只有英文侧会断。
+- 规模（不是孤例）：英文单段 > 90 字符 **848 段**（stat 406 / atlas 121 / skill 85 / gem 70 /
+  minion_attack 35 / minion 24 / passive 15 / leaguestone 14）；中文单段 > 30 字符 1463 段。
+  一旦要处理就是全局口径，不能只改一条。
+- 真要处理时的两条路，各有硬伤：
+  1. **按段长自动折行**：折点会落在词中间（103 字符按 92 折会断在 `Elemental` 后），比软折行更难看；
+  2. **逐条人工指定折点**（`out/fix-wrap.csv`，中英同步折，段数必须相等才能一组配一组）：
+     质量最好，但只适合少量条目，848 段不可能全人工。
+- 已经做掉的部分（本轮）：`dual_body()` 从「整段英文堆在整段中文后面」改成
+  **一组中文配一组英文**的穿插；段数一致（860 行，2–8 组）才穿插，
+  不一致（135 行）退回「整段附在末尾」但**每组都补缩进**，不会再顶格。
+
+## 语系：客户端靠 languages.dat 里的一行代码决定说什么语言（2026-10-29）
+
+- 我们往 `metadata/statdescriptions` 写多少中文都**不影响客户端显示什么语言**。
+  决定因素是 `data/languages.dat` 里 `French` 与 `Traditional Chinese` 两行的 **code**：
+  原版是 `fr` / `zh-TW`，**对调**之后「第二个（法国国旗）」那一项就加载繁中数据。
+  这就是 PoeChinese3 的全部机制（源码 `aianlinb/LibGGPK3` → `Examples/PoeChinese3/Program.cs`
+  的 `ApplyTraditionalChinese`），也是它「游戏更新后不用重打」的原因——它本来就没改译文。
+- 该文件 **696 B / 11 行**，UTF-16LE、字符串内联、`0x0000` 结尾，**无字符串表、无偏移量**。
+  所以交换两段「code + 结束符」是安全的（长度守恒、后续字段整体平移）。
+  行序：en / fr / de / pt-BR / ru / th / zh-TW / zh-CN / es / ko-KR / ja-JP。
+- **判断是否已执行过**：看 `fr` 这个 code 落在 `French` 前面（= 已启用）还是后面（= 未启用）。
+  三个锚点（`fr`、`zh-TW`、`French`）任一找不到就判 `Unknown`，整段跳过，绝不硬写。
+- 已实现：`tools/shared/LanguageSwitch.cs`，patcher 与 dropper 共用；
+  装补丁启用、还原时关掉、已是目标状态不写。`--status` 会报一行「语系：…」。
+- 另两件 PoeChinese3 会做、我们**没做**的：换字体（需随包带字体文件）。
+  换国旗已做，见下节。
+- 用户 `production_Config.ini` 里 `language=fr` 是正常的——那个 fr 正是被换过的繁中槽位。
+
+## 国旗：语言列表那一项该显示五星红旗（2026-10-29）
+
+- 客户端按**语言代码**拼图标名：`FlagIcons/<code>`，code 就是 `languages.dat` 那行第四字段。
+  语系换成繁中之后 code 是 `fr`，所以显示法国国旗。
+- `art/uiimages1.txt` 是图集索引：6,062,484 B、UTF-16LE、**纯 LF 无 CR**、19,534 行，
+  每行 `"图标名" "贴图路径" x1 y1 x2 y2`。11 语言 × 2 分辨率 = 22 条。
+- **图集里本来就有五星红旗**：`zhCN` 那一项。而且两张图集里 `zhCN` 与 `fr` 的矩形
+  尺寸完全一致（74×49 / 101×67），所以只改坐标即可，**一个 DDS 都不用碰**：
+  - `FlagIcons/1.dds`：fr 840,0–914,49 → 756,0–830,49
+  - `FlagIcons/4K/2.dds`：fr 0,152–101,219 → 111,76–212,143
+- PoeChinese3 的 `ApplyNationalFlag` 是把 `fr` 与 **`zhTW`** 对调（青天白日旗）；
+  我们要五星红旗，所以指向 `zhCN`。
+- 已实现 `tools/shared/FlagIcon.cs`（patcher / dropper 共用，同语系那套写法）。
+  只在字节层替换那两行，其余 600 万字节原样拷贝；幂等、可逆（restore 逐字节回到原样）。
+- 副作用：列表里「简体中文」本来就是五星红旗，换完有两面。那一项没有数据目录，
+  选了只会回落英文，不影响使用。

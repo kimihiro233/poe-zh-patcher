@@ -38,12 +38,16 @@
 │  ├─ extract_pairs.py    成对抽取 EN/ZH 的 .dat 文本
 │  ├─ parse_statdesc.py   解析词缀/技能描述模板（纯文本）
 │  ├─ check_sd_syntax.py  词缀文件语法体检 + 「客户端被改过」指纹（--canon 比对基线）
+│  ├─ check_variants.py   中英变体条件对不上的块：对照版会不会把英文挂错行
+│  ├─ check_placeholders.py 译文占位符漏失按后果分级（{n} 丢了 / % 丢了 / 只丢换行）
+│  ├─ sd-sha-ledger.json  历代产物 sha 的持久账本（只增不减，--check 归一化靠它）
 │  ├─ markup.py           标记层/文本层分离与合并（三分法，写回时的唯一口径）
 │  ├─ analyze.py          体检：占位符/方向词/术语/简体字/长度
 │  ├─ glossary.py         从对照数据反推术语表
 │  ├─ dumper/             C# 导出器（LibGGPK3 + oo2core）
 │  ├─ patcher/            C# 写回器（status / apply / restore，只认 ggpk）
 │  ├─ dropper/            C# 拖放式补丁器（ggpk 与 Bundles2 双形态，打包成 dist/*.exe）
+│  ├─ shared/             两个 C# 补丁器共用：bundle 归并、语系切换（languages.dat）、国旗（uiimages1.txt）
 │  ├─ build_bundle.py     patch_sd 产物 → 内嵌数据包 tools/pack/bundle.gz
 │  ├─ b2probe/            Steam/WeGame 索引探针与完整性体检（--check）
 │  └─ ggpkdiag/ ggpkfix/  ggpk 索引诊断与悬空记录修复
@@ -87,6 +91,7 @@ python tools/gameinfo.py --diff   # 列出到底哪些文件变了
 | v0.3.0 | 3.29.3b / patch 3.29.3.3（已锁） | 版本绑定，指纹 `1962f349…` |
 | v0.4.0 | **3.29.3b / patch 3.29.3.3** | 词缀文本入补丁（26 文件 / 161 处）、标记层三分法、繁中 `{0]` 笔误、补丁器支持升级与异地客户端 |
 | v0.4.2 | **3.29.3b / patch 3.29.3.3** | 修 3.29 新语法：技能类 19 个文件（aura/buff/curse/minion/skill…）以前整份读成 0 块、从没进过补丁，全量对照补到 42 文件 / 26635 行 |
+| v0.4.3 | **3.29.3b / patch 3.29.3.3** | 占位符漏失补回（`{n}`/`%` 丢了，三套产物各 181 处）、对照版按 `\n` 分组穿插、补丁工具自带语系启用（不再需要 PoeChinese3）、国旗换五星红旗、产物 sha 持久账本 |
 
 ## 游戏更新后（换赛季）
 
@@ -156,12 +161,57 @@ python tools/glossary.py out/statdesc.csv out/glossary.csv
  [1] 纯译文        —— 日常游玩，161 处修正
  [2] 对照版        —— 修正过的 161 行下方显示英文原文
  [3] 全量对照      —— 所有词缀下方显示英文原文
- [4] 还原官方原文  —— 撤销全部修改
+ [4] 还原官方原文  —— 撤销全部修改（连语系一起还原成英文）
  [t] 结构演练      —— 只验读写通道，不改内容（换客户端/换平台时先跑这个）
 ```
 
 两种形态的差别只在落盘方式：ggpk 每次写文件顺带存索引；`Bundles2` 是把改动
 写进新的 `LibGGPK3/N.bundle.bin`，最后统一存一次 `_.index.bin`。
+
+### 语系：为什么以前打完补丁还要跑一次 PoeChinese3
+
+客户端能不能看到中文，**不取决于我们往 `metadata/statdescriptions` 里写了多少中文**，
+而取决于 `data/languages.dat` 里两行的语言代码：
+
+```
+French 行              原本 code = "fr"
+Traditional Chinese 行  原本 code = "zh-TW"
+```
+
+把这两个 code 对调，客户端语言列表里「第二个（法国国旗）」那一项就会去加载繁中数据。
+官方客户端本来就有繁中这一项，只是入口指在法语上——所以 PoeChinese3 才敢说
+「只启用语系、其余文件均未修改」，游戏更新后也不用重打。
+
+现在装补丁时**自动做这一步**（`[1]`/`[2]`/`[3]` 启用，`[4]` 还原时关掉），
+已经是对应状态就跳过，不重复写。判断依据是 `fr` 这个 code 落在 `French` 前面还是后面，
+结构对不上（多半是游戏更新过）就整段跳过并提示，绝不硬写。
+
+实现见 `tools/shared/LanguageSwitch.cs`，patcher 与 dropper 共用；`--status` 会报一行「语系：…」。
+
+### 国旗：语言列表里那一项不该是法国国旗
+
+语系切到繁中之后，语言列表第二项的标签写着「繁體中文」，配图却还是法国国旗——因为
+客户端是按**语言代码**去拼图标名的（`FlagIcons/<code>`，code 就是 `languages.dat` 里
+那一行的第四个字段，也就是被换过来的 `fr`）。
+
+游戏图集里本来就有五星红旗：`zhCN`（简体中文）那一项。`art/uiimages1.txt` 是图集索引，
+每个图标一行，末尾四个数是贴图上的矩形：
+
+```
+"…/FlagIcons/fr"   "…/FlagIcons/1.dds"    840 0 914 49     ← 法国国旗
+"…/FlagIcons/zhCN" "…/FlagIcons/1.dds"    756 0 830 49     ← 五星红旗
+"…/FlagIcons/4K/fr"   "…/FlagIcons/4K/2.dds" 0 152 101 219
+"…/FlagIcons/4K/zhCN" "…/FlagIcons/4K/2.dds" 111 76 212 143
+```
+
+两张图集里 `fr` 与 `zhCN` 的矩形尺寸完全一致（74×49 / 101×67），所以只要把 `fr`
+那两行的坐标改成 `zhCN` 的坐标，画面就是五星红旗，尺寸、比例、画风和别的国旗全都对得上。
+**一个字节的贴图都不用重编码**，也不碰任何 `.dds`。
+
+实现见 `tools/shared/FlagIcon.cs`（同样 patcher 与 dropper 共用）：只在字节层替换那两行，
+其余 600 万字节原样拷贝；`--status` 报一行「国旗：…」，装补丁时启用、`[4]` 还原时改回法国国旗，
+已是目标状态就跳过。已知副作用：列表里「简体中文」那一项本来就是五星红旗，换完会有两面——
+那一项没有对应的数据目录，选了只会回落到英文，不影响使用。
 
 和手工链路的差别：
 
@@ -412,8 +462,10 @@ $PT restore "$GGPK" out/patch-sd-dual-all/manifest-sd-dual-all.json
 $PT apply   "$GGPK" out/patch-sd/manifest-sd.json
 ```
 
-对照版的英文追加在引号内，格式是 `中文\n  English`（两个空格缩进），
-不新增行、不改 cond/handler，所以解析结构与原文件逐块一致。
+对照版的英文追加在引号内，**一组中文配一组英文**：`中文1\n  English1\n中文2\n  English2`。
+中英两边的 `\n` 段数一致时逐组穿插（实测 860 行），不一致时（135 行）退回
+`整段中文\n  整段英文`，但每一组英文都带两格缩进。两种情况都不新增行、不改 cond/handler，
+所以解析结构与原文件逐块一致，`build_bundle.py` 也能按「两空格前缀」把中英再拆开。
 
 写回器除了「原始 / 已打补丁 / 未知」，多认一个**其它版本**：manifest 里的
 `sha256_variants` 记录同一文件的另一种已知形态（纯译文版），命中即视为已知、
