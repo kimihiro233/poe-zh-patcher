@@ -1513,6 +1513,26 @@ internal static class Program {
         Check("越界时目标文件长度不变", new FileInfo(path).Length == lenBefore,
               $"{lenBefore:N0} → {new FileInfo(path).Length:N0}");
 
+        // ---- G) 逃生舱：丢弃记录，但不回滚任何字节
+        // 用于「官方已经重建索引/文件」——此时日志要退的目标状态已经不存在，
+        // 继续回滚等于把官方刚下发的文件换成一个过期的副本。
+        // 这里同时把 F 留下的那份未完成日志一并丢掉（DiscardWriting 处理所有 writing）。
+        File.WriteAllBytes(path, orig);
+        var uG = GgpkUndo.Begin(path);
+        using (var fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)) {
+            var st = uG.Wrap(fs);
+            st.Position = dataStart + 30000;
+            var b = Rnd(128);
+            st.Write(b, 0, b.Length);
+            st.Flush();
+        }
+        uG.SimulateCrash();
+        var bytesBeforeDiscard = File.ReadAllBytes(path);
+        var msgG = GgpkUndo.DiscardWriting(path);
+        Check("逃生舱：丢弃未完成记录", msgG is null, msgG ?? "");
+        Check("逃生舱：一个字节都没回滚", File.ReadAllBytes(path).SequenceEqual(bytesBeforeDiscard));
+        Check("逃生舱：之后不再认为有未完成写入", !GgpkUndo.Recover(path).Recovered);
+
         Console.WriteLine();
         Console.WriteLine($"日志目录还剩 {Directory.GetDirectories(GgpkUndo.RootFor(path)).Length} 份（提交过的快照会留着当后悔药）");
         Console.WriteLine($"ggpk 逐字节还原自检：{(bad == 0 ? "全部通过" : $"{bad} 项失败")}");
