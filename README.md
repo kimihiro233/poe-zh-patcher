@@ -389,6 +389,20 @@ python tools/doc_check.py     # README 里的数字与产物对得上吗
 和 `Safety.cs` 里的常量上，顺便检查 README 命令行里出现的每个开关是不是程序真认得。
 对不上就返回 1 —— 文档漂移从此会当场变红，而不是等用户按错的说明操作。
 
+### 一次跑完全部自检
+
+上面那些 `--data-test` / `--legacy-test` / `--undo-test` / `--baseline-test` /
+`--redact-test` / `--gate-test` / `doc_check` / `deps_check` 的清单，只在
+`tools/run_tests.py` 里有一份。CI 跑的是同一条命令，本地跑一遍就是同一个结果：
+
+```bash
+python tools/run_tests.py --build     # 先编 7 个工程，再跑全部
+python tools/run_tests.py             # 假定已 build
+```
+
+判定只看**退出码**，不去 grep 输出里的中文，改文案不会弄坏 CI。需要游戏语料的
+`--data-test` 在没有 `raw_sd/` 时是 **SKIP 并说明原因**，不是静默通过。
+
 ### 语系：为什么以前打完补丁还要跑一次 PoeChinese3
 
 客户端能不能看到中文，**不取决于我们往 `metadata/statdescriptions` 里写了多少中文**，
@@ -769,6 +783,64 @@ $PT apply   "$GGPK" out/patch-sd/manifest-sd.json
 写回器除了「原始 / 已打补丁 / 未知」，多认一个**其它版本**：manifest 里的
 `sha256_variants` 记录同一文件的另一种已知形态（纯译文版），命中即视为已知、
 允许覆盖，不会因为「内容对不上」而误判成游戏更新。
+
+## 供应链：拿到这个 exe 能核对什么
+
+单文件发布做不到位级可复现 —— 压缩、打包元数据、PE 时间戳都会变。所以这里不承诺
+「你重编能编出同一个文件」，只承诺**可核验**：三个东西一起发布，任两项都能互相钉住。
+
+| 文件 | 里面有什么 | 用来回答 |
+|---|---|---|
+| `BUILD-INFO.json` | git commit、dotnet SDK 版本、`bundle.gz` 与 exe 的 sha256、适用游戏版本 | 这个 exe 是从哪份代码、哪份数据编的 |
+| `sbom.cdx.json` | CycloneDX 1.5 物料清单：每个依赖的版本、许可、sha256、能否再分发 | 里面到底有哪些第三方代码，各自什么授权 |
+| `MANIFEST.sha256` | 归档目录里每个文件的 sha256（含 exe） | 我下到的文件有没有被换过 |
+
+`serialNumber` 用 uuid5 从「版本 + commit」算出来，不是随机数：同一版本重打发布，
+SBOM 应当逐字节一致，否则每次都会在差异里多出一行没意义的 UUID。
+
+### 依赖是钉住的，不是「大概是这个版本」
+
+7 个工程各有一份 `packages.lock.json` 入库，CI 用 locked mode 还原：
+
+```bash
+dotnet restore tools/dropper/dropper.csproj --locked-mode
+```
+
+锁文件说 2.7.5，解析出别的版本就直接失败，不会「悄悄装个新的」。传递依赖
+（`LibGGPK3.LibGGPK3`、`aianlinb.SystemExtensions`）也一并钉住。
+
+非 NuGet 的 6 份依赖（`oo2core.dll`、`LibDat2.dll`、`bundle.gz`…）由
+`tools/lib/deps.json` 记账，`tools/lib/DEPS.md` 是它的投影（**生成的，别手改**）：
+
+```bash
+python tools/deps_check.py            # 校验：哈希 / 版本 / 文档投影三者一致
+python tools/deps_check.py --doc      # 重新生成 DEPS.md
+python tools/deps_check.py --fix      # 换过二进制后把新哈希写回
+```
+
+它钉的是「同一个文件名底下是不是同一份东西」：`oo2core.dll` 换个版本还是叫这个名字，
+但压出来的 `bundle.gz` 会不同，而没有任何东西会报错。
+
+### CI 只做一件事
+
+`.github/workflows/ci.yml` 在 `windows-latest` 上：按锁文件还原 → 编 7 个工程 →
+`python tools/run_tests.py`。不打包、不发版 —— 发布需要干净的树和本地 exe，
+混进 CI 只会让「绿了」和「发得出去」变成两件容易混淆的事。
+
+发布仍然在本地：`python tools/release.py` 会先查 `git status --porcelain`，
+树脏直接拒绝打包（除非显式 `--allow-dirty`）。理由很实在 —— 树脏的时候打出来的包，
+事后没人能说清它是哪个版本。
+
+### 两条待作者拍板的合规问题
+
+`tools/lib/DEPS.md` 里逐条记着，这里只说结论：
+
+1. **`oo2core.dll` 不可再分发。** 它是 RAD Game Tools / Epic 的 Oodle 运行时，
+   从客户端目录提取的。现在为了「新克隆能一键构建」留在仓库里。合规做法是移出仓库
+   并 `.gitignore`，构建时从使用者自己的游戏目录复制；代价是新克隆不能一键构建。
+2. **`LibGGPK3` 是 AGPL-3.0-or-later。** exe 静态链接了它，所以分发 exe 时整个作品
+   都受 AGPL 约束，必须提供对应源码。仓库目前**没有 LICENSE 文件** —— 这一条要么补
+   LICENSE，要么在 README 里明确写出授权。
 
 ## 关键约定
 

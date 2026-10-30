@@ -1,0 +1,88 @@
+name: CI
+
+# 只回答一个问题：这个 commit 能不能编、自检过不过。
+# 不打包、不发版 —— 发布是本地一次性的事（release.py 要干净的树和 exe），
+# 混进 CI 只会让「绿了」和「发得出去」变成两件容易混淆的事。
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: "1"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1"
+  CI: "true"
+
+jobs:
+  build-and-test:
+    # 必须 Windows：app.manifest 申请管理员权限、oo2core.dll 是原生库，
+    # 这套东西的现实运行环境就是 Win64，在 Linux 上「编过了」不代表什么。
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 缓存 NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      # 锁文件先于构建：依赖对不上就没必要编。
+      # locked mode 下只要有一个包解析出的版本和锁文件不同，直接失败。
+      - name: 按锁文件还原（locked mode）
+        shell: pwsh
+        run: |
+          $projects = @("b2probe","dropper","dumper","ggpkdiag","ggpkdoctor","ggpkfix","patcher")
+          foreach ($p in $projects) {
+            Write-Host "== restore $p"
+            dotnet restore "tools/$p/$p.csproj" --locked-mode --nologo
+            if ($LASTEXITCODE -ne 0) { exit 1 }
+          }
+
+      - name: 构建 7 个工程
+        shell: pwsh
+        run: |
+          $projects = @("b2probe","dropper","dumper","ggpkdiag","ggpkdoctor","ggpkfix","patcher")
+          foreach ($p in $projects) {
+            Write-Host "== build $p"
+            dotnet build "tools/$p/$p.csproj" -c Release --no-restore --nologo -v q
+            if ($LASTEXITCODE -ne 0) { exit 1 }
+          }
+
+      # 清单只在 tools/run_tests.py 里有一份，本地跑同一条命令就是同一个结果。
+      - name: 自检
+        shell: pwsh
+        run: |
+          python tools/run_tests.py 2>&1 | Tee-Object -FilePath test-output.txt
+          exit $LASTEXITCODE
+
+      - name: 上传自检输出
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-output
+          path: |
+            test-output.txt
+            tools/**/packages.lock.json
+          if-no-files-found: ignore
+          retention-days: 14

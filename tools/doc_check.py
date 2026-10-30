@@ -64,6 +64,14 @@ def build_sources() -> dict:
     if m_snap:
         src["code.snapshot_keep"] = int(m_snap.group(1))
 
+    # 供应链：工程数、锁文件数、依赖账本条目数。三者在 README 里是 7 / 7 / 6，
+    # 加一个工程或换一个依赖就应当红。
+    src["code.projects"] = len(list((ROOT / "tools").glob("*/*.csproj")))
+    src["supply.locks"] = len(list((ROOT / "tools").glob("*/packages.lock.json")))
+    deps_json = ROOT / "tools" / "lib" / "deps.json"
+    if deps_json.exists():
+        src["supply.deps"] = len(json.loads(deps_json.read_text(encoding="utf-8"))["deps"])
+
     # 内容闸：白名单标签数 / 对抗样本条数 / 白名单条目数
     whitelist = ROOT / "tools" / "pack" / "markup-whitelist.json"
     fixtures = ROOT / "fixtures" / "gate" / "cases.json"

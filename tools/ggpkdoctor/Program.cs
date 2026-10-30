@@ -5,13 +5,16 @@ using LibBundledGGPK3;
 
 Console.OutputEncoding = Encoding.UTF8;
 if (args.Length < 1) {
-    Console.WriteLine("usage: ggpkdoctor <Content.ggpk> [补丁目录] [--fix]");
-    Console.WriteLine("       默认只体检；--fix 才写入。补丁目录默认 out/patch-sd-dual-all");
+    Console.WriteLine("usage: ggpkdoctor <Content.ggpk> [补丁目录] [--fix] [--all]");
+    Console.WriteLine("       默认只体检；--fix 才写入（备份 → 归并自建记录 → 补写读不出的文件）");
+    Console.WriteLine("       --all 连读得出的文件也按补丁目录重铺（会把客户端换成该 flavor，慎用）");
+    Console.WriteLine("       补丁目录默认 out/patch-sd-dual-all");
     return 1;
 }
 var ggpkPath = args[0];
 var srcDir = args.Skip(1).FirstOrDefault(a => !a.StartsWith("--")) ?? "out/patch-sd-dual-all";
 var doFix = args.Contains("--fix");
+var doAll = args.Contains("--all");
 
 var expected = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);   // 容器路径 → 应有字节
 if (Directory.Exists(srcDir))
@@ -65,14 +68,26 @@ if (carrier is not null && carrier.TryGetBundle(out var cb, out _))
 Console.WriteLine($"留底：{backupDir}");
 
 // ---- 归并 ----
-var hy = BundleHygiene.Consolidate(index);
+// v0.5.0 起这段的接口从 Consolidate 换成了 Detach：不再「把重名记录收成一条、偏移原样保留」，
+// 而是「旧记录一律停用，换一条时间戳命名的新 bundle 承接本次写入」。重名问题从源头消失
+// （名字带秒级时间戳，不可能撞），代价是旧记录里的文件必须重新写一遍才能落到新 bundle。
+var hy = BundleHygiene.Detach(index);
 if (hy.Error is not null) { Console.WriteLine("无法修复：" + hy.Error); return 2; }
-Console.WriteLine($"自建 bundle 记录 {self.Count} → {self.Count - hy.Removed}（丢失数据的文件 {hy.Unreadable.Count} 个）");
+Console.WriteLine($"自建 bundle 记录 {self.Count} → 1（{hy.Retired} 条旧记录停用，新记录 {hy.Name}）");
 
 // ---- 补写丢失的文件 ----
-var todo = hy.Unreadable.Select(p => (Path: p, Bytes: expected.TryGetValue(p, out var b) ? b : null))
-                        .Where(x => x.Bytes is not null)
-                        .ToList();
+// 只补「读不出来的」：那些文件的字节已经不在容器里了，不补就永远打不开。
+// 读得出来的一律不动 —— 它们可能是别的 flavor（客户端装的是纯译文、srcDir 是全量对照时，
+// 硬覆盖等于把玩家的选择改掉）。要整份重铺用 --all。
+var todo = broken.ToList();
+if (doAll) {
+    foreach (var (rel, want) in expected.OrderBy(kv => kv.Key))
+        if (!todo.Any(x => string.Equals(x.path, rel, StringComparison.OrdinalIgnoreCase)))
+            todo.Add((rel, want));
+}
+var stale = hy.Inherited.Where(p => !expected.ContainsKey(p)).ToList();
+if (stale.Count > 0)
+    Console.WriteLine($"  注意：{stale.Count} 个文件还挂在旧记录上，本目录里没有它们的期望字节，原样保留");
 foreach (var (rel, bytes) in todo) {
     if (!index.TryGetFile(rel, out var rec)) { Console.WriteLine($"  ✗ 仍找不到 {rel}"); continue; }
     var t0 = Environment.TickCount64;

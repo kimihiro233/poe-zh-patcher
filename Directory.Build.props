@@ -1,0 +1,16 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- 依赖锁定：每个工程目录下的 packages.lock.json 入库。
+         本地 restore 会按锁文件还原；CI 用 locked mode 直接拒绝偏离。
+         「我这能编」和「CI 能编」之间差的往往就是某个传递依赖的小版本。
+         注意：XML 注释里不能出现连续两个减号，所以下面 flag 名不带前缀。 -->
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+
+    <!-- 同一个输入编出同一份 IL。单文件发布做不到位级一致（压缩 + 打包元数据），
+         但至少让「除了 exe 壳之外的部分」可复现。 -->
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+</Project>

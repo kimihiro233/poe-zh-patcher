@@ -13,7 +13,9 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
 import sys
+import uuid
 import zipfile
 from datetime import datetime, timezone, timedelta
 
@@ -64,11 +66,142 @@ def count(path):
         return sum(1 for _ in csv.DictReader(f))
 
 
+def sh(cmd):
+    """跑一条只读命令，拿它的输出。失败就返回 None —— 构建信息缺字段比打包失败要好。"""
+    try:
+        p = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=120)
+        return p.stdout.strip() if p.returncode == 0 else None
+    except Exception:
+        return None
+
+
+def write_build_info(rel_dir, now, gclient, gpatch):
+    """BUILD-INFO.json：这个 exe 是用什么编的、数据是什么、对应哪个 commit。
+
+    单文件发布做不到位级可复现（压缩 + 打包元数据 + PE 时间戳），所以不承诺「重编出同一个
+    文件」，而是承诺「拿到文件能核对」。三者一起发布：这份 JSON、SBOM、MANIFEST.sha256。
+    """
+    bundle = os.path.join(ROOT, "tools", "pack", "bundle.gz")
+    info = {
+        "version": VERSION,
+        "built_at": now.isoformat(),
+        "game": {"client_version": gclient, "patch_version": gpatch},
+        "source": {
+            "git_commit": sh(["git", "rev-parse", "HEAD"]),
+            "git_branch": sh(["git", "rev-parse", "--abbrev-ref", "HEAD"]),
+            "git_describe": sh(["git", "describe", "--tags", "--always", "--dirty"]),
+        },
+        "toolchain": {
+            "dotnet_sdk": sh(["dotnet", "--version"]),
+            "python": "%d.%d.%d" % sys.version_info[:3],
+            "os": os.name,
+        },
+        "artifacts": {},
+        "note": "single-file publish 不承诺位级可复现；核对方式 = 本文件 + sbom.cdx.json + MANIFEST.sha256",
+    }
+    if os.path.exists(bundle):
+        info["artifacts"]["bundle.gz"] = {"sha256": sha256(bundle), "bytes": os.path.getsize(bundle)}
+    if os.path.exists(EXE):
+        info["artifacts"]["PoE-zh-Patcher.exe"] = {"sha256": sha256(EXE), "bytes": os.path.getsize(EXE)}
+    path = os.path.join(rel_dir, "BUILD-INFO.json")
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(info, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    return info
+
+
+def write_sbom(rel_dir, now, info):
+    """CycloneDX 1.5 物料清单。手写而不是引库：这里只有十几个组件，
+    为它装一个依赖反而让「可审计」变成「依赖一个没人看的依赖」。"""
+    deps = json.load(open(os.path.join(ROOT, "tools", "lib", "deps.json"), encoding="utf-8"))
+    components = []
+
+    def lic(name):
+        if name in ("MIT", "AGPL-3.0-or-later", "Apache-2.0", "BSD-3-Clause"):
+            return [{"license": {"id": name}}]
+        return [{"license": {"name": name}}]
+
+    for e in deps["deps"]:
+        c = {
+            "type": "file" if e["kind"] in ("data", "generated", "native") else "library",
+            "name": e["id"],
+            "version": e["version"],
+            "description": e["purpose"],
+            "licenses": lic(e["license"]),
+            "properties": [
+                {"name": "poezh:path", "value": e["path"]},
+                {"name": "poezh:source", "value": e["source"]},
+                {"name": "poezh:redistributable", "value": "true" if e["redistributable"] else "false"},
+            ],
+        }
+        if e.get("sha256"):
+            c["hashes"] = [{"alg": "SHA-256", "content": e["sha256"]}]
+        components.append(c)
+
+    for e in deps["nuget"]:
+        components.append({
+            "type": "library",
+            "name": e["id"],
+            "version": e["version"],
+            "description": e["purpose"],
+            "licenses": lic(e["license"]),
+            "purl": "pkg:nuget/%s@%s" % (e["id"], e["version"]),
+            "externalReferences": [{"type": "vcs", "url": e["source"]}],
+        })
+
+    # serialNumber 用 uuid5 而不是随机：同一版本同一 commit 的 SBOM 应当逐字节一致，
+    # 否则每次重打发布都会在差异里多出一行没有意义的 UUID。
+    seed = "poe-zh-sbom/%s/%s" % (VERSION, (info.get("source") or {}).get("git_commit") or "unknown")
+    bom = {
+        "bomFormat": "CycloneDX",
+        "specVersion": "1.5",
+        "serialNumber": "urn:uuid:" + str(uuid.uuid5(uuid.NAMESPACE_URL, seed)),
+        "version": 1,
+        "metadata": {
+            "timestamp": now.isoformat(),
+            "tools": [{"vendor": "poe-zh", "name": "tools/release.py", "version": VERSION}],
+            "component": {
+                "type": "application",
+                "name": "PoE-zh-Patcher",
+                "version": VERSION,
+                "licenses": [{"license": {"name": "AGPL-3.0-or-later（受 LibGGPK3 约束，待作者确认）"}}],
+            },
+        },
+        "components": components,
+    }
+    path = os.path.join(rel_dir, "sbom.cdx.json")
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(bom, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    return len(components)
+
+
+def check_clean_tree(allow_dirty):
+    """打包前必须干净的树：BUILD-INFO 里写的 commit 必须真的等于磁盘上的内容。
+    树脏的时候打出来的包，事后没人能说清它是哪个版本的 —— 这种事发生一次就够毁掉信任。"""
+    dirty = sh(["git", "status", "--porcelain"])
+    if dirty is None:
+        print("！ 不是 git 仓库或 git 不可用，跳过脏树检查")
+        return True
+    if dirty and not allow_dirty:
+        print("拒绝打包：工作树不干净。先提交，或加 --allow-dirty 明确表示「这次不算数」。\n")
+        for line in dirty.splitlines()[:20]:
+            print("   " + line)
+        if len(dirty.splitlines()) > 20:
+            print("   …（共 %d 项）" % len(dirty.splitlines()))
+        return False
+    if dirty:
+        print("！ 工作树不干净，但用了 --allow-dirty：BUILD-INFO 的 commit 与内容可能不符")
+    return True
+
+
 def main():
     note = ""
     if "--note" in sys.argv:
         note = sys.argv[sys.argv.index("--note") + 1]
     with_exe = "--no-exe" not in sys.argv
+    if not check_clean_tree("--allow-dirty" in sys.argv):
+        return 1
 
     now = datetime.now(TZ)
     rel_dir = os.path.join(ROOT, "releases", "v" + VERSION)
@@ -197,7 +330,8 @@ def main():
         "",
         "## 打包内容",
         "",
-        "文档 4 份 + 修正稿 %d 份 + 状态表 + 术语表 + 体检报告 %d 份 + 补丁清单 + game.lock.json + MANIFEST.sha256"
+        "文档 4 份 + 修正稿 %d 份 + 状态表 + 术语表 + 体检报告 %d 份 + 补丁清单 + game.lock.json"
+        " + BUILD-INFO.json + sbom.cdx.json + MANIFEST.sha256"
         % (sum(1 for n, _ in FIXES if os.path.exists(os.path.join(ROOT, "out", n))), n_reports)
         + (os.path.exists(EXE) and with_exe) * " + `PoE-zh-Patcher.exe`（zip 根目录，不进归档目录）"
         + "。二进制原始导出不入档（可由 `tools/dumper` 重导，且换版本后必须重导）。",
@@ -251,6 +385,10 @@ def main():
 
     open(os.path.join(rel_dir, "RELEASE.md"), "w", encoding="utf-8").write("\n".join(lines))
 
+    # 构建来源与物料清单：必须在 MANIFEST 之前落盘，否则它们不会进哈希与 zip
+    info = write_build_info(rel_dir, now, gclient, gpatch)
+    n_comp = write_sbom(rel_dir, now, info)
+
     # MANIFEST（exe 只进 zip，但也登记进来，便于校验下载到的二进制）
     files = sorted(f for f in os.listdir(rel_dir) if f != "MANIFEST.sha256")
     extra = []
@@ -277,7 +415,10 @@ def main():
     for name, path in extra:
         print("   %-32s %s  (仅 zip)" % (name, sha256(path)[:16]))
     print("压缩包：%s  %.1f KB" % (zpath, os.path.getsize(zpath) / 1024))
+    print("来源：commit %s  SDK %s  SBOM %d 个组件"
+          % ((info["source"]["git_commit"] or "?")[:10], info["toolchain"]["dotnet_sdk"] or "?", n_comp))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

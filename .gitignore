@@ -8,6 +8,8 @@ tools/*/bin/
 tools/*/obj/
 tools/*/build.log
 tools/*/*.log
+__pycache__/
+*.pyc
 
 # 大体积派生产物（43MB，可由 dumper 重跑）
 out/pairs.csv

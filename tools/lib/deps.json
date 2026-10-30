@@ -1,0 +1,138 @@
+{
+  "_comment": "非 NuGet 依赖清单：这份文件是唯一事实来源，DEPS.md 由 `python tools/deps_check.py --doc` 生成，SBOM 由 release.py 读它。sha256 用来钉住「同一个文件名底下是不是同一份东西」——oo2core.dll 换个版本，压出来的 bundle 就不同，但文件名不变。",
+  "_licenses": {
+    "AGPL-3.0-or-later": "https://www.gnu.org/licenses/agpl-3.0.txt",
+    "MIT": "https://opensource.org/licenses/MIT",
+    "proprietary": "无公开许可，随宿主软件分发"
+  },
+  "deps": [
+    {
+      "id": "oo2core",
+      "kind": "native",
+      "path": "tools/lib/oo2core.dll",
+      "version": "Oodle 2 core（Kraken 解码器，版本号未内嵌）",
+      "source": "从 Path of Exile 客户端目录提取（客户端随包带了 Oodle 运行时）",
+      "license": "proprietary",
+      "license_holder": "RAD Game Tools / Epic Games",
+      "redistributable": false,
+      "purpose": "解压 Bundles2 里的 Oodle 压缩块。LibBundle3 通过同名原生库加载它",
+      "note": "**不可再分发**。当前这份随仓库入库，是因为 build 与单文件 exe 都需要它。合规做法是从仓库移出、由使用者从自己的游戏目录复制；代价是新克隆不能一键构建。等作者拍板。",
+      "bytes": 645400,
+      "sha256": "4758c7901cbd68df1848b7afed48c1975ad59b509886c21b87c0e91d717446b5"
+    },
+    {
+      "id": "libdat2",
+      "kind": "managed",
+      "path": "tools/lib/LibDat2.dll",
+      "version": "0.16.2",
+      "source": "https://github.com/aianlinb/LibDat2",
+      "license": "AGPL-3.0-or-later",
+      "license_holder": "aianlinb",
+      "redistributable": true,
+      "purpose": "读写 .datc64。只有 tools/dumper 用（HintPath 直接引 dll，没走 NuGet）",
+      "note": "AGPL：分发二进制时要提供对应源码。上游地址即源码，release 的 SBOM 里登记了版本与哈希。",
+      "bytes": 59904,
+      "sha256": "23e3d643d20882c11a5f21519770e7f43b6748f4a80826ea8e110e7dab74b48b"
+    },
+    {
+      "id": "datdefinitions",
+      "kind": "data",
+      "path": "tools/lib/DatDefinitions.json",
+      "version": "无版本字段",
+      "source": "本仓库自制（从 .datc64 表头反推的列定义）",
+      "license": "AGPL-3.0-or-later",
+      "license_holder": "本项目",
+      "redistributable": true,
+      "purpose": "LibDat2 解析 .datc64 时需要的列类型定义",
+      "note": "**当前没有任何代码引用它**（全仓库 grep 为 0）。属于 v0.1.0 的研究残留，留着是为了以后重做 .dat 时有参照。",
+      "bytes": 203338,
+      "sha256": "311560f229654328db584d1b4a3306fd38ad5436c10a0eb76cbc95420f1ba07a"
+    },
+    {
+      "id": "schema",
+      "kind": "data",
+      "path": "tools/lib/schema.min.json",
+      "version": "7",
+      "source": "由 poe-dat-viewer 导出的表结构快照（createdAt 1791971088）",
+      "license": "AGPL-3.0-or-later",
+      "license_holder": "上游导出工具作者",
+      "redistributable": true,
+      "purpose": "研究阶段的表结构参照",
+      "note": "**当前没有任何代码引用它**。与 schema-poe1.min.json 内容不同但字节数相同，两者都不是构建输入。",
+      "bytes": 1453300,
+      "sha256": "25a07746db3225d77b30b1960c3d5fe7e926499e7067829d194aaa91b4a9fc09"
+    },
+    {
+      "id": "schema-poe1",
+      "kind": "data",
+      "path": "tools/lib/schema-poe1.min.json",
+      "version": "7",
+      "source": "同上，PoE1 分支的一份副本",
+      "license": "AGPL-3.0-or-later",
+      "license_holder": "上游导出工具作者",
+      "redistributable": true,
+      "purpose": "研究阶段的表结构参照",
+      "note": "**当前没有任何代码引用它**。",
+      "bytes": 1453300,
+      "sha256": "ca95dfac297688f3363567a1db37ee676af338e2de4428e01e4346a6fed2f6d4"
+    },
+    {
+      "id": "bundle",
+      "kind": "generated",
+      "path": "tools/pack/bundle.gz",
+      "version": "随 VERSION 走（构建时写入）",
+      "source": "`python tools/build_bundle.py` 从 raw_sd + 修正稿生成",
+      "license": "proprietary",
+      "license_holder": "游戏文本版权归 Grinding Gear Games；译文归本项目作者",
+      "redistributable": true,
+      "purpose": "补丁器的全部写入数据，内嵌进 exe",
+      "note": "派生自游戏文本，属灰色地带但这是整个项目的前提。逐条改动可从 releases/<版本>/ 的清单复核。",
+      "bytes": 2323456
+    }
+  ],
+  "nuget": [
+    {
+      "id": "LibGGPK3.LibBundledGGPK3",
+      "version": "2.7.5",
+      "source": "https://github.com/aianlinb/LibGGPK3",
+      "commit": "f2e1a39b3f99b4c1f35a6dd22754d43cc58d208c",
+      "license": "AGPL-3.0-or-later",
+      "license_holder": "aianlinb",
+      "redistributable": true,
+      "purpose": "把 BundledGGPK 当 Stream 用，是「原地覆盖 + 逐块记原字节」的前提",
+      "note": "**AGPL 是本项目最重的一条许可约束**：exe 静态链接了它，所以分发 exe 时整个作品都受 AGPL 约束，必须提供源码。仓库目前没有 LICENSE 文件 —— 这条要作者确认。"
+    },
+    {
+      "id": "LibGGPK3.LibBundle3",
+      "version": "2.7.5",
+      "source": "https://github.com/aianlinb/LibGGPK3",
+      "commit": "f2e1a39b3f99b4c1f35a6dd22754d43cc58d208c",
+      "license": "AGPL-3.0-or-later",
+      "license_holder": "aianlinb",
+      "redistributable": true,
+      "purpose": "bundle 索引与文件读写",
+      "note": ""
+    },
+    {
+      "id": "LibGGPK3.LibGGPK3",
+      "version": "2.7.5",
+      "source": "https://github.com/aianlinb/LibGGPK3",
+      "commit": "f2e1a39b3f99b4c1f35a6dd22754d43cc58d208c",
+      "license": "AGPL-3.0-or-later",
+      "license_holder": "aianlinb",
+      "redistributable": true,
+      "purpose": "ggpk 容器结构（传递依赖）",
+      "note": ""
+    },
+    {
+      "id": "aianlinb.SystemExtensions",
+      "version": "1.8.0",
+      "source": "https://github.com/aianlinb/SystemExtensions",
+      "license": "MIT",
+      "license_holder": "aianlinb",
+      "redistributable": true,
+      "purpose": "Span/Stream 扩展（传递依赖）",
+      "note": "MIT 与 AGPL 兼容，不额外增加约束。"
+    }
+  ]
+}

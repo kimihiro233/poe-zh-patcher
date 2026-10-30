@@ -62,6 +62,18 @@
       "regex": "记着 (\\d+) 条「占位符集合故意不同」",
       "source": "gate.exceptions.count",
       "why": "G3 白名单条目数，来自 tools/pack/gate-exceptions.json"
+    },
+    {
+      "id": "projects",
+      "regex": "(\\d+) 个工程",
+      "source": "code.projects",
+      "why": "仓库里 tools/*/*.csproj 的个数。加一个工具不更新文档会红"
+    },
+    {
+      "id": "supply-deps",
+      "regex": "(\\d+) 份依赖（",
+      "source": "supply.deps",
+      "why": "非 NuGet 依赖的份数，来自 tools/lib/deps.json"
     }
   ],
   "unverified": [
