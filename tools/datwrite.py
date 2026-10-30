@@ -70,8 +70,26 @@ def ref_count(t: DatTable, pos: int, step: int = 4) -> int:
 
 
 def patch_bytes(raw: bytes, edits, name: str = ""):
-    """edits: 可迭代的 (row, rel, old, new)。返回 (新字节, 报告 dict)。"""
-    t = load_raw(raw, name)
+    """edits: 可迭代的 (row, rel, old, new)。返回 (新字节, 报告 dict)。
+
+    零编辑（或所有编辑都是「同文」）时，产物必须与原文**逐字节**相同。
+    以前池尾对齐补位写在「有没有编辑」判断之前，于是一份干净原文也会被补 1~2 个 0 字节：
+    长度和 sha 都变了，上游 patcher 会把「官方原文」判成「已打过补丁」。
+    """
+    edits = list(edits)
+    t = load_raw(raw, name)          # 仍然解析：非法文件要照样报错，不能因为没编辑就放行
+
+    def _report(**kw):
+        d = {"file": name, "row_count": t.row_count, "row_size": t.row_size,
+             "pool_base": t.pool_base, "old_len": len(raw), "new_len": len(raw),
+             "appended_bytes": 0, "changed_bytes": 0, "edits": [],
+             "tolerated_eof_sentinel": []}
+        d.update(kw)
+        return d
+
+    if not edits:
+        return raw, _report(verify="ok(no-edits)")
+
     buf = bytearray(raw)
 
     # 池尾对齐：保证新串起点前两字节是 0x00 0x00（read_at 的 is_start 判据）
@@ -80,8 +98,7 @@ def patch_bytes(raw: bytes, edits, name: str = ""):
     if buf[-2:] != b"\x00\x00" and raw != b"":
         buf += b"\x00\x00"
 
-    report = {"file": name, "row_count": t.row_count, "row_size": t.row_size,
-              "pool_base": t.pool_base, "old_len": len(raw), "edits": []}
+    report = _report()
 
     for row, rel, old, new in edits:
         if not (0 <= row < t.row_count):
@@ -113,6 +130,14 @@ def patch_bytes(raw: bytes, edits, name: str = ""):
                                 "grew": len(new) - len(old)})
 
     out = bytes(buf)
+
+    # 兜底：所有编辑都是「同文」（或被共享串挡成 skip）时，buf 已经被补位改过，
+    # 入口的 no-edits 快路径拦不到。这里必须把原文还回去，否则等于凭空改了文件。
+    if out == raw:
+        report.update(verify="ok(no-change)", changed_bytes=0,
+                      new_len=len(raw), appended_bytes=0)
+        return raw, report
+
     report.update(verify(raw, out, edits, t))
     return out, report
 
