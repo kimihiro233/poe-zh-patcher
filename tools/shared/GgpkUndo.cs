@@ -348,19 +348,44 @@ internal sealed class GgpkUndo : IRollback {
         var r = new RecoverResult();
         var root = RootFor(ggpkPath);
         if (!Directory.Exists(root)) return r;
+
+        // 遍历**全部**未完成的日志，不是只退第一份：断电如果发生在「回滚过程中」，
+        // 会同时留下两份 Phase=="writing" 的记录（前一份退到一半、后一份还没开始退），
+        // 只处理第一份就等于把另一份的原字节永久留在日志里。
+        var done = 0;
+        var blocks = 0;
+        var failed = new List<string>();
+        var target = Path.GetFullPath(ggpkPath);
+
         foreach (var d in Directory.GetDirectories(root).OrderByDescending(x => x, StringComparer.Ordinal)) {
             var m = ReadMeta(d);
             if (m is null || m.Phase != "writing") continue;
+            // 同一个 root 下可能放着别的客户端的日志（换过安装目录、复制过 .poe-zh）。
+            // 那些的原字节不属于这个文件，写进去就是纯粹的破坏。
+            string mTarget;
+            try { mTarget = Path.GetFullPath(m.Target); } catch { continue; }
+            if (!string.Equals(mTarget, target, StringComparison.OrdinalIgnoreCase)) continue;
+
             var err = ApplySnapshot(m, d, out var n);
             m.Phase = err is null ? "rolledback" : "writing";
             SaveMeta(d, m);
-            if (err is null) { try { Directory.Delete(d, recursive: true); } catch { } }
-            r.Recovered = true;
-            r.RestoredFiles = err is null ? n : 0;
-            r.Message = err is null
-                ? $"上次写入没有正常结束（开始于 {m.Created}），已把 ggpk 退回写入前的字节（{n} 块）"
-                : $"上次写入没有正常结束，退回时出错：{err}";
-            break;
+            if (err is null) {
+                try { Directory.Delete(d, recursive: true); } catch { }
+                done++;
+                blocks += n;
+            } else {
+                failed.Add($"{Path.GetFileName(d)}：{err}");
+            }
+        }
+
+        r.Recovered = done + failed.Count > 0;
+        r.Complete = failed.Count == 0;
+        r.RestoredFiles = blocks;
+        r.Errors = failed;
+        if (r.Recovered) {
+            r.Message = r.Complete
+                ? $"上次写入没有正常结束，已把 ggpk 退回写入前的字节（{done} 份日志 / {blocks} 块）"
+                : $"上次写入没有正常结束，{failed.Count} 份日志没能退回（已退回 {done} 份）";
         }
         return r;
     }
@@ -386,7 +411,14 @@ internal sealed class GgpkUndo : IRollback {
             while (ReadExactly(log, hdr, 12, allowEof: true)) {
                 var off = BitConverter.ToInt64(hdr, 0);
                 var cnt = BitConverter.ToInt32(hdr, 8);
-                if (off < 0 || cnt <= 0 || cnt > (64 << 20)) { errs.Add($"日志里有坏记录（偏移 {off}，长度 {cnt}）"); break; }
+                // 偏移必须落在原文范围内。只查 cnt <= 64MB 是不够的：日志被截断/写坏时
+                // off 可能是垃圾值，f.Position = off 会写到文件尾之外，FileStream 在中间
+                // 填 0 —— 结果是「追加了一堆垃圾，读回比对还能通过，然后报成功」。
+                // 用 off > OrigLength - cnt 而不是 off + cnt > OrigLength，避开 long 加法溢出。
+                if (off < 0 || cnt <= 0 || cnt > (64 << 20) || off > m.OrigLength - cnt) {
+                    errs.Add($"日志记录越界（偏移 {off}，长度 {cnt}，原文长度 {m.OrigLength}）");
+                    break;
+                }
                 var buf = new byte[cnt];
                 if (!ReadExactly(log, buf, cnt)) { errs.Add("日志被截断"); break; }
                 f.Position = off;
@@ -449,6 +481,8 @@ internal sealed class GgpkUndo : IRollback {
         }
         return true;
     }
+
+    internal static int MagicLength => Magic.Length;
 
     /// <summary>测试用：模拟进程被强杀 —— 关掉句柄就走，不提交也不记账。</summary>
     internal void SimulateCrash() {
