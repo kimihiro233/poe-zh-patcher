@@ -1,0 +1,29 @@
+{
+  "version": "0.5.3",
+  "built_at": "2026-10-30T13:19:58.197341+08:00",
+  "game": {
+    "client_version": "3.29.3b",
+    "patch_version": "3.29.3.3"
+  },
+  "source": {
+    "git_commit": "7783afece68972696e491875e30f00a214adbb6f",
+    "git_branch": "master",
+    "git_describe": "v0.5.2-1-g7783afe"
+  },
+  "toolchain": {
+    "dotnet_sdk": "8.0.427",
+    "python": "3.13.14",
+    "os": "nt"
+  },
+  "artifacts": {
+    "bundle.gz": {
+      "sha256": "5486b6b82f114df648b8af9754df4fbc7aa9ae94141826faaec94a5f139adc2b",
+      "bytes": 2323451
+    },
+    "PoE-zh-Patcher.exe": {
+      "sha256": "db5a7ce36a6710e85800f8e1bbc88eedf8d56f8e3b1c40ecd8f0e0ec0b7ac9a8",
+      "bytes": 38065063
+    }
+  },
+  "note": "single-file publish 不承诺位级可复现；核对方式 = 本文件 + sbom.cdx.json + MANIFEST.sha256"
+}

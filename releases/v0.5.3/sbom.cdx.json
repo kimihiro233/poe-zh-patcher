@@ -1,0 +1,302 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:371194f9-df83-594b-abfb-134db1660f1e",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-30T13:19:58.197341+08:00",
+    "tools": [
+      {
+        "vendor": "poe-zh",
+        "name": "tools/release.py",
+        "version": "0.5.3"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "PoE-zh-Patcher",
+      "version": "0.5.3",
+      "licenses": [
+        {
+          "license": {
+            "name": "AGPL-3.0-or-later（受 LibGGPK3 约束，待作者确认）"
+          }
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "file",
+      "name": "oo2core",
+      "version": "Oodle 2 core（Kraken 解码器，版本号未内嵌）",
+      "description": "解压 Bundles2 里的 Oodle 压缩块。LibBundle3 通过同名原生库加载它",
+      "licenses": [
+        {
+          "license": {
+            "name": "proprietary"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "poezh:path",
+          "value": "tools/lib/oo2core.dll"
+        },
+        {
+          "name": "poezh:source",
+          "value": "从 Path of Exile 客户端目录提取（客户端随包带了 Oodle 运行时）"
+        },
+        {
+          "name": "poezh:redistributable",
+          "value": "false"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4758c7901cbd68df1848b7afed48c1975ad59b509886c21b87c0e91d717446b5"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "libdat2",
+      "version": "0.16.2",
+      "description": "读写 .datc64。只有 tools/dumper 用（HintPath 直接引 dll，没走 NuGet）",
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-or-later"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "poezh:path",
+          "value": "tools/lib/LibDat2.dll"
+        },
+        {
+          "name": "poezh:source",
+          "value": "https://github.com/aianlinb/LibDat2"
+        },
+        {
+          "name": "poezh:redistributable",
+          "value": "true"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "23e3d643d20882c11a5f21519770e7f43b6748f4a80826ea8e110e7dab74b48b"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "datdefinitions",
+      "version": "无版本字段",
+      "description": "LibDat2 解析 .datc64 时需要的列类型定义",
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-or-later"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "poezh:path",
+          "value": "tools/lib/DatDefinitions.json"
+        },
+        {
+          "name": "poezh:source",
+          "value": "本仓库自制（从 .datc64 表头反推的列定义）"
+        },
+        {
+          "name": "poezh:redistributable",
+          "value": "true"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "311560f229654328db584d1b4a3306fd38ad5436c10a0eb76cbc95420f1ba07a"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "schema",
+      "version": "7",
+      "description": "研究阶段的表结构参照",
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-or-later"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "poezh:path",
+          "value": "tools/lib/schema.min.json"
+        },
+        {
+          "name": "poezh:source",
+          "value": "由 poe-dat-viewer 导出的表结构快照（createdAt 1791971088）"
+        },
+        {
+          "name": "poezh:redistributable",
+          "value": "true"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "25a07746db3225d77b30b1960c3d5fe7e926499e7067829d194aaa91b4a9fc09"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "schema-poe1",
+      "version": "7",
+      "description": "研究阶段的表结构参照",
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-or-later"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "poezh:path",
+          "value": "tools/lib/schema-poe1.min.json"
+        },
+        {
+          "name": "poezh:source",
+          "value": "同上，PoE1 分支的一份副本"
+        },
+        {
+          "name": "poezh:redistributable",
+          "value": "true"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ca95dfac297688f3363567a1db37ee676af338e2de4428e01e4346a6fed2f6d4"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "bundle",
+      "version": "随 VERSION 走（构建时写入）",
+      "description": "补丁器的全部写入数据，内嵌进 exe",
+      "licenses": [
+        {
+          "license": {
+            "name": "proprietary"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "poezh:path",
+          "value": "tools/pack/bundle.gz"
+        },
+        {
+          "name": "poezh:source",
+          "value": "`python tools/build_bundle.py` 从 raw_sd + 修正稿生成"
+        },
+        {
+          "name": "poezh:redistributable",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "LibGGPK3.LibBundledGGPK3",
+      "version": "2.7.5",
+      "description": "把 BundledGGPK 当 Stream 用，是「原地覆盖 + 逐块记原字节」的前提",
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-or-later"
+          }
+        }
+      ],
+      "purl": "pkg:nuget/LibGGPK3.LibBundledGGPK3@2.7.5",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/aianlinb/LibGGPK3"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "LibGGPK3.LibBundle3",
+      "version": "2.7.5",
+      "description": "bundle 索引与文件读写",
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-or-later"
+          }
+        }
+      ],
+      "purl": "pkg:nuget/LibGGPK3.LibBundle3@2.7.5",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/aianlinb/LibGGPK3"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "LibGGPK3.LibGGPK3",
+      "version": "2.7.5",
+      "description": "ggpk 容器结构（传递依赖）",
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-or-later"
+          }
+        }
+      ],
+      "purl": "pkg:nuget/LibGGPK3.LibGGPK3@2.7.5",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/aianlinb/LibGGPK3"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "aianlinb.SystemExtensions",
+      "version": "1.8.0",
+      "description": "Span/Stream 扩展（传递依赖）",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:nuget/aianlinb.SystemExtensions@1.8.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/aianlinb/SystemExtensions"
+        }
+      ]
+    }
+  ]
+}
