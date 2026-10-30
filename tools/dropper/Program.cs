@@ -669,6 +669,10 @@ internal static class Program {
 
         LoadBundle();
 
+        // --help 必须在这里就返回：不返回的话会落到「没有位置参数 → 自动找默认安装路径」，
+        // 于是「想看帮助」变成「打开真实客户端」。文档里写了的开关都得真有用。
+        if (Args.ContainsKey("help")) { PrintUsage(); return 0; }
+
         _restoreBare = !Args.ContainsKey("keep-markup");
 
         // 采集包脱敏自检：规则改一个字就是「泄漏」或「误杀」，所以每条规则都拿真实日志行钉住
@@ -1689,6 +1693,14 @@ internal static class Program {
         foreach (var arg in new[] { "--on-modified=ours", "--on-modified=merge", "--gate=enforce", "--gate=warn" }) {
             var code = RunChild(new[] { arg, "--args-test=child" });
             if (code != 0) { Console.WriteLine($"  ! 合法参数被误拒：{arg} → {code}"); bad++; }
+        }
+
+        // 文档里写了 --help，它就必须真的打印帮助然后退出 —— 否则会落到
+        // 「没有位置参数 → 自动找默认安装路径」，变成「想看帮助却打开了客户端」。
+        {
+            var code = RunChild(new[] { "--help" });
+            Console.WriteLine($"  {(code == 0 ? "OK  " : "FAIL")} --help               退出码 {code}（期望 0）");
+            if (code != 0) bad++;
         }
 
         Console.WriteLine(bad == 0
