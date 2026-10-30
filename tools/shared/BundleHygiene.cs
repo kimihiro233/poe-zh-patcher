@@ -72,7 +72,7 @@ internal static class BundleHygiene {
     /// 换一条全新的自建 bundle 来承接本次写入；旧记录一律停用（不再进 CustomBundles）。
     /// 容器本来就干净（没有自建记录）时什么都不做，让库自己按需创建。
     /// </summary>
-    public static DetachResult Detach(Idx index) {
+    public static DetachResult Detach(Idx index, string? bundleDir = null) {
         var r = new DetachResult();
         var all = (BundleRecord[])FBundles.GetValue(index)!;
         var self = all.Where(b => b.Path.StartsWith(Prefix, StringComparison.Ordinal)).ToArray();
@@ -89,12 +89,22 @@ internal static class BundleHygiene {
             foreach (var f in b.Files)
                 if (f.Path is not null) r.Inherited.Add(f.Path);
 
-        // 名字必须唯一：GetBundleToWrite / CreateBundle 都是 Create 语义，同名会 File.Create 把旧文件清空。
-        // 用时间戳而不是序号，是为了让「本次写入」的物理文件与历史文件永不相撞。
-        var name = Prefix + "zh" + DateTime.Now.ToString("yyMMddHHmmss");
+        var name = NewName(bundleDir);
+        if (name.Length == 0) {
+            r.Error = "连续 8 次都没拿到不重复的 bundle 名，已中止（继续写会覆盖仍被索引引用的旧 bundle）";
+            return r;
+        }
         Bundle nb;
         try { nb = (Bundle)MCreate.Invoke(index, new object?[] { name })!; }
         catch (Exception ex) { r.Error = ex.Message; return r; }
+
+        // 观测点：新建的 bundle 必须是空的。不空说明撞上了一个已有物理文件，
+        // 内容被继承进来了 —— 那正是 v0.4.6 的现场（旧记录指向的字节被从 0 重写）。
+        // 宁可中止，也不在这个状态上继续写。
+        if (nb.Record is { Files.Count: > 0 }) {
+            r.Error = $"新 bundle {name} 里已经含有 {nb.Record.Files.Count} 个文件，疑似同名覆盖，已中止";
+            return r;
+        }
 
         FToWrite.SetValue(index, nb);
         FStream.SetValue(index, new MemoryStream(1 << 20));
@@ -106,6 +116,44 @@ internal static class BundleHygiene {
         r.Name = name + Ext;
         return r;
     }
+
+    // 本进程已经发出过的名字。名字撞车最现实的场景就是「同一秒内连着跑两次」
+    // （脚本循环、菜单里连点），那种情况下时钟和 pid 都不变，只剩随机数能区分 ——
+    // 4 位随机在 20000 次里必然撞，所以进程内再加一道确定性去重。
+    private static readonly HashSet<string> Issued = new(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// 造一个没人用过的 bundle 名：时间戳 + pid + 4 位随机。
+    /// 只用秒级时间戳不够 —— 注释早就写着「同名会 File.Create 把旧文件清空」，
+    /// 而同一秒跑两次是能稳定复现的（v0.4.6 的 Buffer Underflow 就是这么回来的）。
+    /// </summary>
+    private static string NewName(string? bundleDir) {
+        var stamp = DateTime.Now.ToString("yyMMddHHmmss");
+        var pid = Environment.ProcessId.ToString("x");
+        for (var i = 0; i < 8; i++) {
+            var bare = "zh" + stamp + "-" + pid + "-" + Random.Shared.Next(0x10000).ToString("x4");
+            // 索引里存的只是个字符串，没有硬上限；但物理文件名别无限长。
+            // 上限按「bare + 扩展名」算（40），不是按「带 LibGGPK3/ 前缀的索引路径」——
+            // 前缀那 9 个字符不进文件名，按它算会把所有候选都判成超长（第一版就这么写废了）。
+            if (bare.Length + Ext.Length > 40) continue;
+            var full = Prefix + bare;
+            lock (Issued) {
+                if (Issued.Contains(full)) continue;
+                if (bundleDir is not null &&
+                    File.Exists(Path.Combine(bundleDir, bare + Ext))) continue;
+                Issued.Add(full);
+            }
+            return full;
+        }
+        return "";
+    }
+
+    /// <summary>自检用：只跑取名逻辑，不碰索引。</summary>
+    internal static string NewNameForTest(string? bundleDir = null) => NewName(bundleDir);
+
+    /// <summary>自检用：前缀与扩展名，让测试不必复制字符串。</summary>
+    internal static string PrefixForTest => Prefix;
+    internal static string ExtForTest => Ext;
 
     /// <summary>诊断用：把索引里的 bundle 记录原样列出来（自建的全列，游戏自带的只报数量）。</summary>
     public static void Dump(Idx index, bool all = false) {
