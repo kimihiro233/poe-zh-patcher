@@ -573,7 +573,7 @@ internal static class Program {
         // 自检
         "sd-test", "dat-test", "data-test", "lang-test", "flag-test", "redact-test", "gate-test",
         "markup-test", "undo-test", "legacy-test", "baseline-test", "recover-test",
-        "bundle-name-test", "args-test", "backup-test",
+        "bundle-name-test", "args-test", "backup-test", "fixture",
         // 其它
         "help",
     };
@@ -972,10 +972,38 @@ internal static class Program {
         if (!File.Exists(path)) { Console.WriteLine($"找不到文件：{path}"); return 1; }
         var cur = File.ReadAllBytes(path);
 
+        // 诊断开关：把行尾换成 LF，复现「第三方汉化写成 LF-only」的客户端。
+        // 这类文件以前会被报成「行数 1 ≠ 基线 268」，把人引向「数据包版本不对」。
+        var lfFixture = Args.GetValueOrDefault("fixture") == "lf";
+        if (lfFixture) {
+            if (cur.Length >= 2 && cur[0] == 0xFF && cur[1] == 0xFE) {
+                var s = Encoding.Unicode.GetString(cur, 2, cur.Length - 2).Replace("\r\n", "\n");
+                var body = Encoding.Unicode.GetBytes(s);
+                cur = new byte[body.Length + 2];
+                cur[0] = 0xFF; cur[1] = 0xFE;
+                body.CopyTo(cur, 2);
+                Console.WriteLine("  （已把这份文件转成 LF-only，模拟第三方汉化的行尾）");
+            }
+        }
+
         var ok = TryCustomBase(e, cur, out var why, out var knownOnly);
+        var nLines = LineCountSafe(cur);
         Console.WriteLine($"{name}");
-        Console.WriteLine($"  行数 {SplitLines(cur).Count:N0} / 基线 {e.BaseLines:N0}   待改行 {e.Rows.Count}");
+        Console.WriteLine($"  行数 {(nLines < 0 ? "读不出（无 BOM）" : nLines.ToString("N0"))} / 基线 {e.BaseLines:N0}   待改行 {e.Rows.Count}");
+        // 认不出时用结构层的原因覆盖 TryCustomBase 的「行数 1 ≠ 基线 N」：后者是对的，
+        // 但它描述的是症状，不是原因。
+        if (!ok) why = WhyUnknown(cur, e);
         Console.WriteLine($"  可叠文本判定：{(ok ? "是" : "否")}  （{why}）");
+
+        // --fixture=lf 是自检模式：判据是「拒写 + 原因指向行尾」，不是「这份文件能合并」。
+        // 这样 CI 只看退出码就够了，不必去 grep 中文输出（改文案不该弄坏 CI）。
+        if (lfFixture) {
+            var diagnosed = !ok && why.Contains("LF");
+            Console.WriteLine(diagnosed
+                ? "  OK：LF-only 被拒，而且原因指向行尾，不会把人引向「数据包版本不对」"
+                : "  FAIL：LF-only 的拒写原因不对（应当指向行尾）");
+            return diagnosed ? 0 : 1;
+        }
         if (ok && !knownOnly) Console.WriteLine("  注意：这一份含旧版补丁文本，会按当前数据包重写");
         if (!ok) return 5;
 
@@ -1975,6 +2003,7 @@ internal static class Program {
         L("  排障用：--simulate-fail=N 故意在第 N 个文件失败，验证退回流程（不写坏客户端）");
         L("  <...> --set=translated --keep-markup      保留底稿的标记层，只叠文本（外部改过的客户端）");
         L("  --sd-test=<某份词缀文件.txt>              只读演练：判定 + 合并 + 应改行数");
+        L("  --sd-test=<文件> --fixture=lf            同上，但先把行尾转成 LF（复现第三方汉化的写法）");
         L();
         L("自检（都不需要打开游戏）：");
         L("  --args-test            参数表与这份文档是否一致、拼错的参数是否被拒");
@@ -2042,6 +2071,13 @@ internal static class Program {
             throw new InvalidDataException("不是 UTF-16LE 带 BOM 的文件");
         var s = Encoding.Unicode.GetString(b, 2, b.Length - 2);
         return s.Split(new[] { "\r\n" }, StringSplitOptions.None).ToList();
+    }
+
+    /// <summary>不抛异常的行数：诊断用，文件连 BOM 都没有时返回 -1。</summary>
+    private static int LineCountSafe(byte[] b) {
+        if (b.Length < 2 || b[0] != 0xFF || b[1] != 0xFE) return -1;
+        var s = Encoding.Unicode.GetString(b, 2, b.Length - 2);
+        return s.Split(new[] { "\r\n" }, StringSplitOptions.None).Length;
     }
 
     private static byte[] Encode(List<string> lines) {
@@ -2129,6 +2165,24 @@ internal static class Program {
             Flavor.Dual => e.ShaDual ?? e.ShaOriginal,
             _ => e.ShaDualAll,
         };
+    }
+
+    /// <summary>
+    /// 「认不出」到底是因为什么。行为不变（仍然拒写），只是把原因说准。
+    ///
+    /// 以前所有认不出的情况都归到「行数 N ≠ 基线 M」，而 LF-only 的文件整份会被当成一行，
+    /// 于是提示是「行数 1 ≠ 基线 268」—— 用户会去怀疑数据包版本，实际是行尾格式。
+    /// </summary>
+    private static string WhyUnknown(byte[] cur, SdEntry e) {
+        if (cur.Length < 2 || cur[0] != 0xFF || cur[1] != 0xFE)
+            return "文件不是 UTF-16LE 带 BOM（本工具只支持这种编码）";
+        var s = Encoding.Unicode.GetString(cur, 2, cur.Length - 2);
+        if (!s.Contains("\r\n") && s.Contains('\n'))
+            return "行尾是 LF，本工具只支持 CRLF（整份文件被当成了一行）";
+        var n = s.Split(new[] { "\r\n" }, StringSplitOptions.None).Length;
+        if (e.BaseLines > 0 && n != e.BaseLines)
+            return $"行数 {n:N0} 与基线 {e.BaseLines:N0} 不符（游戏更新过？或文件被别的工具改过）";
+        return "内容与原文、译文、对照三种形态都不匹配（可能是别的汉化写的）";
     }
 
     private static Flavor Detect(SdEntry e, string sha) {
@@ -2375,6 +2429,8 @@ internal static class Program {
                     it.CurFlavor = Flavor.DualLegacy;
                     why = lwhy;
                 }
+                // 两条接管路径都不成立：给出结构层面的具体原因，而不是「行数 1 ≠ 基线 268」
+                if (it.CurFlavor == Flavor.Unknown) why = WhyUnknown(cur, e);
                 it.Why = why;
             }
             list.Add(it);
