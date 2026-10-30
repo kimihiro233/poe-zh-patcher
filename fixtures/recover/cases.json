@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "note": "B1 的五个场景。每个场景在临时目录里重建一次「上次写入没走完」的现场（Bundles2/_.index.bin + .poe-zh/txn.json + 可选的索引备份），然后调用 Txn.Recover 并断言四件事：Complete / journal 是否保留 / 索引字节 / 容器外文件是否被触碰。旧版把「备份不存在」读成「回滚成功」并删掉 journal，所以 C2 与 C4 在旧版上必红。",
+  "cases": [
+    {
+      "id": "C1",
+      "desc": "备份存在：完整回滚，journal 删除，索引 = 备份字节",
+      "backup": "present",
+      "journal": "valid",
+      "newBundles": [],
+      "expect": { "complete": true, "journalKept": false, "index": "backup" }
+    },
+    {
+      "id": "C2",
+      "desc": "备份缺失：不许报成功，journal 必须留下，索引一个字节都不动",
+      "backup": "absent",
+      "journal": "valid",
+      "newBundles": [],
+      "expect": { "complete": false, "journalKept": true, "index": "unchanged" }
+    },
+    {
+      "id": "C3",
+      "desc": "日志损坏但有备份：按最近一份备份恢复，成功后删日志",
+      "backup": "present",
+      "journal": "corrupt",
+      "newBundles": [],
+      "expect": { "complete": true, "journalKept": false, "index": "backup" }
+    },
+    {
+      "id": "C4",
+      "desc": "日志损坏且没有备份：不删日志，如实报失败",
+      "backup": "absent",
+      "journal": "corrupt",
+      "newBundles": [],
+      "expect": { "complete": false, "journalKept": true, "index": "unchanged" }
+    },
+    {
+      "id": "C5",
+      "desc": "NewBundles 里带 ..\\outside.bin：容器外的文件不许被删",
+      "backup": "present",
+      "journal": "valid",
+      "newBundles": ["..\\outside.bin"],
+      "expect": { "complete": false, "journalKept": true, "index": "backup" }
+    }
+  ]
+}

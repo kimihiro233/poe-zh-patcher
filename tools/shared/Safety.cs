@@ -33,6 +33,9 @@ internal sealed class JournalFile {
     public string Phase { get; set; } = "writing";     // writing / saved
     public List<string> NewBundles { get; set; } = new();
     public List<JournalWritten> Written { get; set; } = new();
+    // 回滚失败过几次、上次为什么失败。老 journal 里没有这两个字段，反序列化后是 0 / 空，天然兼容。
+    public int Attempts { get; set; }
+    public List<string> LastErrors { get; set; } = new();
 }
 
 internal sealed class JournalWritten {
@@ -42,7 +45,14 @@ internal sealed class JournalWritten {
 
 internal sealed class RecoverResult {
     public bool Recovered;
+    /// <summary>是否**真的**全退回去了。false 表示「退了一部分」或「一步都没退成」——
+    /// 老版本把它和 Recovered 合成一个 bool，于是「备份不存在」被读成「回滚成功」。</summary>
+    public bool Complete;
+    /// <summary>失败时现场（journal）是否保留。保留才有下一次重试的可能。</summary>
+    public bool JournalKept;
+    public string JournalPath = "";
     public string Message = "";
+    public List<string> Errors = new();
     public int RestoredFiles;
 }
 
@@ -141,9 +151,17 @@ internal sealed class Txn : IRollback {
     public string? Rollback() {
         if (_done) return null;
         _done = true;
-        var err = RollbackFiles(_j);
-        try { File.Delete(JournalPath); } catch { }
-        return err;
+        var (errs, _) = RollbackFiles(_j);
+        if (errs.Count == 0) {
+            try { File.Delete(JournalPath); } catch { }
+            return null;
+        }
+        // 退不干净就不删日志：下次启动还要靠它知道「上次没走完」，
+        // 而这次的失败原因也在日志里，删了等于把唯一的线索一起销毁。
+        _j.Attempts++;
+        _j.LastErrors = errs.Take(8).ToList();
+        try { WriteJournal(JournalPath, _j); } catch { }
+        return string.Join("；", errs);
     }
 
     private void PruneBackups(int keep) {
@@ -156,11 +174,13 @@ internal sealed class Txn : IRollback {
 
     private string JournalPath => Path.Combine(_dir, JournalName);
 
-    private void SaveJournal() {
-        // 先写临时文件再换名：journal 自己半截就等于没有 journal
-        var tmp = JournalPath + ".tmp";
-        File.WriteAllText(tmp, JsonSerializer.Serialize(_j, new JsonSerializerOptions { WriteIndented = true }), TextEnc.Utf8);
-        File.Move(tmp, JournalPath, overwrite: true);
+    private void SaveJournal() => WriteJournal(JournalPath, _j);
+
+    /// <summary>先写临时文件再换名：journal 自己半截就等于没有 journal。</summary>
+    private static void WriteJournal(string jp, JournalFile j) {
+        var tmp = jp + ".tmp";
+        File.WriteAllText(tmp, JsonSerializer.Serialize(j, new JsonSerializerOptions { WriteIndented = true }), TextEnc.Utf8);
+        File.Move(tmp, jp, overwrite: true);
     }
 
     // ---------------------------------------------------------------- 静态：启动自愈
@@ -180,49 +200,122 @@ internal sealed class Txn : IRollback {
         JournalFile? j = null;
         try { j = JsonSerializer.Deserialize<JournalFile>(File.ReadAllText(jp, Encoding.UTF8)); } catch { }
         if (j is null) {
-            // journal 坏了：至少把最近的备份换回去，这比留着一个可疑索引强
+            // journal 坏了：至少把最近的备份换回去，这比留着一个可疑索引强。
+            // 但「有没有换成功」必须如实说 —— 找不到备份就什么都不做、并且**不删日志**。
+            r.Recovered = true;
+            r.JournalPath = jp;
+            string? latest = null;
             try {
-                var latest = Directory.GetFiles(dir, "index-*.bin")
+                latest = Directory.GetFiles(dir, "index-*.bin")
                     .OrderByDescending(f => f, StringComparer.Ordinal).FirstOrDefault();
-                if (latest is not null) {
-                    File.Copy(latest, indexPath, overwrite: true);
-                    r.Recovered = true;
-                    r.Message = "上次写入的日志已损坏，已按最近一次索引备份恢复";
-                }
             } catch { }
-            try { File.Delete(jp); } catch { }
+
+            if (latest is null) {
+                r.Complete = false;
+                r.JournalKept = true;
+                r.Errors.Add("日志已损坏，而且目录里没有任何索引备份可用");
+                r.Message = "上次写入的日志已损坏，且没有可用备份";
+                return r;
+            }
+
+            try {
+                var want = Sha256(File.ReadAllBytes(latest));
+                File.Copy(latest, indexPath, overwrite: true);
+                if (Sha256(File.ReadAllBytes(indexPath)) != want)
+                    throw new IOException("写回后校验不一致");
+                r.Complete = true;
+                r.RestoredFiles = 1;
+                r.Message = $"上次写入的日志已损坏，已按最近一次索引备份恢复（{Path.GetFileName(latest)}）";
+                try { File.Delete(jp); } catch { }
+            } catch (Exception ex) {
+                r.Complete = false;
+                r.JournalKept = true;
+                r.Errors.Add($"按备份恢复失败：{ex.Message}");
+                r.Message = "上次写入的日志已损坏，按备份恢复也失败了";
+            }
             return r;
         }
 
-        var err = RollbackFiles(j);
-        try { File.Delete(jp); } catch { }
+        // 已经试过 3 次还退不回去：只报错，不再自动动文件 —— 每次启动都去写一遍
+        // 只会让「到底是哪一步坏了」更难查，而用户早该去验证完整性了。
+        if (j.Attempts >= 3) {
+            r.Recovered = true;
+            r.Complete = false;
+            r.JournalKept = true;
+            r.JournalPath = jp;
+            r.Errors.AddRange(j.LastErrors);
+            r.Message = $"上次写入没有正常结束，已尝试 {j.Attempts} 次仍退不回去";
+            return r;
+        }
 
+        var (errs, restored) = RollbackFiles(j);
         r.Recovered = true;
-        r.RestoredFiles = j.Written.Count;
-        r.Message = err is null
-            ? $"上次写入没有正常结束（开始于 {j.Started}），已回滚到写入前的状态"
-            : $"上次写入没有正常结束，已回滚索引，但有文件没能清理：{err}";
+        r.RestoredFiles = restored;
+        r.Errors = errs;
+        r.Complete = errs.Count == 0;
+
+        if (r.Complete) {
+            try { File.Delete(jp); } catch { }
+            r.Message = $"上次写入没有正常结束（开始于 {j.Started}），已回滚到写入前的状态";
+        } else {
+            // 现场必须留着：删了日志，下次启动连「上次没走完」都不知道，
+            // 而这次的失败原因也一起消失了。
+            j.Attempts++;
+            j.LastErrors = errs.Take(8).ToList();
+            try { WriteJournal(jp, j); } catch { }
+            r.JournalKept = true;
+            r.JournalPath = jp;
+            r.Message = $"上次写入没有正常结束，但只退回了一部分（第 {j.Attempts} 次尝试）";
+        }
         return r;
     }
 
-    private static string? RollbackFiles(JournalFile j) {
-        var err = new List<string>();
+    /// <summary>
+    /// 把索引换回备份、删掉本次新建的 bundle。返回**真实**结果：
+    /// 恢复了几个、哪几步没成。不再用「有没有抛异常」代替「成没成」——
+    /// 备份不存在时原来会静默跳过，调用方读成成功，这是 B1 的根因。
+    /// </summary>
+    private static (List<string> errs, int restored) RollbackFiles(JournalFile j) {
+        var errs = new List<string>();
+        var restored = 0;
+
         // 1) 索引换回备份。这一步是「游戏能不能读」的关键，先做。
-        if (j.IndexBackup.Length > 0 && File.Exists(j.IndexBackup)) {
-            try { File.Copy(j.IndexBackup, j.Index, overwrite: true); }
-            catch (Exception ex) { err.Add($"索引恢复失败：{ex.Message}"); }
+        if (string.IsNullOrEmpty(j.IndexBackup)) {
+            errs.Add("日志里没有索引备份路径，无法判断该退回哪一份");
+        } else if (!File.Exists(j.IndexBackup)) {
+            errs.Add($"索引备份不见了：{j.IndexBackup}");
+        } else {
+            try {
+                var want = Sha256(File.ReadAllBytes(j.IndexBackup));
+                File.Copy(j.IndexBackup, j.Index, overwrite: true);
+                if (Sha256(File.ReadAllBytes(j.Index)) != want)
+                    errs.Add("索引写回后校验不一致（磁盘错误？）");
+                else restored++;
+            } catch (Exception ex) { errs.Add($"索引恢复失败：{ex.Message}"); }
         }
 
         // 2) 删掉本次新建的 bundle。索引已经换回去了，这些文件没有任何记录引用，
         //    留着只是占地方；删失败也无害，下次提交时 TrimOrphans 会再清一遍。
-        var dir = Path.GetDirectoryName(j.Index)!;
+        var dir = Path.GetFullPath(Path.GetDirectoryName(j.Index)!);
         foreach (var name in j.NewBundles) {
-            try {
-                var p = Path.Combine(dir, name.Replace('/', Path.DirectorySeparatorChar));
-                if (File.Exists(p)) File.Delete(p);
-            } catch (Exception ex) { err.Add($"{name}：{ex.Message}"); }
+            // 顺手堵住目录穿越：这份 JSON 落在用户可写目录里，名字不能当可信输入。
+            string p;
+            try { p = Path.GetFullPath(Path.Combine(dir, name.Replace('/', Path.DirectorySeparatorChar))); }
+            catch (Exception ex) { errs.Add($"{name}：路径无法解析（{ex.Message}）"); continue; }
+
+            if (!p.StartsWith(dir + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) {
+                errs.Add($"{name}：路径指向容器之外，拒绝删除");
+                continue;
+            }
+            try { if (File.Exists(p)) { File.Delete(p); restored++; } }
+            catch (Exception ex) { errs.Add($"{name}：{ex.Message}"); }
         }
-        return err.Count == 0 ? null : string.Join("；", err);
+        return (errs, restored);
+    }
+
+    private static string Sha256(byte[] b) {
+        using var h = System.Security.Cryptography.SHA256.Create();
+        return Convert.ToHexString(h.ComputeHash(b)).ToLowerInvariant();
     }
 }
 
