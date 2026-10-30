@@ -2490,7 +2490,10 @@ internal static class Program {
                 }
                 // 覆盖之前先把「现在这份」落盘。如果它是别的汉化改过的，
                 // 这份字节在这台机器之外不存在第二个副本，丢了就永久没了。
-                if (backupSet is not null) BackupStore.Add(backupSet, i.Path, i.Cur, ShowFlavor(i));
+                // 内容没变的（只是搬 bundle 的那种重写）不用备份 —— 没覆盖掉任何东西，
+                // 而每次安装都会重写全部文件，无脑备份会让 .poe-zh 白白涨几十 MB。
+                if (backupSet is not null && Sha(i.Cur) != got)
+                    BackupStore.Add(backupSet, i.Path, i.Cur, ShowFlavor(i));
 
                 var t0 = Stopwatch.StartNew();
                 if (!store.Write(i.Path, targetBytes)) {
@@ -2568,7 +2571,10 @@ internal static class Program {
         Console.WriteLine(plan
             ? $"演算 {nDone} 个（未写入任何文件），失败 {nFail} 个，用时 {sw.Elapsed.TotalSeconds:F1} s"
             : $"完成 {nDone} 个，回读通过 {nBack} 个，失败 {nFail} 个，用时 {sw.Elapsed.TotalSeconds:F1} s");
-        if (!plan && nDone > 0 && backupRoot.Length > 0) Console.WriteLine($"备份：{backupRoot}（用 --restore-backup 可以整份写回去）");
+        // 只在真有东西被覆盖时才提备份路径：内容没变的那种重写不会产生备份，
+        // 空目录也已经被 DropIfEmpty 删掉了，还按老样子提示就是指向一个不存在的地方。
+        if (!plan && nDone > 0 && backupSet is { Items.Count: > 0 })
+            Console.WriteLine($"备份：{backupSet.Dir}（用 --restore-backup 可以整份写回去）");
         if (nFail == 0 && !plan) {
             Console.WriteLine();
             Console.WriteLine("现在可以启动游戏了。");
