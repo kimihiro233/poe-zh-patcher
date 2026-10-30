@@ -562,3 +562,150 @@ for name in ["gate-test", "redact-test", "markup-test", "legacy-test",
 B1 是本批唯一「用户已经在受害但没人知道」的问题（假成功 + 删现场），
 B3 是唯一「可能复现历史事故」的问题，B9 是唯一「会让人按错误配置跑完整轮」的问题。
 这三条做完，读写链路的失败路径才算有了观测点；其余六条是把它做扎实。
+
+---
+
+# 第二轮：验证发现的三处（v0.5.4 发布前必须修）
+
+九条修复经端到端复现全部生效，但验证过程本身暴露出三个新问题，
+其中 F1 是**修复引入的退化**，比原始缺陷更容易让用户卡死。
+
+| 编号 | 问题 | 严重度 | 来源 | 改动量 |
+|---|---|---|---|---|
+| F1 | `Attempts >= 3` 硬闸：条件修好也不再重试，且无逃生口 | 高 | 本轮修复引入 | 小 |
+| F2 | `Program.cs` / `doc_check.py` 行尾被整体改成 LF | 中 | 编辑器副作用 | 零逻辑 |
+| F3 | 恢复失败提示三重重复「上次写入没有正常结束」 | 低 | 本轮修复引入 | 小 |
+
+## F1 去掉重试硬闸，改为「幂等重试 + 逃生舱」
+
+### 证据
+
+按程序自己给的建议操作（「① 验证游戏完整性 → ② 重新运行本程序」），
+在第 4 次启动后把缺失的备份补回去，程序仍然：
+
+```
+ 上次写入没有正常结束，而且没能完全退回去：…已尝试 3 次仍退不回去
+ 退出码=3
+ 索引：4096 个 0xCC（一个字节都没恢复）
+```
+
+用户此时唯一出路是手工删 `txn.json`，而删完之后索引仍是坏的，打开即崩
+（`Arithmetic operation resulted in an overflow`）。**提示里写的「② 重新运行本程序」在第 4 次之后是假的。**
+
+### 判断
+
+`Safety.cs:241` 的 `if (j.Attempts >= 3)` 在 `RollbackFiles` **之前**返回，
+拦掉的是「重试」而不是「重复写盘」—— 而回滚每一步都是「检查 + 覆盖写」，失败即返回，
+成本接近零。用「永久拒绝」换「少一次失败的文件存在性检查」，收益为负。
+
+### 改法
+
+**1) 删掉硬闸**（`Safety.cs:239-249` 整块删除）。
+
+**2) 加幂等捷径**：索引当前字节已等于备份时，直接收尾，不再复制 20 MB。
+
+```csharp
+// 上次回滚其实做完了、只是没来得及删日志：别再复制一遍，直接收尾。
+// 这一步同时挡住「每次启动都重写 20 MB 索引」——那才是硬闸原本想防的事。
+if (j.IndexBackup.Length > 0 && File.Exists(j.IndexBackup) && File.Exists(j.Index)
+    && Sha256(File.ReadAllBytes(j.Index)) == Sha256(File.ReadAllBytes(j.IndexBackup))) {
+    try { File.Delete(jp); } catch { }
+    r.Recovered = true; r.Complete = true; r.RestoredFiles = 1;
+    r.Message = "索引已经是写入前的状态，无需再回滚";
+    return r;
+}
+```
+
+成本只在「journal 存在」时发生（异常路径），正常启动零开销。
+
+**3) `Attempts` 降级为文案 + 升级提示**，不再参与控制流：
+
+```csharp
+if (j.Attempts >= 2) {
+    Console.WriteLine(" 已经失败 3 次以上。如果已经用 Steam/WeGame 验证过完整性，");
+    Console.WriteLine(" 索引很可能已被官方重建，此时应丢弃这份记录而不是回滚：");
+    Console.WriteLine($"   本程序 --reset-recover \"{j.Index}\"");
+}
+```
+
+**4) 新增 `--reset-recover`（逃生舱）**：丢弃 journal，**不做回滚**。
+
+```csharp
+// Txn
+public static string? DiscardJournal(string indexPath) {
+    var dir = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(indexPath))!, DirName);
+    var jp = Path.Combine(dir, JournalName);
+    if (!File.Exists(jp)) return "没有找到未完成的写入记录";
+    File.Delete(jp);
+    return null;
+}
+// GgpkUndo 同理：把所有 Phase=="writing" 的快照目录标记成 discarded 并删除
+```
+
+`Program.cs` 在 `Txn.Recover` 之前处理：
+
+```csharp
+if (Args.ContainsKey("reset-recover")) {
+    var msg = GgpkUndo.IsGgpk(gp) ? GgpkUndo.DiscardWriting(gp) : Txn.DiscardJournal(gp);
+    Console.WriteLine(msg ?? "已丢弃上次未完成的写入记录（没有回滚任何字节，索引保持当前状态）。");
+    Console.WriteLine(" 接下来请照常运行；如果游戏仍打不开，用 Steam/WeGame 验证完整性。");
+    if (msg is not null) return 1;
+    return 0;
+}
+```
+
+语义必须在 usage 里写死：**「不回滚、只丢记录」**，用于「官方已重建索引」的场景。
+它和 `--yes` 的区别：`--yes` 是「带着坏状态继续写」，`--reset-recover` 是「承认现状、不写」。
+
+**5) 统一文案**：外层只负责说一次「检测到上次写入没有正常结束」，`Message` 只讲结果。
+
+```csharp
+// Safety.cs
+成功：Message = $"已回滚到写入前的状态（开始于 {j.Started}）";
+失败：Message = $"没能完全退回去（第 {j.Attempts} 次尝试）";
+损坏+无备份：Message = "日志已损坏，且没有可用备份";
+损坏+已恢复：Message = $"日志已损坏，已按最近一次备份恢复（{name}）";
+// GgpkUndo.cs 同步去掉「上次写入没有正常结束」前缀
+
+// Program.cs
+Console.WriteLine(" 检测到上次写入没有正常结束。");
+Console.WriteLine(rec.Complete ? $" {rec.Message}" : $" {rec.Message}");
+```
+
+### 验收
+
+`fixtures/recover/cases.json` 加可选字段 `attempts`，`RecoverTest` 读进 `JournalFile.Attempts`。新增两例：
+
+| 用例 | 构造 | 期望 | 修复前 |
+|---|---|---|---|
+| C6 | 备份存在 + `attempts: 3` | `complete=true`，journal 删除 | **必红**（硬闸拦截） |
+| C7 | 索引字节已等于备份 + `attempts: 1` | `complete=true`，journal 删除，不重写索引（mtime 不变） | 红（会多复制一次） |
+
+再加一条端到端手测（不进 CI，写进发版检查清单）：
+`Attempts=3` + 备份补回 → 必须退出码 0 并真的把索引换回备份。
+
+## F2 把行尾改回去
+
+`Program.cs`（3442 行）与 `doc_check.py`（187 行）的 CRLF 被编辑器整体转成 LF，
+`.gitattributes` 是 `* -text`，所以不是 git 转换。`git diff -w` 已确认除行尾外无额外差异。
+
+改法：单独一个 commit，把两个文件转回 CRLF（先归一到 LF 再统一转 CRLF，避免重复转换）。
+
+验收：`git diff --ignore-all-space <F2 之前>..<F2>` 必须为 **0 行**。
+不通过说明混进了真实改动，要拆开。
+
+## F3 文案去重
+
+并入 F1 的第 5 点，不单独提交。
+
+## 执行顺序与验证
+
+1. F1 代码（Safety → GgpkUndo → Program）+ 用例 → `--recover-test` 7/7
+2. 手工复现上一轮的死锁场景，确认已解开
+3. F2 单独提交 → `git diff -w` 为 0
+4. 全量 `run_tests.py --build` → 24+2 项全绿
+5. 发 v0.5.4 前再跑一次 F1 的端到端手测
+
+**风险**：F1 去掉硬闸后，备份永久缺失的用户每次启动都会看到同一段错误。
+这是有意的（失败必须可见），并在第 3 次起给出 `--reset-recover` 作为明确出路 ——
+比「静默永久拒绝」好。
