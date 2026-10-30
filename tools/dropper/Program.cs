@@ -567,6 +567,7 @@ internal static class Program {
         // 动作
         "status", "selftest", "struct", "collect", "writetest", "bundles", "dump", "detach-test",
         "backups", "baseline", "restore-backup", "restore-baseline", "restore-ggpk",
+        "reset-recover",
         // 写入选项
         "set", "only", "partial", "plan", "on-modified", "keep-markup", "locale-only",
         "gate", "yes", "allow-no-rollback", "out", "simulate-fail",
@@ -721,25 +722,41 @@ internal static class Program {
         }
         _target = gp;
 
+        // 逃生舱：只丢记录、不回滚。用于「官方已经重建索引」——此时那份日志要退的目标
+        // 状态已经不存在了，继续回滚等于把官方刚下发的索引换成一个过期的副本。
+        if (Args.ContainsKey("reset-recover")) {
+            var msg = GgpkUndo.IsGgpk(gp) ? GgpkUndo.DiscardWriting(gp) : Txn.DiscardJournal(gp);
+            if (msg is not null) { Console.WriteLine(msg); return 1; }
+            Console.WriteLine("已丢弃上次未完成的写入记录（没有回滚任何字节，索引保持当前状态）。");
+            Console.WriteLine(" 接下来请照常运行；如果游戏仍打不开，用 Steam/WeGame 验证完整性。");
+            return 0;
+        }
+
         // 上次写入没走完？先把客户端还原到写前状态，再谈别的。
         // 必须在打开容器之前做：回滚要覆盖 _.index.bin / Content.ggpk，句柄被占着就换不回去。
         var rec = GgpkUndo.IsGgpk(gp) ? GgpkUndo.Recover(gp) : Txn.Recover(gp);
         if (rec.Recovered) {
             Console.WriteLine();
             Console.WriteLine("==============================================================");
+            // 三种状态分开说，而且「上次写入没有正常结束」只由外层讲一次 ——
+            // 以前 Message 里也带这句，于是同一句话在一屏里出现三遍。
+            Console.WriteLine(" 检测到上次写入没有正常结束。");
+            Console.WriteLine($" {rec.Message}");
             if (rec.Complete) {
-                Console.WriteLine($" 检测到上次写入没有正常结束：{rec.Message}");
-                Console.WriteLine($" 已回滚到写入前的状态{(rec.RestoredFiles > 0 ? $"（恢复 {rec.RestoredFiles} 处）" : "")}，客户端可以正常启动。");
-                Console.WriteLine(" 直接重新运行本程序即可，不用先验证游戏完整性。");
+                Console.WriteLine($" 客户端可以正常启动{(rec.RestoredFiles > 0 ? $"（恢复 {rec.RestoredFiles} 处）" : "")}，直接重新运行本程序即可。");
+                Console.WriteLine(" 不用先验证游戏完整性。");
             } else {
                 // 「退了一部分」和「退回去了」是两件事。这里不能再说「客户端可以正常启动」——
                 // 索引可能还是半截，而用户唯一能做的判断依据就是这几行字。
-                Console.WriteLine($" 上次写入没有正常结束，而且没能完全退回去：{rec.Message}");
                 foreach (var e in rec.Errors.Take(8)) Console.WriteLine("   - " + e);
                 if (rec.JournalKept && rec.JournalPath.Length > 0)
                     Console.WriteLine($" 现场记录已保留：{rec.JournalPath}");
                 Console.WriteLine(" 建议顺序：① 用 Steam/WeGame「验证游戏完整性」→ ② 重新运行本程序。");
                 Console.WriteLine(" 在退干净之前，本程序不会写入任何东西（--yes 可强行继续，风险自负）。");
+                if (rec.Hint.Length > 0) {
+                    Console.WriteLine();
+                    Console.WriteLine(" " + rec.Hint.Replace("\n", "\n "));
+                }
                 if (!Args.ContainsKey("yes")) {
                     Console.WriteLine("==============================================================");
                     Console.WriteLine();
@@ -1770,10 +1787,17 @@ internal static class Program {
 
             var curBytes = Encoding.ASCII.GetBytes("HALF-WRITTEN-INDEX");
             var bakBytes = Encoding.ASCII.GetBytes("GOOD-INDEX-FROM-BACKUP");
+            // C7：索引已经被上一次回滚写成了备份内容，只剩日志没删
+            if (c.TryGetProperty("indexSameAsBackup", out var sameEl) && sameEl.GetBoolean())
+                curBytes = bakBytes;
+            var attempts = c.TryGetProperty("attempts", out var atEl) ? atEl.GetInt32() : 0;
+            var wantMtimeSame = exp.TryGetProperty("indexMtimeUnchanged", out var mtEl) && mtEl.GetBoolean();
+
             Directory.CreateDirectory(metaDir);
             File.WriteAllBytes(index, curBytes);
             if (backup) File.WriteAllBytes(backupFile, bakBytes);
             if (newBundles.Length > 0) File.WriteAllBytes(outside, Encoding.ASCII.GetBytes("MUST-SURVIVE"));
+            var mtimeBefore = File.GetLastWriteTimeUtc(index);
 
             if (journal == "corrupt") {
                 File.WriteAllText(journalPath, "{{{", TextEnc.Utf8);
@@ -1784,6 +1808,7 @@ internal static class Program {
                     // 备份不存在时也要给出路径：这正是 C2 —— 路径有、文件没了
                     IndexBackup = backupFile,
                     Phase = "writing",
+                    Attempts = attempts,
                     NewBundles = newBundles.ToList(),
                 };
                 File.WriteAllText(journalPath,
@@ -1810,6 +1835,11 @@ internal static class Program {
 
             if (newBundles.Length > 0 && !File.Exists(outside))
                 problems.Add("容器外的 outside.bin 被删掉了（目录穿越没堵住）");
+
+            // 幂等捷径的意义就在这里：索引已经对了就不该再写一遍。
+            // mtime 变了说明它又复制了一次 20 MB。
+            if (wantMtimeSame && File.GetLastWriteTimeUtc(index) != mtimeBefore)
+                problems.Add("索引被重写了一遍（应当识别出「已经是备份内容」直接收尾）");
 
             if (problems.Count == 0) {
                 Console.WriteLine($"  OK   {id} {desc}");
@@ -2008,6 +2038,8 @@ internal static class Program {
         L("  <...> --gate=off|warn|enforce            内容闸：写进去的每一行必须能从原文+译文推出来");
         L("                                           warn 只记（默认，灰度），enforce 直接拒写，off 关掉");
         L("  <...> --yes                              回滚没退干净时强行继续（默认中止，风险自负）");
+        L("  <...> --reset-recover                    只丢弃「上次没走完」的记录，不回滚任何字节");
+        L("                                           用于已验证过完整性、索引已被官方重建的情况");
         L("  <...> --allow-no-rollback                允许在「没有退路」的容器上写入（排障用，慎用）");
         L("  基准是每次写入的算式输入，与「改过几次」无关；它不随备份轮转，按游戏版本分开存。");
         L("  每次写入前都留还原点：Bundles2 复制 _.index.bin；ggpk 逐块记原字节。");

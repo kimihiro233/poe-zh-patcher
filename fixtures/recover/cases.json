@@ -41,6 +41,25 @@
       "journal": "valid",
       "newBundles": ["..\\outside.bin"],
       "expect": { "complete": false, "journalKept": true, "index": "backup" }
+    },
+    {
+      "id": "C6",
+      "desc": "已经失败过 3 次，但备份补回来了：必须照样重试并成功（旧版硬闸会永久拒绝）",
+      "backup": "present",
+      "journal": "valid",
+      "attempts": 3,
+      "newBundles": [],
+      "expect": { "complete": true, "journalKept": false, "index": "backup" }
+    },
+    {
+      "id": "C7",
+      "desc": "索引已经是备份内容（上次退完了只是没删日志）：直接收尾，不重写索引",
+      "backup": "present",
+      "journal": "valid",
+      "attempts": 1,
+      "indexSameAsBackup": true,
+      "newBundles": [],
+      "expect": { "complete": true, "journalKept": false, "index": "unchanged", "indexMtimeUnchanged": true }
     }
   ]
 }

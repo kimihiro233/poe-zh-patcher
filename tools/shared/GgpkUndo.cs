@@ -383,11 +383,38 @@ internal sealed class GgpkUndo : IRollback {
         r.RestoredFiles = blocks;
         r.Errors = failed;
         if (r.Recovered) {
+            // 外层统一说一次「检测到上次写入没有正常结束」，这里只讲结果。
             r.Message = r.Complete
-                ? $"上次写入没有正常结束，已把 ggpk 退回写入前的字节（{done} 份日志 / {blocks} 块）"
-                : $"上次写入没有正常结束，{failed.Count} 份日志没能退回（已退回 {done} 份）";
+                ? $"已把 ggpk 退回写入前的字节（{done} 份日志 / {blocks} 块）"
+                : $"{failed.Count} 份日志没能退回（已退回 {done} 份）";
+            if (!r.Complete)
+                r.Hint = "如果已经用 Steam/WeGame 验证过完整性，可以丢弃这些记录而不是回滚：\n" +
+                         $"   本程序 --reset-recover \"{ggpkPath}\"";
         }
         return r;
+    }
+
+    /// <summary>
+    /// 逃生舱：只丢弃「上次没走完」的快照记录，**不回滚任何字节**。
+    /// 与 Txn.DiscardJournal 同义，只是这边要按 Target 挑出属于这个容器的那些。
+    /// </summary>
+    public static string? DiscardWriting(string ggpkPath) {
+        var root = RootFor(ggpkPath);
+        if (!Directory.Exists(root)) return "没有找到未完成的写入记录（.poe-zh/ggpk 不存在）";
+        var target = Path.GetFullPath(ggpkPath);
+        var n = 0;
+        foreach (var d in Directory.GetDirectories(root)) {
+            var m = ReadMeta(d);
+            if (m is null || m.Phase != "writing") continue;
+            string mt;
+            try { mt = Path.GetFullPath(m.Target); } catch { continue; }
+            if (!string.Equals(mt, target, StringComparison.OrdinalIgnoreCase)) continue;
+            // 先改状态再删目录：删到一半失败时，下次不会又把它当成「未完成」捡回来
+            m.Phase = "discarded";
+            try { SaveMeta(d, m); } catch { }
+            try { Directory.Delete(d, recursive: true); n++; } catch { }
+        }
+        return n == 0 ? "没有找到未完成的写入记录" : null;
     }
 
     /// <summary>

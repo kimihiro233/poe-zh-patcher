@@ -52,6 +52,8 @@ internal sealed class RecoverResult {
     public bool JournalKept;
     public string JournalPath = "";
     public string Message = "";
+    /// <summary>失败多次之后给用户的出路（--reset-recover）。空串表示没有额外建议。</summary>
+    public string Hint = "";
     public List<string> Errors = new();
     public int RestoredFiles;
 }
@@ -214,7 +216,7 @@ internal sealed class Txn : IRollback {
                 r.Complete = false;
                 r.JournalKept = true;
                 r.Errors.Add("日志已损坏，而且目录里没有任何索引备份可用");
-                r.Message = "上次写入的日志已损坏，且没有可用备份";
+                r.Message = "日志已损坏，且没有可用备份";
                 return r;
             }
 
@@ -225,27 +227,32 @@ internal sealed class Txn : IRollback {
                     throw new IOException("写回后校验不一致");
                 r.Complete = true;
                 r.RestoredFiles = 1;
-                r.Message = $"上次写入的日志已损坏，已按最近一次索引备份恢复（{Path.GetFileName(latest)}）";
+                r.Message = $"日志已损坏，已按最近一次备份恢复（{Path.GetFileName(latest)}）";
                 try { File.Delete(jp); } catch { }
             } catch (Exception ex) {
                 r.Complete = false;
                 r.JournalKept = true;
                 r.Errors.Add($"按备份恢复失败：{ex.Message}");
-                r.Message = "上次写入的日志已损坏，按备份恢复也失败了";
+                r.Message = "日志已损坏，按备份恢复也失败了";
             }
             return r;
         }
 
-        // 已经试过 3 次还退不回去：只报错，不再自动动文件 —— 每次启动都去写一遍
-        // 只会让「到底是哪一步坏了」更难查，而用户早该去验证完整性了。
-        if (j.Attempts >= 3) {
-            r.Recovered = true;
-            r.Complete = false;
-            r.JournalKept = true;
-            r.JournalPath = jp;
-            r.Errors.AddRange(j.LastErrors);
-            r.Message = $"上次写入没有正常结束，已尝试 {j.Attempts} 次仍退不回去";
-            return r;
+        // 幂等捷径：上次其实退完了、只是没来得及删日志。
+        // 别再复制一遍 20 MB 索引 —— 这一步同时挡住「每次启动都重写索引」，
+        // 而「少写一次盘」正是当初那个「失败 3 次就永久拒绝」的硬闸想换来的东西。
+        // 硬闸的代价是：条件修好之后也不再重试，用户只能手工删 txn.json。
+        if (j.IndexBackup.Length > 0 && File.Exists(j.IndexBackup) && File.Exists(j.Index)) {
+            try {
+                if (Sha256(File.ReadAllBytes(j.Index)) == Sha256(File.ReadAllBytes(j.IndexBackup))) {
+                    try { File.Delete(jp); } catch { }
+                    r.Recovered = true;
+                    r.Complete = true;
+                    r.RestoredFiles = 1;
+                    r.Message = "索引已经是写入前的状态，无需再回滚";
+                    return r;
+                }
+            } catch { /* 读不出来就走正常回滚，那里会报原因 */ }
         }
 
         var (errs, restored) = RollbackFiles(j);
@@ -256,7 +263,7 @@ internal sealed class Txn : IRollback {
 
         if (r.Complete) {
             try { File.Delete(jp); } catch { }
-            r.Message = $"上次写入没有正常结束（开始于 {j.Started}），已回滚到写入前的状态";
+            r.Message = $"已回滚到写入前的状态（开始于 {j.Started}）";
         } else {
             // 现场必须留着：删了日志，下次启动连「上次没走完」都不知道，
             // 而这次的失败原因也一起消失了。
@@ -265,9 +272,30 @@ internal sealed class Txn : IRollback {
             try { WriteJournal(jp, j); } catch { }
             r.JournalKept = true;
             r.JournalPath = jp;
-            r.Message = $"上次写入没有正常结束，但只退回了一部分（第 {j.Attempts} 次尝试）";
+            r.Message = $"没能完全退回去（第 {j.Attempts} 次尝试）";
+
+            // 失败多次之后给一条明确的出路。注意这**不拦重试**：
+            // 回滚每一步都是「检查 + 覆盖写」，失败即返回，成本接近零；
+            // 而「条件修好了却永远不再试」会把用户锁死在没有出口的状态里。
+            if (j.Attempts >= 3)
+                r.Hint = "如果已经用 Steam/WeGame 验证过完整性，索引很可能已被官方重建，" +
+                         "此时应该丢弃这份记录而不是回滚：\n" +
+                         $"   本程序 --reset-recover \"{j.Index}\"";
         }
         return r;
+    }
+
+    /// <summary>
+    /// 逃生舱：只丢弃「上次没走完」的记录，**不回滚任何字节**。
+    /// 用于「官方已经重建了索引，这份日志的目标状态已经不存在」的场景。
+    /// 与 --yes 的区别：--yes 是带着坏状态继续写，这个是承认现状、不写。
+    /// </summary>
+    public static string? DiscardJournal(string indexPath) {
+        var dir = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(indexPath))!, DirName);
+        var jp = Path.Combine(dir, JournalName);
+        if (!File.Exists(jp)) return "没有找到未完成的写入记录（txn.json 不存在）";
+        try { File.Delete(jp); return null; }
+        catch (Exception ex) { return $"删不掉 {jp}：{ex.Message}"; }
     }
 
     /// <summary>
