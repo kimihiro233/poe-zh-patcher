@@ -391,7 +391,7 @@ internal sealed class GgpkUndo : IRollback {
         try {
             var p = Path.Combine(dir, MetaName);
             var tmp = p + ".tmp";
-            File.WriteAllText(tmp, JsonSerializer.Serialize(m, new JsonSerializerOptions { WriteIndented = true }), Encoding.UTF8);
+            File.WriteAllText(tmp, JsonSerializer.Serialize(m, new JsonSerializerOptions { WriteIndented = true }), TextEnc.Utf8);
             File.Move(tmp, p, overwrite: true);
         } catch { }
     }

@@ -20,6 +20,12 @@
 using System.Text;
 using System.Text.Json;
 
+// 写 JSON 一律用不带 BOM 的 UTF-8：带 BOM 的文件别的工具打不开，
+// 而这几个文件（备份索引 / 基准索引 / journal）本来就是给人和脚本一起看的。
+internal static class TextEnc {
+    public static readonly Encoding Utf8 = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+}
+
 internal sealed class JournalFile {
     public string Started { get; set; } = "";
     public string Index { get; set; } = "";
@@ -77,7 +83,9 @@ internal sealed class Txn : IRollback {
         if (fi.Length > MaxIndexBackup) return null;
 
         var dir = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(indexPath))!, DirName);
-        Directory.CreateDirectory(dir);
+        // 建不出目录（Program Files 下没权限、磁盘满）就等于没有退路。
+        // 这里必须返回 null 让上层拒绝写入，不能抛出去摔在用户脸上，更不能假装成功。
+        try { Directory.CreateDirectory(dir); } catch { return null; }
 
         var stamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
         var bak = Path.Combine(dir, $"index-{stamp}.bin");
@@ -151,7 +159,7 @@ internal sealed class Txn : IRollback {
     private void SaveJournal() {
         // 先写临时文件再换名：journal 自己半截就等于没有 journal
         var tmp = JournalPath + ".tmp";
-        File.WriteAllText(tmp, JsonSerializer.Serialize(_j, new JsonSerializerOptions { WriteIndented = true }), Encoding.UTF8);
+        File.WriteAllText(tmp, JsonSerializer.Serialize(_j, new JsonSerializerOptions { WriteIndented = true }), TextEnc.Utf8);
         File.Move(tmp, JournalPath, overwrite: true);
     }
 
@@ -246,12 +254,16 @@ internal static class BackupStore {
 
     public static string ManifestName => "manifest.json";
 
-    public static BackupSet Create(string containerPath) {
+    /// <summary>开一份备份。返回 null = 备份目录建不出来（没权限/磁盘满）——
+    /// 调用方必须据此拒绝写入，否则「被覆盖的原内容」就真丢了。</summary>
+    public static BackupSet? Create(string containerPath) {
         var root = RootFor(containerPath);
         var stamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
         var dir = Path.Combine(root, stamp);
-        Directory.CreateDirectory(dir);
-        var s = new BackupSet { Stamp = stamp, Dir = dir };
+        // 同一秒内开两次（菜单里连续操作会遇上）：加后缀，别把上一份的 manifest 覆盖掉
+        for (var n = 2; Directory.Exists(dir); n++) dir = Path.Combine(root, $"{stamp}-{n}");
+        try { Directory.CreateDirectory(dir); } catch { return null; }
+        var s = new BackupSet { Stamp = Path.GetFileName(dir), Dir = dir };
         Save(s);
         Prune(root, keep: 5);
         return s;
@@ -274,7 +286,7 @@ internal static class BackupStore {
 
     public static void Save(BackupSet s) {
         var tmp = Path.Combine(s.Dir, ManifestName + ".tmp");
-        File.WriteAllText(tmp, JsonSerializer.Serialize(s, new JsonSerializerOptions { WriteIndented = true }), Encoding.UTF8);
+        File.WriteAllText(tmp, JsonSerializer.Serialize(s, new JsonSerializerOptions { WriteIndented = true }), TextEnc.Utf8);
         File.Move(tmp, Path.Combine(s.Dir, ManifestName), overwrite: true);
     }
 
@@ -334,6 +346,133 @@ internal static class BackupStore {
     }
 
     private static string Sha256(byte[] b) {
+        using var h = System.Security.Cryptography.SHA256.Create();
+        return Convert.ToHexString(h.ComputeHash(b)).ToLowerInvariant();
+    }
+}
+
+// ---------------------------------------------------------------- 基准库
+//
+// 「多次打补丁之后游戏打不开」的根因不是某一次写错了，而是**每次都在上一次的结果上算**：
+// statdesc 里 96% 的行不参与翻译、原样继承，一旦某次被改动，之后每次都继承，
+// 越修越歪，而且完全无声。靠「记住原文」能缓解，可原文恰恰常常拿不到
+// （第一次接触时客户端就已经被别人改过）。
+//
+// 换个思路：不去追原文，而是把「算式里的一个常量」固定下来 ——
+// 每份文件在某个游戏版本下**第一次被本程序看到**的那份完整字节，存起来当基准。
+// 之后所有写入都以「基准 + 目标 flavor」为输入，不再读当前文件。
+//
+// 于是结果只取决于（基准, 目标 flavor, 数据包版本）三者：
+//   · 同一个基准算多少次都是同一份字节 —— 幂等，与历史无关；
+//   · 第 2 次和第 200 次产物完全相同 —— 不可能累积漂移；
+//   · 要还原，把基准原样写回去就行 —— 不需要「原文」这个概念。
+//
+// 基准是算式的常量，不是后悔药，所以**不参与 backup 的轮转**（删了算式就变了）。
+internal sealed class BaselineItem {
+    public string Path { get; set; } = "";
+    public string File { get; set; } = "";
+    public string Sha { get; set; } = "";
+    public long Bytes { get; set; }
+    public string Flavor { get; set; } = "";      // 存下来那一刻的状态：Original / 外部改过 …
+    public string At { get; set; } = "";
+}
+
+internal sealed class BaselineIndex {
+    public string ClientVersion { get; set; } = "";
+    public string PatchVersion { get; set; } = "";
+    public string BundleVersion { get; set; } = "";
+    public string At { get; set; } = "";
+    public Dictionary<string, BaselineItem> Files { get; set; } = new();
+
+    public long TotalBytes => Files.Values.Sum(f => f.Bytes);
+}
+
+internal static class BaselineStore {
+    private static readonly JsonSerializerOptions Opt = new() { WriteIndented = true };
+
+    public static string RootFor(string containerPath) =>
+        Path.Combine(Path.GetDirectoryName(Path.GetFullPath(containerPath))!, Txn.DirName, "baseline");
+
+    /// <summary>基准按「客户端版本 + 补丁版本」分目录 —— 跟版本走。
+    /// 游戏一更新，行号可能整体错位，旧基准对新客户端就是毒，必须换目录而不是接着用。</summary>
+    public static string Key(string client, string patch) {
+        var k = client + (patch.Length > 0 ? "+" + patch : "");
+        foreach (var c in Path.GetInvalidFileNameChars()) k = k.Replace(c, '_');
+        return k.Length > 0 ? k : "_";
+    }
+
+    public static string DirFor(string containerPath, string client, string patch) =>
+        Path.Combine(RootFor(containerPath), Key(client, patch));
+
+    public static BaselineIndex? Load(string containerPath, string client, string patch) {
+        var mf = Path.Combine(DirFor(containerPath, client, patch), "index.json");
+        if (!File.Exists(mf)) return null;
+        try { return JsonSerializer.Deserialize<BaselineIndex>(File.ReadAllText(mf, Encoding.UTF8)); }
+        catch { return null; }
+    }
+
+    /// <summary>读基准字节。sha 对不上就当没有 —— 基准被改坏就不再是常量，宁可从当前文件重算。</summary>
+    public static byte[]? Get(string containerPath, string client, string patch, string path, out string flavor) {
+        flavor = "";
+        var idx = Load(containerPath, client, patch);
+        if (idx is null || !idx.Files.TryGetValue(path, out var it)) return null;
+        try {
+            var f = Path.Combine(DirFor(containerPath, client, patch), it.File);
+            if (!File.Exists(f)) return null;
+            var b = File.ReadAllBytes(f);
+            if (b.Length != it.Bytes || Hex(b) != it.Sha) return null;
+            flavor = it.Flavor;
+            return b;
+        } catch { return null; }
+    }
+
+    /// <summary>存基准。**只存一次**：同版本同路径已有基准就不再覆盖，
+    /// 否则「常量」变回变量，结果又与历史有关了。</summary>
+    public static bool Put(string containerPath, string client, string patch, string bundleVersion,
+                           string path, byte[] bytes, string flavor) {
+        var dir = DirFor(containerPath, client, patch);
+        var idx = Load(containerPath, client, patch) ?? new BaselineIndex {
+            ClientVersion = client, PatchVersion = patch, At = Stamp(),
+        };
+        if (idx.Files.ContainsKey(path)) return false;
+        try {
+            Directory.CreateDirectory(dir);
+            var name = idx.Files.Count.ToString("D3") + "-" + SafeName(Path.GetFileName(path));
+            File.WriteAllBytes(Path.Combine(dir, name), bytes);
+            idx.Files[path] = new BaselineItem {
+                Path = path, File = name, Sha = Hex(bytes), Bytes = bytes.Length, Flavor = flavor, At = Stamp(),
+            };
+            if (idx.BundleVersion.Length == 0) idx.BundleVersion = bundleVersion;
+            var tmp = Path.Combine(dir, "index.json.tmp");
+            File.WriteAllText(tmp, JsonSerializer.Serialize(idx, Opt), TextEnc.Utf8);
+            File.Move(tmp, Path.Combine(dir, "index.json"), overwrite: true);
+            return true;
+        } catch { return false; }
+    }
+
+    public static List<BaselineIndex> List(string containerPath) {
+        var root = RootFor(containerPath);
+        var list = new List<BaselineIndex>();
+        if (!Directory.Exists(root)) return list;
+        foreach (var d in Directory.GetDirectories(root).OrderByDescending(x => x, StringComparer.Ordinal)) {
+            var mf = Path.Combine(d, "index.json");
+            if (!File.Exists(mf)) continue;
+            try {
+                var idx = JsonSerializer.Deserialize<BaselineIndex>(File.ReadAllText(mf, Encoding.UTF8));
+                if (idx is not null && idx.Files.Count > 0) list.Add(idx);
+            } catch { }
+        }
+        return list;
+    }
+
+    private static string Stamp() => DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+    private static string SafeName(string s) {
+        foreach (var c in Path.GetInvalidFileNameChars()) s = s.Replace(c, '_');
+        return s.Length > 60 ? s[..60] : s;
+    }
+
+    private static string Hex(byte[] b) {
         using var h = System.Security.Cryptography.SHA256.Create();
         return Convert.ToHexString(h.ComputeHash(b)).ToLowerInvariant();
     }

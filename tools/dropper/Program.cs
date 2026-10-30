@@ -584,6 +584,9 @@ internal static class Program {
         // 旧版对照的识别自检：不依赖游戏，用数据包里的三态文本现场拼出各种历史拼法，
         // 验证「认得出多少种排列」和「什么情况下必须认不出」。
         if (Args.ContainsKey("legacy-test")) return LegacyTest();
+        // 基准自检：不碰游戏，验证「只存一次」「读回一致」「版本隔离」「被改坏就拒绝使用」。
+        // 这四条是「结果与改过几次无关」的前提，任何一条破了，基准就不再是常量。
+        if (Args.ContainsKey("baseline-test")) return BaselineTest();
         // 外部改过的底稿演练：拿一份现成文件跑 TryCustomBase + Rewrite，只读不写
         if (Args.TryGetValue("sd-test", out var sdArg) && sdArg.Length > 0) return SdTest(sdArg);
         // 外部改过的数据表演练：拿一份现成 .datc64 跑 TryCustomBase + Apply，只读不写
@@ -675,6 +678,8 @@ internal static class Program {
         // 备份：安装时被覆盖掉的「原字节」都留在这里，随时可以整份写回去
         if (Args.ContainsKey("backups")) return ShowBackups(store);
         if (Args.TryGetValue("restore-backup", out var rbArg)) return RestoreBackup(store, rbArg);
+        // 基准：每次写入的「算式输入」，与改过几次无关；也可以直接把某份文件写回基准
+        if (Args.ContainsKey("baseline")) return ShowBaselines(store, Args.TryGetValue("restore-baseline", out var rsb) ? rsb : "");
         // 把容器里的文件原样导出来看（排查结构问题用，只读不写）
         if (Args.TryGetValue("dump", out var dumpArg) && dumpArg.Length > 0) return Dump(store, dumpArg);
         if (Args.ContainsKey("selftest")) return SelfTest(store);
@@ -1062,6 +1067,64 @@ internal static class Program {
     // 旧版对照识别自检：不碰游戏，只拿一份最小的「文件」把判定规则的边界钉住。
     // 重点不是「认得出现在这一版」，而是「以后每次改 dual_body 的排列方式，老客户端都还认得」，
     // 以及「该认不出的必须认不出」—— 认错会把别人的译文整块换成我们的。
+    // 基准自检：不依赖游戏。四条性质必须同时成立，否则「结果与改过几次无关」就不成立 ——
+    //   ① 存一次读一次，字节一模一样；② 同一版本同一路径只存一次，绝不覆盖；
+    //   ③ 版本之间互不可见（换版本绝不能拿旧基准去算新客户端）；
+    //   ④ 基准文件被改坏（sha 对不上）就拒绝使用，宁可从当前重算，也不能拿污染的常量去算。
+    private static int BaselineTest() {
+        var root = Path.Combine(Path.GetTempPath(), "poezh-base-" + DateTime.Now.ToString("HHmmssfff"));
+        Directory.CreateDirectory(root);
+        var fake = Path.Combine(root, "Content.ggpk");
+        File.WriteAllBytes(fake, new byte[16]);          // 只需要存在，用来定位 .poe-zh
+
+        var bad = 0;
+        void Check(string what, bool ok, string extra = "") {
+            Console.WriteLine($"  {(ok ? "✓" : "✗")} {what}{(extra.Length > 0 ? "  " + extra : "")}");
+            if (!ok) bad++;
+        }
+
+        Console.WriteLine($"基准自检（临时目录 {root}）");
+        var v1 = new byte[] { 1, 2, 3 };
+        Check("第一次存基准", BaselineStore.Put(fake, "3.29.3b", "3.29.3.3", "0.5.0", "a/b.txt", v1, "Original"));
+
+        var got = BaselineStore.Get(fake, "3.29.3b", "3.29.3.3", "a/b.txt", out var tag);
+        Check("读回来字节一致、来源记得住",
+              got is not null && got.SequenceEqual(v1) && tag == "Original", tag);
+
+        Check("第二次存不覆盖",
+              !BaselineStore.Put(fake, "3.29.3b", "3.29.3.3", "0.9.9", "a/b.txt", new byte[] { 9 }, "Custom"));
+        var again = BaselineStore.Get(fake, "3.29.3b", "3.29.3.3", "a/b.txt", out var tag2);
+        Check("内容仍是第一份（常量没变）",
+              again is not null && again.SequenceEqual(v1) && tag2 == "Original", tag2);
+
+        Check("换游戏版本读不到旧基准",
+              BaselineStore.Get(fake, "3.30.0", "", "a/b.txt", out _) is null);
+
+        var dir = BaselineStore.DirFor(fake, "3.29.3b", "3.29.3.3");
+        var idx = BaselineStore.Load(fake, "3.29.3b", "3.29.3.3");
+        Check("索引读得回来", idx is not null && idx.Files.Count == 1);
+        if (idx is not null) {
+            var f = Path.Combine(dir, idx.Files["a/b.txt"].File);
+            var raw = File.ReadAllBytes(f);
+            raw[0] ^= 0xFF;
+            File.WriteAllBytes(f, raw);
+            Check("基准文件被改坏 → 拒绝使用",
+                  BaselineStore.Get(fake, "3.29.3b", "3.29.3.3", "a/b.txt", out _) is null);
+        }
+
+        var mf = Path.Combine(dir, "index.json");
+        var head = File.ReadAllBytes(mf);
+        Check("索引不带 UTF-8 BOM（别的工具能直接读）",
+              !(head.Length >= 3 && head[0] == 0xEF && head[1] == 0xBB && head[2] == 0xBF));
+        Check("版本键可直接当目录名",
+              BaselineStore.Key("3.29.3b", "3.29.3.3").IndexOfAny(Path.GetInvalidFileNameChars()) < 0,
+              BaselineStore.Key("3.29.3b", "3.29.3.3"));
+
+        try { Directory.Delete(root, true); } catch { }
+        Console.WriteLine(bad == 0 ? "\n基准自检通过" : $"\n基准自检失败 {bad} 项");
+        return bad == 0 ? 0 : 1;
+    }
+
     private static int LegacyTest() {
         Console.WriteLine("旧版对照识别自检");
         Console.WriteLine();
@@ -1404,6 +1467,9 @@ internal static class Program {
         Console.WriteLine("  <...> --backups                          看有哪些还原点（整份 / 单个文件）");
         Console.WriteLine("  <...> --restore-backup=<时间戳|latest>   把某次备份的文件整份写回去");
         Console.WriteLine("  <Content.ggpk> --restore-ggpk[=时间戳]    把整个 ggpk 退回那次安装之前（游戏打不开时用）");
+        Console.WriteLine("  <...> --baseline                         看基准（这个版本下每份文件第一次被看到的样子）");
+        Console.WriteLine("  <...> --baseline --restore-baseline=<关键词>  把匹配的文件整份写回基准（= 硬还原）");
+        Console.WriteLine("  基准是每次写入的算式输入，与「改过几次」无关；它不随备份轮转，按游戏版本分开存。");
         Console.WriteLine("  每次写入前都留还原点：Bundles2 复制 _.index.bin；ggpk 抄索引区 + 逐块记原字节。");
         Console.WriteLine("  写坏了自动整份退回；进程被杀 / 断电也能在下次启动时自动退回。");
         Console.WriteLine("  排障用：--simulate-fail=N 故意在第 N 个文件失败，验证退回流程（不写坏客户端）");
@@ -1645,6 +1711,11 @@ internal static class Program {
         public string Why = "";          // 判成「未知」或被判成「外部改过」的依据，展示用
         public bool Legacy;              // 认出来了：里面是上一版补丁写的文本
         public bool Force;               // 还挂在旧的自建 bundle 上：不管状态如何都重写一遍搬进新 bundle
+
+        // 基准：这份文件在本次游戏版本下「第一次被本程序看到」的完整字节。
+        // 写入时优先以它为准算，而不是以当前文件为准 —— 这样结果与「改过几次」无关。
+        public byte[]? Base;
+        public Flavor BaseFlavor;
     }
 
     // 外部改过标记的底稿：sha 对不上，但**结构没变**——
@@ -1811,6 +1882,59 @@ internal static class Program {
         return list;
     }
 
+    // ---------------------------------------------------------------- 基准
+    //
+    // 每次写入都以「基准」为算式输入，而不是当前文件 —— 结果只取决于
+    // （基准, 目标 flavor, 数据包版本），与「之前改过几次」完全无关。
+    //
+    // 基准 = 该文件在这个游戏版本下**第一次被本程序看到**的完整字节。建一次就不再变：
+    // 常量一变，结果就又和历史有关了。认不出的内容不建基准 —— 连它是什么都不知道，
+    // 拿来当常量只会把看不懂的东西固化下来。
+    private static void ApplyBaseline(IContainer store, List<Item> items, bool create) {
+        var hit = 0; var made = 0; var refused = 0; var restored = 0;
+        foreach (var i in items) {
+            if (i.Missing || i.Broken || i.Cur.Length == 0) continue;
+            var b = BaselineStore.Get(store.IndexFile, _gameClient, _gamePatch, i.Path, out var tag);
+            if (b is not null) {
+                i.Base = b;
+                i.BaseFlavor = FlavorFromTag(tag);
+                hit++;
+                continue;
+            }
+            if (!create || i.CurFlavor == Flavor.Unknown) { refused++; continue; }
+
+            // 建基准时尽量存「原文」：当前若是我们自己改过的版本，先从数据包还原回原文。
+            // 还原后 sha 必须等于数据包锁定的原文 sha 才作数 —— 这是判断「原文是否完好」的唯一真相：
+            // 对得上说明没被我们记录之外的地方动过；对不上就退回存当前这份（次优，但至少是稳定常量）。
+            var seed = i.Cur;
+            var seedFlavor = i.CurFlavor;
+            try {
+                if (!i.IsSd && i.Dat is not null && i.CurFlavor != Flavor.Custom) {
+                    seed = i.Dat.Orig;                  // dat 表有整份原文字节，直接就是权威原文
+                    seedFlavor = Flavor.Original;
+                } else if (i.IsSd && i.Sd is not null
+                           && i.CurFlavor is Flavor.Translated or Flavor.Dual or Flavor.DualAll or Flavor.DualLegacy) {
+                    var back = Rewrite(i.Sd, i.Cur, i.CurFlavor, Flavor.Original);
+                    if (Sha(back) == i.Sd.ShaOriginal) { seed = back; seedFlavor = Flavor.Original; }
+                }
+            } catch { /* 还原不出来就用当前这份，不影响基准的稳定性 */ }
+
+            if (BaselineStore.Put(store.IndexFile, _gameClient, _gamePatch, _ver, i.Path,
+                                  seed, seedFlavor.ToString())) {
+                made++;
+                if (seedFlavor == Flavor.Original && i.CurFlavor != Flavor.Original) restored++;
+            } else refused++;
+        }
+        if (hit + made + refused == 0) return;
+        var parts = new List<string>();
+        if (hit > 0) parts.Add($"已有 {hit}");
+        if (made > 0) parts.Add($"新建 {made}" + (restored > 0 ? $"（其中 {restored} 份还原自原文）" : ""));
+        if (refused > 0) parts.Add($"无基准 {refused}");
+        Console.WriteLine($"  基准（{_gameClient}{(_gamePatch.Length > 0 ? "+" + _gamePatch : "")}）：{string.Join("  ", parts)}");
+    }
+
+    private static Flavor FlavorFromTag(string s) => Enum.TryParse<Flavor>(s, out var f) ? f : Flavor.Unknown;
+
     private static string ShowFlavor(Item i) => i.CurFlavor switch {
         Flavor.Unknown when i.Broken => "读不出",
         Flavor.Unknown => "未知",
@@ -1840,6 +1964,12 @@ internal static class Program {
         if (store is not null) {
             Console.WriteLine($" 目标      [{store.Kind}] {store.Display}");
             Console.WriteLine($"           {store.Size:N0} B");
+            // 基准：这个版本下每份文件「第一次被看到」的样子。它决定「还原」能有多硬 ——
+            // 有原文基准时，认不出当前内容也能整份写回去。
+            var bi = BaselineStore.Load(store.IndexFile, _gameClient, _gamePatch);
+            if (bi is null) Console.WriteLine(" 基准      无（下次安装时自动建立）");
+            else Console.WriteLine($" 基准      {bi.Files.Count} 份（原文 {bi.Files.Values.Count(f => f.Flavor == nameof(Flavor.Original))}）"
+                                   + $"  {bi.TotalBytes / 1048576.0:F1} MB");
         }
         if (items.Count > 0) Console.WriteLine($" 当前状态  {Summary(items)}");
         Console.WriteLine();
@@ -1877,6 +2007,7 @@ internal static class Program {
             Console.WriteLine("  [t] 结构演练      —— 只验证读写通道（改写后原样写回），不改内容");
             Console.WriteLine("  [c] 采集诊断包    —— 把这份客户端的原文与对比结果打包（只读，给作者排查）");
             Console.WriteLine("  [b] 备份与还原    —— 看每次安装前的原始内容，整份写回去");
+            Console.WriteLine("  [k] 基准          —— 这个版本下每份文件第一次被看到的样子（还原最硬的依据）");
             Console.WriteLine("  [s] 刷新状态");
             Console.WriteLine("  [0] 退出");
             Console.WriteLine();
@@ -1900,6 +2031,22 @@ internal static class Program {
             }
             if (k is "t") {
                 var rt = StructTest(store, items);
+                Console.WriteLine();
+                Console.WriteLine(" 按回车返回菜单");
+                ReadKeyLine();
+                Reopen();
+                items = Preflight(_store!);
+                continue;
+            }
+            if (k is "k") {
+                ShowBaselines(store, "");
+                Console.WriteLine();
+                var bi = BaselineStore.Load(store.IndexFile, _gameClient, _gamePatch);
+                if (bi is not null && bi.Files.Count > 0) {
+                    Console.Write(" 写回基准？(输入路径关键词 / 回车 = 只看)：");
+                    var pat = (ReadKeyLine() ?? "").Trim();
+                    if (pat.Length > 0) ShowBaselines(store, pat);
+                }
                 Console.WriteLine();
                 Console.WriteLine(" 按回车返回菜单");
                 ReadKeyLine();
@@ -2119,15 +2266,20 @@ internal static class Program {
         // 已经和物理文件对不上：复用它就是 Buffer Underflow 的来源。
         // 先只做只读清点，把还挂在旧记录上的文件圈出来；确认真的要写之后才换新 bundle。
         var inherited = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        if (!plan)
-            foreach (var i in items)
-                if (store.IsSelfBundle(i.Path)) inherited.Add(i.Path);
+        // 演算时也算这一项：不然 --plan 说「需要改动 0 个」，真跑却写了 47 个（都是搬 bundle），
+        // 用户看到两个数字对不上只会以为程序在乱写。
+        foreach (var i in items)
+            if (store.IsSelfBundle(i.Path)) inherited.Add(i.Path);
         if (inherited.Count > 0) {
             var movable = items.Count(i => inherited.Contains(i.Path) && i.CurFlavor != Flavor.Unknown);
             foreach (var i in items)
                 if (inherited.Contains(i.Path) && i.CurFlavor != Flavor.Unknown) i.Force = true;
             Console.WriteLine($"  {inherited.Count} 个文件还挂在历史自建 bundle 上，其中 {movable} 个可以重新落一遍");
         }
+
+        // 基准：越早建立越可能抓到干净的那份。这一次要写，就先趁「现在这份还认得」存下来，
+        // 之后所有计算都以它为准（--plan 只演算，不建）。
+        ApplyBaseline(store, items, create: !plan);
 
         var todo = pool.Where(i => i.Force || EffectiveFlavor(i, target) != i.CurFlavor).ToList();
         Console.WriteLine($"目标：{FlavorName(target)}    需要改动 {todo.Count} 个文件（可用 {pool.Count} / 共 {items.Count} 个）");
@@ -2230,6 +2382,15 @@ internal static class Program {
                 Console.WriteLine("  注意：这个容器没法整份备份索引，只提供文件级备份。写入失败时请按提示手动还原。");
             }
             backupSet = BackupStore.Create(store.IndexFile);
+            // 备份目录建不出来（Program Files 下没写权限、磁盘满）就等于「被覆盖的原内容会永久丢」。
+            // 以前这里是静默吞异常照样写，等于把「没退路就不写」这条底线破在自己家里。
+            if (backupSet is null && !AllowNoRollback()) {
+                Console.WriteLine($"中止：无法在 {BackupStore.RootFor(store.IndexFile)} 建备份目录，一个字节都没写。");
+                Console.WriteLine("  · 这里是游戏目录，可能需要以管理员身份运行");
+                Console.WriteLine("  · 或磁盘已满、目录被安全软件锁住");
+                Console.WriteLine("  · 确实接受「被覆盖的原始内容不留档」，加 --allow-no-rollback");
+                return 7;
+            }
         }
 
         // 到这里确定要写了，才换新 bundle：一次写入只落一条新记录，绝不碰历史记录
@@ -2265,17 +2426,32 @@ internal static class Program {
                 if (i.IsSd) {
                     var e = i.Sd!;
                     if (i.CurFlavor == Flavor.Unknown) {
-                        // 行数/文本都对不上，重建不出「整份原文」。能做的只有逐行把我们写过的行撤回去，
-                        // 认不出的行（别的汉化写的）原样保留 —— 文件仍然完整可读，不会变成半截。
-                        targetBytes = RewriteUnknownToOriginal(e, i.Cur, out var nRev, out var nKeep);
-                        expectSha = null;
-                        Console.WriteLine($"  {label,-46} 逐行退回原文：撤销 {nRev} 行，{nKeep} 行认不出（保持原样）");
-                    } else {
-                        // 底稿是别人的：merge 只叠文本层（别人的标记/颜色原样保留）；
-                        // ours 连标记一起换回我们的，等于用我们的版本覆盖这一行
-                        targetBytes = Rewrite(e, i.Cur, i.CurFlavor, effTarget,
-                                              forceOurs: policy == Policy.Ours && i.CurFlavor == Flavor.Custom);
+                        // 当前内容认不出（别人的汉化、或结构被弄乱）：
+                        // 有基准就整份写回，不猜任何一行；没基准才退到逐行撤。
+                        if (i.Base is not null && i.BaseFlavor == Flavor.Original) {
+                            targetBytes = i.Base;
+                            expectSha = e.ShaOriginal;
+                            Console.WriteLine($"  {label,-46} 用基准整份写回原文（当前内容认不出，不逐行猜）");
+                        } else {
+                            // 行数/文本都对不上，重建不出「整份原文」。能做的只有逐行把我们写过的行撤回去，
+                            // 认不出的行（别的汉化写的）原样保留 —— 文件仍然完整可读，不会变成半截。
+                            targetBytes = RewriteUnknownToOriginal(e, i.Cur, out var nRev, out var nKeep);
+                            expectSha = null;
+                            Console.WriteLine($"  {label,-46} 逐行退回原文：撤销 {nRev} 行，{nKeep} 行认不出（保持原样）");
+                        }
+                    } else if (i.CurFlavor == Flavor.Custom && policy != Policy.Ours) {
+                        // 别人的底稿 + merge：只能基于当前文件叠文本层（别人的标记在基准里没有），
+                        // 这条路径本质上与「改过几次」有关，所以它也是最需要备份兜底的一条。
+                        targetBytes = Rewrite(e, i.Cur, i.CurFlavor, effTarget);
                         expectSha = TargetSha(e, effTarget, i.CurFlavor);
+                    } else {
+                        // 其余情况一律以基准为准：结果只取决于（基准, 目标），与之前改过多少次无关。
+                        // 基准是 Original 时，TargetSha 给出数据包里锁定的 sha —— 校验就从「自证」变成真校验。
+                        var srcBytes = i.Base ?? i.Cur;
+                        var srcFlavor = i.Base is not null ? i.BaseFlavor : i.CurFlavor;
+                        targetBytes = Rewrite(e, srcBytes, srcFlavor, effTarget,
+                                              forceOurs: policy == Policy.Ours && i.CurFlavor == Flavor.Custom);
+                        expectSha = TargetSha(e, effTarget, srcFlavor);
                     }
                 } else {
                     var e = i.Dat!;
@@ -2649,6 +2825,129 @@ internal static class Program {
             try { store.TrimAfterCommit(); } catch { }
             Console.WriteLine();
             Console.WriteLine($"已把 {set.Stamp} 的内容写回去。想再装汉化，直接跑一次安装即可。");
+            return 0;
+        } finally { _txn = null; }
+    }
+
+    // ---------------------------------------------------------------- 基准
+    //
+    // 基准不是备份。备份是「改之前存一份」，一次一份、会轮转；
+    // 基准是「这个版本下每份文件第一次被看到的样子」，一个版本一份、永不覆盖。
+    // 它真正的用途是当算式的常量：每次写入都以「基准 + 目标 flavor」算，不读当前文件，
+    // 所以改过多少次结果都一样 —— 这是「反复打补丁也不会越打越歪」的根据。
+    private static int ShowBaselines(IContainer store, string restorePat) {
+        if (restorePat.Length > 0) return RestoreBaseline(store, restorePat);
+
+        var all = BaselineStore.List(store.IndexFile);
+        if (all.Count == 0) {
+            Console.WriteLine($"还没有基准。下次安装时会自动建立，存在 {BaselineStore.RootFor(store.IndexFile)} 下。");
+            Console.WriteLine("  （基准 = 这个版本下每份文件「第一次被看到」的完整字节，之后所有写入都以它为准）");
+            return 0;
+        }
+        Console.WriteLine($"基准：{BaselineStore.RootFor(store.IndexFile)}");
+        Console.WriteLine();
+        foreach (var v in all) {
+            var cur = v.ClientVersion == _gameClient && v.PatchVersion == _gamePatch;
+            var key = v.ClientVersion + (v.PatchVersion.Length > 0 ? "+" + v.PatchVersion : "");
+            Console.WriteLine($"  {key,-18} {v.Files.Count,3} 个文件  {v.TotalBytes / 1048576.0,7:F1} MB  建于 {v.At}"
+                              + (cur ? "  ← 当前版本" : "   （旧版本，不会被使用）"));
+            var byF = v.Files.Values.GroupBy(f => f.Flavor).OrderByDescending(g => g.Count());
+            Console.WriteLine($"      来源：{string.Join("  ", byF.Select(g => $"{BaselineName(g.Key)} {g.Count()}"))}");
+        }
+        Console.WriteLine();
+        Console.WriteLine("把某个文件写回基准：PoE-zh-Patcher.exe <目标> --baseline --restore-baseline=<路径关键词>");
+        Console.WriteLine("整套退回原文      ：PoE-zh-Patcher.exe <目标> --baseline --restore-baseline=statdescriptions");
+        return 0;
+    }
+
+    private static string BaselineName(string tag) => FlavorFromTag(tag) switch {
+        Flavor.Original => "原文",
+        Flavor.Translated => "纯译文",
+        Flavor.Dual => "对照",
+        Flavor.DualAll => "全量对照",
+        Flavor.DualLegacy => "旧版对照",
+        Flavor.Custom => "外部改过",
+        _ => tag,
+    };
+
+    /// <summary>把文件写回基准字节。这是最硬的一种还原：基准是原文（或我们第一次见到的那份），
+    /// 与之后改过多少次、当前内容认不认得出，都没有关系。</summary>
+    private static int RestoreBaseline(IContainer store, string pat) {
+        if (!store.Alive) {
+            Console.WriteLine("容器已经释放，请重新运行本程序。");
+            return 6;
+        }
+        var idx = BaselineStore.Load(store.IndexFile, _gameClient, _gamePatch);
+        if (idx is null) {
+            Console.WriteLine($"还没有 {_gameClient}{(_gamePatch.Length > 0 ? "+" + _gamePatch : "")} 版本的基准。");
+            Console.WriteLine("  基准在第一次安装时自动建立；换过游戏版本就得重新建立。");
+            return 1;
+        }
+        var hits = idx.Files.Values
+            .Where(f => f.Path.Contains(pat, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(f => f.Path, StringComparer.Ordinal).ToList();
+        if (hits.Count == 0) {
+            Console.WriteLine($"基准里没有匹配 \"{pat}\" 的文件。用 --baseline 看有哪些。");
+            return 1;
+        }
+        Console.WriteLine($"把 {hits.Count} 个文件写回基准（{_gameClient}{(_gamePatch.Length > 0 ? "+" + _gamePatch : "")}）：");
+        foreach (var h in hits.Take(6)) Console.WriteLine($"  {h.Path,-56} {BaselineName(h.Flavor)}");
+        if (hits.Count > 6) Console.WriteLine($"  ... 还有 {hits.Count - 6} 个");
+        Console.WriteLine("  （写之前会再建一个还原点，写坏了同样能退回来）");
+        Console.WriteLine();
+
+        var txn = BeginRollback(store);
+        if (txn is null && !AllowNoRollback()) {
+            Console.WriteLine("中止：无法创建还原点，一个字节都没写。");
+            return 7;
+        }
+        _txn = txn;
+        try {
+            store.Detach();
+            _detachedThisRun = true;
+            txn?.AddBundle(store.LastBundle);
+
+            var dir = BaselineStore.DirFor(store.IndexFile, _gameClient, _gamePatch);
+            var done = new List<(Item it, string sha)>();
+            foreach (var h in hits) {
+                var f = Path.Combine(dir, h.File);
+                if (!File.Exists(f)) { Console.WriteLine($"  ✗ {h.Path}：基准文件不见了"); continue; }
+                var bytes = File.ReadAllBytes(f);
+                if (Sha(bytes) != h.Sha) {
+                    Console.WriteLine($"  ✗ {h.Path}：基准文件 sha 对不上（被改过或磁盘坏了），跳过不写");
+                    continue;
+                }
+                if (!store.Write(h.Path, bytes)) {
+                    Console.WriteLine($"  ✗ {h.Path}：容器里找不到这条记录");
+                    continue;
+                }
+                var sha = Sha(bytes);
+                txn?.AddWritten(h.Path, sha);
+                done.Add((new Item { Label = Path.GetFileName(h.Path), Path = h.Path }, sha));
+                Console.WriteLine($"  {h.Path,-56} ← 基准（{BaselineName(h.Flavor)}）");
+            }
+            if (done.Count == 0) {
+                Console.WriteLine("  一个都没写回去。");
+                CloseStore();
+                txn?.Rollback();
+                return 3;
+            }
+            store.Flush();
+            txn?.MarkSaved();
+
+            var nFail = 0;
+            ReloadVerify(done, ref nFail);
+            if (nFail > 0) {
+                Console.WriteLine("  回读没通过，正在整份退回 …");
+                CloseStore();
+                var err = txn?.Rollback();
+                Console.WriteLine(err is null ? "  ✓ 已回滚，客户端保持原样。" : $"  ! 回滚出错：{err}");
+                return 3;
+            }
+            txn?.Commit();
+            try { store.TrimAfterCommit(); } catch { }
+            Console.WriteLine();
+            Console.WriteLine($"已把 {done.Count} 个文件写回基准。想再装汉化，直接跑一次安装即可。");
             return 0;
         } finally { _txn = null; }
     }
