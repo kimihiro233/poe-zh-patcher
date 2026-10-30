@@ -1,0 +1,23 @@
+{
+  "_comment": "由 tools/content_gate.py --whitelist 从 raw_sd 生成，勿手改。原文里出现过的标签，才是客户端认得的。",
+  "named": [
+    "craftingattack",
+    "craftingblue",
+    "craftingcaster",
+    "craftingchaos",
+    "craftingcold",
+    "craftingcrit",
+    "craftingdefences",
+    "craftingfire",
+    "craftinglife",
+    "craftinglightning",
+    "craftingphysical",
+    "craftingred",
+    "craftingspeed",
+    "enchanted",
+    "necropolisdownside",
+    "nemesismod",
+    "normal"
+  ],
+  "allow_rgb": true
+}

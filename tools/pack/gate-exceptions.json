@@ -1,0 +1,29 @@
+{
+  "_comment": "内容闸 G3 的白名单：这些行的占位符集合**故意**与官方原文不同。每一条都必须写明原因，且只能来自 fix-placeholder / fix-typo 两批已判过的修正。新增条目要同时给出 old 与 new 的完整文本 —— 按文本匹配，不按行号，换版本后行号全变，文本不变。",
+  "case": [
+    {
+      "file": "metadata_statdescriptions_chest_stat_descriptions.txt",
+      "old": "被 {1} 群魔法怪物守衛著",
+      "new": "被 {0} 群魔法怪物守衛著",
+      "why": "编号错位修正：官方原文用了不存在的 {1}，渲染成空；fix-placeholder 改成 {0}"
+    },
+    {
+      "file": "metadata_statdescriptions_chest_stat_descriptions.txt",
+      "old": "被 {1} 群稀有怪物守衛著",
+      "new": "被 {0} 群稀有怪物守衛著",
+      "why": "编号错位修正：官方原文用了不存在的 {1}，渲染成空；fix-placeholder 改成 {0}"
+    },
+    {
+      "file": "metadata_statdescriptions_skill_stat_descriptions.txt",
+      "old": "當觸發時使用此技能投擲 {0} 個陷阱",
+      "new": "當觸發時使用此技能投擲 {1} 個陷阱",
+      "why": "编号错位修正：官方原文用了不存在的 {1}，渲染成空；fix-placeholder 改成 {0}"
+    },
+    {
+      "file": "metadata_statdescriptions_active_skill_gem_stat_descriptions.txt",
+      "old": "投射物有 {0}% 機率返回你",
+      "new": "投射物有 {1}% 機率返回你",
+      "why": "编号错位修正：官方原文写 {0}（不存在的参数，渲染成空），fix-placeholder 改成 {1}"
+    }
+  ]
+}

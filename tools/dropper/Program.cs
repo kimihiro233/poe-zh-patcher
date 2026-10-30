@@ -82,6 +82,14 @@ internal static class Markup {
 
     public static bool SameMarkup(string a, string b) => Seq(a) == Seq(b);
 
+    /// 标记层序列（逐个 token），给内容闸判「这行多了个推导不出来的标签」用
+    public static List<string> MarkupTokens(string s)
+    {
+        var list = new List<string>();
+        foreach (var (mk, seg) in Tokens(s)) if (mk) list.Add(seg);
+        return list;
+    }
+
     /// 这一行一个标记都没有（原版有、这里没有 = 被整段删光）
     public static bool IsBare(string s) => Seq(s).Length == 0;
 
@@ -559,6 +567,20 @@ internal static class Program {
     private static List<SdEntry> _sd = new();
     private static List<DatEntry> _dat = new();
 
+    // 仓库根目录：从当前目录往上找，直到看见 tools/pack/markup-whitelist.json。
+    // 单文件 exe 的 AppContext.BaseDirectory 是 %TEMP% 解压目录，不能拿来当锚点。
+    private static string GateRoot()
+    {
+        if (Args.TryGetValue("gate-test", out var v) && v.Length > 0) return v;
+        var d = new DirectoryInfo(Directory.GetCurrentDirectory());
+        while (d is not null) {
+            if (File.Exists(Path.Combine(d.FullName, "tools", "pack", "markup-whitelist.json")))
+                return d.FullName;
+            d = d.Parent;
+        }
+        return Directory.GetCurrentDirectory();
+    }
+
     private static int Main(string[] raw) {
         Console.OutputEncoding = Encoding.UTF8;
         try { Console.Title = "PoE 繁中改良汉化"; } catch { }
@@ -579,6 +601,9 @@ internal static class Program {
 
         // 采集包脱敏自检：规则改一个字就是「泄漏」或「误杀」，所以每条规则都拿真实日志行钉住
         if (Args.ContainsKey("redact-test")) return Redact.SelfTest();
+        // 内容闸自检：读 fixtures/gate/cases.json —— 与 tools/content_gate.py 同一份样本，
+        // 两边结论必须逐条一致。只在一侧改规则，这里就会红。
+        if (Args.ContainsKey("gate-test")) return ContentGate.SelfTest(GateRoot());
         // 标记层合并自检：与 tools/markup.py 的用例逐条对齐，防止两侧实现漂移
         if (Args.ContainsKey("markup-test")) return MarkupTest();
         // ggpk 逐字节还原自检：不碰真实客户端，在临时目录里造一份「同结构」的文件跑
@@ -1462,6 +1487,7 @@ internal static class Program {
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --only=<关键词>  只改文件名含该关键词的文件（最小验证用）");
         Console.WriteLine("  PoE-zh-Patcher.exe --data-test=<基线目录>                 数据包自检（不需要游戏：拿官方原文重算一遍，比对发布 sha）");
         Console.WriteLine("  PoE-zh-Patcher.exe --redact-test                         采集包脱敏自检（10 条真实日志行断言）");
+        Console.WriteLine("  PoE-zh-Patcher.exe --gate-test                           内容闸自检（与 tools/content_gate.py 共用一份样本）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --locale-only[=original]        只处理语系与国旗，不碰译文");
         Console.WriteLine();
         Console.WriteLine("安全相关：");
@@ -1472,6 +1498,8 @@ internal static class Program {
         Console.WriteLine("  <Content.ggpk> --restore-ggpk[=时间戳]    把整个 ggpk 退回那次安装之前（游戏打不开时用）");
         Console.WriteLine("  <...> --baseline                         看基准（这个版本下每份文件第一次被看到的样子）");
         Console.WriteLine("  <...> --baseline --restore-baseline=<关键词>  把匹配的文件整份写回基准（= 硬还原）");
+        Console.WriteLine("  <...> --gate=off|warn|enforce            内容闸：写进去的每一行必须能从原文+译文推出来");
+        Console.WriteLine("                                           warn 只记（默认，灰度），enforce 直接拒写，off 关掉");
         Console.WriteLine("  基准是每次写入的算式输入，与「改过几次」无关；它不随备份轮转，按游戏版本分开存。");
         Console.WriteLine("  每次写入前都留还原点：Bundles2 复制 _.index.bin；ggpk 逐块记原字节。");
         Console.WriteLine("  写坏了自动整份退回；进程被杀 / 断电也能在下次启动时自动退回。");
@@ -2204,6 +2232,31 @@ internal static class Program {
         };
         var skip = missing.Concat(broken).Concat(unknown.Except(forced)).ToList();
 
+        // 内容闸的最后一道：数据包里的文本，在真写进客户端之前过一遍。
+        // 这里拦的是「内嵌数据被人换过」，前两道（patch_sd / build_bundle）拦的是
+        // 「我们自己的修正稿写错了」。三道里少一道，就有一条旁路。
+        var gateMode = GateMode();
+        var gateHits = GateBundle(items, target, gateMode);
+        if (gateMode != ContentGate.Mode.Off) {
+            var rows = items.Where(i => i.Sd is not null && !i.Missing && !i.Broken)
+                            .Sum(i => i.Sd!.Rows.Count(r => TextFor(r, target) != r.O));
+            Console.WriteLine($"  内容闸[{gateMode.ToString().ToLowerInvariant()}]：{rows} 行已过，" +
+                              (gateHits.Count == 0 ? "0 命中" : $"{gateHits.Count} 处命中"));
+        }
+        if (gateHits.Count > 0) {
+            Console.WriteLine();
+            Console.WriteLine($"!! 内容闸[{gateMode.ToString().ToLowerInvariant()}]：{gateHits.Count} 处文本不是我们能推导出来的");
+            foreach (var (it, rule, msg) in gateHits.Take(6))
+                Console.WriteLine($"    {rule} {msg}");
+            if (gateHits.Count > 6) Console.WriteLine($"    ... 还有 {gateHits.Count - 6} 处");
+            if (gateMode == ContentGate.Mode.Enforce) {
+                Console.WriteLine("  enforce 模式：一个都没写。数据包（bundle.gz）可能被人换过。");
+                Console.WriteLine("  确认无误的话用 --gate=warn 只警告、--gate=off 直接关掉。");
+                return 7;
+            }
+            Console.WriteLine("  warn 模式：照常写入。这是灰度期的默认值 —— 先看清命中什么，再决定要不要拦。");
+        }
+
         if (broken.Count > 0) {
             Console.WriteLine();
             Console.WriteLine($"!! {broken.Count} 个目标文件数据已损坏，读不出来：");
@@ -2689,6 +2742,35 @@ internal static class Program {
 
     // 遇到「被别人改过、与数据包对不上」的文件时的处置方式。见 ApplyInPlace 开头。
     private enum Policy { Merge, Ours, Original, Skip }
+
+    // 内容闸默认 warn：误杀比漏放更容易被看见。灰度一个版本、确认 0 命中后再切 enforce。
+    private static ContentGate.Mode GateMode() => (Args.GetValueOrDefault("gate") ?? "").Trim().ToLowerInvariant() switch {
+        "off" => ContentGate.Mode.Off,
+        "enforce" or "strict" => ContentGate.Mode.Enforce,
+        _ => ContentGate.Mode.Warn,
+    };
+
+    // 数据包里的文本在写进客户端之前过一遍闸。
+    // 查的是「要写进去的那一行」（TextFor），不是容器里现有的内容 ——
+    // 容器里那行是谁写的我们管不着，写进去的是我们的东西，就得能推导出来。
+    private static List<(Item item, string rule, string msg)> GateBundle(List<Item> items, Flavor target,
+                                                                        ContentGate.Mode mode) {
+        var hits = new List<(Item, string, string)>();
+        if (mode == ContentGate.Mode.Off) return hits;
+        var cfg = ContentGate.Config.Load(GateRoot());
+        foreach (var i in items) {
+            if (i.Sd is null || i.Missing || i.Broken) continue;
+            // 白名单按 raw_sd 的扁平文件名记（metadata_statdescriptions_xxx.txt）
+            var gateFile = "metadata_statdescriptions_" + Path.GetFileName(i.Sd.Path);
+            foreach (var r in i.Sd.Rows) {
+                var text = TextFor(r, target);
+                if (text == r.O) continue;                   // 没改的行不归我们管
+                foreach (var f in ContentGate.CheckLine(text, oldText: r.O, cfg: cfg, file: gateFile))
+                    hits.Add((i, f.Rule, $"{i.Label}:{r.No + 1} {f.Message}"));
+            }
+        }
+        return hits;
+    }
 
     private static Policy ParsePolicy(string? s) => (s ?? "").Trim().ToLowerInvariant() switch {
         "" or "merge" => Policy.Merge,

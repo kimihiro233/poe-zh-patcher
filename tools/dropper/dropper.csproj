@@ -22,9 +22,14 @@
   <ItemGroup>
     <None Include="..\lib\oo2core.dll" Link="oo2core.dll" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="..\pack\bundle.gz" LogicalName="bundle.gz" />
+    <!-- 内容闸的两份策略表必须随 exe 走：玩家机器上没有仓库目录树，
+         读不到白名单就会把每个命名标签都当成「不在白名单」→ 全量误杀。 -->
+    <EmbeddedResource Include="..\pack\markup-whitelist.json" LogicalName="markup-whitelist.json" />
+    <EmbeddedResource Include="..\pack\gate-exceptions.json" LogicalName="gate-exceptions.json" />
     <Compile Include="..\shared\BundleHygiene.cs" Link="BundleHygiene.cs" />
     <Compile Include="..\shared\Safety.cs" Link="Safety.cs" />
     <Compile Include="..\shared\Redact.cs" Link="Redact.cs" />
+    <Compile Include="..\shared\ContentGate.cs" Link="ContentGate.cs" />
     <Compile Include="..\shared\GgpkUndo.cs" Link="GgpkUndo.cs" />
     <Compile Include="..\shared\LanguageSwitch.cs" Link="LanguageSwitch.cs" />
     <Compile Include="..\shared\FlagIcon.cs" Link="FlagIcon.cs" />

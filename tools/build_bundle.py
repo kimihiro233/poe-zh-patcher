@@ -19,6 +19,7 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
 SD_DIR = "raw_sd"
@@ -120,6 +121,21 @@ def main():
     man_t = load("out/patch-sd/manifest-sd.json")
     man_d = load("out/patch-sd-dual/manifest-sd-dual.json")
     man_dat = load("out/patch/manifest.json")
+
+    # 内容闸的第三道（也是最后一道）：数据进 bundle.gz 之前再看一眼。
+    # patch_sd 那边管的是「我们自己的修正稿」，这里管的是「清单里登记的一切」——
+    # 清单可能是别人递过来的，产物可能是上一次留下的，都得过这一遍。
+    import content_gate
+    gate = content_gate.mode_of(sys.argv)
+    if gate != "off":
+        ents = [e for m in (man_t, man_d, man_all) for e in m.get("files", [])]
+        hits, rows = content_gate.gate_entries(ents, "out/content-gate.md", gate)
+        if hits and gate == "enforce":
+            print(f"内容闸[enforce]：{hits} 处命中，拒绝打包 -> out/content-gate.md")
+            for p, r, m in rows[:5]:
+                print(f"    {r} {p} | {m}")
+            return 3
+        print(f"内容闸[{gate}]：{len(ents)} 个文件，{hits} 处命中")
 
     sha_t = {f["path_in_ggpk"]: f["sha256_patched"] for f in man_t["files"]}
     sha_d = {f["path_in_ggpk"]: f["sha256_patched"] for f in man_d["files"]}

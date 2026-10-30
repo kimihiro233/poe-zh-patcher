@@ -63,6 +63,17 @@ def build_sources() -> dict:
         src["code.backup_keep"] = int(m_backup.group(1))
     if m_snap:
         src["code.snapshot_keep"] = int(m_snap.group(1))
+
+    # 内容闸：白名单标签数 / 对抗样本条数 / 白名单条目数
+    whitelist = ROOT / "tools" / "pack" / "markup-whitelist.json"
+    fixtures = ROOT / "fixtures" / "gate" / "cases.json"
+    exceptions = ROOT / "tools" / "pack" / "gate-exceptions.json"
+    if whitelist.exists():
+        src["gate.whitelist.named"] = len(json.loads(whitelist.read_text(encoding="utf-8"))["named"])
+    if fixtures.exists():
+        src["gate.fixtures.count"] = len(json.loads(fixtures.read_text(encoding="utf-8"))["case"])
+    if exceptions.exists():
+        src["gate.exceptions.count"] = len(json.loads(exceptions.read_text(encoding="utf-8"))["case"])
     return src
 
 

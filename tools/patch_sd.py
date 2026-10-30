@@ -39,6 +39,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import markup
+import content_gate
 
 
 SD_DIR = "raw_sd"
@@ -631,6 +632,21 @@ def main():
         if variants:
             entry["sha256_variants"] = variants[:8]
         entries.append(entry)
+
+    # 内容闸：产物已经落盘，但清单还没写。enforce 模式下落单就不写清单 ——
+    # 没有清单，build_bundle 打不出包，等于在这一步把整条链掐断。
+    gate = content_gate.mode_of(sys.argv)
+    if gate != "off" and entries:
+        hits, rows = content_gate.gate_entries(entries, "out/content-gate.md", gate)
+        if hits:
+            print(f"内容闸[{gate}]：命中 {hits} 处 -> out/content-gate.md")
+            for p, r, m in rows[:5]:
+                print(f"    {r} {p} | {m}")
+            if gate == "enforce":
+                print("enforce 模式：拒绝写清单。先确认这些是不是误杀，再决定改数据还是加白名单。")
+                return 3
+        else:
+            print(f"内容闸[{gate}]：{len(entries)} 个文件，0 命中")
 
     lock = json.load(open("game.lock.json", encoding="utf-8"))
     game = dict(lock["version"])

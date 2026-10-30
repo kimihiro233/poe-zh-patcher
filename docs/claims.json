@@ -44,6 +44,24 @@
       "regex": "留最近 (\\d+) 份当后悔药",
       "source": "code.snapshot_keep",
       "why": "ggpk 快照轮转份数，来自 GgpkUndo.cs 的 Prune(keep: N)"
+    },
+    {
+      "id": "gate-whitelist",
+      "regex": "（(\\d+) 个命名标签",
+      "source": "gate.whitelist.named",
+      "why": "内容闸 G2 的标签白名单，来自 tools/pack/markup-whitelist.json（由 raw_sd 统计生成）"
+    },
+    {
+      "id": "gate-fixtures",
+      "regex": "(\\d+) 条对抗样本",
+      "source": "gate.fixtures.count",
+      "why": "Py 与 C# 共用的对抗样本条数，来自 fixtures/gate/cases.json"
+    },
+    {
+      "id": "gate-exceptions",
+      "regex": "记着 (\\d+) 条「占位符集合故意不同」",
+      "source": "gate.exceptions.count",
+      "why": "G3 白名单条目数，来自 tools/pack/gate-exceptions.json"
     }
   ],
   "unverified": [
