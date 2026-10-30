@@ -22,6 +22,10 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: "1"
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1"
   CI: "true"
+  # runner 是英文 Windows，ANSI 代码页 cp437。自检脚本自己已经把出口钉成 UTF-8，
+  # 这两行是第二道保险：任何新加的 Python 工具默认就是 UTF-8，不必各自记得处理。
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: "utf-8"
 
 jobs:
   build-and-test:
@@ -74,7 +78,9 @@ jobs:
         shell: pwsh
         run: |
           python tools/run_tests.py 2>&1 | Tee-Object -FilePath test-output.txt
-          exit $LASTEXITCODE
+          $code = $LASTEXITCODE
+          Write-Host "run_tests.py 退出码 $code"
+          exit $code
 
       - name: 上传自检输出
         if: always()

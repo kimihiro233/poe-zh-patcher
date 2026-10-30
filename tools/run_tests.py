@@ -25,10 +25,29 @@ PROJECTS = ["b2probe", "dropper", "dumper", "ggpkdiag", "ggpkdoctor", "ggpkfix",
 DLL = os.path.join(ROOT, "tools", "dropper", "bin", "Release", "net8.0", "PoE-zh-Patcher.dll")
 RAW_SD = os.path.join(ROOT, "raw_sd")
 
+# 英文 Windows（GitHub runner 就是）的 ANSI 代码页是 cp437，往管道里打中文会直接
+# UnicodeEncodeError，而不是变成问号 —— 本地是中文系统，这条路径永远走不到，
+# 于是「本地全绿、CI 一上来就红」。自检脚本不该挑系统语言，自己把出口固定成 UTF-8。
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):
+        pass
+
+# 子进程同样要钉住：子 Python 脚本的 stdout 是管道，会退回 locale 编码后崩在 print 上，
+# 表现为「用例失败」而其实只是它打不出中文。这里连同 dotnet 的 CLR 一起钉。
+CHILD_ENV = dict(os.environ)
+CHILD_ENV.update({
+    "PYTHONUTF8": "1",
+    "PYTHONIOENCODING": "utf-8",
+    "DOTNET_CLI_UI_LANGUAGE": "en",
+})
+
 
 def run(cmd, cwd=ROOT):
     t0 = time.time()
-    p = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    p = subprocess.run(cmd, cwd=cwd, capture_output=True,
+                       encoding="utf-8", errors="replace", env=CHILD_ENV)
     return p.returncode, (p.stdout or "") + (p.stderr or ""), time.time() - t0
 
 
@@ -41,10 +60,11 @@ def main():
     results = []
 
     def record(name, code, out, secs, skip_reason=None):
+        last = out.strip().splitlines()[-1][:110] if out.strip() else ""
         if skip_reason:
-            results.append((name, "SKIP", skip_reason, secs))
+            results.append((name, "SKIP", skip_reason, secs, out))
         else:
-            results.append((name, "PASS" if code == 0 else "FAIL", out.strip().splitlines()[-1][:110] if out.strip() else "", secs))
+            results.append((name, "PASS" if code == 0 else "FAIL", last, secs, out))
 
     if build:
         for p in PROJECTS:
@@ -83,10 +103,10 @@ def main():
                    skip_reason="raw_sd/ 不存在（游戏文本不入库，本地跑前先 dumper 导出）")
 
     # 汇总
-    w = max(len(n) for n, _, _, _ in results)
+    w = max(len(n) for n, _, _, _, _ in results)
     print()
     bad = 0
-    for name, status, msg, secs in results:
+    for name, status, msg, secs, _ in results:
         mark = {"PASS": "OK  ", "FAIL": "FAIL", "SKIP": "SKIP"}[status]
         print("  %-4s %-*s %5.1fs  %s" % (mark, w, name, secs, msg))
         if status == "FAIL":
@@ -95,9 +115,14 @@ def main():
     n_skip = sum(1 for r in results if r[1] == "SKIP")
     print("\n%d 通过 / %d 失败 / %d 跳过" % (n_pass, bad, n_skip))
     if bad:
+        # 以前这里是空循环：说了「完整输出在下面」但其实什么都没打，
+        # 到了 CI 上只剩一行 FAIL，还得本地重跑才知道错在哪。
         print("\n失败项的完整输出：")
-        for name, status, msg, _ in results:
-            pass
+        for name, status, _, _, out in results:
+            if status != "FAIL":
+                continue
+            print("\n===== %s =====" % name)
+            print(out.rstrip() if out.strip() else "(无输出)")
     return 0 if bad == 0 else 1
 
 
