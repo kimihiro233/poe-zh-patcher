@@ -22,7 +22,10 @@ using Idx = LibBundle3.Index;
 
 namespace PoeZhPatcher;
 
-internal enum Flavor { Original, Translated, Dual, DualAll, Custom, Unknown }
+// DualLegacy：认出来了 —— 里面是「原文 + 译文」的某个排列，只是拼法不是当前这一版
+// （v0.4.2 及之前把英文整段堆在中文后面）。它和 Custom 的区别是：Custom 是底稿被
+// 别人动过、要保住对方的标记；DualLegacy 是我们自己写的，整块换成目标即可。
+internal enum Flavor { Original, Translated, Dual, DualAll, Custom, DualLegacy, Unknown }
 
 // 标记层 / 文本层分离。
 //
@@ -578,6 +581,9 @@ internal static class Program {
         if (Args.ContainsKey("markup-test")) return MarkupTest();
         // ggpk 逐字节还原自检：不碰真实客户端，在临时目录里造一份「同结构」的文件跑
         if (Args.ContainsKey("undo-test")) return UndoTest();
+        // 旧版对照的识别自检：不依赖游戏，用数据包里的三态文本现场拼出各种历史拼法，
+        // 验证「认得出多少种排列」和「什么情况下必须认不出」。
+        if (Args.ContainsKey("legacy-test")) return LegacyTest();
         // 外部改过的底稿演练：拿一份现成文件跑 TryCustomBase + Rewrite，只读不写
         if (Args.TryGetValue("sd-test", out var sdArg) && sdArg.Length > 0) return SdTest(sdArg);
         // 外部改过的数据表演练：拿一份现成 .datc64 跑 TryCustomBase + Apply，只读不写
@@ -1053,6 +1059,79 @@ internal static class Program {
     //   A) 写到一半进程没了（不提交）→ 下次启动 Recover 必须退回原样
     //   B) 写完提交 → 之后用 --restore-ggpk 退回原样
     //   C) 同一块被反复覆盖（区间去重）→ 退回的仍是最早那份原字节
+    // 旧版对照识别自检：不碰游戏，只拿一份最小的「文件」把判定规则的边界钉住。
+    // 重点不是「认得出现在这一版」，而是「以后每次改 dual_body 的排列方式，老客户端都还认得」，
+    // 以及「该认不出的必须认不出」—— 认错会把别人的译文整块换成我们的。
+    private static int LegacyTest() {
+        Console.WriteLine("旧版对照识别自检");
+        Console.WriteLine();
+
+        // 文本内的换行是字面「反斜杠 + n」，和真实 statdesc 一致
+        const string O = "Hello\\nWorld";
+        const string T = "你好\\n世界";
+
+        byte[] Build(string body) {
+            var text = "key \"x\"\r\nkey \"" + body + "\"\r\n";
+            var b = Encoding.Unicode.GetBytes(text);
+            var r = new byte[b.Length + 2];
+            r[0] = 0xFF; r[1] = 0xFE;
+            b.CopyTo(r, 2);
+            return r;
+        }
+        SdEntry MakeEntry() {
+            var e = new SdEntry { Path = "test_stat_descriptions.txt", BaseLines = 3 };
+            e.Rows.Add(new Row { No = 1, O = O, T = T, E = O });
+            return e;
+        }
+
+        var bad = 0;
+        void Case(string what, string body, bool expect) {
+            var ok = TryLegacyDual(MakeEntry(), Build(body), out var why);
+            var pass = ok == expect;
+            Console.WriteLine($"  {(pass ? "✓" : "✗")} {what}");
+            Console.WriteLine($"      {(ok ? "认出" : "认不出")}：{why}");
+            if (!pass) {
+                Console.WriteLine($"      预期：{(expect ? "认出" : "认不出")}");
+                bad++;
+            }
+        }
+
+        // ---- 认得出来：同一份译文的任何一种排列
+        Case("当前拼法（逐组穿插）", "你好\\n  Hello\\n世界\\n  World", true);
+        Case("旧拼法（英文整段附末尾 + 首行缩进）", "你好\\n世界\\n  Hello\\nWorld", true);
+        Case("旧拼法（英文整段附末尾、完全不缩进）", "你好\\n世界\\nHello\\nWorld", true);
+        Case("英文在前", "Hello\\nWorld\\n你好\\n世界", true);
+        Case("混着来（第一组穿插、第二组附后）", "你好\\n  Hello\\n世界\\nWorld", true);
+        Case("只有译文、没有英文", "你好\\n世界", true);
+
+        // ---- 认不出来：对应关系被破坏，或根本不是我们写的
+        Case("英文那一行被改了一个字", "你好\\n世界\\n  Hello\\nWorlx", false);
+        Case("译文那一行被改了一个字", "你好呀\\n世界\\n  Hello\\nWorld", false);
+        Case("混进了别人的一句译文", "你好\\n世界\\n  Hello\\nWorld\\n  這是別人翻的", false);
+        Case("整份都是官方原文（应走 Original 那条路）", "Hello\\nWorld", false);
+
+        // ---- 一半原文、一半译文：认得出，且不把「还没翻的格」算错
+        {
+            var e = new SdEntry { Path = "t.txt", BaseLines = 3 };
+            e.Rows.Add(new Row { No = 1, O = O, T = T, E = O });
+            e.Rows.Add(new Row { No = 2, O = "Foo\\nBar", T = "甲\\n乙", E = "Foo\\nBar" });
+            var text = "key \"x\"\r\nkey \"你好\\n世界\\n  Hello\\nWorld\"\r\nkey \"Foo\\nBar\"\r\n";
+            var b = Encoding.Unicode.GetBytes(text);
+            var cur = new byte[b.Length + 2];
+            cur[0] = 0xFF; cur[1] = 0xFE;
+            b.CopyTo(cur, 2);
+            var ok = TryLegacyDual(e, cur, out var why);
+            var pass = ok;
+            Console.WriteLine($"  {(pass ? "✓" : "✗")} 一格已翻、一格还是原文");
+            Console.WriteLine($"      {(ok ? "认出" : "认不出")}：{why}");
+            if (!pass) bad++;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine(bad == 0 ? "全部通过。" : $"{bad} 项不符。");
+        return bad == 0 ? 0 : 7;
+    }
+
     private static int UndoTest() {
         var root = Path.Combine(Path.GetTempPath(), "poezh-undo-" + DateTime.Now.ToString("HHmmssfff"));
         Directory.CreateDirectory(root);
@@ -1201,6 +1280,7 @@ internal static class Program {
         Flavor.Translated => "纯译文",
         Flavor.Dual => "对照版",
         Flavor.DualAll => "全量对照",
+        Flavor.DualLegacy => "旧版对照",
         _ => "未知",
     };
 
@@ -1497,6 +1577,16 @@ internal static class Program {
                 continue;
             }
 
+            if (curF == Flavor.DualLegacy) {
+                // 认得出的旧版对照：内容就是「原文 + 译文」，直接整块换成目标文本。
+                // 不做标记层继承 —— 这份内容是我们自己写的，标记本就派生自 O/T，没有额外信息；
+                // 真要保住别人加的颜色，那种文件会先被 TryCustomBase 判成 Custom 走上一条路。
+                var want = TextFor(r, tgtF);
+                if (now == want) continue;
+                lines[r.No] = raw[..j] + want + raw[k..];
+                continue;
+            }
+
             var expect = TextFor(r, curF);
             var target = TextFor(r, tgtF);
             if (expect == target) continue;
@@ -1590,6 +1680,83 @@ internal static class Program {
         return true;
     }
 
+    // ---------------------------------------------------------------- 旧版对照的接管
+    //
+    // v0.4.2 及之前的 dual_body 是「中文整段 + 英文整段堆在末尾，只给第一行缩进」，
+    // 现在是「逐组穿插」。同一份译文，两种拼法的整块 sha 必然不同 —— 但**行还是那些行**。
+    // 所以认它不能比整块，要比「每一行归到哪一版」：
+    //
+    //   把原文 / 译文 / 对照 / 英文原文 / 上一版文本，全部按 \n 拆成行，收成一个行池；
+    //   文件里记录的每一格，块内每一行去标记、去首尾空白后都得落在池子里。
+    //
+    // 全部落得进去 → 这就是「原文与译文的某个排列」，是我们自己的产物，接管。
+    // 有一行落不进去 → 那行不是我们写的（别人的译文，或译文本身被改过），不接管。
+    //
+    // 这条判据不认「拼法」，只认「行」：以后再换多少次排列方式都仍然认得出来，
+    // 不会每改一次 dual_body 就有一批老客户端变成「未知」。
+    private static bool TryLegacyDual(SdEntry e, byte[] cur, out string why) {
+        why = "";
+        List<string> lines;
+        try { lines = SplitLines(cur); } catch (Exception ex) { why = ex.Message; return false; }
+
+        var fromOrig = new HashSet<string>(StringComparer.Ordinal);   // 只出现在原文里的行
+        var fromOur = new HashSet<string>(StringComparer.Ordinal);    // 只出现在译文/英文/旧版里的行
+        var origLines = new HashSet<string>(StringComparer.Ordinal);
+        var ourLines = new HashSet<string>(StringComparer.Ordinal);
+        void Split(string? t, HashSet<string> dst) {
+            if (string.IsNullOrEmpty(t)) return;
+            foreach (var ln in t.Split(Nl)) {
+                var k = LineKey(ln);
+                if (k.Length > 0) dst.Add(k);
+            }
+        }
+        foreach (var r in e.Rows) {
+            Split(r.O, origLines);
+            Split(r.T, ourLines);
+            Split(r.D, ourLines);
+            Split(r.E, ourLines);
+            foreach (var l in r.Legacy) Split(l, ourLines);
+        }
+        // 一段文本既可能是原文行也可能是译文行（没翻译的专名），按「我们能写的」优先
+        foreach (var k in origLines) if (!ourLines.Contains(k)) fromOrig.Add(k);
+        foreach (var k in ourLines) fromOur.Add(k);
+        if (fromOrig.Count + fromOur.Count == 0) { why = "数据包里没有可用的行文本"; return false; }
+
+        var nBlocks = 0;        // 有多少格的块里带了译文
+        var nBare = 0;          // 还停在原文的格
+        foreach (var r in e.Rows) {
+            if (r.No < 0 || r.No >= lines.Count) { why = $"第 {r.No + 1} 行超出文件范围"; return false; }
+            var (j, k) = TextSpan(lines[r.No]);
+            if (j < 0 || k <= j) { why = $"第 {r.No + 1} 行找不到引号文本"; return false; }
+            var now = lines[r.No][j..k];
+            if (LineKey(now) == LineKey(r.O)) { nBare++; continue; }   // 这一格没动，仍是原文
+            var ours = false;
+            foreach (var ln in now.Split(Nl)) {
+                var key = LineKey(ln);
+                if (key.Length == 0) continue;
+                if (fromOur.Contains(key)) { ours = true; continue; }
+                if (fromOrig.Contains(key)) continue;
+                why = $"第 {r.No + 1} 行里有一段不是我们写的：{Clip(key)}";
+                return false;
+            }
+            if (!ours) {
+                // 整块都由原文行组成，却没有一行来自译文 —— 这是原文的重新排列，不是对照版
+                why = $"第 {r.No + 1} 行只有原文，没有译文";
+                return false;
+            }
+            nBlocks++;
+        }
+        if (nBlocks == 0) {
+            why = nBare > 0 ? $"全部 {nBare} 格都还是原文" : "没有可判定的行";
+            return false;
+        }
+        why = $"{nBlocks} 格是「原文 + 译文」的排列（{nBare} 格仍是原文），拼法与本版不同";
+        return true;
+    }
+
+    // 行级归一的键：剥掉标记、去掉首尾空白（旧版给英文行补的缩进就去在这一步）
+    private static string LineKey(string s) => Markup.Core(s).Trim();
+
     private static List<Item> Preflight(IContainer store) {
         var list = new List<Item>();
         foreach (var e in _sd) {
@@ -1607,9 +1774,14 @@ internal static class Program {
             it.CurFlavor = Detect(e, Sha(it.Cur));
             var why = "";
             if (it.CurFlavor == Flavor.Unknown) {
+                // 先看「结构没变、只有标记被外人动过」（保住对方的颜色），
+                // 再看「是我们自己用旧拼法写的对照版」（接管、整块换掉）。
                 if (TryCustomBase(e, cur, out why, out var knownOnly)) {
                     it.CurFlavor = Flavor.Custom;
                     it.Legacy = !knownOnly;      // 只有旧版补丁才会用到 legacy 文本
+                } else if (TryLegacyDual(e, cur, out var lwhy)) {
+                    it.CurFlavor = Flavor.DualLegacy;
+                    why = lwhy;
                 }
                 it.Why = why;
             }
@@ -1643,6 +1815,7 @@ internal static class Program {
         Flavor.Unknown when i.Broken => "读不出",
         Flavor.Unknown => "未知",
         Flavor.Custom => i.Legacy ? "旧版补丁" : "外部改过",
+        Flavor.DualLegacy => "旧版对照",
         _ when !i.IsSd && i.CurFlavor != Flavor.Original => "已打补丁",
         _ => FlavorName(i.CurFlavor),
     };
@@ -1890,8 +2063,11 @@ internal static class Program {
             Console.WriteLine("    （只会重下 _.index.bin，约 20 MB；我们写的 bundle 不在清单里，删掉不影响校验）");
         }
 
+        // --on-modified=skip 的语义就是「一个都不动，只翻能对上的」，
+        // 所以它自己就该放行，不必再叠一个 --partial（以前提示里写着能用、实际仍中止）。
+        var tolerate = partial || policy == Policy.Skip;
         if (skip.Count > 0) {
-            if (!partial) {
+            if (!tolerate) {
                 if (missing.Count > 0) {
                     Console.WriteLine($"中止：{missing.Count} 个目标文件在 {store.Kind} 里找不到，一个都没写。");
                     foreach (var u in missing.Take(6)) Console.WriteLine($"    {u.Label}");
@@ -1919,7 +2095,7 @@ internal static class Program {
         }
 
         if (!VersionOk()) {
-            if (!partial) {
+            if (!tolerate) {
                 Console.WriteLine($"中止：游戏版本与数据包不一致（数据包 {_gameClient}）。");
                 Console.WriteLine("  重启游戏让它更新一次日志，或等新版数据包。");
                 return 4;
@@ -1929,8 +2105,10 @@ internal static class Program {
         }
 
         var plan = Args.ContainsKey("plan");
-        var pool = partial
-            ? items.Where(i => i.CurFlavor != Flavor.Unknown || forced.Contains(i)).ToList()
+        // 放行模式（--partial 或 --on-modified=skip）下，skip 里的文件一个都不碰：
+        // 跳过 = 保持它们现在能被游戏读到的样子，正是 --on-modified=skip 的承诺。
+        var pool = tolerate
+            ? items.Where(i => !skip.Contains(i)).ToList()
             : items;
         if (forced.Count > 0 && !partial) {
             Console.WriteLine($"  按 --on-modified={PolicyName(policy)} 处理 {forced.Count} 个对不上基线的数据表"
