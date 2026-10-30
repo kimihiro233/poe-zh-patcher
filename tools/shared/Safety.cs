@@ -269,11 +269,35 @@ internal static class BackupStore {
         return s;
     }
 
-    /// <summary>只保留最近几份。备份是「后悔药」，留太多会把客户端目录撑大。</summary>
+    // 备份轮转：留最近几份。但有一个例外必须留住 —— 「被外部改过的内容」在这台机器之外
+    // 不存在第二份，轮转把它删掉等于永久销毁用户唯一的副本，而轮转的初衷只是省磁盘。
+    // 所以按时间倒序，第一份含外部内容的备份永远不删。
+    private static readonly string[] ForeignFlavor = { "外部改过", "旧版补丁", "旧版对照", "未知", "读不出" };
+
+    /// <summary>这份备份里有没有「别处没有第二份」的字节。</summary>
+    private static bool HasForeign(string dir) {
+        var mf = Path.Combine(dir, ManifestName);
+        if (!File.Exists(mf)) return false;
+        try {
+            var s = JsonSerializer.Deserialize<BackupSet>(File.ReadAllText(mf, Encoding.UTF8));
+            return s is not null && s.Items.Any(i => ForeignFlavor.Contains(i.Flavor));
+        } catch { return false; }
+    }
+
     private static void Prune(string root, int keep) {
         try {
             var dirs = Directory.GetDirectories(root).OrderByDescending(d => d, StringComparer.Ordinal).ToList();
-            foreach (var d in dirs.Skip(keep)) Directory.Delete(d, recursive: true);
+            if (dirs.Count <= keep) return;
+            var pinned = dirs.FirstOrDefault(HasForeign);
+            foreach (var d in dirs.Skip(keep)) {
+                if (pinned is not null && string.Equals(d, pinned, StringComparison.OrdinalIgnoreCase)) {
+                    Console.WriteLine($"  备份轮转：保留 {Path.GetFileName(d)}（里面是外部改过的内容，别处没有第二份）");
+                    continue;
+                }
+                // 删之前说清删的是哪一份：静默消失的备份，用户下次找不到只会以为程序坏了
+                Console.WriteLine($"  备份轮转：删除 {Path.GetFileName(d)}（超出保留的 {keep} 份）");
+                Directory.Delete(d, recursive: true);
+            }
         } catch { }
     }
 

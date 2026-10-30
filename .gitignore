@@ -21,9 +21,18 @@ releases/*.zip
 # 补丁器构建产物（37 MB，dotnet publish 重新生成；发布包里带一份）
 dist/
 
-# 结构演练的回读镜像、异地采集包里的原始文件（只留分析报告）
+# 结构演练的回读镜像
 out/simtest/
-out/collect-*/files/
+
+# 异地采集包：里面是客户端日志（账号、SteamID、C:\Users\<真名>\…）与容器全路径，
+# 只留分析结论。注意必须写成 `out/collect-*/*` 而不是 `out/collect-*/` ——
+# 父目录一旦被整体忽略，后面的 `!` 否定规则就进不去，等于白写。
+out/collect-*/*
+!out/collect-*/ANALYSIS.md
+!out/collect-*/syntax-check.md
+!out/collect-*/*-diff.csv
+# 采集包打出来的 zip 同理（内容是上面那些 txt/json）
+out/collect-*.zip
 
 # 旧游戏锁留档（需要时可由 git 历史里的 game.lock.json 找回）
 out/game-lock-history/

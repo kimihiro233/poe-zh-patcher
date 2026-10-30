@@ -577,6 +577,8 @@ internal static class Program {
 
         _restoreBare = !Args.ContainsKey("keep-markup");
 
+        // 采集包脱敏自检：规则改一个字就是「泄漏」或「误杀」，所以每条规则都拿真实日志行钉住
+        if (Args.ContainsKey("redact-test")) return Redact.SelfTest();
         // 标记层合并自检：与 tools/markup.py 的用例逐条对齐，防止两侧实现漂移
         if (Args.ContainsKey("markup-test")) return MarkupTest();
         // ggpk 逐字节还原自检：不碰真实客户端，在临时目录里造一份「同结构」的文件跑
@@ -1452,13 +1454,14 @@ internal static class Program {
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --status                         只看状态");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --selftest                       数据与文件对得上吗");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --struct                         结构演练（只验读写通道）");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --collect [--out=目录]           采集诊断包（只读，发给作者排查）");
+        Console.WriteLine("  PoE-zh-Patcher.exe <...> --collect [--out=目录]           采集诊断包（只读，发给作者排查；落盘前脱敏）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --writetest[=N]                  写入演练（在索引副本上写 N 个文件，不碰客户端）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --bundles[=all]                 看索引里的 bundle 记录（排查 bad allocation / Buffer Underflow）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --partial       只处理对得上的文件，跳过对不上的");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --plan          只演算校验，不写文件");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --only=<关键词>  只改文件名含该关键词的文件（最小验证用）");
         Console.WriteLine("  PoE-zh-Patcher.exe --data-test=<基线目录>                 数据包自检（不需要游戏：拿官方原文重算一遍，比对发布 sha）");
+        Console.WriteLine("  PoE-zh-Patcher.exe --redact-test                         采集包脱敏自检（10 条真实日志行断言）");
         Console.WriteLine("  PoE-zh-Patcher.exe <...> --locale-only[=original]        只处理语系与国旗，不碰译文");
         Console.WriteLine();
         Console.WriteLine("安全相关：");
@@ -1470,9 +1473,11 @@ internal static class Program {
         Console.WriteLine("  <...> --baseline                         看基准（这个版本下每份文件第一次被看到的样子）");
         Console.WriteLine("  <...> --baseline --restore-baseline=<关键词>  把匹配的文件整份写回基准（= 硬还原）");
         Console.WriteLine("  基准是每次写入的算式输入，与「改过几次」无关；它不随备份轮转，按游戏版本分开存。");
-        Console.WriteLine("  每次写入前都留还原点：Bundles2 复制 _.index.bin；ggpk 抄索引区 + 逐块记原字节。");
+        Console.WriteLine("  每次写入前都留还原点：Bundles2 复制 _.index.bin；ggpk 逐块记原字节。");
         Console.WriteLine("  写坏了自动整份退回；进程被杀 / 断电也能在下次启动时自动退回。");
         Console.WriteLine("  排障用：--simulate-fail=N 故意在第 N 个文件失败，验证退回流程（不写坏客户端）");
+        Console.WriteLine("  <...> --set=translated --keep-markup      保留底稿的标记层，只叠文本（外部改过的客户端）");
+        Console.WriteLine("  --sd-test=<某份词缀文件.txt>              只读演练：判定 + 合并 + 应改行数");
     }
 
     private static void Pause() {
@@ -2494,6 +2499,9 @@ internal static class Program {
                 // 而每次安装都会重写全部文件，无脑备份会让 .poe-zh 白白涨几十 MB。
                 if (backupSet is not null && Sha(i.Cur) != got)
                     BackupStore.Add(backupSet, i.Path, i.Cur, ShowFlavor(i));
+                // 快照轮转要知道「这次盖掉的是不是别人的译文」：是的话那份快照里可能
+                // 存着别处不存在的字节，不能被省磁盘的轮转顺手删掉（见 GgpkUndo.Prune）
+                store.Undo?.NoteFlavor(ShowFlavor(i));
 
                 var t0 = Stopwatch.StartNew();
                 if (!store.Write(i.Path, targetBytes)) {
@@ -3159,7 +3167,9 @@ internal static class Program {
         sb.AppendLine($"数据包适用  游戏 {_gameClient}{(_gamePatch.Length > 0 ? " / patch " + _gamePatch : "")}");
         sb.AppendLine($"游戏版本    {(client.Length == 0 ? "(读不到 logs/LatestClient.txt)" : client + (patch.Length > 0 ? " / patch " + patch : ""))}" +
                       (client.Length > 0 ? (VersionOk() ? "  ✓ 与数据包一致" : "  ✗ 与数据包不一致") : ""));
-        sb.AppendLine($"目标        [{store.Kind}] {store.Display}");
+        // 不写全路径：采集包是要发出去的，`C:\Users\<真名>\…` 对排查毫无用处，
+        // 对收包的人却是一整套身份线索。盘符 + 层数 + 文件名已经够判断安装形态。
+        sb.AppendLine($"目标        [{store.Kind}] {Redact.PathHint(store.Display)}");
         sb.AppendLine($"容器大小    {store.Size:N0} B");
         sb.AppendLine();
         sb.AppendLine($"目标文件 {items.Count} 个：{Summary(items)}");
@@ -3183,7 +3193,7 @@ internal static class Program {
             // 未知文件：落原文 + 逐行核对我们想改的那几行，看是否还落在原处
             var dump = System.IO.Path.Combine(dumpDir, i.Label);
             try { File.WriteAllBytes(dump, i.Cur); rec["dump"] = "files/" + i.Label; }
-            catch (Exception ex) { rec["dump_error"] = ex.Message; }
+            catch (Exception ex) { rec["dump_error"] = Redact.Text(ex.Message, log: true); }
 
             sb.AppendLine(new string('-', 70));
             sb.AppendLine($"{i.Label}");
@@ -3259,50 +3269,75 @@ internal static class Program {
         if (unknown.Count == 0)
             sb.AppendLine("（没有未知文件，数据包与这份客户端完全对得上）");
 
-        // 客户端日志前 60 行，方便看版本与语言
+        // 客户端日志前 60 行，方便看版本与语言。这一份最容易夹带身份信息：
+        // 登录账号、SteamID、`C:\Users\<真名>\…` 全在日志里，所以逐行过一遍脱敏。
+        var logLines = 0;
         try {
             var root = store.RootDir;
             foreach (var rel in new[] { "logs/LatestClient.txt", "logs/Client.txt" }) {
                 var p = System.IO.Path.Combine(root, rel);
                 if (!File.Exists(p)) continue;
-                var head = File.ReadLines(p).Take(60).ToArray();
-                File.WriteAllLines(System.IO.Path.Combine(dir, "client-log.txt"), head, Encoding.UTF8);
+                var head = File.ReadLines(p).Take(60).Select(Redact.LogLine).ToArray();
+                logLines = head.Length;
+                File.WriteAllLines(System.IO.Path.Combine(dir, "client-log.txt"), head, TextEnc.Utf8);
                 break;
             }
         } catch { }
 
-        var readme = new[]
-        {
+        var readme = new List<string> {
             "这个文件夹是 PoE 繁中汉化补丁器生成的采集包，只用于让作者针对你的客户端重做数据包。",
             "",
             "请把整个文件夹（或同级的 .zip）发回给作者。内容说明：",
             "  report.txt     —— 客户端版本、每个文件的状态、对不上的文件的逐行对照",
             "  report.json    —— 同样的内容，机器可读",
             "  files/         —— 状态对不上的那几个词缀文件原文（UTF-16 文本）",
-            "  client-log.txt —— 客户端日志开头几行，含版本号",
+            $"  client-log.txt —— 客户端日志开头几行，含版本号（已脱敏 {logLines} 行）",
+            "",
+            "已脱敏项（这些东西在写出前被替换或整行删除）：",
+            "  登录账号 / 会话 / 令牌 / 邮箱   整行删除，只留行首时间戳 + [REDACTED]",
+            "  SteamID64（7656 开头的 17 位）  换成 <steamid>",
+            "  用户目录里的用户名              换成 <user>，后面的路径保留",
+            @"  其它盘的绝对路径（仅日志）      换成 <path>",
+            "  游戏容器路径                    只给「盘符 · 层数 · 文件名」，不给全路径",
+            "",
+            "写出后会再扫一遍：如果仍能扫到真实用户名或 SteamID，就**不生成 .zip**，",
+            "只留这个文件夹给你自己看。遇到这种情况请把警告内容发回给作者。",
             "",
             "采集过程只读，没有改动游戏文件。",
         };
-        File.WriteAllLines(System.IO.Path.Combine(dir, "README.txt"), readme, Encoding.UTF8);
-        File.WriteAllText(System.IO.Path.Combine(dir, "report.txt"), sb.ToString(), Encoding.UTF8);
+        File.WriteAllLines(System.IO.Path.Combine(dir, "README.txt"), readme, TextEnc.Utf8);
+        File.WriteAllText(System.IO.Path.Combine(dir, "report.txt"),
+            Redact.Paths(sb.ToString(), log: false), TextEnc.Utf8);
         File.WriteAllText(System.IO.Path.Combine(dir, "report.json"),
             JsonSerializer.Serialize(new {
                 collected_at = DateTime.Now.ToString("s"),
                 patcher = _ver, bundle_built = _bundleBuilt,
                 expected_game = _gameClient, expected_patch = _gamePatch,
                 game = client, patch,
-                container = new { kind = store.Kind, path = store.Display, size = store.Size },
+                // 不给 path：整条路径里有用户名。path_hint 足够判断「什么形态的安装」
+                container = new { kind = store.Kind, path_hint = Redact.PathHint(store.Display), size = store.Size },
+                redacted = new[] { "account/session/token/mail 整行删除", "steamid64", "user path", "absolute path in log" },
                 files,
             }, new JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }),
-            Encoding.UTF8);
+            TextEnc.Utf8);
 
-        var zip = dir.TrimEnd('\\', '/') + ".zip";
-        try {
-            if (File.Exists(zip)) File.Delete(zip);
-            ZipFile.CreateFromDirectory(dir, zip, CompressionLevel.Optimal, false);
-        } catch (Exception ex) {
-            Console.WriteLine($"（打包 zip 失败：{ex.Message}，直接把文件夹发回也行）");
-            zip = "";
+        // 落盘后复扫：宁可交一个散文件夹，也不生成一个能反查到人的 zip
+        var leaks = Redact.Audit(dir);
+        var zip = "";
+        if (leaks.Count > 0) {
+            Console.WriteLine();
+            Console.WriteLine($"! 脱敏自检没通过：还有 {leaks.Count} 处可能带身份信息，已跳过打包");
+            foreach (var l in leaks.Take(8)) Console.WriteLine($"    {l}");
+            Console.WriteLine("  （文件夹本身仍然可用；把这几行发回给作者即可）");
+        } else {
+            zip = dir.TrimEnd('\\', '/') + ".zip";
+            try {
+                if (File.Exists(zip)) File.Delete(zip);
+                ZipFile.CreateFromDirectory(dir, zip, CompressionLevel.Optimal, false);
+            } catch (Exception ex) {
+                Console.WriteLine($"（打包 zip 失败：{ex.Message}，直接把文件夹发回也行）");
+                zip = "";
+            }
         }
 
         Console.WriteLine();

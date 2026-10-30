@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "about": "README.md 里那些会被用户当真的数字，逐条绑定到产物字段上。对不上就 return 1，接进 CI 之后文档没法静默漂移。",
+  "note": "regex 里第 1 个捕获组就是要校验的数字；README 里该正则的**所有**命中都必须等于来源值（多写一处也抓得住）。带千分位逗号的数字会自动去掉逗号再比。",
+  "claims": [
+    {
+      "id": "statdesc-files",
+      "regex": "(\\d+) 份 statdesc",
+      "source": "bundle.statdesc.count",
+      "why": "README 说基准里有 42 份 statdesc —— 这是数据包里 statdesc 数组的长度"
+    },
+    {
+      "id": "dat-tables",
+      "regex": "(\\d+) 个 dat",
+      "source": "bundle.dat.count",
+      "why": "数据表补丁的份数"
+    },
+    {
+      "id": "dual-all-rows",
+      "regex": "(\\d+) 行附英文",
+      "source": "bundle.statdesc.rows",
+      "why": "全量对照的总行数 = 所有 statdesc 行求和"
+    },
+    {
+      "id": "baseline-files",
+      "regex": "(\\d+) 份，全部还原成原文",
+      "source": "bundle.files",
+      "why": "建基准的份数 = statdesc + dat 全部目标文件"
+    },
+    {
+      "id": "ggpk-size",
+      "regex": "(\\d{2},\\d{3},\\d{3},\\d{3}) B",
+      "source": "lock.ggpk.size",
+      "why": "实测那台客户端的 Content.ggpk 字节数，来自 game.lock.json"
+    },
+    {
+      "id": "backup-keep",
+      "regex": "备份留最近 (\\d+) 份",
+      "source": "code.backup_keep",
+      "why": "文件级备份轮转份数，来自 Safety.cs 的 Prune(root, keep: N)"
+    },
+    {
+      "id": "snapshot-keep",
+      "regex": "留最近 (\\d+) 份当后悔药",
+      "source": "code.snapshot_keep",
+      "why": "ggpk 快照轮转份数，来自 GgpkUndo.cs 的 Prune(keep: N)"
+    }
+  ],
+  "unverified": [
+    {
+      "id": "edit-count",
+      "regex": "(\\d+) 处修正",
+      "note": "161 处修正：这个数只能由 patch_sd.py 重跑得出（out/patch-sd/manifest-sd.json 里现在是 181），out/ 不入库，所以 doc_check 不拿它判失败。要么补一个入库的产物当来源，要么承认它是个大约数。"
+    }
+  ]
+}

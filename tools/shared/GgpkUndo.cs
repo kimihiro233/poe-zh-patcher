@@ -25,6 +25,9 @@ internal sealed class GgpkUndoMeta {
     public long RecordBytes { get; set; }       // 一共记了多少字节原文
     public string Phase { get; set; } = "writing";   // writing / committed / rolledback / restored
     public long SavedLength { get; set; }       // 写完之后的文件长度
+    // 这次覆盖掉的文件，覆盖前是什么状态。用来在轮转时把「别处没有第二份」的快照 pin 住 ——
+    // 外部汉化改过的字节，删了就是永久没了，而轮转本来只是为了省磁盘。
+    public string Flavor { get; set; } = "";
 }
 
 internal sealed class GgpkUndo : IRollback {
@@ -235,6 +238,16 @@ internal sealed class GgpkUndo : IRollback {
         DropDir();
     }
 
+    /// <summary>
+    /// 记下「这次覆盖掉的是什么东西」。只记第一份非原文的状态就够了：
+    /// 一份快照里只要有一行别人的译文，这份快照就不能随轮转消失。
+    /// </summary>
+    public void NoteFlavor(string flavor) {
+        if (flavor.Length == 0 || flavor == "官方原文") return;
+        if (_m.Flavor.Length > 0) return;
+        _m.Flavor = flavor;
+    }
+
     public string? Rollback() {
         if (_finished) return null;
         _finished = true;
@@ -260,6 +273,9 @@ internal sealed class GgpkUndo : IRollback {
         } catch { }
     }
 
+    private static bool IsForeign(string flavor) =>
+        flavor is "外部改过" or "旧版补丁" or "旧版对照" or "未知" or "读不出";
+
     private void Prune(int keep) {
         try {
             var all = Directory.GetDirectories(RootFor(_m.Target))
@@ -267,7 +283,21 @@ internal sealed class GgpkUndo : IRollback {
                 .Where(x => x.m is not null && x.m.Phase is "committed" or "restored")
                 .OrderByDescending(x => Path.GetFileName(x.d), StringComparer.Ordinal)
                 .ToList();
-            foreach (var (d, _) in all.Skip(keep)) {
+            if (all.Count <= keep) return;
+
+            // 最新一份「覆盖前不是官方原文」的快照不参与轮转：里面的字节别处没有第二份
+            string? pinned = null;
+            foreach (var x in all) {
+                if (IsForeign(x.m!.Flavor)) { pinned = x.d; break; }
+            }
+
+            foreach (var (d, m) in all.Skip(keep)) {
+                if (pinned is not null && string.Equals(d, pinned, StringComparison.OrdinalIgnoreCase)) {
+                    Console.WriteLine($"  快照轮转：保留 {Path.GetFileName(d)}（覆盖前是 {m!.Flavor}，别处没有第二份）");
+                    continue;
+                }
+                // 删之前报出删的是哪一份、多大 —— 静默消失的还原点最容易被当成 bug
+                Console.WriteLine($"  快照轮转：删除 {Path.GetFileName(d)}（{m!.Records} 块 / {m.RecordBytes / 1048576.0:F1} MB，超出保留的 {keep} 份）");
                 try { Directory.Delete(d, recursive: true); } catch { }
             }
         } catch { }
