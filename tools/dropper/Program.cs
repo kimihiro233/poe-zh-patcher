@@ -665,6 +665,7 @@ internal static class Program {
         if (Args.ContainsKey("args-test")) return ArgsTest();
         if (Args.ContainsKey("recover-test")) return RecoverTest();
         if (Args.ContainsKey("bundle-name-test")) return BundleNameTest();
+        if (Args.ContainsKey("backup-test")) return BackupTest();
 
         LoadBundle();
 
@@ -1394,6 +1395,75 @@ internal static class Program {
         var after = Directory.GetDirectories(GgpkUndo.RootFor(path)).Length;
         Check("只读会话的空日志会被清掉", after == before - 1, $"{before} → {after}");
 
+        // ---- D) 两份未完成日志：断电发生在「回滚过程中」
+        // 这时目录里会同时有两份 Phase=="writing"。旧版遍历到第一份就 break，
+        // 第二份的原字节永远留在日志里 —— 客户端读到的仍是写了一半的内容。
+        File.WriteAllBytes(path, orig);
+        var uD1 = GgpkUndo.Begin(path);
+        using (var fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)) {
+            var st = uD1.Wrap(fs);
+            st.Position = dataStart + 5000;
+            var b = Rnd(512);
+            st.Write(b, 0, b.Length);
+            st.Flush();
+        }
+        uD1.SimulateCrash();
+        var uD2 = GgpkUndo.Begin(path);
+        using (var fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)) {
+            var st = uD2.Wrap(fs);
+            st.Position = dataStart + 9000;
+            var b = Rnd(512);
+            st.Write(b, 0, b.Length);
+            st.Flush();
+        }
+        uD2.SimulateCrash();
+        var recD = GgpkUndo.Recover(path);
+        Check("两份未完成日志都退回去了", recD.Recovered && recD.Complete, recD.Message);
+        Check("两份日志覆盖的偏移都回到写前", SameAsOrig("多份日志恢复后"));
+
+        // ---- E) 别的客户端的日志不许动
+        var otherPath = Path.Combine(root, "Other.ggpk");
+        var otherOrig = new byte[bodyLen];
+        rnd.NextBytes(otherOrig);
+        File.WriteAllBytes(otherPath, otherOrig);
+        var uE = GgpkUndo.Begin(otherPath);
+        using (var fs = new FileStream(otherPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)) {
+            var st = uE.Wrap(fs);
+            st.Position = dataStart + 777;
+            var b = Rnd(256);
+            st.Write(b, 0, b.Length);
+            st.Flush();
+        }
+        uE.SimulateCrash();
+        var otherNow = File.ReadAllBytes(otherPath);
+        var recE = GgpkUndo.Recover(path);
+        Check("别的客户端的日志被跳过", !recE.Recovered, recE.Message);
+        Check("别的文件一个字节都没被碰", File.ReadAllBytes(otherPath).SequenceEqual(otherNow));
+
+        // ---- F) 日志里的偏移越界：必须拒绝，且不能把文件写长
+        File.WriteAllBytes(path, orig);
+        var uF = GgpkUndo.Begin(path);
+        using (var fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)) {
+            var st = uF.Wrap(fs);
+            st.Position = dataStart + 20000;
+            var b = Rnd(256);
+            st.Write(b, 0, b.Length);
+            st.Flush();
+        }
+        uF.SimulateCrash();
+        // 把第一条记录的 off 改成「文件长度 - 1」、cnt 改成 8：越界 7 个字节
+        var logPath = Path.Combine(uF.Dir, "undo.bin");
+        var lb = File.ReadAllBytes(logPath);
+        BitConverter.GetBytes(orig.Length - 1).CopyTo(lb, GgpkUndo.MagicLength);
+        BitConverter.GetBytes(8).CopyTo(lb, GgpkUndo.MagicLength + 8);
+        File.WriteAllBytes(logPath, lb);
+        var lenBefore = new FileInfo(path).Length;
+        var recF = GgpkUndo.Recover(path);
+        Check("越界记录被拒绝", !recF.Complete && recF.Errors.Any(e => e.Contains("越界")),
+              recF.Errors.FirstOrDefault() ?? recF.Message);
+        Check("越界时目标文件长度不变", new FileInfo(path).Length == lenBefore,
+              $"{lenBefore:N0} → {new FileInfo(path).Length:N0}");
+
         Console.WriteLine();
         Console.WriteLine($"日志目录还剩 {Directory.GetDirectories(GgpkUndo.RootFor(path)).Length} 份（提交过的快照会留着当后悔药）");
         Console.WriteLine($"ggpk 逐字节还原自检：{(bad == 0 ? "全部通过" : $"{bad} 项失败")}");
@@ -1757,6 +1827,99 @@ internal static class Program {
         Console.WriteLine(bad == 0
             ? $"bundle 名自检：20000 个名字无重复，格式 {prefix}zh<12位>-<pid>-<4位随机>，撞名会换"
             : $"bundle 名自检：{bad} 处不符合预期");
+        return bad == 0 ? 0 : 1;
+    }
+
+    // ---------------------------------------------------------------- 备份自检（B2 / B7）
+
+    /// <summary>
+    /// 四件事：轮转只在真有内容时发生、没内容就一份都不许少、外部内容永远 pin 住、
+    /// 备份被改坏时能被发现。第三、四件事是「用户唯一的一份副本」的护栏。
+    /// </summary>
+    private static int BackupTest() {
+        var bad = 0;
+
+        static (string tmp, string index) NewContainer() {
+            var tmp = Path.Combine(Path.GetTempPath(), "poezh-bak-" + Guid.NewGuid().ToString("n")[..8]);
+            var root = Path.Combine(tmp, "Bundles2");
+            Directory.CreateDirectory(root);
+            var index = Path.Combine(root, "_.index.bin");
+            File.WriteAllBytes(index, new byte[] { 1, 2, 3 });
+            return (tmp, index);
+        }
+        static BackupSet Make(string index, string path, string flavor = "官方原文") {
+            var s = BackupStore.Create(index)!;
+            BackupStore.Add(s, path, Encoding.UTF8.GetBytes("payload-" + path), flavor);
+            return s;
+        }
+        static int Count(string index) {
+            var root = Path.Combine(Path.GetDirectoryName(index)!, ".poe-zh", "backup");
+            return Directory.Exists(root) ? Directory.GetDirectories(root).Length : 0;
+        }
+
+        // 1) 第 6 次写入且真有内容 → 轮转到 5 份，最老那份被删
+        {
+            var (tmp, index) = NewContainer();
+            var sets = new List<BackupSet>();
+            for (var i = 0; i < 5; i++) sets.Add(Make(index, $"metadata/statdescriptions/f{i}.txt"));
+            var oldest = sets[0].Dir;
+            var six = Make(index, "metadata/statdescriptions/f5.txt");
+            BackupStore.Settle(six);
+            var n = Count(index);
+            var ok = n == 5 && !Directory.Exists(oldest);
+            Console.WriteLine($"  {(ok ? "OK  " : "FAIL")} 第 6 次写入有内容 → 剩 {n} 份，最老一份{(Directory.Exists(oldest) ? "仍在（应删）" : "已删")}");
+            if (!ok) bad++;
+            TryClean(tmp);
+        }
+
+        // 2) 第 6 次什么都没写 → 一份都不能少（旧版在 Create 里就轮转了，这里会掉到 4 份）
+        {
+            var (tmp, index) = NewContainer();
+            var sets = new List<BackupSet>();
+            for (var i = 0; i < 5; i++) sets.Add(Make(index, $"metadata/statdescriptions/f{i}.txt"));
+            var before = Count(index);
+            var six = BackupStore.Create(index)!;       // 不 Add 任何文件 = 这次什么都没覆盖
+            BackupStore.Settle(six);
+            var after = Count(index);
+            var ok = before == 5 && after == 5 && sets.All(s => Directory.Exists(s.Dir));
+            Console.WriteLine($"  {(ok ? "OK  " : "FAIL")} 第 6 次零写入 → {before} 份 → {after} 份（一份都不能少）");
+            if (!ok) bad++;
+            TryClean(tmp);
+        }
+
+        // 3) 最老那份里是「外部改过」的字节 → 轮转必须 pin 住它
+        {
+            var (tmp, index) = NewContainer();
+            var foreign = Make(index, "metadata/statdescriptions/foreign.txt", "外部改过");
+            for (var i = 0; i < 4; i++) Make(index, $"metadata/statdescriptions/f{i}.txt");
+            var six = Make(index, "metadata/statdescriptions/f5.txt");
+            BackupStore.Settle(six);
+            var ok = Directory.Exists(foreign.Dir);
+            Console.WriteLine($"  {(ok ? "OK  " : "FAIL")} 最老一份含外部内容 → {(ok ? "被 pin 住，没删" : "被轮转删掉了")}");
+            if (!ok) bad++;
+            TryClean(tmp);
+        }
+
+        // 4) 备份文件被改坏 → Read 必须报 shaOk=false，但字节仍然给出来
+        {
+            var (tmp, index) = NewContainer();
+            var s = Make(index, "metadata/statdescriptions/tamper.txt");
+            var it = s.Items[0];
+            var p = Path.Combine(s.Dir, it.File);
+            var b = File.ReadAllBytes(p);
+            b[0] ^= 0xFF;
+            File.WriteAllBytes(p, b);
+
+            var got = BackupStore.Read(s, it, out var shaOk);
+            var ok = got is not null && !shaOk;
+            Console.WriteLine($"  {(ok ? "OK  " : "FAIL")} 篡改一个字节 → shaOk={shaOk}，字节{(got is null ? "丢了" : "仍返回（唯一副本不丢）")}");
+            if (!ok) bad++;
+            TryClean(tmp);
+        }
+
+        Console.WriteLine(bad == 0
+            ? "备份自检：轮转时机、零写入不丢份、外部内容 pin、篡改可发现，四项全过"
+            : $"备份自检：{bad} 项不符合预期");
         return bad == 0 ? 0 : 1;
     }
 
@@ -2962,7 +3125,7 @@ internal static class Program {
                 return 3;
             }
             txn?.Commit();
-            if (backupSet is not null) BackupStore.DropIfEmpty(backupSet);
+            if (backupSet is not null) BackupStore.Settle(backupSet);
             try { store.TrimAfterCommit(); } catch (Exception ex) {
                 Console.WriteLine($"  ! 清理旧 bundle 时出错（不影响游戏）：{ex.Message}");
             }
@@ -3220,6 +3383,30 @@ internal static class Program {
         Console.WriteLine("  （写之前会再建一个还原点，写坏了同样能退回来）");
         Console.WriteLine();
 
+        // 先把每份备份读进内存并核对 sha —— 必须在动容器之前做。
+        // 备份被磁盘啃坏时，写回去等于把损坏的内容带进客户端；而这些又往往是这台机器上
+        // 唯一的一份，所以不直接拒绝，只要求明确确认（--yes）。
+        var payload = new List<(BackupItem it, byte[] bytes)>();
+        var suspect = new List<string>();
+        foreach (var it in set.Items) {
+            var bytes = BackupStore.Read(set, it, out var shaOk);
+            if (bytes is null) { Console.WriteLine($"  ✗ {it.Path}：备份文件不见了"); continue; }
+            if (!shaOk) suspect.Add(it.Path);
+            payload.Add((it, bytes));
+        }
+        if (suspect.Count > 0) {
+            Console.WriteLine();
+            Console.WriteLine($"  ! {suspect.Count} 份备份文件与记录不符（磁盘损坏或手工改过）：");
+            foreach (var p in suspect.Take(6)) Console.WriteLine($"    - {p}");
+            if (suspect.Count > 6) Console.WriteLine($"    ... 还有 {suspect.Count - 6} 份");
+            Console.WriteLine("  这些字节在这台机器之外不存在第二份，但已经坏了。");
+            if (!Args.ContainsKey("yes")) {
+                Console.WriteLine("  中止，一个字节都没写。确认要按文件当前内容写回，加 --yes。");
+                return 8;
+            }
+            Console.WriteLine("  已指定 --yes：继续，按文件当前内容写回。");
+        }
+
         var txn = BeginRollback(store);
         if (txn is null && !AllowNoRollback()) {
             Console.WriteLine("中止：无法创建还原点，一个字节都没写。");
@@ -3232,9 +3419,7 @@ internal static class Program {
             txn?.AddBundle(store.LastBundle);
 
             var done = new List<(Item it, string sha)>();
-            foreach (var it in set.Items) {
-                var bytes = BackupStore.Read(set, it);
-                if (bytes is null) { Console.WriteLine($"  ✗ {it.Path}：备份文件不见了"); continue; }
+            foreach (var (it, bytes) in payload) {
                 if (!store.Write(it.Path, bytes)) {
                     Console.WriteLine($"  ✗ {it.Path}：容器里找不到这条记录");
                     continue;

@@ -348,7 +348,8 @@ internal static class BackupStore {
     public static string ManifestName => "manifest.json";
 
     /// <summary>开一份备份。返回 null = 备份目录建不出来（没权限/磁盘满）——
-    /// 调用方必须据此拒绝写入，否则「被覆盖的原内容」就真丢了。</summary>
+    /// 调用方必须据此拒绝写入，否则「被覆盖的原内容」就真丢了。
+    /// 注意这里**不做轮转**：见 Settle。</summary>
     public static BackupSet? Create(string containerPath) {
         var root = RootFor(containerPath);
         var stamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
@@ -358,8 +359,20 @@ internal static class BackupStore {
         try { Directory.CreateDirectory(dir); } catch { return null; }
         var s = new BackupSet { Stamp = Path.GetFileName(dir), Dir = dir };
         Save(s);
-        Prune(root, keep: 5);
         return s;
+    }
+
+    /// <summary>
+    /// 写入结束后调用：没产生备份就只清掉空壳，产生了才参与轮转。
+    ///
+    /// 轮转以前写在 Create 里，也就是**写第一个字节之前**。第 6 次安装一开头就删最老那份，
+    /// 如果这次最后什么都没写（文件都已是最新，一条 Sha(cur)==got 都不触发），
+    /// DropIfEmpty 又会删掉刚建的空目录 —— 净效果是白白丢掉一个还原点。
+    /// GgpkUndo.Commit 一直是「先判 !HasWrites 再 Prune」，这边照抄那个顺序。
+    /// </summary>
+    public static void Settle(BackupSet s) {
+        if (s.Items.Count == 0) { DropIfEmpty(s); return; }
+        Prune(Path.GetDirectoryName(s.Dir)!, keep: 5);   // 内部已有「pin 住外部内容」的逻辑
     }
 
     // 备份轮转：留最近几份。但有一个例外必须留住 —— 「被外部改过的内容」在这台机器之外
@@ -449,12 +462,15 @@ internal static class BackupStore {
                ?? all.FirstOrDefault(s => s.Stamp.StartsWith(which, StringComparison.Ordinal));
     }
 
-    /// <summary>备份目录里那份原始字节；文件被删掉了返回 null。</summary>
-    public static byte[]? Read(BackupSet s, BackupItem it) {
+    /// <summary>备份目录里那份原始字节；文件被删掉了返回 null。
+    /// sha 对不上也照样返回 —— 那可能是用户唯一的一份副本，删掉比写回去更糟。
+    /// 但必须让调用方知道，所以用 out shaOk 把「这份已经坏了」传出去。</summary>
+    public static byte[]? Read(BackupSet s, BackupItem it, out bool shaOk) {
         var p = Path.Combine(s.Dir, it.File);
-        if (!File.Exists(p)) return null;
+        if (!File.Exists(p)) { shaOk = false; return null; }
         var b = File.ReadAllBytes(p);
-        return Sha256(b) == it.Sha ? b : b;    // sha 对不上也返回：那是用户唯一的一份
+        shaOk = Sha256(b) == it.Sha;
+        return b;
     }
 
     private static string SafeName(string s) {
