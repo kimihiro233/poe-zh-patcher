@@ -542,7 +542,7 @@ internal sealed class BundlesContainer : IContainer {
     public GgpkUndo? Undo => null;       // Bundles2 整份复制 _.index.bin 就够，不需要逐字节日志
     public void DumpBundles(bool all) => BundleHygiene.Dump(_index, all);
     public void Detach() {
-        var r = BundleHygiene.Detach(_index);
+        var r = BundleHygiene.Detach(_index, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(IndexPath)!, "LibGGPK3"));
         LastBundle = r.Name.Length > 0 ? r.Name : null;
         if (r.Retired > 0) Console.WriteLine($"  自建 bundle 换新：{r.Name}（旧记录 {r.Retired} 条不再使用）");
         if (r.Error is not null) Console.WriteLine($"  ! 无法新建自建 bundle：{r.Error}");
@@ -559,6 +559,25 @@ internal sealed class BundlesContainer : IContainer {
 internal static class Program {
     private const string Indent = "  ";
     private static readonly Dictionary<string, string> Args = new(StringComparer.OrdinalIgnoreCase);
+
+    // 唯一一份「程序认得的参数」清单。usage 文本要与它双向对齐（--args-test 钉住）：
+    // 写了不认的 → 用户照着文档敲却被拒；认了不写 → 这个开关等于不存在。
+    // 以前这里没有清单，任何 `--xxx` 都被静默塞进 Args，拼错一个字母就按默认值跑完一整轮。
+    private static readonly string[] KnownFlags = {
+        // 动作
+        "status", "selftest", "struct", "collect", "writetest", "bundles", "dump", "detach-test",
+        "backups", "baseline", "restore-backup", "restore-baseline", "restore-ggpk",
+        // 写入选项
+        "set", "only", "partial", "plan", "on-modified", "keep-markup", "locale-only",
+        "gate", "yes", "allow-no-rollback", "out", "simulate-fail",
+        // 自检
+        "sd-test", "dat-test", "data-test", "lang-test", "flag-test", "redact-test", "gate-test",
+        "markup-test", "undo-test", "legacy-test", "baseline-test", "recover-test",
+        "bundle-name-test", "args-test", "backup-test",
+        // 其它
+        "help",
+    };
+
     private static string _target = "";      // Content.ggpk 或 Bundles2\_.index.bin
     private static bool _restoreBare = true;   // 底稿标记被整段删光时补回官方标记（--keep-markup 关闭）
     private static string _ver = "?";
@@ -569,9 +588,8 @@ internal static class Program {
 
     // 仓库根目录：从当前目录往上找，直到看见 tools/pack/markup-whitelist.json。
     // 单文件 exe 的 AppContext.BaseDirectory 是 %TEMP% 解压目录，不能拿来当锚点。
-    private static string GateRoot()
+    private static string RepoRoot()
     {
-        if (Args.TryGetValue("gate-test", out var v) && v.Length > 0) return v;
         var d = new DirectoryInfo(Directory.GetCurrentDirectory());
         while (d is not null) {
             if (File.Exists(Path.Combine(d.FullName, "tools", "pack", "markup-whitelist.json")))
@@ -579,6 +597,43 @@ internal static class Program {
             d = d.Parent;
         }
         return Directory.GetCurrentDirectory();
+    }
+
+    private static string GateRoot()
+    {
+        if (Args.TryGetValue("gate-test", out var v) && v.Length > 0) return v;
+        return RepoRoot();
+    }
+
+    /// <summary>参数校验：名字不在清单里、或取值不认识，都返回一句能照着改的说明。</summary>
+    private static string? CheckArg(string key, string val) {
+        if (!KnownFlags.Contains(key, StringComparer.OrdinalIgnoreCase)) {
+            var near = KnownFlags
+                .Select(f => (f, d: Distance(f.ToLowerInvariant(), key.ToLowerInvariant())))
+                .Where(x => x.d <= 2)
+                .OrderBy(x => x.d)
+                .Select(x => x.f)
+                .FirstOrDefault();
+            var tip = near is null ? "" : $"\n  你是想写 --{near} 吗？";
+            return $"未知参数：--{key}{tip}";
+        }
+        if (key.Equals("on-modified", StringComparison.OrdinalIgnoreCase) && ParsePolicy(val) is null)
+            return $"未知参数：--on-modified={val}\n  可选 merge / ours / original / skip";
+        if (key.Equals("gate", StringComparison.OrdinalIgnoreCase) && GateModeOf(val) is null)
+            return $"未知参数：--gate={val}\n  可选 off / warn / enforce";
+        return null;
+    }
+
+    /// <summary>编辑距离，只用来给「你是不是想写 xxx」挑一个最近的名字。</summary>
+    private static int Distance(string a, string b) {
+        var d = new int[a.Length + 1, b.Length + 1];
+        for (var i = 0; i <= a.Length; i++) d[i, 0] = i;
+        for (var j = 0; j <= b.Length; j++) d[0, j] = j;
+        for (var i = 1; i <= a.Length; i++)
+            for (var j = 1; j <= b.Length; j++)
+                d[i, j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                                   d[i - 1, j - 1] + (a[i - 1] == b[j - 1] ? 0 : 1));
+        return d[a.Length, b.Length];
     }
 
     private static int Main(string[] raw) {
@@ -590,10 +645,26 @@ internal static class Program {
             if (a.StartsWith("--", StringComparison.Ordinal)) {
                 var body = a[2..];
                 var eq = body.IndexOf('=');
-                if (eq < 0) Args[body] = "";
-                else Args[body[..eq]] = body[(eq + 1)..];
+                var key = eq < 0 ? body : body[..eq];
+                var val = eq < 0 ? "" : body[(eq + 1)..];
+
+                // 白名单 + 取值校验都在这里做：拼错的开关如果放过去，程序会按默认值跑完一整轮，
+                // 而默认值恰好是「最保守」的那一档，用户不会收到任何提示（B9）。
+                var bad = CheckArg(key, val);
+                if (bad is not null) {
+                    Console.WriteLine(bad);
+                    Console.WriteLine("  用 --help 看全部参数。未知参数一律拒绝，避免「拼错了却按默认值跑」。");
+                    return 2;
+                }
+                Args[key] = val;
             } else positional.Add(a);
         }
+
+        // 自检放在最前面：它们都不需要打开容器，也不能因为参数解析退化而跑偏。
+        // --args-test 尤其要第一个跑 —— 后面所有用例都依赖「参数被正确识别」这件事。
+        if (Args.ContainsKey("args-test")) return ArgsTest();
+        if (Args.ContainsKey("recover-test")) return RecoverTest();
+        if (Args.ContainsKey("bundle-name-test")) return BundleNameTest();
 
         LoadBundle();
 
@@ -651,9 +722,27 @@ internal static class Program {
         if (rec.Recovered) {
             Console.WriteLine();
             Console.WriteLine("==============================================================");
-            Console.WriteLine($" 检测到上次写入没有正常结束：{rec.Message}");
-            Console.WriteLine($" 已回滚到写入前的状态{(rec.RestoredFiles > 0 ? $"（涉及 {rec.RestoredFiles} 个文件）" : "")}，客户端可以正常启动。");
-            Console.WriteLine(" 直接重新运行本程序即可，不用先验证游戏完整性。");
+            if (rec.Complete) {
+                Console.WriteLine($" 检测到上次写入没有正常结束：{rec.Message}");
+                Console.WriteLine($" 已回滚到写入前的状态{(rec.RestoredFiles > 0 ? $"（恢复 {rec.RestoredFiles} 处）" : "")}，客户端可以正常启动。");
+                Console.WriteLine(" 直接重新运行本程序即可，不用先验证游戏完整性。");
+            } else {
+                // 「退了一部分」和「退回去了」是两件事。这里不能再说「客户端可以正常启动」——
+                // 索引可能还是半截，而用户唯一能做的判断依据就是这几行字。
+                Console.WriteLine($" 上次写入没有正常结束，而且没能完全退回去：{rec.Message}");
+                foreach (var e in rec.Errors.Take(8)) Console.WriteLine("   - " + e);
+                if (rec.JournalKept && rec.JournalPath.Length > 0)
+                    Console.WriteLine($" 现场记录已保留：{rec.JournalPath}");
+                Console.WriteLine(" 建议顺序：① 用 Steam/WeGame「验证游戏完整性」→ ② 重新运行本程序。");
+                Console.WriteLine(" 在退干净之前，本程序不会写入任何东西（--yes 可强行继续，风险自负）。");
+                if (!Args.ContainsKey("yes")) {
+                    Console.WriteLine("==============================================================");
+                    Console.WriteLine();
+                    Pause();
+                    return 3;
+                }
+                Console.WriteLine(" 已指定 --yes：继续，但这次写入的起点可能不是干净的。");
+            }
             Console.WriteLine("==============================================================");
             Console.WriteLine();
         }
@@ -1461,52 +1550,288 @@ internal static class Program {
         }
     }
 
-    private static void PrintUsage() {
-        Console.WriteLine($"PoE 繁中改良汉化 补丁器  v{_ver}");
-        Console.WriteLine();
-        Console.WriteLine("把下面任意一个拖到本程序上：");
-        Console.WriteLine("  · 官方独立端：游戏目录里的 Content.ggpk");
-        Console.WriteLine("  · Steam 端  ：游戏目录里的 Bundles2 目录（内含 _.index.bin）");
-        Console.WriteLine();
-        Console.WriteLine("直接双击也可以，会自动找默认安装路径。");
-        Console.WriteLine();
-        Console.WriteLine("命令行：");
-        Console.WriteLine("  PoE-zh-Patcher.exe <Content.ggpk | Bundles2>              交互菜单");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated                 纯译文");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=dual                       对照版");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=dualall                    全量对照");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=original                   还原官方原文");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --status                         只看状态");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --selftest                       数据与文件对得上吗");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --struct                         结构演练（只验读写通道）");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --collect [--out=目录]           采集诊断包（只读，发给作者排查；落盘前脱敏）");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --writetest[=N]                  写入演练（在索引副本上写 N 个文件，不碰客户端）");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --bundles[=all]                 看索引里的 bundle 记录（排查 bad allocation / Buffer Underflow）");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --partial       只处理对得上的文件，跳过对不上的");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --plan          只演算校验，不写文件");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --set=translated --only=<关键词>  只改文件名含该关键词的文件（最小验证用）");
-        Console.WriteLine("  PoE-zh-Patcher.exe --data-test=<基线目录>                 数据包自检（不需要游戏：拿官方原文重算一遍，比对发布 sha）");
-        Console.WriteLine("  PoE-zh-Patcher.exe --redact-test                         采集包脱敏自检（10 条真实日志行断言）");
-        Console.WriteLine("  PoE-zh-Patcher.exe --gate-test                           内容闸自检（与 tools/content_gate.py 共用一份样本）");
-        Console.WriteLine("  PoE-zh-Patcher.exe <...> --locale-only[=original]        只处理语系与国旗，不碰译文");
-        Console.WriteLine();
-        Console.WriteLine("安全相关：");
-        Console.WriteLine("  --on-modified=merge|ours|original|skip   遇到被别的汉化改过的文件怎么办（默认 merge）");
-        Console.WriteLine("                                           merge 只叠译文、ours 换成我们的、original 退回官方原文");
-        Console.WriteLine("  <...> --backups                          看有哪些还原点（整份 / 单个文件）");
-        Console.WriteLine("  <...> --restore-backup=<时间戳|latest>   把某次备份的文件整份写回去");
-        Console.WriteLine("  <Content.ggpk> --restore-ggpk[=时间戳]    把整个 ggpk 退回那次安装之前（游戏打不开时用）");
-        Console.WriteLine("  <...> --baseline                         看基准（这个版本下每份文件第一次被看到的样子）");
-        Console.WriteLine("  <...> --baseline --restore-baseline=<关键词>  把匹配的文件整份写回基准（= 硬还原）");
-        Console.WriteLine("  <...> --gate=off|warn|enforce            内容闸：写进去的每一行必须能从原文+译文推出来");
-        Console.WriteLine("                                           warn 只记（默认，灰度），enforce 直接拒写，off 关掉");
-        Console.WriteLine("  基准是每次写入的算式输入，与「改过几次」无关；它不随备份轮转，按游戏版本分开存。");
-        Console.WriteLine("  每次写入前都留还原点：Bundles2 复制 _.index.bin；ggpk 逐块记原字节。");
-        Console.WriteLine("  写坏了自动整份退回；进程被杀 / 断电也能在下次启动时自动退回。");
-        Console.WriteLine("  排障用：--simulate-fail=N 故意在第 N 个文件失败，验证退回流程（不写坏客户端）");
-        Console.WriteLine("  <...> --set=translated --keep-markup      保留底稿的标记层，只叠文本（外部改过的客户端）");
-        Console.WriteLine("  --sd-test=<某份词缀文件.txt>              只读演练：判定 + 合并 + 应改行数");
+    // ---------------------------------------------------------------- 参数表自检（B9）
+
+    /// <summary>
+    /// 三件事：文档里写的参数程序都认、程序认的参数文档都写、拼错的参数被拒（退出码 2）。
+    /// 第三条要用子进程跑，因为「拒绝」发生在解析阶段 —— 在同一进程里没法观察。
+    /// </summary>
+    private static int ArgsTest() {
+        // 子进程只用它来「过一遍解析然后立刻退出」，不能再递归跑整套自检
+        if (Args.GetValueOrDefault("args-test") == "child") return 0;
+
+        var bad = 0;
+        var usage = UsageText();
+        var documented = new HashSet<string>(
+            System.Text.RegularExpressions.Regex.Matches(usage, @"--([a-z0-9-]+)")
+                .Select(m => m.Groups[1].Value), StringComparer.OrdinalIgnoreCase);
+
+        foreach (var f in documented.OrderBy(x => x))
+            if (!KnownFlags.Contains(f, StringComparer.OrdinalIgnoreCase)) {
+                Console.WriteLine($"  ! 文档写了 --{f}，但 KnownFlags 里没有"); bad++;
+            }
+        foreach (var f in KnownFlags.OrderBy(x => x))
+            if (!documented.Contains(f)) { Console.WriteLine($"  ! --{f} 认了，但没写进 usage"); bad++; }
+
+        // 每个都必须是 2，且不能落到默认值继续跑
+        var probes = new (string arg, string why)[] {
+            ("--on-modified=our", "少个 s，旧版会静默走 merge"),
+            ("--gate=enforcee",   "拼错，旧版会静默降级成 warn"),
+            ("--gat=warn",        "参数名拼错"),
+            ("--nonexistent",     "根本不存在的参数"),
+        };
+        foreach (var (arg, why) in probes) {
+            var code = RunChild(new[] { arg });
+            var ok = code == 2;
+            Console.WriteLine($"  {(ok ? "OK  " : "FAIL")} {arg,-22} 退出码 {code}（期望 2）  {why}");
+            if (!ok) bad++;
+        }
+
+        // 合法取值必须能过：否则上面的「拒绝」可能只是把所有东西都拒了
+        foreach (var arg in new[] { "--on-modified=ours", "--on-modified=merge", "--gate=enforce", "--gate=warn" }) {
+            var code = RunChild(new[] { arg, "--args-test=child" });
+            if (code != 0) { Console.WriteLine($"  ! 合法参数被误拒：{arg} → {code}"); bad++; }
+        }
+
+        Console.WriteLine(bad == 0
+            ? $"参数表自检：{documented.Count} 个参数双向一致，4 个拼写错误全被拒"
+            : $"参数表自检：{bad} 处不一致");
+        return bad == 0 ? 0 : 1;
     }
+
+    /// <summary>用同一个入口再跑一次自己。dotnet 跑 dll 与单文件 exe 两种形态都要认。</summary>
+    private static int RunChild(string[] extra) {
+        var argv0 = Environment.GetCommandLineArgs()[0];
+        var psi = new ProcessStartInfo { UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true };
+        if (argv0.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)) {
+            psi.FileName = "dotnet";
+            psi.ArgumentList.Add(argv0);
+        } else psi.FileName = argv0;
+        foreach (var e in extra) psi.ArgumentList.Add(e);
+        try {
+            using var p = Process.Start(psi)!;
+            p.StandardOutput.ReadToEnd();
+            p.StandardError.ReadToEnd();
+            p.WaitForExit();
+            return p.ExitCode;
+        } catch (Exception ex) {
+            Console.WriteLine($"  ! 起不了子进程：{ex.Message}");
+            return -1;
+        }
+    }
+
+    // ---------------------------------------------------------------- 回滚自检（B1）
+
+    /// <summary>
+    /// 每个场景在临时目录里重建一次「上次写入没走完」的现场，然后调 Txn.Recover，
+    /// 断言四件事：Complete / journal 是否保留 / 索引字节 / 容器外文件是否被触碰。
+    /// 这四条正是旧版全部判错的地方 —— 旧版只看「有没有抛异常」。
+    /// </summary>
+    private static int RecoverTest() {
+        var casesFile = Path.Combine(RepoRoot(), "fixtures", "recover", "cases.json");
+        if (!File.Exists(casesFile)) { Console.WriteLine($"找不到 {casesFile}"); return 1; }
+
+        using var doc = JsonDocument.Parse(File.ReadAllText(casesFile, Encoding.UTF8));
+        var cases = doc.RootElement.GetProperty("cases");
+        var bad = 0;
+        var n = 0;
+
+        foreach (var c in cases.EnumerateArray()) {
+            n++;
+            var id = c.GetProperty("id").GetString() ?? "?";
+            var desc = c.GetProperty("desc").GetString() ?? "";
+            var backup = c.GetProperty("backup").GetString() == "present";
+            var journal = c.GetProperty("journal").GetString() ?? "valid";
+            var newBundles = c.TryGetProperty("newBundles", out var nbEl)
+                ? nbEl.EnumerateArray().Select(x => x.GetString() ?? "").ToArray()
+                : Array.Empty<string>();
+            var exp = c.GetProperty("expect");
+            var wantComplete = exp.GetProperty("complete").GetBoolean();
+            var wantKept = exp.GetProperty("journalKept").GetBoolean();
+            var wantIndex = exp.GetProperty("index").GetString() ?? "unchanged";
+
+            var tmp = Path.Combine(Path.GetTempPath(), "poezh-recover-" + Guid.NewGuid().ToString("n")[..8]);
+            var bundleDir = Path.Combine(tmp, "Bundles2");
+            var metaDir = Path.Combine(bundleDir, ".poe-zh");
+            var index = Path.Combine(bundleDir, "_.index.bin");
+            var backupFile = Path.Combine(metaDir, "index-20260101-000000.bin");
+            var outside = Path.Combine(tmp, "outside.bin");
+            var journalPath = Path.Combine(metaDir, "txn.json");
+
+            var curBytes = Encoding.ASCII.GetBytes("HALF-WRITTEN-INDEX");
+            var bakBytes = Encoding.ASCII.GetBytes("GOOD-INDEX-FROM-BACKUP");
+            Directory.CreateDirectory(metaDir);
+            File.WriteAllBytes(index, curBytes);
+            if (backup) File.WriteAllBytes(backupFile, bakBytes);
+            if (newBundles.Length > 0) File.WriteAllBytes(outside, Encoding.ASCII.GetBytes("MUST-SURVIVE"));
+
+            if (journal == "corrupt") {
+                File.WriteAllText(journalPath, "{{{", TextEnc.Utf8);
+            } else {
+                var j = new JournalFile {
+                    Started = "20260101-000000",
+                    Index = index,
+                    // 备份不存在时也要给出路径：这正是 C2 —— 路径有、文件没了
+                    IndexBackup = backupFile,
+                    Phase = "writing",
+                    NewBundles = newBundles.ToList(),
+                };
+                File.WriteAllText(journalPath,
+                    JsonSerializer.Serialize(j, new JsonSerializerOptions { WriteIndented = true }), TextEnc.Utf8);
+            }
+
+            RecoverResult r;
+            try { r = Txn.Recover(index); }
+            catch (Exception ex) {
+                Console.WriteLine($"  FAIL {id} {desc}：Recover 抛了异常 {ex.Message}");
+                bad++; TryClean(tmp); continue;
+            }
+
+            var problems = new List<string>();
+            if (!r.Recovered) problems.Add("Recovered=false（日志明明在）");
+            if (r.Complete != wantComplete) problems.Add($"Complete={r.Complete}，期望 {wantComplete}");
+            var kept = File.Exists(journalPath);
+            if (kept != wantKept) problems.Add($"journal {(kept ? "仍在" : "被删")}，期望{(wantKept ? "保留" : "删除")}");
+
+            var got = File.ReadAllBytes(index);
+            var expectBytes = wantIndex == "backup" ? bakBytes : curBytes;
+            if (!got.SequenceEqual(expectBytes))
+                problems.Add($"索引字节不对（期望 {(wantIndex == "backup" ? "备份内容" : "保持原样")}）");
+
+            if (newBundles.Length > 0 && !File.Exists(outside))
+                problems.Add("容器外的 outside.bin 被删掉了（目录穿越没堵住）");
+
+            if (problems.Count == 0) {
+                Console.WriteLine($"  OK   {id} {desc}");
+            } else {
+                Console.WriteLine($"  FAIL {id} {desc}");
+                foreach (var p in problems) Console.WriteLine($"         - {p}");
+                bad++;
+            }
+            TryClean(tmp);
+        }
+
+        Console.WriteLine(bad == 0
+            ? $"回滚自检：{n}/{n} 场景符合预期（含「备份缺失不报成功」「穿越不越界删除」）"
+            : $"回滚自检：{n} 个场景里 {bad} 个不符合预期");
+        return bad == 0 ? 0 : 1;
+    }
+
+    private static void TryClean(string dir) {
+        try { if (Directory.Exists(dir)) Directory.Delete(dir, recursive: true); } catch { }
+    }
+
+    // ---------------------------------------------------------------- bundle 名自检（B3）
+
+    private static int BundleNameTest() {
+        var bad = 0;
+        var prefix = BundleHygiene.PrefixForTest;
+        var ext = BundleHygiene.ExtForTest;
+        var re = new System.Text.RegularExpressions.Regex(
+            "^" + System.Text.RegularExpressions.Regex.Escape(prefix) + @"zh\d{12}-[0-9a-f]+-[0-9a-f]{4}$");
+
+        // 1) 20000 个名字互不相同。同一秒 + 同一 pid 时只剩随机数能区分，
+        //    所以进程内另有一道确定性去重 —— 这条断言钉的就是它。
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        for (var i = 0; i < 20000; i++) seen.Add(BundleHygiene.NewNameForTest());
+        if (seen.Count != 20000) { Console.WriteLine($"  ! 20000 次只拿到 {seen.Count} 个不同的名字"); bad++; }
+
+        // 2) 格式与长度
+        foreach (var nm in seen.Take(500)) {
+            if (!re.IsMatch(nm)) { Console.WriteLine($"  ! 名字格式不对：{nm}"); bad++; break; }
+            var bareName = nm[prefix.Length..];
+            if (bareName.Length + ext.Length > 40) { Console.WriteLine($"  ! 文件名过长：{bareName + ext}（{bareName.Length + ext.Length}）"); bad++; break; }
+        }
+
+        // 3) 撞上已有物理文件时必须换名
+        var dir = Path.Combine(Path.GetTempPath(), "poezh-name-" + Guid.NewGuid().ToString("n")[..8]);
+        Directory.CreateDirectory(dir);
+        var first = BundleHygiene.NewNameForTest(dir);
+        var bare = first[prefix.Length..];
+        File.WriteAllBytes(Path.Combine(dir, bare + ext), Array.Empty<byte>());
+        // 同目录再取一个：不能等于刚才那个已被占用的名字
+        var second = BundleHygiene.NewNameForTest(dir);
+        if (second == first) { Console.WriteLine($"  ! 已存在的名字被再次发出：{first}"); bad++; }
+        TryClean(dir);
+
+        Console.WriteLine(bad == 0
+            ? $"bundle 名自检：20000 个名字无重复，格式 {prefix}zh<12位>-<pid>-<4位随机>，撞名会换"
+            : $"bundle 名自检：{bad} 处不符合预期");
+        return bad == 0 ? 0 : 1;
+    }
+
+    // usage 单独抽成函数：--args-test 要用正则从这份文本里反推「文档里写了哪些参数」，
+    // 再和 KnownFlags 双向比对。打印与校验读同一份字符串，才不会有第三个副本。
+    private static string UsageText() {
+        var sb = new StringBuilder();
+        void L(string s = "") => sb.AppendLine(s);
+
+        L($"PoE 繁中改良汉化 补丁器  v{_ver}");
+        L();
+        L("把下面任意一个拖到本程序上：");
+        L("  · 官方独立端：游戏目录里的 Content.ggpk");
+        L("  · Steam 端  ：游戏目录里的 Bundles2 目录（内含 _.index.bin）");
+        L();
+        L("直接双击也可以，会自动找默认安装路径。");
+        L();
+        L("命令行：");
+        L("  PoE-zh-Patcher.exe <Content.ggpk | Bundles2>              交互菜单");
+        L("  PoE-zh-Patcher.exe <...> --set=translated                 纯译文");
+        L("  PoE-zh-Patcher.exe <...> --set=dual                       对照版");
+        L("  PoE-zh-Patcher.exe <...> --set=dualall                    全量对照");
+        L("  PoE-zh-Patcher.exe <...> --set=original                   还原官方原文");
+        L("  PoE-zh-Patcher.exe <...> --status                         只看状态");
+        L("  PoE-zh-Patcher.exe <...> --selftest                       数据与文件对得上吗");
+        L("  PoE-zh-Patcher.exe <...> --struct                         结构演练（只验读写通道）");
+        L("  PoE-zh-Patcher.exe <...> --collect [--out=目录]           采集诊断包（只读，发给作者排查；落盘前脱敏）");
+        L("  PoE-zh-Patcher.exe <...> --writetest[=N]                  写入演练（在索引副本上写 N 个文件，不碰客户端）");
+        L("  PoE-zh-Patcher.exe <...> --bundles[=all]                 看索引里的 bundle 记录（排查 bad allocation / Buffer Underflow）");
+        L("  PoE-zh-Patcher.exe <...> --dump=<容器内路径>              把容器里的文件原样导出来看（只读）");
+        L("  PoE-zh-Patcher.exe <...> --detach-test                    拆离自建 bundle 并列出记录（排障用）");
+        L("  PoE-zh-Patcher.exe <...> --set=translated --partial       只处理对得上的文件，跳过对不上的");
+        L("  PoE-zh-Patcher.exe <...> --set=translated --plan          只演算校验，不写文件");
+        L("  PoE-zh-Patcher.exe <...> --set=translated --only=<关键词>  只改文件名含该关键词的文件（最小验证用）");
+        L("  PoE-zh-Patcher.exe <...> --locale-only[=original]        只处理语系与国旗，不碰译文");
+        L("  --help                                                    打印这份说明");
+        L();
+        L("安全相关：");
+        L("  --on-modified=merge|ours|original|skip   遇到被别的汉化改过的文件怎么办（默认 merge）");
+        L("                                           merge 只叠译文、ours 换成我们的、original 退回官方原文");
+        L("  <...> --backups                          看有哪些还原点（整份 / 单个文件）");
+        L("  <...> --restore-backup=<时间戳|latest>   把某次备份的文件整份写回去");
+        L("  <Content.ggpk> --restore-ggpk[=时间戳]    把整个 ggpk 退回那次安装之前（游戏打不开时用）");
+        L("  <...> --baseline                         看基准（这个版本下每份文件第一次被看到的样子）");
+        L("  <...> --baseline --restore-baseline=<关键词>  把匹配的文件整份写回基准（= 硬还原）");
+        L("  <...> --gate=off|warn|enforce            内容闸：写进去的每一行必须能从原文+译文推出来");
+        L("                                           warn 只记（默认，灰度），enforce 直接拒写，off 关掉");
+        L("  <...> --yes                              回滚没退干净时强行继续（默认中止，风险自负）");
+        L("  <...> --allow-no-rollback                允许在「没有退路」的容器上写入（排障用，慎用）");
+        L("  基准是每次写入的算式输入，与「改过几次」无关；它不随备份轮转，按游戏版本分开存。");
+        L("  每次写入前都留还原点：Bundles2 复制 _.index.bin；ggpk 逐块记原字节。");
+        L("  写坏了自动整份退回；进程被杀 / 断电也能在下次启动时自动退回。");
+        L("  排障用：--simulate-fail=N 故意在第 N 个文件失败，验证退回流程（不写坏客户端）");
+        L("  <...> --set=translated --keep-markup      保留底稿的标记层，只叠文本（外部改过的客户端）");
+        L("  --sd-test=<某份词缀文件.txt>              只读演练：判定 + 合并 + 应改行数");
+        L();
+        L("自检（都不需要打开游戏）：");
+        L("  --args-test            参数表与这份文档是否一致、拼错的参数是否被拒");
+        L("  --recover-test         回滚失败的五个场景（假成功、删现场、名字穿越）");
+        L("  --bundle-name-test     自建 bundle 名的唯一性与格式");
+        L("  --backup-test          备份轮转、外部内容 pin、备份读回校验");
+        L("  --undo-test            ggpk 逐字节还原（含多份日志、越界记录）");
+        L("  --baseline-test        基准只存一次、读回一致、版本隔离");
+        L("  --legacy-test          旧版对照的识别");
+        L("  --markup-test          标记层合并");
+        L("  --gate-test[=仓库根]   内容闸（与 tools/content_gate.py 共用一份样本）");
+        L("  --redact-test          采集包脱敏");
+        L("  --dat-test=<文件>      外部改过的数据表演练（只读）");
+        L("  --data-test=<基线目录> 数据包自检（拿官方原文重算一遍，比对发布 sha）");
+        L("  --lang-test=<文件>     语系切换往返");
+        L("  --flag-test=<文件>     国旗切换往返");
+        return sb.ToString();
+    }
+
+    private static void PrintUsage() => Console.Write(UsageText());
 
     private static void Pause() {
         if (Console.IsInputRedirected) return;
@@ -2221,10 +2546,18 @@ internal static class Program {
         //   skip     一个字都不动，保持它现在能被游戏读到的样子
         // 无论哪条，容器里最终都必须是「一份完整可读的文件」，绝不能是两种内容拼出来的半成品。
         var policy = ParsePolicy(Args.GetValueOrDefault("on-modified"));
+        if (policy is null) {
+            // 解析阶段已经拦过一次；走到这里说明是代码里拼出来的 Args。
+            // 宁可停下，也不要挑一个默认策略继续写。
+            Console.WriteLine($"--on-modified 的取值不认识：{Args.GetValueOrDefault("on-modified")}");
+            Console.WriteLine("  可选 merge / ours / original / skip");
+            return 2;
+        }
+        var pol = policy.Value;
         // .dat 表内嵌了官方原文与成品两套字节，所以 Unknown 也能整份换；
         // statdesc 没有内嵌原文字节，能做的只有「逐行把我们写过的行撤回去」——
         // 认不出的行（别的汉化写的）一个字节都不动，所以它仍然是完整可读的一份文件。
-        var forced = policy switch {
+        var forced = pol switch {
             Policy.Ours => unknown.Where(i => !i.IsSd).ToList(),
             Policy.Original => unknown.ToList(),
             // 整体还原时也尽量退回原文，否则「还原」会卡在几个认不出的文件上走不下去
@@ -2236,20 +2569,26 @@ internal static class Program {
         // 这里拦的是「内嵌数据被人换过」，前两道（patch_sd / build_bundle）拦的是
         // 「我们自己的修正稿写错了」。三道里少一道，就有一条旁路。
         var gateMode = GateMode();
-        var gateHits = GateBundle(items, target, gateMode);
-        if (gateMode != ContentGate.Mode.Off) {
+        if (gateMode is null) {
+            Console.WriteLine($"--gate 的取值不认识：{Args.GetValueOrDefault("gate")}");
+            Console.WriteLine("  可选 off / warn / enforce");
+            return 2;
+        }
+        var gm = gateMode.Value;
+        var gateHits = GateBundle(items, target, gm);
+        if (gm != ContentGate.Mode.Off) {
             var rows = items.Where(i => i.Sd is not null && !i.Missing && !i.Broken)
                             .Sum(i => i.Sd!.Rows.Count(r => TextFor(r, target) != r.O));
-            Console.WriteLine($"  内容闸[{gateMode.ToString().ToLowerInvariant()}]：{rows} 行已过，" +
+            Console.WriteLine($"  内容闸[{gm.ToString().ToLowerInvariant()}]：{rows} 行已过，" +
                               (gateHits.Count == 0 ? "0 命中" : $"{gateHits.Count} 处命中"));
         }
         if (gateHits.Count > 0) {
             Console.WriteLine();
-            Console.WriteLine($"!! 内容闸[{gateMode.ToString().ToLowerInvariant()}]：{gateHits.Count} 处文本不是我们能推导出来的");
+            Console.WriteLine($"!! 内容闸[{gm.ToString().ToLowerInvariant()}]：{gateHits.Count} 处文本不是我们能推导出来的");
             foreach (var (it, rule, msg) in gateHits.Take(6))
                 Console.WriteLine($"    {rule} {msg}");
             if (gateHits.Count > 6) Console.WriteLine($"    ... 还有 {gateHits.Count - 6} 处");
-            if (gateMode == ContentGate.Mode.Enforce) {
+            if (gm == ContentGate.Mode.Enforce) {
                 Console.WriteLine("  enforce 模式：一个都没写。数据包（bundle.gz）可能被人换过。");
                 Console.WriteLine("  确认无误的话用 --gate=warn 只警告、--gate=off 直接关掉。");
                 return 7;
@@ -2270,7 +2609,7 @@ internal static class Program {
 
         // --on-modified=skip 的语义就是「一个都不动，只翻能对上的」，
         // 所以它自己就该放行，不必再叠一个 --partial（以前提示里写着能用、实际仍中止）。
-        var tolerate = partial || policy == Policy.Skip;
+        var tolerate = partial || pol == Policy.Skip;
         if (skip.Count > 0) {
             if (!tolerate) {
                 if (missing.Count > 0) {
@@ -2316,7 +2655,7 @@ internal static class Program {
             ? items.Where(i => !skip.Contains(i)).ToList()
             : items;
         if (forced.Count > 0 && !partial) {
-            Console.WriteLine($"  按 --on-modified={PolicyName(policy)} 处理 {forced.Count} 个对不上基线的数据表"
+            Console.WriteLine($"  按 --on-modified={PolicyName(pol)} 处理 {forced.Count} 个对不上基线的数据表"
                               + "（原字节会先备份，随时可以还原）");
         }
 
@@ -2744,11 +3083,15 @@ internal static class Program {
     private enum Policy { Merge, Ours, Original, Skip }
 
     // 内容闸默认 warn：误杀比漏放更容易被看见。灰度一个版本、确认 0 命中后再切 enforce。
-    private static ContentGate.Mode GateMode() => (Args.GetValueOrDefault("gate") ?? "").Trim().ToLowerInvariant() switch {
+    // 取值不认识时返回 null，**不回落到 warn** —— 静默降级等于让用户以为闸开着。
+    private static ContentGate.Mode? GateModeOf(string? s) => (s ?? "").Trim().ToLowerInvariant() switch {
+        "" or "warn" => ContentGate.Mode.Warn,
         "off" => ContentGate.Mode.Off,
         "enforce" or "strict" => ContentGate.Mode.Enforce,
-        _ => ContentGate.Mode.Warn,
+        _ => null,
     };
+
+    private static ContentGate.Mode? GateMode() => GateModeOf(Args.GetValueOrDefault("gate"));
 
     // 数据包里的文本在写进客户端之前过一遍闸。
     // 查的是「要写进去的那一行」（TextFor），不是容器里现有的内容 ——
@@ -2772,12 +3115,14 @@ internal static class Program {
         return hits;
     }
 
-    private static Policy ParsePolicy(string? s) => (s ?? "").Trim().ToLowerInvariant() switch {
+    // 取值不认识时返回 null。老版本这里是 `_ => Policy.Merge`，于是 --on-modified=our
+    // （少个 s）会静默走「只叠文本」—— 用户以为整份换成了我们的，实际没有。
+    private static Policy? ParsePolicy(string? s) => (s ?? "").Trim().ToLowerInvariant() switch {
         "" or "merge" => Policy.Merge,
         "ours" or "mine" => Policy.Ours,
         "original" or "orig" or "restore" => Policy.Original,
         "skip" or "off" => Policy.Skip,
-        _ => Policy.Merge,
+        _ => null,
     };
 
     private static string PolicyName(Policy p) => p switch {
