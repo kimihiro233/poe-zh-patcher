@@ -80,10 +80,10 @@ def render(d):
     L.append("| 文件 | 字节 | sha256 |")
     L.append("|---|---|---|")
     for e in d["deps"]:
-        size = e.get("bytes")
         h = e.get("sha256") or "（每次构建都变，不钉）"
+        size = None if e["kind"] == "generated" else e.get("bytes")
         L.append("| `%s` | %s | `%s` |" % (
-            e["path"], format(size, ",") if size else "?", h))
+            e["path"], format(size, ",") if size else "—", h))
     L.append("")
     L.append("## NuGet 包")
     L.append("")
@@ -136,13 +136,14 @@ def check(d):
             print("  ✗ %s 不存在" % e["path"])
             bad += 1
             continue
+        # 生成物每次构建都变（bundle.gz 连 version 都在里面），钉字节数只会在每次发版
+        # 时制造一条假警报。它只校验「在不在」。
+        if e["kind"] == "generated":
+            continue
         size = os.path.getsize(p)
         if e.get("bytes") and e["bytes"] != size:
             print("  ✗ %s 字节数变了：%d → %d" % (e["path"], e["bytes"], size))
             bad += 1
-        # 生成物每次构建都变，只校验存在与字节，不钉哈希
-        if e["kind"] == "generated":
-            continue
         if not e.get("sha256"):
             print("  ! %s 没有钉 sha256（跑 --fix 补上）" % e["path"])
             bad += 1
@@ -188,9 +189,10 @@ def main():
             p = os.path.join(ROOT, e["path"])
             if not os.path.exists(p):
                 continue
+            if e["kind"] == "generated":
+                continue
             e["bytes"] = os.path.getsize(p)
-            if e["kind"] != "generated":
-                e["sha256"] = sha256(p)
+            e["sha256"] = sha256(p)
         save(d)
         print("已写回 %d 条哈希" % len(d["deps"]))
     if "--doc" in sys.argv:

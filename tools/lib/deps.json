@@ -86,8 +86,7 @@
       "license_holder": "游戏文本版权归 Grinding Gear Games；译文归本项目作者",
       "redistributable": true,
       "purpose": "补丁器的全部写入数据，内嵌进 exe",
-      "note": "派生自游戏文本，属灰色地带但这是整个项目的前提。逐条改动可从 releases/<版本>/ 的清单复核。",
-      "bytes": 2323456
+      "note": "派生自游戏文本，属灰色地带但这是整个项目的前提。逐条改动可从 releases/<版本>/ 的清单复核。"
     }
   ],
   "nuget": [

@@ -271,3 +271,32 @@
   （会被覆盖、`BaseDirectory` 是临时解压目录）。
 - `BackupStore.Add` 原来 `catch { }` 静默吞异常，等于没退路也照写。现在建不出目录就拒绝写入。
 - .NET 的 `Encoding.UTF8` **带 BOM**，写 JSON 要用 `new UTF8Encoding(false)`，否则别的工具读不了。
+
+## 工程纪律（v0.5.3 起的硬规矩）
+
+- **MSBuild 的 props/targets 里，XML 注释不能出现连续两个减号。** 写了整份文件被判
+  「无效」→ 静默跳过导入 → 属性没生效 → 命令成功、文件缺失、零日志。判断方法：
+  `dotnet restore -v diag` 搜「由于文件无效」。凡是「属性设了但没效果」，先看这一条。
+- **7 个工程只有 dropper 常编，其余随时可能是坏的。** v0.5.3 的 CI 第一次跑就发现
+  `ggpkdoctor` 从 v0.5.0 起一直编不过（引用了已改名的 `BundleHygiene.Consolidate`）。
+  改 `tools/shared/*` 的公开 API 之后，要么全量编一遍，要么跑 `python tools/run_tests.py --build`。
+- **测试清单只在 `tools/run_tests.py` 里有一份。** 本地和 CI 跑同一条命令，判定只看
+  退出码；缺语料的用例 SKIP 并说明原因，不许静默通过。
+- **依赖版本靠 7 份 `packages.lock.json`，不靠记忆。** 非 NuGet 的二进制靠
+  `tools/lib/deps.json` 钉 sha256（`DEPS.md` 是生成的，别手改）。
+- **打包前树必须干净。** `release.py` 查 `git status --porcelain`；脏树打出来的包，
+  事后没人说得清是哪个版本。发布顺序：提交代码+VERSION+bundle → 干净树上 release →
+  单独提交 releases/ 并打 tag。
+- **不承诺可复现构建，承诺可核验。** BUILD-INFO.json（commit/SDK/两个 sha256）+
+  sbom.cdx.json（CycloneDX 1.5，serialNumber 用 uuid5 算，重打不发散）+
+  MANIFEST.sha256。单文件发布做不到位级一致，别对外说「可复现」。
+- **推送用 `git -c http.proxy= -c http.sslBackend=openssl push`。** schannel 会报
+  `CRYPT_E_REVOCATION_OFFLINE`，`schannelCheckRevoke=false` 无效。远端分支是 `master`。
+
+## 待拍板 / 未验证
+
+- `oo2core.dll`（Oodle 运行时，RAD/Epic）**不可再分发**，目前仍在仓库里；
+  `LibGGPK3` 是 **AGPL-3.0-or-later** 且仓库没有 LICENSE 文件 —— 两条都在
+  `tools/lib/DEPS.md` 里记着，等作者决定。
+- `ggpkdoctor --fix` 没在真机上验证过（手上没有已写坏的 ggpk）。
+- `tools/lib` 下 `DatDefinitions.json` + 两份 `schema*.min.json` 共 3.1 MB，全仓库 0 引用。

@@ -21,7 +21,7 @@
 | `tools/lib/DatDefinitions.json` | 203,338 | `311560f229654328db584d1b4a3306fd38ad5436c10a0eb76cbc95420f1ba07a` |
 | `tools/lib/schema.min.json` | 1,453,300 | `25a07746db3225d77b30b1960c3d5fe7e926499e7067829d194aaa91b4a9fc09` |
 | `tools/lib/schema-poe1.min.json` | 1,453,300 | `ca95dfac297688f3363567a1db37ee676af338e2de4428e01e4346a6fed2f6d4` |
-| `tools/pack/bundle.gz` | 2,323,456 | `（每次构建都变，不钉）` |
+| `tools/pack/bundle.gz` | — | `（每次构建都变，不钉）` |
 
 ## NuGet 包
 
