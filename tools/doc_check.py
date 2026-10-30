@@ -47,7 +47,9 @@ def build_sources() -> dict:
     safety = SAFETY.read_text(encoding="utf-8")
     undo = UNDO.read_text(encoding="utf-8")
 
-    m_backup = re.search(r"Prune\(root, keep:\s*(\d+)\)", safety)
+    # 轮转从 Create 挪到了 Settle（B2），实参变成 Path.GetDirectoryName(s.Dir)!，
+    # 所以不能再钉「Prune(root, …)」这个写法，只认 keep 的值。
+    m_backup = re.search(r"Prune\([^\n]*keep:\s*(\d+)\)", safety)
     m_snap = re.search(r"Prune\(keep:\s*(\d+)\)", undo)
 
     src = {
@@ -140,9 +142,10 @@ def check_flags(text: str) -> tuple[int, int]:
     它们各有自己的 `--write` / `--apply`，混进来只会制造假警报。
     """
     usage = DROPPER.read_text(encoding="utf-8")
-    m = re.search(r"private static void PrintUsage\(\)\s*\{(.+?)\n    \}", usage, re.S)
+    # usage 文本已抽成 UsageText()（B9 要求「文档与参数表同源」），PrintUsage 只负责打印。
+    m = re.search(r"private static string UsageText\(\)\s*\{(.+?)\n    \}", usage, re.S)
     if not m:
-        print("  ✗ 找不到 PrintUsage()，无法校验开关")
+        print("  ✗ 找不到 UsageText()，无法校验开关")
         return 0, 1
 
     known = set(re.findall(r"--([a-z][a-z0-9-]*)", m.group(1)))

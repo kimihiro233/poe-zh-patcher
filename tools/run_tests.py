@@ -86,11 +86,23 @@ def main():
         code, out, secs = run([sys.executable, os.path.join(ROOT, script)] + args)
         record(name, code, out, secs)
 
+    # 零编辑往返：需要 pairs/ 或 raw/ 里的 .datc64（游戏数据，不入库）
+    corpus = glob.glob(os.path.join(ROOT, "pairs", "zh", "*.datc64")) + \
+             glob.glob(os.path.join(ROOT, "raw", "*.datc64"))
+    if corpus:
+        code, out, secs = run([sys.executable, os.path.join(ROOT, "tools", "roundtrip_test.py")])
+        record("roundtrip_test", code, out, secs)
+    else:
+        record("roundtrip_test", 0, "", 0,
+               skip_reason="pairs/zh 与 raw/ 都没有 .datc64（游戏数据不入库）")
+
     # C# 侧自检。--gate-test / --redact-test 用的是内嵌策略表，不依赖仓库目录。
+    # --args-test 放第一个：它验证「参数解析本身没退化」，后面的用例都依赖这件事。
     if not os.path.exists(DLL):
         record("dropper 自检", 1, "找不到 %s，先 dotnet build 或加 --build" % DLL, 0)
     else:
-        for name in ["gate-test", "redact-test", "markup-test", "legacy-test", "undo-test", "baseline-test"]:
+        for name in ["args-test", "gate-test", "redact-test", "markup-test", "legacy-test",
+                     "undo-test", "baseline-test", "recover-test", "bundle-name-test", "backup-test"]:
             code, out, secs = run(["dotnet", DLL, "--" + name])
             record("--" + name, code, out, secs)
 
@@ -101,6 +113,26 @@ def main():
         else:
             record("--data-test", 0, "", 0,
                    skip_reason="raw_sd/ 不存在（游戏文本不入库，本地跑前先 dumper 导出）")
+
+        # LF-only 的诊断自检：SdTest 按**文件名**匹配数据包条目，而 raw_sd 里的名字带
+        # metadata_statdescriptions_ 前缀，所以要先复制成一个同名的临时文件。
+        sd_files = glob.glob(os.path.join(RAW_SD, "metadata_statdescriptions_*.txt"))
+        if sd_files:
+            import shutil
+            import tempfile
+            tmpdir = tempfile.mkdtemp(prefix="poezh-lf-")
+            try:
+                src = sd_files[0]
+                base = os.path.basename(src)[len("metadata_statdescriptions_"):]
+                dst = os.path.join(tmpdir, base)
+                shutil.copyfile(src, dst)
+                code, out, secs = run(["dotnet", DLL, "--sd-test=" + dst, "--fixture=lf"])
+                record("--sd-test --fixture=lf", code, out, secs)
+            finally:
+                shutil.rmtree(tmpdir, ignore_errors=True)
+        else:
+            record("--sd-test --fixture=lf", 0, "", 0,
+                   skip_reason="raw_sd/ 里没有词缀文件")
 
     # 汇总
     w = max(len(n) for n, _, _, _, _ in results)
