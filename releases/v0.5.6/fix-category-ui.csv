@@ -1,0 +1,20 @@
+﻿table,row,slot,en,zh_old,zh_new,note
+achievementitems.datc64,2947,16,Perandus Jewellery Box,普蘭德斯珠寶箱,普蘭德斯飾品箱,同表 Trinket/Jewellery 類標籤多用「飾品」，本條為少數派
+achievementitems.datc64,3012,16,Any Unique Jewellery,任一傳奇珠寶,任一傳奇飾品,同表 Trinket/Jewellery 類標籤多用「飾品」，本條為少數派
+achievementitems.datc64,4049,16,Perandus Jewellery Box,普蘭德斯珠寶箱,普蘭德斯飾品箱,同表 Trinket/Jewellery 類標籤多用「飾品」，本條為少數派
+achievementitems.datc64,5688,16,Jewellery Item Chests,珠寶箱,飾品寶箱,同表 Trinket/Jewellery 類標籤多用「飾品」，本條為少數派
+achievementitems.datc64,7298,16,Jewellery,珠寶,飾品,同表 Trinket/Jewellery 類標籤多用「飾品」，本條為少數派
+clientstrings.datc64,7910,8,"Each additional player party member increases the quantity of certain items found,
+such as Armour, Jewellery, Currency, Gold, Gems and Unique Items.","每個額外的隊伍成員玩家會增加找到的特定物品數量，
+像是護甲、珠寶、通貨、金幣、寶石和傳奇物品。","每個額外的隊伍成員玩家會增加找到的特定物品數量，
+像是護甲、飾品、通貨、金幣、寶石和傳奇物品。",Jewellery: 已譯「飾品：」，本條同源
+currencyitems.datc64,1932,72,"<whiteitem>{Experimented Jewellery}
+<default>{Item Level:} <normal>{86}","<whiteitem>{實驗性珠寶}
+<default>{物品等級:} <normal>{86}","<whiteitem>{實驗性飾品}
+<default>{物品等級:} <normal>{86}",同表 {Jewellery} 佔位符已譯「飾品」（5 條），本條為實驗性首飾獎勵展示
+currencyitems.datc64,1933,56,"<whiteitem>{Experimented Jewellery}
+<default>{Item Level:} <normal>{86}","<whiteitem>{實驗性珠寶}
+<default>{物品等級:} <normal>{86}","<whiteitem>{實驗性飾品}
+<default>{物品等級:} <normal>{86}",同表 {Jewellery} 佔位符已譯「飾品」（5 條），本條為實驗性首飾獎勵展示
+incursionrooms.datc64,50,8,Jewellery Forge,珠寶冶煉室,飾品冶煉室,Jewellery Forge 為神廟房間名，房間功能即產出首飾；同表 Omnitect Forge 作「全能冶煉室」
+uitalktext.datc64,54,20,They should call that room Zalatl's jewellery box! Imagine what their value will be today!,他們應該叫那個房間是札爾特的珠寶盒！想像一下它們現今的價值！,他們應該叫那個房間是札爾特的飾品盒！想像一下它們現今的價值！,台詞比喻「放滿首飾的房間」，指飾品不指寶石

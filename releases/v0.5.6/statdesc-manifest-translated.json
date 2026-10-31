@@ -1,0 +1,269 @@
+{
+  "version": "0.5.1",
+  "kind": "statdescriptions",
+  "flavor": "translated",
+  "game": {
+    "log": "logs/LatestClient.txt",
+    "log_mtime": "2026-10-27T16:54:00",
+    "client_version": "3.29.3b",
+    "patch_version": "3.29.3.3",
+    "fingerprint": "1962f349c65322aedc9f826cf4974ffe8543bd72efceae51f251483e9d8fa155",
+    "locked_at": "2026-10-28T13:11:05",
+    "ggpk_size": 74730084326,
+    "source": "game.lock.json"
+  },
+  "fingerprint": "1962f349c65322aedc9f826cf4974ffe8543bd72efceae51f251483e9d8fa155",
+  "total_edits": 181,
+  "files": [
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/active_skill_gem_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_active_skill_gem_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_active_skill_gem_stat_descriptions.txt",
+      "sha256_original": "92bd41f9c68829663ab98615a91b61dd8e05f22d837b021f4f65b44e44ee983c",
+      "sha256_patched": "8cb8d940b8eb1c415ac293637fccc5dd8a8197fec5042d31fceea0295d496055",
+      "size_original": 938968,
+      "size_patched": 938968,
+      "edits": 3,
+      "sha256_variants": [
+        "6961c2907a22ae09c80382a36dfc7f4edbf61b310639190d6af8780e0b2eb830",
+        "8d9599e8aa60be9d29f77ce29a709a8f01a88df31d320eaf11b0abb4785ee30a",
+        "be91160e13416f1f6dbec6aca8ecb6ba9e8bd99da5938714a99962b1970d8ea1",
+        "346fac10214063aa984e5114cf81c00d205a96df0f3f957edde64f8e6ae12278",
+        "9387c30f200de5f1ddfa063ca217e4e416eb2478c08e667e6f5fdf9378d9245d",
+        "ee4ec080b2b6d9c6a3459de30667068257982f32de52746b0d5e25e18334c6a8"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/atlas_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_atlas_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_atlas_stat_descriptions.txt",
+      "sha256_original": "df56cbf102e3028650caa1a136efb0e14e4d0f13dc7b7a8a610b344294645150",
+      "sha256_patched": "45708b6b4ec57b832fb0e32e8ddbb7c04cf95a142dd885decde2fc01e9b17fc7",
+      "size_original": 2981106,
+      "size_patched": 2981124,
+      "edits": 6,
+      "sha256_variants": [
+        "4fedd9689a955614f55f8468bc92343d3f176206f7770d3fef8cf22a2853ae1a",
+        "bd64beb4886a881f9e21d70a0fec3e2dec9b89fd0f836484f095f76cfc5eb3b0",
+        "79836fae956ad9b5aef483572e7b803ec73b7d5ef3bc8fbf7822757643fba685",
+        "79c0bdbf425a09ef69954410df2777acc019edf9d7a67e8489e0700969092205",
+        "f3fc96c8ee0ff3d771277512e42e7d01a79b886765ae199eb86ee84f9ac325bb",
+        "3bb646a1aad0b4f5a3b1174b3ea7625130054aa017ac9d38f56c8bdf2f5114a7"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/chest_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_chest_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_chest_stat_descriptions.txt",
+      "sha256_original": "9e43fdc286e09984ba65206400f4604faa2d25e9750b86abb7e0728a7e3b0c38",
+      "sha256_patched": "eb93dc48ef8b692580a9af7e8ccfe8da59ffba06aaefe40a5428f12ea2372ade",
+      "size_original": 202900,
+      "size_patched": 202900,
+      "edits": 2,
+      "sha256_variants": [
+        "92ef53931480ee6a9291c4ea0389b2e241b7d395a52693ee1335be2908299b26",
+        "9e43fdc286e09984ba65206400f4604faa2d25e9750b86abb7e0728a7e3b0c38",
+        "949018da32412ee675cab32bc87b817a098bf3eecc485d0c4a24ed93eccd3196",
+        "06634ad719d203113b5de5957cae27436f8fb4386de637b0c29d37b05b1f1028",
+        "c060f871fa2752cd3520b37a81655a8e1e82e37717be82d44fae4bb6a58d8086"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/expedition_relic_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_expedition_relic_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_expedition_relic_stat_descriptions.txt",
+      "sha256_original": "0abed886e0c9d396926d04bdd080128efda55a1ba1993be8d3a50b34ab742cf5",
+      "sha256_patched": "a5a00a583691ec990cce000945d274d1da108de024053ea3be2cebdb4bcff788",
+      "size_original": 446200,
+      "size_patched": 446200,
+      "edits": 4,
+      "sha256_variants": [
+        "aec3e87058dcb15dff5c27147f2b4dc8dcc5b67bb9a00ce147349a7ea9bf6c81",
+        "80789a85289c4d72d92344bc3b30c2abd216e80a79c01580c5f4b06a4631eed6"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/gem_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_gem_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_gem_stat_descriptions.txt",
+      "sha256_original": "fc7166d551487788a9dc20620c47a984a0404c3c5dafd9d4e9df6242853136b1",
+      "sha256_patched": "39ae27d0d3257d821f81c003228abd8a2ae00d4f138bfc7c7683ef078de7ef69",
+      "size_original": 2852588,
+      "size_patched": 2852600,
+      "edits": 11,
+      "sha256_variants": [
+        "da6f2e57d5fcd924256a472dc3a0846670860be5665b1579979a289596ae27e9",
+        "76dd1bb17f27abfc9c34ff9131357d4c9cc66270e451e8cc3dff912fbbe6f5a0",
+        "68bc1239b133f9af235c8b61b4cd408bfbf40897f1013d0a7cb48612a0c2b2e4",
+        "3bb8e78d0ab9961ec9b808bf56a1a4f130fd02565d20df8006fe26f8930b41a4",
+        "531e3819a7f69a41ca69ee90099664e52f32680ac6b469c62ad1a615906848c9",
+        "77367f2ac15b101d06cbc6b8a2bf5b119b8014dfc589bd41731c35b43d7e7f22"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/heist_equipment_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_heist_equipment_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_heist_equipment_stat_descriptions.txt",
+      "sha256_original": "c46dcd38ff02a2e698f33260d4931fef47ba963fa453865d7b0bacf11c2a7bab",
+      "sha256_patched": "127e46a65ff3ad390267a7840a945731576dabfca139aee2849f469ba2f81d9c",
+      "size_original": 328702,
+      "size_patched": 328702,
+      "edits": 1,
+      "sha256_variants": [
+        "f29441d3d9ab070b6bbabf9eabf3553b8cc662310933413c4168992092bebe93",
+        "b84a2d341815492099f89323bb032a8d5e15a37a3052237ed583b30fb04f40a2",
+        "616510295bb1e3508bcd1cd1fb258c40d38c1228aa5180e04261e5a89b3d24f3"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/leaguestone_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_leaguestone_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_leaguestone_stat_descriptions.txt",
+      "sha256_original": "1923ccfa886a5f2078ef9cc48853e3cef435a08d5db89273e42bc0c5c051af6e",
+      "sha256_patched": "4050e8c5b65c262386cd7ac90b1f00b7b6c64da8d307c02abc9e8abb4e62f244",
+      "size_original": 506622,
+      "size_patched": 506640,
+      "edits": 5,
+      "sha256_variants": [
+        "bba0763ed9f3ee557580e626377987de96b7535afd7236385302fb120b713926",
+        "4efd43fbd4b1a1dd8588ac5895b4ff0cdd7446cb95ca041e82f8e712fd5f843c",
+        "8b7ac4a83da1d48170144b9eee964391f68ba4f4704ccb8e8a62e17fda4ec73a",
+        "da8617d3741c7f848f505f5fd5f8e9dd663f3216429e8a42fe24400d21220376",
+        "90242083251c8d8678a1a841e2d5b4e6ee16c2c35eb6cfc8629728d9b5ccacfd",
+        "c9b0263c8c6eed0e22225b9b271d1abc6c9204a0e9689db5340c0c0357494a96"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/map_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_map_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_map_stat_descriptions.txt",
+      "sha256_original": "447cfea51eceea68bd7185f236859011a1039c6d153161811f96f5249a5756a4",
+      "sha256_patched": "6011451f7d20c7e5224ff3b2247604d6ad36c88d1f3454b6408594ec1067243c",
+      "size_original": 556700,
+      "size_patched": 556730,
+      "edits": 14,
+      "sha256_variants": [
+        "153fa1cd0ef3cfb3d0c8dd97b7417acaca1103b1eb91a650a8d5162a0d02bff4",
+        "2af4270448d7504333dc6527b2564de6cb96f768faeda785eae5a6e0d929dc71",
+        "3936e18deb2496f2165a7952149db3d1f969de3409877069b53831ebc9908127",
+        "668a681de46a78d478b00a8dd682e45793d61feb8338c6606c1ad5fd10da2ece"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/minion_skill_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_minion_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_minion_skill_stat_descriptions.txt",
+      "sha256_original": "42a94aa540d15475a5f6f3c3e91156edbd26ac3626bd57576bdb6e4baeb235cf",
+      "sha256_patched": "35d4ffbec9bf89982e500b803c5b32fe009ac8746f3bdada4b59cc02505ecca5",
+      "size_original": 1136630,
+      "size_patched": 1136634,
+      "edits": 2,
+      "sha256_variants": [
+        "76bcb7d0deea97c71cbd4b81d0c1852fec009cac904b3a5380b3e5304471c096",
+        "348bdd30ab9bfc1df94733b14ff12ade63a27dbb3db28619e94c29a87ed65d1e",
+        "aea3437e809b0489aa3f47f47dc2a73e71c7598671d7fa1bb62f4d55d816f1e0",
+        "439b03ab3fda2907fda764a9d4776af2df81321ade1e87b1d378a8a579e49393"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/mirage_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_mirage_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_mirage_stat_descriptions.txt",
+      "sha256_original": "5218d38d0a218519b11ea6db8deace84390cf73d879be446a972ec623433872d",
+      "sha256_patched": "17babacba205840b90e2910a97935614eeade3756981d0a7a87bc777010e4ae0",
+      "size_original": 150106,
+      "size_patched": 150122,
+      "edits": 4,
+      "sha256_variants": [
+        "1fbddb2c670e7a1cf277223df040837f7dda4d330482a647206a3dc063a0ae6d",
+        "4f7556aac0b8c040cca6864b856abd6d71bedd694fb7faa67b2efadbd8a8c451"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/passive_skill_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_passive_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_passive_skill_stat_descriptions.txt",
+      "sha256_original": "98dcc8c9bba348b2b123a9db6391212d691fe1621fd870cb07259dcf9a7e886b",
+      "sha256_patched": "7ebbae69a6d7b82133c366cd548bca98e86de1ba14843a06933a59814856549b",
+      "size_original": 410698,
+      "size_patched": 410700,
+      "edits": 1,
+      "sha256_variants": [
+        "c047c250b763da7d28d2ee6a7b4127de348b6a9c0ceee7ed9b4463efda34181c",
+        "98dcc8c9bba348b2b123a9db6391212d691fe1621fd870cb07259dcf9a7e886b",
+        "434189c33966ee239e4a70b8b1468687f6d556cf7fc6fe62858261a37f26099c",
+        "bac49fd364b0f55a9949e3e16093374e24e8dbb5b383349cb6e24157dfc3f84a",
+        "98298158cce248bbd9e7cfa8fe4fdffbc27a140879ad41f78088925309a22869",
+        "59a597c79d82ba920f8b7cf90e7dd8789367001474acf138ef37ca76b0bdcc1a"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/skill_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_skill_stat_descriptions.txt",
+      "sha256_original": "0686943db84c87093456f1299622d85c824959ef1289022bc8a24b952eb557ba",
+      "sha256_patched": "646467bd95a7eaf6164f143b43f2991478d68813f628aa9e1da8cef8fcd902b8",
+      "size_original": 5735812,
+      "size_patched": 5735842,
+      "edits": 6,
+      "sha256_variants": [
+        "613d45f43eb696a72745e2b7ec93151420bc700e5c3cd830b45f97014ecdeb2f",
+        "8b127f7d5e59bd491e5986b740292d3c0c7baaac3d1afbce6381d24d3534a8b0",
+        "25e982d88b3dcec106542c7656709675190dd03b57deed7901d34d4a166bf306",
+        "7bbab352755dadc4aa834b05a87aef5fa3ef58120b64bc9cc7dc883edf4dd1c3",
+        "31f3f5e597eed983af1c546269ebea0c1ce9b449bf855e798cdfe1202aaf37f7",
+        "0582279301df1eef87f4be636ef1ea926b28cca33e0319dca8cfaefff8285dba",
+        "f6e8cc2093bbb62127e50ee904456d00eb0730e81dbd5ecb0ab6fba7f463138f",
+        "17e1fb27119be06336d6b8583f4d4197cc9a9299100b3c9647dda20dfc47ad11"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_stat_descriptions.txt",
+      "sha256_original": "93a81fb098854781d41e682fff67dae573ee43612c99ad5b22208d49270368f0",
+      "sha256_patched": "b3dfae33aea4bc8dd613d46dc37242c2122a95b1ca7962e9b541c28ebaaab253",
+      "size_original": 30725062,
+      "size_patched": 30725348,
+      "edits": 120,
+      "sha256_variants": [
+        "2e5b8cda0949529ad9741df5dc596bf27f501fb47bd49bd3f11fa5b9cfe0018a",
+        "a563ea8dddda0a2ad3f9253d8e00f9513a8dd675c10bc5e9a1a80181d7cf44c1",
+        "950ceb38fd61835a5ab33ae8d8909a8e9724bd1eedddc85e3ad3efab8467d96b",
+        "dd68a5a0cbc0dd325314b9bbc4186ff9709fc7f1d5ecc03906d084ae560f3f92",
+        "bb06f25c76de86b18d9e9a184809832e5058b79634e66f8e5e85e33b042becce",
+        "b5e11cd59fcd4d428749ab97a430ec12555eee266227955b4e3194a2e68e13d0",
+        "6940bc368212c3406adc18190922f712c75469359fdf40053516ba987bba4cef"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/tincture_stat_descriptions.txt",
+      "src": "raw_sd/metadata_statdescriptions_tincture_stat_descriptions.txt",
+      "dst": "out/patch-sd/metadata_statdescriptions_tincture_stat_descriptions.txt",
+      "sha256_original": "4278067d21953b859eb158799dd44bf4c0b7f701da66fac98129aaa09f1be88d",
+      "sha256_patched": "9e537dadf22399dc558c2052dac8597f43ff5cbb4c22ea55632c7eaf44e97b4f",
+      "size_original": 306492,
+      "size_patched": 306504,
+      "edits": 2,
+      "sha256_variants": [
+        "16e1d480ad8f02fef0aa53e57f332d1b7bfa35b9619edf006e4501734cdd9609",
+        "13e34de70c0c9f540eae1d1668648bd80f8ef625137e62da7b1ce5a39755e322",
+        "efc9ff348124f80109e5457a8b507699a27b9575636423b4543eaaa9aa038a60"
+      ]
+    }
+  ]
+}
