@@ -74,13 +74,19 @@
       "regex": "(\\d+) 份依赖（",
       "source": "supply.deps",
       "why": "非 NuGet 依赖的份数，来自 tools/lib/deps.json"
-    }
-  ],
-  "unverified": [
+    },
     {
       "id": "edit-count",
       "regex": "(\\d+) 处修正",
-      "note": "161 处修正：这个数只能由 patch_sd.py 重跑得出（out/patch-sd/manifest-sd.json 里现在是 181），out/ 不入库，所以 doc_check 不拿它判失败。要么补一个入库的产物当来源，要么承认它是个大约数。"
+      "source": "patch.sd_edits",
+      "why": "补丁器菜单「纯译文——N 处修正」。以前这里没有来源，README 与 Program.cs 各写一份，漂成 161 / 160 / 159"
+    },
+    {
+      "id": "edit-rows",
+      "regex": "修正过的 (\\d+) 行下方显示英文原文",
+      "source": "patch.sd_edits",
+      "why": "同上，对照版那一条用的是同一个数"
     }
-  ]
+  ],
+  "unverified": []
 }

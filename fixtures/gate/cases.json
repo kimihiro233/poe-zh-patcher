@@ -436,6 +436,21 @@
       "old": "<gemlevel={0}>",
       "want": "<gemlevel={0}>",
       "actual": "<badparam={0}>"
+    },
+    {
+      "name": "已判过的编号错位走例外表（.csd 名，3.30）",
+      "expect": "accept",
+      "file": "metadata_statdescriptions_skill_stat_descriptions.csd",
+      "old": "當觸發時使用此技能投擲 {0} 個陷阱",
+      "actual": "當觸發時使用此技能投擲 {1} 個陷阱"
+    },
+    {
+      "name": "同样的改动换个文件就不许放行",
+      "expect": "reject",
+      "rule": "G3",
+      "file": "metadata_statdescriptions_stat_descriptions.csd",
+      "old": "當觸發時使用此技能投擲 {0} 個陷阱",
+      "actual": "當觸發時使用此技能投擲 {1} 個陷阱"
     }
   ]
 }

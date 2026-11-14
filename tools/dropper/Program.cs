@@ -2648,7 +2648,7 @@ internal static class Program {
                 Console.WriteLine("   这时不会写入任何内容。数据包只适用于繁中客户端对应版本。");
                 Console.WriteLine();
             }
-            Console.WriteLine("  [1] 纯译文        —— 日常游玩，160 处修正");
+            Console.WriteLine("  [1] 纯译文        —— 日常游玩，159 处修正");
             Console.WriteLine("  [2] 对照版        —— 修正过的 160 行下方显示英文原文");
             Console.WriteLine("  [3] 全量对照      —— 所有词缀下方显示英文原文（体积最大）");
             Console.WriteLine("  [4] 还原官方原文  —— 撤销全部修改");

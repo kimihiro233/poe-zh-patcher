@@ -135,6 +135,20 @@ def g2_markup(s: str, wl: dict):
     return out
 
 
+def sd_stem(name: str) -> str:
+    """统一成「不带扩展名」的名字：例外表按它匹配。
+
+    3.29 时 ggpk 里是 `.txt`，3.30 改成 `.csd`；而条目名在不同调用点分别来自
+    raw_sd 的扁平名（.txt）和容器路径（.csd）。只要一边按扩展名匹配，换版本就会
+    整批匹配不上 —— 表现是「已判过的编号错位修正」被当成新命中报出来，
+    真机第一次装 3.30 时就报了这一条（skill_stat_descriptions 第 1924 行）。
+    """
+    for ext in (".txt", ".csd"):
+        if name.lower().endswith(ext):
+            return name[: -len(ext)]
+    return name
+
+
 def g3_structure(s: str, old: str | None, want: str | None, file: str | None = None,
                  exc: set | None = None):
     """占位符守恒。
@@ -150,7 +164,8 @@ def g3_structure(s: str, old: str | None, want: str | None, file: str | None = N
     那道检查手上有 en/zh 两份原文，比这里准。
     """
     if file and old and exc:
-        if (file, old, s) in exc or (file, old, s.split("\\n")[0]) in exc:
+        stem = sd_stem(file)
+        if (stem, old, s) in exc or (stem, old, s.split("\\n")[0]) in exc:
             return []
     if want is not None:
         ref, mode = want, "equal"
@@ -275,6 +290,9 @@ def build_whitelist(sd_dir: str) -> dict:
 def run_fixtures(path=FIXTURES) -> int:
     cases = json.load(open(path, encoding="utf-8"))["case"]
     wl = load_whitelist()
+    # 例外表也要一起加载：不然样本里「已判过的编号错位」那条永远测不到，
+    # 而它正是换版本时最容易悄悄失效的一条（.txt / .csd 改名）。
+    exc = load_exceptions()
     bad = 0
     for c in cases:
         if "lines" in c:
@@ -284,7 +302,8 @@ def run_fixtures(path=FIXTURES) -> int:
                              total_base_bytes=c.get("total_base_bytes"), wl=wl)
         else:
             got = check_line(c["actual"], old=c.get("old"), want=c.get("want"),
-                             shell=c.get("shell"), wl=wl)
+                             shell=c.get("shell"), wl=wl,
+                             file=c.get("file"), exc=exc)
         rules = [r for r, _ in got]
         ok = (not got) if c["expect"] == "accept" else (c["rule"] in rules)
         if not ok:
@@ -322,12 +341,13 @@ EXCEPTIONS = os.path.join(ROOT, "tools", "pack", "gate-exceptions.json")
 
 
 def load_exceptions(path=EXCEPTIONS) -> set:
-    """G3 白名单：(文件, 原文, 目标) 三元组。占位符集合故意不同的行，只认完整文本匹配。"""
+    """G3 白名单：(文件, 原文, 目标) 三元组。占位符集合故意不同的行，只认完整文本匹配。
+    文件名统一去掉扩展名（见 sd_stem）：`.txt` 与 `.csd` 都是同一个文件。"""
     try:
         d = json.load(open(path, encoding="utf-8"))
     except FileNotFoundError:
         return set()
-    return {(c["file"], c["old"], c["new"]) for c in d["case"]}
+    return {(sd_stem(c["file"]), c["old"], c["new"]) for c in d["case"]}
 
 
 def check_pair(src_path: str, dst_path: str, name: str, wl: dict, exc: set):

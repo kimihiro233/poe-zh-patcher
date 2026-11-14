@@ -84,6 +84,12 @@ def build_sources() -> dict:
         src["gate.fixtures.count"] = len(json.loads(fixtures.read_text(encoding="utf-8"))["case"])
     if exceptions.exists():
         src["gate.exceptions.count"] = len(json.loads(exceptions.read_text(encoding="utf-8"))["case"])
+
+    # 补丁器菜单里那句「N 处修正」：以纯译文清单为准。以前这个数在 README 与
+    # Program.cs 里各写一份、都没人核，于是三个版本下来漂成了 161 / 160 / 159。
+    man = ROOT / "out" / "patch-sd" / "manifest-sd.json"
+    if man.exists():
+        src["patch.sd_edits"] = json.loads(man.read_text(encoding="utf-8")).get("total_edits", 0)
     return src
 
 

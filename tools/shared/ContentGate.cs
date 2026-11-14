@@ -62,7 +62,7 @@ internal static class ContentGate
             if (exJson is not null) {
                 using var doc = JsonDocument.Parse(exJson);
                 foreach (var c in doc.RootElement.GetProperty("case").EnumerateArray())
-                    cfg.Exceptions.Add((Str(c, "file"), Str(c, "old"), Str(c, "new")));
+                    cfg.Exceptions.Add((Stem(Str(c, "file")), Str(c, "old"), Str(c, "new")));
             }
             return cfg;
         }
@@ -81,6 +81,16 @@ internal static class ContentGate
         private static string Str(JsonElement e, string k) =>
             e.TryGetProperty(k, out var v) ? v.GetString() ?? "" : "";
     }
+
+    // 例外表按「不带扩展名」的名字匹配。3.29 的 ggpk 里是 `.txt`，3.30 起改成 `.csd`；
+    // 条目名在这一侧来自容器路径、在 raw_sd 那一侧还是扁平 `.txt` 名。按扩展名匹配的话，
+    // 换一次版本整张例外表就失效 —— 表现是已判过的编号错位修正被当成新命中报出来
+    // （3.30 真机第一次安装时就在 skill_stat_descriptions 第 1924 行报了这一条）。
+    private static string Stem(string name) =>
+        name.EndsWith(".txt", StringComparison.OrdinalIgnoreCase) ||
+        name.EndsWith(".csd", StringComparison.OrdinalIgnoreCase)
+            ? name[..^4]
+            : name;
 
     // ---------------------------------------------------------------- 五个规则
 
@@ -152,10 +162,12 @@ internal static class ContentGate
     public static List<Finding> G3(string s, string? oldText, string? want, Config cfg,
                                    string? file = null)
     {
-        if (file is not null && oldText is not null
-            && (cfg.Exceptions.Contains((file, oldText, s))
-                || cfg.Exceptions.Contains((file, oldText, s.Split(@"\n")[0]))))
-            return new List<Finding>();      // 已判过的编号错位修正，见 gate-exceptions.json
+        if (file is not null && oldText is not null) {
+            var stem = Stem(file);
+            if (cfg.Exceptions.Contains((stem, oldText, s))
+                || cfg.Exceptions.Contains((stem, oldText, s.Split(@"\n")[0])))
+                return new List<Finding>();      // 已判过的编号错位修正，见 gate-exceptions.json
+        }
 
         var mode = want is not null ? "equal" : (oldText is not null ? "subset" : null);
         if (mode is null) return new List<Finding>();
@@ -274,7 +286,7 @@ internal static class ContentGate
                 got = CheckFile(lines, baseLines, baseBytes, cfg);
             } else {
                 got = CheckLine(c.GetProperty("actual").GetString() ?? "",
-                                Opt(c, "old"), Opt(c, "want"), Opt(c, "shell"), cfg);
+                                Opt(c, "old"), Opt(c, "want"), Opt(c, "shell"), cfg, Opt(c, "file"));
             }
             var rules = got.Select(f => f.Rule).ToList();
             var ok = expect == "accept" ? got.Count == 0 : rules.Contains(wantRule);
