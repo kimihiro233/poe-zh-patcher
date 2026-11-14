@@ -1,0 +1,35 @@
+﻿stat_ids,file,cond,en,zh_old,zh_new
+local_socketed_skill_gem_level_+1_per_x_player_levels,metadata_statdescriptions_stat_descriptions.txt,1|#,+1 to Level of Socketed Skill Gems per {0} Player Levels,玩家每 {0} 等級，插槽中的技能寶石等級 +1,玩家每 {0} 等級，插槽中的主動技能寶石等級 +1
+local_socketed_active_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of Socketed Skill Gems,此物品插槽中技能寶石等級 {0:+d},此物品插槽中主動技能寶石等級 {0:+d}
+local_socketed_active_skill_gem_quality_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d}% to Quality of Socketed Skill Gems,插槽中技能寶石品質 {0:+d}%,插槽中主動技能寶石品質 {0:+d}%
+spell_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Spell Skill Gems,全部法術技能寶石等級 {0:+d},全部法術主動技能寶石等級 {0:+d}
+physical_spell_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Physical Spell Skill Gems,全部物理法術技能寶石等級 {0:+d},全部物理法術主動技能寶石等級 {0:+d}
+fire_spell_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Fire Spell Skill Gems,全部火焰法術技能寶石等級 {0:+d},全部火焰法術主動技能寶石等級 {0:+d}
+cold_spell_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Cold Spell Skill Gems,全部冰冷法術技能寶石等級 {0:+d},全部冰冷法術主動技能寶石等級 {0:+d}
+lightning_spell_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Lightning Spell Skill Gems,全部閃電法術技能寶石等級 {0:+d},全部閃電法術主動技能寶石等級 {0:+d}
+chaos_spell_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Chaos Spell Skill Gems,全部混沌法術技能寶石等級 {0:+d},全部混沌法術主動技能寶石等級 {0:+d}
+minion_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Minion Skill Gems,全部召喚物技能寶石 {0:+d} 等級,全部召喚物主動技能寶石 {0:+d} 等級
+chaos_skill_gem_level_+_if_6_hunter_items,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Chaos Skill Gems if 6 Hunter Items are Equipped,若裝備 6 種狩獵者之物，所有混沌技能寶石的等級 {0:+d},若裝備 6 種狩獵者之物，所有混沌主動技能寶石的等級 {0:+d}
+cold_skill_gem_level_+_if_6_redeemer_items,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Cold Skill Gems if 6 Redeemer Items are Equipped,若裝備 6 種救贖者之物，所有冰冷技能寶石的等級 {0:+d},若裝備 6 種救贖者之物，所有冰冷主動技能寶石的等級 {0:+d}
+fire_skill_gem_level_+_if_6_warlord_items,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Fire Skill Gems if 6 Warlord Items are Equipped,若裝備 6 種總督軍之物，所有火焰技能寶石的等級 {0:+d},若裝備 6 種總督軍之物，所有火焰主動技能寶石的等級 {0:+d}
+lightning_skill_gem_level_+_if_6_crusader_items,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Lightning Skill Gems if 6 Crusader Items are Equipped,若裝備 6 種聖戰軍王之物，所有閃電技能寶石的等級 {0:+d},若裝備 6 種聖戰軍王之物，所有閃電主動技能寶石的等級 {0:+d}
+physical_skill_gem_level_+_if_6_elder_items,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Physical Skill Gems if 6 Elder Items are Equipped,若裝備 6 種尊師之物，所有物理技能寶石的等級 {0:+d},若裝備 6 種尊師之物，所有物理主動技能寶石的等級 {0:+d}
+all_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Skill Gems,全部技能寶石等級 {0:+d},全部主動技能寶石等級 {0:+d}
+all_skill_gem_quality_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d}% to Quality of all Skill Gems,全部技能寶石品質 {0:+d}%,全部主動技能寶石品質 {0:+d}%
+base_elemental_skill_gem_level_+_if_6_unique_influence_amoung_equipped_non_amulet_items,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Elemental Skill Gems if the stars are aligned,發生行列眾星時，所有元素技能寶石等級 {0:+d},發生行列眾星時，所有元素主動技能寶石等級 {0:+d}
+chaos_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Chaos Skill Gems,全部混沌技能寶石等級 {0:+d},全部混沌主動技能寶石等級 {0:+d}
+cold_skill_gem_level_+_if_at_least_4_foulborn_uniques_equipped,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Cold Skill Gems if at least 4 Foulborn Unique Items are Equipped,如果至少裝備了4件穢生傳奇物品，全部冰冷技能寶石等級 {0:+d},如果至少裝備了4件穢生傳奇物品，全部冰冷主動技能寶石等級 {0:+d}
+cold_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Cold Skill Gems,全部冰冷技能寶石等級 {0:+d},全部冰冷主動技能寶石等級 {0:+d}
+curse_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Curse Skill Gems,全部詛咒技能寶石等級{0:+d},全部詛咒主動技能寶石等級{0:+d}
+dexterity_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Dexterity Skill Gems,全部敏捷技能寶石等級 {0:+d},全部敏捷主動技能寶石等級 {0:+d}
+fire_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Fire Skill Gems,全部火焰技能寶石等級 {0:+d},全部火焰主動技能寶石等級 {0:+d}
+herald_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Herald Skill Gems,所有捷光環技能寶石的等級 {0:+d},所有捷光環主動技能寶石的等級 {0:+d}
+intelligence_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Intelligence Skill Gems,全部智慧技能寶石等級 {0:+d},全部智慧主動技能寶石等級 {0:+d}
+lightning_skill_gem_level_+_if_at_least_4_foulborn_uniques_equipped,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Lightning Skill Gems if at least 4 Foulborn Unique Items are Equipped,如果至少裝備了4件穢生傳奇物品，全部閃電技能寶石等級 {0:+d},如果至少裝備了4件穢生傳奇物品，全部閃電主動技能寶石等級 {0:+d}
+lightning_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Lightning Skill Gems,全部閃電技能寶石等級 {0:+d},全部閃電主動技能寶石等級 {0:+d}
+link_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Link Skill Gems,全部連結技能寶石等級 {0:+d},全部連結主動技能寶石等級 {0:+d}
+local_socketed_gem_level_+_per_filled_socket,metadata_statdescriptions_stat_descriptions.txt,#,{:+d} to level of Socketed Skill Gems per Socketed Gem,每顆插槽中的寶石，插槽技能寶石等級 {:+d},每顆插槽中的寶石，插槽中主動技能寶石等級 {:+d}
+melee_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Melee Skill Gems,全部近戰技能寶石等級 {0:+d},全部近戰主動技能寶石等級 {0:+d}
+minion_skill_gem_quality_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d}% to Quality of all Minion Skill Gems,所有召喚物技能寶石的品質 {0:+d}%,所有召喚物主動技能寶石的品質 {0:+d}%
+physical_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Physical Skill Gems,全部物理技能寶石等級 {0:+d},全部物理主動技能寶石等級 {0:+d}
+strength_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Strength Skill Gems,全部力量技能寶石等級 {0:+d},全部力量主動技能寶石等級 {0:+d}

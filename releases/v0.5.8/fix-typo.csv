@@ -1,0 +1,2 @@
+﻿batch,line,state,file,stat_ids,cond,lang,zh_old,zh_new,note
+fix-typo,1,pending,metadata_statdescriptions_stat_descriptions.txt,gain_%_of_two_hand_weapon_physical_damage_as_added_spell_damage,#,Traditional Chinese,法術擁有等同於你已裝備雙手武器{0]%物理傷害的附加法術傷害,法術擁有等同於你已裝備雙手武器{0}%物理傷害的附加法術傷害,官方笔误：占位符 `{0}` 的 `}` 打成 `]`，游戏里会原样显示成「{0]%」。英文段 `{0}%`、简中段 `{0}%` 都正确，只有繁中段错。玩家可见，必须修。
