@@ -2,12 +2,17 @@
 pairs/
 raw/
 raw_sd/
+# 换版本时留档的旧导出（同上：可由改用 dumper 从旧 ggpk 重导，且已经过期）
+pairs-old-*/
+raw_sd-old-*/
+out/stale-*/
 
 # 构建产物
 tools/*/bin/
 tools/*/obj/
 tools/*/build.log
 tools/*/*.log
+out/*.log
 __pycache__/
 *.pyc
 

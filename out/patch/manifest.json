@@ -1,12 +1,12 @@
 {
-  "version": "0.2.0",
+  "version": "0.5.6",
   "lang": "traditional chinese",
   "game": {
-    "client_version": "3.29.3b",
-    "patch_version": "3.29.3.3",
-    "fingerprint": "1962f349c65322aedc9f826cf4974ffe8543bd72efceae51f251483e9d8fa155",
-    "locked_at": "2026-10-28T13:11:05",
-    "ggpk_size": 74730084326,
+    "client_version": "3.30.0",
+    "patch_version": "3.30.0.1.3",
+    "fingerprint": "9eb09edf9fb2cb24adf4e49235983938d3a5361f4c37f6f63684c6ca2483b371",
+    "locked_at": "2026-11-14T12:38:23",
+    "ggpk_size": 79769601101,
     "source": "game.lock.json"
   },
   "source": "out/fix-category-ui.csv",
@@ -17,10 +17,10 @@
       "path_in_ggpk": "data/traditional chinese/achievementitems.datc64",
       "src": "pairs/zh/achievementitems.datc64",
       "dst": "out/patch/achievementitems.datc64",
-      "sha256_original": "f1e37fca80a38b67b56f6768ce5b95fbc7bcd1a168adae9c61e364c097b64021",
-      "sha256_patched": "6a9490a77793f9262e91058534e49f7a72bc6d0c56351ac2338319afd5e965cc",
-      "size_original": 1371030,
-      "size_patched": 1371102,
+      "sha256_original": "211efd3f5d3ab89a44740a0d16f3e8095edcafdc56b98ebba587c4ed5312af81",
+      "sha256_patched": "d83b5d927c79ff7997ae24d01051c4d3016c5ae1571ddb897752c966ab49f236",
+      "size_original": 1406260,
+      "size_patched": 1406332,
       "verify": "ok",
       "tolerated_eof_sentinel": [],
       "edits": [
@@ -31,7 +31,7 @@
           "new": "普蘭德斯飾品箱",
           "action": "append",
           "shared_refs": 2,
-          "new_pool_offset": 805780,
+          "new_pool_offset": 825410,
           "grew": 0
         },
         {
@@ -41,7 +41,7 @@
           "new": "任一傳奇飾品",
           "action": "append",
           "shared_refs": 1,
-          "new_pool_offset": 805798,
+          "new_pool_offset": 825428,
           "grew": 0
         },
         {
@@ -51,7 +51,7 @@
           "new": "普蘭德斯飾品箱",
           "action": "append",
           "shared_refs": 2,
-          "new_pool_offset": 805814,
+          "new_pool_offset": 825444,
           "grew": 0
         },
         {
@@ -61,7 +61,7 @@
           "new": "飾品寶箱",
           "action": "append",
           "shared_refs": 1,
-          "new_pool_offset": 805832,
+          "new_pool_offset": 825462,
           "grew": 1
         },
         {
@@ -71,7 +71,7 @@
           "new": "飾品",
           "action": "append",
           "shared_refs": 4,
-          "new_pool_offset": 805844,
+          "new_pool_offset": 825474,
           "grew": 0
         }
       ]
@@ -81,21 +81,21 @@
       "path_in_ggpk": "data/traditional chinese/clientstrings.datc64",
       "src": "pairs/zh/clientstrings.datc64",
       "dst": "out/patch/clientstrings.datc64",
-      "sha256_original": "d870fc0db700f4d36c3e384ddb756345aebcb12569a583645900190cd99fb93c",
-      "sha256_patched": "d80be3062d44cfc89c375c750b81eaae3a47ae76dd93ccb82a8764aaf6e84587",
-      "size_original": 1279106,
-      "size_patched": 1279206,
+      "sha256_original": "a2a891c2f4bc272ae5e94c2fe5ded9f47c95c5dd119e8b9c925c559f38c900a6",
+      "sha256_patched": "861c47bcc7059157a8e157b5340afa7c17a6f237139f4674aff135bd33a1f034",
+      "size_original": 1307998,
+      "size_patched": 1308098,
       "verify": "ok",
       "tolerated_eof_sentinel": [],
       "edits": [
         {
-          "row": 7910,
+          "row": 7903,
           "rel": 8,
           "old": "每個額外的隊伍成員玩家會增加找到的特定物品數量，\r\n像是護甲、珠寶、通貨、金幣、寶石和傳奇物品。",
           "new": "每個額外的隊伍成員玩家會增加找到的特定物品數量，\r\n像是護甲、飾品、通貨、金幣、寶石和傳奇物品。",
           "action": "append",
           "shared_refs": 1,
-          "new_pool_offset": 837416,
+          "new_pool_offset": 858300,
           "grew": 0
         }
       ]
@@ -105,36 +105,36 @@
       "path_in_ggpk": "data/traditional chinese/currencyitems.datc64",
       "src": "pairs/zh/currencyitems.datc64",
       "dst": "out/patch/currencyitems.datc64",
-      "sha256_original": "82c790bf1c0f26236a31205791e49f58203f1176a5575bc809f8a0dc938b9cc4",
-      "sha256_patched": "d5a6d6983ba260cd06877eb2b1f5eaac01668b68c5b51f518d9361bfdd6a8509",
-      "size_original": 518020,
-      "size_patched": 518224,
+      "sha256_original": "3c218fced454390c5cce888d05ffd98aee42deb867d64f161528156a3bd8aead",
+      "sha256_patched": "434245ed0059b7c78cd1e9184322d5a75a52a26357eeb4704a4ad8530b74b80a",
+      "size_original": 523330,
+      "size_patched": 523534,
       "verify": "ok",
       "tolerated_eof_sentinel": [
         [
-          1961,
+          1987,
           72
         ]
       ],
       "edits": [
         {
-          "row": 1932,
+          "row": 1958,
           "rel": 72,
           "old": "<whiteitem>{實驗性珠寶}\r\n<default>{物品等級:} <normal>{86}",
           "new": "<whiteitem>{實驗性飾品}\r\n<default>{物品等級:} <normal>{86}",
           "action": "append",
           "shared_refs": 2,
-          "new_pool_offset": 115808,
+          "new_pool_offset": 115788,
           "grew": 0
         },
         {
-          "row": 1933,
+          "row": 1959,
           "rel": 56,
           "old": "<whiteitem>{實驗性珠寶}\r\n<default>{物品等級:} <normal>{86}",
           "new": "<whiteitem>{實驗性飾品}\r\n<default>{物品等級:} <normal>{86}",
           "action": "append",
           "shared_refs": 2,
-          "new_pool_offset": 115910,
+          "new_pool_offset": 115890,
           "grew": 0
         }
       ]
@@ -144,10 +144,10 @@
       "path_in_ggpk": "data/traditional chinese/incursionrooms.datc64",
       "src": "pairs/zh/incursionrooms.datc64",
       "dst": "out/patch/incursionrooms.datc64",
-      "sha256_original": "73e72620855ba92015932dc859b9a87d648983a09ccb686f779cab4cd847a8c8",
-      "sha256_patched": "cdccc4cc27fd281bfe9427098007770285cbdb5d8f825a91171d519d9e895a03",
-      "size_original": 64720,
-      "size_patched": 64734,
+      "sha256_original": "069f1288b1767826df14500c861e67304dcfbee9ef08ba434415a39572989915",
+      "sha256_patched": "1d81ef5a0981d9d3eda340b695ea579dd7623bfe5c844173e1f99fe0f1813bd1",
+      "size_original": 69848,
+      "size_patched": 69862,
       "verify": "ok",
       "tolerated_eof_sentinel": [],
       "edits": [
@@ -158,7 +158,7 @@
           "new": "飾品冶煉室",
           "action": "append",
           "shared_refs": 1,
-          "new_pool_offset": 46294,
+          "new_pool_offset": 48286,
           "grew": 0
         }
       ]
@@ -168,10 +168,10 @@
       "path_in_ggpk": "data/traditional chinese/uitalktext.datc64",
       "src": "pairs/zh/uitalktext.datc64",
       "dst": "out/patch/uitalktext.datc64",
-      "sha256_original": "3284e657a87496e65ceb260e8148316e54553be570a500b952c073ed1365b942",
-      "sha256_patched": "f43dfea570d780e4ed107d3062606494caa824ecc24033817a69f3452ff336d9",
-      "size_original": 23852,
-      "size_patched": 23916,
+      "sha256_original": "eea9643599a595c4aaa31c4c71907d95a098fd4b8d6878fb673f04017dc8a67e",
+      "sha256_patched": "de7e5b99352417a07b8f965b245250cf932c6334ad27d38006718523c9c961b2",
+      "size_original": 23720,
+      "size_patched": 23784,
       "verify": "ok",
       "tolerated_eof_sentinel": [],
       "edits": [
@@ -182,7 +182,7 @@
           "new": "他們應該叫那個房間是札爾特的飾品盒！想像一下它們現今的價值！",
           "action": "append",
           "shared_refs": 1,
-          "new_pool_offset": 19440,
+          "new_pool_offset": 19308,
           "grew": 0
         }
       ]

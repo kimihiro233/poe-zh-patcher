@@ -24,6 +24,8 @@ internal static class ContentGate
     // 与 markup.py 的 TAG 一致
     private static readonly Regex Tag = new(@"<[^<>]{1,40}>", RegexOptions.Compiled);
     private static readonly Regex NameTag = new(@"^<([a-z][a-z0-9_]*)>$", RegexOptions.Compiled);
+    // 带参标签：3.30 起官方引入 `<gemlevel={0}>`。参数只允许 `{n}`，不放行任意字符。
+    private static readonly Regex ParamTag = new(@"^<([a-z][a-z0-9_]*)=\{(\d+)\}>$", RegexOptions.Compiled);
     private static readonly Regex Rgb = new(@"^<rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)>$", RegexOptions.Compiled);
     private static readonly Regex Placeholder = new(@"\{[^{}]*\}", RegexOptions.Compiled);
 
@@ -37,6 +39,7 @@ internal static class ContentGate
     public sealed class Config
     {
         public HashSet<string> Named = new(StringComparer.Ordinal);
+        public HashSet<string> Param = new(StringComparer.Ordinal);
         public bool AllowRgb = true;
         // G3 白名单：占位符集合故意不同的行，按完整文本匹配
         public HashSet<(string file, string oldText, string newText)> Exceptions = new();
@@ -49,6 +52,9 @@ internal static class ContentGate
                 using var doc = JsonDocument.Parse(wlJson);
                 foreach (var e in doc.RootElement.GetProperty("named").EnumerateArray())
                     cfg.Named.Add(e.GetString() ?? "");
+                if (doc.RootElement.TryGetProperty("param", out var pa))
+                    foreach (var e in pa.EnumerateArray())
+                        cfg.Param.Add(e.GetString() ?? "");
                 if (doc.RootElement.TryGetProperty("allow_rgb", out var ar))
                     cfg.AllowRgb = ar.GetBoolean();
             }
@@ -117,6 +123,12 @@ internal static class ContentGate
                         outv.Add(new("G2", $"颜色分量越界：{t}"));
                         break;
                     }
+                continue;
+            }
+            var pm = ParamTag.Match(t);
+            if (pm.Success) {
+                if (!cfg.Param.Contains(pm.Groups[1].Value))
+                    outv.Add(new("G2", $"带参标签不在白名单：{t}"));
                 continue;
             }
             var nm = NameTag.Match(t);

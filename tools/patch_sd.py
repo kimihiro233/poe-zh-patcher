@@ -59,6 +59,33 @@ DUAL_ALL_DIR = "out/patch-sd-dual-all"
 DUAL_ALL_MANIFEST = "out/patch-sd-dual-all/manifest-sd-dual-all.json"
 REPORT = "out/patch-sd-report.csv"
 
+# game.lock.json 里 statdescriptions 的真实路径。
+# 3.30 起扩展名从 `.txt` 变成 `.csd`，路径不能再由文件名硬拼：硬拼的结果是补丁器
+# 在客户端里逐个报「缺失」，45 个文件全部失效，而且看起来像客户端坏了。
+_SD_PATH = None
+
+
+def sd_path_map():
+    global _SD_PATH
+    if _SD_PATH is not None:
+        return _SD_PATH
+    m = {}
+    try:
+        lock = json.load(open("game.lock.json", encoding="utf-8"))
+    except Exception:
+        lock = {}
+    for p in lock.get("files", {}):
+        if p.startswith("metadata/statdescriptions/"):
+            m[os.path.splitext(os.path.basename(p))[0]] = p
+    _SD_PATH = m
+    return m
+
+
+def sd_path_in_ggpk(name):
+    """raw_sd 文件名 -> ggpk 内路径。锁里有真实路径就用它，否则退回旧拼法。"""
+    stem = os.path.splitext(name[len(PREFIX):])[0] if name.startswith(PREFIX) else name
+    return sd_path_map().get(stem) or ("metadata/statdescriptions/" + name[len(PREFIX):])
+
 # 对照版：在改过的行下方追加英文原文，缩进两格区分从属关系。
 # 游戏没有「按键切换文本」的入口（Alt 面板由客户端拼装，只放词缀名/tier、
 # 天赋内部名/涂油），所以对照只能落在文本里，靠两套补丁来回切。
@@ -609,7 +636,7 @@ def main():
         open(dst, "wb").write(dst_b)
         entry = {
             "kind": "file_replace",
-            "path_in_ggpk": "metadata/statdescriptions/" + name[len(PREFIX):],
+            "path_in_ggpk": sd_path_in_ggpk(name),
             "src": src_path.replace("\\", "/"),
             "dst": dst.replace("\\", "/"),
             "sha256_original": hashlib.sha256(src_b).hexdigest(),

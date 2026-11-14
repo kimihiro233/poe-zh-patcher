@@ -137,6 +137,32 @@ def main():
             return 3
         print(f"内容闸[{gate}]：{len(ents)} 个文件，{hits} 处命中")
 
+    # 清单里记的 sha 说的是「写进游戏的是什么」，bundle 里放的却是磁盘上那几份文件。
+    # 两者一分叉（改了产物没重跑清单、或清单来自别处），补丁器就会按错的 sha 判断
+    # 「客户端是不是已经是这一版」—— 要么把同一份译文再写一遍，要么该写的直接跳过，
+    # 而两种都不会报错。所以这里不信清单，自己把字节再算一遍。
+    drift = []
+
+    def expect(f, what):
+        for key, want in (("src", f.get("sha256_original")), ("dst", f.get("sha256_patched"))):
+            p = f.get(key)
+            if not p or not want:
+                continue
+            got = hashlib.sha256(open(p, "rb").read()).hexdigest()
+            if got != want:
+                drift.append(f"{what} {key}: {p}  磁盘 {got[:16]} ≠ 清单 {want[:16]}")
+
+    for m, what in ((man_all, "dualall"), (man_t, "translated"), (man_d, "dual"), (man_dat, "dat")):
+        for f in m.get("files", []):
+            expect(f, what)
+    if drift:
+        print(f"拒绝打包：{len(drift)} 份产物与清单登记的 sha 不符（清单过期或产物被替换）：")
+        for line in drift[:10]:
+            print("   " + line)
+        if len(drift) > 10:
+            print(f"   …（共 {len(drift)} 条）")
+        return 4
+
     sha_t = {f["path_in_ggpk"]: f["sha256_patched"] for f in man_t["files"]}
     sha_d = {f["path_in_ggpk"]: f["sha256_patched"] for f in man_d["files"]}
 

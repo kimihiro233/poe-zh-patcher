@@ -1,0 +1,781 @@
+﻿file,zh_block_index,zh_current
+active_skill_gem_stat_descriptions.txt,140,Leaves a Lingering Blade in the ground for every Volley
+active_skill_gem_stat_descriptions.txt,140,Leaves a Lingering Blade in the ground for every {0} Volleys
+active_skill_gem_stat_descriptions.txt,144,Leaves {0}% more Lingering Blades in the ground if you don't Cast this Spell yourself
+active_skill_gem_stat_descriptions.txt,144,Leaves {0}% fewer Lingering Blades in the ground if you don't Cast this Spell yourself
+active_skill_gem_stat_descriptions.txt,246,{0}% increased Damage with Hits
+active_skill_gem_stat_descriptions.txt,246,{0}% reduced Damage with Hits
+advanced_mod_stat_descriptions.txt,0,Only affects Passives in {0} Ring
+advanced_mod_stat_descriptions.txt,7,{0}% increased Mana Cost of Skills per 10 Devotion
+advanced_mod_stat_descriptions.txt,7,{0}% reduced Mana Cost of Skills per 10 Devotion
+atlas_relic_stat_descriptions.txt,0,You gain {0}% increased Damage per stack of Sulphite Intoxication
+atlas_relic_stat_descriptions.txt,1,You gain {0}% increased Movement Speed per stack of Sulphite Intoxication
+atlas_stat_descriptions.txt,109,[ContainsAbyss|Abysses] in your Maps have {0}% [SurpassChance|Surpassing Chance] to contain an additional Pit
+atlas_stat_descriptions.txt,113,Abyss Pits in your Maps have {0}% chance to spawn all Monsters as\nat least Magic for each prior Pit closed
+atlas_stat_descriptions.txt,123,Abyss Chasms in your Maps spawn {0}% increased Monsters per fed Soul
+atlas_stat_descriptions.txt,123,Abyss Chasms in your Maps spawn {0}% reduced Monsters per fed Soul
+atlas_stat_descriptions.txt,144,Abysses in your Maps that do not lead to an Abyssal Depths lead to 4 Pits if able
+atlas_stat_descriptions.txt,145,[ContainsAbyss|Abysses] in your Maps contain an additional Pit
+atlas_stat_descriptions.txt,145,[ContainsAbyss|Abysses] in your Maps contain {0} additional Pits
+atlas_stat_descriptions.txt,148,[ContainsAbyss|Abyss] Pits in your Maps spawn {0}% increased Rare Monsters
+atlas_stat_descriptions.txt,148,[ContainsAbyss|Abyss] Pits in your Maps spawn {0}% reduced Rare Monsters
+atlas_stat_descriptions.txt,175,{0}% increased Quantity of Items Dropped by Delirious Monsters
+atlas_stat_descriptions.txt,176,Your Maps have {0:+d}% chance to contain a Mirror of Delirium
+atlas_stat_descriptions.txt,183,Delirium Reward Bars fill {0}% faster in your Maps
+atlas_stat_descriptions.txt,183,Delirium Reward Bars fill {0}% slower in your Maps
+atlas_stat_descriptions.txt,185,Delirium Rewards in your Maps have {0}% increased chance to give Delirium Orbs
+atlas_stat_descriptions.txt,186,Delirium Fog in your Maps dissipates {0}% faster
+atlas_stat_descriptions.txt,186,Delirium Fog in your Maps dissipates {0}% slower
+atlas_stat_descriptions.txt,189,Delirious Unique Monsters in your Maps have a {0}% chance to drop an additional Delirium Orb
+atlas_stat_descriptions.txt,190,{0}% chance for Orbs of Alchemy to drop as Chaos Orbs instead in your Maps
+atlas_stat_descriptions.txt,242,Immortal Syndicate Members in your Maps have {0}% chance to\ndrop an additional Veiled Item
+atlas_stat_descriptions.txt,265,Blight chests in your Maps have a {0}% chance to be openable again
+atlas_stat_descriptions.txt,268,Blight Chests in your Maps contain an additional Reward
+atlas_stat_descriptions.txt,286,Blight Chests in your Maps have {0}% chance to contain an Oil Extractor
+atlas_stat_descriptions.txt,292,Blight Towers in your Maps can be [BlightSalvage|Salvaged] after the Blight Encounter
+atlas_stat_descriptions.txt,407,Your Maps contain an additional pack of Incursion Monsters
+atlas_stat_descriptions.txt,407,Your Maps contain {0} additional packs of Incursion Monsters
+atlas_stat_descriptions.txt,505,{0}% chance to create a copy of Beasts Captured in your Maps
+atlas_stat_descriptions.txt,505,Create a copy of Beasts Captured in your Maps
+atlas_stat_descriptions.txt,517,"The Shaper, The Elder and their Guardians have a {0}% chance to drop an Influenced Item"
+atlas_stat_descriptions.txt,537,Your Maps contain {0}% increased number of Runic Monster Markers
+atlas_stat_descriptions.txt,537,Your Maps contain {0}% reduced number of Runic Monster Markers
+atlas_stat_descriptions.txt,544,Expeditions in your Maps have {0}% increased chance to be led by Gwennen
+atlas_stat_descriptions.txt,544,Expeditions in your Maps have {0}% reduced chance to be led by Gwennen
+atlas_stat_descriptions.txt,545,{0}% increased Explosive Placement Range in your Maps
+atlas_stat_descriptions.txt,545,{0}% reduced Explosive Placement Range in your Maps
+atlas_stat_descriptions.txt,548,Number of Explosives is one
+atlas_stat_descriptions.txt,552,Expeditions in your Maps have {0}% increased chance to be led by Tujen
+atlas_stat_descriptions.txt,552,Expeditions in your Maps have {0}% reduced chance to be led by Tujen
+atlas_stat_descriptions.txt,553,{0}% increased Quantity of Vendor Refresh Currencies dropped by Monsters in your Maps
+atlas_stat_descriptions.txt,553,{0}% reduced Quantity of Vendor Refresh Currencies dropped by Monsters in your Maps
+atlas_stat_descriptions.txt,576,Gems found in your Maps have {0}% chance to have 20% Quality
+atlas_stat_descriptions.txt,595,Harvest Bosses in your Maps always drop a Sacred Blossom
+atlas_stat_descriptions.txt,612,Sacred Fauna in your Maps have {0}% chance to be duplicated
+atlas_stat_descriptions.txt,618,Sacred Flora in your Maps cannot be Normal Rarity
+atlas_stat_descriptions.txt,643,Your Maps that contain Smuggler's Caches have a {0}% chance to contain 6 additional Smuggler's Caches
+atlas_stat_descriptions.txt,646,Killing resident Architects in your Maps adds their Upgrade Tier\nto the surviving Architect's Room
+atlas_stat_descriptions.txt,681,Legion Chests in your Maps contain an additional Random Reward
+atlas_stat_descriptions.txt,682,Legion Encounters in your Maps have {0}% increased Duration
+atlas_stat_descriptions.txt,682,Legion Encounters in your Maps have {0}% reduced Duration
+atlas_stat_descriptions.txt,699,Legion Monsters in your Maps gain {0}% more Life for each additional Reward they have
+atlas_stat_descriptions.txt,700,Legion Monsters in your Maps have {0}% increased Pack Size
+atlas_stat_descriptions.txt,700,Legion Monsters in your Maps have {0}% reduced Pack Size
+atlas_stat_descriptions.txt,701,{0}% increased Rarity of Items Dropped by Legion Sergeants in your Maps
+atlas_stat_descriptions.txt,701,{0}% reduced Rarity of Items Dropped by Legion Sergeants in your Maps
+atlas_stat_descriptions.txt,775,Your Maps have {0}% increased chance to contain a [Mirage]
+atlas_stat_descriptions.txt,775,Your Maps have {0}% reduced chance to contain a [Mirage]
+atlas_stat_descriptions.txt,861,Favours Deferred at Ritual Altars in your Maps reappear {0}% sooner
+atlas_stat_descriptions.txt,862,Your Maps have {0}% increased chance to contain Ritual Altars
+atlas_stat_descriptions.txt,862,Your Maps have {0}% reduced chance to contain Ritual Altars
+atlas_stat_descriptions.txt,866,Ritual Altars in your Maps spawn Monsters {0}% faster
+atlas_stat_descriptions.txt,867,Rerolling Favours at Ritual Altars in your Maps has no Cost {0} additional time
+atlas_stat_descriptions.txt,867,Rerolling Favours at Ritual Altars in your Maps has no Cost {0} additional times
+atlas_stat_descriptions.txt,869,Favours at Ritual Altars in your Maps randomly cost between 90% less and 80% more
+atlas_stat_descriptions.txt,871,Completing the final Ritual Altar in your Maps has {0}% chance to drop a Blood-filled Vessel
+atlas_stat_descriptions.txt,906,Your Maps have {0:+d}% chance to contain a Shrine
+atlas_stat_descriptions.txt,909,{0}% increased effect of Shrine Buffs on players granted by Shrines in your Maps
+atlas_stat_descriptions.txt,909,{0}% reduced effect of Shrine Buffs on players granted by Shrines in your Maps
+atlas_stat_descriptions.txt,910,{0}% chance for a Shrine in your Tier 16 Maps to\nbe replaced by an [EvolutionShrine|Evolving Shrine]
+atlas_variant_stat_descriptions.txt,56,Artisan's
+atlas_variant_stat_descriptions.txt,57,Cartographer's
+atlas_variant_stat_descriptions.txt,58,Diviner's
+atlas_variant_stat_descriptions.txt,59,Gemcutter's
+atlas_variant_stat_descriptions.txt,60,[TormentedEmbezzler|Tormented Embezzler]
+aura_skill_stat_descriptions.txt,41,You and nearby Allies have {0:+d}% to Critical Strike Multiplier
+chest_stat_descriptions.txt,41,Contains an additional Unique Item
+chest_stat_descriptions.txt,41,Contains {0} additional Unique Items
+deepwater_applied_adjacent_stat_descriptions.txt,1,{0}% Chance for Chart to not be consumed when beginning a Voyage
+deepwater_applied_adjacent_stat_descriptions.txt,1,Chart not consumed when beginning a Voyage
+expedition_relic_stat_descriptions.txt,12,Monsters have {0}% chance to Avoid being Frozen
+expedition_relic_stat_descriptions.txt,13,Monsters have {0}% chance to Avoid being Ignited
+expedition_relic_stat_descriptions.txt,14,Monsters have {0}% chance to Avoid being Shocked
+expedition_relic_stat_descriptions.txt,15,Monsters have {0}% increased Bleeding Duration
+expedition_relic_stat_descriptions.txt,15,Monsters have {0}% reduced Bleeding Duration
+gem_stat_descriptions.txt,2,Supported Skills deal {0}% more Damage
+gem_stat_descriptions.txt,2,Supported Skills deal {0}% less Damage
+gem_stat_descriptions.txt,143,{0}% more Effect of Supported Curses
+gem_stat_descriptions.txt,143,{0}% less Effect of Supported Curses
+gem_stat_descriptions.txt,166,Cruelty granted by Supported Skills has {0}% increased Duration
+gem_stat_descriptions.txt,166,Cruelty granted by Supported Skills has {0}% reduced Duration
+gem_stat_descriptions.txt,244,Supported Attacks have {0}% of Damage Leeched as Mana
+gem_stat_descriptions.txt,268,Supported Skills have {0}% chance to inflict Cold Exposure on Hit
+gem_stat_descriptions.txt,268,Supported Skills Inflict Cold Exposure on Hit
+gem_stat_descriptions.txt,327,Supported Skills have {0}% chance to Cover Enemies in Ash on Hit
+gem_stat_descriptions.txt,327,Supported Skills cover Enemies in Ash on Hit
+gem_stat_descriptions.txt,410,Cursed Ground from Supported Skills Triggers Bursting Toad every {0} second
+gem_stat_descriptions.txt,410,Cursed Ground from Supported Skills Triggers Bursting Toad every {0} seconds
+gem_stat_descriptions.txt,420,Supported Attacks have {0}% increased Impale Effect
+gem_stat_descriptions.txt,420,Supported Attacks have {0}% reduced Impale Effect
+gem_stat_descriptions.txt,460,Supported Skills have minimum of {0} Power
+gem_stat_descriptions.txt,499,"On reaching {0} Gluttony, lose all Gluttony and gain Disgorge for {1} second"
+gem_stat_descriptions.txt,499,"On reaching {0} Gluttony, lose all Gluttony and gain Disgorge for {1} seconds"
+gem_stat_descriptions.txt,550,Supported Skills deal {0}% more Damage
+gem_stat_descriptions.txt,550,Supported Skills deal {0}% less Damage
+gem_stat_descriptions.txt,551,Supported Skills deal {1}% more Damage with Hits per Snipe Stage
+gem_stat_descriptions.txt,551,Supported Skills deal {1}% less Damage with Hits per Snipe Stage
+gem_stat_descriptions.txt,551,This Skill's Arrows deal {1}% more Damage with Hits per Stage
+gem_stat_descriptions.txt,551,This Skill's Arrows deal {1}% less Damage with Hits per Stage
+gem_stat_descriptions.txt,552,Supported Skills deal {1}% more Damage with Ailments per Snipe Stage
+gem_stat_descriptions.txt,552,Supported Skills deal {1}% less Damage with Ailments per Snipe Stage
+gem_stat_descriptions.txt,552,This Skill's Arrows deal {1}% more Damage with Ailments per Stage
+gem_stat_descriptions.txt,552,This Skill's Arrows deal {1}% less Damage with Ailments per Stage
+gem_stat_descriptions.txt,595,Corrupted Blood inflicted by Supported Warcries deals {0} base Physical Damage per second
+gem_stat_descriptions.txt,597,Corrupted Blood inflicted by Supported Warcries has a Base Duration of {0} seconds
+gem_stat_descriptions.txt,598,Supported Warcries inflict Corrupted Blood
+gem_stat_descriptions.txt,598,Supported Warcries inflict {0} Corrupted Blood Debuffs
+gem_stat_descriptions.txt,599,Supported Skills have {0}% chance to Trigger Falling Crystal on Hit
+gem_stat_descriptions.txt,599,Supported Skills will Trigger Falling Crystal on Hit
+gem_stat_descriptions.txt,611,"Supported Skills deal {0}% more Damage per second Channelled, up to a maximum of 60%"
+gem_stat_descriptions.txt,624,Supported Skills inflict Hallowing Flame on Melee Hit
+gem_stat_descriptions.txt,639,Supported Skills throw Mines in an Arc
+gem_stat_descriptions.txt,640,Enemies Maimed by Supported Skills take {0}% increased Physical Damage
+gem_stat_descriptions.txt,640,Enemies Maimed by Supported Skills take {0}% reduced Physical Damage
+gem_stat_descriptions.txt,642,Supported Skills deal {0}% more Damage with Hits and Ailments per 1 Mana Cost
+gem_stat_descriptions.txt,643,Supported Skills have {0}% more Attack Speed
+gem_stat_descriptions.txt,643,Supported Skills have {0}% less Attack Speed
+gem_stat_descriptions.txt,654,Supported Skills have {0}% more Minion maximum Life
+gem_stat_descriptions.txt,654,Supported Skills have {0}% less Minion maximum Life
+gem_stat_descriptions.txt,665,Swiftness grants {0}% increased Movement Speed per Momentum lost
+gem_stat_descriptions.txt,665,Swiftness grants {0}% reduced Movement Speed per Momentum lost
+gem_stat_descriptions.txt,687,Each Supported Skill deals {0}% more Damage for each Ignite inflicted with it Recently
+gem_stat_descriptions.txt,687,"Each Supported Skill deals {0}% less Damage for each Ignite inflicted with it Recently, up to a maximum of {1}%"
+gem_stat_descriptions.txt,725,Supported Skills have {0}% increased Stun Duration per Trauma
+gem_stat_descriptions.txt,725,Supported Skills have {0}% reduced Stun Duration per Trauma
+gem_stat_descriptions.txt,726,Supported Brands have {0}% chance to Trigger Foulgrasp when they are Recalled
+gem_stat_descriptions.txt,726,Supported Brands Trigger Foulgrasp when they are Recalled
+gem_stat_descriptions.txt,760,Hits from Supported Skills have {0}% chance to treat Enemy Monster Elemental Resistance values as inverted
+gem_stat_descriptions.txt,760,Hits from Supported Skills treat Enemy Monster Elemental Resistance values as inverted
+gem_stat_descriptions.txt,770,Supported Skills are used by Mirage Warriors Summoned by General's Cry\nSupported Skills count as Triggered
+harvest_stat_descriptions.txt,1,{0}% increased Sacred Fauna spawned
+harvest_stat_descriptions.txt,1,{0}% reduced Sacred Fauna spawned
+harvest_stat_descriptions.txt,13,Sacred Fauna drop {0}% increased Quantity of Lifeforce
+harvest_stat_descriptions.txt,13,Sacred Fauna drop {0}% reduced Quantity of Lifeforce
+harvest_stat_descriptions.txt,14,Sacred Fauna have {0}% increased chance to be Magic
+harvest_stat_descriptions.txt,14,Sacred Fauna have {0}% reduced chance to be Magic
+harvest_stat_descriptions.txt,15,Sacred Fauna grant {0}% increased Experience
+harvest_stat_descriptions.txt,15,Sacred Fauna grant {0}% reduced Experience
+harvest_stat_descriptions.txt,16,Sacred Fauna have {0}% increased chance to be Rare
+harvest_stat_descriptions.txt,16,Sacred Fauna have {0}% reduced chance to be Rare
+harvest_stat_descriptions.txt,17,Tier 3 Sacred Fauna drop an additional Currency Item
+harvest_stat_descriptions.txt,17,Tier 3 Sacred Fauna drop {0} additional Currency Items
+harvest_stat_descriptions.txt,18,Tier 3 Sacred Fauna drop an additional Stacked Deck
+harvest_stat_descriptions.txt,18,Tier 3 Sacred Fauna drop {0} additional Stacked Decks
+harvest_stat_descriptions.txt,19,Tier 3 Sacred Fauna drop an additional [Thread]
+harvest_stat_descriptions.txt,19,Tier 3 Sacred Fauna drop {0} additional [Thread|Threads]
+harvest_stat_descriptions.txt,20,Tier 3 Sacred Fauna drop an additional Unique Item
+harvest_stat_descriptions.txt,20,Tier 3 Sacred Fauna drop {0} additional Unique Items
+map_stat_descriptions.txt,0,{0} {1}
+map_stat_descriptions.txt,101,{0}% chance to create a copy of Beasts Captured in Area
+map_stat_descriptions.txt,101,Create a copy of Beasts Captured in Area
+map_stat_descriptions.txt,104,Area is affected by every Atlas Passive Tree Notable
+map_stat_descriptions.txt,126,{0}% more Maps found in Area
+map_stat_descriptions.txt,126,{0}% less Maps found in Area
+mercenary_support_stat_descriptions.txt,10,{0}% additional Physical Damage Reduction while affected by Buffs from Supported Guard Skill
+mercenary_support_stat_descriptions.txt,23,Supported Divine Ire's beam has {0}% increased width
+mercenary_support_stat_descriptions.txt,23,Supported Divine Ire's beam has {0}% reduced width
+mercenary_support_stat_descriptions.txt,25,Supported Skills have {0:+d} Maximum Explosive Arrow stuck in an Enemy
+mercenary_support_stat_descriptions.txt,25,Supported Skills have {0:+d} Maximum Explosive Arrows stuck in an Enemy
+mercenary_support_stat_descriptions.txt,32,Hits from Supported Skills have {0}% chance to ignore Enemy Physical Damage Reduction
+mercenary_support_stat_descriptions.txt,32,Hits from Supported Skills ignore Enemy Physical Damage Reduction
+mercenary_support_stat_descriptions.txt,37,Projectiles from Supported Skills Return
+mercenary_support_stat_descriptions.txt,39,Each Arrow from Supported Scourge Arrow leaves {0:+d} Spore Pod
+mercenary_support_stat_descriptions.txt,39,Each Arrow from Supported Scourge Arrow leaves {0:+d} Spore Pod
+minion_skill_stat_descriptions.txt,263,Maximum {0} Visiting Harbinger of Focus
+minion_skill_stat_descriptions.txt,263,Maximum {0} Visiting Harbingers of Focus
+minion_skill_stat_descriptions.txt,264,Maximum {0} Visiting Harbinger of Time
+minion_skill_stat_descriptions.txt,264,Maximum {0} Visiting Harbingers of Time
+minion_skill_stat_descriptions.txt,265,Maximum {0} Summoned Spectral Tiger
+minion_skill_stat_descriptions.txt,265,Maximum {0} Summoned Spectral Tigers
+minion_skill_stat_descriptions.txt,311,Minions deal {0} Base Fire Damage per second to Enemies near them
+passive_skill_stat_descriptions.txt,52,{0:+d}% to Critical Strike Multiplier while you have no Frenzy Charges
+passive_skill_stat_descriptions.txt,94,"When your Hits Impale Enemies, also Impale other Enemies near them\nInflict 5 additional Impales on Enemies you Impale\nFor 5 seconds after you Impale Enemies, they cannot be Impaled again, and Impales cannot be Called from them"
+passive_skill_stat_descriptions.txt,97,Dexterity provides no inherent bonus to Evasion Rating\n+1% Chance to Suppress Spell Damage per 15 Dexterity
+passive_skill_stat_descriptions.txt,101,"Removes all Energy Shield\nWhile not on Full Life, Sacrifice 20% of Mana per Second to Recover that much Life"
+primordial_altar_stat_descriptions.txt,9,Final Boss drops an additional Divination Card which rewards Basic Currency
+primordial_altar_stat_descriptions.txt,9,Final Boss drops {0} additional Divination Cards which reward Basic Currency
+primordial_altar_stat_descriptions.txt,10,Final Boss drops an additional Divination Card which rewards Exotic Currency
+primordial_altar_stat_descriptions.txt,10,Final Boss drops {0} additional Divination Cards which reward Exotic Currency
+primordial_altar_stat_descriptions.txt,11,Final Boss drops an additional Divination Card which rewards League Currency
+primordial_altar_stat_descriptions.txt,11,Final Boss drops {0} additional Divination Cards which reward League Currency
+primordial_altar_stat_descriptions.txt,12,Final Boss drops an additional Divination Card which rewards Currency
+primordial_altar_stat_descriptions.txt,12,Final Boss drops {0} additional Divination Cards which reward Currency
+primordial_altar_stat_descriptions.txt,13,Final Boss drops an additional Divination Card which rewards Levelled Gems
+primordial_altar_stat_descriptions.txt,13,Final Boss drops {0} additional Divination Cards which reward Levelled Gems
+primordial_altar_stat_descriptions.txt,14,Final Boss drops an additional Divination Card which rewards Quality Gems
+primordial_altar_stat_descriptions.txt,14,Final Boss drops {0} additional Divination Cards which reward Quality Gems
+primordial_altar_stat_descriptions.txt,15,Final Boss drops an additional Divination Card which rewards Gems
+primordial_altar_stat_descriptions.txt,15,Final Boss drops {0} additional Divination Cards which reward Gems
+primordial_altar_stat_descriptions.txt,16,Final Boss drops an additional Divination Card which rewards other Divination Cards
+primordial_altar_stat_descriptions.txt,16,Final Boss drops {0} additional Divination Cards which reward other Divination Cards
+primordial_altar_stat_descriptions.txt,17,Final Boss drops an additional Divination Card which rewards a Map
+primordial_altar_stat_descriptions.txt,17,Final Boss drops {0} additional Divination Cards which reward a Map
+primordial_altar_stat_descriptions.txt,18,Final Boss drops an additional Divination Card which rewards a Unique Map
+primordial_altar_stat_descriptions.txt,18,Final Boss drops {0} additional Divination Cards which reward a Unique Map
+primordial_altar_stat_descriptions.txt,19,Final Boss drops an additional Divination Card
+primordial_altar_stat_descriptions.txt,19,Final Boss drops {0} additional Divination Cards
+primordial_altar_stat_descriptions.txt,21,Final Boss drops an additional Divination Card which rewards a Corrupted Unique Item
+primordial_altar_stat_descriptions.txt,21,Final Boss drops {0} additional Divination Cards which reward a Corrupted Unique Item
+primordial_altar_stat_descriptions.txt,22,Final Boss drops an additional Divination Card which rewards Unique Jewellery
+primordial_altar_stat_descriptions.txt,22,Final Boss drops {0} additional Divination Cards which reward Unique Jewellery
+primordial_altar_stat_descriptions.txt,23,Final Boss drops an additional Divination Card which rewards a Unique Item
+primordial_altar_stat_descriptions.txt,23,Final Boss drops {0} additional Divination Cards which reward a Unique Item
+primordial_altar_stat_descriptions.txt,24,Final Boss drops an additional Divination Card which rewards a Unique Weapon
+primordial_altar_stat_descriptions.txt,24,Final Boss drops {0} additional Divination Cards which reward a Unique Weapon
+primordial_altar_stat_descriptions.txt,25,Final Boss drops {0} additional Divine Orb
+primordial_altar_stat_descriptions.txt,25,Final Boss drops {0} additional Divine Orbs
+sanctum_relic_stat_descriptions.txt,4,Aureus Coins are converted to Experience upon defeating the Herald of the Scourge
+sanctum_relic_stat_descriptions.txt,17,{0}% increased chance to Avoid Resolve Loss from Enemy Projectile Hits
+sanctum_relic_stat_descriptions.txt,17,{0}% increased chance to Avoid Resolve Loss from Enemy Projectile Hits
+sanctum_relic_stat_descriptions.txt,20,Bosses impact {0}% increased Resolve
+sanctum_relic_stat_descriptions.txt,20,Bosses impact {0}% reduced Resolve
+sanctum_relic_stat_descriptions.txt,21,Guards take {0}% increased Damage
+sanctum_relic_stat_descriptions.txt,21,Guards take {0}% reduced Damage
+sanctum_relic_stat_descriptions.txt,22,Guards impact {0}% increased Resolve
+sanctum_relic_stat_descriptions.txt,22,Guards impact {0}% reduced Resolve
+sanctum_relic_stat_descriptions.txt,23,Monsters take {0}% increased Damage
+sanctum_relic_stat_descriptions.txt,23,Monsters take {0}% reduced Damage
+sanctum_relic_stat_descriptions.txt,24,Monsters impact {0}% increased Resolve
+sanctum_relic_stat_descriptions.txt,24,Monsters impact {0}% reduced Resolve
+sanctum_relic_stat_descriptions.txt,25,{0}% increased Quantity of Relics Dropped by Monsters
+sanctum_relic_stat_descriptions.txt,25,{0}% reduced Quantity of Relics Dropped by Monsters
+sanctum_relic_stat_descriptions.txt,31,Cannot have Inspiration
+sanctum_relic_stat_descriptions.txt,34,{0} Resolve Aegis
+sanctum_relic_stat_descriptions.txt,37,Gain {0} Maximum Resolve when you use a Fountain
+sanctum_relic_stat_descriptions.txt,38,Gain {0} Resolve when you kill a Boss
+sanctum_relic_stat_descriptions.txt,39,Gain {0} Resolve when you use a Fountain
+sanctum_relic_stat_descriptions.txt,40,Recover {0} Resolve when you complete a Room
+sanctum_relic_stat_descriptions.txt,41,{0}% increased Resolve Recovered
+sanctum_relic_stat_descriptions.txt,41,{0}% reduced Resolve Recovered
+sanctum_relic_stat_descriptions.txt,44,Maximum Resolve is 1
+sanctum_relic_stat_descriptions.txt,46,{0}% increased Merchant Prices
+sanctum_relic_stat_descriptions.txt,46,{0}% reduced Merchant Prices
+sanctum_relic_stat_descriptions.txt,48,"No Resolve Mitigation, chance to Avoid Resolve loss or Resolve Aegis"
+sanctum_relic_stat_descriptions.txt,51,{0}% increased Maximum Resolve
+sanctum_relic_stat_descriptions.txt,51,{0}% reduced Maximum Resolve
+sanctum_relic_stat_descriptions.txt,52,{0:+d} to Maximum Resolve
+sanctum_relic_stat_descriptions.txt,53,Gain {0} Inspiration at the start of the Sanctum
+sanctum_relic_stat_descriptions.txt,54,Cannot be used with Forbidden Tomes below level {}
+sentinel_stat_descriptions.txt,69,Character Gains Diamond Shrine for 1 second on deployment
+sentinel_stat_descriptions.txt,69,Character Gains Diamond Shrine for {} seconds on deployment
+sentinel_stat_descriptions.txt,73,Character Gains Frenzy Charges for 1 second on deployment
+sentinel_stat_descriptions.txt,73,Character Gains Frenzy Charges for {} seconds on deployment
+sentinel_stat_descriptions.txt,76,Character Gains Impenetrable Shrine for 1 second on deployment
+sentinel_stat_descriptions.txt,76,Character Gains Impenetrable Shrine for {} seconds on deployment
+sentinel_stat_descriptions.txt,80,Character Gains Resistance Shrine for 1 second on deployment
+sentinel_stat_descriptions.txt,80,Character Gains Resistance Shrine for {} seconds on deployment
+sentinel_stat_descriptions.txt,85,Character Gains Warlord's Shrine for 1 second on deployment
+sentinel_stat_descriptions.txt,85,Character Gains Warlord's Shrine for {} seconds on deployment
+sentinel_stat_descriptions.txt,86,Map Item Quantity affects number of rewards from Empowered Enemy
+sentinel_stat_descriptions.txt,114,Empowered Enemies do not drop Items
+single_minion_spell_skill_stat_descriptions.txt,38,Minion deals {0} Base Fire Damage per second to Enemies near it
+skill_stat_descriptions.txt,16,{0} to {1} Cold Damage
+skill_stat_descriptions.txt,16,{0} to {1} Cold Damage
+skill_stat_descriptions.txt,16,{2}% chance to deal {0} to {1} Cold Damage
+skill_stat_descriptions.txt,17,{0} to {1} Lightning Damage
+skill_stat_descriptions.txt,17,{0} to {1} Lightning Damage
+skill_stat_descriptions.txt,17,{2}% chance to deal {0} to {1} Lightning Damage
+skill_stat_descriptions.txt,18,{0} to {1} Chaos Damage
+skill_stat_descriptions.txt,91,Buff Lasts {0} seconds
+skill_stat_descriptions.txt,110,{0}% chance to Shock enemies
+skill_stat_descriptions.txt,132,{0}% more Critical Strike Chance
+skill_stat_descriptions.txt,132,{0}% less Critical Strike Chance
+skill_stat_descriptions.txt,149,Minion Movement Speed is Capped
+skill_stat_descriptions.txt,160,Each Viper Strike Charge deals {0} Base Chaos Damage per second
+skill_stat_descriptions.txt,207,Grants {0}% more Spell Damage
+skill_stat_descriptions.txt,207,Grants {0}% less Spell Damage
+skill_stat_descriptions.txt,213,Elemental Ailments caused by this skill spread to other nearby enemies
+skill_stat_descriptions.txt,247,Explosion deals {0}% more Damage with Ailments per Explosive Arrow on Target
+skill_stat_descriptions.txt,356,Explosion deals {0}% more Damage with Hits and Ailments
+skill_stat_descriptions.txt,356,Explosion deals {0}% less Damage with Hits and Ailments
+skill_stat_descriptions.txt,507,Fires an additional Projectile per Intensity
+skill_stat_descriptions.txt,507,Fires {0} additional Projectiles per Intensity
+skill_stat_descriptions.txt,507,Fires 1 fewer Projectile per Intensity
+skill_stat_descriptions.txt,507,Fires {0} fewer Projectiles per Intensity
+skill_stat_descriptions.txt,513,All Damage can Sap
+skill_stat_descriptions.txt,564,{0}% of Damage Leeched as Mana
+skill_stat_descriptions.txt,610,{0}% increased Critical Strike Chance per Volley
+skill_stat_descriptions.txt,610,{0}% reduced Critical Strike Chance per Volley
+skill_stat_descriptions.txt,612,{0}% increased distance between Volleys
+skill_stat_descriptions.txt,612,{0}% reduced distance between Volleys
+skill_stat_descriptions.txt,627,Maximum {0} Bloom
+skill_stat_descriptions.txt,627,Maximum {0} Blooms
+skill_stat_descriptions.txt,648,Grants {0} Steel Shards every {1} seconds
+skill_stat_descriptions.txt,706,Enemies in Area deal {0:+d}% more damage while at maximum Stages
+skill_stat_descriptions.txt,706,Enemies in Area deal +{0}% less damage while at maximum Stages
+skill_stat_descriptions.txt,706,Enemies in Area deal {0}% more Damage while at maximum Stages
+skill_stat_descriptions.txt,706,Enemies in Area deal {0}% less Damage while at maximum Stages
+skill_stat_descriptions.txt,809,Requires {0} Unbound Fury\nConsumes all Unbound Fury on use
+skill_stat_descriptions.txt,821,Consumes 10 Remembrance\nShaper Memory uses your Shaper Skill {0} time
+skill_stat_descriptions.txt,821,Consumes 10 Remembrance\nShaper Memory uses your Shaper Skill {0} times
+skill_stat_descriptions.txt,822,Minimum 1 second between Stages
+skill_stat_descriptions.txt,827,Triggers a Supported Spell from Linked target's location when they Hit an Enemy
+skill_stat_descriptions.txt,829,Grants Insanity
+skill_stat_descriptions.txt,918,"Enemies Killed by their Hits have {0}% chance to Explode, dealing 10% of their Life as Physical Damage, if Charges were consumed from a Sulphur Flask"
+skill_stat_descriptions.txt,919,Added Chaos Damage equal to {0}% of Flask's Recovery Amount if Charges were consumed from a Life Flask
+skill_stat_descriptions.txt,920,Deals {0} to {1} Added Cold Damage if Charges were consumed from a Sapphire Flask
+skill_stat_descriptions.txt,1009,{0}% more Damage with Hits if Enemy is Hexed
+skill_stat_descriptions.txt,1009,{0}% less Damage with Hits if Enemy is Hexed
+skill_stat_descriptions.txt,1043,Debuff deals {0:+d}% more Damage per Stage
+skill_stat_descriptions.txt,1043,Debuff deals {0}% more Damage per Stage
+skill_stat_descriptions.txt,1056,Totems with this Skill Trigger it when Hit by an Enemy
+skill_stat_descriptions.txt,1057,"Inflicts Fire, Cold, and Lightning Exposure on Hit"
+skill_stat_descriptions.txt,1105,Pulses deal {0}% more Damage with Ailments per Energy after the first
+skill_stat_descriptions.txt,1105,Pulses deal {0}% less Damage with Ailments per Energy after the first
+skill_stat_descriptions.txt,1285,"Each second, {0}% more Rage loss Rate"
+skill_stat_descriptions.txt,1286,Ragestorm moves with {0}% increased speed
+skill_stat_descriptions.txt,1286,Ragestorm moves with {0}% reduced speed
+skill_stat_descriptions.txt,1361,Inflicts an additional Wither Debuff the first time each Enemy enters the Area
+skill_stat_descriptions.txt,1361,Inflicts {0} Withered Debuff the first time each Enemy enters the Area
+skill_stat_descriptions.txt,1361,Inflicts {0:+d} Withered Debuffs the first time each Enemy enters the Area
+skill_stat_descriptions.txt,1361,Inflicts {0} Withered Debuffs the first time each Enemy enters the Area
+skill_stat_descriptions.txt,1363,{0:+d} Maximum Stage
+skill_stat_descriptions.txt,1363,{0:+d} Maximum Stages
+skill_stat_descriptions.txt,1363,Maximum {0} Stages
+skill_stat_descriptions.txt,1373,Spells deal {0}% increased Area Damage while in Blood Stance
+skill_stat_descriptions.txt,1373,Spells deal {0}% reduced Area Damage while in Blood Stance
+skill_stat_descriptions.txt,1451,Corrupted Blood has a Base Duration of {0} seconds
+skill_stat_descriptions.txt,1452,Inflicts Corrupted Blood on the first Enemy Hit by each Exerted Attack
+skill_stat_descriptions.txt,1452,Inflicts {0} Corrupted Blood Debuffs on the first Enemy Hit by each Exerted Attack
+skill_stat_descriptions.txt,1453,Corrupted Blood deals {0} base Physical Damage per second
+skill_stat_descriptions.txt,1454,Inflicts Corrupted Blood
+skill_stat_descriptions.txt,1454,Inflicts {0} Corrupted Blood Debuffs
+skill_stat_descriptions.txt,1455,This Skill has {0}% chance to Trigger Falling Crystal on Hit
+skill_stat_descriptions.txt,1455,This Skill will Trigger Falling Crystal on Hit
+skill_stat_descriptions.txt,1465,"{0}% more Damage per second Channelled, up to a maximum of 60%"
+skill_stat_descriptions.txt,1473,Inflict Hallowing Flame on Melee Hit
+skill_stat_descriptions.txt,1483,Throw Mines in an Arc
+skill_stat_descriptions.txt,1484,{0}% more Physical Damage
+skill_stat_descriptions.txt,1484,{0}% less Physical Damage
+skill_stat_descriptions.txt,1532,{0}% increased Stun Duration per Trauma
+skill_stat_descriptions.txt,1532,{0}% reduced Stun Duration per Trauma
+skill_stat_descriptions.txt,1533,{0}% chance to Trigger Foulgrasp when Recalled
+skill_stat_descriptions.txt,1533,Trigger Foulgrasp when Recalled
+skill_stat_descriptions.txt,1622,Animates up to {0} Weapons
+skill_stat_descriptions.txt,1627,Base Circle Radius is 1 metre\n{0:+d} metre to Circle Radius per Stage\nChannelling stops when Total Circle Radius reaches 9 metres
+skill_stat_descriptions.txt,1627,Base Circle Radius is 1 metre\n{0:+d} metres to Circle Radius per Stage\nChannelling stops when Total Circle Radius reaches 9 metres
+skill_stat_descriptions.txt,1646,Maximum {0} Holy Armament
+skill_stat_descriptions.txt,1646,Maximum {0} Holy Armaments
+skill_stat_descriptions.txt,1669,{0:+d}% more Damage with Hits and Ailments for each Cast of this Spell currently waiting
+skill_stat_descriptions.txt,1669,{0}% more Damage with Hits and Ailments for each Cast of this Spell currently waiting
+skill_stat_descriptions.txt,1669,{0}% less Damage with Hits and Ailments for each Cast of this Spell currently waiting
+stat_descriptions.txt,33,{0}% increased Explicit Attribute Modifier magnitudes
+stat_descriptions.txt,33,{0}% reduced Explicit Attribute Modifier magnitudes
+stat_descriptions.txt,34,{0}% increased Explicit Caster Damage Modifier magnitudes
+stat_descriptions.txt,34,{0}% reduced Explicit Caster Damage Modifier magnitudes
+stat_descriptions.txt,36,{0}% increased Explicit Cold Modifier magnitudes
+stat_descriptions.txt,36,{0}% reduced Explicit Cold Modifier magnitudes
+stat_descriptions.txt,37,{0}% increased Explicit Critical Modifier magnitudes
+stat_descriptions.txt,37,{0}% reduced Explicit Critical Modifier magnitudes
+stat_descriptions.txt,38,{0}% increased Explicit Damage Modifier magnitudes
+stat_descriptions.txt,38,{0}% reduced Explicit Damage Modifier magnitudes
+stat_descriptions.txt,39,{0}% increased Explicit Defence Modifier magnitudes
+stat_descriptions.txt,39,{0}% reduced Explicit Defence Modifier magnitudes
+stat_descriptions.txt,40,{0}% increased Explicit Fire Modifier magnitudes
+stat_descriptions.txt,40,{0}% reduced Explicit Fire Modifier magnitudes
+stat_descriptions.txt,41,{0}% increased Explicit Life Modifier magnitudes
+stat_descriptions.txt,41,{0}% reduced Explicit Life Modifier magnitudes
+stat_descriptions.txt,42,{0}% increased Explicit Lightning Modifier magnitudes
+stat_descriptions.txt,42,{0}% reduced Explicit Lightning Modifier magnitudes
+stat_descriptions.txt,43,{0}% increased Explicit Mana Modifier magnitudes
+stat_descriptions.txt,43,{0}% reduced Explicit Mana Modifier magnitudes
+stat_descriptions.txt,44,{0}% increased Explicit Physical Modifier magnitudes
+stat_descriptions.txt,44,{0}% reduced Explicit Physical Modifier magnitudes
+stat_descriptions.txt,45,{0}% increased Explicit Resistance Modifier magnitudes
+stat_descriptions.txt,45,{0}% reduced Explicit Resistance Modifier magnitudes
+stat_descriptions.txt,46,{0}% increased Explicit Speed Modifier magnitudes
+stat_descriptions.txt,46,{0}% reduced Explicit Speed Modifier magnitudes
+stat_descriptions.txt,47,{0}% increased Explicit Elemental Damage Modifier magnitudes
+stat_descriptions.txt,47,{0}% reduced Explicit Elemental Damage Modifier magnitudes
+stat_descriptions.txt,119,Forged Items have a Crucible Passive Skill that modifies the sell price of the Item if possible
+stat_descriptions.txt,120,Forged Items have 30% Quality
+stat_descriptions.txt,121,Forged Items are Corrupted with an Implicit
+stat_descriptions.txt,122,Forged Items have the numeric values of Modifiers Randomised
+stat_descriptions.txt,123,Forged Items are fully Linked
+stat_descriptions.txt,124,Crucible Passive Skills are more likely to be retained when Forging
+stat_descriptions.txt,125,Crucible Passive Skills on Forged Items cannot have tiers downgraded
+stat_descriptions.txt,126,Rare and Unique Monsters have {0}% chance to drop a Magmatic Ore
+stat_descriptions.txt,126,Rare and Unique Monsters drop a Magmatic Ore
+stat_descriptions.txt,128,Rare and Unique Crucible Monsters have {0}% chance to drop a Ranged Weapon with\na Crucible Passive Skill Tree
+stat_descriptions.txt,128,Rare and Unique Crucible Monsters drop a Ranged Weapon with a Crucible Passive Skill Tree
+stat_descriptions.txt,129,Rare and Unique Crucible Monsters have {0}% chance to drop a Shield with\na Crucible Passive Skill Tree
+stat_descriptions.txt,129,Rare and Unique Crucible Monsters drop a Shield with a Crucible Passive Skill Tree
+stat_descriptions.txt,130,Rare and Unique Monsters have {0}% chance to drop Divination Cards that grant Unique Weapons
+stat_descriptions.txt,130,Rare and Unique Monsters drop Divination Cards that grant Unique Weapons
+stat_descriptions.txt,132,Releasing an Imprisoned Monster has a {0}% chance to grant a random Essence Modifier to another Imprisoned Monster
+stat_descriptions.txt,132,Releasing an Imprisoned Monster grants a random Essence Modifier to another Imprisoned Monster
+stat_descriptions.txt,133,Essences found are a tier higher
+stat_descriptions.txt,133,Essences found have {0}% chance to be a tier higher
+stat_descriptions.txt,138,Unique Crucible Monsters have {0}% chance to drop a Unique Ranged Weapon
+stat_descriptions.txt,138,Unique Crucible Monsters drop a Unique Ranged Weapon
+stat_descriptions.txt,139,Unique Crucible Monsters have {0}% chance to drop a Unique Shield
+stat_descriptions.txt,139,Unique Crucible Monsters drop a Unique Shield
+stat_descriptions.txt,140,Corrupting Imprisoned Monsters cannot release them
+stat_descriptions.txt,144,Weapons and Shields found have {0}% chance to be Fractured
+stat_descriptions.txt,145,Weapons and Shields found have {0}% chance to be fully Linked
+stat_descriptions.txt,146,Weapons and Shields found have {}% chance to have the maximum number of Sockets
+stat_descriptions.txt,147,Breach Monsters deal {0}% increased Damage
+stat_descriptions.txt,147,Breach Monsters deal {0}% reduced Damage
+stat_descriptions.txt,365,{0}% of Non-Chaos Damage taken bypasses Energy Shield
+stat_descriptions.txt,379,Trigger Level {0} [TriggeredConsecrate::{0}|Consecrate] when you deal a Critical Strike
+stat_descriptions.txt,394,Trigger level {0} Summon Spirit of Akoya Skill when you reach Maximum Rage while\na Unique Enemy is in your Presence
+stat_descriptions.txt,395,Trigger level {0} Summon Spirit of Ikiaho Skill when you use a Travel\nSkill while a Unique Enemy is in your Presence
+stat_descriptions.txt,396,Trigger level {0} [TriggerSummonedAncestorKahuturoa::{0}|Summon Spirit of Kahuturoa] Skill when you take\na Critical Strike from a Unique Enemy
+stat_descriptions.txt,397,Trigger level {0} [TriggerSummonedAncestorKaom::{0}|Summon Spirit of Kaom] Skill when a Totem dies while\na Unique Enemy is in your Presence
+stat_descriptions.txt,398,Trigger level {0} [TriggerSummonedAncestorKiloava::{0}|Summon Spirit of Kiloava] Skill when you Block Damage from a Unique Enemy
+stat_descriptions.txt,399,Trigger level {0} Summon Spirit of Maata Skill when you reach Low Life while\na Unique Enemy is in your Presence
+stat_descriptions.txt,400,Trigger level {0} [TriggerSummonedAncestorRakiata::{0}|Summon Spirit of Rakiata] Skill on Critical Strike against Marked Unique Enemy
+stat_descriptions.txt,401,Trigger level {0} Summon Spirit of Tawhanuku Skill when Energy Shield Recharge starts while a Unique Enemy is in your Presence
+stat_descriptions.txt,402,Trigger level {0} [TriggerSummonedAncestorUtula::{0}|Summon Spirit of Utula] Skill on taking a Savage Hit from a Unique Enemy
+stat_descriptions.txt,403,Triggers Drowning Domain when Allocated
+stat_descriptions.txt,409,Trigger Level {0} [VoidGaze::{0}|Void Gaze] when you use a Skill
+stat_descriptions.txt,460,Trigger Level 20 [Twister::20|Twister] when you gain Avian's Might or Avian's Flight
+stat_descriptions.txt,466,Trigger Level {0} [PoachersMarkTriggered::{0}|Poacher's Mark] when you Hit a Rare or Unique Enemy and have no Mark
+stat_descriptions.txt,485,{0}% chance to Trigger Level 20 [GlimpseOfEternity::20|Glimpse of Eternity] when Hit
+stat_descriptions.txt,485,Trigger Level 20 [GlimpseOfEternity::20|Glimpse of Eternity] when Hit
+stat_descriptions.txt,626,Chaos Damage taken does not bypass Energy Shield during effect
+stat_descriptions.txt,628,"Grants Last Breath when you Use a Skill during Effect, for {0}% of Mana Cost"
+stat_descriptions.txt,631,{0}% chance to Avoid being Ignited during Effect
+stat_descriptions.txt,632,{0}% chance to Avoid being Shocked during Effect
+stat_descriptions.txt,633,{0}% chance to Poison on Hit during Effect
+stat_descriptions.txt,1231,{0:+d} to maximum Energy Shield per 100 Reserved Life
+stat_descriptions.txt,1406,Gain {0} Life per Enemy Hit with Spells
+stat_descriptions.txt,1406,Lose {0} Life per Enemy Hit with Spells
+stat_descriptions.txt,1410,Gain {0} Life for each Ignited Enemy hit with Attacks
+stat_descriptions.txt,1410,Lose {0} Life for each Ignited Enemy hit with Attacks
+stat_descriptions.txt,1413,Gain {0} Mana per Enemy Hit with Attacks
+stat_descriptions.txt,1413,Lose {0} Mana per Enemy Hit with Attacks
+stat_descriptions.txt,1505,Cannot be Frozen
+stat_descriptions.txt,1506,Cannot be Ignited
+stat_descriptions.txt,1507,Cannot be Poisoned
+stat_descriptions.txt,1508,Cannot be Shocked
+stat_descriptions.txt,1509,Bleeding Cannot be inflicted on you
+stat_descriptions.txt,1510,{0}% chance to Avoid Elemental Ailments
+stat_descriptions.txt,1511,{0}% chance to Avoid being Chilled
+stat_descriptions.txt,1512,{0}% chance to Avoid being Frozen
+stat_descriptions.txt,1516,{0}% chance to Avoid being Poisoned
+stat_descriptions.txt,1517,{0}% chance to Avoid being Stunned
+stat_descriptions.txt,1518,{0}% chance to Avoid being Stunned
+stat_descriptions.txt,1519,Hits always Ignite
+stat_descriptions.txt,1682,Gain no inherent bonuses from Dexterity
+stat_descriptions.txt,1942,You have no Mana Regeneration
+stat_descriptions.txt,2040,Monsters have {0}% chance to Avoid being Ignited
+stat_descriptions.txt,2041,Monsters have {0}% chance to Avoid being Shocked
+stat_descriptions.txt,2042,Monsters are Unaffected by Shock
+stat_descriptions.txt,2044,Monsters have {0}% chance to Avoid Elemental Ailments
+stat_descriptions.txt,2045,Monsters have {0}% increased Critical Strike Chance
+stat_descriptions.txt,2045,Monsters have {0}% reduced Critical Strike Chance
+stat_descriptions.txt,2195,Curse Enemies with Temporal Chains on Hit
+stat_descriptions.txt,2213,Life and Mana Leech from Critical Strikes are instant
+stat_descriptions.txt,2250,{0}% chance to create a Smoke Cloud when Hit
+stat_descriptions.txt,2250,Create a Smoke Cloud when Hit
+stat_descriptions.txt,2276,Frostbite can affect Hexproof Enemies
+stat_descriptions.txt,2277,Elemental Weakness can affect Hexproof Enemies
+stat_descriptions.txt,2278,Enfeeble can affect Hexproof Enemies
+stat_descriptions.txt,2279,Flammability can affect Hexproof Enemies
+stat_descriptions.txt,2280,Conductivity can affect Hexproof Enemies
+stat_descriptions.txt,2281,Punishment can affect Hexproof Enemies
+stat_descriptions.txt,2282,Temporal Chains can affect Hexproof Enemies
+stat_descriptions.txt,2283,Vulnerability can affect Hexproof Enemies
+stat_descriptions.txt,2284,{0}% increased Movement Speed while Phasing
+stat_descriptions.txt,2284,{0}% reduced Movement Speed while Phasing
+stat_descriptions.txt,2435,Iron Flasks applied to you have {0}% increased Effect
+stat_descriptions.txt,2435,Iron Flasks applied to you have {0}% reduced Effect
+stat_descriptions.txt,2438,Sapphire Flasks applied to you have {0}% increased Effect
+stat_descriptions.txt,2438,Sapphire Flasks applied to you have {0}% reduced Effect
+stat_descriptions.txt,2439,Topaz Flasks applied to you have {0}% increased Effect
+stat_descriptions.txt,2439,Topaz Flasks applied to you have {0}% reduced Effect
+stat_descriptions.txt,2440,You gain [Onslaught] for {0} seconds at maximum Endurance Charges
+stat_descriptions.txt,2534,{0}
+stat_descriptions.txt,2535,{0}
+stat_descriptions.txt,2718,Your Chaos Damage Poisons Enemies
+stat_descriptions.txt,2726,Ignites you cause are reflected back to you
+stat_descriptions.txt,2970,{0}% increased Attack and Movement Speed with Her Blessing
+stat_descriptions.txt,2970,{0}% reduced Attack and Movement Speed with Her Blessing
+stat_descriptions.txt,2989,{0}% increased Attack Speed during any Flask Effect
+stat_descriptions.txt,2989,{0}% reduced Attack Speed during any Flask Effect
+stat_descriptions.txt,3016,"When you or your Totems Kill a Burning Enemy, {0}% chance for you\nand your Totems to each gain an Endurance Charge"
+stat_descriptions.txt,3016,"When you or your Totems Kill a Burning Enemy, you and your Totems each gain an Endurance Charge"
+stat_descriptions.txt,3245,{0:+d}% to Critical Strike Multiplier against Enemies that are affected\nby Elemental Ailments
+stat_descriptions.txt,3816,{0}% chance to create Consecrated Ground when you Shatter an Enemy
+stat_descriptions.txt,3816,Create Consecrated Ground when you Shatter an Enemy
+stat_descriptions.txt,3906,You are Immune to Bleeding while Leeching
+stat_descriptions.txt,3987,{0}% increased Effect of Shrine Buffs on Players
+stat_descriptions.txt,3987,{0}% reduced Effect of Shrine Buffs on Players
+stat_descriptions.txt,4105,Summoned Skeleton Warriors and Soldiers deal Triple Damage with this\nWeapon if you've Hit with this Weapon Recently
+stat_descriptions.txt,4120,You take {0}% increased Extra Damage from Critical Strikes by Poisoned Enemies
+stat_descriptions.txt,4120,You take {0}% reduced Extra Damage from Critical Strikes by Poisoned Enemies
+stat_descriptions.txt,4167,Gain {0} Endurance Charge every second if you've been Hit Recently and\n4 Warlord Items are Equipped
+stat_descriptions.txt,4167,Gain {0} Endurance Charges every second if you've been Hit Recently and\n4 Warlord Items are Equipped
+stat_descriptions.txt,4170,{0}% of Physical Damage taken as Fire Damage if 4 Warlord Items are Equipped
+stat_descriptions.txt,4171,{0}% of Physical Damage taken as Lightning Damage if 4 Crusader Items are Equipped
+stat_descriptions.txt,4172,{0:+d}% to Spell Critical Strike Chance if 4 Shaper Items are Equipped
+stat_descriptions.txt,4191,{0:+d} Armour if you've Blocked Recently
+stat_descriptions.txt,4194,{0:+d} Armour per 2 Strength
+stat_descriptions.txt,4198,Summoned Sentinels of Absolution have {0}% increased Area of Effect
+stat_descriptions.txt,4198,Summoned Sentinels of Absolution have {0}% reduced Area of Effect
+stat_descriptions.txt,4228,Your Action Speed is at least 105% of base value
+stat_descriptions.txt,4237,{0:+d}% Chance to Block Attack Damage if you've Used or Triggered a Shield Skill Recently
+stat_descriptions.txt,4261,{0:+d}% to all maximum Elemental Resistances if you've Suppressed Spell Damage Recently
+stat_descriptions.txt,4352,Always inflict Brittle while affected by Hatred
+stat_descriptions.txt,4364,{0}% of Damage Dealt by Ancestor Totems Leeched to you as Energy Shield
+stat_descriptions.txt,4581,Adds {0} to {1} Lightning Damage to Attacks with this Weapon per 10 Intelligence
+stat_descriptions.txt,4637,[DNT] {0}% increased Attribute Requirements of equipped Weapons
+stat_descriptions.txt,4637,[DNT] {0}% increased Attribute Requirements of equipped Weapons
+stat_descriptions.txt,4637,"Auras from your Skills have {0}% increased Effect on you for\neach Herald affecting you, up to a maximum of 40%"
+stat_descriptions.txt,4637,Auras from your Skills have {0}% reduced Effect on you for\neach Herald affecting you
+stat_descriptions.txt,4643,{0}% chance to Avoid Elemental Ailments while holding a Shield
+stat_descriptions.txt,4644,{0}% chance to Avoid Elemental Ailments per Summoned Golem
+stat_descriptions.txt,4647,{0}% chance to avoid Corrupted Blood
+stat_descriptions.txt,4654,{0}% chance to Avoid being Impaled
+stat_descriptions.txt,4654,You cannot be Impaled
+stat_descriptions.txt,4663,{0}% chance to Avoid being Stunned while Channelling
+stat_descriptions.txt,4664,{0}% chance to Avoid being Stunned while holding a Shield
+stat_descriptions.txt,4665,{0}% more Damage with Hits and Ailments against Enemies that are on Low Life
+stat_descriptions.txt,4665,{0}% less Damage with Hits and Ailments against Enemies that are on Low Life
+stat_descriptions.txt,4677,Banner Skills have {0}% increased Duration
+stat_descriptions.txt,4677,Banner Skills have {0}% reduced Duration
+stat_descriptions.txt,4683,{0}% increased Reservation of Banner Skills
+stat_descriptions.txt,4683,{0}% reduced Reservation of Banner Skills
+stat_descriptions.txt,4784,{0}% increased Mana Cost Efficiency of Spells
+stat_descriptions.txt,4784,{0}% reduced Mana Cost Efficiency of Spells
+stat_descriptions.txt,4796,{0}% increased Battlemage's Cry Buff Effect
+stat_descriptions.txt,4796,{0}% reduced Battlemage's Cry Buff Effect
+stat_descriptions.txt,4813,"Enemies in Void Sphere's range take up to {0}% increased Damage, based on distance from the Void Sphere"
+stat_descriptions.txt,4813,"Enemies in Void Sphere's range take up to {0}% reduced Damage, based on distance from the Void Sphere"
+stat_descriptions.txt,4847,Bleeding you inflict is Reflected to you
+stat_descriptions.txt,4929,Your Smothering Towers also grant {0}% increased Movement Speed
+stat_descriptions.txt,4929,Your Smothering Towers also grant {0}% reduced Movement Speed
+stat_descriptions.txt,5133,Cannot Inflict Wither on targets that are not on Full Life
+stat_descriptions.txt,5165,You cannot be Stunned if you've been Stunned or Blocked\na Stunning Hit in the past 2 seconds
+stat_descriptions.txt,5177,Cannot Fish while standing in Water
+stat_descriptions.txt,5185,Non-Damaging Ailments Cannot Be inflicted on you while you already have one
+stat_descriptions.txt,5186,Your Hits cannot Penetrate or ignore Elemental Resistances
+stat_descriptions.txt,5189,Elemental Ailments cannot be inflicted on you if you have an Equipped Body Armour with no Socketed Gems
+stat_descriptions.txt,5207,{0}% increased Cast Speed per 20 Dexterity
+stat_descriptions.txt,5209,{0}% increased Cast Speed with Brand Skills
+stat_descriptions.txt,5209,{0}% reduced Cast Speed with Brand Skills
+stat_descriptions.txt,5297,{0}% chance to drop an additional Divination Card which rewards Currency
+stat_descriptions.txt,5298,{0}% chance to drop an additional Divination Card which rewards Basic Currency
+stat_descriptions.txt,5299,{0}% chance to drop an additional Divination Card which rewards Exotic Currency
+stat_descriptions.txt,5300,{0}% chance to drop an additional Divination Card which rewards League Currency
+stat_descriptions.txt,5301,{0}% chance to drop an additional Divination Card which rewards Gems
+stat_descriptions.txt,5302,{0}% chance to drop an additional Divination Card which rewards Levelled Gems
+stat_descriptions.txt,5303,{0}% chance to drop an additional Divination Card which rewards Quality Gems
+stat_descriptions.txt,5304,{0}% chance to drop an additional Divination Card which rewards other Divination Cards
+stat_descriptions.txt,5305,{0}% chance to drop an additional Divination Card which rewards a Map
+stat_descriptions.txt,5306,{0}% chance to drop an additional Divination Card which rewards a Unique Map
+stat_descriptions.txt,5307,{0}% chance to drop an additional Divination Card which rewards a Unique Item
+stat_descriptions.txt,5308,{0}% chance to drop an additional Divination Card which rewards a Unique Armour
+stat_descriptions.txt,5309,{0}% chance to drop an additional Divination Card which rewards a Corrupted Unique Item
+stat_descriptions.txt,5310,{0}% chance to drop an additional Divination Card which rewards Unique Jewellery
+stat_descriptions.txt,5311,{0}% chance to drop an additional Divination Card which rewards a Unique Weapon
+stat_descriptions.txt,5312,{0}% chance to drop an additional Gem
+stat_descriptions.txt,5358,You have {0}% chance to deal Double Damage while on Full Life
+stat_descriptions.txt,5361,{0}% chance to Defend with 200% of Armour
+stat_descriptions.txt,5485,{0}% increased Damage with Claws while on Low Life
+stat_descriptions.txt,5485,{0}% reduced Damage with Claws while on Low Life
+stat_descriptions.txt,5569,{0}% increased Cooldown Recovery Rate per Power Charge
+stat_descriptions.txt,5569,{0}% reduced Cooldown Recovery Rate per Power Charge
+stat_descriptions.txt,5612,{0}% increased Critical Strike Chance against Shocked Enemies
+stat_descriptions.txt,5612,{0}% reduced Critical Strike Chance against Shocked Enemies
+stat_descriptions.txt,5617,Critical Strike Chance is increased by Lightning Resistance
+stat_descriptions.txt,5674,{0:+d}% to Critical Strike Multiplier with Claws or Daggers
+stat_descriptions.txt,5698,Curse Enemies with Conductivity on Hit if 5 Crusader Items are Equipped
+stat_descriptions.txt,5705,Curse Skills cost Life instead of Mana
+stat_descriptions.txt,5709,Cursed Enemies grant an Endurance Charge when Hit
+stat_descriptions.txt,5709,Cursed Enemies have a {0}% chance to grant an Endurance Charge when Hit
+stat_descriptions.txt,5859,Cannot deal non-Chaos Damage
+stat_descriptions.txt,5863,Debilitate Enemies for a second when Hit
+stat_descriptions.txt,5863,Debilitates Enemies for {0} seconds when Hit
+stat_descriptions.txt,5924,Contains waves of Monsters
+stat_descriptions.txt,5997,Inherent Bonuses from Dual Wielding are doubled
+stat_descriptions.txt,6007,Elemental Ailments inflicted on you spread to Enemies within {0} metres
+stat_descriptions.txt,6127,"Enemies you Curse are Hindered, with 15% reduced Movement Speed"
+stat_descriptions.txt,6190,Ethereal Knives fires an additional Projectile
+stat_descriptions.txt,6190,Ethereal Knives fires {0} additional Projectiles
+stat_descriptions.txt,6198,{0}% increased Evasion Rating per Endurance Charge
+stat_descriptions.txt,6261,{0}% increased Eye of Winter Damage
+stat_descriptions.txt,6261,{0}% reduced Eye of Winter Damage
+stat_descriptions.txt,6295,{0}% increased Fire Damage taken while moving
+stat_descriptions.txt,6295,{0}% reduced Fire Damage taken while moving
+stat_descriptions.txt,6325,You can catch Divine Fish
+stat_descriptions.txt,6368,"Flasks adjacent to active Tinctures gain a charge when you Hit an\nEnemy with a Melee Weapon, no more than once every second"
+stat_descriptions.txt,6368,"Flasks adjacent to active Tinctures gain {0} charges when you Hit an\nEnemy with a Melee Weapon, no more than once every second"
+stat_descriptions.txt,6391,Enemies you Freeze remain Frozen for at least 1 second
+stat_descriptions.txt,6391,Enemies you Freeze remain Frozen for at least {0} seconds
+stat_descriptions.txt,6421,You have Fungal Ground around you while stationary
+stat_descriptions.txt,6427,{0}% increased Armour per 100 Reserved Mana
+stat_descriptions.txt,6444,Gain Adrenaline for {0} second on Kill
+stat_descriptions.txt,6444,Gain Adrenaline for {0} seconds on Kill
+stat_descriptions.txt,6448,Gain Adrenaline for {0} second when Ward Breaks
+stat_descriptions.txt,6448,Gain Adrenaline for {0} seconds when Ward Breaks
+stat_descriptions.txt,6471,{0}% chance to gain a Challenger Charge when you Hit a Rare or Unique Enemy while in Blood Stance
+stat_descriptions.txt,6471,Gain a Challenger Charge when you Hit a Rare or Unique Enemy while in Blood Stance
+stat_descriptions.txt,6533,Gain a Power Charge each second while Channelling a Spell
+stat_descriptions.txt,6536,Gain a Power Charge when you Hit a Frozen Enemy
+stat_descriptions.txt,6536,{0}% chance to gain a Power Charge when you Hit a Frozen Enemy
+stat_descriptions.txt,6656,[DNT] Equipment item Favours from Ritual Atlars in your Maps will be unidentified
+stat_descriptions.txt,6656,"While there are at least five Allies within 6 metres, you and Allies within 6 metres have [Onslaught]"
+stat_descriptions.txt,6663,Your Curse Limit is equal to your maximum Power Charges
+stat_descriptions.txt,6665,You have [Onslaught] if you've Summoned a Totem Recently
+stat_descriptions.txt,6861,Herald of Thunder has {0}% increased Buff Effect
+stat_descriptions.txt,6861,Herald of Thunder has {0}% reduced Buff Effect
+stat_descriptions.txt,6866,{0}% reduced Mana Reservation Efficiency of Herald Skills
+stat_descriptions.txt,6866,{0}% increased Mana Reservation Efficiency of Herald Skills
+stat_descriptions.txt,6875,You are Hexproof if you have a Magic Ring in right slot
+stat_descriptions.txt,6943,Ignites you inflict deal no Damage
+stat_descriptions.txt,6959,"When you Kill an Enemy Cursed with a Non-Aura Hex, become Immune to\nCurses for remaining Hex Duration"
+stat_descriptions.txt,6960,Immune to Curses while you have at least {0} Rage
+stat_descriptions.txt,6968,Immune to Freeze and Chill while Ignited
+stat_descriptions.txt,6976,Immune to Reflected Damage
+stat_descriptions.txt,6977,Immune to Shock while affected by Purity of Lightning
+stat_descriptions.txt,6984,{0}% increased Effect of Impales you inflict with Two Handed Weapons on Non-Impaled Enemies
+stat_descriptions.txt,6984,{0}% reduced Effect of Impales you inflict with Two Handed Weapons on Non-Impaled Enemies
+stat_descriptions.txt,7011,{0}% chance to inflict Cold Exposure on Hit if you have at least 150 Devotion
+stat_descriptions.txt,7011,Inflict Cold Exposure on Hit if you have at least 150 Devotion
+stat_descriptions.txt,7013,[DNT] Inflict Fire Exposure on Nearby Enemies when you reach Maximum Rage
+stat_descriptions.txt,7013,{0}% chance to inflict Fire Exposure on Hit if you have at least 150 Devotion
+stat_descriptions.txt,7013,Inflict Fire Exposure on Hit if you have at least 150 Devotion
+stat_descriptions.txt,7017,{0}% chance to inflict Lightning Exposure on Hit if you have at least 150 Devotion
+stat_descriptions.txt,7017,Inflict Lightning Exposure on Hit if you have at least 150 Devotion
+stat_descriptions.txt,7020,{0}% chance to be inflicted with Cold Exposure when you take Cold Damage from a Hit
+stat_descriptions.txt,7020,Inflicted with Cold Exposure when you take Cold Damage from a Hit
+stat_descriptions.txt,7033,Intimidate Enemies within 3 metres for {0} seconds
+stat_descriptions.txt,7071,Lancing Steel deals {0}% increased Damage
+stat_descriptions.txt,7071,Lancing Steel deals {0}% reduced Damage
+stat_descriptions.txt,7142,Regenerate {0}% of Life per second per Fortification
+stat_descriptions.txt,7253,"Linked targets share Endurance, Frenzy and Power Charges with you"
+stat_descriptions.txt,7590,1 Added Passive Skill is Wicked Pall
+stat_descriptions.txt,7607,{0}% chance to Impale Enemies on Hit with Attacks
+stat_descriptions.txt,7607,Impale Enemies on Hit with Attacks
+stat_descriptions.txt,7613,Can be Anointed
+stat_descriptions.txt,7628,Map Crafting options for this Map have no cost
+stat_descriptions.txt,7671,Every 10 seconds:\nTake 50% less Damage from Hits for 5 seconds\nTake 75% less Damage over Time for 5 seconds
+stat_descriptions.txt,7685,You have Immortal Ambition while all Socketed Gems are Red
+stat_descriptions.txt,7723,{0}
+stat_descriptions.txt,7757,Skills granted by your {0} are Supported by level {2} {1}
+stat_descriptions.txt,7757,Skills Socketed in your {0} are Supported by level {2} {1}
+stat_descriptions.txt,7758,{0}% chance to Cause Poison on Critical Strike
+stat_descriptions.txt,7758,Cause Poison on Critical Strike
+stat_descriptions.txt,7893,"Lose all Frenzy, Endurance, and Power Charges when you Move"
+stat_descriptions.txt,7906,Your Lucky or Unlucky effects are instead Unexciting
+stat_descriptions.txt,7986,Area is affected by an additional random Unallocated Notable Atlas Passives
+stat_descriptions.txt,7986,Area is affected by {0} additional random Unallocated Notable Atlas Passives
+stat_descriptions.txt,7992,Players have {0}% increased Character Size
+stat_descriptions.txt,7992,Players have {0}% reduced Character Size
+stat_descriptions.txt,7997,-
+stat_descriptions.txt,8002,"Players are assaulted by apparitions of Al-Hezmin, the Hunter"
+stat_descriptions.txt,8061,Beyond Portals have a {0}% chance to spawn an additional Beyond Demon
+stat_descriptions.txt,8061,Beyond Portals spawn an additional Beyond Demon
+stat_descriptions.txt,8068,Blight Chests in Area have a {0}% increased chance to contain Oils
+stat_descriptions.txt,8185,Monsters take {}% more Damage
+stat_descriptions.txt,8185,Monsters take {}% less Damage
+stat_descriptions.txt,8201,[DNT] Dropped items have {0}% chance to be Fractured
+stat_descriptions.txt,8243,{0}% increased Quantity of Vendor Refresh Currencies dropped by Monsters in Area
+stat_descriptions.txt,8243,{0}% reduced Quantity of Vendor Refresh Currencies dropped by Monsters in Area
+stat_descriptions.txt,8266,Harvests contain at least one Crop of Purple Plants
+stat_descriptions.txt,8266,Harvests contain at least one Crop of Yellow Plants
+stat_descriptions.txt,8266,Harvests contain at least one Crop of Blue Plants
+stat_descriptions.txt,8413,Monsters Kill things with 20% or lower Life on Hit
+stat_descriptions.txt,8446,Monsters cannot be Taunted
+stat_descriptions.txt,8524,An additional Map drops on Completing Area
+stat_descriptions.txt,8524,{0} additional Maps drop on Completing Area
+stat_descriptions.txt,8526,Map owner gains {0}% more Sulphite
+stat_descriptions.txt,8570,Players have {0}% increased Movement Speed
+stat_descriptions.txt,8570,Players have {0}% reduced Movement Speed
+stat_descriptions.txt,8575,{0}% increased Duration of Shrine Effects on Players
+stat_descriptions.txt,8640,Rare monsters in area are Shaper-Touched
+stat_descriptions.txt,8794,Ultimatum Rewards in your Maps have {0}% increased chance to be Blight Oils
+stat_descriptions.txt,8794,Ultimatum Rewards in your Maps have {0}% reduced chance to be Blight Oils
+stat_descriptions.txt,8795,Ultimatum Rewards in your Maps have {0}% increased chance to be Breach Items
+stat_descriptions.txt,8795,Ultimatum Rewards in your Maps have {0}% reduced chance to be Breach Items
+stat_descriptions.txt,8796,Ultimatum Rewards in your Maps have {0}% increased chance to be Catalysts
+stat_descriptions.txt,8796,Ultimatum Rewards in your Maps have {0}% reduced chance to be Catalysts
+stat_descriptions.txt,8797,Ultimatum Rewards in your Maps have {0}% increased chance to be Corrupted Rare Items
+stat_descriptions.txt,8797,Ultimatum Rewards in your Maps have {0}% reduced chance to be Corrupted Rare Items
+stat_descriptions.txt,8798,Ultimatum Rewards in your Maps have {0}% increased chance to be Currency Items
+stat_descriptions.txt,8798,Ultimatum Rewards in your Maps have {0}% reduced chance to be Currency Items
+stat_descriptions.txt,8800,Ultimatum Rewards in your Maps have {0}% increased chance to be Divination Cards
+stat_descriptions.txt,8800,Ultimatum Rewards in your Maps have {0}% reduced chance to be Divination Cards
+stat_descriptions.txt,8803,Ultimatum Rewards in your Maps have {0}% increased chance to be Fossils
+stat_descriptions.txt,8803,Ultimatum Rewards in your Maps have {0}% reduced chance to be Fossils
+stat_descriptions.txt,8804,Ultimatum Rewards in your Maps have {0}% increased chance to be Map Fragments
+stat_descriptions.txt,8804,Ultimatum Rewards in your Maps have {0}% reduced chance to be Map Fragments
+stat_descriptions.txt,8805,Ultimatum Rewards in your Maps have {0}% increased chance to be Gems
+stat_descriptions.txt,8805,Ultimatum Rewards in your Maps have {0}% reduced chance to be Gems
+stat_descriptions.txt,8807,Ultimatum Rewards in your Maps have {0}% increased chance to be Inscribed Ultimatums
+stat_descriptions.txt,8807,Ultimatum Rewards in your Maps have {0}% reduced chance to be Inscribed Ultimatums
+stat_descriptions.txt,8810,Ultimatum Rewards in your Maps have {0}% increased chance to be Maps
+stat_descriptions.txt,8810,Ultimatum Rewards in your Maps have {0}% reduced chance to be Maps
+stat_descriptions.txt,8811,Ultimatum Encounters in Area grant rewards as though you completed an additional Round
+stat_descriptions.txt,8811,Ultimatum Encounters in Area grant rewards as though you completed {0} additional Rounds
+stat_descriptions.txt,8824,{0}% chance for Packs to be upgraded to Magic
+stat_descriptions.txt,8844,Vaal Vessel contains an additional Ultimatum Aspect
+stat_descriptions.txt,8844,Vaal Vessel contains {0} additional Ultimatum Aspects
+stat_descriptions.txt,8853,Warbands in the Area have an additional Elite Member
+stat_descriptions.txt,8853,Warbands in the Area have {0} additional Elite Members
+stat_descriptions.txt,8890,{0:+d} to Maximum Blitz Charges
+stat_descriptions.txt,8896,{:+d} to Maximum Endurance Charges while affected by Determination
+stat_descriptions.txt,8901,Your Maximum Energy Shield is Equal to {0}% of Your Maximum Life
+stat_descriptions.txt,8931,{0}% increased Maximum Life per Abyss Jewel affecting you
+stat_descriptions.txt,8931,{0}% reduced Maximum Life per Abyss Jewel affecting you
+stat_descriptions.txt,8943,Skills that leave Lingering Blades have {:+d} to Maximum Lingering Blades
+stat_descriptions.txt,8954,Melee Attacks have {0:+d}% to Critical Strike Chance against Excommunicated Enemies
+stat_descriptions.txt,9114,[DNT] Your Minions have {0}% increased Cooldown Recovery Rate with Spells
+stat_descriptions.txt,9114,[DNT] Your Minions have {0}% increased Cooldown Recovery Rate with Spells
+stat_descriptions.txt,9114,Minions have {0:+d}% chance to Suppress Spell Damage
+stat_descriptions.txt,9266,Non-Aura Vaal Skills require {0}% increased Souls Per Use
+stat_descriptions.txt,9266,Non-Aura Vaal Skills require {0}% reduced Souls Per Use
+stat_descriptions.txt,9288,Non-Exerted Attacks deal no Damage
+stat_descriptions.txt,9375,Penance Brand has {0}% increased Area of Effect
+stat_descriptions.txt,9375,Penance Brand has {0}% reduced Area of Effect
+stat_descriptions.txt,9539,{0}% increased Projectile Speed while wielding a Dagger
+stat_descriptions.txt,9539,{0}% reduced Projectile Speed while wielding a Dagger
+stat_descriptions.txt,9624,Projectiles are fired in random directions
+stat_descriptions.txt,9639,Recover {}% of Life when you Kill a Cursed Enemy
+stat_descriptions.txt,9642,Recover {0}% of Mana when you Curse a Non-Cursed Enemy
+stat_descriptions.txt,9643,{0}% chance to Recover 10% of Mana when you use a Skill while affected by Clarity
+stat_descriptions.txt,9668,Recover {0}% of Life when you use a Skill
+stat_descriptions.txt,9705,Remove Ignite and Burning when you use a Flask
+stat_descriptions.txt,9748,Ruthless Hits Intimidate Enemies for 4 seconds
+stat_descriptions.txt,9767,Take {0} Cold Damage on reaching Maximum Power Charges
+stat_descriptions.txt,9771,You are Debilitated
+stat_descriptions.txt,9776,Take no Extra Damage from Critical Strikes if Energy Shield Recharge started Recently
+stat_descriptions.txt,9805,{0}% increased Effect of Shock
+stat_descriptions.txt,9805,{0}% reduced Effect of Shock
+stat_descriptions.txt,9886,Venom Gyre has a {0}% chance to inflict Withered for 2 seconds on Hit
+stat_descriptions.txt,9886,Venom Gyre inflicts Withered for 2 seconds on Hit
+stat_descriptions.txt,9912,Spectral Throw has {0}% chance on Hit to give a Vaal soul to Vaal Spectral Throw
+stat_descriptions.txt,9923,Raised Spectres fire {0} additional Projectiles
+stat_descriptions.txt,10004,{0}% increased Aspect of the Spider Area of Effect
+stat_descriptions.txt,10004,{0}% reduced Aspect of the Spider Area of Effect
+stat_descriptions.txt,10157,Take no Burning Damage if you've stopped taking Burning Damage Recently
+stat_descriptions.txt,10205,{0}% increased Totem Placement range
+stat_descriptions.txt,10205,{0}% reduced Totem Placement range
+stat_descriptions.txt,10240,{0}% more Damage with Triggered Spells
+stat_descriptions.txt,10240,{0}% less Damage with Triggered Spells
+stat_descriptions.txt,10255,Monsters deal {0}% increased Damage for each time they have been Revived
+stat_descriptions.txt,10268,Unaffected by Bleeding while affected by Malevolence
+stat_descriptions.txt,10287,Unaffected by Frostbite while affected by Purity of Ice
+stat_descriptions.txt,10291,Unaffected by Poison while affected by Malevolence
+stat_descriptions.txt,10294,Unaffected by Shock while Channelling
+stat_descriptions.txt,10302,[DNT] Unarmed Non-Vaal Strike Skills target {0} additional nearby Enemy
+stat_descriptions.txt,10302,[DNT] Unarmed Non-Vaal Strike Skills target {0} additional nearby Enemy
+stat_descriptions.txt,10302,{0:+d}% to Critical Strike Multiplier with Unarmed Melee Attacks
+stat_descriptions.txt,10334,Vaal Skills can store {0:+d} Use
+stat_descriptions.txt,10334,Vaal Skills can store {0:+d} Uses
+stat_descriptions.txt,10427,Enemies Cursed by you have Malediction if 33% of Curse Duration expired
+stat_descriptions.txt,10498,Consecrated Ground you create grants {0}% increased Accuracy Rating to you and Allies
+stat_descriptions.txt,10508,Skeletons gain Added Chaos Damage equal to {0}% of Maximum Energy Shield on your Equipped Shield
+stat_descriptions.txt,10536,"You have Igniting, Chilling and Shocking Conflux while affected by Glorious Madness"
+stat_descriptions.txt,10589,Melee Hits count as Rampage Kills\nRampage
+stat_descriptions.txt,10592,All Damage can Ignite against Cursed Enemies
+stat_descriptions.txt,10593,All Damage can Shock against Cursed Enemies
+stat_descriptions.txt,10594,[Draugurflame|Draugurflames] burn enemies around you for 8 seconds after you Ignite a target
+stat_descriptions.txt,10621,Hollow Palm Technique
+village_stat_descriptions.txt,4,Atlas Runners can run White Maps
+village_stat_descriptions.txt,4,Atlas Runners can run White and Yellow Maps
+village_stat_descriptions.txt,4,"Atlas Runners can run White, Yellow and Red Maps"
+village_stat_descriptions.txt,4,"Atlas Runners can run White, Yellow, Red and Purple Maps"
+village_stat_descriptions.txt,17,{}% increased Mapping Speed

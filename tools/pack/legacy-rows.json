@@ -1,24 +1,342 @@
 {
  "metadata/statdescriptions/active_skill_gem_stat_descriptions.txt": {
+  "10500": [
+   "冰凍、感電、易碎或殘喘時，每 {0} 秒發射脈衝",
+   "冰凍、感電、易碎或殘喘時，每 {0} 秒發射脈衝\\n  Pulses every {0} seconds while Frozen, Shocked, Brittle or Sapped"
+  ],
+  "11569": [
+   "增加 {0}% 近戰傷害",
+   "增加 {0}% 近戰傷害\\n  {0}% increased Melee Damage"
+  ],
+  "11570": [
+   "減少 {0}% 近戰傷害",
+   "減少 {0}% 近戰傷害\\n  {0}% reduced Melee Damage"
+  ],
+  "11615": [
+   "對流血的敵人增加 {0}% 近戰傷害",
+   "對流血的敵人增加 {0}% 近戰傷害\\n  {0}% increased Melee Damage against Bleeding Enemies"
+  ],
+  "11616": [
+   "對流血的敵人減少 {0}% 近戰傷害",
+   "對流血的敵人減少 {0}% 近戰傷害\\n  {0}% reduced Melee Damage against Bleeding Enemies"
+  ],
   "13244": [
    "投射物有 {0}% 機率返回你",
    "投射物有 {0}% 機率返回你\\n  Projectiles have {1}% chance to Return to you"
+  ],
+  "14632": [
+   "圖騰每秒回復 {0}% 生命",
+   "圖騰每秒回復 {0}% 生命\\n  Totems Regenerate {0}% of Life per second"
+  ],
+  "14857": [
+   "生成的屍體為等級 {0}",
+   "生成的屍體為等級 {0}\\n  Spawned corpses are Level {0}"
+  ],
+  "3634": [
+   "附加 {0} 至 {1} 閃電傷害",
+   "附加 {0} 至 {1} 閃電傷害\\n  {0} to {1} Added Lightning Damage"
+  ],
+  "3669": [
+   "附加 {0} 至 {1} 閃電傷害",
+   "附加 {0} 至 {1} 閃電傷害\\n  {0} to {1} Added Lightning Damage"
+  ],
+  "5550": [
+   "增加 {0}% 保留效用",
+   "增加 {0}% 保留效用\\n  {0}% increased Reservation Efficiency"
+  ],
+  "5604": [
+   "增加 {0}% 保留",
+   "增加 {0}% 保留\\n  {0}% increased Reservation"
+  ],
+  "7065": [
+   "增加 {0}% 冰冷傷害",
+   "增加 {0}% 冰冷傷害\\n  {0}% increased Cold Damage"
+  ],
+  "7066": [
+   "減少 {0}% 冰冷傷害",
+   "減少 {0}% 冰冷傷害\\n  {0}% reduced Cold Damage"
+  ],
+  "8925": [
+   "減少 {0}% 敵人冰凍持續時間",
+   "減少 {0}% 敵人冰凍持續時間\\n  {0}% reduced Freeze Duration on Enemies"
+  ],
+  "9005": [
+   "發射光束增加 {0}% 頻率",
+   "發射光束增加 {0}% 頻率\\n  Fires Beams with {0}% increased Frequency"
+  ],
+  "9840": [
+   "骸骨尖刺上限為{0}座",
+   "骸骨尖刺上限為{0}座\\n  Maximum {0} Bone Spires"
   ]
  },
- "metadata/statdescriptions/advanced_mod_stat_descriptions.txt": {},
+ "metadata/statdescriptions/advanced_mod_stat_descriptions.txt": {
+  "1067": [
+   "每 10 個奉獻，增加 {0}% 敵人身上非傷害型異常狀態的效果",
+   "每 10 個奉獻，增加 {0}% 敵人身上非傷害型異常狀態的效果\\n  {0}% increased Effect of non-Damaging Ailments on Enemies per 10 Devotion"
+  ],
+  "1068": [
+   "每 10 個奉獻，減少 {0}% 敵人身上非傷害型異常狀態的效果",
+   "每 10 個奉獻，減少 {0}% 敵人身上非傷害型異常狀態的效果\\n  {0}% reduced Effect of non-Damaging Ailments on Enemies per 10 Devotion"
+  ],
+  "743": [
+   "再生腐屍（幻化武器-神聖軍備）的最大數量加倍\\n無法擁有再生腐屍（幻化武器-神聖軍備）以外的召喚物",
+   "再生腐屍（幻化武器-神聖軍備）的最大數量加倍\\n無法擁有再生腐屍（幻化武器-神聖軍備）以外的召喚物\\n  Maximum number of Raised Zombies (Animated Weapons-Holy Armaments) is Doubled\\nCannot have Minions other than Raised Zombies (Animated Weapons-Holy Armaments)"
+  ]
+ },
  "metadata/statdescriptions/atlas_relic_stat_descriptions.txt": {},
  "metadata/statdescriptions/atlas_stat_descriptions.txt": {
+  "10035": [
+   "每張地圖的最終地圖頭目有 {0:+d}% 機率掉落 1 張尊師守護者地圖 (階級 14+)",
+   "每張地圖的最終地圖頭目有 {0:+d}% 機率掉落 1 張尊師守護者地圖 (階級 14+)\\n  Final Map Boss in each Map has {0:+d}% chance to drop an Elder Guardian Map (Tier 14+)"
+  ],
+  "10495": [
+   "每張地圖的最終頭目掉落 1 個瓦爾物品，而不是相連地圖",
+   "每張地圖的最終頭目掉落 1 個瓦爾物品，而不是相連地圖\\n  Final Map Boss in each Map drops Vaal Items instead of Adjacent Maps"
+  ],
+  "10896": [
+   "地圖頭目減少 {0}% 生命",
+   "地圖頭目減少 {0}% 生命\\n  Map Bosses have {0}% reduced Life"
+  ],
+  "12232": [
+   "你地圖中的裂痕怪物減少 {0}% 傷害",
+   "你地圖中的裂痕怪物減少 {0}% 傷害\\n  Breach Monsters in your Maps deal {0}% reduced Damage"
+  ],
+  "12569": [
+   "你地圖中的裂痕裂片有 {0}% 機率改為掉落裂痕石",
+   "你地圖中的裂痕裂片有 {0}% 機率改為掉落裂痕石\\n  Breach Splinters have {0}% chance to drop as Breachstones instead in your Maps"
+  ],
+  "13215": [
+   "你的地圖 {0:+d}% 機率含有聖殿密園",
+   "你的地圖 {0:+d}% 機率含有聖殿密園\\n  Your Maps have {0:+d}% chance to contain The Sacred Grove"
+  ],
+  "13216": [
+   "你的地圖含有聖殿密園",
+   "你的地圖含有聖殿密園\\n  Your Maps contain The Sacred Grove"
+  ],
+  "13308": [
+   "你地圖中的逐夢者‧夏烏拉有 {0}% 機率被複製",
+   "你地圖中的逐夢者‧夏烏拉有 {0}% 機率被複製\\n  Chayula, Who Dreamt in your Maps has a {0}% chance to be Duplicated"
+  ],
+  "13446": [
+   "你地圖中的截載者‧烏爾尼多有 {0}% 機率被複製",
+   "你地圖中的截載者‧烏爾尼多有 {0}% 機率被複製\\n  Uul-Netol, Unburdened Flesh in your Maps has a {0}% chance to be Duplicated"
+  ],
+  "15676": [
+   "你地圖中掉落的寶石匠的稜鏡有 {0}% 機率改為掉落堆疊 6 顆的寶石匠的稜鏡",
+   "你地圖中掉落的寶石匠的稜鏡有 {0}% 機率改為掉落堆疊 6 顆的寶石匠的稜鏡\\n  Gemcutter's Prisms found in your Maps have {0}% chance to drop as a stack of 6 Gemcutter's Prisms instead"
+  ],
+  "16182": [
+   "你地圖中的譫妄迷霧永不消散",
+   "你地圖中的譫妄迷霧永不消散\\n  Delirium Fog in your Maps never dissipates"
+  ],
+  "16639": [
+   "你的地圖不會含有譫妄之鏡",
+   "你的地圖不會含有譫妄之鏡\\n  Your Maps have no chance to contain Mirrors of Delirium"
+  ],
+  "17534": [
+   "你的地圖總是非常吸引人",
+   "你的地圖總是非常吸引人\\n  Your Maps are always very Alluring"
+  ],
+  "18164": [
+   "埃哈在你地圖中對傳奇怪物造成 {0}% 更少傷害",
+   "埃哈在你地圖中對傳奇怪物造成 {0}% 更少傷害\\n  Einhar deals {0}% less Damage to Unique Monsters in your Maps"
+  ],
+  "18454": [
+   "你地圖中掉落的物品有 {0}% 機率有 1 個白色插槽",
+   "你地圖中掉落的物品有 {0}% 機率有 1 個白色插槽\\n  Items found in your Maps have {0}% chance to have a White Socket"
+  ],
+  "19261": [
+   "你地圖中的探險增加 {0}% 機率被關南領導",
+   "你地圖中的探險增加 {0}% 機率被關南領導\\n  Expeditions in your Maps have {0}% increased chance to be led by Gwennen"
+  ],
+  "19407": [
+   "你地圖中的探險有 {0:+d} 個遺跡",
+   "你地圖中的探險有 {0:+d} 個遺跡\\n  Expeditions in your Maps have {0:+d} Remnants"
+  ],
+  "20249": [
+   "完成你的地圖時，有 {0}% 機率獲得 1 個額外尼科任務",
+   "完成你的地圖時，有 {0}% 機率獲得 1 個額外尼科任務\\n  Your Maps have {0}% chance to grant an additional Niko Mission on Completion"
+  ],
+  "20250": [
+   "完成你的地圖時，獲得 1 個額外尼科任務",
+   "完成你的地圖時，獲得 1 個額外尼科任務\\n  Your Maps grant an additional Niko Mission on Completion"
+  ],
+  "21434": [
+   "你地圖中的豐收怪物增加 {0}% 經驗",
+   "你地圖中的豐收怪物增加 {0}% 經驗\\n  Harvest Monsters in your Maps grant {0}% increased Experience"
+  ],
+  "22384": [
+   "你地圖中掉落的劫盜契約書有 {0}% 更少機會需要等級 3 的工作",
+   "你地圖中掉落的劫盜契約書有 {0}% 更少機會需要等級 3 的工作\\n  Heist Contracts found in your Maps are {0}% less likely to require level 3 Jobs"
+  ],
+  "22812": [
+   "你含有走私者的祕寶的地圖，有 {0}% 機率含有 1 個額外走私者的祕寶",
+   "你含有走私者的祕寶的地圖，有 {0}% 機率含有 1 個額外走私者的祕寶\\n  Your Maps that contain Smuggler's Caches have a {0}% chance to contain an additional Smuggler's Cache"
+  ],
+  "25308": [
+   "你地圖中任務增加 {0}% 友誼點數",
+   "你地圖中任務增加 {0}% 友誼點數\\n  Missions in your Maps grant {0}% increased Favour"
+  ],
+  "26130": [
+   "你地圖中找到的傭兵被擊敗時會掉落{0}個其未被拿取的物品",
+   "你地圖中找到的傭兵被擊敗時會掉落{0}個其未被拿取的物品\\n  On defeating Mercenaries found in your Maps they drop {0} of their untaken Items"
+  ],
+  "26881": [
+   "你地圖中的鍊魔有 1 個隨機詞綴掉落物品",
+   "你地圖中的鍊魔有 1 個隨機詞綴掉落物品\\n  Metamorphs in your Maps have a random Modifier to Dropped Items"
+  ],
+  "27838": [
+   "根據每個變動詞綴，增加 {0}% 你地圖上變動詞綴的效果",
+   "根據每個變動詞綴，增加 {0}% 你地圖上變動詞綴的效果\\n  {0}% increased effect of Explicit Modifiers on your Maps per Explicit Modifier"
+  ],
   "29100": [
    "你地圖中的機會石改為掉落傳奇物品",
    "你地圖中的機會石改為掉落傳奇物品\\n  {0}% chance for Orbs of Chance to drop as Unique Items instead in your Maps"
+  ],
+  "29228": [
+   "增加 {0}% 地圖怪群大小",
+   "增加 {0}% 地圖怪群大小\\n  {0}% increased Pack Size in your Maps"
+  ],
+  "29921": [
+   "在你的地圖中，被附身的怪物所掉落之具有稀有度的裝備物品有 {0}% 機率轉換為奇術魔塵",
+   "在你的地圖中，被附身的怪物所掉落之具有稀有度的裝備物品有 {0}% 機率轉換為奇術魔塵\\n  Equipment Items with Rarity dropped by Possessed Monsters in your Maps have {0}% chance to be converted to Thaumaturgic Dust"
+  ],
+  "30152": [
+   "你地圖中的野獸有更高機率為罕見的品種",
+   "你地圖中的野獸有更高機率為罕見的品種\\n  Beasts in your Maps are more likely to be less common varieties"
+  ],
+  "32014": [
+   "被灼烙總督影響且有 1 個額外優勢的異能祭壇，增加 {0}% 劣勢的效果",
+   "被灼烙總督影響且有 1 個額外優勢的異能祭壇，增加 {0}% 劣勢的效果\\n  Eldritch Altars Influenced by The Searing Exarch which have an additional Upside have {0}% increased Effect of Downsides"
+  ],
+  "32105": [
+   "在你的地圖中，鉍礦床\\n會對其影響的怪物附加一個詞綴",
+   "在你的地圖中，鉍礦床\\n會對其影響的怪物附加一個詞綴\\n  Bismuth Ore Deposits in your Maps add an additional Modifier to Monsters they affect"
+  ],
+  "32151": [
+   "在你的地圖中，緋紅鍛鐵礦床會受到 {0} 個額外汙染生長物看守",
+   "在你的地圖中，緋紅鍛鐵礦床會受到 {0} 個額外汙染生長物看守\\n  Crimson Iron Ore Deposits in your Maps are guarded by {0} additional Corrupted Growths"
+  ],
+  "32197": [
+   "你的地圖含有礦床",
+   "你的地圖含有礦床\\n  Your Maps contain Ore Deposits"
+  ],
+  "32243": [
+   "你的地圖含有礦床的機率減少 {0}%",
+   "你的地圖含有礦床的機率減少 {0}%\\n  Your Maps have {0}% reduced chance to contain Ore Deposits"
+  ],
+  "32289": [
+   "在你的地圖中，礦床含有的礦材減少 {0}%",
+   "在你的地圖中，礦床含有的礦材減少 {0}%\\n  Ore Deposits in your Maps contain {0}% reduced Ore"
+  ],
+  "32335": [
+   "在你的地圖中，山銅礦床所賦予之增益效果的持續時間減少 {0}%",
+   "在你的地圖中，山銅礦床所賦予之增益效果的持續時間減少 {0}%\\n  Buffs granted by Orichalcum Ore Deposits in your Maps have {0}% reduced Duration"
+  ],
+  "33984": [
+   "你的地圖中的保險箱最低稀有度為魔法等級",
+   "你的地圖中的保險箱最低稀有度為魔法等級\\n  Strongboxes in your Maps are at least Magic"
+  ],
+  "33985": [
+   "你的地圖中的保險箱最低稀有度為稀有等級",
+   "你的地圖中的保險箱最低稀有度為稀有等級\\n  Strongboxes in your Maps are at least Rare"
+  ],
+  "34767": [
+   "你地圖中吞噬天地影響的怪物有 {0}% 機率掉落有 1 個吞噬天地固定詞綴的物品",
+   "你地圖中吞噬天地影響的怪物有 {0}% 機率掉落有 1 個吞噬天地固定詞綴的物品\\n  Monsters Influenced by The Eater of Worlds in your Maps have {0}% chance to drop an item with an Eater of Worlds Implicit Modifier"
+  ],
+  "35528": [
+   "你地圖中最後通牒事件給予的獎勵，有如你完成 1 額外回合",
+   "你地圖中最後通牒事件給予的獎勵，有如你完成 1 額外回合\\n  Ultimatum Encounters in your Maps grant rewards as though you completed an additional Round"
+  ],
+  "35529": [
+   "你地圖中最後通牒事件給予的獎勵，有如你完成 {0} 額外回合",
+   "你地圖中最後通牒事件給予的獎勵，有如你完成 {0} 額外回合\\n  Ultimatum Encounters in your Maps grant rewards as though you completed {0} additional Rounds"
+  ],
+  "35717": [
+   "你地圖中的傳奇怪物掉落裝備的 {0}% 轉換為金幣",
+   "你地圖中的傳奇怪物掉落裝備的 {0}% 轉換為金幣\\n  {0}% of Equipment dropped by Unique monsters in your Maps is converted to Gold"
+  ],
+  "36446": [
+   "你的地圖中含 {0} 個額外異界尊師惡魔群",
+   "你的地圖中含 {0} 個額外異界尊師惡魔群\\n  Your Maps contain {0} additional packs of Elder Fiends"
+  ],
+  "36472": [
+   "你的地圖含有 {0} 群額外塑界者創造物",
+   "你的地圖含有 {0} 群額外塑界者創造物\\n  Your Maps contains {0} additional packs of Shaper Creations"
+  ],
+  "37591": [
+   "增加 {0}% 小輿圖天賦的效果",
+   "增加 {0}% 小輿圖天賦的效果\\n  {0}% increased effect of Small Atlas Passive Skills"
+  ],
+  "37592": [
+   "減少 {0}% 小輿圖天賦的效果",
+   "減少 {0}% 小輿圖天賦的效果\\n  {0}% reduced effect of Small Atlas Passive Skills"
+  ],
+  "3973": [
+   "你地圖中的絕望深淵增加 {0}% 稀有怪物數量",
+   "你地圖中的絕望深淵增加 {0}% 稀有怪物數量\\n  [AbyssalDepths|Abyssal Depths] in your Maps have {0}% increased number of Rare Monsters"
+  ],
+  "6276": [
+   "你的地圖含有祭祀神壇",
+   "你的地圖含有祭祀神壇\\n  Your Maps contain Ritual Altars"
+  ],
+  "6564": [
+   "你的地圖 {0:+d}% 機率含有祭祀神壇",
+   "你的地圖 {0:+d}% 機率含有祭祀神壇\\n  Your Maps have {0:+d}% chance to contain Ritual Altars"
+  ],
+  "6593": [
+   "你地圖中掉落的護甲有 {0}% 機率有 20% 品質",
+   "你地圖中掉落的護甲有 {0}% 機率有 20% 品質\\n  Armour Items found in your Maps have {0}% chance to have 20% Quality"
+  ],
+  "6628": [
+   "你的地圖 {0:+d}% 機率含有 1 個昇華試煉",
+   "你的地圖 {0:+d}% 機率含有 1 個昇華試煉\\n  Your Maps have {0:+d}% chance to contain a Trial of Ascendancy"
+  ],
+  "8172": [
+   "增加 {0}% 你地圖中超越惡魔掉落玷污通貨的數量",
+   "增加 {0}% 你地圖中超越惡魔掉落玷污通貨的數量\\n  {0}% increased Quantity of Tainted Currency dropped by Beyond Demons in your Maps"
   ]
  },
+ "metadata/statdescriptions/atlas_variant_stat_descriptions.txt": {},
  "metadata/statdescriptions/aura_skill_stat_descriptions.txt": {},
  "metadata/statdescriptions/banner_aura_skill_stat_descriptions.txt": {},
  "metadata/statdescriptions/beam_skill_stat_descriptions.txt": {},
  "metadata/statdescriptions/brand_skill_stat_descriptions.txt": {},
  "metadata/statdescriptions/buff_skill_stat_descriptions.txt": {},
  "metadata/statdescriptions/chest_stat_descriptions.txt": {
+  "1692": [
+   "內含 {0} 個額外傳奇物品",
+   "內含 {0} 個額外傳奇物品\\n  Contains an additional Unique Item"
+  ],
+  "1693": [
+   "含有 {0} 個額外傳奇物品",
+   "含有 {0} 個額外傳奇物品\\n  Contains {0} additional Unique Items"
+  ],
+  "1880": [
+   "內含 1 個額外布琳洛特傳奇物品",
+   "內含 1 個額外布琳洛特傳奇物品\\n  Contains an additional Brinerot Unique Item"
+  ],
+  "1881": [
+   "內含 {0} 個額外布琳洛特傳奇物品",
+   "內含 {0} 個額外布琳洛特傳奇物品\\n  Contains {0} additional Brinerot Unique Items"
+  ],
+  "1926": [
+   "內含 1 個額外混沌軍團傳奇物品",
+   "內含 1 個額外混沌軍團傳奇物品\\n  Contains an additional Renegade Unique Item"
+  ],
+  "1927": [
+   "內含 {0} 個額外混沌軍團傳奇物品",
+   "內含 {0} 個額外混沌軍團傳奇物品\\n  Contains {0} additional Renegade Unique Items"
+  ],
+  "1972": [
+   "內含 1 個額外迪虛瑞特傳奇物品",
+   "內含 1 個額外迪虛瑞特傳奇物品\\n  Contains an additional Deshret Item"
+  ],
+  "1973": [
+   "內含 {0} 個額外迪虛瑞特傳奇物品",
+   "內含 {0} 個額外迪虛瑞特傳奇物品\\n  Contains {0} additional Deshret Items"
+  ],
   "333": [
    "被 {1} 群魔法怪物守衛著",
    "被 {1} 群魔法怪物守衛著\\n  Guarded by {0} packs of Magic Monsters"
@@ -26,32 +344,1095 @@
   "335": [
    "被 {1} 群稀有怪物守衛著",
    "被 {1} 群稀有怪物守衛著\\n  Guarded by {0} packs of Rare Monsters"
+  ],
+  "705": [
+   "內含 {0} 個額外魔法物品",
+   "內含 {0} 個額外魔法物品\\n  Contains {0} additional Magic Item"
+  ],
+  "706": [
+   "含有 {0} 個額外魔法物品",
+   "含有 {0} 個額外魔法物品\\n  Contains {0} additional Magic Items"
+  ],
+  "751": [
+   "內含 {0} 個額外的稀有物品",
+   "內含 {0} 個額外的稀有物品\\n  Contains {0} additional Rare Item"
+  ],
+  "752": [
+   "含有 {0} 個額外稀有物品",
+   "含有 {0} 個額外稀有物品\\n  Contains {0} additional Rare Items"
   ]
  },
  "metadata/statdescriptions/curse_skill_stat_descriptions.txt": {},
  "metadata/statdescriptions/debuff_skill_stat_descriptions.txt": {},
- "metadata/statdescriptions/deepwater_applied_adjacent_stat_descriptions.txt": {},
- "metadata/statdescriptions/deepwater_explicit_stat_descriptions.txt": {},
- "metadata/statdescriptions/deepwater_implicit_stat_descriptions.txt": {},
- "metadata/statdescriptions/expedition_relic_stat_descriptions.txt": {},
+ "metadata/statdescriptions/deepwater_applied_adjacent_stat_descriptions.txt": {
+  "82": [
+   "增加 {0}% 固定詞綴幅度",
+   "增加 {0}% 固定詞綴幅度\\n  {0}% increased explicit modifier magnitudes"
+  ]
+ },
+ "metadata/statdescriptions/deepwater_explicit_stat_descriptions.txt": {
+  "111": [
+   "區域內掉落的腰帶改為掉落傳奇腰帶",
+   "區域內掉落的腰帶改為掉落傳奇腰帶\\n  Belts dropped in Area instead drop as a Unique Belt"
+  ],
+  "227": [
+   "區域內含有額外 {0} 個寶藏船錨",
+   "區域內含有額外 {0} 個寶藏船錨\\n  Area contains {0} additional Treasure Anchors"
+  ],
+  "273": [
+   "區域內含有額外 {0} 個寶藏船錨",
+   "區域內含有額外 {0} 個寶藏船錨\\n  Area contains {0} additional Treasure Anchors"
+  ],
+  "30": [
+   "區域內掉落的項鍊改為掉落傳奇項鍊",
+   "區域內掉落的項鍊改為掉落傳奇項鍊\\n  Amulets dropped in Area instead drop as a Unique Amulet"
+  ],
+  "354": [
+   "區域內含有額外 {0} 個奧術師的保險箱",
+   "區域內含有額外 {0} 個奧術師的保險箱\\n  Area contains {0} additional Arcanist's Strongboxes"
+  ],
+  "400": [
+   "區域內含有額外 {0} 個奧術師的保險箱",
+   "區域內含有額外 {0} 個奧術師的保險箱\\n  Area contains {0} additional Arcanist's Strongboxes"
+  ],
+  "446": [
+   "區域內含有額外 {0} 個命運的保險箱",
+   "區域內含有額外 {0} 個命運的保險箱\\n  Area contains {0} additional Diviner's Strongboxes"
+  ],
+  "508": [
+   "區域內含有 {0} 座女神的祭壇",
+   "區域內含有 {0} 座女神的祭壇\\n  Area contains {0} Altars to the Goddess"
+  ],
+  "538": [
+   "區域內含有額外 {0} 個瓶中信",
+   "區域內含有額外 {0} 個瓶中信\\n  Area contains {0} additional Messages in Bottles"
+  ],
+  "584": [
+   "區域內含有額外 {0} 名被禁錮的怪物",
+   "區域內含有額外 {0} 名被禁錮的怪物\\n  Contains {0} additional Imprisoned Monsters"
+  ],
+  "630": [
+   "區域內含有額外 {0} 個特工的保險箱",
+   "區域內含有額外 {0} 個特工的保險箱\\n  Area contains {0} additional Operative's Strongboxes"
+  ],
+  "676": [
+   "區域內含有額外 {0} 個特工的保險箱",
+   "區域內含有額外 {0} 個特工的保險箱\\n  Area contains {0} additional Operative's Strongboxes"
+  ],
+  "919": [
+   "區域內掉落的戒指改為掉落傳奇戒指",
+   "區域內掉落的戒指改為掉落傳奇戒指\\n  Rings dropped in Area instead drop as a Unique Ring"
+  ]
+ },
+ "metadata/statdescriptions/deepwater_implicit_stat_descriptions.txt": {
+  "1109": [
+   "相鄰區域每與一個區域相連，即增加 {0}% 找到的物品數量",
+   "相鄰區域每與一個區域相連，即增加 {0}% 找到的物品數量\\n  {0}% increased quantity of items found in adjacent Areas per connection"
+  ],
+  "1110": [
+   "相鄰區域每與一個區域相連，即減少 {0}% 找到的物品數量",
+   "相鄰區域每與一個區域相連，即減少 {0}% 找到的物品數量\\n  {0}% reduced quantity of items found in adjacent Areas per connection"
+  ],
+  "1155": [
+   "相鄰區域有 {0}% 更多找到的物品稀有度",
+   "相鄰區域有 {0}% 更多找到的物品稀有度\\n  {0}% more Rarity of Items found in adjacent Areas"
+  ],
+  "1156": [
+   "相鄰區域有 {0}% 更少找到的物品稀有度",
+   "相鄰區域有 {0}% 更少找到的物品稀有度\\n  {0}% less Rarity of Items found in adjacent Areas"
+  ],
+  "1454": [
+   "相鄰區域內的稀有怪物掉落額外一個祝福石",
+   "相鄰區域內的稀有怪物掉落額外一個祝福石\\n  Rare Monsters in adjacent Areas drop an additional Blessed Orb"
+  ],
+  "1455": [
+   "相鄰區域內的稀有怪物掉落額外 {0} 個祝福石",
+   "相鄰區域內的稀有怪物掉落額外 {0} 個祝福石\\n  Rare Monsters in adjacent Areas drop {0} additional Blessed Orbs"
+  ],
+  "1684": [
+   "相鄰區域內的稀有怪物掉落額外一個寶石匠的稜鏡",
+   "相鄰區域內的稀有怪物掉落額外一個寶石匠的稜鏡\\n  Rare Monsters in adjacent Areas drop an additional Gemcutter's Prism"
+  ],
+  "1685": [
+   "相鄰區域內的稀有怪物掉落額外 {0} 個寶石匠的稜鏡",
+   "相鄰區域內的稀有怪物掉落額外 {0} 個寶石匠的稜鏡\\n  Rare Monsters in adjacent Areas drop {0} additional Gemcutter's Prisms"
+  ],
+  "1776": [
+   "相鄰區域內的稀有怪物掉落額外一個後悔石",
+   "相鄰區域內的稀有怪物掉落額外一個後悔石\\n  Rare Monsters in adjacent Areas drop an additional Orb of Regret"
+  ],
+  "1777": [
+   "相鄰區域內的稀有怪物掉落額外 {0} 個後悔石",
+   "相鄰區域內的稀有怪物掉落額外 {0} 個後悔石\\n  Rare Monsters in adjacent Areas drop {0} additional Orbs of Regret"
+  ],
+  "1956": [
+   "相鄰區域內的稀有怪物擁有一條眾神殿詞綴",
+   "相鄰區域內的稀有怪物擁有一條眾神殿詞綴\\n  Rare Monsters in adjacent Areas will have a Pantheon Modifier"
+  ],
+  "2683": [
+   "增加 {0}% 相鄰區域找到的魔法怪物數量",
+   "增加 {0}% 相鄰區域找到的魔法怪物數量\\n  {0}% increased number of Magic Monsters in adjacent Areas"
+  ],
+  "2809": [
+   "玩家在航程中所有區域時擁有[SoulEater|噬魂者]",
+   "玩家在航程中所有區域時擁有[SoulEater|噬魂者]\\n  Players in all Voyage Areas have [SoulEater|Soul Eater]"
+  ],
+  "913": [
+   "相鄰區域內含有額外一個特工的保險箱",
+   "相鄰區域內含有額外一個特工的保險箱\\n  Adjacent Areas contain an additional Operative's Strongbox"
+  ],
+  "914": [
+   "相鄰區域內含有額外 {0} 個特工的保險箱",
+   "相鄰區域內含有額外 {0} 個特工的保險箱\\n  Adjacent Areas contain {0} additional Operative's Strongboxes"
+  ],
+  "959": [
+   "相鄰區域內含有額外一個特工的保險箱",
+   "相鄰區域內含有額外一個特工的保險箱\\n  Adjacent Areas contain an additional Operative's Strongbox"
+  ],
+  "960": [
+   "相鄰區域內含有額外 {0} 個特工的保險箱",
+   "相鄰區域內含有額外 {0} 個特工的保險箱\\n  Adjacent Areas contain {0} additional Operative's Strongboxes"
+  ]
+ },
+ "metadata/statdescriptions/expedition_relic_stat_descriptions.txt": {
+  "2946": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外奉獻碎片}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外奉獻碎片}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Sacrifice Fragment}}"
+  ],
+  "2947": [
+   "<enchanted>{{發掘保險箱含有 1 個額外奉獻碎片}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外奉獻碎片}}\\n  <enchanted>{{Excavated Chests contain additional Sacrifice Fragment}}"
+  ],
+  "2992": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外油瓶}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外油瓶}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Oil}}"
+  ],
+  "2993": [
+   "<enchanted>{{發掘保險箱含有 1 個額外油瓶}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外油瓶}}\\n  <enchanted>{{Excavated Chests contain an additional Oil}}"
+  ],
+  "3038": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外裂痕裂片}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外裂痕裂片}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain additional Breach Splinters}}"
+  ],
+  "3039": [
+   "<enchanted>{{發掘保險箱含有 1 個額外裂痕裂片}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外裂痕裂片}}\\n  <enchanted>{{Excavated Chests contain additional Breach Splinters}}"
+  ],
+  "3084": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外通貨}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外通貨}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain additional Currency Items}}"
+  ],
+  "3085": [
+   "<enchanted>{{發掘保險箱含有 1 個額外通貨}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外通貨}}\\n  <enchanted>{{Excavated Chests contain additional Currency Items}}"
+  ],
+  "3130": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外幻像斷片}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外幻像斷片}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain additional Simulacrum Splinters}}"
+  ],
+  "3131": [
+   "<enchanted>{{發掘保險箱含有 1 個額外幻像斷片}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外幻像斷片}}\\n  <enchanted>{{Excavated Chests contain additional Simulacrum Splinters}}"
+  ],
+  "3176": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 張額外命運卡}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 張額外命運卡}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Divination Card}}"
+  ],
+  "3177": [
+   "<enchanted>{{發掘保險箱含有 1 張額外命運卡}}",
+   "<enchanted>{{發掘保險箱含有 1 張額外命運卡}}\\n  <enchanted>{{Excavated Chests contain an additional Divination Card}}"
+  ],
+  "3222": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外精髓}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外精髓}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Essence}}"
+  ],
+  "3223": [
+   "<enchanted>{{發掘保險箱含有 1 個額外精髓}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外精髓}}\\n  <enchanted>{{Excavated Chests contain an additional Essence}}"
+  ],
+  "3268": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外化石}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外化石}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Fossil}}"
+  ],
+  "3269": [
+   "<enchanted>{{發掘保險箱含有 1 個額外化石}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外化石}}\\n  <enchanted>{{Excavated Chests contain an additional Fossil}}"
+  ],
+  "3406": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外寶石}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外寶石}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Gem}}"
+  ],
+  "3407": [
+   "<enchanted>{{發掘保險箱含有 1 個額外寶石}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外寶石}}\\n  <enchanted>{{Excavated Chests contain an additional Gem}}"
+  ],
+  "3452": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外通貨碎片}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Heist Contract}}"
+  ],
+  "3453": [
+   "<enchanted>{{發掘保險箱含有 1 個額外通貨碎片}}\\n  <enchanted>{{Excavated Chests contain an additional Heist Contract}}"
+  ],
+  "3498": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外通貨碎片}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外通貨碎片}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Incubator}}"
+  ],
+  "3499": [
+   "<enchanted>{{發掘保險箱含有 1 個額外通貨碎片}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外通貨碎片}}\\n  <enchanted>{{Excavated Chests contain an additional Incubator}}"
+  ],
+  "3544": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外勢力之物}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外勢力之物}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Influenced Item}}"
+  ],
+  "3545": [
+   "<enchanted>{{發掘保險箱含有 1 個額外勢力之物}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外勢力之物}}\\n  <enchanted>{{Excavated Chests contain an additional Influenced Item}}"
+  ],
+  "3590": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外戰亂裂片}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外戰亂裂片}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain additional Legion Splinters}}"
+  ],
+  "3591": [
+   "<enchanted>{{發掘保險箱含有 1 個額外戰亂裂片}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外戰亂裂片}}\\n  <enchanted>{{Excavated Chests contain additional Legion Splinters}}"
+  ],
+  "3636": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 張額外地圖}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 張額外地圖}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Map}}"
+  ],
+  "3637": [
+   "<enchanted>{{發掘保險箱含有 1 張額外地圖}}",
+   "<enchanted>{{發掘保險箱含有 1 張額外地圖}}\\n  <enchanted>{{Excavated Chests contain an additional Map}}"
+  ],
+  "3682": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外催化劑}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外催化劑}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Catalyst}}"
+  ],
+  "3683": [
+   "<enchanted>{{發掘保險箱含有 1 個額外催化劑}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外催化劑}}\\n  <enchanted>{{Excavated Chests contain an additional Catalyst}}"
+  ],
+  "3728": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外稀有護甲}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外稀有護甲}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Rare Armour Item}}"
+  ],
+  "3729": [
+   "<enchanted>{{發掘保險箱含有 1 個額外稀有護甲}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外稀有護甲}}\\n  <enchanted>{{Excavated Chests contain an additional Rare Armour Item}}"
+  ],
+  "3774": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外稀有飾品}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外稀有飾品}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Rare Jewellery Item}}"
+  ],
+  "3775": [
+   "<enchanted>{{發掘保險箱含有 1 個額外稀有飾品}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外稀有飾品}}\\n  <enchanted>{{Excavated Chests contain an additional Rare Jewellery Item}}"
+  ],
+  "3912": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外聖甲蟲}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外聖甲蟲}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Scarab}}"
+  ],
+  "3913": [
+   "<enchanted>{{發掘保險箱含有 1 個額外聖甲蟲}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外聖甲蟲}}\\n  <enchanted>{{Excavated Chests contain an additional Scarab}}"
+  ],
+  "3958": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外堆疊的命運卡}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外堆疊的命運卡}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Stacked Deck}}"
+  ],
+  "3959": [
+   "<enchanted>{{發掘保險箱含有 1 個額外堆疊的命運卡}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外堆疊的命運卡}}\\n  <enchanted>{{Excavated Chests contain an additional Stacked Deck}}"
+  ],
+  "4004": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外魔符}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外魔符}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Talisman}}"
+  ],
+  "4005": [
+   "<enchanted>{{發掘保險箱含有 1 個額外魔符}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外魔符}}\\n  <enchanted>{{Excavated Chests contain an additional Talisman}}"
+  ],
+  "4050": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外傳奇物品}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外傳奇物品}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain an additional Unique Item}}"
+  ],
+  "4051": [
+   "<enchanted>{{發掘保險箱含有 1 個額外傳奇物品}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外傳奇物品}}\\n  <enchanted>{{Excavated Chests contain an additional Unique Item}}"
+  ],
+  "4096": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外破碎之環文物}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外破碎之環文物}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain additional Broken Circle Artifacts}}"
+  ],
+  "4097": [
+   "<enchanted>{{發掘保險箱含有 1 個額外破碎之環文物}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外破碎之環文物}}\\n  <enchanted>{{Excavated Chests contain additional Broken Circle Artifacts}}"
+  ],
+  "4142": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外黑暗血鐮文物}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外黑暗血鐮文物}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain additional Black Scythe Artifacts}}"
+  ],
+  "4143": [
+   "<enchanted>{{發掘保險箱含有 1 個額外黑暗血鐮文物}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外黑暗血鐮文物}}\\n  <enchanted>{{Excavated Chests contain additional Black Scythe Artifacts}}"
+  ],
+  "4188": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外秩序文物}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外秩序文物}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain additional Order Artifacts}}"
+  ],
+  "4189": [
+   "<enchanted>{{發掘保險箱含有 1 個額外秩序文物}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外秩序文物}}\\n  <enchanted>{{Excavated Chests contain additional Order Artifacts}}"
+  ],
+  "4234": [
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外豔陽文物}}",
+   "<enchanted>{{發掘保險箱有 {0}% 機率含有 1 個額外豔陽文物}}\\n  <enchanted>{{Excavated Chests have {0}% chance to contain additional Sun Artifacts}}"
+  ],
+  "4235": [
+   "<enchanted>{{發掘保險箱含有 1 個額外豔陽文物}}",
+   "<enchanted>{{發掘保險箱含有 1 個額外豔陽文物}}\\n  <enchanted>{{Excavated Chests contain additional Sun Artifacts}}"
+  ],
+  "4280": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外深淵珠寶}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外深淵珠寶}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Abyssal Jewel}}"
+  ],
+  "4281": [
+   "<enchanted>{{符文怪物掉落 1 個額外深淵珠寶}}",
+   "<enchanted>{{符文怪物掉落 1 個額外深淵珠寶}}\\n  <enchanted>{{Runic Monsters drop an additional Abyssal Jewel}}"
+  ],
+  "4326": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外奉獻碎片}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外奉獻碎片}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Sacrifice Fragment}}"
+  ],
+  "4327": [
+   "<enchanted>{{符文怪物掉落 1 個額外奉獻碎片}}",
+   "<enchanted>{{符文怪物掉落 1 個額外奉獻碎片}}\\n  <enchanted>{{Runic Monsters drop an additional Sacrifice Fragment}}"
+  ],
+  "4372": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外油瓶}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外油瓶}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Oil}}"
+  ],
+  "4373": [
+   "<enchanted>{{符文怪物掉落 1 個額外油瓶}}",
+   "<enchanted>{{符文怪物掉落 1 個額外油瓶}}\\n  <enchanted>{{Runic Monsters drop an additional Oil}}"
+  ],
+  "4418": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外裂痕裂片}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外裂痕裂片}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop additional Breach Splinters}}"
+  ],
+  "4419": [
+   "<enchanted>{{符文怪物掉落 1 個額外油瓶}}",
+   "<enchanted>{{符文怪物掉落 1 個額外油瓶}}\\n  <enchanted>{{Runic Monsters drop additional Breach Splinters}}"
+  ],
+  "4464": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外已汙染物品}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外已汙染物品}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop Corrupted Items}}"
+  ],
+  "4465": [
+   "<enchanted>{{符文怪物掉落 1 個額外已汙染物品}}",
+   "<enchanted>{{符文怪物掉落 1 個額外已汙染物品}}\\n  <enchanted>{{Runic Monsters drop Corrupted Items}}"
+  ],
+  "4510": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外通貨}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外通貨}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop additional Currency Items}}"
+  ],
+  "4511": [
+   "<enchanted>{{符文物掉落 1 個額外通貨}}",
+   "<enchanted>{{符文物掉落 1 個額外通貨}}\\n  <enchanted>{{Runic Monsters drop additional Currency Items}}"
+  ],
+  "4556": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外幻象斷片}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外幻象斷片}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop additional Simulacrum Splinters}}"
+  ],
+  "4557": [
+   "<enchanted>{{符文怪物掉落 1 個額外幻象斷片}}",
+   "<enchanted>{{符文怪物掉落 1 個額外幻象斷片}}\\n  <enchanted>{{Runic Monsters drop additional Simulacrum Splinters}}"
+  ],
+  "4602": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 張額外命運卡}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 張額外命運卡}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Divination Card}}"
+  ],
+  "4603": [
+   "<enchanted>{{符文怪物掉落 1 張額外命運卡}}",
+   "<enchanted>{{符文怪物掉落 1 張額外命運卡}}\\n  <enchanted>{{Runic Monsters drop an additional Divination Card}}"
+  ],
+  "4648": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外精髓}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外精髓}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Essence}}"
+  ],
+  "4649": [
+   "<enchanted>{{符文怪物掉落 1 個額外精髓}}",
+   "<enchanted>{{符文怪物掉落 1 個額外精髓}}\\n  <enchanted>{{Runic Monsters drop an additional Essence}}"
+  ],
+  "4867": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外寶石}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外寶石}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Gem}}"
+  ],
+  "4868": [
+   "<enchanted>{{符文怪物掉落 1 個額外寶石}}",
+   "<enchanted>{{符文怪物掉落 1 個額外寶石}}\\n  <enchanted>{{Runic Monsters drop an additional Gem}}"
+  ],
+  "4913": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外劫盜契約書}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外劫盜契約書}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Heist Contract}}"
+  ],
+  "4914": [
+   "<enchanted>{{符文怪物掉落 1 個額外劫盜契約書}}",
+   "<enchanted>{{符文怪物掉落 1 個額外劫盜契約書}}\\n  <enchanted>{{Runic Monsters drop an additional Heist Contract}}"
+  ],
+  "4959": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外培育器}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外培育器}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Incubator}}"
+  ],
+  "4960": [
+   "<enchanted>{{符文怪物掉落 1 個額外培育器}}",
+   "<enchanted>{{符文怪物掉落 1 個額外培育器}}\\n  <enchanted>{{Runic Monsters drop an additional Incubator}}"
+  ],
+  "5005": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外勢力之物}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外勢力之物}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Influenced Item}}"
+  ],
+  "5006": [
+   "<enchanted>{{符文怪物掉落 1 個額外勢力之物}}",
+   "<enchanted>{{符文怪物掉落 1 個額外勢力之物}}\\n  <enchanted>{{Runic Monsters drop an additional Influenced Item}}"
+  ],
+  "5051": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外戰亂斷片}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外戰亂斷片}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop additional Legion Splinters}}"
+  ],
+  "5052": [
+   "<enchanted>{{符文怪物掉落 1 個額外戰亂斷片}}",
+   "<enchanted>{{符文怪物掉落 1 個額外戰亂斷片}}\\n  <enchanted>{{Runic Monsters drop additional Legion Splinters}}"
+  ],
+  "5097": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 張額外地圖}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 張額外地圖}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Map}}"
+  ],
+  "5098": [
+   "<enchanted>{{符文怪物掉落 1 張額外地圖}}",
+   "<enchanted>{{符文怪物掉落 1 張額外地圖}}\\n  <enchanted>{{Runic Monsters drop an additional Map}}"
+  ],
+  "5143": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外催化劑}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外催化劑}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Catalyst}}"
+  ],
+  "5144": [
+   "<enchanted>{{符文怪物掉落 1 個額外催化劑}}",
+   "<enchanted>{{符文怪物掉落 1 個額外催化劑}}\\n  <enchanted>{{Runic Monsters drop an additional Catalyst}}"
+  ],
+  "5189": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外稀有護甲}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外稀有護甲}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Rare Armour Item}}"
+  ],
+  "5190": [
+   "<enchanted>{{符文怪物掉落 1 個額外稀有護甲}}",
+   "<enchanted>{{符文怪物掉落 1 個額外稀有護甲}}\\n  <enchanted>{{Runic Monsters drop an additional Rare Armour Item}}"
+  ],
+  "5373": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外聖甲蟲}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外聖甲蟲}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Scarab}}"
+  ],
+  "5374": [
+   "<enchanted>{{符文怪物掉落 1 個額外聖甲蟲}}",
+   "<enchanted>{{符文怪物掉落 1 個額外聖甲蟲}}\\n  <enchanted>{{Runic Monsters drop an additional Scarab}}"
+  ],
+  "5419": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外疊層的命運卡}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外疊層的命運卡}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Stacked Deck}}"
+  ],
+  "5420": [
+   "<enchanted>{{符文怪物掉落 1 個額外疊層的命運卡}}",
+   "<enchanted>{{符文怪物掉落 1 個額外疊層的命運卡}}\\n  <enchanted>{{Runic Monsters drop an additional Stacked Deck}}"
+  ],
+  "5465": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外魔符}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外魔符}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Talisman}}"
+  ],
+  "5466": [
+   "<enchanted>{{符文物掉落 1 個額外魔符}}",
+   "<enchanted>{{符文物掉落 1 個額外魔符}}\\n  <enchanted>{{Runic Monsters drop an additional Talisman}}"
+  ],
+  "5511": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外傳奇物品}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外傳奇物品}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop an additional Unique Item}}"
+  ],
+  "5512": [
+   "<enchanted>{{符文怪物掉落 1 個額外傳奇物品}}",
+   "<enchanted>{{符文怪物掉落 1 個額外傳奇物品}}\\n  <enchanted>{{Runic Monsters drop an additional Unique Item}}"
+  ],
+  "5557": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外破碎之環文物}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外破碎之環文物}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop additional Broken Circle Artifacts}}"
+  ],
+  "5558": [
+   "<enchanted>{{符文怪物掉落 1 個額外破碎之環文物}}",
+   "<enchanted>{{符文怪物掉落 1 個額外破碎之環文物}}\\n  <enchanted>{{Runic Monsters drop additional Broken Circle Artifacts}}"
+  ],
+  "5603": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外黑暗血鐮文物}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外黑暗血鐮文物}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop additional Black Scythe Artifacts}}"
+  ],
+  "5604": [
+   "<enchanted>{{符文怪物掉落 1 個額外黑暗血鐮文物}}",
+   "<enchanted>{{符文怪物掉落 1 個額外黑暗血鐮文物}}\\n  <enchanted>{{Runic Monsters drop additional Black Scythe Artifacts}}"
+  ],
+  "5649": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外秩序文物}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外秩序文物}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop additional Order Artifacts}}"
+  ],
+  "5650": [
+   "<enchanted>{{符文怪物掉落 1 個額外秩序文物}}",
+   "<enchanted>{{符文怪物掉落 1 個額外秩序文物}}\\n  <enchanted>{{Runic Monsters drop additional Order Artifacts}}"
+  ],
+  "5695": [
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外豔陽文物}}",
+   "<enchanted>{{符文怪物有 {0}% 機率掉落 1 個額外豔陽文物}}\\n  <enchanted>{{Runic Monsters have {0}% chance to drop additional Sun Artifacts}}"
+  ],
+  "5696": [
+   "<enchanted>{{符文怪物掉落 1 個額外豔陽文物}}",
+   "<enchanted>{{符文怪物掉落 1 個額外豔陽文物}}\\n  <enchanted>{{Runic Monsters drop additional Sun Artifacts}}"
+  ],
+  "5741": [
+   "<enchanted>{{增加 {0}% 怪物掉落文物的數量}}",
+   "<enchanted>{{增加 {0}% 怪物掉落文物的數量}}\\n  <enchanted>{{{0}% increased Quantity of Artifacts dropped by Monsters}}"
+  ],
+  "5742": [
+   "<enchanted>{{減少 {0}% 怪物掉落文物的數量}}",
+   "<enchanted>{{減少 {0}% 怪物掉落文物的數量}}\\n  <enchanted>{{{0}% reduced Quantity of Artifacts dropped by Monsters}}"
+  ]
+ },
  "metadata/statdescriptions/gem_stat_descriptions.txt": {
+  "10358": [
+   "被輔助且使用武器進行的攻擊附加 {0} 至 {1} 物理傷害",
+   "被輔助且使用武器進行的攻擊附加 {0} 至 {1} 物理傷害\\n  Supported Attacks deal {0} to {1} added Physical Damage with Weapons"
+  ],
+  "11380": [
+   "被輔助的技能不能造成混沌傷害",
+   "被輔助的技能不能造成混沌傷害\\n  Supported Skills deal no Chaos Damage"
+  ],
+  "15226": [
+   "若被輔助的召喚物為你的唯一召喚物\\n你承受的{0}%擊中傷害會改由其生命扣除",
+   "若被輔助的召喚物為你的唯一召喚物\\n你承受的{0}%擊中傷害會改由其生命扣除\\n  Minions from Supported Skills take {0}% of Hit Damage from their Life before\\nyou if they are your only Minion"
+  ],
+  "16271": [
+   "燃燒地面持續 {0} 秒",
+   "燃燒地面持續 {0} 秒\\n  Burning Ground lasts {0} seconds"
+  ],
+  "17155": [
+   "被輔助的技能附加 {0} 至 {1} 物理傷害",
+   "被輔助的技能附加 {0} 至 {1} 物理傷害\\n  Supported Skills have {0} to {1} added Physical Damage"
+  ],
+  "17190": [
+   "被輔助的技能減少敵人 {0}% 格擋機率",
+   "被輔助的技能減少敵人 {0}% 格擋機率\\n  Supported Skills have {0}% reduced Enemy Block Chance"
+  ],
+  "19300": [
+   "透過輔助技能製造的地雷增加 {0}% 引爆速度",
+   "透過輔助技能製造的地雷增加 {0}% 引爆速度\\n  Mines from Supported Skills have {0}% increased Detonation Speed"
+  ],
+  "19301": [
+   "透過輔助技能製造的地雷減少 {0}% 引爆速度",
+   "透過輔助技能製造的地雷減少 {0}% 引爆速度\\n  Mines from Supported Skills have {0}% reduced Detonation Speed"
+  ],
+  "20929": [
+   "被輔助的技能投擲最多 1 個額外地雷",
+   "被輔助的技能投擲最多 1 個額外地雷\\n  Supported Skills throw up to 1 additional Mine"
+  ],
+  "20930": [
+   "被輔助的技能投擲最多 {0} 個額外地雷",
+   "被輔助的技能投擲最多 {0} 個額外地雷\\n  Supported Skills throw up to {0} additional Mines"
+  ],
+  "21471": [
+   "當透過輔助技能製造的地雷對敵人引爆時，\\n有 {0}% 機率獲得 1 顆暴擊球",
+   "當透過輔助技能製造的地雷對敵人引爆時，\\n有 {0}% 機率獲得 1 顆暴擊球\\n  {0}% chance to gain a Power Charge when a Mine from Supported\\nSkills is Detonated targeting an Enemy"
+  ],
+  "21472": [
+   "當透過輔助技能製造的地雷對敵人引爆時，\\n獲得 1 顆暴擊球",
+   "當透過輔助技能製造的地雷對敵人引爆時，\\n獲得 1 顆暴擊球\\n  Gain a Power Charge when a Mine from Supported Skills is Detonated targeting an Enemy"
+  ],
+  "21618": [
+   "被輔助的技能從 {0}% 的物理傷害中獲得額外火焰傷害",
+   "被輔助的技能從 {0}% 的物理傷害中獲得額外火焰傷害\\n  Supported Skills gain {0}% of Physical Damage as Extra Fire Damage"
+  ],
+  "21933": [
+   "來自被輔助技能的投射物擁有 {0} 公尺最大[DirectFlight|直線飛行]",
+   "來自被輔助技能的投射物擁有 {0} 公尺最大[DirectFlight|直線飛行]\\n  Projectiles from Supported Skills have {0} metre maximum [DirectFlight|Direct Flight]"
+  ],
+  "21934": [
+   "來自被輔助技能的投射物擁有 {0} 公尺最大[DirectFlight|直線飛行]",
+   "來自被輔助技能的投射物擁有 {0} 公尺最大[DirectFlight|直線飛行]\\n  Projectiles from Supported Skills have {0} metres maximum [DirectFlight|Direct Flight]"
+  ],
+  "22968": [
+   "死亡時被輔助的技能減少 {}% 技能效果持續時間",
+   "死亡時被輔助的技能減少 {}% 技能效果持續時間\\n  Supported Skills have {}% reduced Skill Effect Duration while Dead"
+  ],
+  "23111": [
+   "被輔助的技能將 {0}% 的物理傷害轉化為閃電傷害",
+   "被輔助的技能將 {0}% 的物理傷害轉化為閃電傷害\\n  Supported Skills have {0}% of Physical Damage Converted to Lightning Damage"
+  ],
+  "25670": [
+   "近戰武器對稀有怪物使用輔助打擊技能的擊殺之擊，獲得他們其中一個詞綴 {0} 秒",
+   "近戰武器對稀有怪物使用輔助打擊技能的擊殺之擊，獲得他們其中一個詞綴 {0} 秒\\n  Killing Blows from Supported Strike Skills with Melee Weapons against Rare Monsters grant one of their Modifiers for {0} seconds"
+  ],
+  "26873": [
+   "地雷持續 {0} 秒",
+   "地雷持續 {0} 秒\\n  Mine lasts {0} seconds"
+  ],
+  "27059": [
+   "被輔助的技能以弧形投擲地雷",
+   "被輔助的技能以弧形投擲地雷\\n  Supported Skills throw Mines in an Arc"
+  ],
+  "29182": [
+   "每個被輔助的技能，根據近期技能造成的每個點燃，造成 {0}% 更少傷害，最多 {1}%",
+   "每個被輔助的技能，根據近期技能造成的每個點燃，造成 {0}% 更少傷害，最多 {1}%\\n  Each Supported Skill deals {0}% less Damage for each Ignite inflicted with it Recently, up to a maximum of {1}%"
+  ],
+  "2950": [
+   "被輔助的技能擊中時有 {0}% 機率致盲敵人\\n  Supported Skills have {0}% chance to Blind enemies on hit"
+  ],
+  "2989": [
+   "被輔助的技能增加 {0}% 致盲持續時間\\n  Supported Skills have {0}% increased Blinding duration"
+  ],
+  "2990": [
+   "被輔助的技能減少 {0}% 致盲持續時間\\n  Supported Skills have {0}% reduced Blinding duration"
+  ],
+  "30195": [
+   "被輔助的技能造成 {0}% 更多傷害",
+   "被輔助的技能造成 {0}% 更多傷害\\n  Supported Skills deal {0}% more Damage"
+  ],
+  "30196": [
+   "被輔助的技能造成 {0}% 更少傷害",
+   "被輔助的技能造成 {0}% 更少傷害\\n  Supported Skills deal {0}% less Damage"
+  ],
+  "31199": [
+   "被輔助的技能造成 {0}% 更少物理傷害",
+   "被輔助的技能造成 {0}% 更少物理傷害\\n  Supported Skills deal {0}% less Physical Damage"
+  ],
+  "31771": [
+   "當被咒術的敵人死亡時，被輔助技能的咒術轉移至 3 米內的全部敵人",
+   "當被咒術的敵人死亡時，被輔助技能的咒術轉移至 3 米內的全部敵人\\n  Hexes from Supported Skills Transfer to all Enemies within 3 metres when Hexed Enemy dies"
+  ],
+  "32308": [
+   "來自被輔助技能的擊中對待敵人怪物元素抗性的值為顛倒",
+   "來自被輔助技能的擊中對待敵人怪物元素抗性的值為顛倒\\n  Hits from Supported Skills treat Enemy Monster Elemental Resistance values as inverted"
+  ],
   "32469": [
    "當你的保護被破壞時觸發被輔助的技能",
    "當你的保護被破壞時觸發被輔助的技能\\n  {0}% chance to Trigger this Supported Spell when your Ward Breaks"
+  ],
+  "32531": [
+   "被輔助的技能在擊中時有 {0}% 機率觸發三相爆發",
+   "被輔助的技能在擊中時有 {0}% 機率觸發三相爆發\\n  Supported Skills have a {0}% chance to Trigger Prismatic Burst on Hit"
+  ],
+  "32532": [
+   "被輔助的技能在擊中時觸發三相爆發",
+   "被輔助的技能在擊中時觸發三相爆發\\n  Supported Skills will Trigger Prismatic Burst on Hit"
+  ],
+  "7477": [
+   "當使用輔助技能擊殺感電的敵人時，獲得亢奮",
+   "當使用輔助技能擊殺感電的敵人時，獲得亢奮\\n  Gain Innervation on Killing a Shocked Enemy with Supported Skills"
+  ],
+  "7512": [
+   "亢奮給予 {0} 至 {1} 閃電傷害",
+   "亢奮給予 {0} 至 {1} 閃電傷害\\n  Innervation grants {0} to {1} Lightning Damage"
+  ],
+  "8246": [
+   "透過輔助技能製造的召喚物 {0:+d}% 全部最大元素抗性",
+   "透過輔助技能製造的召喚物 {0:+d}% 全部最大元素抗性\\n  Minions from Supported Skills have {0:+d}% to all maximum Elemental Resistances"
+  ],
+  "8281": [
+   "透過輔助技能製造的召喚物每秒承受 {0}% 他們最大生命的火焰傷害",
+   "透過輔助技能製造的召喚物每秒承受 {0}% 他們最大生命的火焰傷害\\n  Minions from Supported Skills take {0}% of their Maximum Life as Fire Damage per second"
+  ],
+  "9038": [
+   "來自被輔助技能的投射物有 {0}% 機率額外返回你 1 次",
+   "來自被輔助技能的投射物有 {0}% 機率額外返回你 1 次\\n  Projectiles from Supported Skills have {0}% chance to Return to you an additional Time"
+  ],
+  "9585": [
+   "被輔助的技能有 {0:+d}% 機率冰凍被冰緩的敵人",
+   "被輔助的技能有 {0:+d}% 機率冰凍被冰緩的敵人\\n  Supported Skills have {0:+d}% chance to Freeze Enemies which are Chilled"
+  ],
+  "9781": [
+   "減少 {0}% 先祖圖騰增益的效果",
+   "減少 {0}% 先祖圖騰增益的效果\\n  {0}% reduced Effect of Ancestor Totem Buff"
   ]
  },
- "metadata/statdescriptions/graft_stat_descriptions.txt": {},
+ "metadata/statdescriptions/graft_stat_descriptions.txt": {
+  "1188": [
+   "由此接肢施放的技能所造成的持續性傷害異常狀態造成傷害速度加快 {0}%\\n  Damaging Ailments inflicted by Skills used by this Graft deal damage {0}% faster"
+  ],
+  "2214": [
+   "由此接肢召喚的召喚物有 {0}% 機率在擊中時使敵人致盲\\n  Minions summoned by this Graft have {0}% chance to Blind on Hit"
+  ],
+  "2215": [
+   "由此接肢召喚的召喚物在擊中時使敵人致盲\\n  Minions summoned by this Graft Blind on Hit"
+  ],
+  "3971": [
+   "由此接肢使用的慈愛之擁所賦予的增益使生命回復速度更多 {0}%",
+   "由此接肢使用的慈愛之擁所賦予的增益使生命回復速度更多 {0}%\\n  Buff granted by Tender Embrace used by this Graft grants {0}% more Life Recovery Rate"
+  ],
+  "3972": [
+   "由此接肢使用的慈愛之擁所賦予的增益使生命回復速度更少 {0}%",
+   "由此接肢使用的慈愛之擁所賦予的增益使生命回復速度更少 {0}%\\n  Buff granted by Tender Embrace used by this Graft grants {0}% less Life Recovery Rate"
+  ]
+ },
+ "metadata/statdescriptions/harvest_stat_descriptions.txt": {},
  "metadata/statdescriptions/heist_equipment_stat_descriptions.txt": {},
  "metadata/statdescriptions/leaguestone_stat_descriptions.txt": {
+  "1745": [
+   "下個區域內玩家擊殺稀有敵人時獲得猛攻 {0} 秒\\n  Players in next Area gain Onslaught for {0} seconds when they Kill a Rare Monster"
+  ],
   "2567": [
    "下個區域額外含有 1 座神殿",
    "下個區域額外含有 1 座神殿\\n  Next Area will contain up to {0} additional Shrine"
+  ],
+  "3222": [
+   "下個區域侵略頭目有 {0}% 更多物品掉落數量和物品稀有度",
+   "下個區域侵略頭目有 {0}% 更多物品掉落數量和物品稀有度\\n  Invasion Bosses in next Area will have {0}% more Quantity and Rarity of dropped Items"
+  ],
+  "3223": [
+   "下個區域侵略頭目有 {0}% 更少物品掉落數量和物品稀有度",
+   "下個區域侵略頭目有 {0}% 更少物品掉落數量和物品稀有度\\n  Invasion Bosses in next Area will have {0}% less Quantity and Rarity of dropped Items"
+  ],
+  "4571": [
+   "下個區域怪物增加 {0}% 產生超越傳送門的機率",
+   "下個區域怪物增加 {0}% 產生超越傳送門的機率\\n  Monsters in next Area have {0}% increased chance to spawn a Beyond Portal"
+  ],
+  "4572": [
+   "下個區域怪物減少 {0}% 產生超越傳送門的機率",
+   "下個區域怪物減少 {0}% 產生超越傳送門的機率\\n  Monsters in next Area have {0}% reduced chance to spawn a Beyond Portal"
+  ],
+  "4825": [
+   "下個區域持有銀幣的怪物額外掉落 1 枚銀幣",
+   "下個區域持有銀幣的怪物額外掉落 1 枚銀幣\\n  Monsters with Silver Coins in next Area will drop an additional Silver Coin"
+  ],
+  "4826": [
+   "下個區域持有銀幣的怪物額外掉落 {0} 枚銀幣",
+   "下個區域持有銀幣的怪物額外掉落 {0} 枚銀幣\\n  Monsters with Silver Coins in next Area will drop {0} additional Silver Coins"
+  ],
+  "4917": [
+   "下個區域持有銀幣的怪物額外掉落 1 個稀有物品",
+   "下個區域持有銀幣的怪物額外掉落 1 個稀有物品\\n  Monsters in next Area with Silver Coins drop an additional Rare Item"
+  ],
+  "4918": [
+   "下個區域持有銀幣的怪物額外掉落 {0} 個稀有物品",
+   "下個區域持有銀幣的怪物額外掉落 {0} 個稀有物品\\n  Monsters in next Area with Silver Coins drop {0} additional Rare Items"
+  ],
+  "4963": [
+   "下個區域含有 1 個衛者之責血族群",
+   "下個區域含有 1 個衛者之責血族群\\n  Next Area will contain a Bearers of the Guardian Bloodline Pack"
+  ],
+  "4964": [
+   "下個區域含有 {0} 個衛者之責血族群",
+   "下個區域含有 {0} 個衛者之責血族群\\n  Next Area will contain {0} Bearers of the Guardian Bloodline Packs"
+  ],
+  "5878": [
+   "下個區域內的稀有裂痕怪物會額外掉落 1 個裂片",
+   "下個區域內的稀有裂痕怪物會額外掉落 1 個裂片\\n  Rare Breach Monsters in the next Area will drop an additional Splinter"
+  ],
+  "5879": [
+   "下個區域內的稀有裂痕怪物會額外掉落 {0} 個裂片",
+   "下個區域內的稀有裂痕怪物會額外掉落 {0} 個裂片\\n  Rare Breach Monsters in the next Area will drop {0} additional Splinters"
+  ],
+  "5924": [
+   "下個區域稀有怪受到阻礙，增加 {0}% 移動速度",
+   "下個區域稀有怪受到阻礙，增加 {0}% 移動速度\\n  Rare Monsters in next Area will be Hindered, with {0}% increased Movement Speed"
+  ],
+  "5925": [
+   "下個區域稀有怪受到阻礙，減少 {0}% 移動速度",
+   "下個區域稀有怪受到阻礙，減少 {0}% 移動速度\\n  Rare Monsters in next Area will be Hindered, with {0}% reduced Movement Speed"
+  ],
+  "6550": [
+   "下個區域內的超越頭目死後有 {0}% 機率召喚超越頭目",
+   "下個區域內的超越頭目死後有 {0}% 機率召喚超越頭目\\n  Unique Monsters from Beyond in next Area have a {0}% chance to Summon another Unique Monster from Beyond when Slain"
+  ],
+  "6551": [
+   "下個區域內的超越頭目死後召喚超越頭目",
+   "下個區域內的超越頭目死後召喚超越頭目\\n  Unique Monsters from Beyond in next Area will Summon another Unique Monster from Beyond when Slain"
+  ],
+  "6769": [
+   "下個區域尋獲的魔符將會高 1 階級",
+   "下個區域尋獲的魔符將會高 1 階級\\n  Talismans found in the next Area will be 1 Tier higher"
+  ],
+  "6770": [
+   "下個區域尋獲的魔符將會高 {0} 階級",
+   "下個區域尋獲的魔符將會高 {0} 階級\\n  Talismans found in the next Area will be {0} Tiers higher"
+  ],
+  "6861": [
+   "下個區域的風暴頻率增加 {0}%",
+   "下個區域的風暴頻率增加 {0}%\\n  {0}% increased frequency of Tempest effects in next Area"
+  ],
+  "6862": [
+   "下個區域的風暴頻率減少 {0}%",
+   "下個區域的風暴頻率減少 {0}%\\n  {0}% reduced frequency of Tempest effects in next Area"
+  ],
+  "6907": [
+   "下個區域罪魂額外掉落 1 件物品",
+   "下個區域罪魂額外掉落 1 件物品\\n  Tormented Spirits in next Area will drop 1 additional Rare Item"
+  ],
+  "6908": [
+   "下個區域罪魂額外掉落 {0} 件物品",
+   "下個區域罪魂額外掉落 {0} 件物品\\n  Tormented Spirits in next Area will drop {0} additional Rare Items"
+  ],
+  "6953": [
+   "下個區域的罪魂增加 {0}% 持續時間",
+   "下個區域的罪魂增加 {0}% 持續時間\\n  Tormented Spirits in next Area will have {0}% increased Duration"
+  ],
+  "6954": [
+   "下個區域的罪魂減少 {0}% 持續時間",
+   "下個區域的罪魂減少 {0}% 持續時間\\n  Tormented Spirits in next Area will have {0}% reduced Duration"
+  ],
+  "6999": [
+   "下個區域的罪魂增加 {0}% 移動速度",
+   "下個區域的罪魂增加 {0}% 移動速度\\n  Tormented Spirits in next Area will have {0}% increased Movement Speed"
+  ],
+  "7000": [
+   "下個區域的罪魂減少 {0}% 移動速度",
+   "下個區域的罪魂減少 {0}% 移動速度\\n  Tormented Spirits in next Area will have {0}% reduced Movement Speed"
   ]
  },
- "metadata/statdescriptions/map_stat_descriptions.txt": {},
- "metadata/statdescriptions/mercenary_support_stat_descriptions.txt": {},
- "metadata/statdescriptions/minion_attack_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/legion_stat_descriptions.txt": {},
+ "metadata/statdescriptions/map_stat_descriptions.txt": {
+  "1015": [
+   "區域內含有額外{0}群海洋野獸",
+   "區域內含有額外{0}群海洋野獸\\n  Area contains {0} additional pack of Sea Beasts"
+  ],
+  "1016": [
+   "區域內含有額外{0}群海洋野獸",
+   "區域內含有額外{0}群海洋野獸\\n  Area contains {0} additional packs of Sea Beasts"
+  ],
+  "1142": [
+   "區域有 {0}% 更多找到的物品稀有度",
+   "區域有 {0}% 更多找到的物品稀有度\\n  {0}% more Rarity of Items found in Area"
+  ],
+  "1143": [
+   "區域有 {0}% 更少找到的物品稀有度",
+   "區域有 {0}% 更少找到的物品稀有度\\n  {0}% less Rarity of Items found in Area"
+  ],
+  "1188": [
+   "區域內的怪物掉落裝備的 {0}% 會改為掉落金幣",
+   "區域內的怪物掉落裝備的 {0}% 會改為掉落金幣\\n  {0}% of Equipment dropped by Monsters in Area is converted to Gold"
+  ],
+  "1189": [
+   "區域內的怪物掉落的裝備會改為掉落金幣",
+   "區域內的怪物掉落的裝備會改為掉落金幣\\n  Equipment dropped by Monsters in Area is converted to Gold"
+  ],
+  "1315": [
+   "區域內的稀有怪物有 {0}% 機率掉落一個輔助寶石",
+   "區域內的稀有怪物有 {0}% 機率掉落一個輔助寶石\\n  Rare Monsters in Area have {0}% chance to drop a Support Gem"
+  ],
+  "1316": [
+   "區域內的稀有怪物掉落一個輔助寶石",
+   "區域內的稀有怪物掉落一個輔助寶石\\n  Rare Monsters in Area drop a Support Gem"
+  ],
+  "1361": [
+   "區域內的稀有怪物掉落額外一個古變石",
+   "區域內的稀有怪物掉落額外一個古變石\\n  Rare Monsters in Area drop an additional Ancient Orb"
+  ],
+  "1362": [
+   "區域內的稀有怪物掉落額外 {0} 個古變石",
+   "區域內的稀有怪物掉落額外 {0} 個古變石\\n  Rare Monsters in Area drop {0} additional Ancient Orbs"
+  ],
+  "1407": [
+   "區域內的稀有怪物掉落額外一個無效石",
+   "區域內的稀有怪物掉落額外一個無效石\\n  Rare Monsters in Area drop an additional Annulment Orb"
+  ],
+  "1408": [
+   "區域內的稀有怪物掉落額外 {0} 個無效石",
+   "區域內的稀有怪物掉落額外 {0} 個無效石\\n  Rare Monsters in Area drop {0} additional Annulment Orbs"
+  ],
+  "1511": [
+   "區域內的稀有怪物掉落額外一個混沌石",
+   "區域內的稀有怪物掉落額外一個混沌石\\n  Rare Monsters in Area drop an additional Chaos Orb"
+  ],
+  "1512": [
+   "區域內的稀有怪物掉落額外 {0} 個混沌石",
+   "區域內的稀有怪物掉落額外 {0} 個混沌石\\n  Rare Monsters in Area drop {0} additional Chaos Orbs"
+  ],
+  "1557": [
+   "區域內的稀有怪物掉落額外一個幻色石",
+   "區域內的稀有怪物掉落額外一個幻色石\\n  Rare Monsters in Area drop an additional Chromatic Orb"
+  ],
+  "1558": [
+   "區域內的稀有怪物掉落額外 {0} 個幻色石",
+   "區域內的稀有怪物掉落額外 {0} 個幻色石\\n  Rare Monsters in Area drop {0} additional Chromatic Orbs"
+  ],
+  "1637": [
+   "區域內的稀有怪物掉落額外一個崇高石",
+   "區域內的稀有怪物掉落額外一個崇高石\\n  Rare Monsters in Area drop an additional Exalted Orb"
+  ],
+  "1638": [
+   "區域內的稀有怪物掉落額外 {0} 個崇高石",
+   "區域內的稀有怪物掉落額外 {0} 個崇高石\\n  Rare Monsters in Area drop {0} additional Exalted Orbs"
+  ],
+  "1741": [
+   "區域內的稀有怪物掉落額外一個富豪石",
+   "區域內的稀有怪物掉落額外一個富豪石\\n  Rare Monsters in Area drop an additional Regal Orb"
+  ],
+  "1742": [
+   "區域內的稀有怪物掉落額外 {0} 個富豪石",
+   "區域內的稀有怪物掉落額外 {0} 個富豪石\\n  Rare Monsters in Area drop {0} additional Regal Orbs"
+  ],
+  "1787": [
+   "區域內的稀有怪物掉落額外一個後悔石",
+   "區域內的稀有怪物掉落額外一個後悔石\\n  Rare Monsters in Area drop an additional Orb of Regret"
+  ],
+  "1788": [
+   "區域內的稀有怪物掉落額外 {0} 個後悔石",
+   "區域內的稀有怪物掉落額外 {0} 個後悔石\\n  Rare Monsters in Area drop {0} additional Orbs of Regret"
+  ],
+  "2204": [
+   "區域內非最終的[ContainsAbyss|深淵]坑洞會於關閉時創造一個[AbyssalCrystal|深淵水晶]",
+   "區域內非最終的[ContainsAbyss|深淵]坑洞會於關閉時創造一個[AbyssalCrystal|深淵水晶]\\n  Non-final [ContainsAbyss|Abyss] Pits in Area create an [AbyssalCrystal|Abyssal Crystal] on closing"
+  ],
+  "2492": [
+   "區域內守衛礦床的怪物至少為魔法",
+   "區域內守衛礦床的怪物至少為魔法\\n  Monsters guarding Ore Deposits in Area are at least Magic"
+  ],
+  "3301": [
+   "最終地圖頭目的命運卡會以 2 倍的數量掉落",
+   "最終地圖頭目的命運卡會以 2 倍的數量掉落\\n  Divination Cards dropped by Final Map Boss are duplicated"
+  ],
+  "3455": [
+   "區域內的裂痕巢穴會通往巢裔要塞",
+   "區域內的裂痕巢穴會通往巢裔要塞\\n  Breach Hives in Area lead to a Hive Fortress"
+  ],
+  "4228": [
+   "區域內掉落的命運卡被最終地圖頭目盜竊",
+   "區域內掉落的命運卡被最終地圖頭目盜竊\\n  Divination Cards which drop in Area are stolen by the Final Map Boss"
+  ],
+  "454": [
+   "{0}% 更多最大生命",
+   "{0}% 更多最大生命\\n  {0}% more maximum Life"
+  ],
+  "455": [
+   "{0}% 更少最大生命",
+   "{0}% 更少最大生命\\n  {0}% less maximum Life"
+  ],
+  "4887": [
+   "區域內的神諭會生成強化石碑",
+   "區域內的神諭會生成強化石碑\\n  Harbingers in Area spawn Empowered Obelisks"
+  ],
+  "500": [
+   "增加 {0}% 角色體型",
+   "增加 {0}% 角色體型\\n  {0}% increased Character Size"
+  ],
+  "5000": [
+   "若可能，聖殿密園含有每種最多 1 個額外階級 4 種子",
+   "若可能，聖殿密園含有每種最多 1 個額外階級 4 種子\\n  The Sacred Grove contains up to 1 additional Tier 4 seed of each type, if possible"
+  ],
+  "501": [
+   "減少 {0}% 角色體型",
+   "減少 {0}% 角色體型\\n  {0}% reduced Character Size"
+  ],
+  "546": [
+   "{0}% 更多攻擊速度",
+   "{0}% 更多攻擊速度\\n  {0}% more Attack Speed"
+  ],
+  "547": [
+   "{0}% 更少攻擊速度",
+   "{0}% 更少攻擊速度\\n  {0}% less Attack Speed"
+  ],
+  "592": [
+   "{0}% 更多施放速度",
+   "{0}% 更多施放速度\\n  {0}% more Cast Speed"
+  ],
+  "593": [
+   "{0}% 更少施放速度",
+   "{0}% 更少施放速度\\n  {0}% less Cast Speed"
+  ],
+  "6021": [
+   "區域內最多 {0} 隻額外稀有怪物為眾神之觸",
+   "區域內最多 {0} 隻額外稀有怪物為眾神之觸\\n  Up to {0} additional Rare Monsters in Area are Pantheon-Touched"
+  ],
+  "6250": [
+   "祭祀神壇重骰恩賜之物前 {0} 次免費",
+   "祭祀神壇重骰恩賜之物前 {0} 次免費\\n  Rerolling Favours at Ritual Altars has no Cost the first {0} time"
+  ],
+  "6354": [
+   "區域內的祭祀包含額外一隻屍體可物品化的稀有怪物",
+   "區域內的祭祀包含額外一隻屍體可物品化的稀有怪物\\n  Rituals in Area contain an additional Rare Itemised Corpse Monster"
+  ],
+  "638": [
+   "{0}% 更多移動速度",
+   "{0}% 更多移動速度\\n  {0}% more Movement Speed"
+  ],
+  "639": [
+   "{0}% 更少移動速度",
+   "{0}% 更少移動速度\\n  {0}% less Movement Speed"
+  ],
+  "7034": [
+   "擊敗永生密教成員時有 {0}% 機率掉落 1 個額外聖甲蟲",
+   "擊敗永生密教成員時有 {0}% 機率掉落 1 個額外聖甲蟲\\n  Immortal Syndicate members have a {0}% chance to drop an additional Scarab when defeated"
+  ],
+  "738": [
+   "增加 {0}% 物品稀有度",
+   "增加 {0}% 物品稀有度\\n  {0}% increased Item Rarity"
+  ],
+  "739": [
+   "減少 {0}% 物品稀有度",
+   "減少 {0}% 物品稀有度\\n  {0}% reduced Item Rarity"
+  ],
+  "923": [
+   "區域內含有額外{0}群浮屍",
+   "區域內含有額外{0}群浮屍\\n  Area contains {0} additional pack of Drowned"
+  ],
+  "924": [
+   "區域內含有額外{0}群浮屍",
+   "區域內含有額外{0}群浮屍\\n  Area contains {0} additional packs of Drowned"
+  ],
+  "969": [
+   "區域內含有額外{0}群章魚",
+   "區域內含有額外{0}群章魚\\n  Area contains {0} additional pack of Octopi"
+  ],
+  "970": [
+   "區域內含有額外{0}群章魚",
+   "區域內含有額外{0}群章魚\\n  Area contains {0} additional packs of Octopi"
+  ]
+ },
+ "metadata/statdescriptions/mercenary_support_stat_descriptions.txt": {
+  "1120": [
+   "遭被輔助技能擊中的敵人在 4 秒內的生命恢復率增加 {0}%",
+   "遭被輔助技能擊中的敵人在 4 秒內的生命恢復率增加 {0}%\\n  Enemies Hit by Supported Skills have {0}% increased Life regeneration rate for four seconds"
+  ],
+  "1121": [
+   "遭被輔助技能擊中的敵人在 4 秒內的生命恢復率減少 {0}%",
+   "遭被輔助技能擊中的敵人在 4 秒內的生命恢復率減少 {0}%\\n  Enemies Hit by Supported Skills have {0}% reduced Life regeneration rate for four seconds"
+  ],
+  "1399": [
+   "若在近期被召喚，被輔助技能的圖騰帶有猛攻\\n  Totems from Supported Skills have Onslaught if summoned Recently"
+  ],
+  "2068": [
+   "使用被輔助的戰吼會賦予你和附近友方猛攻，持續 4 秒\\n  Using Supported Warcry grants you and nearby Allies Onslaught for 4 seconds"
+  ]
+ },
+ "metadata/statdescriptions/minion_attack_skill_stat_descriptions.txt": {
+  "4374": [
+   "擊中稀有或傳奇敵人時有{0}%機率/n召喚一名普通統御護衛",
+   "擊中稀有或傳奇敵人時有{0}%機率/n召喚一名普通統御護衛\\n  {0}% Chance to Summon a Normal Sentinel of Dominance on Hitting\\na Rare or Unique Monster"
+  ],
+  "5062": [
+   "此攻擊和召喚物在近距離擊中時有 {0}% 機率擊退敵人",
+   "此攻擊和召喚物在近距離擊中時有 {0}% 機率擊退敵人\\n  This Attack and Minions have {0}% chance to Knock Enemies Back with Hits at Close Range"
+  ],
+  "6070": [
+   "當你使用此攻擊時，獲得 1 氣勢\\n引導施放此攻擊時，每 {1} 秒獲得 1 氣勢\\n若你移動將失去全部氣勢\\n當召喚物攻擊時，它們獲得 1 氣勢\\n引導施放攻擊時，召喚物每 {0} 秒獲得 1 氣勢\\n若召喚物移動，它們將失去全部氣勢",
+   "當你使用此攻擊時，獲得 1 氣勢\\n引導施放此攻擊時，每 {1} 秒獲得 1 氣勢\\n若你移動將失去全部氣勢\\n當召喚物攻擊時，它們獲得 1 氣勢\\n引導施放攻擊時，召喚物每 {0} 秒獲得 1 氣勢\\n若召喚物移動，它們將失去全部氣勢\\n  Gain 1 Momentum when you Use this Attack\\nGain 1 Momentum every {1} seconds while Channelling this Attack\\nLose all Momentum if you Move\\nMinions gain 1 Momentum when they Attack\\nMinions gain 1 Momentum every {0} seconds while Channelling an Attack\\nMinions lose all Momentum if they Move"
+  ]
+ },
  "metadata/statdescriptions/minion_skill_stat_descriptions.txt": {
+  "10292": [
+   "召喚物在近距離擊中時有 {0}% 機率擊退敵人",
+   "召喚物在近距離擊中時有 {0}% 機率擊退敵人\\n  Minions have {0}% chance to Knock Enemies Back with Hits at Close Range"
+  ],
+  "10493": [
+   "召喚物根據每顆狂怒球附加 {0} 至 {1} 冰冷傷害",
+   "召喚物根據每顆狂怒球附加 {0} 至 {1} 冰冷傷害\\n  Minions have {0} to {1} added Cold Damage per Frenzy Charge"
+  ],
+  "10925": [
+   "召喚物發射的投射物增加 {0}% 投射物擴散",
+   "召喚物發射的投射物增加 {0}% 投射物擴散\\n  Projectiles Fired by Minions have {0}% increased Projectile spread"
+  ],
   "11209": [
    "奪魂鐮使你非奪魂鐮召喚物造成 {0} 更多傷害",
    "奪魂鐮使你非奪魂鐮召喚物造成 {0} 更多傷害\\n  Reapers cause your Non-Reaper Minions to deal {0}% more Damage"
@@ -59,27 +1440,173 @@
   "11210": [
    "奪魂鐮使你非奪魂鐮召喚物造成 {0} 更少傷害",
    "奪魂鐮使你非奪魂鐮召喚物造成 {0} 更少傷害\\n  Reapers cause your Non-Reaper Minions to deal {0}% less Damage"
+  ],
+  "13207": [
+   "召喚物對燃燒的敵人附加 {0} 至 {1} 火焰傷害",
+   "召喚物對燃燒的敵人附加 {0} 至 {1} 火焰傷害\\n  Minions deal {0} to {1} added Fire Damage against Burning Enemies"
+  ],
+  "13688": [
+   "召喚物從他們兩側最多 {0} 個點發射投射物",
+   "召喚物從他們兩側最多 {0} 個點發射投射物\\n  Minions fire Projectiles from up to {0} points on each side of them"
   ]
  },
- "metadata/statdescriptions/minion_spell_damage_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/minion_spell_damage_skill_stat_descriptions.txt": {
+  "3552": [
+   "此法術和召喚物造成 {0}% 更少傷害",
+   "此法術和召喚物造成 {0}% 更少傷害\\n  This Spell and Minions deal {0}% less Damage"
+  ]
+ },
  "metadata/statdescriptions/minion_spell_skill_stat_descriptions.txt": {},
- "metadata/statdescriptions/mirage_stat_descriptions.txt": {},
+ "metadata/statdescriptions/mirage_stat_descriptions.txt": {
+  "1075": [
+   "無名先知會在破壞星界鎖鏈時出現",
+   "無名先知會在破壞星界鎖鏈時出現\\n  The Nameless Seer will appear on breaking the Astral Chain"
+  ],
+  "113": [
+   "破壞星界鎖鏈時會獎勵一個含有地圖的寶匣",
+   "破壞星界鎖鏈時會獎勵一個含有地圖的寶匣\\n  Breaking the Astral Chain will reward a cache of Maps"
+  ],
+  "148": [
+   "破壞星界鎖鏈時會獎勵一個含有聖甲蟲的寶匣",
+   "破壞星界鎖鏈時會獎勵一個含有聖甲蟲的寶匣\\n  Breaking the Astral Chain will reward a cache of Scarabs"
+  ],
+  "183": [
+   "破壞星界鎖鏈時會獎勵一個含有豐裕牌組的寶匣",
+   "破壞星界鎖鏈時會獎勵一個含有豐裕牌組的寶匣\\n  Breaking the Astral Chain will reward a cache of Stacked Decks"
+  ],
+  "2104": [
+   "區域內的敵人會被冰緩和阻礙",
+   "區域內的敵人會被冰緩和阻礙\\n  Enemies in Area are Chilled and Hindered"
+  ],
+  "218": [
+   "破壞星界鎖鏈時會獎勵一個含有幻色石的寶匣",
+   "破壞星界鎖鏈時會獎勵一個含有幻色石的寶匣\\n  Breaking the Astral Chain will reward a cache of Chromatic Orbs"
+  ],
+  "2185": [
+   "區域內的某些怪物群被永生密教成員替換",
+   "區域內的某些怪物群被永生密教成員替換\\n  Some packs in Area are replaced with Syndicate members"
+  ],
+  "2220": [
+   "區域內的某些怪物群被無法掉落裝備的怪物替換",
+   "區域內的某些怪物群被無法掉落裝備的怪物替換\\n  Some packs in Area are replaced with Monsters that cannot drop Equipment"
+  ],
+  "43": [
+   "破壞星界鎖鏈時會獎勵一枚知識之硬幣",
+   "破壞星界鎖鏈時會獎勵一枚知識之硬幣\\n  Breaking the Astral Chain will reward a Coin of Knowledge"
+  ],
+  "725": [
+   "破壞星界鎖鏈時會獎勵一枚力量之硬幣",
+   "破壞星界鎖鏈時會獎勵一枚力量之硬幣\\n  Breaking the Astral Chain will reward a Coin of Power"
+  ],
+  "795": [
+   "破壞星界鎖鏈時會獎勵一個含有傳奇護甲的寶匣",
+   "破壞星界鎖鏈時會獎勵一個含有傳奇護甲的寶匣\\n  Breaking the Astral Chain will reward a Unique Armour"
+  ],
+  "8": [
+   "破壞星界鎖鏈時會獎勵一個含有束縛石的寶匣",
+   "破壞星界鎖鏈時會獎勵一個含有束縛石的寶匣\\n  Breaking the Astral Chain will reward a cache of Binding Orbs"
+  ],
+  "865": [
+   "破壞星界鎖鏈時會獎勵一個含有傳奇飾品的寶匣",
+   "破壞星界鎖鏈時會獎勵一個含有傳奇飾品的寶匣\\n  Breaking the Astral Chain will reward a Unique Jewellery item"
+  ],
+  "935": [
+   "破壞星界鎖鏈時會獎勵一個含有傳奇武器的寶匣",
+   "破壞星界鎖鏈時會獎勵一個含有傳奇武器的寶匣\\n  Breaking the Astral Chain will reward a Unique Weapon"
+  ],
+  "970": [
+   "破壞星界鎖鏈時會獎勵一個含有技能寶石的寶匣",
+   "破壞星界鎖鏈時會獎勵一個含有技能寶石的寶匣\\n  Breaking the Astral Chain will reward a cache of Skill Gems"
+  ]
+ },
  "metadata/statdescriptions/monster_stat_descriptions.txt": {},
  "metadata/statdescriptions/necropolis_stat_descriptions.txt": {},
  "metadata/statdescriptions/offering_skill_stat_descriptions.txt": {},
- "metadata/statdescriptions/passive_skill_aura_stat_descriptions.txt": {},
+ "metadata/statdescriptions/passive_skill_aura_stat_descriptions.txt": {
+  "917": [
+   "附近敵人被致盲\\n  Nearby Enemies are Blinded"
+  ]
+ },
  "metadata/statdescriptions/passive_skill_stat_descriptions.txt": {
+  "1677": [
+   "擊中敵人時有 {0}% 機率致盲\\n  {0}% chance to Blind Enemies on Hit"
+  ],
+  "1678": [
+   "擊中敵人時致盲\\n  Blind Enemies on Hit"
+  ],
+  "2000": [
+   "觸發等級 {0} 的艾貝拉斯之怒\\n  Triggers Level {0} Abberath's Fury"
+  ],
+  "2492": [
+   "附近敵人增加 {0}% 生命恢復率",
+   "附近敵人增加 {0}% 生命恢復率\\n  Nearby Enemies have {0}% increased Life Regeneration Rate"
+  ],
+  "2493": [
+   "附近敵人減少 {0}% 生命恢復率",
+   "附近敵人減少 {0}% 生命恢復率\\n  Nearby Enemies have {0}% reduced Life Regeneration Rate"
+  ],
+  "3010": [
+   "你瞎了\\n致盲不會影響你的照亮範圍\\n被致盲時有 25% 更多近戰暴擊率\\n  You are Blind\\nBlind does not affect your Light Radius\\n25% more Melee Critical Strike Chance while Blinded"
+  ],
+  "3340": [
+   "50% 更少生命恢復率\\n50% 更少來自偷取的每秒最大總恢復\\n能量護盾充能套用至生命",
+   "50% 更少生命恢復率\\n50% 更少來自偷取的每秒最大總恢復\\n能量護盾充能套用至生命\\n  50% less Life Regeneration Rate\\n50% less maximum Total Life Recovery per Second from Leech\\nEnergy Shield Recharge instead applies to Life"
+  ],
   "3713": [
    "敏捷不提供固有的閃避值加成\\n每 15 點敏捷 +1 法術傷害壓抑率",
    "敏捷不提供固有的閃避值加成\\n每 15 點敏捷 +1 法術傷害壓抑率\\n  Dexterity provides no inherent bonus to Evasion Rating\\n+1% Chance to Suppress Spell Damage per 15 Dexterity"
+  ],
+  "4266": [
+   "擊中的所有傷害都會造成你正承受的元素異常狀態\\n你造成的元素異常狀態將會從你身上移除\\n  All Damage will cause Elemental Ailments you are suffering\\nRemove Elemental Ailments from you when you inflict them"
+  ],
+  "4615": [
+   "當你有未破損的保護時，你下一次由自身使用的非引導攻擊會打破你的保護以獲得等同於25%保護的附加冰冷傷害",
+   "當你有未破損的保護時，你下一次由自身使用的非引導攻擊會打破你的保護以獲得等同於25%保護的附加冰冷傷害\\n  While you have Unbroken Ward, your next non-channelling Attack you Use yourself breaks your Ward to gain Added Cold Damage equal to 25% of Ward"
   ]
  },
- "metadata/statdescriptions/primordial_altar_stat_descriptions.txt": {},
+ "metadata/statdescriptions/primordial_altar_stat_descriptions.txt": {
+  "2616": [
+   "最終頭目掉落 {0} 個額外聖甲蟲：圓滑獸獵",
+   "最終頭目掉落 {0} 個額外聖甲蟲：圓滑獸獵\\n  Final Boss drops {0} additional Polished Bestiary Scarab"
+  ],
+  "2617": [
+   "最終頭目掉落 {0} 個額外聖甲蟲：圓滑獸獵",
+   "最終頭目掉落 {0} 個額外聖甲蟲：圓滑獸獵\\n  Final Boss drops {0} additional Polished Bestiary Scarabs"
+  ],
+  "2662": [
+   "最終頭目掉落 {0} 個額外聖甲蟲：鏽蝕獸獵",
+   "最終頭目掉落 {0} 個額外聖甲蟲：鏽蝕獸獵\\n  Final Boss drops {0} additional Rusted Bestiary Scarab"
+  ],
+  "2663": [
+   "最終頭目掉落 {0} 個額外聖甲蟲：鏽蝕獸獵",
+   "最終頭目掉落 {0} 個額外聖甲蟲：鏽蝕獸獵\\n  Final Boss drops {0} additional Rusted Bestiary Scarabs"
+  ]
+ },
  "metadata/statdescriptions/sanctum_relic_stat_descriptions.txt": {},
  "metadata/statdescriptions/secondary_debuff_skill_stat_descriptions.txt": {},
- "metadata/statdescriptions/sentinel_stat_descriptions.txt": {},
- "metadata/statdescriptions/single_minion_spell_skill_stat_descriptions.txt": {},
+ "metadata/statdescriptions/sentinel_stat_descriptions.txt": {
+  "2250": [
+   "巔峰守望賦予的敵人有猛攻\\n  Enemies Empowered by Apex Sentinels have Onslaught"
+  ]
+ },
+ "metadata/statdescriptions/single_minion_spell_skill_stat_descriptions.txt": {
+  "859": [
+   "當召喚物擊中敵人造成感電時同時使其冰緩，根據感電效果減少行動速度\\n  Chill enemies when they are Shocked by Hits from Minon, reducing Action Speed by Shock Effect"
+  ]
+ },
  "metadata/statdescriptions/skill_stat_descriptions.txt": {
+  "12366": [
+   "冰凍時減低敵人 {0}% 冰冷抗性",
+   "冰凍時減低敵人 {0}% 冰冷抗性\\n  Enemies lose {0}% Cold Resistance while Frozen"
+  ],
+  "13290": [
+   "當你獲得飛羽意志或飛羽飄翔時，有 {0}% 機率觸發此法術",
+   "當你獲得飛羽意志或飛羽飄翔時，有 {0}% 機率觸發此法術\\n  {0}% chance to Trigger this Spell when you gain Avian's Might or Avian's Flight"
+  ],
+  "13739": [
+   "{0}% 更多攻擊速度",
+   "{0}% 更多攻擊速度\\n  {0}% more Attack Speed"
+  ],
   "18714": [
    "秘能波動增加 {0}% 施放速度\\n秘能波動增加 {0}% 魔力恢復率",
    "秘能波動增加 {0}% 施放速度\\n秘能波動增加 {0}% 魔力恢復率\\n  Arcane Surge grants {0}% increased Cast Speed\\nArcane Surge grants {1}% increased Mana Regeneration rate"
@@ -87,6 +1614,342 @@
   "1923": [
    "當觸發時使用此技能投擲 {0} 個陷阱",
    "當觸發時使用此技能投擲 {0} 個陷阱\\n  Throws up to {1} Traps which use this Skill when Triggered"
+  ],
+  "20560": [
+   "基本齊射範圍為 {1} 公尺",
+   "基本齊射範圍為 {1} 公尺\\n  Base Volley radius is {1} metres"
+  ],
+  "20561": [
+   "齊射範圍為 {2} 公尺",
+   "齊射範圍為 {2} 公尺\\n  Volley radius is {2} metre"
+  ],
+  "20562": [
+   "齊射範圍為 {2} 公尺",
+   "齊射範圍為 {2} 公尺\\n  Volley radius is {2} metres"
+  ],
+  "20563": [
+   "首波箭矢後的箭矢落在基礎範圍 {1} 米內",
+   "首波箭矢後的箭矢落在基礎範圍 {1} 米內\\n  Arrows after the first fall within a Base radius of {1} metre"
+  ],
+  "20564": [
+   "首波箭矢後的箭矢落在基礎範圍 {1} 米內",
+   "首波箭矢後的箭矢落在基礎範圍 {1} 米內\\n  Arrows after the first fall within a Base radius of {1} metres"
+  ],
+  "20565": [
+   "首波箭矢後的箭矢落在範圍 {2} 米內",
+   "首波箭矢後的箭矢落在範圍 {2} 米內\\n  Arrows after the first fall within a radius of {2} metre"
+  ],
+  "20566": [
+   "首波箭矢後的箭矢落在範圍 {2} 米內",
+   "首波箭矢後的箭矢落在範圍 {2} 米內\\n  Arrows after the first fall within a radius of {2} metres"
+  ],
+  "20567": [
+   "基礎目標範圍長度為 {1} 米",
+   "基礎目標範圍長度為 {1} 米\\n  Base targeting area length is {1} metre"
+  ],
+  "20568": [
+   "基礎目標範圍長度為 {1} 米",
+   "基礎目標範圍長度為 {1} 米\\n  Base targeting area length is {1} metres"
+  ],
+  "20569": [
+   "目標範圍長度為 {2} 米",
+   "目標範圍長度為 {2} 米\\n  Targeting area length is {2} metre"
+  ],
+  "20570": [
+   "目標範圍長度為 {2} 米",
+   "目標範圍長度為 {2} 米\\n  Targeting area length is {2} metres"
+  ],
+  "20571": [
+   "第一道環的基礎爆炸半徑為{1}公尺",
+   "第一道環的基礎爆炸半徑為{1}公尺\\n  First Ring base explosion radius is {1} metre"
+  ],
+  "20572": [
+   "第一道環的基礎爆炸半徑為{1}公尺",
+   "第一道環的基礎爆炸半徑為{1}公尺\\n  First Ring base explosion radius is {1} metres"
+  ],
+  "20573": [
+   "第一道環的爆炸半徑為{2}公尺",
+   "第一道環的爆炸半徑為{2}公尺\\n  First Ring explosion radius is {2} metre"
+  ],
+  "20574": [
+   "第一道環的爆炸半徑為{2}公尺",
+   "第一道環的爆炸半徑為{2}公尺\\n  First Ring explosion radius is {2} metres"
+  ],
+  "20575": [
+   "藤壺猛夾的基礎半徑為 {1} 公尺",
+   "藤壺猛夾的基礎半徑為 {1} 公尺\\n  Barnacle Snap base radius is {1} metre"
+  ],
+  "20576": [
+   "藤壺猛夾的基礎半徑為 {1} 公尺",
+   "藤壺猛夾的基礎半徑為 {1} 公尺\\n  Barnacle Snap base radius is {1} metres"
+  ],
+  "20577": [
+   "藤壺猛夾的半徑為 {2} 公尺",
+   "藤壺猛夾的半徑為 {2} 公尺\\n  Barnacle Snap radius is {2} metre"
+  ],
+  "20578": [
+   "藤壺猛夾的半徑為 {2} 公尺",
+   "藤壺猛夾的半徑為 {2} 公尺\\n  Barnacle Snap radius is {2} metres"
+  ],
+  "21709": [
+   "{0}% 更少中毒傷害",
+   "{0}% 更少中毒傷害\\n  {0}% less Damage with Poison"
+  ],
+  "21974": [
+   "基礎次要半徑範圍為{1}公尺",
+   "基礎次要半徑範圍為{1}公尺\\n  Base secondary radius is {1} metre"
+  ],
+  "21975": [
+   "基礎次要半徑範圍為{1}公尺",
+   "基礎次要半徑範圍為{1}公尺\\n  Base secondary radius is {1} metres"
+  ],
+  "21976": [
+   "次要半徑範圍為{2}公尺",
+   "次要半徑範圍為{2}公尺\\n  Secondary radius is {2} metre"
+  ],
+  "21977": [
+   "次要半徑範圍為{2}公尺",
+   "次要半徑範圍為{2}公尺\\n  Secondary radius is {2} metres"
+  ],
+  "21978": [
+   "基礎爆炸範圍為 {1} 米",
+   "基礎爆炸範圍為 {1} 米\\n  Base explosion radius is {1} metre"
+  ],
+  "21979": [
+   "基礎爆炸範圍為 {1} 米",
+   "基礎爆炸範圍為 {1} 米\\n  Base explosion radius is {1} metres"
+  ],
+  "21980": [
+   "爆炸範圍為 {2} 米",
+   "爆炸範圍為 {2} 米\\n  Explosion radius is {2} metre"
+  ],
+  "21981": [
+   "爆炸範圍為 {2} 米",
+   "爆炸範圍為 {2} 米\\n  Explosion radius is {2} metres"
+  ],
+  "21982": [
+   "冰緩地面初始基礎半徑範圍為{1}公尺",
+   "冰緩地面初始基礎半徑範圍為{1}公尺\\n  Chilled Ground Base initial radius is {1} metre"
+  ],
+  "21983": [
+   "冰緩地面初始基礎半徑範圍為{1}公尺",
+   "冰緩地面初始基礎半徑範圍為{1}公尺\\n  Chilled Ground Base initial radius is {1} metres"
+  ],
+  "21984": [
+   "冰緩地面初始半徑範圍為{2}公尺",
+   "冰緩地面初始半徑範圍為{2}公尺\\n  Chilled Ground initial radius is {2} metre"
+  ],
+  "21985": [
+   "冰緩地面初始半徑範圍為{2}公尺",
+   "冰緩地面初始半徑範圍為{2}公尺\\n  Chilled Ground initial radius is {2} metres"
+  ],
+  "21986": [
+   "副手基礎半徑範圍為{1}公尺",
+   "副手基礎半徑範圍為{1}公尺\\n  Off Hand Base radius is {1} metre"
+  ],
+  "21987": [
+   "副手基礎半徑範圍為{1}公尺",
+   "副手基礎半徑範圍為{1}公尺\\n  Off Hand Base radius is {1} metres"
+  ],
+  "21988": [
+   "副手半徑範圍為{2}公尺",
+   "副手半徑範圍為{2}公尺\\n  Off Hand radius is {2} metre"
+  ],
+  "21989": [
+   "副手半徑範圍為{2}公尺",
+   "副手半徑範圍為{2}公尺\\n  Off Hand radius is {2} metres"
+  ],
+  "21990": [
+   "基礎光環範圍為 {1} 米",
+   "基礎光環範圍為 {1} 米\\n  Base Aura radius is {1} metre"
+  ],
+  "22801": [
+   "第三道環的爆炸半徑為{2}公尺",
+   "第三道環的爆炸半徑為{2}公尺\\n  Thrid Ring explosion radius is {2} metres"
+  ],
+  "23500": [
+   "傷害擊中一定暈眩滿血的敵人",
+   "傷害擊中一定暈眩滿血的敵人\\n  Damaging Hits always Stun Enemies that are on Full Life"
+  ],
+  "25342": [
+   "對目標發射最多 {0} 支箭矢",
+   "對目標發射最多 {0} 支箭矢\\n  Fires up to {0} Arrow at a target"
+  ],
+  "25680": [
+   "擊中時有 {0}% 機率穿刺敵人",
+   "擊中時有 {0}% 機率穿刺敵人\\n  {0}% chance to Impale Enemies on Hit"
+  ],
+  "26994": [
+   "每次脈衝會消耗至多 {0} 具屍體",
+   "每次脈衝會消耗至多 {0} 具屍體\\n  Consumes up to {0} Corpse on every Pulse"
+  ],
+  "27210": [
+   "達最大階段時，有 {0}% 更多傷害",
+   "達最大階段時，有 {0}% 更多傷害\\n  {0}% more Damage while at maximum Stages"
+  ],
+  "28777": [
+   "若沒有消耗屍體，增加 {0}% 傷害",
+   "若沒有消耗屍體，增加 {0}% 傷害\\n  {0}% increased Damage if not Consuming a Corpse"
+  ],
+  "28778": [
+   "若沒有消耗屍體，減少 {0}% 傷害",
+   "若沒有消耗屍體，減少 {0}% 傷害\\n  {0}% reduced Damage if not Consuming a Corpse"
+  ],
+  "31423": [
+   "冰緩區域減少 {0}% 移動速度",
+   "冰緩區域減少 {0}% 移動速度\\n  Chilling Area has {0}% reduced Movement Speed"
+  ],
+  "32162": [
+   "奉獻地面對敵人增加 {0}% 承受傷害",
+   "奉獻地面對敵人增加 {0}% 承受傷害\\n  Consecrated Ground applies {0}% increased Damage taken to Enemies"
+  ],
+  "32243": [
+   "增加 {0}% 奉獻地面範圍",
+   "增加 {0}% 奉獻地面範圍\\n  {0}% increased Consecrated Ground Area"
+  ],
+  "32368": [
+   "被轉化的敵人增加 {0}% 傷害",
+   "被轉化的敵人增加 {0}% 傷害\\n  Converted Enemies deal {0}% increased Damage"
+  ],
+  "32369": [
+   "被轉化的敵人減少 {0}% 傷害",
+   "被轉化的敵人減少 {0}% 傷害\\n  Converted Enemies deal {0}% reduced Damage"
+  ],
+  "32725": [
+   "以副手造成致命一擊時有 {0}% 機率觸發",
+   "以副手造成致命一擊時有 {0}% 機率觸發\\n  {0}% chance to trigger on Killing Blow with your Offhand"
+  ],
+  "32726": [
+   "以副手造成致命一擊時觸發",
+   "以副手造成致命一擊時觸發\\n  Triggers on Killing Blow with your Offhand"
+  ],
+  "33406": [
+   "擊中時有 {0}% 機率壓碎 2 秒",
+   "擊中時有 {0}% 機率壓碎 2 秒\\n  {0}% chance to Crush for 2 seconds on Hit"
+  ],
+  "33407": [
+   "擊中時壓碎 2 秒",
+   "擊中時壓碎 2 秒\\n  Crush for 2 seconds on Hit"
+  ],
+  "33900": [
+   "擊中冰緩敵人減少 {0}% 傷害",
+   "擊中冰緩敵人減少 {0}% 傷害\\n  {0}% reduced Damage with Hits against Chilled Enemies"
+  ],
+  "34037": [
+   "偷取能量護盾時增加 {0}% 傷害",
+   "偷取能量護盾時增加 {0}% 傷害\\n  {0}% increased Damage while Leeching Energy Shield"
+  ],
+  "34038": [
+   "偷取能量護盾時減少 {0}% 傷害",
+   "偷取能量護盾時減少 {0}% 傷害\\n  {0}% reduced Damage while Leeching Energy Shield"
+  ],
+  "35107": [
+   "若屍體被點燃，爆炸增加 {0}% 傷害",
+   "若屍體被點燃，爆炸增加 {0}% 傷害\\n  Explosion deals {0}% increased Damage if the Corpse is Ignited"
+  ],
+  "35293": [
+   "{0}% 機率在不移除能量球下造成傷害",
+   "{0}% 機率在不移除能量球下造成傷害\\n  {0}% chance to deal Damage without removing Charges"
+  ],
+  "36309": [
+   "當投射物撞擊地面時可以連鎖\\n當連鎖時，投射物不會改變方向",
+   "當投射物撞擊地面時可以連鎖\\n當連鎖時，投射物不會改變方向\\n  Projectiles can Chain when impacting the ground\\nProjectiles do not change direction when Chaining"
+  ],
+  "36351": [
+   "觸發審判烈焰或審判風暴，\\n在兩者之間替換",
+   "觸發審判烈焰或審判風暴，\\n在兩者之間替換\\n  Triggers either Flames of Judgement or Storm of Judgement,\\nalternating between the two"
+  ],
+  "36913": [
+   "增加 {0}% 射線寬度",
+   "增加 {0}% 射線寬度\\n  {0}% increased beam width"
+  ],
+  "36914": [
+   "減少 {0}% 射線寬度",
+   "減少 {0}% 射線寬度\\n  {0}% reduced beam width"
+  ],
+  "39061": [
+   "點燃造成的傷害加速 {0}%",
+   "點燃造成的傷害加速 {0}%\\n  Ignites deal Damage {0}% faster"
+  ],
+  "39062": [
+   "點燃造成的傷害減緩 {0}%",
+   "點燃造成的傷害減緩 {0}%\\n  Ignites deal Damage {0}% slower"
+  ],
+  "39705": [
+   "{0}% 更多燃燒傷害",
+   "{0}% 更多燃燒傷害\\n  {0}% more Burning Damage"
+  ],
+  "40713": [
+   "若充能從生命藥劑中消耗，附加等同 {0}% 藥劑恢復總量的混沌傷害",
+   "若充能從生命藥劑中消耗，附加等同 {0}% 藥劑恢復總量的混沌傷害\\n  Added Chaos Damage equal to {0}% of Flask's Recovery Amount if Charges were consumed from a Life Flask"
+  ],
+  "40967": [
+   "增益效果減少 {0}% 移動速度",
+   "增益效果減少 {0}% 移動速度\\n  Buff grants {0}% reduced Movement Speed"
+  ],
+  "41317": [
+   "每顆狂怒球有 {0:+d}% 更多攻擊速度",
+   "每顆狂怒球有 {0:+d}% 更多攻擊速度\\n  {0:+d}% more Attack Speed per Frenzy Charge"
+  ],
+  "41318": [
+   "每顆狂怒球有 {0}% 更多攻擊速度",
+   "每顆狂怒球有 {0}% 更多攻擊速度\\n  {0}% more Attack Speed per Frenzy Charge"
+  ],
+  "43465": [
+   "創造{0:+d}灰燼之柱",
+   "創造{0:+d}灰燼之柱\\n  Creates {0:+d} Ashen Pillar"
+  ],
+  "43466": [
+   "創造{0:+d}灰燼之柱",
+   "創造{0:+d}灰燼之柱\\n  Creates {0:+d} Ashen Pillars"
+  ],
+  "44035": [
+   "增益給予 {0}% 更少物理傷害",
+   "增益給予 {0}% 更少物理傷害\\n  Buff grants {0}% less Physical Damage"
+  ],
+  "46666": [
+   "使用此技能的攻擊視為竭盡",
+   "使用此技能的攻擊視為竭盡\\n  Attacks with this Skill count as Exerted"
+  ],
+  "46750": [
+   "擊殺之擊消耗屍體恢復 {0}% 生命",
+   "擊殺之擊消耗屍體恢復 {0}% 生命\\n  Killing Blows Consume corpses to Recover {0}% of Life"
+  ],
+  "47682": [
+   "擊中 1 個額外敵人",
+   "擊中 1 個額外敵人\\n  Hit an additional Enemy"
+  ],
+  "48000": [
+   "雷擊 {0:+d} 額外區域",
+   "雷擊 {0:+d} 額外區域\\n  Strikes {0:+d} additional Area"
+  ],
+  "48001": [
+   "雷擊 {0:+d} 區域",
+   "雷擊 {0:+d} 區域\\n  Strikes {0:+d} Areas"
+  ],
+  "51481": [
+   "召喚物擊中時造成曝曬，根據敵人受到最高的傷害種類 -10% 對應的元素抗性",
+   "召喚物擊中時造成曝曬，根據敵人受到最高的傷害種類 -10% 對應的元素抗性\\n  Minions inflict Exposure on Hit, applying -10% to the Elemental Resistance matching highest Damage type taken by Enemy"
+  ],
+  "52151": [
+   "減少 {0}% 投射物擴散",
+   "減少 {0}% 投射物擴散\\n  {0}% reduced Projectile spread"
+  ],
+  "54870": [
+   "在釣魚時有 {0}% 機率改為前往狂風碼頭",
+   "在釣魚時有 {0}% 機率改為前往狂風碼頭\\n  {0}% chance to travel to Winding Pier instead while on a Ley Fishing Line"
+  ],
+  "55426": [
+   "投射物擁有 {0} 公尺最大[DirectFlight|直線飛行]",
+   "投射物擁有 {0} 公尺最大[DirectFlight|直線飛行]\\n  Projectiles have {0} metre maximum [DirectFlight|Direct Flight]"
+  ],
+  "55427": [
+   "投射物擁有 {0} 公尺最大[DirectFlight|直線飛行]",
+   "投射物擁有 {0} 公尺最大[DirectFlight|直線飛行]\\n  Projectiles have {0} metres maximum [DirectFlight|Direct Flight]"
+  ],
+  "55781": [
+   "曝曬使承受最高的元素傷害，{0:+d}% 對應的元素抗性",
+   "曝曬使承受最高的元素傷害，{0:+d}% 對應的元素抗性\\n  Exposure applies {0:+d}% to Elemental Resistance matching highest Damage taken"
   ],
   "56039": [
    "每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更多傷害",
@@ -96,9 +1959,157 @@
    "每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更少傷害",
    "每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更少傷害\\n  Ragestorm deals {0}% less Damage per {1} Rage Sacrificed"
   ],
+  "56131": [
+   "盛怒風暴有 {0}% 更多擊中頻率",
+   "盛怒風暴有 {0}% 更多擊中頻率\\n  Ragestorm Hits {0}% more Frequently"
+  ],
+  "56132": [
+   "盛怒風暴有 {0}% 更少擊中頻率",
+   "盛怒風暴有 {0}% 更少擊中頻率\\n  Ragestorm Hits {0}% less Frequently"
+  ],
+  "57351": [
+   "你身上的每層毒性，增加 {0}% 苦痛毒蛛蠍的物理傷害",
+   "你身上的每層毒性，增加 {0}% 苦痛毒蛛蠍的物理傷害\\n  Agony Crawler deals {0}% increased Physical Damage per Virulence you have"
+  ],
+  "57352": [
+   "你身上的每層毒性，減少 {0}% 苦痛毒蛛蠍的物理傷害",
+   "你身上的每層毒性，減少 {0}% 苦痛毒蛛蠍的物理傷害\\n  Agony Crawler deals {0}% reduced Physical Damage per Virulence you have"
+  ],
+  "58178": [
+   "造成 {0:+d} 小爆炸",
+   "造成 {0:+d} 小爆炸\\n  Causes {0:+d} smaller explosion"
+  ],
+  "58608": [
+   "每個影響你的捷光環使增益效果獲得 {0}% 更多傷害",
+   "每個影響你的捷光環使增益效果獲得 {0}% 更多傷害\\n  Buff grants {0}% more Damage per Herald Skill affecting you"
+  ],
+  "59833": [
+   "螺旋通過 {0} 旋轉",
+   "螺旋通過 {0} 旋轉\\n  Spirals through {0} rotations"
+  ],
+  "59877": [
+   "最多彈射 {0} 次",
+   "最多彈射 {0} 次\\n  Bounces up to {0} time"
+  ],
   "59917": [
    "每個投射物有介在 10% 更多至 10% 更少投射物速度",
    "每個投射物有介在 10% 更多至 10% 更少投射物速度\\n  Each Projectile has between {0}% more and {0}% less Projectile Speed"
+  ],
+  "61067": [
+   "一次射出 {0} 個碎片，直到全部射出為止",
+   "一次射出 {0} 個碎片，直到全部射出為止\\n  Fires {0} Shard at a time until all fired"
+  ],
+  "61470": [
+   "能量之刃將攻擊的 {0}% 閃電傷害轉化至混沌傷害",
+   "能量之刃將攻擊的 {0}% 閃電傷害轉化至混沌傷害\\n  Energy Blades grant {0}% of Lightning Damage with Attacks Converted to Chaos Damage"
+  ],
+  "61792": [
+   "擊中時觸發召喚活體閃電",
+   "擊中時觸發召喚活體閃電\\n  Trigger Summon Living Lightning on Hit"
+  ],
+  "61915": [
+   "此技能會在擊中時觸發召喚聖潔妖精",
+   "此技能會在擊中時觸發召喚聖潔妖精\\n  This Skill will Trigger Summon Sacred Wisps on Hit"
+  ],
+  "62751": [
+   "{0}% 更少異常狀態傷害",
+   "{0}% 更少異常狀態傷害\\n  {0}% less Damage with Ailments"
+  ],
+  "63193": [
+   "此技能冰緩的敵人，隨著冰緩效果而增加承受冰冷傷害",
+   "此技能冰緩的敵人，隨著冰緩效果而增加承受冰冷傷害\\n  Enemies Chilled by this Skill have Cold Damage taken increased by Chill Effect"
+  ],
+  "63371": [
+   "腐化之血有基礎持續時間 {0} 秒",
+   "腐化之血有基礎持續時間 {0} 秒\\n  Corrupted Blood has a Base Duration of {0} seconds"
+  ],
+  "65031": [
+   "犧牲周遭一名可傷害的召喚物以獲得等同於{0}%被犧牲召喚物生命的附加物理傷害",
+   "犧牲周遭一名可傷害的召喚物以獲得等同於{0}%被犧牲召喚物生命的附加物理傷害\\n  Sacrifice a random nearby Damageable Minion on Cast to gain added Physical Damage equal to {0}% of Sacrificed Minion's Life"
+  ],
+  "65215": [
+   "每層氣勢減少 {0}% 攻擊速度",
+   "每層氣勢減少 {0}% 攻擊速度\\n  {0}% reduced Attack Speed per Momentum"
+  ],
+  "66865": [
+   "召回時有{0}%機率觸發邪穢之握",
+   "召回時有{0}%機率觸發邪穢之握\\n  {0}% chance to Trigger Foulgrasp when Recalled"
+  ],
+  "68042": [
+   "龍捲風增加 {0}% 移動速度",
+   "龍捲風增加 {0}% 移動速度\\n  Tornado has {0}% increased Movement Speed"
+  ],
+  "68043": [
+   "龍捲風減少 {0}% 移動速度",
+   "龍捲風減少 {0}% 移動速度\\n  Tornado has {0}% reduced Movement Speed"
+  ],
+  "68394": [
+   "增加 {0}% 陷阱擴散",
+   "增加 {0}% 陷阱擴散\\n  {0}% increased Trap Spread"
+  ],
+  "68832": [
+   "每 0.1 秒暈眩持續時間，使脈衝增加 {0}% 範圍效果，最多 400%",
+   "每 0.1 秒暈眩持續時間，使脈衝增加 {0}% 範圍效果，最多 400%\\n  Pulse has {0}% increased Area of Effect per 0.1s of Stun Duration, up to 400%"
+  ],
+  "68833": [
+   "每 0.1 秒暈眩持續時間，使脈衝減少 {0}% 範圍效果",
+   "每 0.1 秒暈眩持續時間，使脈衝減少 {0}% 範圍效果\\n  Pulse has {0}% reduced Area of Effect per 0.1s of Stun Duration"
+  ],
+  "69167": [
+   "當你消耗 1 個屍體觸發此技能",
+   "當你消耗 1 個屍體觸發此技能\\n  Trigger this Skill when you Consume a corpse"
+  ],
+  "69383": [
+   "當你擊中冰凍的敵人時，有 {0}% 機率觸發此法術",
+   "當你擊中冰凍的敵人時，有 {0}% 機率觸發此法術\\n  {0}% chance to Trigger this Skill when you Hit a Frozen Enemy"
+  ],
+  "69384": [
+   "當你擊中冰凍的敵人時，觸發此法術",
+   "當你擊中冰凍的敵人時，觸發此法術\\n  Trigger this Skill when you Hit a Frozen Enemy"
+  ],
+  "69600": [
+   "當你使用非瓦爾重擊或打擊技能攻擊附近敵人時，有 {0}% 機率觸發此法術",
+   "當你使用非瓦爾重擊或打擊技能攻擊附近敵人時，有 {0}% 機率觸發此法術\\n  {0}% chance to Trigger this Spell when you Attack with a Non-Vaal Slam or Strike Skill near an Enemy"
+  ],
+  "69601": [
+   "當你使用非瓦爾重擊或打擊技能攻擊附近敵人時，觸發此法術",
+   "當你使用非瓦爾重擊或打擊技能攻擊附近敵人時，觸發此法術\\n  Trigger this Spell when you Attack with a Non-Vaal Slam or Strike Skill near an Enemy"
+  ],
+  "6989": [
+   "每次脈衝都是強脈衝",
+   "每次脈衝都是強脈衝\\n  Every Pulse is a Stronger Pulse"
+  ],
+  "74222": [
+   "最大風暴為{0}",
+   "最大風暴為{0}\\n  Maximum {0} Storms"
+  ],
+  "74517": [
+   "爆炸每個階段造成{0}%更多擊中和異常狀態傷害",
+   "爆炸每個階段造成{0}%更多擊中和異常狀態傷害\\n  Explosion deals {0}% more Damage with Hits and Ailments per Stage"
+  ],
+  "74518": [
+   "爆炸每個階段造成{0}%更少擊中和異常狀態傷害",
+   "爆炸每個階段造成{0}%更少擊中和異常狀態傷害\\n  Explosion deals {0}% less Damage with Hits and Ailments per Stage"
+  ],
+  "74596": [
+   "當造成凋零時，有 {0}% 機率套用 1 層額外凋零減益效果",
+   "當造成凋零時，有 {0}% 機率套用 1 層額外凋零減益效果\\n  {0}% chance to apply an additional Withered Debuff when inflicting Withered"
+  ],
+  "74769": [
+   "使用技能時不移除增益效果",
+   "使用技能時不移除增益效果\\n  Buff is not removed on Skill use"
+  ],
+  "75269": [
+   "召喚物有侵略性",
+   "召喚物有侵略性\\n  Minions are Aggressive"
+  ],
+  "8024": [
+   "每秒造成 {0} 閃電傷害",
+   "每秒造成 {0} 閃電傷害\\n  Deals {0} Lightning Damage per second"
+  ],
+  "9088": [
+   "每秒造成 {0}% 你最大魔力的基礎火焰傷害",
+   "每秒造成 {0}% 你最大魔力的基礎火焰傷害\\n  Deals {0}% of your Maximum Mana as Base Fire Damage per second"
   ],
   "9848": [
    "移動或你立即傳送時，\\n每 {0} 秒失去 1 強化",
@@ -106,9 +2117,801 @@
   ]
  },
  "metadata/statdescriptions/stat_descriptions.txt": {
+  "101217": [
+   "擊殺每個感電的敵人回復 {0:+d} 點能量護盾",
+   "擊殺每個感電的敵人回復 {0:+d} 點能量護盾\\n  {0:+d} Energy Shield gained on Killing a Shocked Enemy"
+  ],
+  "101673": [
+   "貧血時減少 {0}% 爪類武器物理傷害",
+   "貧血時減少 {0}% 爪類武器物理傷害\\n  {0}% reduced Claw Physical Damage when on Low Life"
+  ],
+  "103738": [
+   "滿血時增加 {0}% 近戰傷害",
+   "滿血時增加 {0}% 近戰傷害\\n  {0}% increased Melee Damage when on Full Life"
+  ],
+  "103863": [
+   "每個暴擊球 {0}% 增加投射物傷害",
+   "每個暴擊球 {0}% 增加投射物傷害\\n  {0}% increased Projectile Damage per Power Charge"
+  ],
+  "106257": [
+   "投射物有 {0}% 機率點燃",
+   "投射物有 {0}% 機率點燃\\n  Projectiles have {0}% chance to Ignite"
+  ],
+  "106934": [
+   "插槽中每個紅色寶石會使召喚物轉化 {0}% 物理傷害為火焰傷害",
+   "插槽中每個紅色寶石會使召喚物轉化 {0}% 物理傷害為火焰傷害\\n  Minions convert {0}% of Physical Damage to Fire Damage per Socketed Red Gem"
+  ],
+  "108089": [
+   "作用於你的非傳奇藥劑減少 {0}% 效果",
+   "作用於你的非傳奇藥劑減少 {0}% 效果\\n  Non-Unique Flasks applied to you have {0}% reduced Effect"
+  ],
+  "109125": [
+   "當你使用近戰擊中暈眩敵人時，有 {1}% 機率獲得 1 顆耐力球",
+   "當你使用近戰擊中暈眩敵人時，有 {1}% 機率獲得 1 顆耐力球\\n  {1}% chance to gain an Endurance Charge when you Stun an Enemy with a Melee Hit"
+  ],
+  "109352": [
+   "感電時增加 {0}% 傷害",
+   "感電時增加 {0}% 傷害\\n  {0}% increased Damage while Shocked"
+  ],
+  "110525": [
+   "感電時增加 {0}% 移動速度",
+   "感電時增加 {0}% 移動速度\\n  {0}% increased Movement Speed while Shocked"
+  ],
+  "112384": [
+   "增加 {0}% 釣魚稀有度",
+   "增加 {0}% 釣魚稀有度\\n  {0}% increased Rarity of Fish Caught"
+  ],
+  "112449": [
+   "擊殺中毒的敵人時，使3公尺內的敵人中毒，且若你和友方\\n在3公尺內，將在中毒持續時間內每秒回復400生命",
+   "擊殺中毒的敵人時，使3公尺內的敵人中毒，且若你和友方\\n在3公尺內，將在中毒持續時間內每秒回復400生命\\n  On Killing a Poisoned Enemy, Enemies within 3 metres are Poisoned, and you and\\nAllies Regenerate 400 Life per second for the Poison's duration if within 3 metres"
+  ],
+  "112533": [
+   "你可以捕獲外來魚種",
+   "你可以捕獲外來魚種\\n  You can catch Exotic Fish"
+  ],
+  "112603": [
+   "你的火焰傷害可以感電但不能點燃",
+   "你的火焰傷害可以感電但不能點燃\\n  Your Fire Damage can Shock but not Ignite"
+  ],
+  "114581": [
+   "召喚物偷取 {0}% 生命",
+   "召喚物偷取 {0}% 生命\\n  Minions Leech {0}% of Damage as Life"
+  ],
+  "114861": [
+   "殺敵時召喚物獲得不潔之力持續 {0} 秒",
+   "殺敵時召喚物獲得不潔之力持續 {0} 秒\\n  Minions gain Unholy Might for {0} seconds on Kill"
+  ],
+  "11599": [
+   "插槽中寶石被等級 {0} 的陷阱充能輔助",
+   "插槽中寶石被等級 {0} 的陷阱充能輔助\\n  Socketed Gems are Supported by Level {0} Charged Traps"
+  ],
+  "116694": [
+   "每等級減少 {0}% 法術傷害",
+   "每等級減少 {0}% 法術傷害\\n  {0}% reduced Spell Damage per Level"
+  ],
+  "117530": [
+   "傷害穿透 {0}% 閃電抗性",
+   "傷害穿透 {0}% 閃電抗性\\n  Damage Penetrates {0}% Lightning Resistance"
+  ],
+  "117531": [
+   "你的擊中將閃電抗性視為比實際值高 {0}%",
+   "你的擊中將閃電抗性視為比實際值高 {0}%\\n  Your Hits treat Lightning Resistance as {0}% higher than actual value"
+  ],
+  "118045": [
+   "每顆暴擊球對滿血的敵人減少 {0}% 擊中傷害",
+   "每顆暴擊球對滿血的敵人減少 {0}% 擊中傷害\\n  {0}% reduced Damage per Power Charge with Hits against Enemies on Full Life"
+  ],
+  "118521": [
+   "每個耐力球增加 {0} 每秒生命回復",
+   "每個耐力球增加 {0} 每秒生命回復\\n  Regenerate {0} Life per second per Endurance Charge"
+  ],
+  "118812": [
+   "不能獲得友方光環效果",
+   "不能獲得友方光環效果\\n  Allies' Aura Buffs do not affect you"
+  ],
+  "120112": [
+   "將範圍內天賦所賦予的智慧轉換成敏捷",
+   "將範圍內天賦所賦予的智慧轉換成敏捷\\n  Intelligence from Passives in Radius is Transformed to Dexterity"
+  ],
+  "120158": [
+   "空手時減少 {0}% 範圍效果",
+   "空手時減少 {0}% 範圍效果\\n  {0}% reduced Area of Effect while Unarmed"
+  ],
+  "120388": [
+   "當你擊殺稀有怪物時，你會獲得它其中 {0} 個詞綴 20 秒",
+   "當你擊殺稀有怪物時，你會獲得它其中 {0} 個詞綴 20 秒\\n  When you Kill a Rare monster, you gain {0} of its Modifiers for 20 seconds"
+  ],
+  "121133": [
+   "若範圍內已配置至少 {0} 點智慧，你可以施放 1 個額外詛咒",
+   "若範圍內已配置至少 {0} 點智慧，你可以施放 1 個額外詛咒\\n  With at least {0} Intelligence Allocated in Radius, You can apply an additional Curse"
+  ],
+  "122658": [
+   "優先使用能量護盾代替魔力消耗",
+   "優先使用能量護盾代替魔力消耗\\n  Spend Energy Shield before Mana for Skill Costs"
+  ],
+  "123367": [
+   "範圍內每配置 {0} 智慧增加 1 最大生命",
+   "範圍內每配置 {0} 智慧增加 1 最大生命\\n  Adds 1 to Maximum Life per {0} Intelligence Allocated in Radius"
+  ],
+  "12349": [
+   "插槽中的寶石被等級{0}的咒蟾輔助",
+   "插槽中的寶石被等級{0}的咒蟾輔助\\n  Socketed Gems are Supported by Level {0} Hextoad"
+  ],
+  "124017": [
+   "範圍內每 10 點配置力量有 {0}% 額外物理傷害減免",
+   "範圍內每 10 點配置力量有 {0}% 額外物理傷害減免\\n  {0}% additional Physical Damage Reduction per 10 Strength on Allocated Passives in Radius"
+  ],
+  "124203": [
+   "範圍內配置 {0:d} 點敏捷即可對弓及法杖使用幻化武器",
+   "範圍內配置 {0:d} 點敏捷即可對弓及法杖使用幻化武器\\n  Animate Weapon will Animate Bows and Wands with {0:d} Dexterity from Passives in Radius"
+  ],
+  "125305": [
+   "承受 {0}% 的擊中閃電傷害視為冰冷傷害",
+   "承受 {0}% 的擊中閃電傷害視為冰冷傷害\\n  {0}% of Lightning Damage from Hits taken as Cold Damage"
+  ],
+  "125945": [
+   "每個耐力球增加 {0}% 傷害",
+   "每個耐力球增加 {0}% 傷害\\n  {0}% increased Damage per Endurance Charge"
+  ],
+  "125946": [
+   "每個耐力球減少 {0}% 傷害",
+   "每個耐力球減少 {0}% 傷害\\n  {0}% reduced Damage per Endurance Charge"
+  ],
+  "127544": [
+   "近期內你若有被擊中則附加 {0} 至 {1} 冰冷傷害",
+   "近期內你若有被擊中則附加 {0} 至 {1} 冰冷傷害\\n  Adds {0} to {1} Cold Damage if you've been Hit Recently"
+  ],
+  "128521": [
+   "彈幕的第一次和最後一次攻擊附加一個額外的投射物",
+   "彈幕的第一次和最後一次攻擊附加一個額外的投射物\\n  Barrage fires an additional projectile simultaneously on the first and final attacks"
+  ],
+  "128942": [
+   "每個你擁有的幽魂增加 {0}% 召喚物傷害",
+   "每個你擁有的幽魂增加 {0}% 召喚物傷害\\n  {0}% increased Minion Damage per Raised Spectre"
+  ],
+  "129875": [
+   "猛攻狀態下有額外 {0}% 機率閃避近戰攻擊",
+   "猛攻狀態下有額外 {0}% 機率閃避近戰攻擊\\n  {0}% more chance to Evade Melee Attacks during Onslaught"
+  ],
+  "130873": [
+   "耐力球達到上限時，減少 {0}% 受到的元素傷害",
+   "耐力球達到上限時，減少 {0}% 受到的元素傷害\\n  {0}% reduced Elemental Damage taken while at Maximum Endurance Charges"
+  ],
+  "132460": [
+   "冰霜淨化增加 {0}% 光環效果",
+   "冰霜淨化增加 {0}% 光環效果\\n  Purity of Ice has {0}% increased Aura Effect"
+  ],
+  "133434": [
+   "召喚物擊殺時有 {0}% 機率獲得猛攻 4 秒",
+   "召喚物擊殺時有 {0}% 機率獲得猛攻 4 秒\\n  Minions have {0}% chance to gain Onslaught for 4 seconds on Kill"
+  ],
+  "134764": [
+   "召喚憤怒狂靈有 {0}% 機率召喚 1 個額外召喚物",
+   "召喚憤怒狂靈有 {0}% 機率召喚 1 個額外召喚物\\n  Summon Raging Spirit has {0}% chance to summon an extra Minion"
+  ],
+  "134981": [
+   "增加 {0}% 閃電陷阱的傷害",
+   "增加 {0}% 閃電陷阱的傷害\\n  {0}% increased Lightning Trap Damage"
+  ],
+  "134982": [
+   "減少 {0}% 閃電陷阱的傷害",
+   "減少 {0}% 閃電陷阱的傷害\\n  {0}% reduced Lightning Trap Damage"
+  ],
+  "135947": [
+   "你的召喚物死亡時擴散腐蝕地面，每秒造成 {0}% 他們最大生命的混沌傷害",
+   "你的召喚物死亡時擴散腐蝕地面，每秒造成 {0}% 他們最大生命的混沌傷害\\n  Your Minions spread Caustic Ground on Death, dealing {0}% of their maximum Life as Chaos Damage per second"
+  ],
+  "136319": [
+   "造成暴擊時無視敵人的元素抗性",
+   "造成暴擊時無視敵人的元素抗性\\n  Critical Strikes ignore Enemy Monster Elemental Resistances"
+  ],
+  "136361": [
+   "近期內若有造成暴擊，增加 {0}% 傷害",
+   "近期內若有造成暴擊，增加 {0}% 傷害\\n  {0}% increased Damage if you've dealt a Critical Strike Recently"
+  ],
+  "136362": [
+   "近期內若有造成暴擊，減少 {0}% 傷害",
+   "近期內若有造成暴擊，減少 {0}% 傷害\\n  {0}% reduced Damage if you've dealt a Critical Strike Recently"
+  ],
+  "137454": [
+   "當你的陷阱觸發時，你附近的陷阱也跟著觸發",
+   "當你的陷阱觸發時，你附近的陷阱也跟著觸發\\n  When your Traps Trigger, your nearby Traps also Trigger"
+  ],
+  "137929": [
+   "擊殺時有 {0}% 機率觸發煉獄之律",
+   "擊殺時有 {0}% 機率觸發煉獄之律\\n  {0}% chance to Trigger Edict of Inferno on Kill"
+  ],
+  "141377": [
+   "每個擊中流血的敵人，獲得 {0} 生命",
+   "每個擊中流血的敵人，獲得 {0} 生命\\n  Gain {0} Life per Bleeding Enemy Hit"
+  ],
+  "141378": [
+   "每個擊中流血的敵人，失去 {0} 生命",
+   "每個擊中流血的敵人，失去 {0} 生命\\n  Lose {0} Life per Bleeding Enemy Hit"
+  ],
+  "141423": [
+   "{0:+d}% 空手近戰攻擊暴擊率",
+   "{0:+d}% 空手近戰攻擊暴擊率\\n  {0:+d}% to Unarmed Melee Attack Critical Strike Chance"
+  ],
+  "142536": [
+   "武器造成的傷害穿透 {0}% 元素抗性",
+   "武器造成的傷害穿透 {0}% 元素抗性\\n  Damage with Weapons Penetrates {0}% Elemental Resistances"
+  ],
+  "143309": [
+   "傷害穿透 {0}% 閃電抗性/n若你過去 10 秒內有使用冰冷技能",
+   "傷害穿透 {0}% 閃電抗性/n若你過去 10 秒內有使用冰冷技能\\n  Damage Penetrates {0}% Lightning Resistance if you've\\nused a Cold Skill in the past 10 seconds"
+  ],
+  "14562": [
+   "插槽中寶石被等級 {0} 的殘暴輔助",
+   "插槽中寶石被等級 {0} 的殘暴輔助\\n  Socketed Gems are Supported by Level {0} Ruthless"
+  ],
+  "145747": [
+   "減少{0}%神聖橫掃傷害",
+   "減少{0}%神聖橫掃傷害\\n  {0}% reduced Holy Sweep Damage"
+  ],
+  "146539": [
+   "腐蝕箭矢擊中時造成凋零，有 {1} 秒基礎持續時間",
+   "腐蝕箭矢擊中時造成凋零，有 {1} 秒基礎持續時間\\n  Caustic Arrow inflicts Withered on Hit for {1} second base Duration"
+  ],
+  "146540": [
+   "腐蝕箭矢擊中時有 {0}% 機率造成凋零，有 {1} 秒基礎持續時間",
+   "腐蝕箭矢擊中時有 {0}% 機率造成凋零，有 {1} 秒基礎持續時間\\n  Caustic Arrow has {0}% chance to inflict Withered on Hit for {1} seconds base Duration"
+  ],
+  "146750": [
+   "增加 {0}% 烈焰魔像的傷害",
+   "增加 {0}% 烈焰魔像的傷害\\n  Flame Golems have {0}% increased Damage"
+  ],
+  "147119": [
+   "減少 {0}% 霸氣之擊的傷害",
+   "減少 {0}% 霸氣之擊的傷害\\n  {0}% reduced Dominating Blow Damage"
+  ],
+  "147433": [
+   "減少 {0}% 清算傷害",
+   "減少 {0}% 清算傷害\\n  {0}% reduced Reckoning Damage"
+  ],
+  "149590": [
+   "此武器進行的攻擊對冰緩的敵人造成兩倍傷害",
+   "此武器進行的攻擊對冰緩的敵人造成兩倍傷害\\n  Attacks with this Weapon deal Double Damage to Chilled Enemies"
+  ],
+  "149913": [
+   "召喚物附加 {0} 至 {1} 攻擊物理傷害",
+   "召喚物附加 {0} 至 {1} 攻擊物理傷害\\n  Minions deal {0} to {1} additional Attack Physical Damage"
+  ],
+  "150867": [
+   "攻擊技能 {0}% 的魔力消耗，改為消耗生命",
+   "攻擊技能 {0}% 的魔力消耗，改為消耗生命\\n  Attack Skills Cost Life instead of {0}% of Mana Cost"
+  ],
+  "152151": [
+   "減少 {0}% 寒霜滲透範圍效果",
+   "減少 {0}% 寒霜滲透範圍效果\\n  {0}% reduced Creeping Frost Area of Effect"
+  ],
+  "152962": [
+   "增加 {0}% 飛刃風暴範圍效果",
+   "增加 {0}% 飛刃風暴範圍效果\\n  {0}% increased Blade Vortex Area of Effect"
+  ],
+  "153008": [
+   "增加 {0}% 刀雨範圍效果",
+   "增加 {0}% 刀雨範圍效果\\n  {0}% increased Bladefall Area of Effect"
+  ],
+  "153054": [
+   "增加 {0}% 冰凍陷阱範圍效果",
+   "增加 {0}% 冰凍陷阱範圍效果\\n  {0}% increased Ice Trap Area of Effect"
+  ],
+  "154940": [
+   "魅影射擊增加 {0}% 冷卻時間恢復率",
+   "魅影射擊增加 {0}% 冷卻時間恢復率\\n  Mirror Arrow has {0}% increased Cooldown Recovery Rate"
+  ],
+  "155301": [
+   "減少 {0}% 冰霜脈衝投射物速度",
+   "減少 {0}% 冰霜脈衝投射物速度\\n  {0}% reduced Freezing Pulse Projectile Speed"
+  ],
+  "156555": [
+   "減少褻瀆 {0}% 持續時間",
+   "減少褻瀆 {0}% 持續時間\\n  {0}% reduced Desecrate Duration"
+  ],
+  "156726": [
+   "增加 {0}% 靈魂吸取持續時間",
+   "增加 {0}% 靈魂吸取持續時間\\n  {0}% increased Essence Drain Duration"
+  ],
+  "157049": [
+   "減少 {0}% 充能打擊持續時間",
+   "減少 {0}% 充能打擊持續時間\\n  {0}% reduced Static Strike Duration"
+  ],
+  "157804": [
+   "熔岩之擊有 1 個額外投射物",
+   "熔岩之擊有 1 個額外投射物\\n  Molten Strike fires an additional Projectile"
+  ],
+  "158544": [
+   "每一層衝擊波堆疊次數增加 {0}% 攻擊速度",
+   "每一層衝擊波堆疊次數增加 {0}% 攻擊速度\\n  {0}% increased Attack Speed per Reave stack"
+  ],
+  "158729": [
+   "電弧必定感電",
+   "電弧必定感電\\n  Arc Always Shocks"
+  ],
+  "15991": [
+   "此物品插槽中寶石被等級 10 的精準破壞輔助",
+   "此物品插槽中寶石被等級 10 的精準破壞輔助\\n  Socketed Gems are Supported by Level 10 Controlled Destruction"
+  ],
+  "161174": [
+   "{0}% 機率不用消耗耐力球，增加不朽怒嚎持續時間",
+   "{0}% 機率不用消耗耐力球，增加不朽怒嚎持續時間\\n  {0}% chance for Immortal Call to increase Duration without removing Endurance Charges"
+  ],
+  "161220": [
+   "{0}% 機率不用消耗狂怒球，增加暗影迷蹤持續時間",
+   "{0}% 機率不用消耗狂怒球，增加暗影迷蹤持續時間\\n  {0}% chance for Phase Run to increase Duration without removing Frenzy Charges"
+  ],
+  "161812": [
+   "火焰淨化減少 {0}% 保留",
+   "火焰淨化減少 {0}% 保留\\n  Purity of Fire has {0}% reduced Reservation"
+  ],
+  "162987": [
+   "你和附近友方增加 {0}% 攻擊、施放和移動速度",
+   "你和附近友方增加 {0}% 攻擊、施放和移動速度\\n  You and nearby Allies have {0}% increased Attack, Cast and Movement Speed"
+  ],
+  "164247": [
+   "減少 {0}% 烈焰魔像賦予你的增益效果",
+   "減少 {0}% 烈焰魔像賦予你的增益效果\\n  {0}% reduced Effect of the Buff granted by your Flame Golems"
+  ],
+  "164583": [
+   "鮮血狂怒有額外 {0}% 機率擊殺時獲得狂怒球",
+   "鮮血狂怒有額外 {0}% 機率擊殺時獲得狂怒球\\n  Blood Rage grants additional {0}% chance to gain a Frenzy Charge on Kill"
+  ],
+  "164697": [
+   "爆裂箭雨有 {0}% 機率發射 1 支額外箭矢",
+   "爆裂箭雨有 {0}% 機率發射 1 支額外箭矢\\n  Blast Rain has a {0}% chance to fire an additional Arrow"
+  ],
+  "164698": [
+   "爆裂箭雨發射 1 支額外箭矢",
+   "爆裂箭雨發射 1 支額外箭矢\\n  Blast Rain fires an additional Arrow"
+  ],
+  "166298": [
+   "減少 {0}% 先祖戰士長圖騰範圍效果",
+   "減少 {0}% 先祖戰士長圖騰範圍效果\\n  {0}% reduced Ancestral Warchief Totem Area of Effect"
+  ],
+  "167727": [
+   "對中毒敵人所造成傷害 {0}% 偷取魔力",
+   "對中毒敵人所造成傷害 {0}% 偷取魔力\\n  {0}% of Attack Damage Leeched as Mana against Poisoned Enemies"
+  ],
+  "169632": [
+   "在奉獻地面減少 {0}% 攻擊和施放速度",
+   "在奉獻地面減少 {0}% 攻擊和施放速度\\n  {0}% reduced Attack and Cast Speed while on Consecrated Ground"
+  ],
+  "170216": [
+   "陷阱被敵人觸發時獲得 3 秒迷蹤效果",
+   "陷阱被敵人觸發時獲得 3 秒迷蹤效果\\n  Gain Phasing for 3 seconds when your Trap is triggered by an Enemy"
+  ],
+  "172015": [
+   "你有抗爭時，增加 {0}% 來自偷取的每秒最大總生命恢復",
+   "你有抗爭時，增加 {0}% 來自偷取的每秒最大總生命恢復\\n  {0}% increased Maximum total Life Recovery per second from Leech while you have Defiance"
+  ],
+  "172696": [
+   "對點燃的敵人增加 {0}% 近戰物理傷害",
+   "對點燃的敵人增加 {0}% 近戰物理傷害\\n  {0}% increased Melee Physical Damage against Ignited Enemies"
+  ],
+  "174179": [
+   "每顆虹吸能量球使攻擊和法術附加 {0} 至 {1} 物理傷害",
+   "每顆虹吸能量球使攻擊和法術附加 {0} 至 {1} 物理傷害\\n  Adds {0} to {1} Physical Damage to Attacks and Spells per Siphoning Charge"
+  ],
+  "174723": [
+   "當你至少有 5 層蟹將重盾時 {0:+d}% 攻擊傷害格擋率",
+   "當你至少有 5 層蟹將重盾時 {0:+d}% 攻擊傷害格擋率\\n  {0:+d}% Chance to Block Attack Damage while you have at least 5 Crab Barriers"
+  ],
+  "176099": [
+   "擊中時獲得 1 層神聖充能",
+   "擊中時獲得 1 層神聖充能\\n  Gain a Divine Charge on Hit"
+  ],
+  "177418": [
+   "最左邊 {0} 的魔法功能藥劑持續套用它的藥劑效果至你身上",
+   "最左邊 {0} 的魔法功能藥劑持續套用它的藥劑效果至你身上\\n  Leftmost {0} Magic Utility Flask constantly applies its Flask Effect to you"
+  ],
+  "178639": [
+   "若裝備 2 種聖戰軍王之物，智慧增加 {0}%",
+   "若裝備 2 種聖戰軍王之物，智慧增加 {0}%\\n  {0}% increased Intelligence if 2 Crusader Items are Equipped"
+  ],
+  "179179": [
+   "若裝備 4 種狩獵者之物，最大混沌抗性 {0:+d}%",
+   "若裝備 4 種狩獵者之物，最大混沌抗性 {0:+d}%\\n  {0:+d}% to maximum Chaos Resistance if 4 Hunter Items are Equipped"
+  ],
+  "180502": [
+   "每 2 點力量 {0:+d} 護甲",
+   "每 2 點力量 {0:+d} 護甲\\n  {0:+d} Armour per 2 Strength"
+  ],
+  "181687": [
+   "被迅捷影響時，減少 {}% 行動速度",
+   "被迅捷影響時，減少 {}% 行動速度\\n  {}% reduced Action Speed while affected by Haste"
+  ],
+  "181918": [
+   "雙持擊殺時有 {0}% 機率獲得 1 顆狂怒球",
+   "雙持擊殺時有 {0}% 機率獲得 1 顆狂怒球\\n  {0}% chance to gain a Frenzy Charge on Kill while Dual Wielding"
+  ],
   "183019": [
    "若你近期有壓抑法術傷害，",
    "若你近期有壓抑法術傷害，\\n  {0:+d}% to all maximum Elemental Resistances if you've Suppressed Spell Damage Recently"
+  ],
+  "183121": [
+   "若裝備的頭盔、胸甲、手套和鞋子都有護甲，{0:+d}% 全部最大元素抗性",
+   "若裝備的頭盔、胸甲、手套和鞋子都有護甲，{0:+d}% 全部最大元素抗性\\n  {0:+d}% to all maximum Elemental Resistances if Equipped Helmet, Body Armour, Gloves, and Boots all have Armour"
+  ],
+  "185276": [
+   "增加 {0}% 煉金術士印記的詛咒效果",
+   "增加 {0}% 煉金術士印記的詛咒效果\\n  {0}% increased Alchemist's Mark Curse Effect"
+  ],
+  "186342": [
+   "瓦爾技能每需求1靈魂就造成{0}%更少傷害",
+   "瓦爾技能每需求1靈魂就造成{0}%更少傷害\\n  Vaal Skills deal {0}% less Damage per Soul Required"
+  ],
+  "186565": [
+   "投射物穿透全部燃燒的敵人",
+   "投射物穿透全部燃燒的敵人\\n  Projectiles Pierce all Burning Enemies"
+  ],
+  "187170": [
+   "先祖戰吼竭盡的攻擊增加 {0}% 傷害",
+   "先祖戰吼竭盡的攻擊增加 {0}% 傷害\\n  Attacks Exerted by Ancestral Cry deal {0}% increased Damage"
+  ],
+  "187411": [
+   "攻擊手隊員產生時獲得腎上腺素 {0} 秒",
+   "攻擊手隊員產生時獲得腎上腺素 {0} 秒\\n  Attacker Teammates gain Adrenaline for {0} seconds when spawned"
+  ],
+  "188188": [
+   "被擊中時有 {0}% 機率使敵人餘燼纏身",
+   "被擊中時有 {0}% 機率使敵人餘燼纏身\\n  {0}% chance to cover Enemies in Ash when they Hit you"
+  ],
+  "188245": [
+   "{0}秒內，混沌技能擊中可造成最多 15 凋零減益效果",
+   "{0}秒內，混沌技能擊中可造成最多 15 凋零減益效果\\n  Chaos Skills inflict up to 15 Withered Debuffs on Hit for {0} seconds"
+  ],
+  "188922": [
+   "極地裝甲減少 {0}% 魔力保留效用",
+   "極地裝甲減少 {0}% 魔力保留效用\\n  Arctic Armour has {0}% reduced Mana Reservation Efficiency"
+  ],
+  "18947": [
+   "插槽中寶石被等級 {0} 的啟發輔助",
+   "插槽中寶石被等級 {0} 的啟發輔助\\n  Socketed Gems are Supported by Level {0} Inspiration"
+  ],
+  "189492": [
+   "若你近期有使用雙手近戰武器暈眩敵人，增加 {0}% 範圍效果",
+   "若你近期有使用雙手近戰武器暈眩敵人，增加 {0}% 範圍效果\\n  {0}% increased Area of Effect if you've Stunned an Enemy with a Two Handed Melee Weapon Recently"
+  ],
+  "189493": [
+   "若你近期有使用雙手近戰武器暈眩敵人，減少 {0}% 範圍效果",
+   "若你近期有使用雙手近戰武器暈眩敵人，減少 {0}% 範圍效果\\n  {0}% reduced Area of Effect if you've Stunned an Enemy with a Two Handed Melee Weapon Recently"
+  ],
+  "18976": [
+   "插槽中寶石被等級 {0} 的和善輔助",
+   "插槽中寶石被等級 {0} 的和善輔助\\n  Socketed Gems are Supported by Level {0} Generosity"
+  ],
+  "189990": [
+   "持弓時增加 {0}% 範圍效果",
+   "持弓時增加 {0}% 範圍效果\\n  {0}% increased Area of Effect while wielding a Bow"
+  ],
+  "191373": [
+   "若近期沒有擊殺，增加 {0}% 護甲",
+   "若近期沒有擊殺，增加 {0}% 護甲\\n  {0}% increased Armour if you haven't Killed Recently"
+  ],
+  "191620": [
+   "站立時，減少 {0}% 護甲",
+   "站立時，減少 {0}% 護甲\\n  {0}% reduced Armour while stationary"
+  ],
+  "192099": [
+   "攻擊技能造成 {0}% 更多混沌傷害",
+   "攻擊技能造成 {0}% 更多混沌傷害\\n  {0}% more Chaos Damage with Attack Skills"
+  ],
+  "192100": [
+   "攻擊技能造成 {0}% 更少混沌傷害",
+   "攻擊技能造成 {0}% 更少混沌傷害\\n  {0}% less Chaos Damage with Attack Skills"
+  ],
+  "193712": [
+   "被捷光環影響時，增加 {0}% 攻擊和施放速度",
+   "被捷光環影響時，增加 {0}% 攻擊和施放速度\\n  {0}% increased Attack and Cast Speed while affected by a Herald"
+  ],
+  "193762": [
+   "引導施放時，增加 {0}% 攻擊和施放速度",
+   "引導施放時，增加 {0}% 攻擊和施放速度\\n  {0}% increased Attack and Cast Speed while Channelling"
+  ],
+  "193763": [
+   "引導施放時，減少 {0}% 攻擊和施放速度",
+   "引導施放時，減少 {0}% 攻擊和施放速度\\n  {0}% reduced Attack and Cast Speed while Channelling"
+  ],
+  "194436": [
+   "近期每承受來自擊中的 200 火焰傷害，{0:+d}% 格擋攻擊傷害率",
+   "近期每承受來自擊中的 200 火焰傷害，{0:+d}% 格擋攻擊傷害率\\n  {0:+d}% Chance to Block Attack Damage for every 200 Fire Damage taken from Hits Recently"
+  ],
+  "194584": [
+   "如果近期受到殘暴打擊，增加 {0}% 攻擊速度、施放速度和移動速度",
+   "如果近期受到殘暴打擊，增加 {0}% 攻擊速度、施放速度和移動速度\\n  {0}% increased Attack, Cast and Movement Speed if you've taken a Savage Hit Recently"
+  ],
+  "195196": [
+   "護甲與閃避值兩者較低的數值每 200 點增加 1% 攻擊傷害",
+   "護甲與閃避值兩者較低的數值每 200 點增加 1% 攻擊傷害\\n  1% increased Attack Damage per 200 of the lowest of Armour and Evasion Rating"
+  ],
+  "195684": [
+   "引導施放技能時，增加 {0}% 攻擊傷害",
+   "引導施放技能時，增加 {0}% 攻擊傷害\\n  Channelling Skills deal {0}% increased Attack Damage"
+  ],
+  "195729": [
+   "{0}% 攻擊技能閃電傷害轉化至混沌傷害",
+   "{0}% 攻擊技能閃電傷害轉化至混沌傷害\\n  {0}% of Lightning Damage with Attack Skills Converted to Chaos Damage"
+  ],
+  "196618": [
+   "沙戮姿態時，減少 {0}% 攻擊速度",
+   "沙戮姿態時，減少 {0}% 攻擊速度\\n  {0}% reduced Attack Speed while in Sand Stance"
+  ],
+  "196831": [
+   "若你近期有被擊中，增加 {0}% 攻擊速度",
+   "若你近期有被擊中，增加 {0}% 攻擊速度\\n  {0}% increased Attack Speed if you've been Hit Recently"
+  ],
+  "197813": [
+   "攻擊擊中時有 {0}% 機率穿刺敵人",
+   "攻擊擊中時有 {0}% 機率穿刺敵人\\n  {0}% chance to Impale Enemies on Hit with Attacks"
+  ],
+  "198332": [
+   "{0}% 機率避免來自暴擊的異常狀態",
+   "{0}% 機率避免來自暴擊的異常狀態\\n  {0}% chance to avoid Ailments from Critical Strikes"
+  ],
+  "198596": [
+   "你有靈巧時有 {0}% 機率避免元素異常狀態",
+   "你有靈巧時有 {0}% 機率避免元素異常狀態\\n  {0}% chance to Avoid Elemental Ailments while you have Elusive"
+  ],
+  "200265": [
+   "{0}% 更多護甲",
+   "{0}% 更多護甲\\n  {0}% more Armour"
+  ],
+  "200266": [
+   "{0}% 更少護甲",
+   "{0}% 更少護甲\\n  {0}% less Armour"
+  ],
+  "200782": [
+   "{0}% 機率避免投射物",
+   "{0}% 機率避免投射物\\n  {0}% chance to avoid Projectiles"
+  ],
+  "200821": [
+   "減少 {0}% 流血持續時間",
+   "減少 {0}% 流血持續時間\\n  {0}% reduced Bleeding Duration"
+  ],
+  "200882": [
+   "格擋率很幸運",
+   "格擋率很幸運\\n  Chance to Block is Lucky"
+  ],
+  "200883": [
+   "格擋率很不幸",
+   "格擋率很不幸\\n  Chance to Block is Unlucky"
+  ],
+  "201160": [
+   "承受的混沌傷害不會無視能量護盾",
+   "承受的混沌傷害不會無視能量護盾\\n  Chaos Damage taken does not bypass Energy Shield"
+  ],
+  "201957": [
+   "免疫冰冷異常狀態",
+   "免疫冰冷異常狀態\\n  Immune to Cold Ailments"
+  ],
+  "202004": [
+   "免疫冰凍",
+   "免疫冰凍\\n  Immune to Freeze"
+  ],
+  "202262": [
+   "減少 {0}% 生命消耗效用",
+   "減少 {0}% 生命消耗效用\\n  {0}% reduced Life Cost Efficiency"
+  ],
+  "203655": [
+   "技能消耗能量護盾，而非魔力或生命",
+   "技能消耗能量護盾，而非魔力或生命\\n  Skills Cost Energy Shield instead of Mana or Life"
+  ],
+  "204302": [
+   "神秘之胎贈有{0}%機率產出1個額外物品",
+   "神秘之胎贈有{0}%機率產出1個額外物品\\n  {0}% chance for Mysterious Wombgifts to Birth an additional Item"
+  ],
+  "205423": [
+   "刀鋒陷阱有 {0}% 更多範圍效果",
+   "刀鋒陷阱有 {0}% 更多範圍效果\\n  {0}% more Blade Trap Area of Effect"
+  ],
+  "207269": [
+   "你的火球塔增加 {0}% 傷害",
+   "你的火球塔增加 {0}% 傷害\\n  Your Fireball Towers deal {0}% increased Damage"
+  ],
+  "207397": [
+   "你的噴火塔減少 {0}% 施放速度",
+   "你的噴火塔減少 {0}% 施放速度\\n  Your Flamethrower Towers have {0}% reduced Cast Speed"
+  ],
+  "207986": [
+   "你的寒冰牢籠塔減少 {0}% 範圍",
+   "你的寒冰牢籠塔減少 {0}% 範圍\\n  Your Glacial Cage Towers have {0}% reduced Range"
+  ],
+  "208662": [
+   "你的隕石塔增加 {0}% 範圍",
+   "你的隕石塔增加 {0}% 範圍\\n  Your Meteor Towers have {0}% increased Range"
+  ],
+  "209169": [
+   "你的地裂塔減少 {0}% 範圍",
+   "你的地裂塔減少 {0}% 範圍\\n  Your Seismic Towers have {0}% reduced Range"
+  ],
+  "212314": [
+   "召喚食腐魔像減少 {0}% 傷害",
+   "召喚食腐魔像減少 {0}% 傷害\\n  Summoned Carrion Golems deal {0}% reduced Damage"
+  ],
+  "212606": [
+   "更少 {0}% 命中值",
+   "更少 {0}% 命中值\\n  {0}% less Accuracy Rating"
+  ],
+  "216118": [
+   "產出的接肢成為索伏接肢的機率降低 {0}%",
+   "產出的接肢成為索伏接肢的機率降低 {0}%\\n  {0}% reduced chance for Birthed Grafts to be Xophgrafts"
+  ],
+  "216720": [
+   "產出的傳奇物品成為腰帶的機率降低 {0}%",
+   "產出的傳奇物品成為腰帶的機率降低 {0}%\\n  {0}% reduced chance for Birthed Unique Items to be Belts"
+  ],
+  "217806": [
+   "燃燒箭矢增加 {0}% 減益效果",
+   "燃燒箭矢增加 {0}% 減益效果\\n  Burning Arrow has {0}% increased Debuff Effect"
+  ],
+  "217807": [
+   "燃燒箭矢減少 {0}% 減益效果",
+   "燃燒箭矢減少 {0}% 減益效果\\n  Burning Arrow has {0}% reduced Debuff Effect"
+  ],
+  "218817": [
+   "若力量高於敏捷則不會被點燃",
+   "若力量高於敏捷則不會被點燃\\n  Cannot be Ignited if Strength is higher than Dexterity"
+  ],
+  "219709": [
+   "不能獲得充能",
+   "不能獲得充能\\n  Cannot gain Charges"
+  ],
+  "220195": [
+   "不會承受反射的元素傷害",
+   "不會承受反射的元素傷害\\n  Cannot take Reflected Elemental Damage"
+  ],
+  "220870": [
+   "元素技能增加 {0}% 施放速度",
+   "元素技能增加 {0}% 施放速度\\n  {0}% increased Cast Speed with Elemental Skills"
+  ],
+  "22133": [
+   "鑲嵌的瓦爾技能不會施加停止獲得靈魂",
+   "鑲嵌的瓦爾技能不會施加停止獲得靈魂\\n  Socketed Vaal Skills do not apply Soul Gain Prevention"
+  ],
+  "222281": [
+   "掉落的護甲有 {}% 機率變成撤銷石",
+   "掉落的護甲有 {}% 機率變成撤銷石\\n  Dropped Armour has {}% chance to be converted to an Orb of Unmaking"
+  ],
+  "222282": [
+   "掉落的護甲變成撤銷石",
+   "掉落的護甲變成撤銷石\\n  Dropped Armour is converted to Orbs of Unmaking"
+  ],
+  "222327": [
+   "掉落的飾品有 {}% 機率變成神聖石",
+   "掉落的飾品有 {}% 機率變成神聖石\\n  Dropped Jewellery has {}% chance to be converted to a Divine Orb"
+  ],
+  "222328": [
+   "掉落的飾品變成神聖石",
+   "掉落的飾品變成神聖石\\n  Dropped Jewellery is converted to Divine Orbs"
+  ],
+  "222741": [
+   "掉落的武器有 {}% 機率變成富豪石",
+   "掉落的武器有 {}% 機率變成富豪石\\n  Dropped Weapons have {}% chance to be converted to a Regal Orb"
+  ],
+  "225047": [
+   "{0}% 機率掉落 1 個額外聖甲蟲：鏽蝕深淵",
+   "{0}% 機率掉落 1 個額外聖甲蟲：鏽蝕深淵\\n  {0}% chance to drop an additional Rusted Abyss Scarab"
+  ],
+  "22763": [
+   "你在不受藥劑影響時擁有無畏神殿增益",
+   "你在不受藥劑影響時擁有無畏神殿增益\\n  You have Impenetrable Shrine Buff while affected by no Flasks"
+  ],
+  "22833": [
+   "你在不受藥劑影響時擁有回復神殿增益",
+   "你在不受藥劑影響時擁有回復神殿增益\\n  You have Replenishing Shrine Buff while affected by no Flasks"
+  ],
+  "228477": [
+   "每 500 點力量有 {0}% 機率造成兩倍傷害",
+   "每 500 點力量有 {0}% 機率造成兩倍傷害\\n  {0}% chance to deal Double Damage per 500 Strength"
+  ],
+  "229588": [
+   "擊殺時有 {0}% 機率獲得猛攻 10 秒",
+   "擊殺時有 {0}% 機率獲得猛攻 10 秒\\n  {0}% chance to gain Onslaught for 10 seconds on Kill"
+  ],
+  "229622": [
+   "擊中被蛛網纏繞的敵人有 {0}% 機率獲得 1 顆暴擊球",
+   "擊中被蛛網纏繞的敵人有 {0}% 機率獲得 1 顆暴擊球\\n  {0}% chance to gain a Power Charge on hitting an Enemy affected by a Spider's Web"
+  ],
+  "229747": [
+   "當你付出技能消耗時，有 {0}% 機率獲得等量的魔力",
+   "當你付出技能消耗時，有 {0}% 機率獲得等量的魔力\\n  {0}% chance when you pay a Skill's Cost to gain that much Mana"
+  ],
+  "230190": [
+   "火焰傷害擊中時，有 {0}% 機率造成火焰曝曬",
+   "火焰傷害擊中時，有 {0}% 機率造成火焰曝曬\\n  {0}% Chance to Inflict Fire Exposure on Hit with Fire Damage"
+  ],
+  "230310": [
+   "當你格擋敵人的傷害時，有 {0}% 機率對他們造成焦灼",
+   "當你格擋敵人的傷害時，有 {0}% 機率對他們造成焦灼\\n  {0}% chance to Scorch Enemies when you Block their Damage"
+  ],
+  "230843": [
+   "引導施放技能增加 {0}% 傷害",
+   "引導施放技能增加 {0}% 傷害\\n  Channelling Skills deal {0}% increased Damage"
+  ],
+  "230889": [
+   "每 10 個奉獻，引導施放技能增加 {0}% 傷害",
+   "每 10 個奉獻，引導施放技能增加 {0}% 傷害\\n  Channelling Skills deal {0}% increased Damage per 10 Devotion"
+  ],
+  "232098": [
+   "混沌技能減少 {0}% 範圍效果",
+   "混沌技能減少 {0}% 範圍效果\\n  Chaos Skills have {0}% reduced Area of Effect"
+  ],
+  "233258": [
+   "清晰增加 {0}% 魔力保留效用",
+   "清晰增加 {0}% 魔力保留效用\\n  Clarity has {0}% increased Mana Reservation Efficiency"
+  ],
+  "233361": [
+   "對貧血的敵人，增加 {0}% 爪的傷害",
+   "對貧血的敵人，增加 {0}% 爪的傷害\\n  {0}% increased Damage with Claws against Enemies that are on Low Life"
+  ],
+  "233641": [
+   "毒蛇鞭笞連鎖額外 1 次",
+   "毒蛇鞭笞連鎖額外 1 次\\n  Cobra Lash Chains an additional time"
+  ],
+  "233729": [
+   "增加 {0}% 冰冷異常狀態持續時間",
+   "增加 {0}% 冰冷異常狀態持續時間\\n  {0}% increased Duration of Cold Ailments"
+  ],
+  "236255": [
+   "奉獻之路增加 {0}% 傷害",
+   "奉獻之路增加 {0}% 傷害\\n  Consecrated Path deals {0}% increased Damage"
+  ],
+  "236428": [
+   "使用非引導攻擊時，將一罐充能高於50%的生命藥劑的剩餘充能改為50%\\n以此方法移除的每一充能，該攻擊獲得{0:+d}%持續傷害加成",
+   "使用非引導攻擊時，將一罐充能高於50%的生命藥劑的剩餘充能改為50%\\n以此方法移除的每一充能，該攻擊獲得{0:+d}%持續傷害加成\\n  On non-channelling Attack, set a Life Flask with greater than 50% of maximum Charges remaining to 50%\\nFor each Charge removed this way, that Attack gains {0:+d}% to Damage over time Multiplier"
+  ],
+  "237291": [
+   "每次盾牌攻擊擊中的第一個目標時，將視為格擋其攻擊傷害",
+   "每次盾牌攻擊擊中的第一個目標時，將視為格擋其攻擊傷害\\n  Count as Blocking Attack Damage from the first target Hit with each Shield Attack"
+  ],
+  "240153": [
+   "若你近期沒有擊殺，{0:+d}% 法術暴擊加成",
+   "若你近期沒有擊殺，{0:+d}% 法術暴擊加成\\n  {0:+d}% to Critical Strike Multiplier for Spells if you haven't Killed Recently"
+  ],
+  "241895": [
+   "詛咒技能增加 {0}% 技能效果持續時間",
+   "詛咒技能增加 {0}% 技能效果持續時間\\n  Curse Skills have {0}% increased Skill Effect Duration"
+  ],
+  "242305": [
+   "每 10 秒中有 4 秒 詛咒不能影響你",
+   "每 10 秒中有 4 秒 詛咒不能影響你\\n  Every 10 seconds for 4 seconds, Curses have no effect on you"
+  ],
+  "242513": [
+   "當附近最多至有 1 個稀有或傳奇敵人，你造成 {0}% 更少傷害",
+   "當附近最多至有 1 個稀有或傳奇敵人，你造成 {0}% 更少傷害\\n  {0}% less Damage while there is at most one Rare or Unique Enemy nearby"
+  ],
+  "242816": [
+   "增加 {}% 弓技能的傷害",
+   "增加 {}% 弓技能的傷害\\n  {}% increased Damage with Bow Skills"
+  ],
+  "242936": [
+   "玩家每 100 最大生命值，增加 {0}% 持續傷害",
+   "玩家每 100 最大生命值，增加 {0}% 持續傷害\\n  Deal {0}% increased Damage Over Time per 100 Player Maximum Life"
+  ],
+  "243043": [
+   "增加 {0}% 攻擊技能持續傷害",
+   "增加 {0}% 攻擊技能持續傷害\\n  {0}% increased Damage Over Time with Attack Skills"
+  ],
+  "244795": [
+   "近期每次你獲得戰吼減少 {0}% 傷害",
+   "近期每次你獲得戰吼減少 {0}% 傷害\\n  {0}% reduced Damage for each time you've Warcried Recently"
+  ],
+  "245098": [
+   "當滿血時減少 {0}% 傷害",
+   "當滿血時減少 {0}% 傷害\\n  {0}% reduced Damage when on Full Life"
+  ],
+  "245159": [
+   "被捷光環影響時，增加 {0}% 傷害",
+   "被捷光環影響時，增加 {0}% 傷害\\n  {0}% increased Damage while affected by a Herald"
+  ],
+  "246734": [
+   "每個幽魂屍布增加 {0}% 承受傷害",
+   "每個幽魂屍布增加 {0}% 承受傷害\\n  {0}% increased Damage taken per Ghost Shroud"
+  ],
+  "246888": [
+   "每個颶風之力承受 {0}% 更多傷害",
+   "每個颶風之力承受 {0}% 更多傷害\\n  {0}% more Damage taken per Gale Force"
   ],
   "248427": [
    "機會石改為掉落古變石",
@@ -122,16 +2925,1425 @@
    "重鑄石改為掉落無效石",
    "重鑄石改為掉落無效石\\n  {0}% chance for Orbs of Scouring to drop as Orbs of Annulment instead"
   ],
+  "248883": [
+   "反抗之旗增加 {0}% 魔力保留效用",
+   "反抗之旗增加 {0}% 魔力保留效用\\n  Defiance Banner has {0}% increased Mana Reservation Efficiency"
+  ],
+  "248945": [
+   "惡意增加 {0}% 光環效果",
+   "惡意增加 {0}% 光環效果\\n  Malevolence has {0}% increased Aura Effect"
+  ],
+  "249121": [
+   "傳奇頭目有 {0}% 更多最大生命",
+   "傳奇頭目有 {0}% 更多最大生命\\n  Unique Boss has {0}% more maximum Life"
+  ],
+  "249180": [
+   "褻瀆和屍術矢 {0:+d} 屍體最大上限",
+   "褻瀆和屍術矢 {0:+d} 屍體最大上限\\n  Desecrate and Unearth have {0:+d} to Maximum number of corpses allowed"
+  ],
+  "249698": [
+   "無法使用功能藥劑",
+   "無法使用功能藥劑\\n  Utility Flasks are Disabled"
+  ],
+  "251015": [
+   "區域內有許多月影神信徒",
+   "區域內有許多月影神信徒\\n  Area is inhabited by Lunaris fanatics"
+  ],
+  "251126": [
+   "神聖之泉可以祝福腰帶",
+   "神聖之泉可以祝福腰帶\\n  The Divine Font may bless belts"
+  ],
+  "251517": [
+   "區域含有額外精髓\\n精髓含有盜賊流亡者",
+   "區域含有額外精髓\\n精髓含有盜賊流亡者\\n  Areas contain additional Essences\\nEssences contain Rogue Exiles"
+  ],
+  "251622": [
+   "區域含有聖殿密園\\n作物更大\\n作物含有高階種子",
+   "區域含有聖殿密園\\n作物更大\\n作物含有高階種子\\n  Areas contain The Sacred Grove\\nCrops are larger in size\\nCrops contain higher tier seeds"
+  ],
+  "253465": [
+   "雙持爪時，來自雙持固有的攻擊速度加成為 2 倍",
+   "雙持爪時，來自雙持固有的攻擊速度加成為 2 倍\\n  Inherent Attack Speed bonus from Dual Wielding is doubled while wielding two Claws"
+  ],
+  "253669": [
+   "每 0.1 秒持續時間使震地減少 {0}% 傷害",
+   "每 0.1 秒持續時間使震地減少 {0}% 傷害\\n  Earthquake deals {0}% reduced Damage per 0.1 seconds Duration"
+  ],
+  "254145": [
+   "每顆啟發球有 {0}% 更多元素傷害",
+   "每顆啟發球有 {0}% 更多元素傷害\\n  {0}% more Elemental Damage per Inspiration Charge"
+  ],
+  "254146": [
+   "每顆啟發球有 {0}% 更少元素傷害",
+   "每顆啟發球有 {0}% 更少元素傷害\\n  {0}% less Elemental Damage per Inspiration Charge"
+  ],
+  "255051": [
+   "若近期沒有被擊中，增加承受 {0}% 元素傷害",
+   "若近期沒有被擊中，增加承受 {0}% 元素傷害\\n  {0}% increased Elemental Damage taken if you haven't\\nbeen Hit Recently"
+  ],
+  "2551": [
+   "增加 {0}% 變動物理和混沌傷害詞綴的大小",
+   "增加 {0}% 變動物理和混沌傷害詞綴的大小\\n  {0}% increased Explicit Physical and Chaos Damage Modifier magnitudes"
+  ],
+  "255757": [
+   "每隻召喚物 {0:+d}% 全部元素抗性，最多 30%",
+   "每隻召喚物 {0:+d}% 全部元素抗性，最多 30%\\n  {0:+d}% to all Elemental Resistances per Minion, up to 30%"
+  ],
+  "256084": [
+   "增加 {0}% 範圍效果 5 秒",
+   "增加 {0}% 範圍效果 5 秒\\n  Gain {0}% increased Area of Effect for 5 seconds"
+  ],
+  "256165": [
+   "增加 {0}% 元素傷害 5 秒",
+   "增加 {0}% 元素傷害 5 秒\\n  Gain {0}% increased Elemental Damage for 5 seconds"
+  ],
+  "256435": [
+   "你的靈巧在前{0}秒內會改為增加效果",
+   "你的靈巧在前{0}秒內會改為增加效果\\n  Elusive's Effect on you is increased instead for the first {0} seconds"
+  ],
+  "256701": [
+   "若你近期有施放魔法，減少 {0}% 魔力恢復率",
+   "若你近期有施放魔法，減少 {0}% 魔力恢復率\\n  {0}% reduced Mana Regeneration Rate if you've cast a Spell Recently"
+  ],
+  "25672": [
+   "擊殺時有 {0}% 機率觸發召喚卡胡圖羅亞之魂",
+   "擊殺時有 {0}% 機率觸發召喚卡胡圖羅亞之魂\\n  {0}% chance to Trigger Summon Spirit of Kahuturoa on Kill"
+  ],
+  "257126": [
+   "被你擊中冰緩的敵人被感電",
+   "被你擊中冰緩的敵人被感電\\n  Enemies Chilled by your Hits are Shocked"
+  ],
+  "257207": [
+   "被你擊殺的敵人會爆炸，造成 {0}% 它們生命的物理傷害",
+   "被你擊殺的敵人會爆炸，造成 {0}% 它們生命的物理傷害\\n  Enemies you Kill Explode, dealing {0}% of their Life as Physical Damage"
+  ],
+  "257614": [
+   "敵人擊中你時留下感電地面，每 2 秒不會超過 1 次",
+   "敵人擊中你時留下感電地面，每 2 秒不會超過 1 次\\n  Enemies drop Shocked Ground when Hitting you, no more than once every 2 seconds"
+  ],
+  "258234": [
+   "被你嘲諷的敵人不能閃避攻擊",
+   "被你嘲諷的敵人不能閃避攻擊\\n  Enemies Taunted by you cannot Evade Attacks"
+  ],
+  "258384": [
+   "敵人近期攻擊有擊中你，增加 {0}% 攻擊速度",
+   "敵人近期攻擊有擊中你，增加 {0}% 攻擊速度\\n  Enemies that have Hit you with an Attack Recently have {0}% increased Attack Speed"
+  ],
+  "258385": [
+   "敵人近期攻擊有擊中你，減少 {0}% 攻擊速度",
+   "敵人近期攻擊有擊中你，減少 {0}% 攻擊速度\\n  Enemies that have Hit you with an Attack Recently have {0}% reduced Attack Speed"
+  ],
+  "259686": [
+   "當能量護盾滿時，能量護盾偷取效果不會被移除",
+   "當能量護盾滿時，能量護盾偷取效果不會被移除\\n  Energy Shield Leech effects are not removed when Energy Shield is Filled"
+  ],
+  "259727": [
+   "滿能量護盾時，來自攻擊的能量護盾偷取效果不會移除",
+   "滿能量護盾時，來自攻擊的能量護盾偷取效果不會移除\\n  Energy Shield Leech Effects from Attacks are not removed at Full Energy Shield"
+  ],
+  "259826": [
+   "對冰凍的敵人造成傷害的 {0}% 偷取能量護盾",
+   "對冰凍的敵人造成傷害的 {0}% 偷取能量護盾\\n  {0}% of Damage Leeched as Energy Shield against Frozen Enemies"
+  ],
+  "260542": [
+   "被紀律影響時，每秒回復 {0}% 最大能量護盾",
+   "被紀律影響時，每秒回復 {0}% 最大能量護盾\\n  Regenerate {0}% of Energy Shield per Second while affected by Discipline"
+  ],
+  "26213": [
+   "獲得等級 {0} 的號召技能",
+   "獲得等級 {0} 的號召技能\\n  Grants Level {0} Convocation Skill"
+  ],
+  "262290": [
+   "每 10 秒，獲得 {0}% 物理傷害的額外火焰傷害 5 秒",
+   "每 10 秒，獲得 {0}% 物理傷害的額外火焰傷害 5 秒\\n  Every 10 seconds, gain {0}% of Physical Damage\\nas Extra Fire Damage for 4 seconds"
+  ],
+  "262715": [
+   "減少 {0}% 魔符怪物掉落探險日誌的數量",
+   "減少 {0}% 魔符怪物掉落探險日誌的數量\\n  {0}% reduced Quantity of Expedition Logbooks dropped by Runic Monsters"
+  ],
+  "262982": [
+   "減少 {0}% 爆裂物傷害",
+   "減少 {0}% 爆裂物傷害\\n  {0}% reduced Explosive Concoction Damage"
+  ],
+  "263003": [
+   "爆裂物增加 {0}% 藥劑充能使用",
+   "爆裂物增加 {0}% 藥劑充能使用\\n  Explosive Concoction uses {0}% increased Flask Charges"
+  ],
+  "263004": [
+   "爆裂物減少 {0}% 藥劑充能使用s",
+   "爆裂物減少 {0}% 藥劑充能使用s\\n  Explosive Concoction uses {0}% reduced Flask Charges"
+  ],
+  "264437": [
+   "增加熾灼奔流 {0}% 傷害",
+   "增加熾灼奔流 {0}% 傷害\\n  {0}% increased Scorching Ray Damage"
+  ],
+  "264480": [
+   "熾灼奔流的負面效果會在目標死亡時擴散至附近敵人",
+   "熾灼奔流的負面效果會在目標死亡時擴散至附近敵人\\n  Scorching Ray debuff spreads to nearby Enemies on death"
+  ],
+  "266939": [
+   "增加 {0}% 古代魚給予的願望效果",
+   "增加 {0}% 古代魚給予的願望效果\\n  {0}% increased effect of Wishes granted by Ancient Fish"
+  ],
+  "267822": [
+   "擊殺時獲得 {0}% 更多藥劑充能",
+   "擊殺時獲得 {0}% 更多藥劑充能\\n  {0}% more Flask Charges gained from Kills"
+  ],
+  "267948": [
+   "每等級增加 {0}% 藥劑效果持續時間",
+   "每等級增加 {0}% 藥劑效果持續時間\\n  {0}% increased Flask Effect Duration per Level"
+  ],
+  "268648": [
+   "若魔力消耗不高於你可支付的最大值，禁忌儀式和暗夜血契獲得等同於 {0}% 魔力消耗的附加混沌傷害",
+   "若魔力消耗不高於你可支付的最大值，禁忌儀式和暗夜血契獲得等同於 {0}% 魔力消耗的附加混沌傷害\\n  Forbidden Rite and Dark Bargain gains Added Chaos Damage equal to {0}% of Mana Cost, if Mana Cost is not higher than the maximum you could spend"
+  ],
+  "269442": [
+   "持盾時擊殺有 {0}% 機率獲得 1 顆狂怒球",
+   "持盾時擊殺有 {0}% 機率獲得 1 顆狂怒球\\n  {0}% chance to gain a Frenzy Charge on Kill while holding a Shield"
+  ],
   "270324": [
    "法術擁有等同於你已裝備雙手武器{0]%物理傷害的附加法術傷害",
    "法術擁有等同於你已裝備雙手武器{0]%物理傷害的附加法術傷害\\n  Spells have Added Spell Damage equal to {0}% of Physical Damage of\\nyour Equipped Two handed Weapon"
   ],
+  "270558": [
+   "每秒失去 {0} 顆耐力球",
+   "每秒失去 {0} 顆耐力球\\n  Lose {0} Endurance Charges each second"
+  ],
+  "271662": [
+   "若你只少有 150 個奉獻，法術擊中時護得秘能波動",
+   "若你只少有 150 個奉獻，法術擊中時護得秘能波動\\n  Gain Arcane Surge on Hit with Spells if you have at least 150 Devotion"
+  ],
+  "271801": [
+   "當你擊中傳奇敵人，有 {0}% 機率獲得秘能波動",
+   "當你擊中傳奇敵人，有 {0}% 機率獲得秘能波動\\n  {0}% chance to gain Arcane Surge when you Hit a Unique enemy"
+  ],
+  "273165": [
+   "你的暴擊擊中敵人有 {0}% 機率獲得 1 顆狂怒球",
+   "你的暴擊擊中敵人有 {0}% 機率獲得 1 顆狂怒球\\n  {0}% chance to gain a Frenzy Charge for each Enemy you hit with a Critical Strike"
+  ],
+  "273203": [
+   "引導施放時被擊中，有 {0}% 機率獲得 1 顆狂怒球",
+   "引導施放時被擊中，有 {0}% 機率獲得 1 顆狂怒球\\n  {0}% chance to gain a Frenzy Charge when Hit while Channelling"
+  ],
+  "273834": [
+   "被擊中時有獲得 3 秒猛攻",
+   "被擊中時有獲得 3 秒猛攻\\n  Gain Onslaught for 3 seconds when Hit"
+  ],
+  "274925": [
+   "引導施放時，每秒獲得 1 顆暴擊球或狂怒球",
+   "引導施放時，每秒獲得 1 顆暴擊球或狂怒球\\n  Gain a Power or Frenzy Charge each second while Channelling"
+  ],
+  "274951": [
+   "當你格擋時，獲得 1 顆耐力球、狂怒球或暴擊球",
+   "當你格擋時，獲得 1 顆耐力球、狂怒球或暴擊球\\n  Gain an Endurance, Frenzy or Power charge when you Block"
+  ],
+  "275062": [
+   "當你使用技能時獲得犧牲狂熱，每秒造成 {0}% 你技能魔力消耗的物理傷害",
+   "當你使用技能時獲得犧牲狂熱，每秒造成 {0}% 你技能魔力消耗的物理傷害\\n  Gain Sacrificial Zeal when you use a Skill, dealing you {0}% of the Skill's Mana Cost as Physical Damage per Second"
+  ],
+  "276261": [
+   "近戰擊中時獲得 {0} 層盛怒",
+   "近戰擊中時獲得 {0} 層盛怒\\n  Gain {0} Rage on Melee Hit"
+  ],
+  "276331": [
+   "被敵人擊中時獲得 {0} 層盛怒",
+   "被敵人擊中時獲得 {0} 層盛怒\\n  Gain {0} Rage when Hit by an Enemy"
+  ],
+  "279600": [
+   "增加 {0}% 生靈之力",
+   "增加 {0}% 生靈之力\\n  {0}% increased Lifeforce"
+  ],
+  "27963": [
+   "獲得等級 {0} 的召喚黑暗雕像技能",
+   "獲得等級 {0} 的召喚黑暗雕像技能\\n  Grants Level {0} Summon Dark Effigy Skill"
+  ],
+  "280081": [
+   "憎恨減少 {0}% 魔力保留效用",
+   "憎恨減少 {0}% 魔力保留效用\\n  Hatred has {0}% reduced Mana Reservation Efficiency"
+  ],
+  "28110": [
+   "每秒對周遭的敵人施加藤壺",
+   "每秒對周遭的敵人施加藤壺\\n  Inflict Barnacles on nearby Enemies every second"
+  ],
+  "281679": [
+   "劫盜保險箱複製內含的地圖",
+   "劫盜保險箱複製內含的地圖\\n  Heist Chests Duplicate contained Maps"
+  ],
+  "283256": [
+   "劫盜中的增幅石改為掉落混沌石",
+   "劫盜中的增幅石改為掉落混沌石\\n  In Heists Orbs of Augmentation drop as Chaos Orbs instead"
+  ],
+  "284356": [
+   "劫盜時增加 {0}% 物品掉落數量",
+   "劫盜時增加 {0}% 物品掉落數量\\n  {0}% increased Quantity of Items dropped in Heists"
+  ],
+  "284602": [
+   "劫盜中有 {0}% 機率掉落的物品有尊師勢力",
+   "劫盜中有 {0}% 機率掉落的物品有尊師勢力\\n  {0}% chance in Heists for Items to drop with Elder Influence"
+  ],
+  "28587": [
+   "賦予等級 20 召喚塑界者的記憶\\n賦予等級 20 塑界者的憤怒，供塑界者的記憶使用",
+   "賦予等級 20 召喚塑界者的記憶\\n賦予等級 20 塑界者的憤怒，供塑界者的記憶使用\\n  Grants Level 20 Summon Shaper Memory\\nGrants Level 20 Shaper's Ire, which will be used by Shaper Memory"
+  ],
+  "286602": [
+   "{0}% 機率轉化降低 1 階裝備上的有害詞綴",
+   "{0}% 機率轉化降低 1 階裝備上的有害詞綴\\n  {0}% chance for transforming to grant Detrimental Modifiers one tier lower on Equipment"
+  ],
+  "286882": [
+   "{0}% 機率轉化提升 1 階裝備上的有利詞綴",
+   "{0}% 機率轉化提升 1 階裝備上的有利詞綴\\n  {0}% chance for transforming to grant Beneficial Modifiers one tier higher on Equipment"
+  ],
+  "287292": [
+   "灰燼之捷減少 {0}% 增益效果",
+   "灰燼之捷減少 {0}% 增益效果\\n  Herald of Ash has {0}% reduced Buff Effect"
+  ],
+  "287636": [
+   "純淨之捷增加 {0}% 增益效果",
+   "純淨之捷增加 {0}% 增益效果\\n  Herald of Purity has {0}% increased Buff Effect"
+  ],
+  "289487": [
+   "使用此武器擊中，每敵人強度 +{0}% 暴擊加成",
+   "使用此武器擊中，每敵人強度 +{0}% 暴擊加成\\n  Hits with this Weapon have +{0}% to Critical Strike Multiplier per Enemy Power"
+  ],
+  "290111": [
+   "召喚的聖物減少 {0}% 冷卻時間恢復率",
+   "召喚的聖物減少 {0}% 冷卻時間恢復率\\n  Summoned Holy Relics have {0}% reduced Cooldown Recovery Rate"
+  ],
+  "292760": [
+   "增加 {0}% 你使用雙手武器對未被穿刺的敵人所造成的穿刺效果",
+   "增加 {0}% 你使用雙手武器對未被穿刺的敵人所造成的穿刺效果\\n  {0}% increased Effect of Impales you inflict with Two Handed Weapons on Non-Impaled Enemies"
+  ],
+  "293288": [
+   "承受 {0}% 更少冰冷傷害",
+   "承受 {0}% 更少冰冷傷害\\n  {0}% less Cold Damage taken"
+  ],
+  "296907": [
+   "被惡意影響時，增加 {0}% 生命和能量護盾恢復率",
+   "被惡意影響時，增加 {0}% 生命和能量護盾恢復率\\n  {0}% increased Recovery rate of Life and Energy Shield while affected by Malevolence"
+  ],
+  "297036": [
+   "生命藥劑每 3 秒獲得 {0} 充能",
+   "生命藥劑每 3 秒獲得 {0} 充能\\n  Life Flasks gain {0} Charges every 3 seconds"
+  ],
+  "29726": [
+   "當以此武器近戰擊中時，觸發等級{0}的雷彈，有 0.25 秒冷卻時間",
+   "當以此武器近戰擊中時，觸發等級{0}的雷彈，有 0.25 秒冷卻時間\\n  Trigger Level {0} Lightning Bolt on Melee Hit with this Weapon, with a 0.25 second cooldown"
+  ],
+  "297383": [
+   "若你近期有使用瓦爾技能，每擊中一個敵人失去 {0} 生命",
+   "若你近期有使用瓦爾技能，每擊中一個敵人失去 {0} 生命\\n  Lose {0} Life per Enemy Hit if you have used a Vaal Skill Recently"
+  ],
+  "299130": [
+   "引導施放時，每秒回復 {0}% 生命",
+   "引導施放時，每秒回復 {0}% 生命\\n  Regenerate {0}% of Life per second while Channelling"
+  ],
+  "299340": [
+   "若近期有召喚物死亡，每秒回復 {0}% 生命",
+   "若近期有召喚物死亡，每秒回復 {0}% 生命\\n  Regenerate {0}% of Life per second if a Minion has Died Recently"
+  ],
+  "29988": [
+   "迷蹤時，每 0.5 秒觸發等級 {0} 的隱匿突擊",
+   "迷蹤時，每 0.5 秒觸發等級 {0} 的隱匿突擊\\n  Trigger Level {0} Unseen Strike every 0.5 seconds while Phasing"
+  ],
+  "299900": [
+   "站立時，每秒回復 {0}% 生命",
+   "站立時，每秒回復 {0}% 生命\\n  Regenerate {0}% of Life per second while stationary"
+  ],
+  "300040": [
+   "增加和減少照亮範圍同時套用至你作用於\\n你傭兵上的連結技能增益效果",
+   "增加和減少照亮範圍同時套用至你作用於\\n你傭兵上的連結技能增益效果\\n  Increases and Reductions to Light Radius also apply to Effect\\nof your Link Skill Buffs on your Mercenary"
+  ],
+  "300600": [
+   "導雷增加 {0}% 傷害",
+   "導雷增加 {0}% 傷害\\n  Lightning Conduit deals {0}% increased Damage"
+  ],
+  "301195": [
+   "風爆地雷減少 {0}% 投擲速度",
+   "風爆地雷減少 {0}% 投擲速度\\n  Stormblast Mine has {0}% reduced Throwing Speed"
+  ],
+  "30153": [
+   "擊殺時有 {0}% 機率觸發等級 8 的召喚憤怒狂靈",
+   "擊殺時有 {0}% 機率觸發等級 8 的召喚憤怒狂靈\\n  {0}% chance to Trigger Level 10 Summon Raging Spirit on Kill"
+  ],
+  "301755": [
+   "電能釋放每擊中一個敵人，增加 {0}% 範圍效果",
+   "電能釋放每擊中一個敵人，增加 {0}% 範圍效果\\n  Lightning Tendrils has {0}% increased Area of Effect per Enemy Hit"
+  ],
+  "302070": [
+   "減少 {0}% 鋒雷陷阱投擲速度",
+   "減少 {0}% 鋒雷陷阱投擲速度\\n  {0}% reduced Lightning Spire Trap Throwing Speed"
+  ],
+  "30230": [
+   "暴擊時觸發煉獄之誡",
+   "暴擊時觸發煉獄之誡\\n  Trigger Commandment of Inferno on Critical Strike"
+  ],
+  "30276": [
+   "裝備時觸發等級 {0} 的行屍走肉",
+   "裝備時觸發等級 {0} 的行屍走肉\\n  Triggers Level {0} Corpse Walk when Equipped"
+  ],
+  "305018": [
+   "1 個附加天賦為氣動學",
+   "1 個附加天賦為氣動學\\n  1 Added Passive Skill is Aerodynamics"
+  ],
+  "310160": [
+   "1 個附加的天賦為振奮預兆",
+   "1 個附加的天賦為振奮預兆\\n  1 Added Passive Skill is Invigorating Portents"
+  ],
+  "310198": [
+   "1 個附加的天賦為碎鐵者",
+   "1 個附加的天賦為碎鐵者\\n  1 Added Passive Skill is Iron Breaker"
+  ],
+  "310440": [
+   "1 個附加的天賦為魔術災厄",
+   "1 個附加的天賦為魔術災厄\\n  1 Added Passive Skill is Mage Bane"
+  ],
+  "31104": [
+   "當你使用插槽中的技能時，觸發等級 {} 的烈焰衝刺",
+   "當你使用插槽中的技能時，觸發等級 {} 的烈焰衝刺\\n  Trigger Level {} Flame Dash when you use a Socketed Skill"
+  ],
+  "311738": [
+   "1 個附加的天賦為壓力點",
+   "1 個附加的天賦為壓力點\\n  1 Added Passive Skill is Pressure Points"
+  ],
+  "31288": [
+   "裝備時觸發等級 {0} 的反射",
+   "裝備時觸發等級 {0} 的反射\\n  Triggers Level {0} Reflection when Equipped"
+  ],
+  "314500": [
+   "1 個附加的天賦為堅定邪靈",
+   "1 個附加的天賦為堅定邪靈\\n  1 Added Passive Skill is Unwaveringly Evil"
+  ],
+  "314567": [
+   "1 個附加天賦為正道",
+   "1 個附加天賦為正道\\n  1 Added Passive Skill is Righteous Path"
+  ],
+  "315990": [
+   "可以有 {0} 個額外魔符鍛造附魔",
+   "可以有 {0} 個額外魔符鍛造附魔\\n  Can have {0} additional Runesmithing Enchantment"
+  ],
+  "317992": [
+   "你被壓碎",
+   "你被壓碎\\n  You are Crushed"
+  ],
+  "31828": [
+   "當該武器擊中並冰凍目標時\\n觸發 1 個插槽中的法術，有 0.25 秒冷卻時間",
+   "當該武器擊中並冰凍目標時\\n觸發 1 個插槽中的法術，有 0.25 秒冷卻時間\\n  Trigger a Socketed Spell when a Hit from this\\nWeapon Freezes a Target, with a 0.25 second Cooldown"
+  ],
+  "318830": [
+   "若你近期有格擋，此武器擊中不能被閃避",
+   "若你近期有格擋，此武器擊中不能被閃避\\n  Hits with this Weapon can't be Evaded if you have Blocked Recently"
+  ],
+  "319125": [
+   "若吞噬天地支配，暴擊造成惡之狂亂",
+   "若吞噬天地支配，暴擊造成惡之狂亂\\n  Critical Strikes inflict Malignant Madness if The Eater of Worlds is dominant"
+  ],
+  "319853": [
+   "附加老鳥意識",
+   "附加老鳥意識\\n  Adds Veteran's Awareness"
+  ],
+  "320633": [
+   "每 2% 品質 {0:+d}% 閃電抗性",
+   "每 2% 品質 {0:+d}% 閃電抗性\\n  Grants {0:+d}% to Lightning Resistance per 2% Quality"
+  ],
+  "32162": [
+   "{0:+d} 最大充能。使用時 -1 此數值",
+   "{0:+d} 最大充能。使用時 -1 此數值\\n  {0:+d} to Maximum Charges. -1 to this value when used"
+  ],
+  "322093": [
+   "增加{0}%插槽內魔法催眠之眼珠寶的效果",
+   "增加{0}%插槽內魔法催眠之眼珠寶的效果\\n  {0}% increased Effect of Socketed Magic Hypnotic Eye Jewels"
+  ],
+  "322094": [
+   "減少{0}%插槽內魔法催眠之眼珠寶的效果",
+   "減少{0}%插槽內魔法催眠之眼珠寶的效果\\n  {0}% reduced Effect of Socketed Magic Hypnotic Eye Jewels"
+  ],
+  "322185": [
+   "增加{0}%插槽內魔法勘查之眼珠寶的效果",
+   "增加{0}%插槽內魔法勘查之眼珠寶的效果\\n  {0}% increased Effect of Socketed Magic Searching Eye Jewels"
+  ],
+  "322186": [
+   "減少{0}%插槽內魔法勘查之眼珠寶的效果",
+   "減少{0}%插槽內魔法勘查之眼珠寶的效果\\n  {0}% reduced Effect of Socketed Magic Searching Eye Jewels"
+  ],
+  "323395": [
+   "若範圍內含 40 點智慧，解放造成 {0}% 更少傷害",
+   "若範圍內含 40 點智慧，解放造成 {0}% 更少傷害\\n  With at least 40 Intelligence in Radius, Discharge deals {0}% less Damage"
+  ],
+  "323452": [
+   "範圍內未配置的天賦中，每 10 點智慧 {0:+d}% 持續傷害加成",
+   "範圍內未配置的天賦中，每 10 點智慧 {0:+d}% 持續傷害加成\\n  {0:+d}% to Damage over Time Multiplier per 10 Intelligence on Unallocated Passives in Radius"
+  ],
+  "323794": [
+   "若範圍內含總 40 智慧和敏捷，三相技能造成 50% 更少火焰傷害",
+   "若範圍內含總 40 智慧和敏捷，三相技能造成 50% 更少火焰傷害\\n  With 40 total Intelligence and Dexterity in Radius, Prismatic Skills deal 50% less Fire Damage"
+  ],
+  "32542": [
+   "增加 {0}% 充能恢復",
+   "增加 {0}% 充能恢復\\n  {0}% increased Charge Recovery"
+  ],
+  "325554": [
+   "範圍內的天賦同時減少 {0}% 冰冷傷害",
+   "範圍內的天賦同時減少 {0}% 冰冷傷害\\n  Passive Skills in Radius also grant {0}% reduced Cold Damage"
+  ],
+  "326992": [
+   "當你使用技能時失去 {0} 魔力",
+   "當你使用技能時失去 {0} 魔力\\n  Lose {0} Mana when you use a Skill"
+  ],
+  "327196": [
+   "減少 {0}% 魔法怪物擊殺時掉落物品稀有度",
+   "減少 {0}% 魔法怪物擊殺時掉落物品稀有度\\n  {0}% reduced Rarity of Items Dropped by Slain Magic Enemies"
+  ],
+  "327872": [
+   "瘟疫打擊減少 {0}% 傷害",
+   "瘟疫打擊減少 {0}% 傷害\\n  Pestilent Strike deals {0}% reduced Damage"
+  ],
+  "328744": [
+   "每級 {0:+d} 最大魔力",
+   "每級 {0:+d} 最大魔力\\n  {0:+d} Maximum Mana per Level"
+  ],
+  "330136": [
+   "{0}% 魔能束縛和風暴術符的閃電傷害轉化至冰冷傷害",
+   "{0}% 魔能束縛和風暴術符的閃電傷害轉化至冰冷傷害\\n  {0}% of Manabond and Stormbind Lightning Damage Converted to Cold Damage"
+  ],
+  "330202": [
+   "減少 {0}% 魔能束縛傷害",
+   "減少 {0}% 魔能束縛傷害\\n  {0}% reduced Manabond Damage"
+  ],
+  "330283": [
+   "減少 {0}% 魔能束縛範圍效果t",
+   "減少 {0}% 魔能束縛範圍效果t\\n  {0}% reduced Manabond Area of Effect"
+  ],
+  "330985": [
+   "譫妄獎勵條加速 {0}% 填滿",
+   "譫妄獎勵條加速 {0}% 填滿\\n  Delirium Reward Bars fill {0}% faster"
+  ],
+  "33225": [
+   "若使用時貧血，有 {0}% 更多恢復",
+   "若使用時貧血，有 {0}% 更多恢復\\n  {0}% more Recovery if used while on Low Life"
+  ],
+  "332712": [
+   "區域含有額外 {0} 組神秘木桶",
+   "區域含有額外 {0} 組神秘木桶\\n  Area contains {0} additional Clusters of Mysterious Barrels"
+  ],
+  "336007": [
+   "區域含有額外 {0} 群硫酸魔像",
+   "區域含有額外 {0} 群硫酸魔像\\n  Area contains {0} additional packs of Sulphite Golems"
+  ],
+  "337111": [
+   "區域含有 1 群富裕的魔法怪物",
+   "區域含有 1 群富裕的魔法怪物\\n  Area contains an additional Magic Pack of Wealth"
+  ],
+  "337680": [
+   "區域含有 {0} 個額外原始豐收頭目",
+   "區域含有 {0} 個額外原始豐收頭目\\n  Area contains {0} additional Primal Harvest Bosses"
+  ],
+  "33937": [
+   "使用時製造冰緩地面",
+   "使用時製造冰緩地面\\n  Creates Chilled Ground on Use"
+  ],
+  "341202": [
+   "地圖有 1 個瓦爾地區",
+   "地圖有 1 個瓦爾地區\\n  Map has a Vaal Side Area"
+  ],
+  "341278": [
+   "傳奇怪物減少 {0}% 最大生命",
+   "傳奇怪物減少 {0}% 最大生命\\n  Unique Monsters have {0}% reduced Maximum Life"
+  ],
+  "342534": [
+   "受精髓禁錮的怪物增加 {0}% 行動速度",
+   "受精髓禁錮的怪物增加 {0}% 行動速度\\n  Imprisoned Monsters have {0}% increased Action Speed"
+  ],
+  "342535": [
+   "受精髓禁錮的怪物減少 {0}% 行動速度",
+   "受精髓禁錮的怪物減少 {0}% 行動速度\\n  Imprisoned Monsters have {0}% reduced Action Speed"
+  ],
+  "343189": [
+   "傳奇頭目被罪魂：煉金術士附身",
+   "傳奇頭目被罪魂：煉金術士附身\\n  Unique Bosses are possessed by Tormented Alchemist"
+  ],
+  "344048": [
+   "該地圖的品質加成將同時套用在掉落物品稀有度上",
+   "該地圖的品質加成將同時套用在掉落物品稀有度上\\n  This Map's Quality also applies to Rarity of Items found"
+  ],
+  "34422": [
+   "消耗每顆狂怒球獲得 {0} 秒猛攻效果",
+   "消耗每顆狂怒球獲得 {0} 秒猛攻效果\\n  Gain Onslaught for {0} second per Frenzy Charge consumed on use"
+  ],
+  "34423": [
+   "消耗每顆狂怒球獲得 {0} 秒猛攻效果",
+   "消耗每顆狂怒球獲得 {0} 秒猛攻效果\\n  Gain Onslaught for {0} seconds per Frenzy Charge consumed on use"
+  ],
+  "344699": [
+   "區域被布琳洛特軍團守衛著",
+   "區域被布琳洛特軍團守衛著\\n  Area is inhabited by Brinerot Warbands"
+  ],
+  "345185": [
+   "區域含有 {0} 位盜賊流亡者",
+   "區域含有 {0} 位盜賊流亡者\\n  Area contains {0} Rogue Exiles"
+  ],
+  "346389": [
+   "魔法怪物減少 {0}% 承受傷害",
+   "魔法怪物減少 {0}% 承受傷害\\n  Magic Monsters take {0}% reduced Damage"
+  ],
+  "347909": [
+   "區域內的怪物有花瓣的機率減少 {0}%",
+   "區域內的怪物有花瓣的機率減少 {0}%\\n  {0}% reduced chance for Monsters in Area to have Petals"
+  ],
+  "34836": [
+   "若使用時非滿血，在 10 秒內恢復額外 {0}% 藥劑的生命恢復總量",
+   "若使用時非滿血，在 10 秒內恢復額外 {0}% 藥劑的生命恢復總量\\n  Recover an additional {0}% of Flask's Life Recovery Amount over 10 seconds if used while not on Full Life"
+  ],
+  "348789": [
+   "怪物擊中必定造成點燃",
+   "怪物擊中必定造成點燃\\n  Monsters' Hits always Ignite"
+  ],
+  "349098": [
+   "怪物造成易碎",
+   "怪物造成易碎\\n  Monsters inflict Brittle"
+  ],
+  "349261": [
+   "怪物增加 {0}% 傷害",
+   "怪物增加 {0}% 傷害\\n  Monsters take {0}% increased Damage"
+  ],
+  "349423": [
+   "快物增加 {0}% 冰凍持續時間",
+   "快物增加 {0}% 冰凍持續時間\\n  Monsters have {0}% increased Freeze Duration"
+  ],
+  "349791": [
+   "擊中時，怪物有 {0}% 機率點燃、冰凍和感電",
+   "擊中時，怪物有 {0}% 機率點燃、冰凍和感電\\n  Monsters have a {0}% chance to Ignite, Freeze and Shock on Hit"
+  ],
+  "350345": [
+   "怪物法術擊中時造成阻礙",
+   "怪物法術擊中時造成阻礙\\n  Monsters Hinder on Hit with Spells"
+  ],
+  "350519": [
+   "怪物有 {0}% 機率有核息",
+   "怪物有 {0}% 機率有核息\\n  Monsters have {0}% chance to have a Volatile Core"
+  ],
+  "351173": [
+   "隨機掉落的普通物品被魔法物品替代",
+   "隨機掉落的普通物品被魔法物品替代\\n  Randomly dropped Items are Magic instead of Normal"
+  ],
+  "351335": [
+   "此區域含 {0} 個額外神諭",
+   "此區域含 {0} 個額外神諭\\n  Area contains {0} additional Harbingers"
+  ],
+  "351523": [
+   "區域有 {0} 個額外隨機詞綴",
+   "區域有 {0} 個額外隨機詞綴\\n  Area has {0} additional random Modifiers"
+  ],
+  "351750": [
+   "玩家有最多 {0:+d} 個召喚圖騰",
+   "玩家有最多 {0:+d} 個召喚圖騰\\n  Players have {0:+d} to maximum number of Summoned Totems"
+  ],
+  "352107": [
+   "區域內有許多月影神信徒",
+   "區域內有許多月影神信徒\\n  Area is inhabited by Lunaris fanatics"
+  ],
+  "353351": [
+   "{0}%更多施加於玩家的藥劑效果",
+   "{0}%更多施加於玩家的藥劑效果\\n  Players have {0}% more effect of Flasks applied to them"
+  ],
+  "353707": [
+   "玩家增加 {0}% 移動速度",
+   "玩家增加 {0}% 移動速度\\n  Players have {0}% increased Movement Speed"
+  ],
+  "353708": [
+   "玩家減少 {0}% 移動速度",
+   "玩家減少 {0}% 移動速度\\n  Players have {0}% reduced Movement Speed"
+  ],
+  "35387": [
+   "使用時適應每個元素",
+   "使用時適應每個元素\\n  Adapt to each Element on use"
+  ],
+  "354304": [
+   "玩家與怪物擁有堅毅之心",
+   "玩家與怪物擁有堅毅之心\\n  Players and Monsters have Resolute Technique"
+  ],
+  "35457": [
+   "使用時回復保護",
+   "使用時回復保護\\n  Restores Ward on use"
+  ],
+  "354942": [
+   "當玩家擊殺稀有怪物時，獲得它其中 1 個詞綴，持續 20 秒",
+   "當玩家擊殺稀有怪物時，獲得它其中 1 個詞綴，持續 20 秒\\n  When Players Kill a Rare Monster they will gain 1 of its Modifiers for 20 seconds"
+  ],
+  "355652": [
+   "最初 3 個被附身的怪物有 {0}% 機率掉落 1 個額外鍍金聖甲蟲",
+   "最初 3 個被附身的怪物有 {0}% 機率掉落 1 個額外鍍金聖甲蟲\\n  The First 3 Possessed Monsters have a {0}% chance to drop an additional Gilded Scarab"
+  ],
+  "355745": [
+   "最初 3 個被附身的怪物掉落 1 個額外圓滑聖甲蟲",
+   "最初 3 個被附身的怪物掉落 1 個額外圓滑聖甲蟲\\n  The First 3 Possessed Monsters drop an additional Polished Scarab"
+  ],
+  "355891": [
+   "前 3 個被附身的怪物掉落 1 個額外展翅聖甲蟲",
+   "前 3 個被附身的怪物掉落 1 個額外展翅聖甲蟲\\n  The First 3 Possessed Monsters drop an additional Winged Scarab"
+  ],
+  "356652": [
+   "區域內稀有怪物有 {0}% 機率被附身",
+   "區域內稀有怪物有 {0}% 機率被附身\\n  {0}% chance for Rare Monsters in Area to be Possessed"
+  ],
+  "35687": [
+   "當你被點燃時使用",
+   "當你被點燃時使用\\n  Used when you become Ignited"
+  ],
+  "357574": [
+   "神殿被使用時掉落 1 個基礎通貨",
+   "神殿被使用時掉落 1 個基礎通貨\\n  Shrines drop a Basic Currency Item when used"
+  ],
+  "3580": [
+   "有 {0} 個白色插槽",
+   "有 {0} 個白色插槽\\n  Has {0} White Sockets"
+  ],
+  "358624": [
+   "後綴詞綴沒有效果",
+   "後綴詞綴沒有效果\\n  Suffix Modifiers have no effect"
+  ],
+  "358700": [
+   "玩家被隕石隨機瞄準",
+   "玩家被隕石隨機瞄準\\n  Players are randomly targeted by Meteors"
+  ],
+  "359446": [
+   "追憶之魔法怪物有 {0}% 機率掉落 1 個化石",
+   "追憶之魔法怪物有 {0}% 機率掉落 1 個化石\\n  Synthesised Magic Monsters have {0}% chance to drop a Fossil"
+  ],
+  "359684": [
+   "追憶之魔法怪物掉落 1 個額外品質通貨",
+   "追憶之魔法怪物掉落 1 個額外品質通貨\\n  Synthesised Magic Monsters drop an additional Quality Currency Item"
+  ],
+  "361694": [
+   "追憶之稀有怪物增加 {0}% 掉落地圖機率",
+   "追憶之稀有怪物增加 {0}% 掉落地圖機率\\n  Synthesised Rare Monsters have {0}% increased chance to drop a Map"
+  ],
+  "362177": [
+   "罪魂可以附身玩家 20 秒\\n罪魂不能附身怪物",
+   "罪魂可以附身玩家 20 秒\\n罪魂不能附身怪物\\n  Tormented Spirits can Possess Players for 20 seconds\\nTormented Spirits cannot Possess Monsters"
+  ],
+  "362407": [
+   "你地圖中的通諜事件，\\n增加 {0}% 機率要求你站在石陣內",
+   "你地圖中的通諜事件，\\n增加 {0}% 機率要求你站在石陣內\\n  Ultimatum Encounters in your Maps have {0}% increased chance to\\nrequire you to Stand in the Stone Circles"
+  ],
+  "362941": [
+   "你地圖中的最後通牒獎勵為深淵物品的機率增加 {0}%",
+   "你地圖中的最後通牒獎勵為深淵物品的機率增加 {0}%\\n  Ultimatum Rewards in your Maps have {0}% increased chance to be Abyssal Items"
+  ],
+  "363080": [
+   "你地圖中的最後通牒獎勵為催化劑的機率減少 {0}%",
+   "你地圖中的最後通牒獎勵為催化劑的機率減少 {0}%\\n  Ultimatum Rewards in your Maps have {0}% reduced chance to be Catalysts"
+  ],
+  "364742": [
+   "瓦爾容器包含 1 個額外給予已汙染物品的命運卡",
+   "瓦爾容器包含 1 個額外給予已汙染物品的命運卡\\n  Vaal Vessel contains an additional Divination Card that give Corrupted Items"
+  ],
+  "364861": [
+   "瓦爾容器包含 {0} 個額外等級 20 的瓦爾寶石",
+   "瓦爾容器包含 {0} 個額外等級 20 的瓦爾寶石\\n  Vaal Vessel contains {0} additional Level 20 Vaal Gems"
+  ],
+  "365329": [
+   "瓦爾容器包含 1 個額外瓦爾寶珠",
+   "瓦爾容器包含 1 個額外瓦爾寶珠\\n  Vaal Vessel contains an additional Vaal Orb"
+  ],
   "365356": [
    "瓦爾容器包含 1 張瓦爾密殿",
    "瓦爾容器包含 1 張瓦爾密殿\\n  Vaal Vessel contains {0} additional Vaal Temple Maps"
+  ],
+  "366551": [
+   "被印記的敵人不會回復生命",
+   "被印記的敵人不會回復生命\\n  Marked Enemy cannot Regenerate Life"
+  ],
+  "366820": [
+   "{0:+d} 最大護體",
+   "{0:+d} 最大護體\\n  {0:+d} to maximum Fortification"
+  ],
+  "367900": [
+   "裝備的長杖上每有一個紅色插槽，增加 {0}% 最大生命",
+   "裝備的長杖上每有一個紅色插槽，增加 {0}% 最大生命\\n  {0}% increased maximum Life per Red Socket on equipped Staff"
+  ],
+  "367901": [
+   "裝備的長杖上每有一個紅色插槽，減少 {0}% 最大生命",
+   "裝備的長杖上每有一個紅色插槽，減少 {0}% 最大生命\\n  {0}% reduced maximum Life per Red Socket on equipped Staff"
+  ],
+  "368273": [
+   "若你近期承受殘暴打擊，增加 {0}% 來自偷取的每秒生命最大總恢復",
+   "若你近期承受殘暴打擊，增加 {0}% 來自偷取的每秒生命最大總恢復\\n  {0}% increased Maximum total Life Recovery per second from Leech if you've taken a Savage Hit Recently"
+  ],
+  "368274": [
+   "若你近期承受殘暴打擊，減少 {0}% 來自偷取的每秒生命最大總恢復",
+   "若你近期承受殘暴打擊，減少 {0}% 來自偷取的每秒生命最大總恢復\\n  {0}% reduced Maximum total Life Recovery per second from Leech if you've taken a Savage Hit Recently"
+  ],
+  "368300": [
+   "每 10 點敏捷增加 {0:+d} 最大生命",
+   "每 10 點敏捷增加 {0:+d} 最大生命\\n  {0:+d} to Maximum Life per 10 Dexterity"
+  ],
+  "36834": [
+   "效果持續時間內，{0}% 物理傷害偷取魔力",
+   "效果持續時間內，{0}% 物理傷害偷取魔力\\n  {0}% of Physical Attack Damage Leeched as Mana during Effect"
+  ],
+  "368408": [
+   "每個配置的軀體的歷練紋身，{:+d} 最大生命",
+   "每個配置的軀體的歷練紋身，{:+d} 最大生命\\n  {:+d} to maximum Life per Allocated Journey Tattoo of the Body"
+  ],
+  "370960": [
+   "你的傭兵可以裝備傳奇鞋子",
+   "你的傭兵可以裝備傳奇鞋子\\n  Your Mercenary can equip Unique Boots"
+  ],
+  "371320": [
+   "地雷減少 {0}% 引爆速度",
+   "地雷減少 {0}% 引爆速度\\n  Mines have {0}% reduced Detonation Speed"
+  ],
+  "372735": [
+   "貧血時 {0:+d} 最小暴擊球",
+   "貧血時 {0:+d} 最小暴擊球\\n  {0:+d} to Minimum Power Charges while on Low Life"
+  ],
+  "37289": [
+   "效果持續時間內，有 {0}% 機率造成中毒",
+   "效果持續時間內，有 {0}% 機率造成中毒\\n  {0}% chance to Poison on Hit during Effect"
+  ],
+  "374404": [
+   "召喚物增加 {0}% 閃避值",
+   "召喚物增加 {0}% 閃避值\\n  Minions have {0}% increased Evasion Rating"
+  ],
+  "374838": [
+   "召喚物每秒回復 {0} 生命",
+   "召喚物每秒回復 {0} 生命\\n  Minions Regenerate {0} Life per second"
+  ],
+  "377163": [
+   "在遭敵人擊中前，獲得{0}%失去的未保留魔力",
+   "在遭敵人擊中前，獲得{0}%失去的未保留魔力\\n  Gain {0}% of Missing Unreserved Mana before being Hit by an Enemy"
+  ],
+  "377965": [
+   "被擊殺時從殺手的藥劑移除 {} 次藥劑充能",
+   "被擊殺時從殺手的藥劑移除 {} 次藥劑充能\\n  Remove {} Flask Charge from killer's Flasks when slain"
+  ],
+  "378972": [
+   "若你近期沒受到傷害，增加 {0}% 移動速度",
+   "若你近期沒受到傷害，增加 {0}% 移動速度\\n  {0}% increased Movement Speed if you haven't taken Damage Recently"
+  ],
+  "379502": [
+   "沒有藥劑效果時，增加 {0}% 移動速度",
+   "沒有藥劑效果時，增加 {0}% 移動速度\\n  {0}% increased Movement Speed while under no Flask Effects"
+  ],
+  "381331": [
+   "移除全部閃避",
+   "移除全部閃避\\n  Removes all Evasion"
+  ],
+  "38142": [
+   "當你在效果期間點燃敵人，偷取 {0}% 的預期點燃傷害為生命",
+   "當你在效果期間點燃敵人，偷取 {0}% 的預期點燃傷害為生命\\n  Leech {0}% of Expected Ignite Damage as Life when you Ignite an Enemy during Effect"
+  ],
+  "381677": [
+   "你造成中毒的非冰緩敵人被冰緩",
+   "你造成中毒的非冰緩敵人被冰緩\\n  Non-Chilled Enemies you Poison are Chilled"
+  ],
+  "382362": [
+   "你造成的非傷害型元素異常狀態擴散至 {0} 米內的其它敵人",
+   "你造成的非傷害型元素異常狀態擴散至 {0} 米內的其它敵人\\n  Non-Damaging Elemental Ailments you inflict spread to other enemies within {0} metre"
+  ],
+  "382363": [
+   "你造成的非傷害型元素異常狀態擴散至 {0} 米內的其它敵人",
+   "你造成的非傷害型元素異常狀態擴散至 {0} 米內的其它敵人\\n  Non-Damaging Elemental Ailments you inflict spread to other enemies within {0} metres"
+  ],
+  "382489": [
+   "非瞬發的戰吼在使用時會忽略其冷卻時間",
+   "非瞬發的戰吼在使用時會忽略其冷卻時間\\n  Non-Instant Warcries ignore their Cooldown when Used"
+  ],
+  "382953": [
+   "你可以對敵人施加{0:+d}聖徒烈火",
+   "你可以對敵人施加{0:+d}聖徒烈火\\n  You can inflict {0:+d} Hallowing Flames on Enemies"
+  ],
+  "383298": [
+   "投擲陷阱的技能額外投擲 1 個陷阱",
+   "投擲陷阱的技能額外投擲 1 個陷阱\\n  Skills which Throw Traps throw up to 1 additional Trap"
+  ],
+  "383538": [
+   "若你插槽中或裝備的有 3 個先祖物品，{0:+d} 最大召喚魔像上限",
+   "若你插槽中或裝備的有 3 個先祖物品，{0:+d} 最大召喚魔像上限\\n  {0:+d} to maximum number of Summoned Golems if you have 3 Primordial Items Socketed or Equipped"
+  ],
+  "38372": [
+   "效果持續時間內，增加 1 個你可以施加的詛咒",
+   "效果持續時間內，增加 1 個你可以施加的詛咒\\n  You can apply an additional Curse during Effect"
+  ],
+  "38373": [
+   "效果持續時間內，你可以施加 {0} 個額外的詛咒",
+   "效果持續時間內，你可以施加 {0} 個額外的詛咒\\n  You can apply {0} additional Curses during Effect"
+  ],
+  "384261": [
+   "奉獻技能增加 {0}% 持續時間",
+   "奉獻技能增加 {0}% 持續時間\\n  Offering Skills have {0}% increased Duration"
+  ],
+  "387350": [
+   "理智時，承受 {0}% 更多物理和混沌傷害",
+   "理智時，承受 {0}% 更多物理和混沌傷害\\n  {0}% more Physical and Chaos Damage Taken while Sane"
+  ],
+  "38756": [
+   "效果持續時間內，減少 {0}% 你身上詛咒的效果",
+   "效果持續時間內，減少 {0}% 你身上詛咒的效果\\n  {0}% reduced Effect of Curses on you during Effect"
+  ],
+  "389147": [
+   "{0}% 的物理傷害承受為火焰傷害",
+   "{0}% 的物理傷害承受為火焰傷害\\n  {0}% of Physical Damage taken as Fire Damage"
+  ],
+  "389397": [
+   "病疫之難增加 {}% 最大瘟疫值",
+   "病疫之難增加 {}% 最大瘟疫值\\n  Plague Bearer has {}% increased Maximum Plague Value"
+  ],
+  "389451": [
+   "感染時，病疫之難增加 {0}% 移動速度",
+   "感染時，病疫之難增加 {0}% 移動速度\\n  Plague Bearer Grants {0}% increased Movement Speed while Infecting"
+  ],
+  "389601": [
+   "每顆暴擊球增加 {0}% 中毒傷害",
+   "每顆暴擊球增加 {0}% 中毒傷害\\n  {0}% increased Damage with Poison per Power Charge"
+  ],
+  "389837": [
+   "法術技能 -{0}% 中毒持續傷害加成",
+   "法術技能 -{0}% 中毒持續傷害加成\\n  Spell Skills have -{0}% to Damage over Time Multiplier for Poison"
+  ],
+  "390056": [
+   "你對非中毒的敵人造成中毒，減少 {0}% 傷害",
+   "你對非中毒的敵人造成中毒，減少 {0}% 傷害\\n  Poisons you inflict on non-Poisoned Enemies deal {0}% reduced Damage"
+  ],
+  "390278": [
+   "增加 {0}% 毒藥範圍效果",
+   "增加 {0}% 毒藥範圍效果\\n  {0}% increased Poisonous Concoction Area of Effect"
+  ],
+  "390279": [
+   "減少 {0}% 毒藥範圍效果",
+   "減少 {0}% 毒藥範圍效果\\n  {0}% reduced Poisonous Concoction Area of Effect"
+  ],
+  "391703": [
+   "投射物在起始位置擊中目標減少 {0}% 傷害，\\n隨著飛行越遠增加至 0%",
+   "投射物在起始位置擊中目標減少 {0}% 傷害，\\n隨著飛行越遠增加至 0%\\n  Projectiles deal {0}% reduced Damage with Hits to targets at the start\\nof their movement, increasing to 0% as they travel farther"
+  ],
+  "392040": [
+   "投射物對 {0:+d} 個目標裂化",
+   "投射物對 {0:+d} 個目標裂化\\n  Projectiles Split towards {0:+d} targets"
+  ],
+  "392593": [
+   "你在迷狀態時，投射物穿透一個額外目標",
+   "你在迷狀態時，投射物穿透一個額外目標\\n  Projectiles Pierce an additional Target while you have Phasing"
+  ],
+  "393163": [
+   "火焰淨化減少 {0}% 魔力保留效用",
+   "火焰淨化減少 {0}% 魔力保留效用\\n  Purity of Fire has {0}% reduced Mana Reservation Efficiency"
+  ],
+  "394329": [
+   "失去固有盛怒的時間延緩 1 秒",
+   "失去固有盛怒的時間延緩 1 秒\\n  Inherent Rage Loss starts 1 second later"
+  ],
+  "395467": [
+   "{0}% 機率使用 1 個隨機咒術詛咒擊中你的敵人，無視詛咒上限",
+   "{0}% 機率使用 1 個隨機咒術詛咒擊中你的敵人，無視詛咒上限\\n  Curse Enemies which Hit you with a random Hex, ignoring Curse Limit"
+  ],
+  "397163": [
+   "當你格擋法術傷害時，恢復 {} 能量護盾",
+   "當你格擋法術傷害時，恢復 {} 能量護盾\\n  Recover {} Energy Shield when you Block Spell Damage"
+  ],
+  "397455": [
+   "{0}% 機率反射敵人冰緩和冰凍狀態",
+   "{0}% 機率反射敵人冰緩和冰凍狀態\\n  {0}% chance to Reflect Enemy Chills and Freezes"
+  ],
+  "397456": [
+   "反射冰緩和冰凍狀態",
+   "反射冰緩和冰凍狀態\\n  Chill and Freeze Reflection"
+  ],
+  "397916": [
+   "每 4 秒，1 秒內回復等同 {0}% 閃避值的能量護盾",
+   "每 4 秒，1 秒內回復等同 {0}% 閃避值的能量護盾\\n  Every 4 seconds, Regenerate Energy Shield equal to {0}% of Evasion Rating over 1 second"
+  ],
+  "400966": [
+   "到達最大暴擊球時承受 {0} 冰冷傷害",
+   "到達最大暴擊球時承受 {0} 冰冷傷害\\n  Take {0} Cold Damage on reaching Maximum Power Charges"
+  ],
+  "401122": [
+   "你身上每層木質，減少 {0}% 傷害型異常狀態的持續時間",
+   "你身上每層木質，減少 {0}% 傷害型異常狀態的持續時間\\n  {0}% reduced Duration of Damaging Ailments on you per Bark"
+  ],
+  "402476": [
+   "增加 {0}% 你對被詛咒敵人造成感電的效果",
+   "增加 {0}% 你對被詛咒敵人造成感電的效果\\n  {0}% increased Effect of Shocks you inflict on Cursed Enemies"
+  ],
+  "402477": [
+   "減少 {0}% 你對被詛咒敵人造成感電的效果",
+   "減少 {0}% 你對被詛咒敵人造成感電的效果\\n  {0}% reduced Effect of Shocks you inflict on Cursed Enemies"
+  ],
+  "402882": [
+   "減少 {0}% 你身上冰緩和感電的效果",
+   "減少 {0}% 你身上冰緩和感電的效果\\n  {0}% reduced Effect of Chill and Shock on you"
+  ],
+  "403506": [
+   "每個攻城炮台減少 {0}% 攻城炮台攻擊速度",
+   "每個攻城炮台減少 {0}% 攻城炮台攻擊速度\\n  {0}% reduced Siege Ballista attack speed per Siege Ballista Totem"
+  ],
+  "40397": [
+   "效果持續時間內，當你擊殺 1 個敵人時恢復 {0}% 能量護盾",
+   "效果持續時間內，當你擊殺 1 個敵人時恢復 {0}% 能量護盾\\n  Recover {0}% of Energy Shield when you Kill an Enemy during Effect"
+  ],
+  "407494": [
+   "法術技能減少 {0}% 範圍效果",
+   "法術技能減少 {0}% 範圍效果\\n  Spell Skills have {0}% reduced Area of Effect"
+  ],
+  "408330": [
+   "若過去 8 秒你有造成暴擊，增加 {0}% 法術傷害",
+   "若過去 8 秒你有造成暴擊，增加 {0}% 法術傷害\\n  {0}% increased Spell Damage if you've dealt a Critical Strike in the past 8 seconds"
+  ],
+  "408418": [
+   "每 100 玩家最大生命，增加 {0}% 法術傷害",
+   "每 100 玩家最大生命，增加 {0}% 法術傷害\\n  {0}% increased Spell Damage per 100 Player Maximum Life"
+  ],
+  "410365": [
+   "減少毒蛛祝福 {0}% 持續時間",
+   "減少毒蛛祝福 {0}% 持續時間\\n  {0}% reduced Aspect of the Spider Debuff Duration"
+  ],
+  "411756": [
+   "{0}% 更多閃避值",
+   "{0}% 更多閃避值\\n  {0}% more Evasion Rating"
+  ],
+  "411757": [
+   "{0}% 更少閃避值",
+   "{0}% 更少閃避值\\n  {0}% less Evasion Rating"
+  ],
+  "411982": [
+   "能量之刃有 {0}% 機率感電",
+   "能量之刃有 {0}% 機率感電\\n  Energy Blades grant {0}% chance to Shock"
+  ],
+  "412650": [
+   "力量的傷害加成同時以 20% 它的值套用至收線速度",
+   "力量的傷害加成同時以 20% 它的值套用至收線速度\\n  Strength's Damage bonus also applies to Reeling Speed at 20% of its value"
+  ],
+  "412696": [
+   "全部力量主動技能寶石等級 {0:+d}",
+   "全部力量主動技能寶石等級 {0:+d}\\n  {0:+d} to Level of all Strength Skill Gems"
+  ],
+  "413777": [
+   "召喚弩兵獲得 {}% 物理傷害的額外冰冷傷害",
+   "召喚弩兵獲得 {}% 物理傷害的額外冰冷傷害\\n  Summoned Arbalists gain {}% of Physical Damage as Extra Cold Damage"
+  ],
+  "414162": [
+   "召喚弩兵擊中時有 {}% 機率造成冰冷曝曬",
+   "召喚弩兵擊中時有 {}% 機率造成冰冷曝曬\\n  Summoned Arbalists have {}% chance to inflict Cold Exposure on Hit"
+  ],
+  "414684": [
+   "召喚憤怒狂靈有鑽石神殿和威猛神殿增益效果",
+   "召喚憤怒狂靈有鑽石神殿和威猛神殿增益效果\\n  Summoned Raging Spirits have Diamond Shrine and Massive Shrine Buffs"
+  ],
+  "416025": [
+   "放置於此地區的記憶，掉落物品數量加成 2 倍",
+   "放置於此地區的記憶，掉落物品數量加成 2 倍\\n  Doubles bonuses to Quantity of Items Found in Memories placed on this location"
+  ],
+  "416704": [
+   "每 700 護甲，使破體之擊和煉獄之擊增加 {0}% 攻擊傷害",
+   "每 700 護甲，使破體之擊和煉獄之擊增加 {0}% 攻擊傷害\\n  Tectonic Slam and Infernal Blow deal {0}% increased Attack Damage per 700 Armour"
+  ],
+  "418051": [
+   "圖騰免疫混沌傷害",
+   "圖騰免疫混沌傷害\\n  Totems are Immune to Chaos Damage"
+  ],
+  "419624": [
+   "造成 {0}% 更少持續傷害",
+   "造成 {0}% 更少持續傷害\\n  {0}% less Damage over Time"
+  ],
+  "419875": [
+   "已裝備的雙手武器每有一個未連結的插槽，減少 {0}% 傷害",
+   "已裝備的雙手武器每有一個未連結的插槽，減少 {0}% 傷害\\n  {0}% reduced Damage for each unlinked Socket in Equipped Two Handed Weapon"
+  ],
+  "420128": [
+   "怪物每次復活時，增加 {0}% 攻擊和施放速度",
+   "怪物每次復活時，增加 {0}% 攻擊和施放速度\\n  Monsters gain {0}% increased Attack and Cast Speed each time they are Revived"
+  ],
+  "420129": [
+   "怪物每次復活時，減少 {0}% 攻擊和施放速度",
+   "怪物每次復活時，減少 {0}% 攻擊和施放速度\\n  Monsters gain {0}% reduced Attack and Cast Speed each time they are Revived"
+  ],
+  "421503": [
+   "不被點燃影響",
+   "不被點燃影響\\n  Unaffected by Ignite"
+  ],
+  "421602": [
+   "被惡意影響時，不被到中毒影響",
+   "被惡意影響時，不被到中毒影響\\n  Unaffected by Poison while affected by Malevolence"
+  ],
+  "42188": [
+   "當你轉移至或轉出夢魘時，承受 {0} 閃電傷害",
+   "當你轉移至或轉出夢魘時，承受 {0} 閃電傷害\\n  Take {0} Lightning Damage when you Shift into or out of Nightmare"
+  ],
+  "423173": [
+   "承受 {0}% 更少冰冷傷害",
+   "承受 {0}% 更少冰冷傷害\\n  {0}% less Cold Damage taken"
+  ],
+  "424427": [
+   "減少 {0}% 致命之息傷害",
+   "減少 {0}% 致命之息傷害\\n  {0}% reduced Volatile Dead Damage"
+  ],
+  "424623": [
+   "減少 {0}% 魔痕爆發傷害",
+   "減少 {0}% 魔痕爆發傷害\\n  {0}% reduced Voltaxic Burst Damage"
+  ],
+  "425019": [
+   "戰爭之旗增加 {0}% 光環效果",
+   "戰爭之旗增加 {0}% 光環效果\\n  War Banner has {0}% increased Aura Effect"
+  ],
+  "425220": [
+   "戰吼竭盡造成 2 倍攻擊次數",
+   "戰吼竭盡造成 2 倍攻擊次數\\n  Warcries Exert twice as many Attacks"
+  ],
+  "42623": [
+   "在夢魘時，玩家減少 {0}% 移動速度",
+   "在夢魘時，玩家減少 {0}% 移動速度\\n  Players have {0}% reduced Movement Speed while in Nightmare"
+  ],
+  "426364": [
+   "販售物品有 {0} 個額外古變石",
+   "販售物品有 {0} 個額外古變石\\n  Item sells for {0} additional Ancient Orbs"
+  ],
+  "426455": [
+   "販售物品有 1 個額外祝福石",
+   "販售物品有 1 個額外祝福石\\n  Item sells for an additional Blessed Orb"
+  ],
+  "44948": [
+   "雙持時 {0:+d}% 攻擊傷害格擋率",
+   "雙持時 {0:+d}% 攻擊傷害格擋率\\n  {0:+d}% Chance to Block Attack Damage while Dual Wielding"
+  ],
+  "4497": [
+   "保險箱出現在 {0} 序列中",
+   "保險箱出現在 {0} 序列中\\n  Strongboxes are found in Sequences of {0}"
+  ],
+  "44983": [
+   "雙持爪時 {0:+d}% 攻擊傷害格擋率",
+   "雙持爪時 {0:+d}% 攻擊傷害格擋率\\n  {0:+d}% Chance to Block Attack Damage while Dual Wielding Claws"
+  ],
+  "45018": [
+   "持盾時 {0:+d}% 攻擊傷害格擋率",
+   "持盾時 {0:+d}% 攻擊傷害格擋率\\n  {0:+d}% Chance to Block Attack Damage while holding a Shield"
+  ],
+  "45053": [
+   "雙持或持盾 {0:+d}% 攻擊傷害格擋率",
+   "雙持或持盾 {0:+d}% 攻擊傷害格擋率\\n  {0:+d}% Chance to Block Attack Damage while Dual Wielding or holding a Shield"
+  ],
+  "46091": [
+   "增加 {0}% 傷害",
+   "增加 {0}% 傷害\\n  {0}% increased Damage"
+  ],
+  "46092": [
+   "減少 {0}% 傷害",
+   "減少 {0}% 傷害\\n  {0}% reduced Damage"
+  ],
+  "47701": [
+   "法術增加 {0}% 冰冷傷害",
+   "法術增加 {0}% 冰冷傷害\\n  {0}% increased Spell Cold Damage"
+  ],
+  "47948": [
+   "減少 {0}% 全域物理傷害",
+   "減少 {0}% 全域物理傷害\\n  {0}% reduced Global Physical Damage"
+  ],
+  "48295": [
+   "對感電的敵人增加 {0}% 擊中傷害",
+   "對感電的敵人增加 {0}% 擊中傷害\\n  {0}% increased Damage with Hits against Shocked Enemies"
+  ],
+  "49023": [
+   "{0:+d}% 閃電持續傷害加成",
+   "{0:+d}% 閃電持續傷害加成\\n  {0:+d}% to Lightning Damage over Time Multiplier"
+  ],
+  "49469": [
+   "每3玩家等級法術附加{0}至{1}物理傷害",
+   "每3玩家等級法術附加{0}至{1}物理傷害\\n  Adds {0} to {1} Physical Damage to Spells per 3 Player Levels"
+  ],
+  "51162": [
+   "減少 {0}% 長杖的傷害",
+   "減少 {0}% 長杖的傷害\\n  {0}% reduced Damage with Staves"
+  ],
+  "51329": [
+   "持長杖類武器時增加 {0}% 冰冷傷害",
+   "持長杖類武器時增加 {0}% 冰冷傷害\\n  {0}% increased Cold Damage with Staves"
+  ],
+  "51330": [
+   "持長杖類武器時減少 {0}% 冰冷傷害",
+   "持長杖類武器時減少 {0}% 冰冷傷害\\n  {0}% reduced Cold Damage with Staves"
+  ],
+  "51667": [
+   "增加 {0}% 匕首的傷害",
+   "增加 {0}% 匕首的傷害\\n  {0}% increased Damage with Daggers"
+  ],
+  "51668": [
+   "減少 {0}% 匕首的傷害",
+   "減少 {0}% 匕首的傷害\\n  {0}% reduced Damage with Daggers"
+  ],
+  "51935": [
+   "錘和權杖增加 {0}% 傷害",
+   "錘和權杖增加 {0}% 傷害\\n  {0}% increased Damage with Maces or Sceptres"
+  ],
+  "52296": [
+   "持弓類武器時減少 {0}% 物理傷害",
+   "持弓類武器時減少 {0}% 物理傷害\\n  {0}% reduced Physical Damage with Bows"
+  ],
+  "52959": [
+   "法杖攻擊增加 {0}% 異常狀態傷害",
+   "法杖攻擊增加 {0}% 異常狀態傷害\\n  Wand Attacks deal {0}% increased Damage with Ailments"
+  ],
+  "53327": [
+   "錘、權杖或長杖攻擊增加 {0}% 異常狀態傷害",
+   "錘、權杖或長杖攻擊增加 {0}% 異常狀態傷害\\n  Mace, Sceptre or Staff Attacks deal {0}% increased Damage with Ailments"
+  ],
+  "53747": [
+   "增加 {0}% 冰冷傷害",
+   "增加 {0}% 冰冷傷害\\n  {0}% increased Cold Damage"
+  ],
+  "56285": [
+   "近戰技能減少 {0}% 空手攻擊速度",
+   "近戰技能減少 {0}% 空手攻擊速度\\n  {0}% reduced Unarmed Attack Speed with Melee Skills"
+  ],
+  "56331": [
+   "空手近戰攻擊時，有 {0}% 更少攻擊速度",
+   "空手近戰攻擊時，有 {0}% 更少攻擊速度\\n  {0}% less Attack Speed with Unarmed Melee Attacks"
+  ],
+  "5685": [
+   "鍛造物品為最大連線",
+   "鍛造物品為最大連線\\n  Forged Items are fully Linked"
+  ],
+  "61729": [
+   "每秒能量護盾回復 {0}%",
+   "每秒能量護盾回復 {0}%\\n  {0}% of Energy Shield Recharged per second"
+  ],
+  "62111": [
+   "{0}% 更少最大生命",
+   "{0}% 更少最大生命\\n  {0}% less maximum Life"
+  ],
+  "62424": [
+   "減少 {0}% 最大魔力",
+   "減少 {0}% 最大魔力\\n  {0}% reduced maximum Mana"
+  ],
+  "62652": [
+   "減少 {0}% 魔力恢復率",
+   "減少 {0}% 魔力恢復率\\n  {0}% reduced Mana Recovery rate"
+  ],
+  "62722": [
+   "減少 {0}% 最大生命和增加火焰抗性",
+   "減少 {0}% 最大生命和增加火焰抗性\\n  {0}% reduced maximum Life and increased Fire Resistance"
+  ],
+  "62875": [
+   "減少 {0}% 物品數量",
+   "減少 {0}% 物品數量\\n  {0}% reduced Quantity of Items found"
+  ],
+  "63516": [
+   "不能使用其他戒指",
+   "不能使用其他戒指\\n  Can't use other Rings"
+  ],
+  "63697": [
+   "全部火焰法術主動技能寶石等級 {0:+d}",
+   "全部火焰法術主動技能寶石等級 {0:+d}\\n  {0:+d} to Level of all Fire Spell Skill Gems"
+  ],
+  "64128": [
+   "貧血時 {0:+d}% 全元素抗性",
+   "貧血時 {0:+d}% 全元素抗性\\n  {0:+d}% to all Elemental Resistances while on Low Life"
+  ],
+  "64308": [
+   "貧血時 {0:+d}% 火焰抗性",
+   "貧血時 {0:+d}% 火焰抗性\\n  {0:+d}% to Fire Resistance while on Low Life"
+  ],
+  "65127": [
+   "{0}% 的物理攻擊傷害被敵人偷取為生命",
+   "{0}% 的物理攻擊傷害被敵人偷取為生命\\n  {0}% of Physical Attack Damage Leeched by Enemy as Life"
+  ],
+  "65879": [
+   "{0}% 火焰傷害偷取生命",
+   "{0}% 火焰傷害偷取生命\\n  {0}% of Fire Damage Leeched as Life"
+  ],
+  "66299": [
+   "{0}% 混沌傷害偷取生命",
+   "{0}% 混沌傷害偷取生命\\n  {0}% of Chaos Damage Leeched as Life"
+  ],
+  "66614": [
+   "{0}% 對冰凍的敵人造成之傷害偷取生命",
+   "{0}% 對冰凍的敵人造成之傷害偷取生命\\n  {0}% of Damage against Frozen Enemies Leeched as Life"
+  ],
+  "66649": [
+   "{0}% 對冰緩的敵人所造成的攻擊傷害偷取生命",
+   "{0}% 對冰緩的敵人所造成的攻擊傷害偷取生命\\n  {0}% of Attack Damage Leeched as Life against Chilled Enemies"
+  ],
+  "66684": [
+   "{0}% 對冰緩的敵人所造成的攻擊傷害偷取生命",
+   "{0}% 對冰緩的敵人所造成的攻擊傷害偷取生命\\n  {0}% of Attack Damage Leeched as Life against Chilled Enemies"
+  ],
+  "66719": [
+   "暴擊時偷取等同 {0}% 傷害的生命",
+   "暴擊時偷取等同 {0}% 傷害的生命\\n  {0}% of Damage Leeched as Life on Critical Strike"
+  ],
+  "66754": [
+   "暴擊時偷取等同 {0}% 傷害的生命",
+   "暴擊時偷取等同 {0}% 傷害的生命\\n  {0}% of Damage Leeched as Life on Critical Strike"
+  ],
+  "66789": [
+   "{0}% 對流血的敵人所造成的攻擊傷害偷取生命",
+   "{0}% 對流血的敵人所造成的攻擊傷害偷取生命\\n  {0}% of Attack Damage Leeched as Life against Bleeding Enemies"
+  ],
+  "66824": [
+   "{0}% 物理攻擊傷害偷取魔力",
+   "{0}% 物理攻擊傷害偷取魔力\\n  {0}% of Physical Attack Damage Leeched as Mana"
+  ],
+  "66999": [
+   "{0}% 傷害偷取魔力",
+   "{0}% 傷害偷取魔力\\n  {0}% of Damage Leeched as Mana"
+  ],
+  "67960": [
+   "{0:+d}% 來自偷取每秒最大總能量護盾恢復",
+   "{0:+d}% 來自偷取每秒最大總能量護盾恢復\\n  {0:+d}% to Maximum total Energy Shield Recovery per second from Leech"
+  ],
+  "68030": [
+   "{0:+d}% 來自偷取每秒最大總魔力恢復",
+   "{0:+d}% 來自偷取每秒最大總魔力恢復\\n  {0:+d}% Maximum total Mana Recovery per second from Leech"
+  ],
+  "68392": [
+   "每擊中一個敵人，獲得 {0} 生命",
+   "每擊中一個敵人，獲得 {0} 生命\\n  Grants {0} Life per Enemy Hit"
+  ],
+  "69503": [
+   "召喚物有 {0}% 更多最大生命",
+   "召喚物有 {0}% 更多最大生命\\n  Minions have {0}% more maximum Life"
+  ],
+  "69847": [
+   "火元素增加 {0}% 最大生命",
+   "火元素增加 {0}% 最大生命\\n  Fire Elementals have {0}% increased maximum Life"
+  ],
+  "70728": [
+   "技能發射 1 個額外投射物",
+   "技能發射 1 個額外投射物\\n  Skills fire an additional Projectile"
+  ],
+  "72332": [
+   "擊中時有 {0}% 機率獲得 1 顆狂怒球",
+   "擊中時有 {0}% 機率獲得 1 顆狂怒球\\n  {0}% chance to gain a Frenzy Charge on Hit"
+  ],
+  "76076": [
+   "減少 {0}% 陷阱觸發範圍",
+   "減少 {0}% 陷阱觸發範圍\\n  {0}% reduced Trap Trigger Area of Effect"
+  ],
+  "80397": [
+   "{0}% 機率殘喘敵人",
+   "{0}% 機率殘喘敵人\\n  {0}% chance to Sap Enemies"
+  ],
+  "80576": [
+   "撲殺",
+   "撲殺\\n  Culling Strike"
+  ],
+  "80916": [
+   "每個狂怒球減少 {0}% 攻擊和施放速度",
+   "每個狂怒球減少 {0}% 攻擊和施放速度\\n  {0}% reduced Attack and Cast Speed per Frenzy Charge"
+  ],
+  "83309": [
+   "持雙手武器時法術附加 {0} 至 {1} 冰冷傷害",
+   "持雙手武器時法術附加 {0} 至 {1} 冰冷傷害\\n  {0} to {1} Added Spell Cold Damage while wielding a Two Handed Weapon"
+  ],
+  "83484": [
+   "持盾時法術附加 {0} 至 {1} 閃電傷害",
+   "持盾時法術附加 {0} 至 {1} 閃電傷害\\n  {0} to {1} Added Spell Lightning Damage while holding a Shield"
+  ],
+  "83958": [
+   "格擋時獲得 1 顆暴擊球",
+   "格擋時獲得 1 顆暴擊球\\n  Gain a Power Charge when you Block"
+  ],
+  "84774": [
+   "增加 {0}% 冰緩地面對你的效果",
+   "增加 {0}% 冰緩地面對你的效果\\n  {0}% increased Effect of Chilled Ground on you"
+  ],
+  "84775": [
+   "減少 {0}% 冰緩地面對你的效果",
+   "減少 {0}% 冰緩地面對你的效果\\n  {0}% reduced Effect of Chilled Ground on you"
+  ],
+  "849": [
+   "物品有此詞綴時可以有最多 1 個固定詞綴",
+   "物品有此詞綴時可以有最多 1 個固定詞綴\\n  Can have a up to 1 Implicit Modifier while Item has this Modifier"
+  ],
+  "850": [
+   "物品有此詞綴時可以有最多 {0} 個固定詞綴",
+   "物品有此詞綴時可以有最多 {0} 個固定詞綴\\n  Can have up to {0} Implicit Modifiers while Item has this Modifier"
+  ],
+  "86214": [
+   "召喚物增加 {0}% 使用藥劑充能",
+   "召喚物增加 {0}% 使用藥劑充能\\n  Minions have {0}% increased Flask Charges used"
+  ],
+  "86215": [
+   "召喚物減少 {0}% 使用藥劑充能",
+   "召喚物減少 {0}% 使用藥劑充能\\n  Minions have {0}% reduced Flask Charges used"
+  ],
+  "91198": [
+   "地圖含有燃燒地面",
+   "地圖含有燃燒地面\\n  Area has patches of Burning Ground"
+  ],
+  "91992": [
+   "地圖含有額外 {0} 個軍團",
+   "地圖含有額外 {0} 個軍團\\n  Area is inhabited by {0} additional Warband"
+  ],
+  "92232": [
+   "此區域有 {0} 個額外被魔符附身的怪物",
+   "此區域有 {0} 個額外被魔符附身的怪物\\n  Area contains {0} additional Monster possessed by an Ancient Talisman"
+  ],
+  "92233": [
+   "區域含有額外 {0} 個被遠古魔符附身的怪物",
+   "區域含有額外 {0} 個被遠古魔符附身的怪物\\n  Area contains {0} additional Monsters possessed by Ancient Talismans"
+  ],
+  "92351": [
+   "地圖含有 1 個額外的保險箱",
+   "地圖含有 1 個額外的保險箱\\n  Area contains an additional Strongbox"
+  ],
+  "92725": [
+   "玩家被時空鎖鏈詛咒",
+   "玩家被時空鎖鏈詛咒\\n  Players are Cursed with Temporal Chains"
+  ],
+  "93079": [
+   "玩家有 {0}% 更少生命、魔力和能量護盾恢復率",
+   "玩家有 {0}% 更少生命、魔力和能量護盾恢復率\\n  Players have {0}% less Recovery Rate of Life, Mana and Energy Shield"
+  ],
+  "93152": [
+   "玩家所有物理傷害轉換成火焰傷害",
+   "玩家所有物理傷害轉換成火焰傷害\\n  Players convert all Physical Damage to Fire"
+  ],
+  "94453": [
+   "怪物造成 {0}% 額外物理傷害視為火焰",
+   "怪物造成 {0}% 額外物理傷害視為火焰\\n  Monsters deal {0}% extra Physical Damage as Fire"
+  ],
+  "94710": [
+   "怪物每20秒獲得 {0} 個耐力球",
+   "怪物每20秒獲得 {0} 個耐力球\\n  Monsters gain {0} Endurance Charge every 20 seconds"
+  ],
+  "95334": [
+   "怪物不會掉落物品",
+   "怪物不會掉落物品\\n  Monsters drop no Items"
+  ],
+  "96327": [
+   "承受 {0}% 的擊中火焰傷害視為物理傷害",
+   "承受 {0}% 的擊中火焰傷害視為物理傷害\\n  {0}% of Fire Damage from Hits taken as Physical Damage"
+  ],
+  "97179": [
+   "當你格擋時，恢復等同 {0}% 護甲的能量護盾",
+   "當你格擋時，恢復等同 {0}% 護甲的能量護盾\\n  Recover Energy Shield equal to {0}% of Armour when you Block"
+  ],
+  "98293": [
+   "輔助攻擊技能不能使用在近戰武器上",
+   "輔助攻擊技能不能使用在近戰武器上\\n  Supported Attack Skills cannot be used with Melee Weapons"
+  ],
+  "98331": [
+   "使用此武器時增加 {0}% 敵人暈眩門檻",
+   "使用此武器時增加 {0}% 敵人暈眩門檻\\n  {0}% increased Enemy Stun Threshold with this Weapon"
   ]
  },
- "metadata/statdescriptions/tincture_stat_descriptions.txt": {},
+ "metadata/statdescriptions/tincture_stat_descriptions.txt": {
+  "112": [
+   "使用近戰武器擊中時有 {0}% 機率致盲敵人\\n  {0}% chance to Blind Enemies on Hit with Melee Weapons"
+  ],
+  "225": [
+   "每層魔力灼燒增加 {0}% 掉落物品稀有度，最多 100%",
+   "每層魔力灼燒增加 {0}% 掉落物品稀有度，最多 100%\\n  {0}% increased Rarity of Items found per Mana Burn, up to a maximum of 100%"
+  ]
+ },
  "metadata/statdescriptions/variable_duration_skill_stat_descriptions.txt": {},
- "metadata/statdescriptions/village_stat_descriptions.txt": {}
+ "metadata/statdescriptions/village_stat_descriptions.txt": {
+  "963": [
+   "地圖上的變動詞綴效果增加 {0}%",
+   "地圖上的變動詞綴效果增加 {0}%\\n  {0}% increased effect of Explicit Modifiers on Maps"
+  ],
+  "964": [
+   "地圖上的變動詞綴效果減少 {0}%",
+   "地圖上的變動詞綴效果減少 {0}%\\n  {0}% reduced effect of Explicit Modifiers on Maps"
+  ]
+ }
 }

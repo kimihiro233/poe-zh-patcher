@@ -1,107 +1,107 @@
 [
  {
   "table": "mtxtypes.datc64",
-  "rows": 8411,
+  "rows": 8770,
   "cols": 3,
-  "pairs": 24985,
-  "diff": 16345,
-  "cjk": 16272
+  "pairs": 26046,
+  "diff": 16923,
+  "cjk": 16838
  },
  {
   "table": "achievementitems.datc64",
-  "rows": 11776,
+  "rows": 12101,
   "cols": 2,
-  "pairs": 23036,
-  "diff": 11257,
-  "cjk": 10774
+  "pairs": 23673,
+  "diff": 11569,
+  "cjk": 11086
  },
  {
   "table": "achievementitems.datcl64",
-  "rows": 11776,
+  "rows": 12101,
   "cols": 1,
-  "pairs": 11260,
-  "diff": 11228,
-  "cjk": 10730
+  "pairs": 11572,
+  "diff": 11540,
+  "cjk": 11042
  },
  {
   "table": "monstervarieties.datc64",
-  "rows": 10691,
+  "rows": 11007,
   "cols": 4,
-  "pairs": 42763,
-  "diff": 10542,
-  "cjk": 10542
+  "pairs": 44027,
+  "diff": 10853,
+  "cjk": 10853
  },
  {
   "table": "clientstrings.datc64",
-  "rows": 8494,
+  "rows": 8648,
   "cols": 3,
-  "pairs": 17272,
-  "diff": 8551,
-  "cjk": 8514
+  "pairs": 17581,
+  "diff": 8697,
+  "cjk": 8659
  },
  {
   "table": "clientstrings.datcl64",
-  "rows": 8494,
+  "rows": 8648,
   "cols": 2,
-  "pairs": 8778,
-  "diff": 8123,
-  "cjk": 8012
+  "pairs": 8933,
+  "diff": 8248,
+  "cjk": 8137
  },
  {
   "table": "baseitemtypes.datc64",
-  "rows": 5461,
+  "rows": 5668,
   "cols": 7,
-  "pairs": 37802,
-  "diff": 5018,
-  "cjk": 5271
+  "pairs": 39254,
+  "diff": 5226,
+  "cjk": 5226
  },
  {
   "table": "baseitemtypes.datcl64",
-  "rows": 5461,
+  "rows": 5668,
   "cols": 1,
-  "pairs": 5041,
-  "diff": 5017,
-  "cjk": 5014
+  "pairs": 5248,
+  "diff": 5224,
+  "cjk": 5221
  },
  {
   "table": "words.datc64",
-  "rows": 4117,
+  "rows": 4162,
   "cols": 2,
-  "pairs": 8234,
-  "diff": 4102,
-  "cjk": 4102
+  "pairs": 8324,
+  "diff": 4147,
+  "cjk": 4147
  },
  {
   "table": "npctalk.datc64",
-  "rows": 3990,
+  "rows": 3996,
   "cols": 1,
-  "pairs": 3990,
-  "diff": 3984,
-  "cjk": 3984
+  "pairs": 3996,
+  "diff": 3990,
+  "cjk": 3990
  },
  {
   "table": "achievements.datc64",
-  "rows": 1749,
+  "rows": 1797,
   "cols": 3,
-  "pairs": 5230,
-  "diff": 3481,
-  "cjk": 3478
+  "pairs": 5374,
+  "diff": 3577,
+  "cjk": 3574
  },
  {
   "table": "words.datcl64",
-  "rows": 4117,
+  "rows": 4162,
   "cols": 1,
-  "pairs": 4117,
-  "diff": 3547,
-  "cjk": 3229
+  "pairs": 4162,
+  "diff": 3592,
+  "cjk": 3268
  },
  {
   "table": "flavourtext.datc64",
-  "rows": 2962,
+  "rows": 2983,
   "cols": 2,
-  "pairs": 5923,
-  "diff": 2914,
-  "cjk": 2913
+  "pairs": 5965,
+  "diff": 2936,
+  "cjk": 2935
  },
  {
   "table": "necropolispacks.datc64",
@@ -112,36 +112,36 @@
   "cjk": 2519
  },
  {
-  "table": "currencyitems.datc64",
-  "rows": 1962,
-  "cols": 2,
-  "pairs": 3206,
-  "diff": 2308,
-  "cjk": 2305
- },
- {
   "table": "worldareas.datc64",
-  "rows": 1932,
-  "cols": 3,
-  "pairs": 5789,
-  "diff": 1920,
+  "rows": 1935,
+  "cols": 2,
+  "pairs": 3867,
+  "diff": 1925,
   "cjk": 1925
  },
  {
   "table": "queststates.datc64",
-  "rows": 2010,
+  "rows": 2017,
   "cols": 1,
-  "pairs": 1568,
-  "diff": 1568,
-  "cjk": 1568
+  "pairs": 1575,
+  "diff": 1573,
+  "cjk": 1573
  },
  {
   "table": "buffdefinitions.datc64",
-  "rows": 2814,
+  "rows": 2871,
   "cols": 3,
-  "pairs": 4834,
-  "diff": 1474,
-  "cjk": 1474
+  "pairs": 4935,
+  "diff": 1507,
+  "cjk": 1507
+ },
+ {
+  "table": "currencyitems.datc64",
+  "rows": 1988,
+  "cols": 1,
+  "pairs": 1236,
+  "diff": 1235,
+  "cjk": 1234
  },
  {
   "table": "charactertextaudio.datc64",
@@ -153,83 +153,83 @@
  },
  {
   "table": "shoptag.datc64",
-  "rows": 948,
+  "rows": 954,
   "cols": 2,
-  "pairs": 1896,
-  "diff": 945,
-  "cjk": 943
- },
- {
-  "table": "npcs.datc64",
-  "rows": 819,
-  "cols": 2,
-  "pairs": 1622,
-  "diff": 803,
-  "cjk": 803
+  "pairs": 1908,
+  "diff": 952,
+  "cjk": 950
  },
  {
   "table": "passiveskills.datc64",
-  "rows": 5706,
-  "cols": 3,
-  "pairs": 12182,
-  "diff": 781,
-  "cjk": 781
+  "rows": 6606,
+  "cols": 4,
+  "pairs": 14103,
+  "diff": 902,
+  "cjk": 902
  },
  {
   "table": "passiveskills.datcl64",
-  "rows": 5706,
-  "cols": 1,
-  "pairs": 781,
-  "diff": 781,
-  "cjk": 781
+  "rows": 6606,
+  "cols": 2,
+  "pairs": 902,
+  "diff": 900,
+  "cjk": 898
+ },
+ {
+  "table": "npcs.datc64",
+  "rows": 827,
+  "cols": 2,
+  "pairs": 1637,
+  "diff": 810,
+  "cjk": 810
  },
  {
   "table": "backenderrors.datc64",
-  "rows": 715,
+  "rows": 727,
   "cols": 2,
-  "pairs": 1430,
-  "diff": 713,
-  "cjk": 704
+  "pairs": 1454,
+  "diff": 725,
+  "cjk": 716
  },
  {
   "table": "gemeffects.datc64",
-  "rows": 1292,
+  "rows": 1305,
   "cols": 3,
-  "pairs": 2056,
-  "diff": 615,
-  "cjk": 615
+  "pairs": 2081,
+  "diff": 628,
+  "cjk": 628
  },
  {
   "table": "indexableskillgems.datc64",
-  "rows": 287,
+  "rows": 288,
   "cols": 2,
-  "pairs": 574,
-  "diff": 574,
-  "cjk": 574
+  "pairs": 576,
+  "diff": 576,
+  "cjk": 576
  },
  {
   "table": "indexableskillgems.datcl64",
-  "rows": 287,
+  "rows": 288,
   "cols": 2,
-  "pairs": 574,
-  "diff": 574,
-  "cjk": 574
+  "pairs": 576,
+  "diff": 576,
+  "cjk": 576
  },
  {
   "table": "mercenaryskills.datc64",
-  "rows": 272,
+  "rows": 277,
   "cols": 2,
-  "pairs": 544,
-  "diff": 538,
-  "cjk": 538
+  "pairs": 554,
+  "diff": 548,
+  "cjk": 548
  },
  {
   "table": "achievementsetrewards.datc64",
-  "rows": 329,
+  "rows": 341,
   "cols": 4,
-  "pairs": 970,
-  "diff": 492,
-  "cjk": 492
+  "pairs": 1006,
+  "diff": 502,
+  "cjk": 502
  },
  {
   "table": "remindertext.datc64",
@@ -257,27 +257,27 @@
  },
  {
   "table": "leagueinfo.datc64",
-  "rows": 373,
+  "rows": 385,
   "cols": 3,
-  "pairs": 1013,
-  "diff": 352,
-  "cjk": 352
+  "pairs": 1036,
+  "diff": 363,
+  "cjk": 363
  },
  {
   "table": "incursionrooms.datc64",
   "rows": 98,
-  "cols": 11,
-  "pairs": 972,
-  "diff": 331,
-  "cjk": 338
+  "cols": 13,
+  "pairs": 1168,
+  "diff": 329,
+  "cjk": 346
  },
  {
   "table": "clientstrings2.datc64",
-  "rows": 311,
+  "rows": 366,
   "cols": 2,
-  "pairs": 619,
-  "diff": 300,
-  "cjk": 300
+  "pairs": 729,
+  "diff": 315,
+  "cjk": 315
  },
  {
   "table": "mappins.datc64",
@@ -296,22 +296,6 @@
   "cjk": 280
  },
  {
-  "table": "clientstrings2.datcl64",
-  "rows": 311,
-  "cols": 1,
-  "pairs": 308,
-  "diff": 275,
-  "cjk": 273
- },
- {
-  "table": "mercenaryskills.datcl64",
-  "rows": 272,
-  "cols": 1,
-  "pairs": 272,
-  "diff": 269,
-  "cjk": 269
- },
- {
   "table": "mercenaryflavourtext.datc64",
   "rows": 234,
   "cols": 2,
@@ -328,6 +312,38 @@
   "cjk": 219
  },
  {
+  "table": "archnemesismods.datc64",
+  "rows": 216,
+  "cols": 1,
+  "pairs": 215,
+  "diff": 215,
+  "cjk": 215
+ },
+ {
+  "table": "archnemesismods.datcl64",
+  "rows": 216,
+  "cols": 1,
+  "pairs": 215,
+  "diff": 215,
+  "cjk": 215
+ },
+ {
+  "table": "keywordpopups.datc64",
+  "rows": 161,
+  "cols": 3,
+  "pairs": 377,
+  "diff": 214,
+  "cjk": 214
+ },
+ {
+  "table": "keywordpopups.datcl64",
+  "rows": 161,
+  "cols": 2,
+  "pairs": 216,
+  "diff": 213,
+  "cjk": 211
+ },
+ {
   "table": "skillgeminfo.datc64",
   "rows": 204,
   "cols": 4,
@@ -337,19 +353,43 @@
  },
  {
   "table": "quest.datc64",
-  "rows": 212,
+  "rows": 215,
   "cols": 3,
-  "pairs": 565,
-  "diff": 198,
-  "cjk": 198
+  "pairs": 574,
+  "diff": 200,
+  "cjk": 200
  },
  {
   "table": "quest.datcl64",
-  "rows": 212,
+  "rows": 215,
   "cols": 1,
-  "pairs": 198,
-  "diff": 198,
-  "cjk": 198
+  "pairs": 201,
+  "diff": 200,
+  "cjk": 200
+ },
+ {
+  "table": "incursionrooms.datcl64",
+  "rows": 98,
+  "cols": 6,
+  "pairs": 566,
+  "diff": 174,
+  "cjk": 188
+ },
+ {
+  "table": "indexablesupportgems.datc64",
+  "rows": 184,
+  "cols": 1,
+  "pairs": 184,
+  "diff": 184,
+  "cjk": 184
+ },
+ {
+  "table": "indexablesupportgems.datcl64",
+  "rows": 184,
+  "cols": 1,
+  "pairs": 184,
+  "diff": 184,
+  "cjk": 184
  },
  {
   "table": "archetypes.datc64",
@@ -358,30 +398,6 @@
   "pairs": 611,
   "diff": 180,
   "cjk": 180
- },
- {
-  "table": "incursionrooms.datcl64",
-  "rows": 98,
-  "cols": 4,
-  "pairs": 370,
-  "diff": 174,
-  "cjk": 179
- },
- {
-  "table": "indexablesupportgems.datc64",
-  "rows": 172,
-  "cols": 1,
-  "pairs": 172,
-  "diff": 172,
-  "cjk": 172
- },
- {
-  "table": "indexablesupportgems.datcl64",
-  "rows": 172,
-  "cols": 1,
-  "pairs": 172,
-  "diff": 172,
-  "cjk": 172
  },
  {
   "table": "synthesisareas.datc64",
@@ -449,19 +465,19 @@
  },
  {
   "table": "hideoutdoodadcategory.datc64",
-  "rows": 133,
+  "rows": 135,
   "cols": 2,
-  "pairs": 266,
-  "diff": 133,
-  "cjk": 133
+  "pairs": 270,
+  "diff": 135,
+  "cjk": 135
  },
  {
   "table": "hideoutdoodadcategory.datcl64",
-  "rows": 133,
+  "rows": 135,
   "cols": 1,
-  "pairs": 133,
-  "diff": 133,
-  "cjk": 132
+  "pairs": 135,
+  "diff": 135,
+  "cjk": 134
  },
  {
   "table": "ancestraltrialitems.datcl64",
@@ -480,12 +496,12 @@
   "cjk": 128
  },
  {
-  "table": "harvestcraftoptions.datc64",
-  "rows": 74,
-  "cols": 4,
-  "pairs": 291,
-  "diff": 125,
-  "cjk": 125
+  "table": "expeditiondeals.datc64",
+  "rows": 127,
+  "cols": 1,
+  "pairs": 127,
+  "diff": 127,
+  "cjk": 127
  },
  {
   "table": "passiveskilloverrides.datcl64",
@@ -496,20 +512,12 @@
   "cjk": 125
  },
  {
-  "table": "currencyexchangecategories.datc64",
-  "rows": 124,
-  "cols": 2,
-  "pairs": 248,
-  "diff": 124,
-  "cjk": 124
- },
- {
-  "table": "currencyexchangecategories.datcl64",
-  "rows": 124,
-  "cols": 1,
-  "pairs": 124,
-  "diff": 124,
-  "cjk": 124
+  "table": "harvestcraftoptions.datc64",
+  "rows": 73,
+  "cols": 4,
+  "pairs": 287,
+  "diff": 123,
+  "cjk": 123
  },
  {
   "table": "synthesisrewardtypes.datc64",
@@ -536,10 +544,26 @@
   "cjk": 99
  },
  {
+  "table": "currencyexchangecategories.datc64",
+  "rows": 98,
+  "cols": 2,
+  "pairs": 196,
+  "diff": 98,
+  "cjk": 98
+ },
+ {
+  "table": "currencyexchangecategories.datcl64",
+  "rows": 98,
+  "cols": 1,
+  "pairs": 98,
+  "diff": 98,
+  "cjk": 98
+ },
+ {
   "table": "uitalktext.datc64",
   "rows": 98,
   "cols": 3,
-  "pairs": 291,
+  "pairs": 289,
   "diff": 98,
   "cjk": 98
  },
@@ -553,9 +577,9 @@
  },
  {
   "table": "achievementsetrewards.datcl64",
-  "rows": 329,
+  "rows": 341,
   "cols": 1,
-  "pairs": 329,
+  "pairs": 341,
   "diff": 96,
   "cjk": 96
  },
@@ -592,44 +616,20 @@
   "cjk": 83
  },
  {
-  "table": "expeditiondeals.datc64",
-  "rows": 82,
-  "cols": 2,
-  "pairs": 159,
-  "diff": 82,
-  "cjk": 82
- },
- {
-  "table": "keywordpopups.datc64",
-  "rows": 46,
-  "cols": 3,
-  "pairs": 126,
-  "diff": 80,
-  "cjk": 80
- },
- {
-  "table": "itemisednecropolispacks.datc64",
-  "rows": 79,
+  "table": "craftingbenchoptions.datc64",
+  "rows": 846,
   "cols": 1,
   "pairs": 79,
   "diff": 79,
   "cjk": 79
  },
  {
-  "table": "craftingbenchoptions.datc64",
-  "rows": 829,
+  "table": "augurycardtiers.datc64",
+  "rows": 75,
   "cols": 1,
-  "pairs": 78,
-  "diff": 78,
-  "cjk": 78
- },
- {
-  "table": "keywordpopups.datcl64",
-  "rows": 46,
-  "cols": 2,
-  "pairs": 80,
-  "diff": 79,
-  "cjk": 78
+  "pairs": 75,
+  "diff": 75,
+  "cjk": 75
  },
  {
   "table": "ancestraltrialunits.datcl64",
@@ -638,6 +638,22 @@
   "pairs": 74,
   "diff": 74,
   "cjk": 73
+ },
+ {
+  "table": "itemisednecropolispacks.datc64",
+  "rows": 70,
+  "cols": 1,
+  "pairs": 70,
+  "diff": 70,
+  "cjk": 70
+ },
+ {
+  "table": "craftingbenchoptions.datcl64",
+  "rows": 846,
+  "cols": 1,
+  "pairs": 79,
+  "diff": 79,
+  "cjk": 69
  },
  {
   "table": "commands.datc64",
@@ -656,28 +672,36 @@
   "cjk": 68
  },
  {
-  "table": "craftingbenchoptions.datcl64",
-  "rows": 829,
-  "cols": 1,
-  "pairs": 78,
-  "diff": 78,
+  "table": "itemclasscategories.datc64",
+  "rows": 68,
+  "cols": 2,
+  "pairs": 136,
+  "diff": 68,
   "cjk": 68
  },
  {
-  "table": "itemclasscategories.datc64",
-  "rows": 67,
-  "cols": 2,
-  "pairs": 134,
-  "diff": 67,
-  "cjk": 67
+  "table": "itemclasscategories.datcl64",
+  "rows": 68,
+  "cols": 1,
+  "pairs": 68,
+  "diff": 68,
+  "cjk": 68
  },
  {
-  "table": "itemclasscategories.datcl64",
-  "rows": 67,
+  "table": "tieredmicrotransactionsvisuals.datc64",
+  "rows": 66,
+  "cols": 3,
+  "pairs": 88,
+  "diff": 66,
+  "cjk": 66
+ },
+ {
+  "table": "tieredmicrotransactionsvisuals.datcl64",
+  "rows": 66,
   "cols": 1,
-  "pairs": 67,
-  "diff": 67,
-  "cjk": 67
+  "pairs": 66,
+  "diff": 66,
+  "cjk": 66
  },
  {
   "table": "incubators.datc64",
@@ -728,22 +752,6 @@
   "cjk": 54
  },
  {
-  "table": "tieredmicrotransactionsvisuals.datc64",
-  "rows": 53,
-  "cols": 3,
-  "pairs": 75,
-  "diff": 53,
-  "cjk": 53
- },
- {
-  "table": "tieredmicrotransactionsvisuals.datcl64",
-  "rows": 53,
-  "cols": 1,
-  "pairs": 53,
-  "diff": 53,
-  "cjk": 53
- },
- {
   "table": "microtransactionslot.datc64",
   "rows": 49,
   "cols": 1,
@@ -779,7 +787,7 @@
   "table": "sanctumdeferredrewardcategories.datc64",
   "rows": 37,
   "cols": 2,
-  "pairs": 74,
+  "pairs": 73,
   "diff": 37,
   "cjk": 37
  },
@@ -790,14 +798,6 @@
   "pairs": 37,
   "diff": 37,
   "cjk": 37
- },
- {
-  "table": "descendancy.datc64",
-  "rows": 17,
-  "cols": 7,
-  "pairs": 101,
-  "diff": 35,
-  "cjk": 35
  },
  {
   "table": "hideoutdoodadtags.datc64",
@@ -828,6 +828,14 @@
   "rows": 33,
   "cols": 1,
   "pairs": 33,
+  "diff": 33,
+  "cjk": 33
+ },
+ {
+  "table": "augurypinnaclecards.datc64",
+  "rows": 11,
+  "cols": 5,
+  "pairs": 55,
   "diff": 33,
   "cjk": 33
  },
@@ -872,12 +880,36 @@
   "cjk": 32
  },
  {
-  "table": "descendancy.datcl64",
-  "rows": 17,
-  "cols": 3,
-  "pairs": 49,
-  "diff": 31,
+  "table": "atlasmissiontypes.datc64",
+  "rows": 10,
+  "cols": 4,
+  "pairs": 40,
+  "diff": 30,
   "cjk": 30
+ },
+ {
+  "table": "atlasmissiontypes.datcl64",
+  "rows": 10,
+  "cols": 4,
+  "pairs": 40,
+  "diff": 30,
+  "cjk": 30
+ },
+ {
+  "table": "mapseries.datc64",
+  "rows": 29,
+  "cols": 13,
+  "pairs": 220,
+  "diff": 29,
+  "cjk": 29
+ },
+ {
+  "table": "mapseries.datcl64",
+  "rows": 29,
+  "cols": 1,
+  "pairs": 29,
+  "diff": 29,
+  "cjk": 29
  },
  {
   "table": "necropoliscraftitemtypes.datc64",
@@ -896,6 +928,22 @@
   "cjk": 29
  },
  {
+  "table": "alternatetreeversionkeystones.datc64",
+  "rows": 28,
+  "cols": 1,
+  "pairs": 28,
+  "diff": 28,
+  "cjk": 28
+ },
+ {
+  "table": "alternatetreeversionkeystones.datcl64",
+  "rows": 28,
+  "cols": 1,
+  "pairs": 28,
+  "diff": 28,
+  "cjk": 28
+ },
+ {
   "table": "ancestraltrialtribes.datc64",
   "rows": 11,
   "cols": 9,
@@ -908,22 +956,6 @@
   "rows": 11,
   "cols": 6,
   "pairs": 64,
-  "diff": 28,
-  "cjk": 28
- },
- {
-  "table": "mapseries.datc64",
-  "rows": 28,
-  "cols": 13,
-  "pairs": 207,
-  "diff": 28,
-  "cjk": 28
- },
- {
-  "table": "mapseries.datcl64",
-  "rows": 28,
-  "cols": 2,
-  "pairs": 30,
   "diff": 28,
   "cjk": 28
  },
@@ -969,15 +1001,15 @@
  },
  {
   "table": "tags.datc64",
-  "rows": 1389,
+  "rows": 1441,
   "cols": 2,
-  "pairs": 1415,
+  "pairs": 1467,
   "diff": 26,
   "cjk": 26
  },
  {
   "table": "tags.datcl64",
-  "rows": 1389,
+  "rows": 1441,
   "cols": 1,
   "pairs": 26,
   "diff": 26,
@@ -998,6 +1030,22 @@
   "pairs": 42,
   "diff": 26,
   "cjk": 26
+ },
+ {
+  "table": "augurycards.datc64",
+  "rows": 25,
+  "cols": 3,
+  "pairs": 75,
+  "diff": 25,
+  "cjk": 25
+ },
+ {
+  "table": "augurycards.datcl64",
+  "rows": 25,
+  "cols": 2,
+  "pairs": 50,
+  "diff": 25,
+  "cjk": 25
  },
  {
   "table": "villagetownlayout.datc64",
@@ -1248,6 +1296,22 @@
   "cjk": 16
  },
  {
+  "table": "miniondoublingstattypes.datc64",
+  "rows": 16,
+  "cols": 1,
+  "pairs": 16,
+  "diff": 16,
+  "cjk": 16
+ },
+ {
+  "table": "miniondoublingstattypes.datcl64",
+  "rows": 16,
+  "cols": 1,
+  "pairs": 16,
+  "diff": 16,
+  "cjk": 16
+ },
+ {
   "table": "sanctumselectiondisplayoverride.datc64",
   "rows": 122,
   "cols": 4,
@@ -1432,6 +1496,14 @@
   "cjk": 11
  },
  {
+  "table": "augurypinnaclecards.datcl64",
+  "rows": 11,
+  "cols": 1,
+  "pairs": 11,
+  "diff": 11,
+  "cjk": 11
+ },
+ {
   "table": "necropolispackmodtiers.datc64",
   "rows": 12,
   "cols": 3,
@@ -1448,18 +1520,26 @@
   "cjk": 11
  },
  {
-  "table": "brequelencounterskills.datc64",
+  "table": "atlaspassiveskillsubtrees.datc64",
   "rows": 10,
-  "cols": 3,
-  "pairs": 30,
+  "cols": 4,
+  "pairs": 40,
   "diff": 10,
   "cjk": 10
  },
  {
-  "table": "brequelencounterskills.datcl64",
+  "table": "atlasthreadtypes.datc64",
   "rows": 10,
-  "cols": 1,
-  "pairs": 10,
+  "cols": 4,
+  "pairs": 40,
+  "diff": 10,
+  "cjk": 10
+ },
+ {
+  "table": "atlasthreadtypes.datcl64",
+  "rows": 10,
+  "cols": 3,
+  "pairs": 30,
   "diff": 10,
   "cjk": 10
  },
@@ -1560,10 +1640,42 @@
   "cjk": 9
  },
  {
+  "table": "atlasexiles.datc64",
+  "rows": 4,
+  "cols": 5,
+  "pairs": 20,
+  "diff": 8,
+  "cjk": 8
+ },
+ {
+  "table": "atlasexiles.datcl64",
+  "rows": 4,
+  "cols": 3,
+  "pairs": 12,
+  "diff": 8,
+  "cjk": 8
+ },
+ {
   "table": "characterpaneldescriptionmodes.datc64",
   "rows": 12,
   "cols": 4,
   "pairs": 41,
+  "diff": 7,
+  "cjk": 7
+ },
+ {
+  "table": "fishingluretypes.datc64",
+  "rows": 7,
+  "cols": 1,
+  "pairs": 7,
+  "diff": 7,
+  "cjk": 7
+ },
+ {
+  "table": "fishingluretypes.datcl64",
+  "rows": 7,
+  "cols": 1,
+  "pairs": 7,
   "diff": 7,
   "cjk": 7
  },
@@ -1776,6 +1888,22 @@
   "cjk": 4
  },
  {
+  "table": "atlasprimordialbossoptions.datc64",
+  "rows": 4,
+  "cols": 10,
+  "pairs": 37,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "atlasprimordialbossoptions.datcl64",
+  "rows": 4,
+  "cols": 1,
+  "pairs": 4,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
   "table": "atlasvoidstoneslots.datc64",
   "rows": 4,
   "cols": 5,
@@ -1804,6 +1932,14 @@
   "rows": 4,
   "cols": 2,
   "pairs": 8,
+  "diff": 4,
+  "cjk": 4
+ },
+ {
+  "table": "elderguardians.datc64",
+  "rows": 4,
+  "cols": 3,
+  "pairs": 12,
   "diff": 4,
   "cjk": 4
  },
@@ -1952,18 +2088,18 @@
   "cjk": 3
  },
  {
-  "table": "atlasprimordialbossoptions.datc64",
+  "table": "auguryfactions.datc64",
   "rows": 3,
-  "cols": 10,
-  "pairs": 30,
+  "cols": 3,
+  "pairs": 9,
   "diff": 3,
   "cjk": 3
  },
  {
-  "table": "atlasprimordialbossoptions.datcl64",
+  "table": "auguryfactions.datcl64",
   "rows": 3,
-  "cols": 1,
-  "pairs": 3,
+  "cols": 2,
+  "pairs": 6,
   "diff": 3,
   "cjk": 3
  },
@@ -2040,6 +2176,14 @@
   "cjk": 3
  },
  {
+  "table": "mapmodicons.datc64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
   "table": "mercenarybuildstatscategories.datc64",
   "rows": 3,
   "cols": 2,
@@ -2088,6 +2232,14 @@
   "cjk": 3
  },
  {
+  "table": "shaperapparitionability.datc64",
+  "rows": 4,
+  "cols": 1,
+  "pairs": 3,
+  "diff": 3,
+  "cjk": 3
+ },
+ {
   "table": "socketnotches.datc64",
   "rows": 3,
   "cols": 5,
@@ -2102,6 +2254,14 @@
   "pairs": 6,
   "diff": 3,
   "cjk": 3
+ },
+ {
+  "table": "atlasthreadslayout.datc64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 5,
+  "diff": 2,
+  "cjk": 2
  },
  {
   "table": "atlastrees.datcl64",
@@ -2256,10 +2416,42 @@
   "cjk": 0
  },
  {
+  "table": "alternatetreeversions.datc64",
+  "rows": 13,
+  "cols": 1,
+  "pairs": 13,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "alternatetreeversions.datcl64",
+  "rows": 13,
+  "cols": 1,
+  "pairs": 13,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
   "table": "archnemesismetarewards.datcl64",
   "rows": 11,
   "cols": 1,
   "pairs": 9,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "atlaspassiveskillsubtrees.datcl64",
+  "rows": 10,
+  "cols": 1,
+  "pairs": 10,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "atlasthreadslayout.datcl64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 5,
   "diff": 0,
   "cjk": 0
  },
@@ -2269,6 +2461,22 @@
   "cols": 1,
   "pairs": 4,
   "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "auguryrewardoutcomes.datc64",
+  "rows": 360,
+  "cols": 1,
+  "pairs": 360,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "battlepasses.datc64",
+  "rows": 14,
+  "cols": 3,
+  "pairs": 37,
+  "diff": 4,
   "cjk": 0
  },
  {
@@ -2297,17 +2505,17 @@
  },
  {
   "table": "buffvisuals.datc64",
-  "rows": 2468,
+  "rows": 2542,
   "cols": 2,
-  "pairs": 4215,
+  "pairs": 4327,
   "diff": 0,
   "cjk": 0
  },
  {
   "table": "chests.datc64",
-  "rows": 2572,
+  "rows": 2400,
   "cols": 2,
-  "pairs": 5142,
+  "pairs": 4798,
   "diff": 0,
   "cjk": 0
  },
@@ -2336,10 +2544,26 @@
   "cjk": 0
  },
  {
-  "table": "faridunwishes.datc64",
-  "rows": 178,
+  "table": "elderguardians.datcl64",
+  "rows": 4,
   "cols": 1,
-  "pairs": 178,
+  "pairs": 4,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "faridunwishes.datc64",
+  "rows": 171,
+  "cols": 1,
+  "pairs": 171,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "fragmentstashtablayout.datc64",
+  "rows": 316,
+  "cols": 1,
+  "pairs": 316,
   "diff": 0,
   "cjk": 0
  },
@@ -2368,6 +2592,14 @@
   "cjk": 0
  },
  {
+  "table": "mercenarybuilds.datc64",
+  "rows": 66,
+  "cols": 2,
+  "pairs": 132,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
   "table": "mercenaryclasses.datc64",
   "rows": 13,
   "cols": 2,
@@ -2385,17 +2617,17 @@
  },
  {
   "table": "mods.datc64",
-  "rows": 40355,
+  "rows": 41324,
   "cols": 1,
-  "pairs": 40355,
+  "pairs": 41324,
   "diff": 0,
   "cjk": 0
  },
  {
   "table": "music.datc64",
-  "rows": 395,
+  "rows": 398,
   "cols": 2,
-  "pairs": 787,
+  "pairs": 793,
   "diff": 0,
   "cjk": 0
  },
@@ -2424,10 +2656,34 @@
   "cjk": 0
  },
  {
-  "table": "ritualrunetypes.datc64",
-  "rows": 82,
+  "table": "packsizes.datc64",
+  "rows": 3,
+  "cols": 2,
+  "pairs": 6,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "packsizes.datcl64",
+  "rows": 3,
   "cols": 1,
-  "pairs": 82,
+  "pairs": 3,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "pantheonsouls.datc64",
+  "rows": 20,
+  "cols": 1,
+  "pairs": 20,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "pantheonsouls.datcl64",
+  "rows": 20,
+  "cols": 1,
+  "pairs": 20,
   "diff": 0,
   "cjk": 0
  },
@@ -2456,16 +2712,32 @@
   "cjk": 0
  },
  {
-  "table": "ultimatumencounters.datc64",
-  "rows": 40,
+  "table": "sentinelpassives.datc64",
+  "rows": 72,
   "cols": 2,
-  "pairs": 42,
+  "pairs": 75,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "shrines.datc64",
+  "rows": 69,
+  "cols": 1,
+  "pairs": 69,
+  "diff": 0,
+  "cjk": 0
+ },
+ {
+  "table": "ultimatumencounters.datc64",
+  "rows": 41,
+  "cols": 2,
+  "pairs": 43,
   "diff": 0,
   "cjk": 0
  },
  {
   "table": "ultimatumencounters.datcl64",
-  "rows": 40,
+  "rows": 41,
   "cols": 1,
   "pairs": 2,
   "diff": 0,
@@ -2473,15 +2745,15 @@
  },
  {
   "table": "ultimatummodifiers.datc64",
-  "rows": 99,
+  "rows": 132,
   "cols": 1,
-  "pairs": 99,
+  "pairs": 132,
   "diff": 0,
   "cjk": 0
  },
  {
   "table": "ultimatummodifiers.datcl64",
-  "rows": 99,
+  "rows": 132,
   "cols": 1,
   "pairs": 2,
   "diff": 0,

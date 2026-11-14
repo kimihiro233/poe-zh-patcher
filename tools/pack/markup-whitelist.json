@@ -15,9 +15,13 @@
     "craftingred",
     "craftingspeed",
     "enchanted",
+    "goldname",
     "necropolisdownside",
     "nemesismod",
     "normal"
+  ],
+  "param": [
+    "gemlevel"
   ],
   "allow_rgb": true
 }

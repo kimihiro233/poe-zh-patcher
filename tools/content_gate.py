@@ -44,6 +44,9 @@ TOTAL_RATIO = 1.20
 # 与 markup.py 的 TAG 一致：标签只可能是 <...>，且不会嵌套
 TAG = re.compile(r"<[^<>]{1,40}>")
 NAMETAG = re.compile(r"<([a-z][a-z0-9_]*)>")
+# 带参标签：3.30 起官方引入 `<gemlevel={0}>`（原版 101 处）。参数只允许 `{n}` 占位符，
+# 不放行任意字符，否则 `<script src=...>` 这类会被当成合法标签。
+PARAMTAG = re.compile(r"<([a-z][a-z0-9_]*)=\{(\d+)\}>")
 RGB = re.compile(r"<rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)>")
 
 # 与 check_placeholders.py 的 TOKEN_RE **必须一字不差**：那边算「漏了哪些占位符」，
@@ -67,7 +70,9 @@ BAD_NAMES = {
 
 def load_whitelist(path=WHITELIST) -> dict:
     d = json.load(open(path, encoding="utf-8"))
-    return {"named": set(d["named"]), "allow_rgb": bool(d.get("allow_rgb", True))}
+    return {"named": set(d["named"]),
+            "param": set(d.get("param") or []),
+            "allow_rgb": bool(d.get("allow_rgb", True))}
 
 
 # ---------------------------------------------------------------- 五个规则
@@ -103,6 +108,11 @@ def g2_markup(s: str, wl: dict):
                 if int(v) > 255:
                     out.append(("G2", f"颜色分量越界：{t}"))
                     break
+            continue
+        m = PARAMTAG.fullmatch(t)
+        if m:
+            if m.group(1) not in wl.get("param", []):
+                out.append(("G2", f"带参标签不在白名单：{t}"))
             continue
         m = NAMETAG.fullmatch(t)
         if not m:
@@ -235,6 +245,7 @@ def check_file(lines, *, base_lines=None, base_bytes=None, total_bytes=None,
 def build_whitelist(sd_dir: str) -> dict:
     """从官方原文里统计标签词表。原文里出现过的，就是客户端认得的。"""
     named = set()
+    param = set()
     for name in sorted(os.listdir(sd_dir)):
         if not name.endswith(".txt"):
             continue
@@ -246,10 +257,15 @@ def build_whitelist(sd_dir: str) -> dict:
             m = NAMETAG.fullmatch(t)
             if m:
                 named.add(m.group(1))
+                continue
+            m = PARAMTAG.fullmatch(t)
+            if m:
+                param.add(m.group(1))
     return {
         "_comment": "由 tools/content_gate.py --whitelist 从 raw_sd 生成，勿手改。"
                     "原文里出现过的标签，才是客户端认得的。",
         "named": sorted(named),
+        "param": sorted(param),
         "allow_rgb": True,
     }
 
@@ -371,14 +387,19 @@ def gate_entries(entries, report_path: str, mode: str = "warn"):
         hits += len(got)
         for rule, msg in got:
             rows.append((e.get("path_in_ggpk", name), rule, msg))
-    if rows:
-        with open(report_path, "w", encoding="utf-8", newline="\n") as f:
-            f.write("# 内容闸命中\n\n")
-            f.write(f"模式 `{mode}`，命中 {hits} 处。每一条都得先判「是不是误杀」——\n"
-                    "G2 会误杀对方自造标签，G5 的标记层边界只能放在 merge() 的三分法里。\n\n")
-            f.write("| 文件 | 规则 | 说明 |\n|---|---|---|\n")
-            for p, r, m in rows[:200]:
-                f.write(f"| `{p}` | {r} | {m.replace('|', '/')} |\n")
+    # 0 命中也要落盘。以前是「有命中才写」，于是白名单补好之后那次 0 命中不会覆盖
+    # 上一轮的报告，`out/content-gate.md` 里留着的 30 处旧警报会被当成本次的结论读。
+    with open(report_path, "w", encoding="utf-8", newline="\n") as f:
+        f.write("# 内容闸命中\n\n")
+        if not rows:
+            f.write(f"模式 `{mode}`，{len(entries)} 个文件，**0 处命中**。"
+                    "（空表就是结论：清单里登记的一切都能由「原文 + 译文」推出来。）\n")
+            return hits, rows
+        f.write(f"模式 `{mode}`，命中 {hits} 处。每一条都得先判「是不是误杀」——\n"
+                "G2 会误杀对方自造标签，G5 的标记层边界只能放在 merge() 的三分法里。\n\n")
+        f.write("| 文件 | 规则 | 说明 |\n|---|---|---|\n")
+        for p, r, m in rows[:200]:
+            f.write(f"| `{p}` | {r} | {m.replace('|', '/')} |\n")
     return hits, rows
 
 

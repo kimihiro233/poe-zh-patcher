@@ -72,14 +72,14 @@ fix-mult,13,pending,map_map_drop_chance_+%_final_from_faridun_wish,,,,{0}% more 
 fix-mult,14,pending,map_map_drop_chance_+%_final_from_faridun_wish,,,,{0}% less Maps found in Area,減少{0}%區域內找到的地圖,區域內可找到 {0}% 更少地圖,減少{0}%區域內找到的地圖,
 fix-mult,15,pending,map_map_item_drop_chance_+%_final_from_uber_mod,,,,{}% more Maps found in Area,區域內掉落的地圖增加 {}%,區域內可找到 {}% 更多地圖,區域內掉落的地圖增加 {}%,
 fix-mult,16,pending,map_map_item_drop_chance_+%_final_from_uber_mod,,,,{}% less Maps found in Area,區域內掉落的地圖減少 {}%,區域內可找到 {}% 更少地圖,區域內掉落的地圖減少 {}%,
-fix-mult,17,pending,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% more Scarabs found in Area,增加{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更多聖甲蟲,增加{0}%區域內找到的聖甲蟲,
-fix-mult,18,pending,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% less Scarabs found in Area,減少{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更少聖甲蟲,減少{0}%區域內找到的聖甲蟲,
-fix-mult,19,pending,map_scarab_drop_chance_+%_final_from_uber_mod,,,,{}% more Scarabs found in Area,區域內掉落的聖甲蟲增加 {}%,區域內可找到 {}% 更多聖甲蟲,區域內掉落的聖甲蟲增加 {}%,
-fix-mult,20,pending,map_scarab_drop_chance_+%_final_from_uber_mod,,,,{}% less Scarabs found in Area,區域內掉落的聖甲蟲減少 {}%,區域內可找到 {}% 更少聖甲蟲,區域內掉落的聖甲蟲減少 {}%,
+fix-mult,17,drift,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% more Scarabs found in Area,增加{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更多聖甲蟲,{0}% more [Thread|Threads] found in Area ⏎ {0}% less [Thread|Threads] found in Area,英文原文已改写
+fix-mult,18,drift,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% less Scarabs found in Area,減少{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更少聖甲蟲,{0}% more [Thread|Threads] found in Area ⏎ {0}% less [Thread|Threads] found in Area,英文原文已改写
+fix-mult,19,drift,map_scarab_drop_chance_+%_final_from_uber_mod,,,,{}% more Scarabs found in Area,區域內掉落的聖甲蟲增加 {}%,區域內可找到 {}% 更多聖甲蟲,{}% more [Thread|Threads] found in Area ⏎ {}% less [Thread|Threads] found in Area,英文原文已改写
+fix-mult,20,drift,map_scarab_drop_chance_+%_final_from_uber_mod,,,,{}% less Scarabs found in Area,區域內掉落的聖甲蟲減少 {}%,區域內可找到 {}% 更少聖甲蟲,{}% more [Thread|Threads] found in Area ⏎ {}% less [Thread|Threads] found in Area,英文原文已改写
 fix-mult,21,pending,map_map_drop_chance_+%_final_from_faridun_wish,,,,{0}% more Maps found in Area,增加{0}%區域內找到的地圖,區域內可找到 {0}% 更多地圖,增加{0}%區域內找到的地圖,
 fix-mult,22,pending,map_map_drop_chance_+%_final_from_faridun_wish,,,,{0}% less Maps found in Area,減少{0}%區域內找到的地圖,區域內可找到 {0}% 更少地圖,減少{0}%區域內找到的地圖,
-fix-mult,23,pending,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% more Scarabs found in Area,增加{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更多聖甲蟲,增加{0}%區域內找到的聖甲蟲,
-fix-mult,24,pending,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% less Scarabs found in Area,減少{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更少聖甲蟲,減少{0}%區域內找到的聖甲蟲,
+fix-mult,23,drift,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% more Scarabs found in Area,增加{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更多聖甲蟲,{0}% more [Thread|Threads] found in Area ⏎ {0}% less [Thread|Threads] found in Area,英文原文已改写
+fix-mult,24,drift,map_scarab_drop_chance_+%_final_from_faridun_wish,,,,{0}% less Scarabs found in Area,減少{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更少聖甲蟲,{0}% more [Thread|Threads] found in Area ⏎ {0}% less [Thread|Threads] found in Area,英文原文已改写
 fix-mult,25,pending,gladiator_accuracy_rating_+%_final_while_wielding_sword,,,,{0}% more Accuracy Rating while wielding a Sword,持劍時，命中值增加 {0}%,持劍時有 {0}% 更多命中值,持劍時，命中值增加 {0}%,
 fix-mult,26,pending,gladiator_accuracy_rating_+%_final_while_wielding_sword,,,,{0}% less Accuracy Rating while wielding a Sword,持劍時，命中值減少 {0}%,持劍時有 {0}% 更少命中值,持劍時，命中值減少 {0}%,
 fix-mult,27,pending,ailment_bearer_elemental_damage_+%_final,,,,{0}% more Elemental Damage while Unbound,無縛狀態下，增加 {0}% 元素傷害,無縛狀態下，{0}% 更多元素傷害,無縛狀態下，增加 {0}% 元素傷害,
@@ -237,20 +237,18 @@ fix-category-ui,2,pending,,achievementitems.datc64,3012,16,Any Unique Jewellery,
 fix-category-ui,3,pending,,achievementitems.datc64,4049,16,Perandus Jewellery Box,普蘭德斯珠寶箱,普蘭德斯飾品箱,普蘭德斯珠寶箱,
 fix-category-ui,4,pending,,achievementitems.datc64,5688,16,Jewellery Item Chests,珠寶箱,飾品寶箱,珠寶箱,
 fix-category-ui,5,pending,,achievementitems.datc64,7298,16,Jewellery,珠寶,飾品,珠寶,
-fix-category-ui,6,pending,,clientstrings.datc64,7910,8,"Each additional player party member increases the quantity of certain items found,
+fix-category-ui,6,drift,,clientstrings.datc64,7910,8,"Each additional player party member increases the quantity of certain items found,
 such as Armour, Jewellery, Currency, Gold, Gems and Unique Items.","每個額外的隊伍成員玩家會增加找到的特定物品數量，
 像是護甲、珠寶、通貨、金幣、寶石和傳奇物品。","每個額外的隊伍成員玩家會增加找到的特定物品數量，
-像是護甲、飾品、通貨、金幣、寶石和傳奇物品。","每個額外的隊伍成員玩家會增加找到的特定物品數量，
-像是護甲、珠寶、通貨、金幣、寶石和傳奇物品。",
-fix-category-ui,7,pending,,currencyitems.datc64,1932,72,"<whiteitem>{Experimented Jewellery}
+像是護甲、飾品、通貨、金幣、寶石和傳奇物品。",仇敵總數：{0},该槽位文本已被改动（游戏更新或别的补丁）
+fix-category-ui,7,gone,,currencyitems.datc64,1932,72,"<whiteitem>{Experimented Jewellery}
 <default>{Item Level:} <normal>{86}","<whiteitem>{實驗性珠寶}
 <default>{物品等級:} <normal>{86}","<whiteitem>{實驗性飾品}
-<default>{物品等級:} <normal>{86}","<whiteitem>{實驗性珠寶}
-<default>{物品等級:} <normal>{86}",
-fix-category-ui,8,pending,,currencyitems.datc64,1933,56,"<whiteitem>{Experimented Jewellery}
+<default>{物品等級:} <normal>{86}",,表/行/槽位已不存在
+fix-category-ui,8,drift,,currencyitems.datc64,1933,56,"<whiteitem>{Experimented Jewellery}
 <default>{Item Level:} <normal>{86}","<whiteitem>{實驗性珠寶}
 <default>{物品等級:} <normal>{86}","<whiteitem>{實驗性飾品}
-<default>{物品等級:} <normal>{86}","<whiteitem>{實驗性珠寶}
-<default>{物品等級:} <normal>{86}",
+<default>{物品等級:} <normal>{86}","替換區域內 12 個怪物群為
+將掉落的裝備轉換為金幣的怪物群",该槽位文本已被改动（游戏更新或别的补丁）
 fix-category-ui,9,pending,,incursionrooms.datc64,50,8,Jewellery Forge,珠寶冶煉室,飾品冶煉室,珠寶冶煉室,
 fix-category-ui,10,pending,,uitalktext.datc64,54,20,They should call that room Zalatl's jewellery box! Imagine what their value will be today!,他們應該叫那個房間是札爾特的珠寶盒！想像一下它們現今的價值！,他們應該叫那個房間是札爾特的飾品盒！想像一下它們現今的價值！,他們應該叫那個房間是札爾特的珠寶盒！想像一下它們現今的價值！,

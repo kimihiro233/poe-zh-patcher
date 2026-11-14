@@ -954,9 +954,14 @@ internal static class Program {
         var ok = 0;
         var bad = 0;
         foreach (var e in _sd) {
+            // 3.30 起 ggpk 内是 `.csd`，raw_sd 里仍是 `.txt`（导出时的扁平命名）。
+            // 基线查找只按主名匹配，不认扩展名，否则换版本就整批「基线文件缺失」。
+            var stem = System.IO.Path.GetFileNameWithoutExtension(e.Path);
             var name = System.IO.Path.GetFileName(e.Path);
-            var p = System.IO.Path.Combine(dir, "metadata_statdescriptions_" + name);
+            var p = System.IO.Path.Combine(dir, "metadata_statdescriptions_" + stem + ".txt");
+            if (!File.Exists(p)) p = System.IO.Path.Combine(dir, "metadata_statdescriptions_" + stem + ".csd");
             if (!File.Exists(p)) p = System.IO.Path.Combine(dir, name);
+            if (!File.Exists(p)) p = System.IO.Path.Combine(dir, stem + ".txt");
             if (!File.Exists(p)) { Console.WriteLine($"  ? {name,-52} 基线文件缺失"); bad++; continue; }
             var cur = File.ReadAllBytes(p);
             var s0 = Sha(cur);
@@ -988,7 +993,9 @@ internal static class Program {
     // 参数：--sd-test=文件路径（按文件名匹配数据包里的条目）
     private static int SdTest(string path) {
         var name = System.IO.Path.GetFileName(path);
-        var e = _sd.FirstOrDefault(x => System.IO.Path.GetFileName(x.Path) == name);
+        // 同上：按主名匹配，扩展名在 3.29(txt)/3.30(csd) 之间变过。
+        var stem = System.IO.Path.GetFileNameWithoutExtension(name);
+        var e = _sd.FirstOrDefault(x => System.IO.Path.GetFileNameWithoutExtension(x.Path) == stem);
         if (e is null) { Console.WriteLine($"数据包里没有这个文件：{name}"); return 1; }
         if (!File.Exists(path)) { Console.WriteLine($"找不到文件：{path}"); return 1; }
         var cur = File.ReadAllBytes(path);
