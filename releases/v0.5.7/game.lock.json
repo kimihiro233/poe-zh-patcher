@@ -1,0 +1,2165 @@
+{
+  "schema": 1,
+  "locked_at": "2026-11-14T12:38:23",
+  "game_dir": "C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile",
+  "version": {
+    "log": "logs/LatestClient.txt",
+    "log_mtime": "2026-11-14T12:29:56",
+    "client_version": "3.30.0",
+    "patch_version": "3.30.0.1.3"
+  },
+  "ggpk": {
+    "size": 79769601101,
+    "mtime": "2026-11-14T12:30:01"
+  },
+  "exe": {
+    "PathOfExile.exe": {
+      "size": 79945560,
+      "sha256": "e5c238a2478dc5cfab8eeb4d3de3ddf9ef065645410cfdc744ae7779fcba42d7",
+      "mtime": "2026-11-14T12:29:35"
+    },
+    "PathOfExile_x64.exe": {
+      "size": 541528,
+      "sha256": "a6e7b545ff73e6a25f23308289b32904f0beb9f041546f7d279df53a363ff33d",
+      "mtime": "2026-11-14T12:33:25"
+    },
+    "Client.exe": {
+      "size": 541528,
+      "sha256": "03f6711fd7c9991e9655f251134bb44d364ff5cb8d6d6c9d96d6337f07e7264f",
+      "mtime": "2026-11-14T12:30:07"
+    }
+  },
+  "counts": {
+    "lang_files": 482,
+    "statdesc_files": 49,
+    "total": 531
+  },
+  "fingerprint": "9eb09edf9fb2cb24adf4e49235983938d3a5361f4c37f6f63684c6ca2483b371",
+  "files": {
+    "data/traditional chinese/achievementitemrewards.datc64": {
+      "size": 352,
+      "sha256": "517da590860ffd1795028f60af675ea5f49e97c9b14e2248d44414f148af5c3c"
+    },
+    "data/traditional chinese/achievementitemrewards.datcl64": {
+      "size": 524,
+      "sha256": "f6f83d922bfa7b2955b814a0884566f3370291f0fce3d5ac249a119bf8902403"
+    },
+    "data/traditional chinese/achievementitems.datc64": {
+      "size": 1406260,
+      "sha256": "211efd3f5d3ab89a44740a0d16f3e8095edcafdc56b98ebba587c4ed5312af81"
+    },
+    "data/traditional chinese/achievementitems.datcl64": {
+      "size": 2158824,
+      "sha256": "f2b2f7a3714bebacf7351f152dd82b6d440f36327a35bbb55e67729ec848c2d4"
+    },
+    "data/traditional chinese/achievements.datc64": {
+      "size": 311052,
+      "sha256": "f181bb89b25a66c259d477a03c895b06b745ad4c342acde0f118a6dc38312c82"
+    },
+    "data/traditional chinese/achievements.datcl64": {
+      "size": 469946,
+      "sha256": "c1c0cc261f3d7cae45572dc5ec6649e2f0bcc2e76f7910d46af4b7ae886db6ba"
+    },
+    "data/traditional chinese/achievementsetrewards.datc64": {
+      "size": 51614,
+      "sha256": "339353a8691ab7e9d0f28a11f268725c40befc9eb6f403b832b993e3e35101c5"
+    },
+    "data/traditional chinese/achievementsetrewards.datcl64": {
+      "size": 76500,
+      "sha256": "c028e96cdd42125aab3052d9cbac1b5bab1c54b480e42a1e59fa10ce203ffd09"
+    },
+    "data/traditional chinese/achievementsetsdisplay.datc64": {
+      "size": 1728,
+      "sha256": "4d891fc5bf37d9a0d7b40572275e07d5282cf0bca4839a7534278305571ad36b"
+    },
+    "data/traditional chinese/achievementsetsdisplay.datcl64": {
+      "size": 1916,
+      "sha256": "aa12ac91d41d1cd7ee37775d74d19a0c6319f62c99f457f6ebbdc6dbcbcfb1bf"
+    },
+    "data/traditional chinese/activeskills.datc64": {
+      "size": 1455037,
+      "sha256": "1831967f36be6ee6e66c3f33c40bb099f52faf3110f835abdf270ce8ff6b8a7c"
+    },
+    "data/traditional chinese/activeskills.datcl64": {
+      "size": 1752637,
+      "sha256": "2226662dd4623c8faa1f244cad7ebc41ebd977e555a5ddeaf27b6b7e8a09ea93"
+    },
+    "data/traditional chinese/acts.datc64": {
+      "size": 2544,
+      "sha256": "813a376684d8dde48e844fe6e9a623d47942ed2553103e8f17eff0036feb22ed"
+    },
+    "data/traditional chinese/acts.datcl64": {
+      "size": 3788,
+      "sha256": "24e179e3b7f52235893d6da9f45ca50fc22b38df73d81a1f1f4645b9344b03fe"
+    },
+    "data/traditional chinese/advancedskillstutorial.datc64": {
+      "size": 21564,
+      "sha256": "a862674772c92789db7627b156ba44e69f4426c2b39f7d007b8ccb99336d2bb4"
+    },
+    "data/traditional chinese/advancedskillstutorial.datcl64": {
+      "size": 34764,
+      "sha256": "6ee7c31fb56268a655d7d12b9d6a4a60b28e3f5ef3ab0b111404eb48f4f30564"
+    },
+    "data/traditional chinese/afflictionrewardtypevisuals.datc64": {
+      "size": 1796,
+      "sha256": "d2d71597b7514058836b9f0e820c0f3259ba62139b8324e35b3f2d5b116483f7"
+    },
+    "data/traditional chinese/afflictionrewardtypevisuals.datcl64": {
+      "size": 2772,
+      "sha256": "1f77e7bbde5595c9b1226664ff6eba06e1799f38e2116e55c2295dd08f7745ba"
+    },
+    "data/traditional chinese/alternatepassiveskills.datc64": {
+      "size": 111760,
+      "sha256": "9899c39901ed79fe17cb646243bc46150f642d95d7e4c00d15adec8b0ccd6441"
+    },
+    "data/traditional chinese/alternatepassiveskills.datcl64": {
+      "size": 141280,
+      "sha256": "e3e1fd283e9ea42845339f5d0a8f2c3ba3750248b8b75a238968f9175b070308"
+    },
+    "data/traditional chinese/alternatequalitytypes.datc64": {
+      "size": 2942,
+      "sha256": "7da33093f7ef1c81153f65c8a9533ef5494cc93685980d00e0ea119bd99e340a"
+    },
+    "data/traditional chinese/alternatequalitytypes.datcl64": {
+      "size": 4066,
+      "sha256": "81e282c964178a1024d310d02a2344fb60e0df0148175eb7f2918d6be00d819c"
+    },
+    "data/traditional chinese/alternatetreeversionkeystones.datc64": {
+      "size": 1234,
+      "sha256": "e835ade97c6592455b9b16a9b9ff4b136ad91f4c42b597c0f8c1e9cb3ea1a80d"
+    },
+    "data/traditional chinese/alternatetreeversionkeystones.datcl64": {
+      "size": 1448,
+      "sha256": "0e098c75cce2f1783c5abd61cbcdbed393bcca06ea4c20dcb718e29a89164d1c"
+    },
+    "data/traditional chinese/alternatetreeversions.datc64": {
+      "size": 972,
+      "sha256": "59183103811deba7ebaeb5b7661267463cdde75986ea64d6c4c2ff146ec97568"
+    },
+    "data/traditional chinese/alternatetreeversions.datcl64": {
+      "size": 1250,
+      "sha256": "efd504e37afa9eb5a7a88ffcbab309f52d722df9cafb4cd4d2be7b4d8f6184a2"
+    },
+    "data/traditional chinese/ancestraltrialfielditems.datc64": {
+      "size": 4072,
+      "sha256": "1eddcd1fcbbd2f0dcf6466eba6c920e1a26cb66e4ff6cbc0ff3ec54956e8405f"
+    },
+    "data/traditional chinese/ancestraltrialfielditems.datcl64": {
+      "size": 5156,
+      "sha256": "0a14949ca05ddaf1cc67dfb61ba6a6ea0aac91a310050e252bc7cd87ef542b9f"
+    },
+    "data/traditional chinese/ancestraltrialitems.datc64": {
+      "size": 16948,
+      "sha256": "c7462db63e12fc23236a41778e2e2fb2e6684712425d7981886269719fa8851d"
+    },
+    "data/traditional chinese/ancestraltrialitems.datcl64": {
+      "size": 26736,
+      "sha256": "5af6bb8eb1f187e3fdc4e6a8a53bc56ce0001a826c772b7eed2578457a2b8f3f"
+    },
+    "data/traditional chinese/ancestraltrialpositiontype.datc64": {
+      "size": 2870,
+      "sha256": "a15323b28dffc0ac8776625573043a0275be31a8efee0ec4a65fd73868439cb4"
+    },
+    "data/traditional chinese/ancestraltrialpositiontype.datcl64": {
+      "size": 5440,
+      "sha256": "c6a562f2f42367a6312d5c4854f7ea7d08722a62a8eee6acb9ef8aea2545a2db"
+    },
+    "data/traditional chinese/ancestraltrialtribes.datc64": {
+      "size": 8440,
+      "sha256": "09ef73c666055ff9c7e149a8e4cf16255165ca3dc74ae11d47dd66e9a099d463"
+    },
+    "data/traditional chinese/ancestraltrialtribes.datcl64": {
+      "size": 13776,
+      "sha256": "45dcc16a45b2f1ef59ee7d5c97fe09e552369e86cf8cc420342fbbf979d02b71"
+    },
+    "data/traditional chinese/ancestraltrialunits.datc64": {
+      "size": 35424,
+      "sha256": "d3fa73c8e6b156c97d8dec1a938b2a5ad483a0cf6761a3028de61e473e6f27a7"
+    },
+    "data/traditional chinese/ancestraltrialunits.datcl64": {
+      "size": 63200,
+      "sha256": "8c6daa3c770def3668acd36e168cb397eec32c3240b0a2afc310ccca21d496bb"
+    },
+    "data/traditional chinese/archetypes.datc64": {
+      "size": 113868,
+      "sha256": "d7a5c34806ef7f026c0a5685d0b9de072cf544c03e49ca84af8b2147e2b6842a"
+    },
+    "data/traditional chinese/archetypes.datcl64": {
+      "size": 216480,
+      "sha256": "ce7494b04c0ebfc31fb5faa97da5cf087b23b03b8859e30fc397e9eb579add24"
+    },
+    "data/traditional chinese/archnemesismetarewards.datc64": {
+      "size": 1324,
+      "sha256": "cfcf8904767183e5f67e9408405d7111c70465525f569948b5a5df16654628a9"
+    },
+    "data/traditional chinese/archnemesismetarewards.datcl64": {
+      "size": 2120,
+      "sha256": "c095a6af4fd4eba9486c82ab01818936172391c663d05aa1ce821f6351e21bdd"
+    },
+    "data/traditional chinese/archnemesismods.datc64": {
+      "size": 18610,
+      "sha256": "c272709b934ece5b64f8553cbb75e38875e52871ed3d6f47186a7072e53e98ba"
+    },
+    "data/traditional chinese/archnemesismods.datcl64": {
+      "size": 22092,
+      "sha256": "ca92021eb3947def692dd03fd738a48821d1e7b164f89d74e8ddcf4f4a25b924"
+    },
+    "data/traditional chinese/ascendancy.datc64": {
+      "size": 17149,
+      "sha256": "0afb3ff78dc7c7d9e292f774a210100fc02643c5e4998f0e890964f3f8f9e04d"
+    },
+    "data/traditional chinese/ascendancy.datcl64": {
+      "size": 30165,
+      "sha256": "6136ac82d226731005eeba027207bb4fa258eb6c230eedd80ae79d617c2b29b8"
+    },
+    "data/traditional chinese/atlasexiles.datc64": {
+      "size": 1158,
+      "sha256": "4d466c1277b42f7940bea710df10c7cdb5fdd6a186fa74743b0b4910360670ca"
+    },
+    "data/traditional chinese/atlasexiles.datcl64": {
+      "size": 1984,
+      "sha256": "31903b374295707d77958a8218a69eada00bc9c3ef79c609b9cafa1b9b574103"
+    },
+    "data/traditional chinese/atlasmissiontypes.datc64": {
+      "size": 3802,
+      "sha256": "833ef2bde22d1ec13288ac6773a5e5dcb2d0706c7ec2b224e64ab23b7c25a2c3"
+    },
+    "data/traditional chinese/atlasmissiontypes.datcl64": {
+      "size": 6632,
+      "sha256": "d52495ff63dc36a54d2b0b2bc0b30f709125c66e6b4417477b38f2ec237c1d43"
+    },
+    "data/traditional chinese/atlaspassiveskillsubtrees.datc64": {
+      "size": 4084,
+      "sha256": "189fcf0bcbc8c7f75a564c751d516b2a7e2841beaa55a499fb42916d7a22b6a0"
+    },
+    "data/traditional chinese/atlaspassiveskillsubtrees.datcl64": {
+      "size": 6584,
+      "sha256": "b3eb198e7b2213d82f3a0db9e15f93c0d8964619b665cd8f8ca559f97fe32015"
+    },
+    "data/traditional chinese/atlasprimordialaltarchoicetypes.datc64": {
+      "size": 1886,
+      "sha256": "459d5c30d46668177fa5ac2083786b01a47b7c4291989c0d6f8b6ab8f2a515a6"
+    },
+    "data/traditional chinese/atlasprimordialaltarchoicetypes.datcl64": {
+      "size": 3544,
+      "sha256": "5735827a060eab88293b267f2d09683e0186ea0102f009f78c0327aae0f1f413"
+    },
+    "data/traditional chinese/atlasprimordialbossoptions.datc64": {
+      "size": 4508,
+      "sha256": "ea3996e0dc3c3b0b3557b83a2ecf363601bf851d7feb621fa40a568a1dd5f32d"
+    },
+    "data/traditional chinese/atlasprimordialbossoptions.datcl64": {
+      "size": 8284,
+      "sha256": "cc38b7e3f3bc12e5c216ef4e639d9ebefcf337d7ebec0ec0516858c647241c67"
+    },
+    "data/traditional chinese/atlasthreadslayout.datc64": {
+      "size": 206,
+      "sha256": "0014b5a715f8e311035d18be5cc7481c470d76ed6e09be85393225bc0aba6fcc"
+    },
+    "data/traditional chinese/atlasthreadslayout.datcl64": {
+      "size": 316,
+      "sha256": "976f9b33b5abf0633a30017a6985e5858c6d2796df9c59f28d12df5794f0f028"
+    },
+    "data/traditional chinese/atlasthreadtypes.datc64": {
+      "size": 3072,
+      "sha256": "de123a4215d84c06ab8b5395f48dd94d2da930b16549bc5e8146f42e09a03a27"
+    },
+    "data/traditional chinese/atlasthreadtypes.datcl64": {
+      "size": 4504,
+      "sha256": "2431a43b2a0e86f59e00aa5121419603280d9574c4e6c12673b47ff6c673ec2c"
+    },
+    "data/traditional chinese/atlastrees.datc64": {
+      "size": 340,
+      "sha256": "84ad37af71d8a119fc2e3835f124a9fb9ffa244e8f298bdc73e96533a602d680"
+    },
+    "data/traditional chinese/atlastrees.datcl64": {
+      "size": 536,
+      "sha256": "dd3d87c4a39da01431317a1f00a36f860c555e610ea17df32e7080e1319b9db6"
+    },
+    "data/traditional chinese/atlasvoidstoneslots.datc64": {
+      "size": 2524,
+      "sha256": "22fdf9aadd298856d9117d0e7e44e9b9ec227d2ef556a0121affcb6943936d33"
+    },
+    "data/traditional chinese/atlasvoidstoneslots.datcl64": {
+      "size": 4444,
+      "sha256": "c5c3855d0cf2f9b66ef159f54297a0432aceae73769421fc8325d296150282c8"
+    },
+    "data/traditional chinese/augurycards.datc64": {
+      "size": 6174,
+      "sha256": "1d33eba574acdfd436389e98ed9f75adea9643bcef997f49f9a2eb06493aa914"
+    },
+    "data/traditional chinese/augurycards.datcl64": {
+      "size": 9836,
+      "sha256": "3e8ac5592eb593919b91041489de222872653f62efb2d1fa5f3e899bf583675a"
+    },
+    "data/traditional chinese/augurycardtiers.datc64": {
+      "size": 21224,
+      "sha256": "c56bd817652ba2c9402bd1b19552562e15c5134c20de1f83558a35485fa519fd"
+    },
+    "data/traditional chinese/augurycardtiers.datcl64": {
+      "size": 37004,
+      "sha256": "95a458248087c0dc0d40b303ca40e99ee87a70a5bc30588e23e201d442ada3fb"
+    },
+    "data/traditional chinese/auguryfactions.datc64": {
+      "size": 594,
+      "sha256": "429bf4d4419ff7761c833333dd609385ef36b5afd0c1ed22616492f5ce155253"
+    },
+    "data/traditional chinese/auguryfactions.datcl64": {
+      "size": 984,
+      "sha256": "15cb60d89edbc3ed027e21f30f625ebb12016dbe05e7403de1c630faf83540b2"
+    },
+    "data/traditional chinese/augurypinnaclecards.datc64": {
+      "size": 7112,
+      "sha256": "883d8e1cd45a3f09e4bb63690103477fdd79fd0bd4f8625d8968acb8486b9da3"
+    },
+    "data/traditional chinese/augurypinnaclecards.datcl64": {
+      "size": 12528,
+      "sha256": "532f6c9360a61fa92a276596e8ec6f4a136d42b7dad583f35692d7177553b49f"
+    },
+    "data/traditional chinese/auguryrewardoutcomes.datc64": {
+      "size": 79184,
+      "sha256": "0a3ab3c97f843facb57fed7e1320c742aaa5aa09e0e0ab425bd8313427780129"
+    },
+    "data/traditional chinese/auguryrewardoutcomes.datcl64": {
+      "size": 110304,
+      "sha256": "6d87a54e77ac35d6fc12c9cd70684009b261b1dd7ea5dd9495e6ca3d05fba6b0"
+    },
+    "data/traditional chinese/awarddisplay.datc64": {
+      "size": 18331,
+      "sha256": "cadf2eec4d3aaf96d902ad71bca8b525eb12275cdac6926ea116e0b309aea9c3"
+    },
+    "data/traditional chinese/awarddisplay.datcl64": {
+      "size": 28049,
+      "sha256": "aa5175eba8d40be75cb5df5cf0cd3cbb4d56d939bed04fdca62d69a65f64b9dd"
+    },
+    "data/traditional chinese/azmeriwoodsdusttype.datc64": {
+      "size": 1080,
+      "sha256": "1f87790936fe3e19ae663c07562775f41b70da774d6f77fd19f0cf4a49f2d6eb"
+    },
+    "data/traditional chinese/azmeriwoodsdusttype.datcl64": {
+      "size": 1716,
+      "sha256": "7a01ef7396a1f5903d186884a8241fdf2091816f5aef8b89f9a32352003e1e34"
+    },
+    "data/traditional chinese/backenderrors.datc64": {
+      "size": 72694,
+      "sha256": "00a627fdbc8e133bbe54bfdbcad324c3becc9b494c90e397c4ea4303c31eafbe"
+    },
+    "data/traditional chinese/backenderrors.datcl64": {
+      "size": 127992,
+      "sha256": "d0ee4d67ae5fc8096bf94e9ee6c2aaa42d3e860b238e2114cb0db5734e9808cf"
+    },
+    "data/traditional chinese/baseitemtypes.datc64": {
+      "size": 2876784,
+      "sha256": "6d7900a0249a72d009a6bc1f8a740d466c6b270e77cf862d6998d23adf189666"
+    },
+    "data/traditional chinese/baseitemtypes.datcl64": {
+      "size": 3455512,
+      "sha256": "84ef57b7a33bef0884610903a100dc7dc2fcc6cb087b08d889cfbcf90f69bec3"
+    },
+    "data/traditional chinese/battlepasses.datc64": {
+      "size": 3864,
+      "sha256": "7875b1b1f24dc92442937e57bb658f428659c115d7b264025d735f35d841792f"
+    },
+    "data/traditional chinese/battlepasses.datcl64": {
+      "size": 6882,
+      "sha256": "6b1222e8247f6c8925b3b163cceb89d63e4a5ced97642667257552a1a586e0d5"
+    },
+    "data/traditional chinese/battlepassrewards.datc64": {
+      "size": 43440,
+      "sha256": "a1fce5b0ec2351ab9655786e6e664205622547ac94d17f8bd72f8b9542ec3386"
+    },
+    "data/traditional chinese/battlepassrewards.datcl64": {
+      "size": 55036,
+      "sha256": "e48828fff09f07a480acd2752ae8d001c33c843c1c5a660d7a06db3c2711b18d"
+    },
+    "data/traditional chinese/battlepasstracks.datc64": {
+      "size": 148,
+      "sha256": "eb9ab7f56fb7a5fbba7a6ed5117763cf13e0e10641a8dd9ba3b34a6ecc034f95"
+    },
+    "data/traditional chinese/battlepasstracks.datcl64": {
+      "size": 188,
+      "sha256": "8e0c559ff1e183b40f572cdc043931f5dae4062b90f0693e841d7bf590339c8a"
+    },
+    "data/traditional chinese/bestiaryfamilies.datc64": {
+      "size": 3153,
+      "sha256": "e3e9dcf24174690fdecf5dbe758503ee1bf51fc22a856c244dd9a1f42510122c"
+    },
+    "data/traditional chinese/bestiaryfamilies.datcl64": {
+      "size": 5301,
+      "sha256": "8d19feb32cb774f5f9417159e286a14869940eb6d4e5ff34a4a3f72683dff312"
+    },
+    "data/traditional chinese/bestiarygenus.datc64": {
+      "size": 5538,
+      "sha256": "cd500653a898c93bb73a09c7066881633ce5635139b91e634a005afcba7c984c"
+    },
+    "data/traditional chinese/bestiarygenus.datcl64": {
+      "size": 8628,
+      "sha256": "da51fe8b319e4985738115f5176ee6f4cc243587805209745fd8ba73cd21335a"
+    },
+    "data/traditional chinese/bestiarygroups.datc64": {
+      "size": 7060,
+      "sha256": "03905be33ca5717db66cf929bb4beb9fe1a41296e072be7f3ceae927895a642c"
+    },
+    "data/traditional chinese/bestiarygroups.datcl64": {
+      "size": 12860,
+      "sha256": "560162733090bc8ede213723e0c6cae258053d103c4ca18990813f7e0d9cfbda"
+    },
+    "data/traditional chinese/bestiaryrecipecategories.datc64": {
+      "size": 1458,
+      "sha256": "6b84524d656b6517e2899f39e758baf63380af014c81e42ccc877d77d7ca5a16"
+    },
+    "data/traditional chinese/bestiaryrecipecategories.datcl64": {
+      "size": 2376,
+      "sha256": "fe2cde2f199471a24bd1b3180d93e7abad00b7e503772dfc565ceafe794b7455"
+    },
+    "data/traditional chinese/bestiaryrecipes.datc64": {
+      "size": 28408,
+      "sha256": "e48b8b661803b9a837b453788b1237c161dcc60291e0e3e5c3ceaf456586c473"
+    },
+    "data/traditional chinese/bestiaryrecipes.datcl64": {
+      "size": 37864,
+      "sha256": "74c2ca0c6ed5f155c069ca3d16df0413ec3e07555b42d3d24b53765b46f8fe7c"
+    },
+    "data/traditional chinese/betrayalchoices.datc64": {
+      "size": 408,
+      "sha256": "4df4240c42ec263b6bcc77d8c18d574e92e2272665238d3f32a3b10f8e23a22b"
+    },
+    "data/traditional chinese/betrayalchoices.datcl64": {
+      "size": 504,
+      "sha256": "e158529122a906e12adfbc055d473700b525ce85e381331d6efcf8ca0db04a9c"
+    },
+    "data/traditional chinese/betrayaljobs.datc64": {
+      "size": 1640,
+      "sha256": "59207049be952d257997473757684f67c37010db726aaf1d14b93a24e698ed1b"
+    },
+    "data/traditional chinese/betrayaljobs.datcl64": {
+      "size": 2528,
+      "sha256": "3b77fe71022418a1d038f7b741a7d606a8f1b3bc8185b3781cb1400c5fac2a30"
+    },
+    "data/traditional chinese/betrayalranks.datc64": {
+      "size": 512,
+      "sha256": "6179abe679b1c547ac0f533e2bb220495c2262bc78c8df4f6128e1005626d9b8"
+    },
+    "data/traditional chinese/betrayalranks.datcl64": {
+      "size": 856,
+      "sha256": "baa2b4dab5b1848f8eee4258070619c93c7a401ab9e53826c949c186ab273857"
+    },
+    "data/traditional chinese/betrayalrelationshipstate.datc64": {
+      "size": 136,
+      "sha256": "95823198d4dd07b7dc219b893b3fb8e0fe3787d6c2af9f85b5e2ecefef823f46"
+    },
+    "data/traditional chinese/betrayalrelationshipstate.datcl64": {
+      "size": 188,
+      "sha256": "4a9708c2e122b9053742103514f668545f0b04e27bfb4bb16c958b215dec9ab8"
+    },
+    "data/traditional chinese/betrayaltargets.datc64": {
+      "size": 9858,
+      "sha256": "43024bec260428c1b3dbb7e39f82c1cd528fefecb84bda8e3a93adefdbfe0ab5"
+    },
+    "data/traditional chinese/betrayaltargets.datcl64": {
+      "size": 15226,
+      "sha256": "d9354020530975ff8a2b172fd8a82f55435bfcf6617de17c5c9d8b9edb61b928"
+    },
+    "data/traditional chinese/betrayaltraitorrewards.datc64": {
+      "size": 15628,
+      "sha256": "6d921779dc0592e30b3506347d87e7a4974740e0efb68da34d2038fa0b9144a6"
+    },
+    "data/traditional chinese/betrayaltraitorrewards.datcl64": {
+      "size": 17708,
+      "sha256": "18d5d859350456284201fa21ad596b3526931fc62789ac42a79c1747a7fa03c5"
+    },
+    "data/traditional chinese/betrayalupgrades.datc64": {
+      "size": 16912,
+      "sha256": "2870581fab087e5b4745e25785e654875a42876bd7225b638412ac6fae726d1c"
+    },
+    "data/traditional chinese/betrayalupgrades.datcl64": {
+      "size": 25440,
+      "sha256": "e5a47e4f423861fe0b41d45ea4d594e095a37ae7329d33e7ff17d1273c034af6"
+    },
+    "data/traditional chinese/bindablevirtualkeys.datc64": {
+      "size": 2868,
+      "sha256": "6fbf2324c23a6ad8be33bf85bba2aa9268c783fe6da9bc51caf2c9d7ca351af8"
+    },
+    "data/traditional chinese/bindablevirtualkeys.datcl64": {
+      "size": 3424,
+      "sha256": "16244f0a1a09e1977baeba52b6ffcab7fb7e0279eda6d771dec3a0a3048cd7b9"
+    },
+    "data/traditional chinese/blightcraftingitems.datc64": {
+      "size": 1166,
+      "sha256": "36fffd601e02fd9bf23a331eae2c342f0b76283ab54a63564ce5c4d5c5afc1c5"
+    },
+    "data/traditional chinese/blightcraftingitems.datcl64": {
+      "size": 1232,
+      "sha256": "8f5c2b4bc5bce5316cb07d34acaaefff4ea39d0eda9e4fc8b49f5f2cb578a83a"
+    },
+    "data/traditional chinese/blighttowers.datc64": {
+      "size": 15727,
+      "sha256": "73d3ecc8b8392945d063aa967b3ce4de54b21b01f90972450c334e5ca6af9195"
+    },
+    "data/traditional chinese/blighttowers.datcl64": {
+      "size": 20595,
+      "sha256": "cb8de9e631917b3142a0e83d2ae5b8282daf4ecd11c68c4d7551bce6c49792c0"
+    },
+    "data/traditional chinese/breachstashtabsubstashgroup.datc64": {
+      "size": 1010,
+      "sha256": "130e3c92759c6c24a7621bc47673f3a41031f03bd281d344e513f09aa027f70c"
+    },
+    "data/traditional chinese/breachstashtabsubstashgroup.datcl64": {
+      "size": 1776,
+      "sha256": "f6ac9633f348afce844f1338b21656dd38182807059833732d09cb4b18c352cc"
+    },
+    "data/traditional chinese/brequelencounterskills.datc64": {
+      "size": 5095,
+      "sha256": "f865da7b6522ee1682f48a9483583edbc20906d0fb2092e77d6653cc3a6c925d"
+    },
+    "data/traditional chinese/brequelencounterskills.datcl64": {
+      "size": 8965,
+      "sha256": "d8ef7da085b5252ac59722f63830d5c2a85c7c741799d2e05579de09377a510d"
+    },
+    "data/traditional chinese/brequelfruitrewardtypes.datc64": {
+      "size": 1400,
+      "sha256": "e0cd00611b1978daf288169ac1fec163080ce8523f29df6e84873a0188af092f"
+    },
+    "data/traditional chinese/brequelfruitrewardtypes.datcl64": {
+      "size": 2292,
+      "sha256": "30aff7088a9cc1b3f9538149ae0e37d0a07b171ed3260a1fb26edb5161e11cc6"
+    },
+    "data/traditional chinese/brequellockerlayout.datc64": {
+      "size": 78,
+      "sha256": "149bf5a7883fdad6b871e2ad0c14c7c7629ab634947b94efa82e4a34a0738a29"
+    },
+    "data/traditional chinese/brequellockerlayout.datcl64": {
+      "size": 92,
+      "sha256": "b5b505fa458d44df1ce38cd55221a63584d1c1b0a20a25ddc024dba02c19f929"
+    },
+    "data/traditional chinese/buffdefinitions.datc64": {
+      "size": 1293946,
+      "sha256": "91e46d1e781e09f8f5b0a957bd039563d0cfd719a0b4355f95d32853c2285d0e"
+    },
+    "data/traditional chinese/buffdefinitions.datcl64": {
+      "size": 1516194,
+      "sha256": "8ff61c919a13981423faeaace2557d48fff443aa584ad47340c3d7a12e211389"
+    },
+    "data/traditional chinese/buffvisuals.datc64": {
+      "size": 1123882,
+      "sha256": "98b8b9be6bfccddd1d46e09d2b35574320ecd3090b2283b0507b33422cb54346"
+    },
+    "data/traditional chinese/buffvisuals.datcl64": {
+      "size": 1577064,
+      "sha256": "42dd21f42228e7ccd223ba23de31146a8dd7a0a8c04b0fc57b232cfe504db75e"
+    },
+    "data/traditional chinese/builtinitemfilters.datc64": {
+      "size": 172,
+      "sha256": "7c72c6263fd4be32669f832866d1cbafa10a4ebdb4201f7e294f11f232d42850"
+    },
+    "data/traditional chinese/builtinitemfilters.datcl64": {
+      "size": 274,
+      "sha256": "930c032ba33095c204009ec838f941bf092bbf200ae829a968ad1e65a315ba00"
+    },
+    "data/traditional chinese/byocrafting.datc64": {
+      "size": 8272,
+      "sha256": "cfd7a07de97db376b3f4ee33d81c560a5a6d84d7cc9959ee4b5bf258f10e6495"
+    },
+    "data/traditional chinese/byocrafting.datcl64": {
+      "size": 13772,
+      "sha256": "958b238cb6b2bb45ef4642afd8075721e3be9da25f3d05ad0be324ccbb30ceec"
+    },
+    "data/traditional chinese/characterpaneldescriptionmodes.datc64": {
+      "size": 1174,
+      "sha256": "7b60b05037663d28e61bcb8e1422524b1658b9de90ec89612323f196347d3c91"
+    },
+    "data/traditional chinese/characterpaneldescriptionmodes.datcl64": {
+      "size": 1800,
+      "sha256": "9ff00ea975ed20d374645a5a8784fdc8d95d1b4cc5747b7f6ef6a80c51940e8d"
+    },
+    "data/traditional chinese/characterpanelstats.datc64": {
+      "size": 83730,
+      "sha256": "2f8b7d25650fa493e91d59f63e89364a8284c592db9f4ad45e5871ebffa0350e"
+    },
+    "data/traditional chinese/characterpanelstats.datcl64": {
+      "size": 102574,
+      "sha256": "4e40a64eaf262269f98bed0660f67dc4ab1380876f18a2db83c04778be6669ce"
+    },
+    "data/traditional chinese/characterpaneltabs.datc64": {
+      "size": 342,
+      "sha256": "3523fc7bf39769082ef65664728798069774b7149b53986421c279025fcd9a5a"
+    },
+    "data/traditional chinese/characterpaneltabs.datcl64": {
+      "size": 480,
+      "sha256": "46f9a8301fe98a3c97689e06c6df61754d7c9897d82e8cd8bff0f9f8a1c784cc"
+    },
+    "data/traditional chinese/characters.datc64": {
+      "size": 14468,
+      "sha256": "bd308e65ffdaa20acf58f93593ad111c07966df603e7fcde409345426a0a6b25"
+    },
+    "data/traditional chinese/characters.datcl64": {
+      "size": 23820,
+      "sha256": "d051559199bf8f8a293dc5a1528f26645e4569e6ddd390c03d07fafc153dd1f4"
+    },
+    "data/traditional chinese/characterstartstates.datc64": {
+      "size": 34147,
+      "sha256": "03d0f5860b1d3bae38464fb53747cc4a5a20715d18ce26feba7bd51fe30a3727"
+    },
+    "data/traditional chinese/characterstartstates.datcl64": {
+      "size": 39949,
+      "sha256": "48e332afff0fec016bd7b7c3c58ae8f342ca39cfabea020b5cee922a8eb74e6b"
+    },
+    "data/traditional chinese/charactertextaudio.datc64": {
+      "size": 244664,
+      "sha256": "b5389441a34a02c2c3b629e99a4025f9631f3f0885492fe8ba388e6ebf533692"
+    },
+    "data/traditional chinese/charactertextaudio.datcl64": {
+      "size": 434856,
+      "sha256": "19a83282f169d75cd268f341ccc68a65a42f4f211f5687920e4317c774291756"
+    },
+    "data/traditional chinese/chests.datc64": {
+      "size": 1169390,
+      "sha256": "ebfee6d712d465e0b177a11f050d78b29053e5f6cd8b57d44ed38f3af050279a"
+    },
+    "data/traditional chinese/chests.datcl64": {
+      "size": 1468164,
+      "sha256": "b91b2aee5029b65754c6092d995e85fcc7bea594405b0645a64a8c0491c438b0"
+    },
+    "data/traditional chinese/clientstrings.datc64": {
+      "size": 1307998,
+      "sha256": "a2a891c2f4bc272ae5e94c2fe5ded9f47c95c5dd119e8b9c925c559f38c900a6"
+    },
+    "data/traditional chinese/clientstrings.datcl64": {
+      "size": 2099620,
+      "sha256": "976dd6cc3c1bee38f526746e544a5bc66a43e1a152875a3b925f6bca35e57acb"
+    },
+    "data/traditional chinese/clientstrings2.datc64": {
+      "size": 59484,
+      "sha256": "8fb38560bf9b37702bc12c92e089390fa5b22e76e58d36fb7307eea5fe8ca478"
+    },
+    "data/traditional chinese/clientstrings2.datcl64": {
+      "size": 97012,
+      "sha256": "e3c56a1c24fb09f35dfd7b161799d2da6f9b2902e2211475a659f801fe01331f"
+    },
+    "data/traditional chinese/commands.datc64": {
+      "size": 8576,
+      "sha256": "1e1c790d6cfee7a3df95d7ddf99f58cea93361c114da4ce763ed5933e0de4254"
+    },
+    "data/traditional chinese/commands.datcl64": {
+      "size": 13774,
+      "sha256": "b0fb83c71fcae7fd9da7feb707a3a34b22946b17b5bacdcace6132bad57cc58f"
+    },
+    "data/traditional chinese/corpsetypetags.datc64": {
+      "size": 2270,
+      "sha256": "8ae91b11f06bf300f3c67707837a3112ed012b0df7efbd461e0760230c158afb"
+    },
+    "data/traditional chinese/corpsetypetags.datcl64": {
+      "size": 3904,
+      "sha256": "96e5eb4d41550046104822262c6ffe1e89bf5c8a6f9f36685c4cf2d8a0165fce"
+    },
+    "data/traditional chinese/costtypes.datc64": {
+      "size": 1144,
+      "sha256": "43e2549e9f6ea38f1605b903cb73f89fb43b561b62f3f47a3d9ff8b442c06f66"
+    },
+    "data/traditional chinese/costtypes.datcl64": {
+      "size": 1704,
+      "sha256": "ef13b2b5361c24b02b7fae62cb83e9af93623d8c7a32eb92ee9f97bb838bb688"
+    },
+    "data/traditional chinese/countdowntimers.datc64": {
+      "size": 330,
+      "sha256": "ef7e87e981f8db5549329c7dc3955204d01d97c310c67e128e69d49302ae72b0"
+    },
+    "data/traditional chinese/countdowntimers.datcl64": {
+      "size": 508,
+      "sha256": "9797295e8006b00ab18575f60e7e7dea73b2cf9d2fb10e2c482c70b1b2aa5617"
+    },
+    "data/traditional chinese/craftingbenchoptions.datc64": {
+      "size": 402416,
+      "sha256": "631fe0d4d7f91a5b332dc9317463e246d78077c4e2974fb923f810130af82307"
+    },
+    "data/traditional chinese/craftingbenchoptions.datcl64": {
+      "size": 403874,
+      "sha256": "995c78195404aa8ae547eece920e371f7849b8dc6bd8cff206e9784921148ab7"
+    },
+    "data/traditional chinese/craftingitemclasscategories.datc64": {
+      "size": 3034,
+      "sha256": "4a5690971f16d48c099f20f7945d76d813d168cb65f31d706c4771c5cfb0cbe8"
+    },
+    "data/traditional chinese/craftingitemclasscategories.datcl64": {
+      "size": 3604,
+      "sha256": "f0a50dd978c5400b9fcc7e164afa75f0fe4d07e4393432310ba736b40bb64514"
+    },
+    "data/traditional chinese/craftingspreetype.datc64": {
+      "size": 10422,
+      "sha256": "d5f4c677588a1c7a984debfd30a0acca9e86e170b494cfe782c9cd430047505d"
+    },
+    "data/traditional chinese/craftingspreetype.datcl64": {
+      "size": 13058,
+      "sha256": "dd9db69b8307bb77e11785e940a6b79a0ffbaf3d7eb256d0ceb4ff53c8abda09"
+    },
+    "data/traditional chinese/crucibledifficulty.datc64": {
+      "size": 242,
+      "sha256": "9fc631e32b7707a0f71cf7cae4d65375ad42f5b25367944336427a083ca25bd4"
+    },
+    "data/traditional chinese/crucibledifficulty.datcl64": {
+      "size": 272,
+      "sha256": "6851e8fa8da736cad8b036f126ea29cc37dab4ed89770126b52804274e640227"
+    },
+    "data/traditional chinese/currencyexchangecategories.datc64": {
+      "size": 5840,
+      "sha256": "c26c7a678177c803a69ea75fb031fd47149dea5b8f669b0f479839cf1785c96a"
+    },
+    "data/traditional chinese/currencyexchangecategories.datcl64": {
+      "size": 9316,
+      "sha256": "9c974d067199593ae1892a33a79ef4bbe03ef08048407c12a7d82a398426d544"
+    },
+    "data/traditional chinese/currencyitems.datc64": {
+      "size": 523330,
+      "sha256": "3c218fced454390c5cce888d05ffd98aee42deb867d64f161528156a3bd8aead"
+    },
+    "data/traditional chinese/currencyitems.datcl64": {
+      "size": 625160,
+      "sha256": "34706e2f79e6e2bab27087b7ef581884c55414e7fb435dc27586cd8302eace6e"
+    },
+    "data/traditional chinese/deepwatercraftingcurrencies.datc64": {
+      "size": 35600,
+      "sha256": "4bca7614eb018a36d83282351074a6f6b55ad968af81908f9f811f47888031ef"
+    },
+    "data/traditional chinese/deepwatercraftingcurrencies.datcl64": {
+      "size": 38774,
+      "sha256": "8d8810613fcdc95b11fd3e8e1fe5c6a42471e895b160312c088940e7e9e471ad"
+    },
+    "data/traditional chinese/deepwaterlockerlayout.datc64": {
+      "size": 1118,
+      "sha256": "417d734da6fcdd183c1da92e08c4645284e08143da794d991c5bd10a0d8954ff"
+    },
+    "data/traditional chinese/deepwaterlockerlayout.datcl64": {
+      "size": 1824,
+      "sha256": "7d3b06459f4feeffcc82f7e507b30c415eb3a4ae4eb354eacaf4e686d14e101c"
+    },
+    "data/traditional chinese/deepwaterrooms.datc64": {
+      "size": 26496,
+      "sha256": "4db5288f46b6eca66947f17fc7a28d8e18804bdde85e282c3be90569d59f67cf"
+    },
+    "data/traditional chinese/deepwaterrooms.datcl64": {
+      "size": 40264,
+      "sha256": "3b55ea3afc9a5f3182d1e5a614bc005f57b78c0e8c8977102565eaae0867eb6e"
+    },
+    "data/traditional chinese/delvebiomes.datc64": {
+      "size": 5116,
+      "sha256": "3a4a5a0690b8f3204ee30d0d2fca4f22916c665fb50d1c61714534bc76bc1537"
+    },
+    "data/traditional chinese/delvebiomes.datcl64": {
+      "size": 7130,
+      "sha256": "d2729e8afcf7b0bd2156c6dccfb0874a36801739c3605a020ba983e5b27c9462"
+    },
+    "data/traditional chinese/delvecraftingmodifierdescriptions.datc64": {
+      "size": 5106,
+      "sha256": "cbd25fcc51f763f1df371b3f708da38f71b1988b48c75a4c5b605c1a93b7a270"
+    },
+    "data/traditional chinese/delvecraftingmodifierdescriptions.datcl64": {
+      "size": 8212,
+      "sha256": "4d32ac8f3d0cf5730ece09a77d570890396ea7e4d738ca211b7375332c75f93f"
+    },
+    "data/traditional chinese/delvecraftingtags.datc64": {
+      "size": 534,
+      "sha256": "19cb257cb16208d1882830c594ac8afc46ad24353f59bc4f7458e9ba7047ce33"
+    },
+    "data/traditional chinese/delvecraftingtags.datcl64": {
+      "size": 608,
+      "sha256": "ebae5f9e27b176e9cec1021a380a5af613055865bacab3596a943cf4eb60236a"
+    },
+    "data/traditional chinese/delvefeatures.datc64": {
+      "size": 68230,
+      "sha256": "459e4697dc9f08d9837935393f34935a1db359188c760c11e817627381fc0129"
+    },
+    "data/traditional chinese/delvefeatures.datcl64": {
+      "size": 82612,
+      "sha256": "0efbbcb5003bc83cedab0df0f83f7d3d277ca1b61acc40a1eca5ec7967739cbc"
+    },
+    "data/traditional chinese/descendancy.datc64": {
+      "size": 7009,
+      "sha256": "c6fda701c435e99e6adcac9124c98ec0cd5e4eef5a1eb1211b50e2f07d951a76"
+    },
+    "data/traditional chinese/descendancy.datcl64": {
+      "size": 11485,
+      "sha256": "ca2c02bc981c5371d3b044fc00673d4a9889c604505cc02c19a3b3476b7c5ebf"
+    },
+    "data/traditional chinese/dronetypes.datc64": {
+      "size": 552,
+      "sha256": "29d0c43b0a501ff00d9da980a2b957b011351eedf8c7c5a81db7490bcf0bb416"
+    },
+    "data/traditional chinese/dronetypes.datcl64": {
+      "size": 776,
+      "sha256": "69e8e5de364f33fe9b917e748dd81cbb02c2dc91c416cd9db2c0ced67856339f"
+    },
+    "data/traditional chinese/dynamiccraftingbenchtypes.datc64": {
+      "size": 1700,
+      "sha256": "017f763a99de2cadb4d3e9f7bb312da39ed0dc27d03ec1504140e810902d25a0"
+    },
+    "data/traditional chinese/dynamiccraftingbenchtypes.datcl64": {
+      "size": 2386,
+      "sha256": "d6e31980ea43d34d4b270e6a955928de5c800562b18f705b491cbd238d3f183d"
+    },
+    "data/traditional chinese/elderguardians.datc64": {
+      "size": 642,
+      "sha256": "46d1ffccc2858a237ae0c39a3d65ee2fae6724ff8dee9f67f676f2569463c1d4"
+    },
+    "data/traditional chinese/elderguardians.datcl64": {
+      "size": 1128,
+      "sha256": "688d71a1aa19fe12973a657bf17295edc886ac2b80f485c374a34cffb7c7dffb"
+    },
+    "data/traditional chinese/endgameplayerhideoutrewards.datc64": {
+      "size": 34657,
+      "sha256": "1953801bd521ad32ae05d49ff28f5113471306a2f553747c8a2411b6b5c61c99"
+    },
+    "data/traditional chinese/endgameplayerhideoutrewards.datcl64": {
+      "size": 48827,
+      "sha256": "1094900b8e34668207c130b86208b30216be37ea8dd80f159ff77b16ca97296f"
+    },
+    "data/traditional chinese/expeditiondeals.datc64": {
+      "size": 17734,
+      "sha256": "873323b3a7f5316de7eedabe05faa536bca7891a749a6ae789fbcc595ec4a323"
+    },
+    "data/traditional chinese/expeditiondeals.datcl64": {
+      "size": 23708,
+      "sha256": "7b3a759a4be5ace2fed3607b8abde43fa736a7b963dd7483b169177b1acc6a33"
+    },
+    "data/traditional chinese/expeditionfactions.datc64": {
+      "size": 1698,
+      "sha256": "0369ee66dc3106a01a8ee38cf39120383412af46cc9962248b113e7c93e5f800"
+    },
+    "data/traditional chinese/expeditionfactions.datcl64": {
+      "size": 2856,
+      "sha256": "52daed888d4ba9fff25a5f410efa49b8f0eedca1e67e0c7499a9bff4d20d605f"
+    },
+    "data/traditional chinese/expeditionrelics.datc64": {
+      "size": 3756,
+      "sha256": "d858f5885eb82b0b598c803164306f1be12933ae0841182e0403cb3e6e7a5fee"
+    },
+    "data/traditional chinese/expeditionrelics.datcl64": {
+      "size": 6684,
+      "sha256": "fb87cb05396b1c641a50f4762d675e2086d7eba28204ce73dec8c90b0d280e43"
+    },
+    "data/traditional chinese/faridunwishes.datc64": {
+      "size": 42420,
+      "sha256": "f7e9a24809c1c3d34cffecebe788c7f93254f86d66c1a81c6d953f408b089721"
+    },
+    "data/traditional chinese/faridunwishes.datcl64": {
+      "size": 59520,
+      "sha256": "7adbe76d72705451cdcaf76501c681981b0d9d1ad393a3dafeebde58cc7045d7"
+    },
+    "data/traditional chinese/fishingluretypes.datc64": {
+      "size": 200,
+      "sha256": "83cd8807a5d128e4eba69bcd15954a7d0a943ce2f2a982111154b00d8fdfc340"
+    },
+    "data/traditional chinese/fishingluretypes.datcl64": {
+      "size": 276,
+      "sha256": "6b00536e334f5a4d662132304a4b1c3c5ad43d2389ae8514b92b88c1c60fa978"
+    },
+    "data/traditional chinese/flavourtext.datc64": {
+      "size": 389324,
+      "sha256": "eaa5e37f0b5e09a05bb20f2eda7545f10c7c8f27a75129190b80be4c1695fe52"
+    },
+    "data/traditional chinese/flavourtext.datcl64": {
+      "size": 695268,
+      "sha256": "8551f44a907d844f91d878b928ae2579f0a1b8098ea1680d6769ff1fed5771eb"
+    },
+    "data/traditional chinese/fragmentstashtablayout.datc64": {
+      "size": 63118,
+      "sha256": "45892e7687fbca462e1e1b6ac3e0a0b57d254c8b0f52a79394fed84d5435edb0"
+    },
+    "data/traditional chinese/fragmentstashtablayout.datcl64": {
+      "size": 96924,
+      "sha256": "3833c9c527cdabcf40b1d28d2418e159eef2f1946a624003faec902e594473be"
+    },
+    "data/traditional chinese/gamepadbutton.datc64": {
+      "size": 2040,
+      "sha256": "015ee292328664437b61c5042fbddb0ff88f07e663a3600fe8d13850a54c3a20"
+    },
+    "data/traditional chinese/gamepadbutton.datcl64": {
+      "size": 2804,
+      "sha256": "45574e6cf3a0bc8a4da3d44fe436b6eeaf40477ab8c964bb8253c25d65af26e3"
+    },
+    "data/traditional chinese/gemeffects.datc64": {
+      "size": 369056,
+      "sha256": "dc0240c4acc146f56f3cbde3b5a083b01c5dd9f9a50aaf52e7fa39b508b153d2"
+    },
+    "data/traditional chinese/gemeffects.datcl64": {
+      "size": 433204,
+      "sha256": "251ae327c50b0dcfb84976c22ca54344a7d4e1bb0455aa0ff1b9e8331f29ddad"
+    },
+    "data/traditional chinese/gemtags.datc64": {
+      "size": 5656,
+      "sha256": "d8a8365cd65e1b60ea9293cc95bdc9d0dbf949a672a19509a71f10c6d559744b"
+    },
+    "data/traditional chinese/gemtags.datcl64": {
+      "size": 6572,
+      "sha256": "9ceda333595d81978357589408ca38a6ffb731b2e4896bd8932e4a8d45159791"
+    },
+    "data/traditional chinese/genericleaguerewardtypevisuals.datc64": {
+      "size": 4872,
+      "sha256": "1161fa28801f6e6276e9e0780424a4c9b9e3b3f5ceab2519e23594a1df377804"
+    },
+    "data/traditional chinese/genericleaguerewardtypevisuals.datcl64": {
+      "size": 7920,
+      "sha256": "fb836da95a371e5fddfc0990a1a0672eec86efb10ffd7bdd21031845b92b89f8"
+    },
+    "data/traditional chinese/grantedeffects.datc64": {
+      "size": 4211561,
+      "sha256": "4d01d98bba63965beb97a500fdaa6cd2b8c3e52f5be64f137387f42cb3119f5e"
+    },
+    "data/traditional chinese/grantedeffects.datcl64": {
+      "size": 4901109,
+      "sha256": "7988787618791803960946079c85e031d44fee34ba59eb189b15a7fd6293e815"
+    },
+    "data/traditional chinese/harvestcraftfilters.datc64": {
+      "size": 382,
+      "sha256": "2f2a892bf680bfbb8071de4d361a461bb51e386372ba83b69a8f06215f0266e2"
+    },
+    "data/traditional chinese/harvestcraftfilters.datcl64": {
+      "size": 552,
+      "sha256": "161833669ad4b6ee81b66bedfa7c132963c9ca73def1fb3069670d717719d999"
+    },
+    "data/traditional chinese/harvestcraftoptions.datc64": {
+      "size": 55492,
+      "sha256": "4a418012b21926ebd0f852a5ebadfaabf95e2c25d0a04f353d5158a08c7aa8aa"
+    },
+    "data/traditional chinese/harvestcraftoptions.datcl64": {
+      "size": 98128,
+      "sha256": "edfa1ab4aa14f85e7bf70d0cb0e7f176476d50525c11c4e7723157dbe2a83589"
+    },
+    "data/traditional chinese/heistchestrewardtypes.datc64": {
+      "size": 7480,
+      "sha256": "b17a4508999fb0c7342deb6bcb5e52d2dfa2df6931e1db3fb0acaaf5302e437b"
+    },
+    "data/traditional chinese/heistchestrewardtypes.datcl64": {
+      "size": 11060,
+      "sha256": "935a3bb4da222f04dd2e61b18c20ac9aa5723a3cd715b725a42d541724c84156"
+    },
+    "data/traditional chinese/heistjobs.datc64": {
+      "size": 7194,
+      "sha256": "6b655e3c1a30d3afec8a34736ae60f0542b28560ca88166e1327ce1df5181ff8"
+    },
+    "data/traditional chinese/heistjobs.datcl64": {
+      "size": 12828,
+      "sha256": "a530725a829b69af902b9d0e3a55654b51351632c9f61514ea0c4ce1352e3770"
+    },
+    "data/traditional chinese/heistobjectives.datc64": {
+      "size": 2624,
+      "sha256": "ff30b1ee3adc617492223a803f6829bfa97acdbaeb4bdcb0defe75413c8cd5f6"
+    },
+    "data/traditional chinese/heistobjectives.datcl64": {
+      "size": 2880,
+      "sha256": "ca7cf4d727cc15b674b51687b40b3e5e6d55957da6db04c73bb618f7f3defc93"
+    },
+    "data/traditional chinese/heistobjectivevaluedescriptions.datc64": {
+      "size": 136,
+      "sha256": "8e2e0cacd33cac3a3cc09d9eebd48445a4964410ade1dd0f0c654ae431a418b1"
+    },
+    "data/traditional chinese/heistobjectivevaluedescriptions.datcl64": {
+      "size": 160,
+      "sha256": "76f5bab6de464908275a5fdf4b054b0f71f557451c3716e3636b353619fdf36d"
+    },
+    "data/traditional chinese/heistquestcontracts.datc64": {
+      "size": 9452,
+      "sha256": "1f7ed72e4e1eac4d6ebe07fe45d604ec22b1e3650a2f0638fddb2ccf35437ab7"
+    },
+    "data/traditional chinese/heistquestcontracts.datcl64": {
+      "size": 9648,
+      "sha256": "6d0cb276cfa0a88c4b428c6f79237b543d44e094244e57581ed7790041dbb3d0"
+    },
+    "data/traditional chinese/hellscapepassives.datc64": {
+      "size": 6702,
+      "sha256": "bda58d4fde3c8b1d88c47b7317bc0bb1b55ce4e5b4dc39e8202feb9fc28a5c7e"
+    },
+    "data/traditional chinese/hellscapepassives.datcl64": {
+      "size": 11248,
+      "sha256": "c6f0788c2af95e0d3d71bccb7b87f717d0d0628c9dbf84834f1349b14a6e3852"
+    },
+    "data/traditional chinese/hideoutdoodadcategory.datc64": {
+      "size": 6222,
+      "sha256": "f9ebdd3f94fb83fe948343bd5a8bd43c82f3714ae72d254b4082086f46e7c0a3"
+    },
+    "data/traditional chinese/hideoutdoodadcategory.datcl64": {
+      "size": 9192,
+      "sha256": "06acaf293ccfb19a0baf35ca737008a2e85dbe1aab3d8be1b4b00904e435b903"
+    },
+    "data/traditional chinese/hideoutdoodadtags.datc64": {
+      "size": 2532,
+      "sha256": "144fbf5ce714975a088269ff9f086a5d52f29189fc3d9cdfff973876bece3564"
+    },
+    "data/traditional chinese/hideoutdoodadtags.datcl64": {
+      "size": 3124,
+      "sha256": "a2a2ea40a1ca130c53481faa9589f3ff17efa448c412b785017d8718ed19b5f8"
+    },
+    "data/traditional chinese/hideouts.datc64": {
+      "size": 41892,
+      "sha256": "93283e89116c0c7ecb64f4d99cbaa5e8a0c4876be27c13dda75bfadbc88eecb2"
+    },
+    "data/traditional chinese/hideouts.datcl64": {
+      "size": 68260,
+      "sha256": "aed46797c7e879b7af5323e35dd00cb01083776244f525c8c545129ccfb2b49b"
+    },
+    "data/traditional chinese/incubators.datc64": {
+      "size": 3508,
+      "sha256": "67d8c506cb3449f9ccec51916e38a581b48fc56f6db99faf07cb1b3361bf9172"
+    },
+    "data/traditional chinese/incubators.datcl64": {
+      "size": 3852,
+      "sha256": "c95f7b4cac77705a308be8efdfc78ae1fde5d5e3b780c2657a2bf3093ae7f6e9"
+    },
+    "data/traditional chinese/incursionrooms.datc64": {
+      "size": 69848,
+      "sha256": "069f1288b1767826df14500c861e67304dcfbee9ef08ba434415a39572989915"
+    },
+    "data/traditional chinese/incursionrooms.datcl64": {
+      "size": 110228,
+      "sha256": "b89678bcd8f363a227a4ac01c3ab6c067a5d6831961c67457c9ea966b87004ce"
+    },
+    "data/traditional chinese/indexablenonactivesupportgems.datc64": {
+      "size": 6456,
+      "sha256": "07351d852eb92489c65b0d36c21f076c80ff052ec8e8258651cfcf2a2be14811"
+    },
+    "data/traditional chinese/indexablenonactivesupportgems.datcl64": {
+      "size": 7660,
+      "sha256": "5edfa48d5884f87e1262c166604cb94f3b77b98b334e8e690df36df7d2aa4e21"
+    },
+    "data/traditional chinese/indexableskillgems.datc64": {
+      "size": 31320,
+      "sha256": "6467fbfe736abb6fea4b8135162a46cea838996801c5a860725daddeb17e411e"
+    },
+    "data/traditional chinese/indexableskillgems.datcl64": {
+      "size": 33456,
+      "sha256": "73f31f425850a2809109148059eff73cbd995fd053b39e31a5c3cdee30996fd9"
+    },
+    "data/traditional chinese/indexablesupportgems.datc64": {
+      "size": 7206,
+      "sha256": "79a5cb52d6fed1c065f6262741a0ae6681aa81d5b5a4296daac1d63c69435177"
+    },
+    "data/traditional chinese/indexablesupportgems.datcl64": {
+      "size": 8516,
+      "sha256": "b99e8495ec6e6de9e86839d15b02a2ce451d328f00ecd11e2614b5131182c40f"
+    },
+    "data/traditional chinese/itemclasscategories.datc64": {
+      "size": 4610,
+      "sha256": "ea16ffeef1585b58619c594dd41d3bb20710a53f5860526ac5b538535afac2e6"
+    },
+    "data/traditional chinese/itemclasscategories.datcl64": {
+      "size": 6492,
+      "sha256": "ab3debe470de7c67c6d367bc4494870e82243c220dd32e79617e287d77990b3d"
+    },
+    "data/traditional chinese/itemclasses.datc64": {
+      "size": 20629,
+      "sha256": "58d7d7c75d1edcb68cbff72706e1d0156e5c0f2d7d04ca26102450a8f480e2cf"
+    },
+    "data/traditional chinese/itemclasses.datcl64": {
+      "size": 23617,
+      "sha256": "5e8b02d56a09a951b8fe7da8c8652d7ce9de827c1ae2b86b265b190cc39b5c93"
+    },
+    "data/traditional chinese/itemisedcorpse.datc64": {
+      "size": 12996,
+      "sha256": "a02e28edf5b9ea2c052af125c8eb3226a8409da2d25b74cbf4d2fad2acde228a"
+    },
+    "data/traditional chinese/itemisedcorpse.datcl64": {
+      "size": 19184,
+      "sha256": "c710f08c52d608646b6d552cea7baf2ee08dc5491f0b7cf2c68cc9339044525e"
+    },
+    "data/traditional chinese/itemisednecropolispacks.datc64": {
+      "size": 5028,
+      "sha256": "5c57b57a907ce2ddc3e7bdc7c67603f0f25dbb9386910afa0bf28f2d7484b0ff"
+    },
+    "data/traditional chinese/itemisednecropolispacks.datcl64": {
+      "size": 6516,
+      "sha256": "9192e171d60cbda3231c792ce1e730988dfd926941f3cded794ce6ad6325fc4e"
+    },
+    "data/traditional chinese/keywordpopups.datc64": {
+      "size": 38960,
+      "sha256": "f4fe6a012e32adf37813b66f591e80dfe63619642e023cd4f80e853efcfa33f0"
+    },
+    "data/traditional chinese/keywordpopups.datcl64": {
+      "size": 64808,
+      "sha256": "ac9c974f0de8a9f2cde2a70fd031ddd02176cda1f94b5df7528afbf64362632f"
+    },
+    "data/traditional chinese/labyrinthbonusitems.datc64": {
+      "size": 150,
+      "sha256": "ebb9ebec95c979cf7dc36bde824af68c82be64049aaa35b6c81a9e72e9d1ff20"
+    },
+    "data/traditional chinese/labyrinthbonusitems.datcl64": {
+      "size": 192,
+      "sha256": "6f8f148abec2690bd4f3f23b20238b186899e22d8042f55b254d467cded6278e"
+    },
+    "data/traditional chinese/labyrinthcraftoptions.datc64": {
+      "size": 14567,
+      "sha256": "bce617eedee38d77483fc546c30d9f3c034f735fc1160352043d04b013206e4e"
+    },
+    "data/traditional chinese/labyrinthcraftoptions.datcl64": {
+      "size": 22833,
+      "sha256": "3b31c8625b58fcfc8a908f3dd3e5860eabebae1146021498fed83ae8e3e86de6"
+    },
+    "data/traditional chinese/labyrinths.datc64": {
+      "size": 960,
+      "sha256": "968c98772568443db17ec68eaa02606329e16c011005d50c9d44f7808636c923"
+    },
+    "data/traditional chinese/labyrinths.datcl64": {
+      "size": 1004,
+      "sha256": "a8d60b6183055d1eb5235f3a675341d1e4739e959301da9ec7fedfeccc680aec"
+    },
+    "data/traditional chinese/labyrinthsecrets.datc64": {
+      "size": 13996,
+      "sha256": "0f4bee103d74e57392f84a157e964dca33f9238079e7bcf9fd60aaa99cc6a8dc"
+    },
+    "data/traditional chinese/labyrinthsecrets.datcl64": {
+      "size": 16648,
+      "sha256": "a420e26c2171723eb440726d84cd23d4c914090f83903aebde6e2f67ca9cbb69"
+    },
+    "data/traditional chinese/lakemetaoptionsunlocktext.datc64": {
+      "size": 340,
+      "sha256": "d15507659d15ae700639733d1fc0b67e86b15524d3e1791896cd1947a5dfdd75"
+    },
+    "data/traditional chinese/lakemetaoptionsunlocktext.datcl64": {
+      "size": 572,
+      "sha256": "80555598ebcc71078129393963c112d49d9602b91a257414af15a45ea8155342"
+    },
+    "data/traditional chinese/lakerooms.datc64": {
+      "size": 38102,
+      "sha256": "94832fed981ff2b053e7a0040c65668b95c436f0ad8eda115e841d9d678d793c"
+    },
+    "data/traditional chinese/lakerooms.datcl64": {
+      "size": 51438,
+      "sha256": "c6c8699e5a12ca63239b30bc633373b8e689f39fd6a130b0b66bd900b82949e1"
+    },
+    "data/traditional chinese/leagueinfo.datc64": {
+      "size": 319262,
+      "sha256": "405d7ff90d64b12a1e1ad6b342c2637ae264af77dd673fe49012447cee7ed1b9"
+    },
+    "data/traditional chinese/leagueinfo.datcl64": {
+      "size": 570696,
+      "sha256": "06226d332d0d1efb8577d8cf7ad704ba7fc1e98ce3f32406594d345efe9eee03"
+    },
+    "data/traditional chinese/leaguenames.datc64": {
+      "size": 332,
+      "sha256": "01dfdd74e8ea91904b36b88868e82295c5c705e6cd9dca63e6350a8d335a1c5f"
+    },
+    "data/traditional chinese/leaguenames.datcl64": {
+      "size": 460,
+      "sha256": "81bf4c8e547a66f1588ea038481e7a26c59ea5372c75e02e4a4230f7212dabe5"
+    },
+    "data/traditional chinese/mapconnections.datc64": {
+      "size": 16546,
+      "sha256": "f5369fdfabc6e0c435b4b8060e430f09bc8bd88801aad9debd9ce8a454c53985"
+    },
+    "data/traditional chinese/mapconnections.datcl64": {
+      "size": 17052,
+      "sha256": "24229b6569ae8566625c59ed56ea12375ddf0014f8e0b03de3f0c3a8c5c78d5f"
+    },
+    "data/traditional chinese/mapmodicons.datc64": {
+      "size": 528,
+      "sha256": "9b3f3e7e44ca144d3d99accdf6c059e0e6824b691ff7d6294a151dfe987c3568"
+    },
+    "data/traditional chinese/mapmodicons.datcl64": {
+      "size": 924,
+      "sha256": "979b4aa188104fd9841494f6151e239f6069378f97c1260c4e886887fd1d2b7e"
+    },
+    "data/traditional chinese/mappins.datc64": {
+      "size": 35862,
+      "sha256": "fc9d06aae150acf4fb66d60ab8320053d7255fb18e55cc9beb48c6ef02caecd2"
+    },
+    "data/traditional chinese/mappins.datcl64": {
+      "size": 42368,
+      "sha256": "13c9450b75bfc39c249cc09cdd8a3d4fa5878a65a45b945526dd055a2a67dfc7"
+    },
+    "data/traditional chinese/maprelicinventorylayout.datc64": {
+      "size": 970,
+      "sha256": "af755f1a0c07c03f0f8bc2b59e42631fe4a75a3c27104346826b67bead64050c"
+    },
+    "data/traditional chinese/maprelicinventorylayout.datcl64": {
+      "size": 1236,
+      "sha256": "b0e3c186de468ec45cc839ca66f4da0144c36788a8f1eb68f3f2e7c6575144b1"
+    },
+    "data/traditional chinese/mapseries.datc64": {
+      "size": 19962,
+      "sha256": "52d870a38a0891347bba512d0db9e75d0c5b6f2813f3d59ee67f9118f1302e91"
+    },
+    "data/traditional chinese/mapseries.datcl64": {
+      "size": 36016,
+      "sha256": "169fc829414b59550a65d08a4ff480f5f1d064e1c3df8dfde6b6e59a2d89874c"
+    },
+    "data/traditional chinese/mapstashspecialsubstashgroup.datc64": {
+      "size": 2248,
+      "sha256": "f8ca2b97e6052cd7861a3cf02a996b4ff7930d47e26bc045fa42f8dc8a57ec20"
+    },
+    "data/traditional chinese/mapstashspecialsubstashgroup.datcl64": {
+      "size": 2988,
+      "sha256": "5d094b8279dbd660dc50554c91ab03d31417f837fbf91256cb5fc0f9d2720902"
+    },
+    "data/traditional chinese/memorylinetype.datc64": {
+      "size": 1766,
+      "sha256": "7e07494bcb1aae6ed3405a9a95041a6146f572d0162f54a44f2eeb27a4e90d4a"
+    },
+    "data/traditional chinese/memorylinetype.datcl64": {
+      "size": 2150,
+      "sha256": "ed3a0561ee14986475dac56aa06a5667d64a317a13d66a52c331bc707e598702"
+    },
+    "data/traditional chinese/mercenaryattributes.datc64": {
+      "size": 858,
+      "sha256": "d3584a605c95b0183607c46b9c9d2d50bf6d08a20d1fe762fbeba198da3f1eef"
+    },
+    "data/traditional chinese/mercenaryattributes.datcl64": {
+      "size": 1008,
+      "sha256": "047477e21b2903999da55a8dbbe117ce6d2731beef3eb453b6f4736f62ed4a65"
+    },
+    "data/traditional chinese/mercenarybuilds.datc64": {
+      "size": 62016,
+      "sha256": "6c628681a2f51434e236fa4598aaacda5594e702c1880a0927a57e1160ed09fa"
+    },
+    "data/traditional chinese/mercenarybuilds.datcl64": {
+      "size": 71114,
+      "sha256": "53951ebf28a331e52da82df5621ed6d58b0194079a4a273e308e88f16699cec2"
+    },
+    "data/traditional chinese/mercenarybuildstatscategories.datc64": {
+      "size": 146,
+      "sha256": "5671e2b1e8b9e8693931573ada17d19341b6c869479c6a40275f19bf02daf7fe"
+    },
+    "data/traditional chinese/mercenarybuildstatscategories.datcl64": {
+      "size": 208,
+      "sha256": "328225259ec29acbd92b28fd7852f4e492bdad83bb7c16b1e3f8b250c2373d7b"
+    },
+    "data/traditional chinese/mercenaryclasses.datc64": {
+      "size": 5190,
+      "sha256": "e00e5be6eb4334a0ee8ea8aafd57ae3cd0f802524a5cebf9f6987675ae0006a7"
+    },
+    "data/traditional chinese/mercenaryclasses.datcl64": {
+      "size": 7580,
+      "sha256": "58fc1c4a04d13ac4d0e0567dc6744d9186be31eeb24ec261b1a2b8542b1e55aa"
+    },
+    "data/traditional chinese/mercenaryflavourtext.datc64": {
+      "size": 47582,
+      "sha256": "d269b044e0e86ce82d940ca81ff590c68496c89d089906deb8f2c0122d5a9187"
+    },
+    "data/traditional chinese/mercenaryflavourtext.datcl64": {
+      "size": 73308,
+      "sha256": "423704a40b085403e32493164920921780fbb8cd7ba1572d763d19c88ba1ed47"
+    },
+    "data/traditional chinese/mercenaryskills.datc64": {
+      "size": 128746,
+      "sha256": "5c638548068231c2c9572c80f4824a30346d7843102cf414c79362577981108b"
+    },
+    "data/traditional chinese/mercenaryskills.datcl64": {
+      "size": 157590,
+      "sha256": "5e0571d778326631ccfe406d6f810a5d1147f879cdbdf80f9749d216a361cedf"
+    },
+    "data/traditional chinese/mercenarysupports.datc64": {
+      "size": 61144,
+      "sha256": "020cb8ff969c3796163de3980d327b4a722164f84eb60a033dc3742dbbf504bc"
+    },
+    "data/traditional chinese/mercenarysupports.datcl64": {
+      "size": 81228,
+      "sha256": "3459033464856f44ffb72b26d6ead104c19053a4e98f55217421e7dff198cfee"
+    },
+    "data/traditional chinese/microtransactioncategory.datc64": {
+      "size": 948,
+      "sha256": "b7f6ed4f24eee8f8dfa5b254b22a219397d47068257a70be18e5d5f1c6ca3285"
+    },
+    "data/traditional chinese/microtransactioncategory.datcl64": {
+      "size": 1224,
+      "sha256": "d36a67454c5fd71c3f54bbc65ac4f66c852412d45c5ad3a0af4ab3b099508e7e"
+    },
+    "data/traditional chinese/microtransactionskillgemeffectslottypes.datc64": {
+      "size": 134,
+      "sha256": "a602385783af5f4eeeaf445ce8c23aeb311c699b29ea71b34c7f108243d59b2f"
+    },
+    "data/traditional chinese/microtransactionskillgemeffectslottypes.datcl64": {
+      "size": 200,
+      "sha256": "6465573c3fa18b903c2fa8209a739a8bcb79c5ade2821c7beef0ad2872a0ee56"
+    },
+    "data/traditional chinese/microtransactionslot.datc64": {
+      "size": 3378,
+      "sha256": "a533f1ac1b9def2e1835caa9df08c43662f7dd65127d62245dab74c8af1a84ad"
+    },
+    "data/traditional chinese/microtransactionslot.datcl64": {
+      "size": 3598,
+      "sha256": "b012775aeebe2b4be96017bccbede24ec7d39c0df76e97623f631978cc9d43f0"
+    },
+    "data/traditional chinese/microtransactionslotadditionaldefaultoptions.datc64": {
+      "size": 308,
+      "sha256": "784dcc8a3d1cf2b4e99ca223a04152353767fb3ac1d0299326e6de1a1545a25e"
+    },
+    "data/traditional chinese/microtransactionslotadditionaldefaultoptions.datcl64": {
+      "size": 540,
+      "sha256": "d58a9af94537f1b7844e45c87933aad71f63dd0d34cbbb02c03985580204797c"
+    },
+    "data/traditional chinese/miniondoublingstattypes.datc64": {
+      "size": 914,
+      "sha256": "f6ffabe4b444e17e5ed8f8be18bfef7bd06f63de21d6881e95e683af7d66e5f9"
+    },
+    "data/traditional chinese/miniondoublingstattypes.datcl64": {
+      "size": 1048,
+      "sha256": "211786a1a7b500b8d356a587c3d9d1b6e58f713c980fcc2acedfcbd224218ad8"
+    },
+    "data/traditional chinese/mods.datc64": {
+      "size": 35105560,
+      "sha256": "11c4eb90315681f62ee2088fff0f2790ba52aed0a4c5f2e0cab489bd63e97e44"
+    },
+    "data/traditional chinese/mods.datcl64": {
+      "size": 38200444,
+      "sha256": "fd44dc63a5693e82ceadb49e76b9ffa6f1c8b3ec465a173f2c7044a882e1a825"
+    },
+    "data/traditional chinese/monstercategories.datc64": {
+      "size": 232,
+      "sha256": "677eb5a8b78d6bfe508480f6fcd0cfc74af41131eb8dca66bddf76cbc31c833b"
+    },
+    "data/traditional chinese/monstercategories.datcl64": {
+      "size": 260,
+      "sha256": "a2ff015c929a4a412e73871c2ee3d3d1b5c9047b3fe6e4d2cf507613b093305c"
+    },
+    "data/traditional chinese/monstervarieties.datc64": {
+      "size": 14824302,
+      "sha256": "ff1a511dee71fb49806d2a107d6588991d306c3348fdd18af2475ef4f6121318"
+    },
+    "data/traditional chinese/monstervarieties.datcl64": {
+      "size": 17532018,
+      "sha256": "e56a94073ca3da9300faf25a213cfcb096b57e49426cf4723d7f63ec2194141a"
+    },
+    "data/traditional chinese/mousecursorsizesettings.datc64": {
+      "size": 134,
+      "sha256": "3dea43071a8768aebce94b6d1a9d0b460b4c870c1a5a0a31befd3176aa357b79"
+    },
+    "data/traditional chinese/mousecursorsizesettings.datcl64": {
+      "size": 172,
+      "sha256": "ea29883099687f1df400186a1cd6710959eefad549ace107802980af13cc41ef"
+    },
+    "data/traditional chinese/mtxtypes.datc64": {
+      "size": 3603898,
+      "sha256": "cdbcd7d9484beba8ae99d6d7284deccd13289e666239ce6cff3f29946a019c26"
+    },
+    "data/traditional chinese/mtxtypes.datcl64": {
+      "size": 5507352,
+      "sha256": "d1dbc8793f8f504234aaa2e0da3986a74bf8c264fb1c1d245809380bdc8ab8e9"
+    },
+    "data/traditional chinese/music.datc64": {
+      "size": 73832,
+      "sha256": "172314b49c49b62b67a627da93f716ec57f526c7ca9904e51fa4308efd66c644"
+    },
+    "data/traditional chinese/music.datcl64": {
+      "size": 110684,
+      "sha256": "e1d2b159000686a6328891ec25a6fd7e484e7b88b329751818a5db133edd532f"
+    },
+    "data/traditional chinese/musiccategories.datc64": {
+      "size": 811,
+      "sha256": "b7dce33845f5334050efb8b35baea4ef9350cd336856069ad5aba60e3e133374"
+    },
+    "data/traditional chinese/musiccategories.datcl64": {
+      "size": 1117,
+      "sha256": "86ca4b49cd984a63b3666152c410702f27830f39b9980cd29150ce28993cbedb"
+    },
+    "data/traditional chinese/mysteryboxes.datc64": {
+      "size": 19282,
+      "sha256": "1932efaa05efbc1068f54f9864d7392b7bfbdc298905fc57dd4ff5f52af815a0"
+    },
+    "data/traditional chinese/mysteryboxes.datcl64": {
+      "size": 32226,
+      "sha256": "ecf65aec7caed35646a2282c5c4720099f59dc22397290c06dbe2cf2924146ee"
+    },
+    "data/traditional chinese/necropoliscraftbases.datc64": {
+      "size": 147978,
+      "sha256": "0fe4188fe79b2190230e0cf7334fd4c9b5e26795d86d91e7bbf62f5b80e7ed48"
+    },
+    "data/traditional chinese/necropoliscraftbases.datcl64": {
+      "size": 224836,
+      "sha256": "c85d8d9239ccc88ef610db96f5e47eb06790461f5011aa831676d686d2f0b27a"
+    },
+    "data/traditional chinese/necropoliscraftitemtypes.datc64": {
+      "size": 12746,
+      "sha256": "36a30dceef7ef1e42d0748be22973e0ede48ffda3f284ea47b9707e86b888851"
+    },
+    "data/traditional chinese/necropoliscraftitemtypes.datcl64": {
+      "size": 22140,
+      "sha256": "6041bea6d780dfc7fb91edb1906e4f0d1dbadc782d953a502d7ad00a8af5e4a5"
+    },
+    "data/traditional chinese/necropolispackimplicits.datc64": {
+      "size": 890,
+      "sha256": "4670bc3ff0d03d704cb9d4be4cafc3b7c78ad3cd8190a0df0b063743af40064a"
+    },
+    "data/traditional chinese/necropolispackimplicits.datcl64": {
+      "size": 1624,
+      "sha256": "6d5a49345dbc4e17f6f8b7a8caf0abd0c111f52f252a73f04f0a4759675d556c"
+    },
+    "data/traditional chinese/necropolispackmodtiers.datc64": {
+      "size": 2104,
+      "sha256": "608a2f7bf01fdae00658b84e9789858b8609465be675fc21156f3641eb5b605d"
+    },
+    "data/traditional chinese/necropolispackmodtiers.datcl64": {
+      "size": 3380,
+      "sha256": "295a3a2a4ff2dd52df1a84441cdfa73d8f3597fa7f9681cafd065ea0b534716e"
+    },
+    "data/traditional chinese/necropolispacks.datc64": {
+      "size": 264518,
+      "sha256": "d4edd86e8c915ba71ebad4f5846dbb01bc585d773723a4ef65d6c95cde8c07d3"
+    },
+    "data/traditional chinese/necropolispacks.datcl64": {
+      "size": 455616,
+      "sha256": "6bcb937826f7e5c00777e14c77781424a84079079c4ce5e64839986750289147"
+    },
+    "data/traditional chinese/notifications.datc64": {
+      "size": 3814,
+      "sha256": "e7378a662dd7717d93f03388f8563b4df46456cae62af1179b1f4c211623ce5a"
+    },
+    "data/traditional chinese/notifications.datcl64": {
+      "size": 5912,
+      "sha256": "6288e8feda928c08df37d90b298d51504d08e35f741ae8ed20e24c608759b7f7"
+    },
+    "data/traditional chinese/npcs.datc64": {
+      "size": 235864,
+      "sha256": "9f006610459fc07da21b0672c131afc0acbf7a5ff9531eda7f631938b970f5b0"
+    },
+    "data/traditional chinese/npcs.datcl64": {
+      "size": 314528,
+      "sha256": "94456d2b3098fc8f52b0e9b62fca2ca97d6032aa7fc078b174bed79e8c1893b7"
+    },
+    "data/traditional chinese/npctalk.datc64": {
+      "size": 1799426,
+      "sha256": "40ff85c71ea81c0c19dac811b3e8b1539f23ba030dba82db592b2e4e9ab0c7e3"
+    },
+    "data/traditional chinese/npctalk.datcl64": {
+      "size": 1849640,
+      "sha256": "59b1db462238496cb2c50cdbb9ede7ca63d16c214e588b50dbf0d60564d221e2"
+    },
+    "data/traditional chinese/npctextaudio.datc64": {
+      "size": 10713101,
+      "sha256": "264bf0045a2c5ee0b92165e1bb77fdf4f01bdee4bcf8a47fd6e3fed8598577df"
+    },
+    "data/traditional chinese/npctextaudio.datcl64": {
+      "size": 16836623,
+      "sha256": "bf74f89e655193b8a7699e61955d7152ed456e059d7a97b3ccbe47f27475e434"
+    },
+    "data/traditional chinese/packsizes.datc64": {
+      "size": 220,
+      "sha256": "76775b1db17482041445e46bc3ed0f78125dba9c42a79481b9ecc6c228e5d784"
+    },
+    "data/traditional chinese/packsizes.datcl64": {
+      "size": 320,
+      "sha256": "b97e387cfe9e16c3a2972b3c6cf536ab9ca35b40a7b2ab8ef67b33db376f899e"
+    },
+    "data/traditional chinese/pantheonpanellayout.datc64": {
+      "size": 7016,
+      "sha256": "4cad63be0b65aac208a08d46e918032bd4669435ebbf08c1f5164885dd6b1deb"
+    },
+    "data/traditional chinese/pantheonpanellayout.datcl64": {
+      "size": 8368,
+      "sha256": "161f91ee7c69232b6ce9d076747f98f28917a1f17de530ba92eeb1ed4c8daaf9"
+    },
+    "data/traditional chinese/pantheonsouls.datc64": {
+      "size": 2540,
+      "sha256": "918c7329c483a00aa47ecef5e7339377a984ba33ed40a6b8a69f5e25bb9195c6"
+    },
+    "data/traditional chinese/pantheonsouls.datcl64": {
+      "size": 2548,
+      "sha256": "196a9b9c620aea7fbc90aae952ca24d3a99b42a1f4f83f78800d19acdc6491f7"
+    },
+    "data/traditional chinese/passiveoverridelimits.datc64": {
+      "size": 3059,
+      "sha256": "578de53f503a38573972e94af47d29836acffa3c91d9aecc423025639a3790fb"
+    },
+    "data/traditional chinese/passiveoverridelimits.datcl64": {
+      "size": 5081,
+      "sha256": "43f974913f1a0913dd6bff88ddff8e11c3507f932759bed13d88fbc838de80e3"
+    },
+    "data/traditional chinese/passiveskilloverrides.datc64": {
+      "size": 85216,
+      "sha256": "79038b81266bb0b022425c9cab9b49b1a9a25f83ef01d6163419e0aaaa38723a"
+    },
+    "data/traditional chinese/passiveskilloverrides.datcl64": {
+      "size": 111768,
+      "sha256": "a29d3caaaed0f48d4c569b693187598bc606802d79e0d9463dea219033c2ea15"
+    },
+    "data/traditional chinese/passiveskills.datc64": {
+      "size": 3428624,
+      "sha256": "94ec3ba70486d38fb5b4233c198e60d996b01c21c1da716cdf7ce1e839887bc8"
+    },
+    "data/traditional chinese/passiveskills.datcl64": {
+      "size": 3944110,
+      "sha256": "2a93d215f91ed03d73d8c77c5aa275d4fb50452ef9f0ed3dcd0d48110dcc415b"
+    },
+    "data/traditional chinese/passiveskillstatcategories.datc64": {
+      "size": 960,
+      "sha256": "d03d3f679ddd58afed65527f2e8ab94a94d4db209dc3aea1e49a20d365bb90a6"
+    },
+    "data/traditional chinese/passiveskillstatcategories.datcl64": {
+      "size": 1428,
+      "sha256": "267a454a94681f4724b60cac70be73d3992b2fade27ecc007d7595df51345fbe"
+    },
+    "data/traditional chinese/passiveskilltattootargetsets.datc64": {
+      "size": 892,
+      "sha256": "4fb0a5b12a2d17d36a2768681266c5ea0c021d5ccd5399aa879ecbe004ddde14"
+    },
+    "data/traditional chinese/passiveskilltattootargetsets.datcl64": {
+      "size": 1236,
+      "sha256": "9899dbaacac97dd34d5194dffcd26e425793f633c26ca62df2c2f079c7b68866"
+    },
+    "data/traditional chinese/passiveskilltreetutorial.datc64": {
+      "size": 4052,
+      "sha256": "ff8b368c7c25e9a03bbcdad168b1caf1eabc39d652714a65bd5972c8f11c59a0"
+    },
+    "data/traditional chinese/passiveskilltreetutorial.datcl64": {
+      "size": 7124,
+      "sha256": "f14115d89e6899b9196a1b7272714e5c40f5035fa97ff0eed28e64d694541ad1"
+    },
+    "data/traditional chinese/playertradewhisperformats.datc64": {
+      "size": 728,
+      "sha256": "ea7b492d54f961d5563e644a66d64865322d5b32be6e292c1e22bd77abf6c3d2"
+    },
+    "data/traditional chinese/playertradewhisperformats.datcl64": {
+      "size": 1340,
+      "sha256": "1df53b9b680fb563daf9fef0eb0acad4e1a20e50a023949a0dc2954b93212536"
+    },
+    "data/traditional chinese/quest.datc64": {
+      "size": 41818,
+      "sha256": "e6b8b07528bfac62608b0fe0e2afab1138519c915fe122305b6708062c198ddb"
+    },
+    "data/traditional chinese/quest.datcl64": {
+      "size": 59086,
+      "sha256": "016d980d56abb82ada63a5bd55443e871007eb8defa60aca92e071578f3ee7e2"
+    },
+    "data/traditional chinese/queststates.datc64": {
+      "size": 578052,
+      "sha256": "4e60b7581cf18bff75b89dc4a50a6a452ae95bb1902ae777d76972686d017934"
+    },
+    "data/traditional chinese/queststates.datcl64": {
+      "size": 665398,
+      "sha256": "aa2e0a4f41ca357785e05543d2543dde48f316339170c28740bfd7fefef6ac73"
+    },
+    "data/traditional chinese/questtrackergroup.datc64": {
+      "size": 136,
+      "sha256": "1fad8c8cbc0f91779c3be56dad130e2f57ac480e56a692443dc0e867803f703d"
+    },
+    "data/traditional chinese/questtrackergroup.datcl64": {
+      "size": 180,
+      "sha256": "869107ac3736faf6cfe9703ca6c47ba487b2b31080df70fa431fca51b34fd2a3"
+    },
+    "data/traditional chinese/races.datc64": {
+      "size": 99241,
+      "sha256": "38826f6d6c4766459597af114eaf53f46af108c6a3ba4b25a807b8d4950770a4"
+    },
+    "data/traditional chinese/races.datcl64": {
+      "size": 99873,
+      "sha256": "64db395fbe39fc3569c254fe399db7f7aabb3b0c1f0be9b48657903e3ee04387"
+    },
+    "data/traditional chinese/rarity.datc64": {
+      "size": 390,
+      "sha256": "21f443a453c5ae33b6357ce6949bfda3334dfb6e2f72032d4d98123e26630a5f"
+    },
+    "data/traditional chinese/rarity.datcl64": {
+      "size": 528,
+      "sha256": "75c625d418c2c58db445b9c6ae85f4fd7c6d7e1dbc67c4f16a5c7f8273e99623"
+    },
+    "data/traditional chinese/realms.datc64": {
+      "size": 8980,
+      "sha256": "cb8c287a49e067e438020b599fc73914a41b1f14a9cefe741ac970ebb526e205"
+    },
+    "data/traditional chinese/realms.datcl64": {
+      "size": 12800,
+      "sha256": "fef3b976ec5d06495e037ce6bfabdb5aacbf76838bcbf1d8e381187f41c94e4c"
+    },
+    "data/traditional chinese/recipeunlockdisplay.datc64": {
+      "size": 22394,
+      "sha256": "95d642a29b039325e59238d06089d926eb42dbeee170c5b331adee18ecdcaca2"
+    },
+    "data/traditional chinese/recipeunlockdisplay.datcl64": {
+      "size": 25236,
+      "sha256": "c5e7e3c73ba7b2af7d42d9e0d93c2d6b0caaba300204357461fb6ce461954585"
+    },
+    "data/traditional chinese/relicinventorylayout.datc64": {
+      "size": 568,
+      "sha256": "7b57e32dece05093254033e4ba3e6be6062f55a4bacc9785cac93d75ffe58744"
+    },
+    "data/traditional chinese/relicinventorylayout.datcl64": {
+      "size": 728,
+      "sha256": "1105e1e1a5e54c523169e369f72199dca08c5df9820717ffb5740e3a2b6ab830"
+    },
+    "data/traditional chinese/relicitemeffectvariations.datc64": {
+      "size": 1710,
+      "sha256": "aee32420a22752d06267a6f2483bff31b8a26fcc9b7c1e23fbf045282e9ef848"
+    },
+    "data/traditional chinese/relicitemeffectvariations.datcl64": {
+      "size": 2892,
+      "sha256": "54a0de2b0fe9b49732cebeaa7802cece3ebc5eebe3dc096571a49ad87bf25964"
+    },
+    "data/traditional chinese/remindertext.datc64": {
+      "size": 76504,
+      "sha256": "f121783ad99de83f4da4d264f9e4adce7d766facdc4d127c2c2bb309610856ad"
+    },
+    "data/traditional chinese/remindertext.datcl64": {
+      "size": 138012,
+      "sha256": "5f7d0e09a449a3e69bef9309d4b1268db1a324af44e429e6fba3b54a56da64b7"
+    },
+    "data/traditional chinese/ritualrunetypes.datc64": {
+      "size": 26267,
+      "sha256": "75b5d81cee9b36ccf438404ec8996625c2f863503ba1f4564eb81f646155a0dc"
+    },
+    "data/traditional chinese/ritualrunetypes.datcl64": {
+      "size": 29047,
+      "sha256": "069d0b0b5e9a31e5853f11d668601bb25677299f83e7fb40efaea075c1730016"
+    },
+    "data/traditional chinese/sanctumdefenceicons.datc64": {
+      "size": 1008,
+      "sha256": "846ff93509e2199364c0773863800ca0a99f26647e8ea0c25c9c8157578fe092"
+    },
+    "data/traditional chinese/sanctumdefenceicons.datcl64": {
+      "size": 1768,
+      "sha256": "4a4fd4e7ed8114b642873e0bb734357fd2b5e1bc82b91adec4f1cfb6937ef36a"
+    },
+    "data/traditional chinese/sanctumdeferredrewardcategories.datc64": {
+      "size": 2374,
+      "sha256": "b5da0f9efabbb223dc986b7d5a06df13874b339d214274823b192d93134fe774"
+    },
+    "data/traditional chinese/sanctumdeferredrewardcategories.datcl64": {
+      "size": 3256,
+      "sha256": "b2d94306a3709e58900cdb935b07eded32a56195d329a37f56343de00eef5e93"
+    },
+    "data/traditional chinese/sanctumfloors.datc64": {
+      "size": 1338,
+      "sha256": "1e74f97fb58df83dcc21cf291709ec7b42fad904d89c96a1b4c0855bb74c1a8f"
+    },
+    "data/traditional chinese/sanctumfloors.datcl64": {
+      "size": 2216,
+      "sha256": "45eb07777f3e824419335f0d5fafb118bb33199696fdc5e95a8afd599713b4a2"
+    },
+    "data/traditional chinese/sanctumpersistenteffectcategories.datc64": {
+      "size": 2958,
+      "sha256": "51ed91e175aec4b7eb64b3c5208b23390a1ea99d08af308a90250c46b790bd0b"
+    },
+    "data/traditional chinese/sanctumpersistenteffectcategories.datcl64": {
+      "size": 5356,
+      "sha256": "0494e2a243bc7759019116a36dd59d49c89531a33224dafb31c303933153a1b9"
+    },
+    "data/traditional chinese/sanctumpersistenteffects.datc64": {
+      "size": 70200,
+      "sha256": "e294ff7dd22b11afc9339e9f648a1fedcd963031b6a9a832d92b4dad37a68b14"
+    },
+    "data/traditional chinese/sanctumpersistenteffects.datcl64": {
+      "size": 111460,
+      "sha256": "83269575fdbd85f964d1eceef6168a7275f8b9402ce98a62b97d116f2a021f8c"
+    },
+    "data/traditional chinese/sanctumroomtypes.datc64": {
+      "size": 4815,
+      "sha256": "0df1401885e07fbbd1c99e5a9c519025dfd835d5c5bf5d8a8af108398037b4ba"
+    },
+    "data/traditional chinese/sanctumroomtypes.datcl64": {
+      "size": 6523,
+      "sha256": "ec6cf6db1eb3600e71bd008b6260c1cd15b8d45f70e6a29e596f33168ee2907e"
+    },
+    "data/traditional chinese/sanctumselectiondisplayoverride.datc64": {
+      "size": 17890,
+      "sha256": "d0255e65622df8d3a4a22f2b7efd49ff9e683728cb9c0259e5bc6a693fa7a2a0"
+    },
+    "data/traditional chinese/sanctumselectiondisplayoverride.datcl64": {
+      "size": 26848,
+      "sha256": "645e62a8661d1bfabad9dcd53d66762352eaff2defec41f4272d17e8b3d38bf9"
+    },
+    "data/traditional chinese/sentinelpassives.datc64": {
+      "size": 8108,
+      "sha256": "556f2e8a10c7ba48b3ad91d25cbb968bc5ed6b10fbd3ee87f45de90a0763b577"
+    },
+    "data/traditional chinese/sentinelpassives.datcl64": {
+      "size": 8508,
+      "sha256": "f10e4308c721d06e6bd239c69229fbea3bfc0b4bf3f8fed0679f655fc25a8ae1"
+    },
+    "data/traditional chinese/shaperapparitionability.datc64": {
+      "size": 176,
+      "sha256": "8f98bb8bee329cc44301ed0d566ffb75029ea4cca30773d4ccda7c07e975ef75"
+    },
+    "data/traditional chinese/shaperapparitionability.datcl64": {
+      "size": 212,
+      "sha256": "b3dee0e9c61c1221282b2c4ebe24f3922877f9b3f6c3e29d2e80ac6b26733ce0"
+    },
+    "data/traditional chinese/shoptag.datc64": {
+      "size": 92830,
+      "sha256": "aac9f81b1d621ada0e3da52958ce0651795bf8439850bf7ee56d46866257eb6f"
+    },
+    "data/traditional chinese/shoptag.datcl64": {
+      "size": 129726,
+      "sha256": "b409d655154f5360ec73e51ecbdbd6a6ccc056974f46ddcffd3c84e1d4973720"
+    },
+    "data/traditional chinese/shrines.datc64": {
+      "size": 17710,
+      "sha256": "8f7d8252ba4a36e7b502d94ac4fe41dd145760bbd50e3cfc29b3839a981dc6d9"
+    },
+    "data/traditional chinese/shrines.datcl64": {
+      "size": 19362,
+      "sha256": "2d88838d065a39863fca834e5dbd2b0ee1c2cb2272170d86822dc82001973ef0"
+    },
+    "data/traditional chinese/skillgeminfo.datc64": {
+      "size": 110860,
+      "sha256": "786e7c126f9bec399278a628692c9e58bc6e4f9239ea9056c69f5fe1adfc85d5"
+    },
+    "data/traditional chinese/skillgeminfo.datcl64": {
+      "size": 201156,
+      "sha256": "fef84c872047a45131b1ecf7f48bff1b16298f67f580e7d70d727be75a19ac63"
+    },
+    "data/traditional chinese/socketnotches.datc64": {
+      "size": 1098,
+      "sha256": "ffb6ea83a3a2107ef0438a5027a71a6670ca2718c858e3f0c08e77bc6f4b1cb1"
+    },
+    "data/traditional chinese/socketnotches.datcl64": {
+      "size": 2004,
+      "sha256": "a9cbc3444b7dcb1835b4ea87dbe28b65020a0167359c0065e1cb59ad3cd76c6d"
+    },
+    "data/traditional chinese/stampchoice.datc64": {
+      "size": 13204,
+      "sha256": "60806422dc075c85a2f532986bdf40065cf3ee658d27fe93d65800859694c870"
+    },
+    "data/traditional chinese/stampchoice.datcl64": {
+      "size": 17960,
+      "sha256": "d017181956daf3c8814303e9275fbc88acc5af41159c944e9b75542f515d247d"
+    },
+    "data/traditional chinese/stashavailabilities.datc64": {
+      "size": 516,
+      "sha256": "6c7e9d95ac78407701d2250aaed8dd152be6e0a1cdf7189207f2fe3d69a6b6be"
+    },
+    "data/traditional chinese/stashavailabilities.datcl64": {
+      "size": 820,
+      "sha256": "53221699c60fe767b7c0901479060119827a69669a995221a4b92639bbabecfd"
+    },
+    "data/traditional chinese/stashtabaffinities.datc64": {
+      "size": 1236,
+      "sha256": "01626f6ef8e5e681846ffcffb3b4937fb03464f4a522e45ee32d1cf84363c107"
+    },
+    "data/traditional chinese/stashtabaffinities.datcl64": {
+      "size": 1316,
+      "sha256": "c46d78e548934c909f3fb68503d63a2e281202a74d4ffc8dba476a58fbadfd0c"
+    },
+    "data/traditional chinese/statistictrackingmicrotransactioncountertype.datc64": {
+      "size": 154,
+      "sha256": "8f00ab4f147c9ee7a390b79dd7e6bd0e6c7aa0fd55fb890a3ba9b0b43e05cf42"
+    },
+    "data/traditional chinese/statistictrackingmicrotransactioncountertype.datcl64": {
+      "size": 228,
+      "sha256": "85f87180dbe4702eb68ab8de160735c51bd8d9338c06b20b9c6acccf5f799289"
+    },
+    "data/traditional chinese/synthesisareas.datc64": {
+      "size": 36462,
+      "sha256": "0f20ce72bd3aea46b65be722d3025a64918b6f19b5a0e8e656081a23a86631a7"
+    },
+    "data/traditional chinese/synthesisareas.datcl64": {
+      "size": 49860,
+      "sha256": "e694ab5f06a8379283c17764f203038cffeed198e4697df2111e93fa4dee64dd"
+    },
+    "data/traditional chinese/synthesisrewardtypes.datc64": {
+      "size": 19252,
+      "sha256": "e027c41fd194567361d746d22ff5081a1d86f419d4818be9609f97ea9554226c"
+    },
+    "data/traditional chinese/synthesisrewardtypes.datcl64": {
+      "size": 33216,
+      "sha256": "396c2d8091e440215b276beed39d8f206f6690c0a61301372cf41cc780c49185"
+    },
+    "data/traditional chinese/tags.datc64": {
+      "size": 98272,
+      "sha256": "1d496efb27422489394950e2ef7174f54d96b6111201da07908e0f14d72bedb3"
+    },
+    "data/traditional chinese/tags.datcl64": {
+      "size": 150112,
+      "sha256": "8fee7b0e50abe014068945a191e5bc2e8ae949582fa148fad4d30feea5cf792c"
+    },
+    "data/traditional chinese/tieredmicrotransactionsvisuals.datc64": {
+      "size": 5508,
+      "sha256": "f751a5236352ddd78e0781b04acd395c7624916991006ef372b9aac805b110cc"
+    },
+    "data/traditional chinese/tieredmicrotransactionsvisuals.datcl64": {
+      "size": 7572,
+      "sha256": "df4ff2be273630126ef4ef170bc5eead2186ebb40f98e64d66630143f605e995"
+    },
+    "data/traditional chinese/tips.datc64": {
+      "size": 8750,
+      "sha256": "9815b370ad19951eff3f1d3a5b2889499399f0a2bbad8b632991719eeafa53e8"
+    },
+    "data/traditional chinese/tips.datcl64": {
+      "size": 14040,
+      "sha256": "e3be79c5f3816ebb909df2064e87a023ffc433936075639cf8c5a9921bbaaa54"
+    },
+    "data/traditional chinese/typetags.datc64": {
+      "size": 1282,
+      "sha256": "e87d008601e874dbb4b559e6aa67eb26acb08f331463a1b82f7dd58688cd1bc0"
+    },
+    "data/traditional chinese/typetags.datcl64": {
+      "size": 2084,
+      "sha256": "c007f442dcbf1baffc6f795ba79c8c1b7f99aa64d743529e34a67553eb01e175"
+    },
+    "data/traditional chinese/uitalktext.datc64": {
+      "size": 23720,
+      "sha256": "eea9643599a595c4aaa31c4c71907d95a098fd4b8d6878fb673f04017dc8a67e"
+    },
+    "data/traditional chinese/uitalktext.datcl64": {
+      "size": 41858,
+      "sha256": "eea7392db2d4e518bd50242bccd71a2189806f4004e85c09c4d0a1682f41cf11"
+    },
+    "data/traditional chinese/ultimatumencounters.datc64": {
+      "size": 5782,
+      "sha256": "7656e8c3c96e04f89f65be07649d2bad7947b90999d7e67f503678ca657b17d8"
+    },
+    "data/traditional chinese/ultimatumencounters.datcl64": {
+      "size": 8090,
+      "sha256": "fa698522c2b351933d1ec846146cf68caea7c1c451a9a901b699f86f2bab8132"
+    },
+    "data/traditional chinese/ultimatumencountertypes.datc64": {
+      "size": 652,
+      "sha256": "ff38dc20e545ff2acf0da491856722dacc7ef9c1912471a3ce260b4b9b3916c6"
+    },
+    "data/traditional chinese/ultimatumencountertypes.datcl64": {
+      "size": 798,
+      "sha256": "e2967f8f41ec93c9cc35a20ea71b30e68b443568b48e898ec5371a32a1a1b6e4"
+    },
+    "data/traditional chinese/ultimatumitemisedrewards.datc64": {
+      "size": 13538,
+      "sha256": "e5cf03ba91e229b28517667bb322781452159d0e518439ebfa5a062ae230d6c2"
+    },
+    "data/traditional chinese/ultimatumitemisedrewards.datcl64": {
+      "size": 16396,
+      "sha256": "72609c74f4fbf41929410b881f468e00f23b1672349e1d0c4dcb10736657423d"
+    },
+    "data/traditional chinese/ultimatummodifiers.datc64": {
+      "size": 57804,
+      "sha256": "afc7723fb3eaeddb12e2fe59b4c65dd65665e17adf1631ba0d86e0d38485c3f7"
+    },
+    "data/traditional chinese/ultimatummodifiers.datcl64": {
+      "size": 76544,
+      "sha256": "3bd5540474dca060d41f8e00ff1ee998fb99c4ae39e231cc772ae7693ce4afe6"
+    },
+    "data/traditional chinese/uniquemaps.datc64": {
+      "size": 2898,
+      "sha256": "192624926b37fe65c40573c4c02c174d2935862dead93513969a39340c1dc719"
+    },
+    "data/traditional chinese/uniquemaps.datcl64": {
+      "size": 3222,
+      "sha256": "c33f29c0fa549559329400bbbab3171f1f2d34916532da7ebbc543ccbb6e3a05"
+    },
+    "data/traditional chinese/uniquestashtypes.datc64": {
+      "size": 4733,
+      "sha256": "a5c8872d8ad7b52484f54f3ee913a9175b0c9484faab7f3bd79ca7c7584c7475"
+    },
+    "data/traditional chinese/uniquestashtypes.datcl64": {
+      "size": 7959,
+      "sha256": "597beb32fe6aa0f8558a09e5b9068cd16e378e93f5b42bb01e923f38ec75c1d2"
+    },
+    "data/traditional chinese/villageexports.datc64": {
+      "size": 4980,
+      "sha256": "e1de632f27645a90363841f133c03d243f783383de5e554a669f7f5e55dc67e2"
+    },
+    "data/traditional chinese/villageexports.datcl64": {
+      "size": 8524,
+      "sha256": "64e72a74f4ac864c506022b1a7d29abf26eb935c0f5ad46467821848c2aaaa19"
+    },
+    "data/traditional chinese/villagejobs.datc64": {
+      "size": 1702,
+      "sha256": "a1d19bf1125eea4dc98964f57eebe757cdfda953dbd543462546894c654e437b"
+    },
+    "data/traditional chinese/villagejobs.datcl64": {
+      "size": 1836,
+      "sha256": "4781216c457b23d92f54599aeb9c858498fd8048b8ebbdbef72e4ee3035b7dbe"
+    },
+    "data/traditional chinese/villagejobtypes.datc64": {
+      "size": 1730,
+      "sha256": "b2ba6aaf9d189e459266be8424afc2906cdf33c6a81de97608b2c42a89beb13d"
+    },
+    "data/traditional chinese/villagejobtypes.datcl64": {
+      "size": 2766,
+      "sha256": "faa716b844deb32193cd1113787d1e0f21df3568019a69c11770da62f012e444"
+    },
+    "data/traditional chinese/villageshippingfailures.datc64": {
+      "size": 5178,
+      "sha256": "ed7acb764753fcb143771dc8a9cc71bf6703bb063e4ee45663121afaa9c1df7b"
+    },
+    "data/traditional chinese/villageshippingfailures.datcl64": {
+      "size": 8276,
+      "sha256": "a6dfbaa654d8e2b475f8ffec7dee546042383a58314effde05d107dc318f75c3"
+    },
+    "data/traditional chinese/villageshippingports.datc64": {
+      "size": 2000,
+      "sha256": "76b61de3e0ab29386a1384aaf385a8e2afa0e0a7e551b53ec780be9eff84e9d7"
+    },
+    "data/traditional chinese/villageshippingports.datcl64": {
+      "size": 3298,
+      "sha256": "1b0d4dd329eab626781cf85b58c99badeb12e3dc2fbeceaaba9b7f3dd8a9d939"
+    },
+    "data/traditional chinese/villagetownlayout.datc64": {
+      "size": 4640,
+      "sha256": "132b5f428cf6fe05ff11c1152af81e68fa082cb2901dcc234d71e391f7055b5e"
+    },
+    "data/traditional chinese/villagetownlayout.datcl64": {
+      "size": 6768,
+      "sha256": "034e62a21331523cfec2b4f3cc3ae4c8c0e63cd16f12d4583174a8bb9b51ff37"
+    },
+    "data/traditional chinese/villageupgradecategories.datc64": {
+      "size": 2810,
+      "sha256": "25286dabad73818bef162ebec9a83b460607e73869644a7bf867e4c88229a13c"
+    },
+    "data/traditional chinese/villageupgradecategories.datcl64": {
+      "size": 4772,
+      "sha256": "0b9bc46a979ae7701bf30678ff9976fa7e3bac849cbf3edfb08e78c38bf769c1"
+    },
+    "data/traditional chinese/villageupgrades.datc64": {
+      "size": 12,
+      "sha256": "dcee8ef773abb4496aab2c0d8b33b72e66440e0ec922b96d779f87a5c4514505"
+    },
+    "data/traditional chinese/villageupgrades.datcl64": {
+      "size": 12,
+      "sha256": "dcee8ef773abb4496aab2c0d8b33b72e66440e0ec922b96d779f87a5c4514505"
+    },
+    "data/traditional chinese/votestate.datc64": {
+      "size": 280,
+      "sha256": "c768c3b75fc983a36b154bde852692bfa9be402b0089293a648571a88167261e"
+    },
+    "data/traditional chinese/votestate.datcl64": {
+      "size": 452,
+      "sha256": "4c08e85b7a23b193f303abc8ab1d1dbfb3e48be4146e1bb39ea779b60e72059c"
+    },
+    "data/traditional chinese/votetype.datc64": {
+      "size": 732,
+      "sha256": "12c8d248ab060281e5e12fd3a4047f6de9cbe0bec281c4caa81e56e8b52b41fa"
+    },
+    "data/traditional chinese/votetype.datcl64": {
+      "size": 1260,
+      "sha256": "21f1e107ac0ca7a900a1b3fad6a789f55a8e123a05ff0271da24705c46c1d9c4"
+    },
+    "data/traditional chinese/warbandspackmonsters.datc64": {
+      "size": 2844,
+      "sha256": "7da32db0bdb62e7e356e3ebeb80cbcd8370c8bf690cf37c78ff3dbf8ed407161"
+    },
+    "data/traditional chinese/warbandspackmonsters.datcl64": {
+      "size": 4276,
+      "sha256": "751a162d030acc83813f9658d20b4613e6dc9d3987e2690a4e207685b7b72999"
+    },
+    "data/traditional chinese/windowcursors.datc64": {
+      "size": 4227,
+      "sha256": "b29cdbb1f477b40b40745f5611785ab1f99442e8ad528a72422b3ce2efd07330"
+    },
+    "data/traditional chinese/windowcursors.datcl64": {
+      "size": 7513,
+      "sha256": "3bee94832e643b179e71c7879484b9830e600b2f3e2bcaf17028166ca31e8971"
+    },
+    "data/traditional chinese/words.datc64": {
+      "size": 609358,
+      "sha256": "75397d27875d8257f74782de3a5ecab6fcefab5cc201aba2fade94ba2bd59ee5"
+    },
+    "data/traditional chinese/words.datcl64": {
+      "size": 729020,
+      "sha256": "968a133118cdf798ae8f425e71047485005b5f4604639a6144ca2a4f52965dba"
+    },
+    "data/traditional chinese/worldareas.datc64": {
+      "size": 1703742,
+      "sha256": "6e5060235d1d66ca16e2b225ece1fd77d4f5edd7a2248199a04301f222d0bfd4"
+    },
+    "data/traditional chinese/worldareas.datcl64": {
+      "size": 1785450,
+      "sha256": "6ad63859f7b4b581c3a9d8577cc951b0717a4658c1ad9a98e28185696bd10bec"
+    },
+    "data/traditional chinese/worldobjectquickactions.datc64": {
+      "size": 202,
+      "sha256": "0d4a64c7f1c05a856593543c495d7a3a6c191759c1ccd944f354a75165207b17"
+    },
+    "data/traditional chinese/worldobjectquickactions.datcl64": {
+      "size": 356,
+      "sha256": "fd4d7bb4a36b6e56b99d438bddd110841548610024ea2e32e340d7b655de7857"
+    },
+    "data/traditional chinese/worldpopupicontypes.datc64": {
+      "size": 6664,
+      "sha256": "26c8dfc388125b8cc87d83c0c8a29ecddcde4f732a9224e52ab21d8ac8cfd724"
+    },
+    "data/traditional chinese/worldpopupicontypes.datcl64": {
+      "size": 10714,
+      "sha256": "d00da7aa9f7d104efe09e147f212464b22cbb4760c36a446c25dfdc68a05eca2"
+    },
+    "metadata/statdescriptions/active_skill_gem_stat_descriptions.csd": {
+      "size": 944156,
+      "sha256": "17a640e318408076ab6c6eb200b514cd99147c4b9e10500cede509d77dfb31a1"
+    },
+    "metadata/statdescriptions/advanced_mod_stat_descriptions.csd": {
+      "size": 163056,
+      "sha256": "96d881ca1e8343d429b4458f4d4ba772b7488659f10d50e31a27e52afbcef64a"
+    },
+    "metadata/statdescriptions/atlas_relic_stat_descriptions.csd": {
+      "size": 10488,
+      "sha256": "fd95f9b55a28e41403c59be2532c18ee55ffc715a427cfa84664059a575366d7"
+    },
+    "metadata/statdescriptions/atlas_stat_descriptions.csd": {
+      "size": 3403724,
+      "sha256": "1e30955cd8ace74a977daabb022e051e3c73f3b83220eef45b9451e2423968f4"
+    },
+    "metadata/statdescriptions/atlas_variant_stat_descriptions.csd": {
+      "size": 81858,
+      "sha256": "bc98a32a6d6f0f4fe870a8265d59a6da1bd1abbbfb8c9b4f8cab7f32c0efe71e"
+    },
+    "metadata/statdescriptions/aura_skill_stat_descriptions.csd": {
+      "size": 250192,
+      "sha256": "be7277df412bd89d2a553852a57405a0022e18eb644b01c7be01c06c059c2b82"
+    },
+    "metadata/statdescriptions/banner_aura_skill_stat_descriptions.csd": {
+      "size": 54576,
+      "sha256": "c737d21eaa7060f75487a3eb6a5a4a69724e1e9b113bc801bc4906ee9b784697"
+    },
+    "metadata/statdescriptions/beam_skill_stat_descriptions.csd": {
+      "size": 10676,
+      "sha256": "935844cbb48e1302a22ac553b5957aac24976a6f9f4367c9b9faa563b45d5d2e"
+    },
+    "metadata/statdescriptions/brand_skill_stat_descriptions.csd": {
+      "size": 34024,
+      "sha256": "bb3b8fd27524079141a533b4533ac1601487209dd4dc6aab96f74aa9cef62669"
+    },
+    "metadata/statdescriptions/buff_skill_stat_descriptions.csd": {
+      "size": 168976,
+      "sha256": "4268b064398d2b93d29a736823e9a476f3e95db3bb3d80a31201b965c52fb599"
+    },
+    "metadata/statdescriptions/chest_stat_descriptions.csd": {
+      "size": 180156,
+      "sha256": "7d2ec80ceb731166768d9b4796051e1977cbfc053ebc73a7a21a5cbbecac93ec"
+    },
+    "metadata/statdescriptions/curse_skill_stat_descriptions.csd": {
+      "size": 221514,
+      "sha256": "93be1d43cffa12ffa73f2ccc8decd4be06f8cd5a912810f49334ba906fb79067"
+    },
+    "metadata/statdescriptions/debuff_skill_stat_descriptions.csd": {
+      "size": 66772,
+      "sha256": "c63607ea6c8acc8802d5d282920647d03bc35209f9bade4aa31dce82916a5810"
+    },
+    "metadata/statdescriptions/deepwater_applied_adjacent_stat_descriptions.csd": {
+      "size": 7698,
+      "sha256": "5b4cfd2d43d745d044e5cda532e012a0eac7036efa8dada4335a15aa88b468c0"
+    },
+    "metadata/statdescriptions/deepwater_explicit_stat_descriptions.csd": {
+      "size": 62496,
+      "sha256": "eab334c95be79340d32a3295226d8a5a085a9107f220a2c45b4e91bc6e93f244"
+    },
+    "metadata/statdescriptions/deepwater_implicit_stat_descriptions.csd": {
+      "size": 205328,
+      "sha256": "bb8977f2a5befeed5644672b5611431277adf72ea05d923fa10a6db012d7b1d9"
+    },
+    "metadata/statdescriptions/deepwater_stat_descriptions.csd": {
+      "size": 502,
+      "sha256": "ff11203b784370d1f430aedf16f476f70a7672034975a688094ffbe5d1f0296b"
+    },
+    "metadata/statdescriptions/expedition_relic_stat_descriptions.csd": {
+      "size": 447760,
+      "sha256": "318504f61309ed4904e727be1ae0a540a82aa8600b8878e9b51f4a9bcfddbbdc"
+    },
+    "metadata/statdescriptions/gem_stat_descriptions.csd": {
+      "size": 2861708,
+      "sha256": "fed5306969ff21ac40e90d003f34cf7dae51bd87dd302a97f9f82dea0db1328d"
+    },
+    "metadata/statdescriptions/graft_stat_descriptions.csd": {
+      "size": 361206,
+      "sha256": "36bcce1236ac4f63690bfa772b68803c7a31627aea9efac0072e8787b4d563fa"
+    },
+    "metadata/statdescriptions/harvest_stat_descriptions.csd": {
+      "size": 59682,
+      "sha256": "b193352e20f36c3ed21530ff78add1ee23c632980a9574191b49ff2dcfcfdb7f"
+    },
+    "metadata/statdescriptions/heist_equipment_stat_descriptions.csd": {
+      "size": 330168,
+      "sha256": "168ba73bb56e9c68ae6430bbd0562d7bbe6d13fe9f0b0bf1ad7d91f49bc81649"
+    },
+    "metadata/statdescriptions/leaguestone_stat_descriptions.csd": {
+      "size": 492486,
+      "sha256": "a3d0a78ecf6e671e245b26469a4b29c6e2d52418f9b3e239b1c6c18ef49eac46"
+    },
+    "metadata/statdescriptions/legion_stat_descriptions.csd": {
+      "size": 12212,
+      "sha256": "dfe12feb59be73998c24c1ddf886746e07633a6bce8cea1eca4cbd1a2266fc7f"
+    },
+    "metadata/statdescriptions/map_stat_descriptions.csd": {
+      "size": 565048,
+      "sha256": "ccce2f328b2fdb0436a7c6b3a60089e2a7d0529c6d173f9a00cf0e0d70a6a489"
+    },
+    "metadata/statdescriptions/mercenary_support_stat_descriptions.csd": {
+      "size": 162870,
+      "sha256": "13a3bce2467498f3ae53b028293b645ac0034411f2e13e8ce6ac553571678e23"
+    },
+    "metadata/statdescriptions/minion_attack_skill_stat_descriptions.csd": {
+      "size": 656940,
+      "sha256": "ff3270ca56ef47a2513a7ac85a70298e939c5910307bd9617234e5117d5a0328"
+    },
+    "metadata/statdescriptions/minion_skill_stat_descriptions.csd": {
+      "size": 1139466,
+      "sha256": "76089ac13f81864cfcc049157a5b1e520c6a9e183de598d77b8807b31538a520"
+    },
+    "metadata/statdescriptions/minion_spell_damage_skill_stat_descriptions.csd": {
+      "size": 368760,
+      "sha256": "e598fa5e53dd826c45596196c0ffdc60704f259f7161f0fe5c58a69592936cf4"
+    },
+    "metadata/statdescriptions/minion_spell_skill_stat_descriptions.csd": {
+      "size": 28658,
+      "sha256": "7d9040f1e8cee411a3e60855a91407899ad855d5e35541fa83b2dd8e3988c8c5"
+    },
+    "metadata/statdescriptions/mirage_stat_descriptions.csd": {
+      "size": 140280,
+      "sha256": "ddc3027e1b4faca759dd15a67200fb85552a43d80650d309cdc539eb8bb5a1b4"
+    },
+    "metadata/statdescriptions/monster_stat_descriptions.csd": {
+      "size": 44198,
+      "sha256": "4960bb516707c444f2bfc341cfc8529eafcf66946830b0d28385e0c17e6b14be"
+    },
+    "metadata/statdescriptions/necropolis_stat_descriptions.csd": {
+      "size": 457744,
+      "sha256": "e2132236040df3574dc86acdf6a3101d81de35ff1dc1fa38a1bf897043b27a7c"
+    },
+    "metadata/statdescriptions/offering_skill_stat_descriptions.csd": {
+      "size": 41278,
+      "sha256": "b49ed8c89e1b29336bad78a9deaaa99be0b858af0d60de0acf78401c509e2433"
+    },
+    "metadata/statdescriptions/passive_skill_aura_stat_descriptions.csd": {
+      "size": 74958,
+      "sha256": "094a47d107d35bbcbba816834f0256cb47bd7f45d72940d3281897ac8c6fa673"
+    },
+    "metadata/statdescriptions/passive_skill_stat_descriptions.csd": {
+      "size": 409484,
+      "sha256": "dab1a8a4aff87e6543e1be4f06ea9e4051c549856bb8eb293b493462e68a57c9"
+    },
+    "metadata/statdescriptions/passive_skill_variant_stat_descriptions.csd": {
+      "size": 156,
+      "sha256": "8b130f1898eb8c5516101aa16de39b949fbd78a9f2606129ea68c67d321d6da0"
+    },
+    "metadata/statdescriptions/primordial_altar_stat_descriptions.csd": {
+      "size": 243460,
+      "sha256": "ae008cf62f948996d4c136eb969e335677fa6a137353994e9229476f51c60594"
+    },
+    "metadata/statdescriptions/sanctum_relic_stat_descriptions.csd": {
+      "size": 128328,
+      "sha256": "13a42918ea4c8e6fa03ee2787cc36c9201573b0f4be7840fd1588d842005d287"
+    },
+    "metadata/statdescriptions/secondary_debuff_skill_stat_descriptions.csd": {
+      "size": 4526,
+      "sha256": "06b3ff49aef98079499d2079667dffc790432fb427569cfd928cfb8b2b3c358c"
+    },
+    "metadata/statdescriptions/sentinel_stat_descriptions.csd": {
+      "size": 393030,
+      "sha256": "1a5603710b2932ce9e4aee4231c82b9bff3a6d8db96bc8eaed5c15373381ae31"
+    },
+    "metadata/statdescriptions/single_minion_spell_skill_stat_descriptions.csd": {
+      "size": 148942,
+      "sha256": "71d38a20c57c16e44a302e3b3c704bff2a84e1000b3618bbcd0fbcc00e695f4d"
+    },
+    "metadata/statdescriptions/skill_stat_descriptions.csd": {
+      "size": 5743428,
+      "sha256": "09d61fd34d9eeb1e213ec358627161e308bbb873ab091273a812eef6d2ca203f"
+    },
+    "metadata/statdescriptions/skillpopup_stat_filters.txt": {
+      "size": 490718,
+      "sha256": "97ec505f66b07bbfd37bc452a2ea48599960a3fbf4f8347dd0418386b6f5d5d4"
+    },
+    "metadata/statdescriptions/stat_descriptions.csd": {
+      "size": 30317102,
+      "sha256": "cb13dacd5b3bca7a4226e4a68a62e6e28dacc99fff809156f9f15ae740eda94e"
+    },
+    "metadata/statdescriptions/tincture_stat_descriptions.csd": {
+      "size": 303792,
+      "sha256": "3421d5e6a481c2cbc770ba5e2cd0b4b255347e13266d1a85dbb650485e547949"
+    },
+    "metadata/statdescriptions/vaal_side_area_stat_descriptions.csd": {
+      "size": 306,
+      "sha256": "f28f094d01364daaa78ed028638ae0e51c9e5d7f367e0189b3a8bde3632e1274"
+    },
+    "metadata/statdescriptions/variable_duration_skill_stat_descriptions.csd": {
+      "size": 14108,
+      "sha256": "fd8c05df2a1b2ec3d4b9712d9e9e4a7b9e67adb3f8399487a9befc9f22b75316"
+    },
+    "metadata/statdescriptions/village_stat_descriptions.csd": {
+      "size": 155778,
+      "sha256": "d5ac8cf0d2122d9970bfef4d8128672ff3078c8b771b654bcf105e5f5eae68ed"
+    }
+  },
+  "ggpk_state": "clean"
+}

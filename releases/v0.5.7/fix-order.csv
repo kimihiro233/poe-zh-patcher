@@ -1,0 +1,11 @@
+﻿stat_ids,file,cond,en,zh_old,zh_new,note
+supported_chaos_skill_gem_level_+,metadata_statdescriptions_gem_stat_descriptions.txt,#,{0:+d} to Level of Supported Chaos Skill Gems,{0:+d} 被輔助混沌技能寶石的等級,被輔助混沌技能寶石等級 {0:+d},
+supported_elemental_skill_gem_level_+,metadata_statdescriptions_gem_stat_descriptions.txt,#,{0:+d} to Level of Supported Elemental Skill Gems,{0:+d} 被輔助元素技能寶石的等級,被輔助元素技能寶石等級 {0:+d},
+supported_minion_skill_gem_level_+,metadata_statdescriptions_gem_stat_descriptions.txt,#,{0:+d} to Level of Supported Minion Skill Gems,{0:+d} 被輔助召喚物技能寶石的等級,被輔助召喚物技能寶石等級 {0:+d},
+supported_physical_skill_gem_level_+,metadata_statdescriptions_gem_stat_descriptions.txt,#,{0:+d} to Level of Supported Physical Skill Gems,{0:+d} 被輔助物理技能寶石的等級,被輔助物理技能寶石等級 {0:+d},
+supported_strike_skill_gem_level_+,metadata_statdescriptions_gem_stat_descriptions.txt,#,{0:+d} to Level of Supported Strike Skill Gems,{0:+d} 被輔助打擊技能寶石的等級,被輔助打擊技能寶石等級 {0:+d},
+local_socketed_physical_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of Socketed Physical Gems,{0:+d} 插槽中全部物理寶石的等級,插槽中物理寶石等級 {0:+d},
+aura_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Aura Skill Gems,{0:+d}所有光環技能寶石等級,所有光環主動技能寶石等級 {0:+d},与 fix-gem 重叠，两批同时生效时以本条为准
+critical_support_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Critical Support Gems,{0:+d} 全部暴擊輔助寶石的等級,全部暴擊輔助寶石等級 {0:+d},
+totem_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Totem Skill Gems,{0:+d} 全部圖騰技能寶石的等級,全部圖騰主動技能寶石等級 {0:+d},与 fix-gem 重叠，两批同时生效时以本条为准
+vaal_skill_gem_level_+,metadata_statdescriptions_stat_descriptions.txt,#,{0:+d} to Level of all Vaal Skill Gems,{0:+d} 全部瓦爾技能寶石的等級,全部瓦爾主動技能寶石等級 {0:+d},与 fix-gem 重叠，两批同时生效时以本条为准
