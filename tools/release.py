@@ -36,6 +36,7 @@ FIXES = [
     ("fix-order.csv", "数值位置/语序统一"),
     ("fix-category.csv", "物品类别词（Jewellery/Item/Armour）"),
     ("fix-category-ui.csv", "物品类别词·UI 表侧（.dat 回写）"),
+    ("fix-newtext.csv", "官方未翻译、本项目补译（.dat 回写）"),
     ("fix-category-hold.csv", "存疑未改（待拍板）"),
     ("fix-typo.csv", "原件笔误（繁中占位符 {0] → {0}）"),
     ("fix-placeholder.csv", "占位符漏失（{n} / % 丢了，补回；含一条繁体错字）"),

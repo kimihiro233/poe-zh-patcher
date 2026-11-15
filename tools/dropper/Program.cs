@@ -563,6 +563,17 @@ internal static class Program {
     // 唯一一份「程序认得的参数」清单。usage 文本要与它双向对齐（--args-test 钉住）：
     // 写了不认的 → 用户照着文档敲却被拒；认了不写 → 这个开关等于不存在。
     // 以前这里没有清单，任何 `--xxx` 都被静默塞进 Args，拼错一个字母就按默认值跑完一整轮。
+    /// <summary>同时写控制台与 --log 指定的文件。逐字符转发，所以重载不必逐个覆盖。</summary>
+    private sealed class TeeWriter : TextWriter {
+        private readonly TextWriter _console, _file;
+        public TeeWriter(TextWriter console, TextWriter file) { _console = console; _file = file; }
+        public override Encoding Encoding => _console.Encoding;
+        public override void Write(char value) { _console.Write(value); _file.Write(value); }
+        public override void Write(string? value) { _console.Write(value); _file.Write(value); }
+        public override void WriteLine(string? value) { _console.WriteLine(value); _file.WriteLine(value); }
+        public override void Flush() { _console.Flush(); _file.Flush(); }
+    }
+
     private static readonly string[] KnownFlags = {
         // 动作
         "status", "selftest", "struct", "collect", "writetest", "bundles", "dump", "detach-test",
@@ -576,7 +587,7 @@ internal static class Program {
         "markup-test", "undo-test", "legacy-test", "baseline-test", "recover-test",
         "bundle-name-test", "args-test", "backup-test", "fixture",
         // 其它
-        "help",
+        "help", "log",
     };
 
     private static string _target = "";      // Content.ggpk 或 Bundles2\_.index.bin
@@ -659,6 +670,21 @@ internal static class Program {
                 }
                 Args[key] = val;
             } else positional.Add(a);
+        }
+
+        // --log：单文件 exe 提权运行时，控制台窗口一关就什么都不剩。
+        // 真机写入没法复现，日志必须是程序自己落的，不能依赖 shell 重定向。
+        if (Args.TryGetValue("log", out var logTo) && logTo.Length > 0) {
+            try {
+                var dir = Path.GetDirectoryName(Path.GetFullPath(logTo));
+                if (!string.IsNullOrEmpty(dir)) Directory.CreateDirectory(dir);
+                var sw = new StreamWriter(logTo, false, new UTF8Encoding(false)) { AutoFlush = true };
+                var tee = new TeeWriter(Console.Out, sw);
+                Console.SetOut(tee);
+                Console.SetError(tee);
+            } catch (Exception e) {
+                Console.WriteLine($"  ! --log 打不开 {logTo}：{e.Message}（照常继续，只是不落盘）");
+            }
         }
 
         // 自检放在最前面：它们都不需要打开容器，也不能因为参数解析退化而跑偏。
@@ -2052,6 +2078,7 @@ internal static class Program {
         L("  PoE-zh-Patcher.exe <...> --set=translated --plan          只演算校验，不写文件");
         L("  PoE-zh-Patcher.exe <...> --set=translated --only=<关键词>  只改文件名含该关键词的文件（最小验证用）");
         L("  PoE-zh-Patcher.exe <...> --locale-only[=original]        只处理语系与国旗，不碰译文");
+        L("  --log=<文件>                                             把本次输出同时写进该文件（真机排查用）");
         L("  --help                                                    打印这份说明");
         L();
         L("安全相关：");

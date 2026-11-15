@@ -5,6 +5,8 @@ raw_sd/
 # 换版本时留档的旧导出（同上：可由改用 dumper 从旧 ggpk 重导，且已经过期）
 pairs-old-*/
 raw_sd-old-*/
+# 按版本号留档的成对导出：下次游戏更新时拿它当 dat_text_diff 的 --base
+pairs-[0-9]*/
 out/stale-*/
 
 # 构建产物

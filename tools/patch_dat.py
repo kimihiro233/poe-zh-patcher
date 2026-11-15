@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 """把修正稿（UI 表侧）应用成可写回 ggpk 的 .dat 文件。
 
-输入：out/fix-category-ui.csv（table,row,slot,en,zh_old,zh_new）
+输入：out/fix-category-ui.csv（既有术语修正）
+      out/fix-newtext.csv    （官方未翻译、由本项目补的文本）
+      两份都是 table,row,slot,en,zh_old,zh_new，分开只为可追溯——
+      「修正官方译错」与「官方没翻我们来翻」是两件事，搅在一起以后没法算退役。
       基线：pairs/zh/<table>（从 ggpk 原文导出，未改过）
 输出：out/patch/<table> + out/patch/manifest.json
 
@@ -17,7 +20,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from datwrite import WriteError, load_raw, patch_bytes  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(ROOT, "out", "fix-category-ui.csv")
+SOURCES = [
+    os.path.join(ROOT, "out", "fix-category-ui.csv"),   # 术语修正
+    os.path.join(ROOT, "out", "fix-newtext.csv"),       # 官方未翻，本项目补译
+]
 BASE = os.path.join(ROOT, "pairs", "zh")
 DST = os.path.join(ROOT, "out", "patch")
 LOCK = os.path.join(ROOT, "game.lock.json")
@@ -64,9 +70,25 @@ def adapt(actual, new):
 
 
 def main():
-    rows = list(csv.DictReader(open(SRC, encoding="utf-8-sig")))
+    rows, seen, used = [], {}, []
+    for p in SOURCES:
+        if not os.path.exists(p):
+            print("  ! 缺清单 %s，跳过" % os.path.relpath(p, ROOT).replace("\\", "/"))
+            continue
+        used.append(p)
+        for r in csv.DictReader(open(p, encoding="utf-8-sig")):
+            key = (r["table"], int(r["row"]), int(r["slot"]))
+            if key in seen:
+                # 同一处被两份清单同时改，谁赢都是隐患，直接拒
+                print("  x %s 行 %d 槽位 %d 同时出现在 %s 与 %s"
+                      % (key[0], key[1], key[2], seen[key], os.path.basename(p)))
+                return 1
+            seen[key] = os.path.basename(p)
+            r["_src"] = os.path.basename(p)
+            rows.append(r)
     if not rows:
-        print("fix-category-ui.csv 为空"); return 1
+        print("修正稿为空（%s）" % "、".join(os.path.basename(p) for p in SOURCES))
+        return 1
 
     lock = load_game_lock()
     if lock is None:
@@ -129,6 +151,7 @@ def main():
             "table": table,
             "path_in_ggpk": key,
             "src": os.path.relpath(src, ROOT).replace("\\", "/"),
+            "source": sorted({i["_src"] for i in items}),
             "dst": os.path.relpath(dst, ROOT).replace("\\", "/"),
             "sha256_original": sha_o,
             "sha256_patched": sha256(dst),
@@ -156,7 +179,7 @@ def main():
             "ggpk_size": lock.get("ggpk", {}).get("size"),
             "source": "game.lock.json",
         },
-        "source": os.path.relpath(SRC, ROOT).replace("\\", "/"),
+        "source": [os.path.relpath(p, ROOT).replace("\\", "/") for p in used],
         "total_edits": sum(len(f["edits"]) for f in files),
         "files": files,
     }

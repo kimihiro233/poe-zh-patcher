@@ -1,32 +1,32 @@
 {
   "schema": 1,
-  "locked_at": "2026-11-14T12:38:23",
+  "locked_at": "2026-11-15T12:54:59",
   "game_dir": "C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile",
   "version": {
     "log": "logs/LatestClient.txt",
-    "log_mtime": "2026-11-14T12:29:56",
-    "client_version": "3.30.0",
-    "patch_version": "3.30.0.1.3"
+    "log_mtime": "2026-11-15T12:46:14",
+    "client_version": "3.30.0b",
+    "patch_version": "3.30.0.2"
   },
   "ggpk": {
     "size": 79769601101,
-    "mtime": "2026-11-14T12:30:01"
+    "mtime": "2026-11-14T14:50:33"
   },
   "exe": {
     "PathOfExile.exe": {
-      "size": 79945560,
-      "sha256": "e5c238a2478dc5cfab8eeb4d3de3ddf9ef065645410cfdc744ae7779fcba42d7",
-      "mtime": "2026-11-14T12:29:35"
+      "size": 79947608,
+      "sha256": "c86e4b153a93e573e7d800dcdf01a79b3392a52f73e29ca48d2bd8297ad28031",
+      "mtime": "2026-11-15T12:39:40"
     },
     "PathOfExile_x64.exe": {
       "size": 541528,
-      "sha256": "a6e7b545ff73e6a25f23308289b32904f0beb9f041546f7d279df53a363ff33d",
-      "mtime": "2026-11-14T12:33:25"
+      "sha256": "cfbdc27f59f24493dfa11ea1de4d2f6187d0cfec7223571a71c5f6e16b141dbb",
+      "mtime": "2026-11-15T12:42:39"
     },
     "Client.exe": {
       "size": 541528,
-      "sha256": "03f6711fd7c9991e9655f251134bb44d364ff5cb8d6d6c9d96d6337f07e7264f",
-      "mtime": "2026-11-14T12:30:07"
+      "sha256": "9cfc30595132a180ae85e4a4c75b9c891a583b77a8da23eeb873c8af59ecdbc2",
+      "mtime": "2026-11-15T12:42:12"
     }
   },
   "counts": {
@@ -34,7 +34,7 @@
     "statdesc_files": 49,
     "total": 531
   },
-  "fingerprint": "9eb09edf9fb2cb24adf4e49235983938d3a5361f4c37f6f63684c6ca2483b371",
+  "fingerprint": "3ec41ed08762373d414370ac43e4fb0a954f0ba71d19fa8c6fa19e5822ddd492",
   "files": {
     "data/traditional chinese/achievementitemrewards.datc64": {
       "size": 352,
@@ -621,12 +621,12 @@
       "sha256": "b91b2aee5029b65754c6092d995e85fcc7bea594405b0645a64a8c0491c438b0"
     },
     "data/traditional chinese/clientstrings.datc64": {
-      "size": 1307998,
-      "sha256": "a2a891c2f4bc272ae5e94c2fe5ded9f47c95c5dd119e8b9c925c559f38c900a6"
+      "size": 1308294,
+      "sha256": "c9092217d79d49e18195f76a7eaf134dba842aac9bcaa7a00ffbb18c4710215a"
     },
     "data/traditional chinese/clientstrings.datcl64": {
-      "size": 2099620,
-      "sha256": "976dd6cc3c1bee38f526746e544a5bc66a43e1a152875a3b925f6bca35e57acb"
+      "size": 2100152,
+      "sha256": "a3bea8b66b5f22bdb99dbe8ae4e909157c9fa50ef79b7b4f424b343745f1fa48"
     },
     "data/traditional chinese/clientstrings2.datc64": {
       "size": 59484,
@@ -1293,12 +1293,12 @@
       "sha256": "211786a1a7b500b8d356a587c3d9d1b6e58f713c980fcc2acedfcbd224218ad8"
     },
     "data/traditional chinese/mods.datc64": {
-      "size": 35105560,
-      "sha256": "11c4eb90315681f62ee2088fff0f2790ba52aed0a4c5f2e0cab489bd63e97e44"
+      "size": 35109864,
+      "sha256": "b721fb6ab34b984b7b92077ab79e385a6f9917b0363325e9e293414d27691611"
     },
     "data/traditional chinese/mods.datcl64": {
-      "size": 38200444,
-      "sha256": "fd44dc63a5693e82ceadb49e76b9ffa6f1c8b3ec465a173f2c7044a882e1a825"
+      "size": 38204748,
+      "sha256": "760a7e27050c9c1d755a7d686bba50de1705c3b447b3b896c5ed12b13ac73b07"
     },
     "data/traditional chinese/monstercategories.datc64": {
       "size": 232,
@@ -1309,12 +1309,12 @@
       "sha256": "a2ff015c929a4a412e73871c2ee3d3d1b5c9047b3fe6e4d2cf507613b093305c"
     },
     "data/traditional chinese/monstervarieties.datc64": {
-      "size": 14824302,
-      "sha256": "ff1a511dee71fb49806d2a107d6588991d306c3348fdd18af2475ef4f6121318"
+      "size": 14824304,
+      "sha256": "c21005bc71f42b0477acb032da77fa410e07406fa3a1c0d49f2b9e6d59348bde"
     },
     "data/traditional chinese/monstervarieties.datcl64": {
-      "size": 17532018,
-      "sha256": "e56a94073ca3da9300faf25a213cfcb096b57e49426cf4723d7f63ec2194141a"
+      "size": 17532022,
+      "sha256": "82030b97094f203cde1ae25593cba51f456c48f1a520f9f02a151ffa7f9f7df1"
     },
     "data/traditional chinese/mousecursorsizesettings.datc64": {
       "size": 134,

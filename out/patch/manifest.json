@@ -1,21 +1,27 @@
 {
-  "version": "0.5.6",
+  "version": "0.5.8",
   "lang": "traditional chinese",
   "game": {
-    "client_version": "3.30.0",
-    "patch_version": "3.30.0.1.3",
-    "fingerprint": "9eb09edf9fb2cb24adf4e49235983938d3a5361f4c37f6f63684c6ca2483b371",
-    "locked_at": "2026-11-14T12:38:23",
+    "client_version": "3.30.0b",
+    "patch_version": "3.30.0.2",
+    "fingerprint": "3ec41ed08762373d414370ac43e4fb0a954f0ba71d19fa8c6fa19e5822ddd492",
+    "locked_at": "2026-11-15T12:54:59",
     "ggpk_size": 79769601101,
     "source": "game.lock.json"
   },
-  "source": "out/fix-category-ui.csv",
-  "total_edits": 10,
+  "source": [
+    "out/fix-category-ui.csv",
+    "out/fix-newtext.csv"
+  ],
+  "total_edits": 13,
   "files": [
     {
       "table": "achievementitems.datc64",
       "path_in_ggpk": "data/traditional chinese/achievementitems.datc64",
       "src": "pairs/zh/achievementitems.datc64",
+      "source": [
+        "fix-category-ui.csv"
+      ],
       "dst": "out/patch/achievementitems.datc64",
       "sha256_original": "211efd3f5d3ab89a44740a0d16f3e8095edcafdc56b98ebba587c4ed5312af81",
       "sha256_patched": "d83b5d927c79ff7997ae24d01051c4d3016c5ae1571ddb897752c966ab49f236",
@@ -80,11 +86,15 @@
       "table": "clientstrings.datc64",
       "path_in_ggpk": "data/traditional chinese/clientstrings.datc64",
       "src": "pairs/zh/clientstrings.datc64",
+      "source": [
+        "fix-category-ui.csv",
+        "fix-newtext.csv"
+      ],
       "dst": "out/patch/clientstrings.datc64",
-      "sha256_original": "a2a891c2f4bc272ae5e94c2fe5ded9f47c95c5dd119e8b9c925c559f38c900a6",
-      "sha256_patched": "861c47bcc7059157a8e157b5340afa7c17a6f237139f4674aff135bd33a1f034",
-      "size_original": 1307998,
-      "size_patched": 1308098,
+      "sha256_original": "c9092217d79d49e18195f76a7eaf134dba842aac9bcaa7a00ffbb18c4710215a",
+      "sha256_patched": "aa3475aa33b0eb6c5a769ead2ec9af2017c77bcdbebb0b0c39e64c00314c4516",
+      "size_original": 1308294,
+      "size_patched": 1308438,
       "verify": "ok",
       "tolerated_eof_sentinel": [],
       "edits": [
@@ -95,8 +105,18 @@
           "new": "每個額外的隊伍成員玩家會增加找到的特定物品數量，\r\n像是護甲、飾品、通貨、金幣、寶石和傳奇物品。",
           "action": "append",
           "shared_refs": 1,
-          "new_pool_offset": 858300,
+          "new_pool_offset": 858544,
           "grew": 0
+        },
+        {
+          "row": 8648,
+          "rel": 8,
+          "old": "After selecting this, you will be unable to reclaim this item until you have chosen an outcome",
+          "new": "選擇後，在你選定結果之前將無法取回此物品",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 858644,
+          "grew": -74
         }
       ]
     },
@@ -104,6 +124,9 @@
       "table": "currencyitems.datc64",
       "path_in_ggpk": "data/traditional chinese/currencyitems.datc64",
       "src": "pairs/zh/currencyitems.datc64",
+      "source": [
+        "fix-category-ui.csv"
+      ],
       "dst": "out/patch/currencyitems.datc64",
       "sha256_original": "3c218fced454390c5cce888d05ffd98aee42deb867d64f161528156a3bd8aead",
       "sha256_patched": "434245ed0059b7c78cd1e9184322d5a75a52a26357eeb4704a4ad8530b74b80a",
@@ -143,6 +166,9 @@
       "table": "incursionrooms.datc64",
       "path_in_ggpk": "data/traditional chinese/incursionrooms.datc64",
       "src": "pairs/zh/incursionrooms.datc64",
+      "source": [
+        "fix-category-ui.csv"
+      ],
       "dst": "out/patch/incursionrooms.datc64",
       "sha256_original": "069f1288b1767826df14500c861e67304dcfbee9ef08ba434415a39572989915",
       "sha256_patched": "1d81ef5a0981d9d3eda340b695ea579dd7623bfe5c844173e1f99fe0f1813bd1",
@@ -164,9 +190,49 @@
       ]
     },
     {
+      "table": "monstervarieties.datc64",
+      "path_in_ggpk": "data/traditional chinese/monstervarieties.datc64",
+      "src": "pairs/zh/monstervarieties.datc64",
+      "source": [
+        "fix-newtext.csv"
+      ],
+      "dst": "out/patch/monstervarieties.datc64",
+      "sha256_original": "c21005bc71f42b0477acb032da77fa410e07406fa3a1c0d49f2b9e6d59348bde",
+      "sha256_patched": "8bbf6e729513c3b3d375e79e52d742b25d80c437f2aa85059289c72e09327234",
+      "size_original": 14824304,
+      "size_patched": 14824328,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [],
+      "edits": [
+        {
+          "row": 427,
+          "rel": 228,
+          "old": "Stoneshamble",
+          "new": "踉蹌之岩",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 6084744,
+          "grew": -8
+        },
+        {
+          "row": 427,
+          "rel": 260,
+          "old": "Stoneshamble",
+          "new": "踉蹌之岩",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 6084756,
+          "grew": -8
+        }
+      ]
+    },
+    {
       "table": "uitalktext.datc64",
       "path_in_ggpk": "data/traditional chinese/uitalktext.datc64",
       "src": "pairs/zh/uitalktext.datc64",
+      "source": [
+        "fix-category-ui.csv"
+      ],
       "dst": "out/patch/uitalktext.datc64",
       "sha256_original": "eea9643599a595c4aaa31c4c71907d95a098fd4b8d6878fb673f04017dc8a67e",
       "sha256_patched": "de7e5b99352417a07b8f965b245250cf932c6334ad27d38006718523c9c961b2",
