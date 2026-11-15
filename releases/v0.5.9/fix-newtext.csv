@@ -1,0 +1,4 @@
+﻿table,row,slot,en,zh_old,zh_new,note
+clientstrings.datc64,8648,8,"After selecting this, you will be unable to reclaim this item until you have chosen an outcome","After selecting this, you will be unable to reclaim this item until you have chosen an outcome",選擇後，在你選定結果之前將無法取回此物品,3.30.0.2 新增 GwennenCraftingHoverText，官方繁中未翻譯（原樣照抄英文）
+monstervarieties.datc64,427,228,Stoneshamble,Stoneshamble,踉蹌之岩,3.30.0.2 把 [DNT] Gnugh 定名為 Stoneshamble，官方繁中未翻譯；同族 Gneiss=白岩、Granitecrush=崩岩
+monstervarieties.datc64,427,260,Stoneshamble,Stoneshamble,踉蹌之岩,同上，同一行的第二個名稱欄位

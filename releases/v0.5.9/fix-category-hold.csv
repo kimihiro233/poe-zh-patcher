@@ -1,0 +1,33 @@
+﻿stat_ids,table,row,slot,cond,en,zh_old,zh_new,rule,note
+brequel_equipment_fruit_amulet_chance_+%,,,,1|#,{0}% increased chance for Birthed Equipment to be Amulets,產出的裝備成為護身符的機率提高 {0}%,產出的裝備成為項鍊的機率提高 {0}%,H1,官方分裂：baseitemtypes 用「X 護身符」，泛称用「項鍊」(250:67)。本條在 statdesc 內屬泛称，按主流應改項鍊，待拍板
+brequel_equipment_fruit_amulet_chance_+%,,,,#|-1,{0}% reduced chance for Birthed Equipment to be Amulets,產出的裝備成為護身符的機率降低 {0}%,產出的裝備成為項鍊的機率降低 {0}%,H1,官方分裂：baseitemtypes 用「X 護身符」，泛称用「項鍊」(250:67)。本條在 statdesc 內屬泛称，按主流應改項鍊，待拍板
+brequel_unique_fruit_amulet_chance_+%,,,,1|#,{0}% increased chance for Birthed Unique Items to be Amulets,產出的傳奇物品成為護身符的機率提高 {0}%,產出的傳奇物品成為項鍊的機率提高 {0}%,H1,官方分裂：baseitemtypes 用「X 護身符」，泛称用「項鍊」(250:67)。本條在 statdesc 內屬泛称，按主流應改項鍊，待拍板
+brequel_unique_fruit_amulet_chance_+%,,,,#|-1,{0}% reduced chance for Birthed Unique Items to be Amulets,產出的傳奇物品成為護身符的機率降低 {0}%,產出的傳奇物品成為項鍊的機率降低 {0}%,H1,官方分裂：baseitemtypes 用「X 護身符」，泛称用「項鍊」(250:67)。本條在 statdesc 內屬泛称，按主流應改項鍊，待拍板
+,flavourtext.datc64,1351,12,,"<size:23>{Vintage or crafted, Glittering and shiny
+Dusty or glittering, huge or tiny
+Secured within a chest 
+or unearthed from your mining
+Find jewellery everywhere, 
+no need for divining!
+So why is it so hard 
+to figure out which one to wear?
+This one makes me stronger, 
+but does it match my hair?}","<size:23> {復古或手工製作，閃閃發光和有光澤
+塵土飛揚或閃閃發光，巨大或微小
+固定在胸部
+或從你的採礦中發掘出來
+隨處可見珠寶，
+無需占卜！
+那為什麼這麼難
+找出穿哪一件？
+這使我更堅強
+但是它和我的頭髮匹配嗎？}","<size:23> {復古或手工製作，閃閃發光和有光澤
+塵土飛揚或閃閃發光，巨大或微小
+固定在胸部
+或從你的採礦中發掘出來
+隨處可見珠寶，
+無需占卜！
+那為什麼這麼難
+找出穿哪一件？
+這使我更堅強
+但是它和我的頭髮匹配嗎？}",,詩意/隱喻文本，指稱不確定，未動
