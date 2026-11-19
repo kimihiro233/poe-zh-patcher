@@ -1,0 +1,18 @@
+﻿table,row,slot,en,zh_old,zh_new,note
+clientstrings.datc64,8648,8,"After selecting this, you will be unable to reclaim this item until you have chosen an outcome","After selecting this, you will be unable to reclaim this item until you have chosen an outcome",選擇後，在你選定結果之前將無法取回此物品,3.30.0.2 新增 GwennenCraftingHoverText，官方繁中未翻譯（原樣照抄英文）
+monstervarieties.datc64,427,228,Stoneshamble,Stoneshamble,踉蹌之岩,3.30.0.2 把 [DNT] Gnugh 定名為 Stoneshamble，官方繁中未翻譯；同族 Gneiss=白岩、Granitecrush=崩岩
+monstervarieties.datc64,427,260,Stoneshamble,Stoneshamble,踉蹌之岩,同上，同一行的第二個名稱欄位
+clientstrings.datc64,8649,8,A random Viscera,A random Viscera,1 個隨機臟器,3.30.0.3 新增 HiddenItemViscera，官方繁中未翻譯；同表「A random X」官方一律作「1 個隨機X」（如 1 個隨機項鍊）
+auguryrewardoutcomes.datc64,32,16,Empowered Monster will drop an additional Mirror Shard,Empowered Monster will drop an additional Mirror Shard,被強化的怪物會掉落額外一個魔鏡碎片,3.30.0.3 新增，官方繁中未翻譯；同表既有譯法為「被強化的怪物會掉落額外…」，道具名沿用官方譯名（魔鏡碎片／破裂石／神聖石／無效石／映像迷霧／悉妮蔻拉的髮絲／聖玉）
+auguryrewardoutcomes.datc64,33,16,Empowered Monster will drop an additional Fracturing Orb,Empowered Monster will drop an additional Fracturing Orb,被強化的怪物會掉落額外一個破裂石,3.30.0.3 新增，官方繁中未翻譯；同表既有譯法為「被強化的怪物會掉落額外…」，道具名沿用官方譯名（魔鏡碎片／破裂石／神聖石／無效石／映像迷霧／悉妮蔻拉的髮絲／聖玉）
+auguryrewardoutcomes.datc64,34,16,Empowered Monster will drop an additional Divine Orb,Empowered Monster will drop an additional Divine Orb,被強化的怪物會掉落額外一個神聖石,3.30.0.3 新增，官方繁中未翻譯；同表既有譯法為「被強化的怪物會掉落額外…」，道具名沿用官方譯名（魔鏡碎片／破裂石／神聖石／無效石／映像迷霧／悉妮蔻拉的髮絲／聖玉）
+auguryrewardoutcomes.datc64,35,16,Empowered Monster will drop additional Divine Orbs,Empowered Monster will drop additional Divine Orbs,被強化的怪物會掉落額外數個神聖石,3.30.0.3 新增，官方繁中未翻譯；同表既有譯法為「被強化的怪物會掉落額外…」，道具名沿用官方譯名（魔鏡碎片／破裂石／神聖石／無效石／映像迷霧／悉妮蔻拉的髮絲／聖玉）
+auguryrewardoutcomes.datc64,36,16,Empowered Monster will drop an additional Orb of Annulment,Empowered Monster will drop an additional Orb of Annulment,被強化的怪物會掉落額外一個無效石,3.30.0.3 新增，官方繁中未翻譯；同表既有譯法為「被強化的怪物會掉落額外…」，道具名沿用官方譯名（魔鏡碎片／破裂石／神聖石／無效石／映像迷霧／悉妮蔻拉的髮絲／聖玉）
+auguryrewardoutcomes.datc64,37,16,Empowered Monster will drop additional Orbs of Annulment,Empowered Monster will drop additional Orbs of Annulment,被強化的怪物會掉落額外數個無效石,3.30.0.3 新增，官方繁中未翻譯；同表既有譯法為「被強化的怪物會掉落額外…」，道具名沿用官方譯名（魔鏡碎片／破裂石／神聖石／無效石／映像迷霧／悉妮蔻拉的髮絲／聖玉）
+auguryrewardoutcomes.datc64,38,16,Empowered Monster will drop an additional Reflecting Mist,Empowered Monster will drop an additional Reflecting Mist,被強化的怪物會掉落額外一個映像迷霧,3.30.0.3 新增，官方繁中未翻譯；同表既有譯法為「被強化的怪物會掉落額外…」，道具名沿用官方譯名（魔鏡碎片／破裂石／神聖石／無效石／映像迷霧／悉妮蔻拉的髮絲／聖玉）
+auguryrewardoutcomes.datc64,39,16,Empowered Monster will drop an additional Hinekora's Lock,Empowered Monster will drop an additional Hinekora's Lock,被強化的怪物會掉落額外一個悉妮蔻拉的髮絲,3.30.0.3 新增，官方繁中未翻譯；同表既有譯法為「被強化的怪物會掉落額外…」，道具名沿用官方譯名（魔鏡碎片／破裂石／神聖石／無效石／映像迷霧／悉妮蔻拉的髮絲／聖玉）
+auguryrewardoutcomes.datc64,40,16,Empowered Monster will drop an additional Sacred Orb,Empowered Monster will drop an additional Sacred Orb,被強化的怪物會掉落額外一個聖玉,3.30.0.3 新增，官方繁中未翻譯；同表既有譯法為「被強化的怪物會掉落額外…」，道具名沿用官方譯名（魔鏡碎片／破裂石／神聖石／無效石／映像迷霧／悉妮蔻拉的髮絲／聖玉）
+auguryrewardoutcomes.datc64,164,16,"Empowered Monster will drop additional Rare Amulets
+Amulets dropped by Empowered Monster will have a Gem modifier","Empowered Monster will drop additional Rare Amulets
+Amulets dropped by Empowered Monster will have a Gem modifier","被強化的怪物會掉落額外稀有項鍊
+由被強化怪物所掉落的項鍊會擁有一條寶石詞綴",3.30.0.3 新增，官方繁中未翻譯；同表 row 160-163 的譯法為「由被強化怪物所掉落的…會擁有一條…詞綴」
