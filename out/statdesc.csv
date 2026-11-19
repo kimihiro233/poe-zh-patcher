@@ -752,7 +752,9 @@ metadata_statdescriptions_atlas_stat_descriptions.txt,display_notable_atlas_pass
 metadata_statdescriptions_atlas_stat_descriptions.txt,display_small_atlas_passives_grant_nothing,0,#,reminderstring ReminderTextSmallAtlasPassives,Small Atlas Passive Skills grant nothing,小輿圖天賦沒有效果
 metadata_statdescriptions_atlas_stat_descriptions.txt,dummy_display_bestiary_family_selector,0,#,,Red Beasts in your Maps have {0}% increased chance to be from\nYour Maps that contain capturable Beasts contain an additional Red Beast from,增加{0}%你地圖中紅色野獸來自指定地區的機率\n你含有可捕獲野獸的地圖中會額外含有一隻來自指定地區的紅色野獸
 metadata_statdescriptions_atlas_stat_descriptions.txt,dummy_display_breach_type_selector,0,#,,Breach Encounters in your Maps are always,你地圖中的裂痕遭遇總是
+metadata_statdescriptions_atlas_stat_descriptions.txt,dummy_display_eldritch_altar_mod_type_selector,0,1|#,,Eldritch Altars in your Maps always have one choice affecting,
 metadata_statdescriptions_atlas_stat_descriptions.txt,dummy_display_essence_type_selector,0,#,,{0}% increased chance for Imprisoned Monsters to have certain Essences,增加{0}%被囚禁的怪物擁有特定精髓類型的機率
+metadata_statdescriptions_atlas_stat_descriptions.txt,dummy_display_expedition_remnant_blocker_selector,0,1|#,,Remnants in your Maps do not have Suffix Modifiers affecting,
 metadata_statdescriptions_atlas_stat_descriptions.txt,dummy_display_harvest_tree_type_selector,0,#,,{0}% increased chance to encounter certain Sacred Flora,增加{0}%遭遇特定聖潔之花的機率
 metadata_statdescriptions_atlas_stat_descriptions.txt,dummy_display_mercenary_attribute_type_selector,0,1|#,,{0}% more chance for Mercenaries in your Maps to be,你地圖中的傭兵有{0}%更多機率為
 metadata_statdescriptions_atlas_stat_descriptions.txt,dummy_display_mercenary_attribute_type_selector,1,#|-1,negate 1,{0}% less chance for Mercenaries in your Maps to be,你地圖中的傭兵有{0}%更少機率為
@@ -776,6 +778,7 @@ metadata_statdescriptions_atlas_stat_descriptions.txt,favoured_map_drop_chance_+
 metadata_statdescriptions_atlas_stat_descriptions.txt,fortune_favours_the_brave_map_item_quantity_+%,0,1|#,,{0}% increased Quantity of Items found in your Maps affected by Fortune Favours the Brave,增加 {0}% 被天佑勇者影響你的地圖掉落的物品數量
 metadata_statdescriptions_atlas_stat_descriptions.txt,fortune_favours_the_brave_map_item_rarity_+%,0,1|#,,{0}% increased Rarity of Items found in your Maps affected by Fortune Favours the Brave,增加 {0}% 被天佑勇者影響你的地圖掉落的物品稀有度
 metadata_statdescriptions_atlas_stat_descriptions.txt,fortune_favours_the_brave_map_pack_size_+%,0,1|#,,{0}% increased Pack Size of your Maps affected by Fortune Favours the Brave,增加 {0}% 被天佑勇者影響你的地圖的怪物群大小
+metadata_statdescriptions_atlas_stat_descriptions.txt,harvest_wisp_enable_spread_to_unique_and_rare_enemies,0,#,,Sacred Flora in your Maps can spread Wildwood Wisps to Rare and Unique Monsters,
 metadata_statdescriptions_atlas_stat_descriptions.txt,influence_monster_chance_to_drop_currency_item_%,0,#,,Influenced Monsters in your Maps have {0}% chance to drop an additional Basic Currency Item,你地圖中勢力怪物有 {0}% 機率掉落 1 個額外基礎通貨
 metadata_statdescriptions_atlas_stat_descriptions.txt,influence_monster_chance_to_drop_quality_gem_%,0,#,,Influenced Monsters in your Maps have {0}% chance to drop an additional Gem with Quality,你地圖中勢力怪物有 {0}% 機率掉落 1 個額外有品質的寶石
 metadata_statdescriptions_atlas_stat_descriptions.txt,influence_monster_chance_to_drop_rare_armour_%,0,#,,Influenced Monsters in your Maps have {0}% chance to drop an additional Rare Armour Item,你地圖中勢力怪物有 {0}% 機率掉落 1 個額外稀有護甲
@@ -1425,7 +1428,7 @@ metadata_statdescriptions_atlas_stat_descriptions.txt,map_expedition_encounter_c
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_expedition_encounter_chance_+%,1,#|-1,,Your Maps have {0}% reduced chance to contain an Expedition Encounter,你的地圖減少 {0}% 機率含有 1 個探險事件
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_expedition_explosion_radius_+%,0,1|#,,{0}% increased Explosive Radius in your Maps,增加 {0}% 你的地圖中的爆炸範圍
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_expedition_explosives_+%,0,1|#,,{0}% increased number of Explosives in your Maps,增加 {0}% 你的地圖中爆裂物的數量
-metadata_statdescriptions_atlas_stat_descriptions.txt,map_expedition_extra_relic_suffix_chance_%,0,1|#,,Remnants in your Maps have {0}% chance to have an additional Suffix Modifier,你地圖中的遺跡有 {0}% 機率有 1 個額外後綴
+metadata_statdescriptions_atlas_stat_descriptions.txt,map_expedition_extra_relic_suffix_chance_%,0,1|#,,{0:+d}% [SurpassChance|Surpassing Chance] for Remnants in your Maps to have an additional Suffix Modifier,
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_expedition_fuse_burn_time_+%,0,1|#,,Expedition Detonation Chains in your Maps travel {0}% slower,你地圖中的探險爆炸連鎖減緩 {0}%
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_expedition_fuse_burn_time_+%,1,#|-1,negate 1,Expedition Detonation Chains in your Maps travel {0}% faster,你地圖中的探險爆炸連鎖加速 {0}%
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_expedition_gwennen_encounter_chance_+%,0,1|#,,Expeditions in your Maps have {0}% increased chance to be led by Gwennen,你地圖中的探險增加 {0}% 機率被關南領導
@@ -1991,7 +1994,7 @@ metadata_statdescriptions_atlas_stat_descriptions.txt,map_settlers_secondary_ore
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_settlers_verisium_buff_duration_+%,0,1|#,,Buffs granted by Verisium Ore Deposits in your Maps have {0}% increased Duration,增加{0}%由你地圖中維里西姆礦床所賦予增益的持續時間
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_settlers_verisium_buff_duration_+%,1,#|-1,negate 1,Buffs granted by Verisium Ore Deposits in your Maps have {0}% reduced Duration,減少{0}%由你地圖中維里西姆礦床所賦予增益的持續時間
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_settlers_verisium_maximum_channel_+%,0,1|#,,Verisium Ore Deposits in your Maps can be channelled on for {0}% longer,在你的地圖中，維里西姆礦床可引導的時間增加 {0}%
-metadata_statdescriptions_atlas_stat_descriptions.txt,map_shaped_regions_manifest_anomalies_instead,0,#,,Atlas Anomalies manifest on completing [ShapedRegionAnomalies|Shaped Regions] instead of on Map Completion\nAtlas Anomalies can manifest from any Quadrant,輿圖異常會在完成[ShapedRegionAnomalies|幻塑界域]時顯現，而不是完成地圖時\n輿圖異常可以在任一半區顯現
+metadata_statdescriptions_atlas_stat_descriptions.txt,map_shaped_regions_manifest_anomalies_instead,0,#,,Atlas Anomalies manifest on completing [ShapedRegionAnomalies|Shaped Region Objectives] instead of Map Completion\nAtlas Anomalies can manifest from any Quadrant,
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_shaper_boss_drops_X_additional_shaper_items,0,1,,The Shaper drops an additional Shaper Item,塑界者掉落 1 個額外塑者之物
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_shaper_boss_drops_X_additional_shaper_items,1,2|#,,The Shaper drops {0} additional Shaper Items,塑界者掉落 {0} 個額外塑者之物
 metadata_statdescriptions_atlas_stat_descriptions.txt,map_shaper_elder_guardians_assisted_by_allies,0,#,reminderstring ReminderTextShaperGuardians reminderstring ReminderTextElderGuardians,Shaper and Elder Guardians are healed and joined by an ally on first reaching 33% Life\nAllies have a chance to drop their Fragments,塑者和尊師守護者在初次到達 33% 生命時被治癒，並且加入 1 個友方\n友方有機率掉落他們的碎片
@@ -2255,6 +2258,9 @@ metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_disable_incurs
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_disable_legion_scarab_drops,0,#,,[LegionThread|Legion],[LegionThread|戰亂]
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_disable_ritual_scarab_drops,0,#,,[RitualThread|Ritual],[RitualThread|祭祀]
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_disable_ultimatum_scarab_drops,0,#,,[UltimatumThread|Ultimatum],[UltimatumThread|通牒]
+metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_eldritch_altar_always_has_altar_monsters_mod,0,#,,Influenced Monsters,
+metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_eldritch_altar_always_has_map_boss_mod,0,#,,Map Bosses,
+metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_eldritch_altar_always_has_player_mod,0,#,,Players,
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_essence_anger_chance_+%,0,#,,[EssenceAnger|Anger],[EssenceAnger|憤怒]
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_essence_anguish_chance_+%,0,#,,[EssenceAnguish|Anguish],[EssenceAnguish|煎熬]
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_essence_contempt_chance_+%,0,#,,[EssenceContempt|Contempt],[EssenceContempt|輕視]
@@ -2294,6 +2300,8 @@ metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_red_beast_from
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_red_beast_from_deep_chance_+%,0,#,,The Deep,深潭
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_red_beast_from_sands_chance_+%,0,#,,The Sands,飛沙
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_red_beast_from_wilds_chance_+%,0,#,,The Wilds,荒野
+metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_remnant_no_chest_remnant_upsides,0,#,,Chests,
+metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_remnant_no_monster_remnant_upsides,0,#,,Monsters,
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_shrine_acceleration_chance_+%,0,#,,[AccelerationShrine|Acceleration Shrine],[AccelerationShrine|迅速神殿]
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_shrine_covetous_chance_+%,0,#,,[CovetousShrine|Covetous Shrine],[CovetousShrine|貪婪神殿]
 metadata_statdescriptions_atlas_variant_stat_descriptions.txt,map_shrine_gloom_chance_+%,0,#,,[GloomShrine|Gloom Shrine],[GloomShrine|漆黑神殿]
@@ -8031,8 +8039,8 @@ metadata_statdescriptions_stat_descriptions.txt,local_energy_shield_+%,0,1|#,,{0
 metadata_statdescriptions_stat_descriptions.txt,local_energy_shield_+%,1,#|-1,negate 1,{0}% reduced Energy Shield,減少 {0}% 能量護盾
 metadata_statdescriptions_stat_descriptions.txt,maximum_energy_shield_+%,0,1|#,,{0}% increased maximum Energy Shield,增加 {0}% 最大能量護盾
 metadata_statdescriptions_stat_descriptions.txt,maximum_energy_shield_+%,1,#|-1,negate 1,{0}% reduced maximum Energy Shield,減少 {0}% 最大能量護盾
-metadata_statdescriptions_stat_descriptions.txt,local_display_socketed_active_gems_damage_+%_final_per_filled_socket_in_body,0,1|#,,Socketed Gems deal {0}% more damage per Socketed Skill Gem,
-metadata_statdescriptions_stat_descriptions.txt,local_display_socketed_active_gems_damage_+%_final_per_filled_socket_in_body,1,#|-1,negate 1,Socketed Gems deal {0}% more damage per Socketed Skill Gem,
+metadata_statdescriptions_stat_descriptions.txt,local_display_socketed_active_gems_damage_+%_final_per_filled_socket_in_body,0,1|#,,Socketed Gems deal {0}% more damage per Socketed Skill Gem,每鑲嵌一顆技能寶石，插槽中的寶石即造成{0}%更多傷害
+metadata_statdescriptions_stat_descriptions.txt,local_display_socketed_active_gems_damage_+%_final_per_filled_socket_in_body,1,#|-1,negate 1,Socketed Gems deal {0}% more damage per Socketed Skill Gem,每鑲嵌一顆技能寶石，插槽中的寶石即造成{0}%更多傷害
 metadata_statdescriptions_stat_descriptions.txt,energy_shield_delay_-%,0,1|#,,{0}% faster start of Energy Shield Recharge,提前 {0}% 開始充能能量護盾
 metadata_statdescriptions_stat_descriptions.txt,energy_shield_delay_-%,1,#|-1,negate 1,{0}% slower start of Energy Shield Recharge,延後 {0}% 開始充能能量護盾
 metadata_statdescriptions_stat_descriptions.txt,energy_shield_recharge_not_delayed_by_damage,0,#,,Energy Shield Recharge not delayed by Damage,能量護盾充能不會因傷害而延遲
@@ -16643,6 +16651,7 @@ metadata_statdescriptions_stat_descriptions.txt,killed_monster_dropped_gold_+%,0
 metadata_statdescriptions_stat_descriptions.txt,killed_monster_dropped_gold_+%,1,#|-1,negate 1,{0}% reduced Quantity of Gold Dropped by Slain Enemies,減少 {0}% 殺死敵人時掉落的金幣數量
 metadata_statdescriptions_stat_descriptions.txt,killing_blow_consumes_corpse_restore_%_mana,0,1|#,,Killing Blows Consume corpses to Recover {0}% of Mana,致命一擊會消耗屍體以恢復{0}%魔力
 metadata_statdescriptions_stat_descriptions.txt,killing_blow_consumes_corpse_restore_10%_life_chance_%,0,1|#,,Killing Blows have {0}% chance to Consume corpses to recover 10% of Maximum Life,擊殺之擊有 {0}% 機率消耗屍體恢復 10% 最大生命
+metadata_statdescriptions_stat_descriptions.txt,killing_blow_consumes_corpse_restore_%_life,0,1|#,,Killing Blows Consume corpses to Recover {0}% of Life,擊殺之擊消耗屍體恢復 {0}% 生命
 metadata_statdescriptions_stat_descriptions.txt,killing_blow_consumes_corpse_restore_x_life killing_blow_consumes_corpse_restore_x_mana,0,1|# 1|#,,Killing Blows Consume corpses to Recover {0} Life and {1} Mana,最後一擊會消耗屍體並恢復{0}生命和{1}魔力
 metadata_statdescriptions_stat_descriptions.txt,killing_blow_consumes_corpse_restore_x_life killing_blow_consumes_corpse_restore_x_mana,1,1|# 0,,Killing Blows Consume corpses to Recover {0} Life,最後一擊會消耗屍體並恢復{0}生命
 metadata_statdescriptions_stat_descriptions.txt,killing_blow_consumes_corpse_restore_x_life killing_blow_consumes_corpse_restore_x_mana,2,0   1|#,,Killing Blows Consume corpses to Recover {1} Mana,最後一擊會消耗屍體並恢復{1}生命
@@ -18190,7 +18199,7 @@ metadata_statdescriptions_stat_descriptions.txt,map_expedition_epic_chest_marker
 metadata_statdescriptions_stat_descriptions.txt,map_expedition_epic_chest_marker_count_+,1,2|#,,[DNT] Area contains {0} additional Epic Chest Markers,
 metadata_statdescriptions_stat_descriptions.txt,map_expedition_explosion_radius_+%,0,1|#,,{0}% increased Explosive Radius,增加 {0}% 爆炸範圍
 metadata_statdescriptions_stat_descriptions.txt,map_expedition_explosives_+%,0,1|#,,{0}% increased number of Explosives,增加 {0}% 爆炸數量
-metadata_statdescriptions_stat_descriptions.txt,map_expedition_extra_relic_suffix_chance_%,0,1|#,,Remnants have {0}% chance to have an additional Suffix Modifier,遺跡有 {0}% 機率有 1 個額外後綴
+metadata_statdescriptions_stat_descriptions.txt,map_expedition_extra_relic_suffix_chance_%,0,1|#,,{0:+d}% [SurpassChance|Surpassing Chance] for Remnants to have an additional Suffix Modifier,
 metadata_statdescriptions_stat_descriptions.txt,map_expedition_faridun_elite_marker_count_+,0,1,,Area contains {0} additional Afarud Commander Monster Marker,區域內包含{0}個額外阿法魯德指揮官怪物標記
 metadata_statdescriptions_stat_descriptions.txt,map_expedition_faridun_elite_marker_count_+,1,2|#,,Area contains {0} additional Afarud Commander Monster Markers,區域內包含{0}個額外阿法魯德指揮官怪物標記
 metadata_statdescriptions_stat_descriptions.txt,map_expedition_faridun_monster_marker_count_+,0,#,,Area contains {0} additional Afarud Monster Markers,區域內包含{0}個額外阿法魯德怪物標記

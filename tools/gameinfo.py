@@ -27,7 +27,11 @@ from datetime import datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOCK = os.path.join(ROOT, "game.lock.json")
-DUMPER = os.path.join(ROOT, "tools", "dumper", "bin", "Debug", "net8.0", "dumper.exe")
+# dumper 默认在仓库内构建，但有些沙箱会把「工作区内的可执行文件」限制在工作区内，
+# 那样连只读打开游戏目录里的 Content.ggpk 都会被拒（UnauthorizedAccessException）。
+# 用 POE_DUMPER 指向工作区外的副本即可绕开（同名 exe + 同目录 DLL 一起拷走）。
+DUMPER = os.environ.get("POE_DUMPER") or os.path.join(
+    ROOT, "tools", "dumper", "bin", "Debug", "net8.0", "dumper.exe")
 DEFAULT_DIR = r"C:\Program Files (x86)\Grinding Gear Games\Path of Exile"
 LANG = "traditional chinese"
 

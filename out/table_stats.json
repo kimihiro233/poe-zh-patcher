@@ -33,19 +33,19 @@
  },
  {
   "table": "clientstrings.datc64",
-  "rows": 8648,
+  "rows": 8650,
   "cols": 3,
-  "pairs": 17581,
-  "diff": 8697,
-  "cjk": 8659
+  "pairs": 17585,
+  "diff": 8701,
+  "cjk": 8663
  },
  {
   "table": "clientstrings.datcl64",
-  "rows": 8648,
+  "rows": 8650,
   "cols": 2,
-  "pairs": 8933,
-  "diff": 8248,
-  "cjk": 8137
+  "pairs": 8935,
+  "diff": 8252,
+  "cjk": 8141
  },
  {
   "table": "baseitemtypes.datc64",
@@ -161,15 +161,15 @@
  },
  {
   "table": "passiveskills.datc64",
-  "rows": 6606,
+  "rows": 6612,
   "cols": 4,
-  "pairs": 14103,
+  "pairs": 14115,
   "diff": 902,
   "cjk": 902
  },
  {
   "table": "passiveskills.datcl64",
-  "rows": 6606,
+  "rows": 6612,
   "cols": 2,
   "pairs": 902,
   "diff": 900,
@@ -313,7 +313,7 @@
  },
  {
   "table": "archnemesismods.datc64",
-  "rows": 216,
+  "rows": 240,
   "cols": 1,
   "pairs": 215,
   "diff": 215,
@@ -321,7 +321,7 @@
  },
  {
   "table": "archnemesismods.datcl64",
-  "rows": 216,
+  "rows": 240,
   "cols": 1,
   "pairs": 215,
   "diff": 215,
@@ -544,22 +544,6 @@
   "cjk": 99
  },
  {
-  "table": "currencyexchangecategories.datc64",
-  "rows": 98,
-  "cols": 2,
-  "pairs": 196,
-  "diff": 98,
-  "cjk": 98
- },
- {
-  "table": "currencyexchangecategories.datcl64",
-  "rows": 98,
-  "cols": 1,
-  "pairs": 98,
-  "diff": 98,
-  "cjk": 98
- },
- {
   "table": "uitalktext.datc64",
   "rows": 98,
   "cols": 3,
@@ -580,6 +564,22 @@
   "rows": 341,
   "cols": 1,
   "pairs": 341,
+  "diff": 96,
+  "cjk": 96
+ },
+ {
+  "table": "currencyexchangecategories.datc64",
+  "rows": 96,
+  "cols": 2,
+  "pairs": 192,
+  "diff": 96,
+  "cjk": 96
+ },
+ {
+  "table": "currencyexchangecategories.datcl64",
+  "rows": 96,
+  "cols": 1,
+  "pairs": 96,
   "diff": 96,
   "cjk": 96
  },
@@ -1001,15 +1001,15 @@
  },
  {
   "table": "tags.datc64",
-  "rows": 1441,
+  "rows": 1443,
   "cols": 2,
-  "pairs": 1467,
+  "pairs": 1469,
   "diff": 26,
   "cjk": 26
  },
  {
   "table": "tags.datcl64",
-  "rows": 1441,
+  "rows": 1443,
   "cols": 1,
   "pairs": 26,
   "diff": 26,
@@ -1217,17 +1217,17 @@
  },
  {
   "table": "stashtabaffinities.datc64",
-  "rows": 17,
+  "rows": 18,
   "cols": 1,
-  "pairs": 17,
+  "pairs": 18,
   "diff": 17,
   "cjk": 17
  },
  {
   "table": "stashtabaffinities.datcl64",
-  "rows": 17,
+  "rows": 18,
   "cols": 1,
-  "pairs": 17,
+  "pairs": 18,
   "diff": 17,
   "cjk": 17
  },
@@ -2465,9 +2465,9 @@
  },
  {
   "table": "auguryrewardoutcomes.datc64",
-  "rows": 360,
+  "rows": 370,
   "cols": 1,
-  "pairs": 360,
+  "pairs": 370,
   "diff": 0,
   "cjk": 0
  },
@@ -2617,9 +2617,9 @@
  },
  {
   "table": "mods.datc64",
-  "rows": 41324,
+  "rows": 41336,
   "cols": 1,
-  "pairs": 41324,
+  "pairs": 41336,
   "diff": 0,
   "cjk": 0
  },

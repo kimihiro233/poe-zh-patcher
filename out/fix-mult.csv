@@ -15,14 +15,14 @@ map_map_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_map_sta
 map_map_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_map_stat_descriptions.txt,#|-1,{0}% less Maps found in Area,減少{0}%區域內找到的地圖,區域內可找到 {0}% 更少地圖
 map_map_item_drop_chance_+%_final_from_uber_mod,metadata_statdescriptions_map_stat_descriptions.txt,1|#,{}% more Maps found in Area,區域內掉落的地圖增加 {}%,區域內可找到 {}% 更多地圖
 map_map_item_drop_chance_+%_final_from_uber_mod,metadata_statdescriptions_map_stat_descriptions.txt,#|-1,{}% less Maps found in Area,區域內掉落的地圖減少 {}%,區域內可找到 {}% 更少地圖
-map_scarab_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_map_stat_descriptions.txt,1|#,{0}% more Scarabs found in Area,增加{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更多聖甲蟲
-map_scarab_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_map_stat_descriptions.txt,#|-1,{0}% less Scarabs found in Area,減少{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更少聖甲蟲
-map_scarab_drop_chance_+%_final_from_uber_mod,metadata_statdescriptions_map_stat_descriptions.txt,1|#,{}% more Scarabs found in Area,區域內掉落的聖甲蟲增加 {}%,區域內可找到 {}% 更多聖甲蟲
-map_scarab_drop_chance_+%_final_from_uber_mod,metadata_statdescriptions_map_stat_descriptions.txt,#|-1,{}% less Scarabs found in Area,區域內掉落的聖甲蟲減少 {}%,區域內可找到 {}% 更少聖甲蟲
+map_scarab_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_map_stat_descriptions.txt,1|#,{0}% more [Thread|Threads] found in Area,區域內可找到{0}%更多[Thread|綢帶],區域內可找到 {0}% 更多[Thread|綢帶]
+map_scarab_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_map_stat_descriptions.txt,#|-1,{0}% less [Thread|Threads] found in Area,區域內可找到{0}%更少[Thread|綢帶],區域內可找到 {0}% 更少[Thread|綢帶]
+map_scarab_drop_chance_+%_final_from_uber_mod,metadata_statdescriptions_map_stat_descriptions.txt,1|#,{}% more [Thread|Threads] found in Area,區域內可以找到{}%更多[Thread|綢帶],區域內可找到 {}% 更多[Thread|綢帶]
+map_scarab_drop_chance_+%_final_from_uber_mod,metadata_statdescriptions_map_stat_descriptions.txt,#|-1,{}% less [Thread|Threads] found in Area,區域內可以找到{}%更少[Thread|綢帶],區域內可找到 {}% 更少[Thread|綢帶]
 map_map_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_mirage_stat_descriptions.txt,1|#,{0}% more Maps found in Area,增加{0}%區域內找到的地圖,區域內可找到 {0}% 更多地圖
 map_map_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_mirage_stat_descriptions.txt,#|-1,{0}% less Maps found in Area,減少{0}%區域內找到的地圖,區域內可找到 {0}% 更少地圖
-map_scarab_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_mirage_stat_descriptions.txt,1|#,{0}% more Scarabs found in Area,增加{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更多聖甲蟲
-map_scarab_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_mirage_stat_descriptions.txt,#|-1,{0}% less Scarabs found in Area,減少{0}%區域內找到的聖甲蟲,區域內可找到 {0}% 更少聖甲蟲
+map_scarab_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_mirage_stat_descriptions.txt,1|#,{0}% more [Thread|Threads] found in Area,區域內可找到{0}%更多[Thread|綢帶],區域內可找到 {0}% 更多[Thread|綢帶]
+map_scarab_drop_chance_+%_final_from_faridun_wish,metadata_statdescriptions_mirage_stat_descriptions.txt,#|-1,{0}% less [Thread|Threads] found in Area,區域內可找到{0}%更少[Thread|綢帶],區域內可找到 {0}% 更少[Thread|綢帶]
 gladiator_accuracy_rating_+%_final_while_wielding_sword,metadata_statdescriptions_stat_descriptions.txt,1|#,{0}% more Accuracy Rating while wielding a Sword,持劍時，命中值增加 {0}%,持劍時有 {0}% 更多命中值
 gladiator_accuracy_rating_+%_final_while_wielding_sword,metadata_statdescriptions_stat_descriptions.txt,#|-1,{0}% less Accuracy Rating while wielding a Sword,持劍時，命中值減少 {0}%,持劍時有 {0}% 更少命中值
 ailment_bearer_elemental_damage_+%_final,metadata_statdescriptions_stat_descriptions.txt,1|#,{0}% more Elemental Damage while Unbound,無縛狀態下，增加 {0}% 元素傷害,無縛狀態下，{0}% 更多元素傷害

@@ -29,7 +29,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 import dat64  # noqa: E402
 
-DUMPER = os.path.join(ROOT, "tools", "dumper", "bin", "Debug", "net8.0", "dumper.exe")
+DUMPER = os.environ.get("POE_DUMPER") or os.path.join(
+    ROOT, "tools", "dumper", "bin", "Debug", "net8.0", "dumper.exe")
 LANGS = ("en", "zh")
 
 

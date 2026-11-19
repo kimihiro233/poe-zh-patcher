@@ -1,11 +1,11 @@
 {
-  "version": "0.5.8",
+  "version": "0.6.0",
   "lang": "traditional chinese",
   "game": {
-    "client_version": "3.30.0b",
-    "patch_version": "3.30.0.2",
-    "fingerprint": "3ec41ed08762373d414370ac43e4fb0a954f0ba71d19fa8c6fa19e5822ddd492",
-    "locked_at": "2026-11-15T12:54:59",
+    "client_version": "3.30.0c",
+    "patch_version": "3.30.0.3",
+    "fingerprint": "83689aef5c78cfe16364160962235c1deeeaecde85184445ad5bed353fcd02a2",
+    "locked_at": "2026-11-19T13:43:51",
     "ggpk_size": 79769601101,
     "source": "game.lock.json"
   },
@@ -13,7 +13,7 @@
     "out/fix-category-ui.csv",
     "out/fix-newtext.csv"
   ],
-  "total_edits": 13,
+  "total_edits": 24,
   "files": [
     {
       "table": "achievementitems.datc64",
@@ -23,8 +23,8 @@
         "fix-category-ui.csv"
       ],
       "dst": "out/patch/achievementitems.datc64",
-      "sha256_original": "211efd3f5d3ab89a44740a0d16f3e8095edcafdc56b98ebba587c4ed5312af81",
-      "sha256_patched": "d83b5d927c79ff7997ae24d01051c4d3016c5ae1571ddb897752c966ab49f236",
+      "sha256_original": "738699ef406f9c0a820d3a69385bdb4937956c901da84a2c80c210969282d868",
+      "sha256_patched": "543c05de82d6bf7a966e11c8c092ab2411e547210a0c6c01b054cf8d5b71da23",
       "size_original": 1406260,
       "size_patched": 1406332,
       "verify": "ok",
@@ -83,6 +83,128 @@
       ]
     },
     {
+      "table": "auguryrewardoutcomes.datc64",
+      "path_in_ggpk": "data/traditional chinese/auguryrewardoutcomes.datc64",
+      "src": "pairs/zh/auguryrewardoutcomes.datc64",
+      "source": [
+        "fix-newtext.csv"
+      ],
+      "dst": "out/patch/auguryrewardoutcomes.datc64",
+      "sha256_original": "f3477e8adcf07bd268ef0b1929d2a946ee77cc3a7bd9ce1c93fc4e2ca163dd06",
+      "sha256_patched": "a1f03dbdc51d8024842e826432e9d7c8b2ee93efca26811546ab39ef903e50ab",
+      "size_original": 83058,
+      "size_patched": 83470,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [
+        [
+          369,
+          80
+        ]
+      ],
+      "edits": [
+        {
+          "row": 32,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Mirror Shard",
+          "new": "被強化的怪物會掉落額外一個魔鏡碎片",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42726,
+          "grew": -37
+        },
+        {
+          "row": 33,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Fracturing Orb",
+          "new": "被強化的怪物會掉落額外一個破裂石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42764,
+          "grew": -40
+        },
+        {
+          "row": 34,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Divine Orb",
+          "new": "被強化的怪物會掉落額外一個神聖石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42800,
+          "grew": -36
+        },
+        {
+          "row": 35,
+          "rel": 16,
+          "old": "Empowered Monster will drop additional Divine Orbs",
+          "new": "被強化的怪物會掉落額外數個神聖石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42836,
+          "grew": -34
+        },
+        {
+          "row": 36,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Orb of Annulment",
+          "new": "被強化的怪物會掉落額外一個無效石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42872,
+          "grew": -42
+        },
+        {
+          "row": 37,
+          "rel": 16,
+          "old": "Empowered Monster will drop additional Orbs of Annulment",
+          "new": "被強化的怪物會掉落額外數個無效石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42908,
+          "grew": -40
+        },
+        {
+          "row": 38,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Reflecting Mist",
+          "new": "被強化的怪物會掉落額外一個映像迷霧",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42944,
+          "grew": -40
+        },
+        {
+          "row": 39,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Hinekora's Lock",
+          "new": "被強化的怪物會掉落額外一個悉妮蔻拉的髮絲",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42982,
+          "grew": -37
+        },
+        {
+          "row": 40,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Sacred Orb",
+          "new": "被強化的怪物會掉落額外一個聖玉",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 43026,
+          "grew": -37
+        },
+        {
+          "row": 164,
+          "rel": 16,
+          "old": "Empowered Monster will drop additional Rare Amulets\nAmulets dropped by Empowered Monster will have a Gem modifier",
+          "new": "被強化的怪物會掉落額外稀有項鍊\n由被強化怪物所掉落的項鍊會擁有一條寶石詞綴",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 43060,
+          "grew": -76
+        }
+      ]
+    },
+    {
       "table": "clientstrings.datc64",
       "path_in_ggpk": "data/traditional chinese/clientstrings.datc64",
       "src": "pairs/zh/clientstrings.datc64",
@@ -91,10 +213,10 @@
         "fix-newtext.csv"
       ],
       "dst": "out/patch/clientstrings.datc64",
-      "sha256_original": "c9092217d79d49e18195f76a7eaf134dba842aac9bcaa7a00ffbb18c4710215a",
-      "sha256_patched": "aa3475aa33b0eb6c5a769ead2ec9af2017c77bcdbebb0b0c39e64c00314c4516",
-      "size_original": 1308294,
-      "size_patched": 1308438,
+      "sha256_original": "d94e46e61e7efe2504bc220c8f8769310e527cd6ed07b58231c700a7d4e289d9",
+      "sha256_patched": "eb332363403288bdad02cf785e4d542b550bc5e442d967542230df7b59275585",
+      "size_original": 1308260,
+      "size_patched": 1308422,
       "verify": "ok",
       "tolerated_eof_sentinel": [],
       "edits": [
@@ -105,7 +227,7 @@
           "new": "每個額外的隊伍成員玩家會增加找到的特定物品數量，\r\n像是護甲、飾品、通貨、金幣、寶石和傳奇物品。",
           "action": "append",
           "shared_refs": 1,
-          "new_pool_offset": 858544,
+          "new_pool_offset": 858458,
           "grew": 0
         },
         {
@@ -115,8 +237,18 @@
           "new": "選擇後，在你選定結果之前將無法取回此物品",
           "action": "append",
           "shared_refs": 1,
-          "new_pool_offset": 858644,
+          "new_pool_offset": 858558,
           "grew": -74
+        },
+        {
+          "row": 8649,
+          "rel": 8,
+          "old": "A random Viscera",
+          "new": "1 個隨機臟器",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 858602,
+          "grew": -9
         }
       ]
     },
@@ -170,8 +302,8 @@
         "fix-category-ui.csv"
       ],
       "dst": "out/patch/incursionrooms.datc64",
-      "sha256_original": "069f1288b1767826df14500c861e67304dcfbee9ef08ba434415a39572989915",
-      "sha256_patched": "1d81ef5a0981d9d3eda340b695ea579dd7623bfe5c844173e1f99fe0f1813bd1",
+      "sha256_original": "3e7a1706e42ea6a545a9ffc33d20907fd0257c5ba53effcaf510870ccc068e09",
+      "sha256_patched": "2a5b0b2d80254b0feba46d53dcab8d55642d6fe05200900e52115fe0e2d89d91",
       "size_original": 69848,
       "size_patched": 69862,
       "verify": "ok",
@@ -197,10 +329,10 @@
         "fix-newtext.csv"
       ],
       "dst": "out/patch/monstervarieties.datc64",
-      "sha256_original": "c21005bc71f42b0477acb032da77fa410e07406fa3a1c0d49f2b9e6d59348bde",
-      "sha256_patched": "8bbf6e729513c3b3d375e79e52d742b25d80c437f2aa85059289c72e09327234",
-      "size_original": 14824304,
-      "size_patched": 14824328,
+      "sha256_original": "5af9b240b97f7bdafb8044026b146a610778fc285885ee14cd1b60fa7f99904f",
+      "sha256_patched": "5f2d173d3fd266e9a395143feb442e11f12f761da5d3525d4bf86f63cb83ee89",
+      "size_original": 14824192,
+      "size_patched": 14824216,
       "verify": "ok",
       "tolerated_eof_sentinel": [],
       "edits": [
@@ -211,7 +343,7 @@
           "new": "踉蹌之岩",
           "action": "append",
           "shared_refs": 2,
-          "new_pool_offset": 6084744,
+          "new_pool_offset": 6084632,
           "grew": -8
         },
         {
@@ -221,7 +353,7 @@
           "new": "踉蹌之岩",
           "action": "append",
           "shared_refs": 2,
-          "new_pool_offset": 6084756,
+          "new_pool_offset": 6084644,
           "grew": -8
         }
       ]

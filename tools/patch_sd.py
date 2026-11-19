@@ -466,6 +466,42 @@ def merge_line(sf: SdFile, no: int, old: str, new: str, restore_bare: bool = Tru
     return before, after, kind
 
 
+def placeholders(text: str) -> set:
+    """文本里的占位符集合：{0}、{1}、{0:+d} 都算。"""
+    return set(re.findall(r"\{\d+(?::[^}]*)?\}", text or ""))
+
+
+def upstream_fixed(files: dict[str, SdFile], g: dict) -> str:
+    """这条修正稿要修的毛病，官方是不是自己已经修好了？
+
+    定位失败有两种完全不同的原因：
+      1. 原文被改写了（漂移）→ 必须人工重判；
+      2. 官方已经把缺/错位的占位符补对了 → 这条修正稿再也匹配不上，
+         留着只会每次构建都报一次假警（2026-11 发现 16 条这种情况）。
+
+    判据：目标 stat 块的繁中段里，修正稿「新文本」用到的占位符已经齐全，
+    说明占位符层面的毛病不存在了。返回当前文本（供报告展示），否则返回空串。
+    """
+    want = set()
+    for p in g["parts"]:
+        want |= placeholders(p["new"])
+    if not want:
+        return ""
+    pats = g["stat_ids"].split()
+    lang = g.get("lang") or DEFAULT_LANG
+    for sf in files.values():
+        if g["file"] and sf.name != g["file"]:
+            continue
+        for sid in sf.index:
+            if not any(id_match(p, sid) for p in pats):
+                continue
+            for bi in sf.index[sid]:
+                for no, cond in sf.vers(bi, lang):
+                    if want <= placeholders(sf.text_of(no)):
+                        return sf.text_of(no)
+    return ""
+
+
 def main():
     write = "--write" in sys.argv
     dual = "--dual" in sys.argv
@@ -515,6 +551,11 @@ def main():
                 why = None
         tag = f"{g['batch']}#{g['line']}"
         if pos is None:
+            fixed = upstream_fixed(files, g)
+            if fixed:
+                report.append([tag, g["stat_ids"], g["parts"][0]["old"][:56],
+                               "✓ 上游已修正（本条可退役）｜" + fixed[:60]])
+                continue
             report.append([tag, g["stat_ids"], g["parts"][0]["old"][:56], "✗ " + why])
             continue
         sf, nos = pos

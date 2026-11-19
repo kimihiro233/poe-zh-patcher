@@ -1,32 +1,32 @@
 {
   "schema": 1,
-  "locked_at": "2026-11-15T12:54:59",
+  "locked_at": "2026-11-19T13:43:51",
   "game_dir": "C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile",
   "version": {
     "log": "logs/LatestClient.txt",
-    "log_mtime": "2026-11-15T12:46:14",
-    "client_version": "3.30.0b",
-    "patch_version": "3.30.0.2"
+    "log_mtime": "2026-11-19T13:01:09",
+    "client_version": "3.30.0c",
+    "patch_version": "3.30.0.3"
   },
   "ggpk": {
     "size": 79769601101,
-    "mtime": "2026-11-14T14:50:33"
+    "mtime": "2026-11-15T13:13:41"
   },
   "exe": {
     "PathOfExile.exe": {
-      "size": 79947608,
-      "sha256": "c86e4b153a93e573e7d800dcdf01a79b3392a52f73e29ca48d2bd8297ad28031",
-      "mtime": "2026-11-15T12:39:40"
+      "size": 79946072,
+      "sha256": "69a11eacf7d9bf86c98a8de57ff2ccc60a998ed2a6dcfd228180c070dcf419e3",
+      "mtime": "2026-11-19T13:00:06"
     },
     "PathOfExile_x64.exe": {
       "size": 541528,
-      "sha256": "cfbdc27f59f24493dfa11ea1de4d2f6187d0cfec7223571a71c5f6e16b141dbb",
-      "mtime": "2026-11-15T12:42:39"
+      "sha256": "58a0e8c0878979b5314bbef73e89c994edaa1dccd03910773b64e7e099c10bf1",
+      "mtime": "2026-11-19T13:00:19"
     },
     "Client.exe": {
       "size": 541528,
-      "sha256": "9cfc30595132a180ae85e4a4c75b9c891a583b77a8da23eeb873c8af59ecdbc2",
-      "mtime": "2026-11-15T12:42:12"
+      "sha256": "ab0124fe9b8be5d52e7db5dd0585d7ec7cd14e7cfcdbaeb93fe422e5a6e17b85",
+      "mtime": "2026-11-19T13:00:22"
     }
   },
   "counts": {
@@ -34,7 +34,7 @@
     "statdesc_files": 49,
     "total": 531
   },
-  "fingerprint": "3ec41ed08762373d414370ac43e4fb0a954f0ba71d19fa8c6fa19e5822ddd492",
+  "fingerprint": "83689aef5c78cfe16364160962235c1deeeaecde85184445ad5bed353fcd02a2",
   "files": {
     "data/traditional chinese/achievementitemrewards.datc64": {
       "size": 352,
@@ -46,11 +46,11 @@
     },
     "data/traditional chinese/achievementitems.datc64": {
       "size": 1406260,
-      "sha256": "211efd3f5d3ab89a44740a0d16f3e8095edcafdc56b98ebba587c4ed5312af81"
+      "sha256": "738699ef406f9c0a820d3a69385bdb4937956c901da84a2c80c210969282d868"
     },
     "data/traditional chinese/achievementitems.datcl64": {
       "size": 2158824,
-      "sha256": "f2b2f7a3714bebacf7351f152dd82b6d440f36327a35bbb55e67729ec848c2d4"
+      "sha256": "6e9caa9ee12a747463a74ade9e614c7fc1cfb8c67c9051280bc4e331590530d7"
     },
     "data/traditional chinese/achievements.datc64": {
       "size": 311052,
@@ -118,11 +118,11 @@
     },
     "data/traditional chinese/alternatequalitytypes.datc64": {
       "size": 2942,
-      "sha256": "7da33093f7ef1c81153f65c8a9533ef5494cc93685980d00e0ea119bd99e340a"
+      "sha256": "24ab1d604dd0e2d294d915bea8dbe82f87f5b68cc8c5c94841124fccee2a42a7"
     },
     "data/traditional chinese/alternatequalitytypes.datcl64": {
       "size": 4066,
-      "sha256": "81e282c964178a1024d310d02a2344fb60e0df0148175eb7f2918d6be00d819c"
+      "sha256": "775bac2d21d4a39354211be47e1e586aa08f8135fe219590722d6401b2e29154"
     },
     "data/traditional chinese/alternatetreeversionkeystones.datc64": {
       "size": 1234,
@@ -150,11 +150,11 @@
     },
     "data/traditional chinese/ancestraltrialitems.datc64": {
       "size": 16948,
-      "sha256": "c7462db63e12fc23236a41778e2e2fb2e6684712425d7981886269719fa8851d"
+      "sha256": "27d53bca523b11ecfc44cf97abce69fabdcf1e83721a2be9cba6a8e4d2aaf0f4"
     },
     "data/traditional chinese/ancestraltrialitems.datcl64": {
       "size": 26736,
-      "sha256": "5af6bb8eb1f187e3fdc4e6a8a53bc56ce0001a826c772b7eed2578457a2b8f3f"
+      "sha256": "26628390448bd125a394b8c97f62dbbb304acb759b2b8ba9e84e0dee2b9c149b"
     },
     "data/traditional chinese/ancestraltrialpositiontype.datc64": {
       "size": 2870,
@@ -197,12 +197,12 @@
       "sha256": "c095a6af4fd4eba9486c82ab01818936172391c663d05aa1ce821f6351e21bdd"
     },
     "data/traditional chinese/archnemesismods.datc64": {
-      "size": 18610,
-      "sha256": "c272709b934ece5b64f8553cbb75e38875e52871ed3d6f47186a7072e53e98ba"
+      "size": 20026,
+      "sha256": "473085d145e7f4c1845b5e18500a30de0f6cd8c9c4d37fe4e537b0ed95f1a29d"
     },
     "data/traditional chinese/archnemesismods.datcl64": {
-      "size": 22092,
-      "sha256": "ca92021eb3947def692dd03fd738a48821d1e7b164f89d74e8ddcf4f4a25b924"
+      "size": 23508,
+      "sha256": "6187815aba6f7619725bb455c7829780f44cce5827b3cf29a148bc8e09a67929"
     },
     "data/traditional chinese/ascendancy.datc64": {
       "size": 17149,
@@ -294,11 +294,11 @@
     },
     "data/traditional chinese/augurycardtiers.datc64": {
       "size": 21224,
-      "sha256": "c56bd817652ba2c9402bd1b19552562e15c5134c20de1f83558a35485fa519fd"
+      "sha256": "f5ef6ed4dd9c7862cc4c81fec6d7ce1d63a4b8113428269ebaa73854f4b89a9e"
     },
     "data/traditional chinese/augurycardtiers.datcl64": {
       "size": 37004,
-      "sha256": "95a458248087c0dc0d40b303ca40e99ee87a70a5bc30588e23e201d442ada3fb"
+      "sha256": "44531c62a517f8ffa36ce96d543f7012ca139181afea9e2fbf786bc3cd712b98"
     },
     "data/traditional chinese/auguryfactions.datc64": {
       "size": 594,
@@ -317,12 +317,12 @@
       "sha256": "532f6c9360a61fa92a276596e8ec6f4a136d42b7dad583f35692d7177553b49f"
     },
     "data/traditional chinese/auguryrewardoutcomes.datc64": {
-      "size": 79184,
-      "sha256": "0a3ab3c97f843facb57fed7e1320c742aaa5aa09e0e0ab425bd8313427780129"
+      "size": 83058,
+      "sha256": "f3477e8adcf07bd268ef0b1929d2a946ee77cc3a7bd9ce1c93fc4e2ca163dd06"
     },
     "data/traditional chinese/auguryrewardoutcomes.datcl64": {
-      "size": 110304,
-      "sha256": "6d87a54e77ac35d6fc12c9cd70684009b261b1dd7ea5dd9495e6ca3d05fba6b0"
+      "size": 116678,
+      "sha256": "f4628253f4be46a6e43ab85db255154ed89f226bd8e1f709b120046d81d1e406"
     },
     "data/traditional chinese/awarddisplay.datc64": {
       "size": 18331,
@@ -350,11 +350,11 @@
     },
     "data/traditional chinese/baseitemtypes.datc64": {
       "size": 2876784,
-      "sha256": "6d7900a0249a72d009a6bc1f8a740d466c6b270e77cf862d6998d23adf189666"
+      "sha256": "9e953c41115153100457fed860907f6e4f0982b9327a1c95a3692729f9847fac"
     },
     "data/traditional chinese/baseitemtypes.datcl64": {
       "size": 3455512,
-      "sha256": "84ef57b7a33bef0884610903a100dc7dc2fcc6cb087b08d889cfbcf90f69bec3"
+      "sha256": "4c76f5be4cc08c17a733eafb08df053fee250129de3759a03a4090c56ec0d921"
     },
     "data/traditional chinese/battlepasses.datc64": {
       "size": 3864,
@@ -414,11 +414,11 @@
     },
     "data/traditional chinese/bestiaryrecipes.datc64": {
       "size": 28408,
-      "sha256": "e48b8b661803b9a837b453788b1237c161dcc60291e0e3e5c3ceaf456586c473"
+      "sha256": "944e5f54799a1a40ac3a1ce80be438559666e2086d33131d4ccc5d3466ba2323"
     },
     "data/traditional chinese/bestiaryrecipes.datcl64": {
       "size": 37864,
-      "sha256": "74c2ca0c6ed5f155c069ca3d16df0413ec3e07555b42d3d24b53765b46f8fe7c"
+      "sha256": "59c1025b3e9d204ad74c62690a4109e5521cab02cdce619914d0750ecfca2aeb"
     },
     "data/traditional chinese/betrayalchoices.datc64": {
       "size": 408,
@@ -614,27 +614,27 @@
     },
     "data/traditional chinese/chests.datc64": {
       "size": 1169390,
-      "sha256": "ebfee6d712d465e0b177a11f050d78b29053e5f6cd8b57d44ed38f3af050279a"
+      "sha256": "753fa7547c30cbaf01ec81883325ae15afa660425767b85624d8c3f3023eb47a"
     },
     "data/traditional chinese/chests.datcl64": {
       "size": 1468164,
-      "sha256": "b91b2aee5029b65754c6092d995e85fcc7bea594405b0645a64a8c0491c438b0"
+      "sha256": "5c22485a6b99603bcdef99e1ebaf866814e96d8b0f55cc5db0437bc7c797be51"
     },
     "data/traditional chinese/clientstrings.datc64": {
-      "size": 1308294,
-      "sha256": "c9092217d79d49e18195f76a7eaf134dba842aac9bcaa7a00ffbb18c4710215a"
+      "size": 1308260,
+      "sha256": "d94e46e61e7efe2504bc220c8f8769310e527cd6ed07b58231c700a7d4e289d9"
     },
     "data/traditional chinese/clientstrings.datcl64": {
-      "size": 2100152,
-      "sha256": "a3bea8b66b5f22bdb99dbe8ae4e909157c9fa50ef79b7b4f424b343745f1fa48"
+      "size": 2100024,
+      "sha256": "eb7a0b5ef2f87af8d0fd29732a1d7347aef6401201de5cd50da873b5d2faea61"
     },
     "data/traditional chinese/clientstrings2.datc64": {
       "size": 59484,
-      "sha256": "8fb38560bf9b37702bc12c92e089390fa5b22e76e58d36fb7307eea5fe8ca478"
+      "sha256": "b607f709bde797fee8dc62cd6e5743ba66dbbc7626dcff7b2179b3dcf4d7922c"
     },
     "data/traditional chinese/clientstrings2.datcl64": {
       "size": 97012,
-      "sha256": "e3c56a1c24fb09f35dfd7b161799d2da6f9b2902e2211475a659f801fe01331f"
+      "sha256": "ed2a7ef7e0357a3d23ac3a7d9975d9c97feb389b3e564058c897e7205e1f9137"
     },
     "data/traditional chinese/commands.datc64": {
       "size": 8576,
@@ -670,11 +670,11 @@
     },
     "data/traditional chinese/craftingbenchoptions.datc64": {
       "size": 402416,
-      "sha256": "631fe0d4d7f91a5b332dc9317463e246d78077c4e2974fb923f810130af82307"
+      "sha256": "da7ef749371292b5d023cb71fe63d4e145dcbbd53c08bf6702c2c5f00eb84e6a"
     },
     "data/traditional chinese/craftingbenchoptions.datcl64": {
       "size": 403874,
-      "sha256": "995c78195404aa8ae547eece920e371f7849b8dc6bd8cff206e9784921148ab7"
+      "sha256": "158af0826b2e608cd516d778f449bff69f11f65e9c28a5a31664979394d9158e"
     },
     "data/traditional chinese/craftingitemclasscategories.datc64": {
       "size": 3034,
@@ -701,12 +701,12 @@
       "sha256": "6851e8fa8da736cad8b036f126ea29cc37dab4ed89770126b52804274e640227"
     },
     "data/traditional chinese/currencyexchangecategories.datc64": {
-      "size": 5840,
-      "sha256": "c26c7a678177c803a69ea75fb031fd47149dea5b8f669b0f479839cf1785c96a"
+      "size": 5720,
+      "sha256": "7f765f5548ff6e45a801b40b4d896767fc5e907ef0d9ac59ab18e3a56082a0f7"
     },
     "data/traditional chinese/currencyexchangecategories.datcl64": {
-      "size": 9316,
-      "sha256": "9c974d067199593ae1892a33a79ef4bbe03ef08048407c12a7d82a398426d544"
+      "size": 9124,
+      "sha256": "3ef7819f33c41cac249f108649c515e101c9654f9cba9475b3b33b7a5a4898b7"
     },
     "data/traditional chinese/currencyitems.datc64": {
       "size": 523330,
@@ -878,11 +878,11 @@
     },
     "data/traditional chinese/gemeffects.datc64": {
       "size": 369056,
-      "sha256": "dc0240c4acc146f56f3cbde3b5a083b01c5dd9f9a50aaf52e7fa39b508b153d2"
+      "sha256": "c8cb0075e017ba148201c3d855233fb55bf037dceb7295ed3a32fd4450892873"
     },
     "data/traditional chinese/gemeffects.datcl64": {
       "size": 433204,
-      "sha256": "251ae327c50b0dcfb84976c22ca54344a7d4e1bb0455aa0ff1b9e8331f29ddad"
+      "sha256": "89419855abfa6b8d5446377b9ad358db1013cb6e16d0ef1655050c87d817835f"
     },
     "data/traditional chinese/gemtags.datc64": {
       "size": 5656,
@@ -1006,11 +1006,11 @@
     },
     "data/traditional chinese/incursionrooms.datc64": {
       "size": 69848,
-      "sha256": "069f1288b1767826df14500c861e67304dcfbee9ef08ba434415a39572989915"
+      "sha256": "3e7a1706e42ea6a545a9ffc33d20907fd0257c5ba53effcaf510870ccc068e09"
     },
     "data/traditional chinese/incursionrooms.datcl64": {
       "size": 110228,
-      "sha256": "b89678bcd8f363a227a4ac01c3ab6c067a5d6831961c67457c9ea966b87004ce"
+      "sha256": "82c4eca6aa9150d2dcb2c4709d95559bd3ae3e9aa8dd80cb1fb0b58beb307c9f"
     },
     "data/traditional chinese/indexablenonactivesupportgems.datc64": {
       "size": 6456,
@@ -1150,11 +1150,11 @@
     },
     "data/traditional chinese/mapmodicons.datc64": {
       "size": 528,
-      "sha256": "9b3f3e7e44ca144d3d99accdf6c059e0e6824b691ff7d6294a151dfe987c3568"
+      "sha256": "0221715f6e6d7f2b6980de64f561a1a3a076784443ae7cc22f4edb33145f716f"
     },
     "data/traditional chinese/mapmodicons.datcl64": {
       "size": 924,
-      "sha256": "979b4aa188104fd9841494f6151e239f6069378f97c1260c4e886887fd1d2b7e"
+      "sha256": "2a9d801d67edf1816338c2ea447f890407ff7fa333f72185807cd7e216c1f33d"
     },
     "data/traditional chinese/mappins.datc64": {
       "size": 35862,
@@ -1293,12 +1293,12 @@
       "sha256": "211786a1a7b500b8d356a587c3d9d1b6e58f713c980fcc2acedfcbd224218ad8"
     },
     "data/traditional chinese/mods.datc64": {
-      "size": 35109864,
-      "sha256": "b721fb6ab34b984b7b92077ab79e385a6f9917b0363325e9e293414d27691611"
+      "size": 35121174,
+      "sha256": "cf0cc8f270eef26cc531371f246169e2ef98cf0323bd8366412ae41cd2946018"
     },
     "data/traditional chinese/mods.datcl64": {
-      "size": 38204748,
-      "sha256": "760a7e27050c9c1d755a7d686bba50de1705c3b447b3b896c5ed12b13ac73b07"
+      "size": 38216940,
+      "sha256": "bb7313621efe17e8916545c413434e71904318addaa72919ffd6ab777e7cbd8a"
     },
     "data/traditional chinese/monstercategories.datc64": {
       "size": 232,
@@ -1309,12 +1309,12 @@
       "sha256": "a2ff015c929a4a412e73871c2ee3d3d1b5c9047b3fe6e4d2cf507613b093305c"
     },
     "data/traditional chinese/monstervarieties.datc64": {
-      "size": 14824304,
-      "sha256": "c21005bc71f42b0477acb032da77fa410e07406fa3a1c0d49f2b9e6d59348bde"
+      "size": 14824192,
+      "sha256": "5af9b240b97f7bdafb8044026b146a610778fc285885ee14cd1b60fa7f99904f"
     },
     "data/traditional chinese/monstervarieties.datcl64": {
-      "size": 17532022,
-      "sha256": "82030b97094f203cde1ae25593cba51f456c48f1a520f9f02a151ffa7f9f7df1"
+      "size": 17531910,
+      "sha256": "d8c2ec8b775a41b08bfc138a572b3b0d281f5b657a8042ad3902708d94e5e7aa"
     },
     "data/traditional chinese/mousecursorsizesettings.datc64": {
       "size": 134,
@@ -1325,12 +1325,12 @@
       "sha256": "ea29883099687f1df400186a1cd6710959eefad549ace107802980af13cc41ef"
     },
     "data/traditional chinese/mtxtypes.datc64": {
-      "size": 3603898,
-      "sha256": "cdbcd7d9484beba8ae99d6d7284deccd13289e666239ce6cff3f29946a019c26"
+      "size": 3603896,
+      "sha256": "2e501d45204edbbe5a89908b4db9f9e0d7d90bfcb89605ea031b4d39370528fa"
     },
     "data/traditional chinese/mtxtypes.datcl64": {
-      "size": 5507352,
-      "sha256": "d1dbc8793f8f504234aaa2e0da3986a74bf8c264fb1c1d245809380bdc8ab8e9"
+      "size": 5507348,
+      "sha256": "6dc94498bb6676abad3da45e6d7cd75ea556bd1fee7a37f33211811ca78aaa57"
     },
     "data/traditional chinese/music.datc64": {
       "size": 73832,
@@ -1390,11 +1390,11 @@
     },
     "data/traditional chinese/necropolispacks.datc64": {
       "size": 264518,
-      "sha256": "d4edd86e8c915ba71ebad4f5846dbb01bc585d773723a4ef65d6c95cde8c07d3"
+      "sha256": "c55d0f3ee32eb3852ada49b65aca4b4266e8327b87d6655fb60e9a937c8e1c12"
     },
     "data/traditional chinese/necropolispacks.datcl64": {
       "size": 455616,
-      "sha256": "6bcb937826f7e5c00777e14c77781424a84079079c4ce5e64839986750289147"
+      "sha256": "38f4d1e4ff5451d895e43c20da3c4b1a5daf3c9416bffbef8f1518fce21a8de5"
     },
     "data/traditional chinese/notifications.datc64": {
       "size": 3814,
@@ -1462,19 +1462,19 @@
     },
     "data/traditional chinese/passiveskilloverrides.datc64": {
       "size": 85216,
-      "sha256": "79038b81266bb0b022425c9cab9b49b1a9a25f83ef01d6163419e0aaaa38723a"
+      "sha256": "2510d6234f634401f3cbbe4b9ab0198b4b5a012a06c2456a768c3d80983ee225"
     },
     "data/traditional chinese/passiveskilloverrides.datcl64": {
       "size": 111768,
-      "sha256": "a29d3caaaed0f48d4c569b693187598bc606802d79e0d9463dea219033c2ea15"
+      "sha256": "fe3ad46d25a3518c8b260f4387fca49e82a9da4e36abd8eb367c9401e764f6e6"
     },
     "data/traditional chinese/passiveskills.datc64": {
-      "size": 3428624,
-      "sha256": "94ec3ba70486d38fb5b4233c198e60d996b01c21c1da716cdf7ce1e839887bc8"
+      "size": 3432076,
+      "sha256": "d96790473b2029198736a8e6d11f9894527104666f57bf500ac059e8087da672"
     },
     "data/traditional chinese/passiveskills.datcl64": {
-      "size": 3944110,
-      "sha256": "2a93d215f91ed03d73d8c77c5aa275d4fb50452ef9f0ed3dcd0d48110dcc415b"
+      "size": 3948240,
+      "sha256": "95bdf4a85bc4e6b8adf292eb90be55124197b51218c1c99260a6a9f11c0f6dfc"
     },
     "data/traditional chinese/passiveskillstatcategories.datc64": {
       "size": 960,
@@ -1517,12 +1517,12 @@
       "sha256": "016d980d56abb82ada63a5bd55443e871007eb8defa60aca92e071578f3ee7e2"
     },
     "data/traditional chinese/queststates.datc64": {
-      "size": 578052,
-      "sha256": "4e60b7581cf18bff75b89dc4a50a6a452ae95bb1902ae777d76972686d017934"
+      "size": 578076,
+      "sha256": "26dc508d0b6187da13bd4ab9b6158348dbdedee41347cff0e3fd3653d7ce15c9"
     },
     "data/traditional chinese/queststates.datcl64": {
-      "size": 665398,
-      "sha256": "aa2e0a4f41ca357785e05543d2543dde48f316339170c28740bfd7fefef6ac73"
+      "size": 665442,
+      "sha256": "9dcdc96579a0d0ad0d8a2647748b4b6a708b23ddb7a558326b32f5ef79d840a8"
     },
     "data/traditional chinese/questtrackergroup.datc64": {
       "size": 136,
@@ -1534,11 +1534,11 @@
     },
     "data/traditional chinese/races.datc64": {
       "size": 99241,
-      "sha256": "38826f6d6c4766459597af114eaf53f46af108c6a3ba4b25a807b8d4950770a4"
+      "sha256": "0c8a38dccc63a8c2ebf0d23405f67b5cdb1f44fc7e00b4f57f715d8d70c9b66c"
     },
     "data/traditional chinese/races.datcl64": {
       "size": 99873,
-      "sha256": "64db395fbe39fc3569c254fe399db7f7aabb3b0c1f0be9b48657903e3ee04387"
+      "sha256": "06d3e2037b1d48645354af5944ca6f35d21dfc44738b5a5c0aa8c279b5296695"
     },
     "data/traditional chinese/rarity.datc64": {
       "size": 390,
@@ -1590,11 +1590,11 @@
     },
     "data/traditional chinese/ritualrunetypes.datc64": {
       "size": 26267,
-      "sha256": "75b5d81cee9b36ccf438404ec8996625c2f863503ba1f4564eb81f646155a0dc"
+      "sha256": "77f1959edd7cdf5cc1b6ca86b06f4e111d104847a4e36faafce4f83584dde830"
     },
     "data/traditional chinese/ritualrunetypes.datcl64": {
       "size": 29047,
-      "sha256": "069d0b0b5e9a31e5853f11d668601bb25677299f83e7fb40efaea075c1730016"
+      "sha256": "ddca38081ebae9ede59d18f383e440b71f57825d8363ac485f82c392ce090269"
     },
     "data/traditional chinese/sanctumdefenceicons.datc64": {
       "size": 1008,
@@ -1670,19 +1670,19 @@
     },
     "data/traditional chinese/shoptag.datc64": {
       "size": 92830,
-      "sha256": "aac9f81b1d621ada0e3da52958ce0651795bf8439850bf7ee56d46866257eb6f"
+      "sha256": "13e4ebc45a21edf43164194733c38895ad30a343369ed9df07d452a86dbbfa65"
     },
     "data/traditional chinese/shoptag.datcl64": {
       "size": 129726,
-      "sha256": "b409d655154f5360ec73e51ecbdbd6a6ccc056974f46ddcffd3c84e1d4973720"
+      "sha256": "232d628ee858a86a2f14633d174b388b6c3ee76da0695a3b8007737fab0e1f74"
     },
     "data/traditional chinese/shrines.datc64": {
       "size": 17710,
-      "sha256": "8f7d8252ba4a36e7b502d94ac4fe41dd145760bbd50e3cfc29b3839a981dc6d9"
+      "sha256": "45b2aea85250766f28d8ffae77e438e813da541a90d3cec4e25e1cc94475c058"
     },
     "data/traditional chinese/shrines.datcl64": {
       "size": 19362,
-      "sha256": "2d88838d065a39863fca834e5dbd2b0ee1c2cb2272170d86822dc82001973ef0"
+      "sha256": "62484c04dd93d983e318cef94e8704d28afadb59d5055f87fed576c5c8c53e2a"
     },
     "data/traditional chinese/skillgeminfo.datc64": {
       "size": 110860,
@@ -1717,12 +1717,12 @@
       "sha256": "53221699c60fe767b7c0901479060119827a69669a995221a4b92639bbabecfd"
     },
     "data/traditional chinese/stashtabaffinities.datc64": {
-      "size": 1236,
-      "sha256": "01626f6ef8e5e681846ffcffb3b4937fb03464f4a522e45ee32d1cf84363c107"
+      "size": 1314,
+      "sha256": "949954afd382e48741bf0a572b9c712f0366401ecc74bf6d9c3b38864fc435be"
     },
     "data/traditional chinese/stashtabaffinities.datcl64": {
-      "size": 1316,
-      "sha256": "c46d78e548934c909f3fb68503d63a2e281202a74d4ffc8dba476a58fbadfd0c"
+      "size": 1408,
+      "sha256": "a8af6f1afda74b73e1071afbda22a182f4384f31309a0c22992f7620e174ed88"
     },
     "data/traditional chinese/statistictrackingmicrotransactioncountertype.datc64": {
       "size": 154,
@@ -1749,12 +1749,12 @@
       "sha256": "396c2d8091e440215b276beed39d8f206f6690c0a61301372cf41cc780c49185"
     },
     "data/traditional chinese/tags.datc64": {
-      "size": 98272,
-      "sha256": "1d496efb27422489394950e2ef7174f54d96b6111201da07908e0f14d72bedb3"
+      "size": 98476,
+      "sha256": "b4d34599274337dd47f261fec959bd76673622ba3ca7584ce7d12db0a4109fed"
     },
     "data/traditional chinese/tags.datcl64": {
-      "size": 150112,
-      "sha256": "8fee7b0e50abe014068945a191e5bc2e8ae949582fa148fad4d30feea5cf792c"
+      "size": 150456,
+      "sha256": "0a29824c4b92a52141e9be40216dc30aba82d927050453025e76432c71250588"
     },
     "data/traditional chinese/tieredmicrotransactionsvisuals.datc64": {
       "size": 5508,
@@ -1806,19 +1806,19 @@
     },
     "data/traditional chinese/ultimatumitemisedrewards.datc64": {
       "size": 13538,
-      "sha256": "e5cf03ba91e229b28517667bb322781452159d0e518439ebfa5a062ae230d6c2"
+      "sha256": "c29711c10267e7c89bf45f5ae2c9aff2d70ff042dea429a1ea1feb00f7cbf2e0"
     },
     "data/traditional chinese/ultimatumitemisedrewards.datcl64": {
       "size": 16396,
-      "sha256": "72609c74f4fbf41929410b881f468e00f23b1672349e1d0c4dcb10736657423d"
+      "sha256": "ca467d3f409b81fd31eed14e0ac29da6307ab1360e695bda802bf9bd6420531e"
     },
     "data/traditional chinese/ultimatummodifiers.datc64": {
       "size": 57804,
-      "sha256": "afc7723fb3eaeddb12e2fe59b4c65dd65665e17adf1631ba0d86e0d38485c3f7"
+      "sha256": "4aa33f37ba833ed2f9911e93b4347298b974005420dde63e7d75987f7c6e37a6"
     },
     "data/traditional chinese/ultimatummodifiers.datcl64": {
       "size": 76544,
-      "sha256": "3bd5540474dca060d41f8e00ff1ee998fb99c4ae39e231cc772ae7693ce4afe6"
+      "sha256": "9c837d0aa77e2c5fe507bc4dfc271aa2b06fba12c08913c6876475512dba1b54"
     },
     "data/traditional chinese/uniquemaps.datc64": {
       "size": 2898,
@@ -1942,11 +1942,11 @@
     },
     "data/traditional chinese/worldareas.datc64": {
       "size": 1703742,
-      "sha256": "6e5060235d1d66ca16e2b225ece1fd77d4f5edd7a2248199a04301f222d0bfd4"
+      "sha256": "ce8ce9be48467045a5acaad50aa2ea8392458541952257b7abfee0df1c0c55e2"
     },
     "data/traditional chinese/worldareas.datcl64": {
       "size": 1785450,
-      "sha256": "6ad63859f7b4b581c3a9d8577cc951b0717a4658c1ad9a98e28185696bd10bec"
+      "sha256": "95bcb9d038cb771a947340395f6940090ff3e72d7f0bf6aac4c44fe3cb00b04a"
     },
     "data/traditional chinese/worldobjectquickactions.datc64": {
       "size": 202,
@@ -1969,20 +1969,20 @@
       "sha256": "17a640e318408076ab6c6eb200b514cd99147c4b9e10500cede509d77dfb31a1"
     },
     "metadata/statdescriptions/advanced_mod_stat_descriptions.csd": {
-      "size": 163056,
-      "sha256": "96d881ca1e8343d429b4458f4d4ba772b7488659f10d50e31a27e52afbcef64a"
+      "size": 172016,
+      "sha256": "9d71cd230a46af4a9e719ce78dfdafb320fa63ca7d80a0b2414c59d3ac69c3bd"
     },
     "metadata/statdescriptions/atlas_relic_stat_descriptions.csd": {
       "size": 10488,
       "sha256": "fd95f9b55a28e41403c59be2532c18ee55ffc715a427cfa84664059a575366d7"
     },
     "metadata/statdescriptions/atlas_stat_descriptions.csd": {
-      "size": 3403724,
-      "sha256": "1e30955cd8ace74a977daabb022e051e3c73f3b83220eef45b9451e2423968f4"
+      "size": 3399146,
+      "sha256": "bb7f6e841f265819c0ba83d584641ebb29ab8124d0df2265c53ece1cf9299aba"
     },
     "metadata/statdescriptions/atlas_variant_stat_descriptions.csd": {
-      "size": 81858,
-      "sha256": "bc98a32a6d6f0f4fe870a8265d59a6da1bd1abbbfb8c9b4f8cab7f32c0efe71e"
+      "size": 82754,
+      "sha256": "af1c87924a47fba58b53028579cca936519ec590a078ca72feb6614d97168a22"
     },
     "metadata/statdescriptions/aura_skill_stat_descriptions.csd": {
       "size": 250192,
@@ -2005,8 +2005,8 @@
       "sha256": "4268b064398d2b93d29a736823e9a476f3e95db3bb3d80a31201b965c52fb599"
     },
     "metadata/statdescriptions/chest_stat_descriptions.csd": {
-      "size": 180156,
-      "sha256": "7d2ec80ceb731166768d9b4796051e1977cbfc053ebc73a7a21a5cbbecac93ec"
+      "size": 180148,
+      "sha256": "1cab4646a7610653f5a8d4b674493573809627796d4734718492b56f22d89059"
     },
     "metadata/statdescriptions/curse_skill_stat_descriptions.csd": {
       "size": 221514,
@@ -2025,20 +2025,20 @@
       "sha256": "eab334c95be79340d32a3295226d8a5a085a9107f220a2c45b4e91bc6e93f244"
     },
     "metadata/statdescriptions/deepwater_implicit_stat_descriptions.csd": {
-      "size": 205328,
-      "sha256": "bb8977f2a5befeed5644672b5611431277adf72ea05d923fa10a6db012d7b1d9"
+      "size": 205312,
+      "sha256": "636cf78f8dfea27509280307e8bd790197d88a48f0ef6358c46eaa3f511824fb"
     },
     "metadata/statdescriptions/deepwater_stat_descriptions.csd": {
       "size": 502,
       "sha256": "ff11203b784370d1f430aedf16f476f70a7672034975a688094ffbe5d1f0296b"
     },
     "metadata/statdescriptions/expedition_relic_stat_descriptions.csd": {
-      "size": 447760,
-      "sha256": "318504f61309ed4904e727be1ae0a540a82aa8600b8878e9b51f4a9bcfddbbdc"
+      "size": 447728,
+      "sha256": "94924fc3d6bb1e77174a3b8e783014d3f953779964a636eebe295f81d8651ccf"
     },
     "metadata/statdescriptions/gem_stat_descriptions.csd": {
-      "size": 2861708,
-      "sha256": "fed5306969ff21ac40e90d003f34cf7dae51bd87dd302a97f9f82dea0db1328d"
+      "size": 2861700,
+      "sha256": "8cd680da06cd2d36ee228f93984673ff490e52e9258d89a376cda3a8dae73740"
     },
     "metadata/statdescriptions/graft_stat_descriptions.csd": {
       "size": 361206,
@@ -2049,44 +2049,44 @@
       "sha256": "b193352e20f36c3ed21530ff78add1ee23c632980a9574191b49ff2dcfcfdb7f"
     },
     "metadata/statdescriptions/heist_equipment_stat_descriptions.csd": {
-      "size": 330168,
-      "sha256": "168ba73bb56e9c68ae6430bbd0562d7bbe6d13fe9f0b0bf1ad7d91f49bc81649"
+      "size": 330152,
+      "sha256": "931b15b9454426a2f213fbf2fe2371c7761ff1869e12ed8bc63618a7307850be"
     },
     "metadata/statdescriptions/leaguestone_stat_descriptions.csd": {
-      "size": 492486,
-      "sha256": "a3d0a78ecf6e671e245b26469a4b29c6e2d52418f9b3e239b1c6c18ef49eac46"
+      "size": 492426,
+      "sha256": "ecb24489a2f5ad8548af85d296fbf06ae438bca55d43b6123c2b9609e922d847"
     },
     "metadata/statdescriptions/legion_stat_descriptions.csd": {
       "size": 12212,
       "sha256": "dfe12feb59be73998c24c1ddf886746e07633a6bce8cea1eca4cbd1a2266fc7f"
     },
     "metadata/statdescriptions/map_stat_descriptions.csd": {
-      "size": 565048,
-      "sha256": "ccce2f328b2fdb0436a7c6b3a60089e2a7d0529c6d173f9a00cf0e0d70a6a489"
+      "size": 564994,
+      "sha256": "aaf9a54e11eddb4f08632b696d5f79cb7c4f06d9423e4c88ef3eb0d3665766ad"
     },
     "metadata/statdescriptions/mercenary_support_stat_descriptions.csd": {
       "size": 162870,
       "sha256": "13a3bce2467498f3ae53b028293b645ac0034411f2e13e8ce6ac553571678e23"
     },
     "metadata/statdescriptions/minion_attack_skill_stat_descriptions.csd": {
-      "size": 656940,
-      "sha256": "ff3270ca56ef47a2513a7ac85a70298e939c5910307bd9617234e5117d5a0328"
+      "size": 656932,
+      "sha256": "cebf5c3cfc5480a3a5acae0af4b5ab374216f9917c2439c1a53c739ba23ac617"
     },
     "metadata/statdescriptions/minion_skill_stat_descriptions.csd": {
-      "size": 1139466,
-      "sha256": "76089ac13f81864cfcc049157a5b1e520c6a9e183de598d77b8807b31538a520"
+      "size": 1139454,
+      "sha256": "4d68e79bf22623eb786e960e2a2e2dd911ee6f61399b2676e93c9e2999ba0474"
     },
     "metadata/statdescriptions/minion_spell_damage_skill_stat_descriptions.csd": {
-      "size": 368760,
-      "sha256": "e598fa5e53dd826c45596196c0ffdc60704f259f7161f0fe5c58a69592936cf4"
+      "size": 368752,
+      "sha256": "2e265b2f6c481eca33863a7895b54b41a6287f7f299357a31775fbc3afd371bb"
     },
     "metadata/statdescriptions/minion_spell_skill_stat_descriptions.csd": {
       "size": 28658,
       "sha256": "7d9040f1e8cee411a3e60855a91407899ad855d5e35541fa83b2dd8e3988c8c5"
     },
     "metadata/statdescriptions/mirage_stat_descriptions.csd": {
-      "size": 140280,
-      "sha256": "ddc3027e1b4faca759dd15a67200fb85552a43d80650d309cdc539eb8bb5a1b4"
+      "size": 140272,
+      "sha256": "374a209acee84f05908bfd310c09c2553a8019b31d9e9e0ab63e34af11f4b571"
     },
     "metadata/statdescriptions/monster_stat_descriptions.csd": {
       "size": 44198,
@@ -2113,8 +2113,8 @@
       "sha256": "8b130f1898eb8c5516101aa16de39b949fbd78a9f2606129ea68c67d321d6da0"
     },
     "metadata/statdescriptions/primordial_altar_stat_descriptions.csd": {
-      "size": 243460,
-      "sha256": "ae008cf62f948996d4c136eb969e335677fa6a137353994e9229476f51c60594"
+      "size": 243444,
+      "sha256": "870c5d6c098133ef41872a1460a0b65fa147df338e00eb3c9d7ab8fdf13b5c46"
     },
     "metadata/statdescriptions/sanctum_relic_stat_descriptions.csd": {
       "size": 128328,
@@ -2125,24 +2125,24 @@
       "sha256": "06b3ff49aef98079499d2079667dffc790432fb427569cfd928cfb8b2b3c358c"
     },
     "metadata/statdescriptions/sentinel_stat_descriptions.csd": {
-      "size": 393030,
-      "sha256": "1a5603710b2932ce9e4aee4231c82b9bff3a6d8db96bc8eaed5c15373381ae31"
+      "size": 393298,
+      "sha256": "45a3c98b26442304784581ba26f705e007a402739fa666c9a51acef36a3a5037"
     },
     "metadata/statdescriptions/single_minion_spell_skill_stat_descriptions.csd": {
       "size": 148942,
       "sha256": "71d38a20c57c16e44a302e3b3c704bff2a84e1000b3618bbcd0fbcc00e695f4d"
     },
     "metadata/statdescriptions/skill_stat_descriptions.csd": {
-      "size": 5743428,
-      "sha256": "09d61fd34d9eeb1e213ec358627161e308bbb873ab091273a812eef6d2ca203f"
+      "size": 5749044,
+      "sha256": "956cc4ebf14a61d1392ffb715da34c3b36da9200f72d4eb9398fd8c44bc77768"
     },
     "metadata/statdescriptions/skillpopup_stat_filters.txt": {
       "size": 490718,
       "sha256": "97ec505f66b07bbfd37bc452a2ea48599960a3fbf4f8347dd0418386b6f5d5d4"
     },
     "metadata/statdescriptions/stat_descriptions.csd": {
-      "size": 30317102,
-      "sha256": "cb13dacd5b3bca7a4226e4a68a62e6e28dacc99fff809156f9f15ae740eda94e"
+      "size": 30324122,
+      "sha256": "04cb94a3fbbd26f4301ae67b23dc839aabb62a7d195e8a6b70658040403e2729"
     },
     "metadata/statdescriptions/tincture_stat_descriptions.csd": {
       "size": 303792,

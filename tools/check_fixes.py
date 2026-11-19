@@ -114,11 +114,41 @@ def check_direction(fix, idx):
     return "drift", " ⏎ ".join(sorted(cur)), "变体文本已变，需重新判定方向"
 
 
+def read_dat_cell(table, row, slot):
+    """直接回 .dat 原文件读一个槽位。
+
+    out/pairs.csv 只收录 extract_pairs.detect_slots() 认出来的列；有些表
+    （比如 currencyitems）只认出第一列，另一列里的同一段文本就查不到，
+    修正稿指向它时会误判成「gone」。这里兜底读原文件，别让人白查一轮。
+    """
+    p = os.path.join(ROOT, "pairs", "zh", table)
+    if not os.path.exists(p):
+        return None
+    try:
+        import dat64
+        t = _dat_cache(table)
+        return t.string_field(int(row), int(slot))
+    except Exception:
+        return None
+
+
+_DAT_CACHE = {}
+
+
+def _dat_cache(table):
+    if table not in _DAT_CACHE:
+        import dat64
+        _DAT_CACHE[table] = dat64.load(os.path.join(ROOT, "pairs", "zh", table))
+    return _DAT_CACHE[table]
+
+
 def check_ui(fix, ui_index):
     key = (fix["table"], fix["row"], fix["slot"])
     cur = ui_index.get(key)
     if cur is None:
-        return "gone", "", "表/行/槽位已不存在"
+        cur = read_dat_cell(fix["table"], fix["row"], fix["slot"])
+        if cur is None:
+            return "gone", "", "表/行/槽位已不存在"
     z = norm(cur)
     if z == norm(fix["zh_new"]):
         return "applied", z, ""
