@@ -1,0 +1,96 @@
+# v0.7.1
+
+- 打包时间：2026-11-20 19:47:25 +0800
+- **适用游戏版本：3.30.0d**（patch 3.30.0.4）
+- 状态：**已向 ggpk 写入 词缀文本 45 文件 / 165 处 + .dat 7 表 / 30 处 + 语系 1 文件 + 国旗 1 文件**
+
+## 对应的游戏版本
+
+| 项 | 值 |
+|---|---|
+| 客户端版本 | `3.30.0d` |
+| 补丁版本 | `3.30.0.4` |
+| 版本来源 | `logs/LatestClient.txt` |
+| 锁定时 ggpk 状态 | 干净（原始） |
+| Content.ggpk | 79,769,601,101 B，mtime 2026-11-19T14:13:40 |
+| 锁定文件数 | 531（语言 482 + 词缀 txt 49） |
+| 基线指纹 | `a27179244953f4a34e5f572f6587ca56c8f413928ae9fbec9ae1c659d2001462` |
+
+指纹 = 上述每个文件 `path + sha256` 排序后聚合；只要有一处文本变化它就会变。
+游戏更新后先跑 `python tools/gameinfo.py --diff` —— 它会指出哪些文件变了。
+
+**本版译文只对 3.30.0d 负责。**换版本必须重跑：`gameinfo` → 重导 → 重分析 → `patch_dat`。
+
+> 热修：v0.7.0 会让客户端闪退，撤出 keywordpopups/baseitemtypes 两张表；修掉 ggpk 回滚上限 64MB（索引 78MB 一整块落盘，超过上限后索引写坏就永远退不回去）
+
+| 修正稿 | 条数 | 内容 |
+|---|---|---|
+| `fix-direction.csv` | 19 | 方向错误（正/负变体用了相反措辞） |
+| `fix-mult.csv` | 49 | 乘法口径（more/less 误译 增加/減少） |
+| `fix-additive-rev.csv` | 5 | 反向口径（increased 误译 更多/更少） |
+| `fix-wording.csv` | 5 | 逐条润色与语义补全 |
+| `fix-gem.csv` | 34 | 技能宝石限定词（技能寶石→主動技能寶石） |
+| `fix-order.csv` | 10 | 数值位置/语序统一 |
+| `fix-category.csv` | 41 | 物品类别词（Jewellery/Item/Armour） |
+| `fix-category-ui.csv` | 10 | 物品类别词·UI 表侧（.dat 回写） |
+| `fix-newtext.csv` | 20 | 官方未翻译、本项目补译（.dat 回写） |
+| `fix-category-hold.csv` | 5 | 存疑未改（待拍板） |
+| `fix-typo.csv` | 1 | 原件笔误（繁中占位符 {0] → {0}） |
+| `fix-placeholder.csv` | 20 | 占位符漏失（{n} / % 丢了，补回；含一条繁体错字） |
+
+## 术语表
+
+`glossary.csv` 共 51 条。
+
+## 体检报告
+
+- `placeholder-check.md` —— 占位符漏失全库排查（216 条按后果分级）
+- `variant-check.md` —— 中英变体条件不一致排查（58 处）
+
+## 打包内容
+
+文档 4 份 + 修正稿 12 份 + 状态表 + 术语表 + 体检报告 2 份 + 补丁清单 + game.lock.json + BUILD-INFO.json + sbom.cdx.json + MANIFEST.sha256 + `PoE-zh-Patcher.exe`（zip 根目录，不进归档目录）。二进制原始导出不入档（可由 `tools/dumper` 重导，且换版本后必须重导）。
+
+## 已写入游戏（metadata/statdescriptions 侧）
+
+| 版本 | 文件 | 改动行 | 说明 |
+|---|---|---|---|
+| 纯译文 | 13 | 165 | `active_skill_gem_stat_descriptions.csd, atlas_stat_descriptions.csd, expedition_…` |
+| 对照版 | 13 | 165 | `active_skill_gem_stat_descriptions.csd, atlas_stat_descriptions.csd, expedition_…` |
+| 全量对照 | 45 | 165 | `active_skill_gem_stat_descriptions.csd, advanced_mod_stat_descriptions.csd, atla…` |
+
+写回方式是**逐行改引号内文本**，结构行、其它语言段、`.dat` 之外的一切原样保留；
+标记层（`<enchanted>` / `<rgb(…)>{{ }}`）按三分法处理：对方的换色/换标签沿用，
+被整段删光的按官方补回，与官方一致的就原样。逐条改动见对应 `statdesc-manifest-*.json`。
+
+## 已写入游戏（.dat 侧）
+
+| 表 | 改动 | 原始 → 补丁字节 | sha256(补丁) |
+|---|---|---|---|
+| `achievementitems.datc64` | 5 | 1406260 → 1406332 | `543c05de82d6bf7a` |
+| `auguryrewardoutcomes.datc64` | 10 | 83058 → 83470 | `65de600296d75dcc` |
+| `clientstrings.datc64` | 3 | 1308260 → 1308422 | `eb332363403288bd` |
+| `currencyitems.datc64` | 8 | 524550 → 525118 | `49947dae8f1428a7` |
+| `incursionrooms.datc64` | 1 | 69848 → 69862 | `2a5b0b2d80254b0f` |
+| `monstervarieties.datc64` | 2 | 14824192 → 14824216 | `c4f46466fb7354a8` |
+| `uitalktext.datc64` | 1 | 23720 → 23784 | `de7e5b99352417a0` |
+
+写入方式：`patcher apply`（LibBundledGGPK3），每个文件写入后从 ggpk 重读比对 sha256；
+回滚：`patcher restore`。逐条改动见 `out/patch/manifest.json`。
+
+## 已写入游戏（客户端配置侧）
+
+这两步不是译文，但**不做就看不到中文 / 图标对不上**，所以由补丁器一并处理，
+已经是对应状态就跳过，`[4] 还原` 时一并改回。
+
+| 文件 | 改什么 | 为什么 |
+|---|---|---|
+| `data/languages.dat` | `French` 与 `Traditional Chinese` 两行的语言代码对调（`fr` ↔ `zh-TW`） | 客户端语言列表第二项（法国国旗）改为加载繁中数据。不这么做，打完补丁游戏里还是英文，必须再跑一次 PoeChinese3 |
+| `art/uiimages1.txt` | `FlagIcons/fr` 与 `FlagIcons/4K/fr` 两行的图集坐标改指 `zhCN` 区域 | 上一步之后那一项的标签是「繁體中文」，配图却还是法国国旗。图集里本来就有五星红旗，且两处矩形尺寸一致（74×49 / 101×67），只改坐标、不动任何 DDS |
+
+两份文件都是**字节级最小替换**：`languages.dat` 交换两段等长字符串（696 B 长度守恒），
+`uiimages1.txt` 只重编那两行（6 MB 里其余字节原样拷贝）。结构对不上（多半是游戏更新过）
+一律跳过并提示，不硬写。实现见 `tools/shared/LanguageSwitch.cs` 与 `tools/shared/FlagIcon.cs`。
+
+已知副作用：语言列表里「简体中文」那一项本来就是五星红旗，换完会有两面；
+那一项没有对应的数据目录（客户端只有 `data/traditional chinese/`），选了只会回落到英文。

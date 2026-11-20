@@ -1,0 +1,450 @@
+{
+  "version": "0.7.1",
+  "lang": "traditional chinese",
+  "game": {
+    "client_version": "3.30.0d",
+    "patch_version": "3.30.0.4",
+    "fingerprint": "a27179244953f4a34e5f572f6587ca56c8f413928ae9fbec9ae1c659d2001462",
+    "locked_at": "2026-11-20T13:22:20",
+    "ggpk_size": 79769601101,
+    "source": "game.lock.json"
+  },
+  "source": [
+    "out/fix-category-ui.csv",
+    "out/fix-newtext.csv"
+  ],
+  "total_edits": 30,
+  "files": [
+    {
+      "table": "achievementitems.datc64",
+      "path_in_ggpk": "data/traditional chinese/achievementitems.datc64",
+      "src": "pairs/zh/achievementitems.datc64",
+      "source": [
+        "fix-category-ui.csv"
+      ],
+      "dst": "out/patch/achievementitems.datc64",
+      "sha256_original": "738699ef406f9c0a820d3a69385bdb4937956c901da84a2c80c210969282d868",
+      "sha256_patched": "543c05de82d6bf7a966e11c8c092ab2411e547210a0c6c01b054cf8d5b71da23",
+      "size_original": 1406260,
+      "size_patched": 1406332,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [],
+      "edits": [
+        {
+          "row": 2947,
+          "rel": 16,
+          "old": "普蘭德斯珠寶箱",
+          "new": "普蘭德斯飾品箱",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 825410,
+          "grew": 0
+        },
+        {
+          "row": 3012,
+          "rel": 16,
+          "old": "任一傳奇珠寶",
+          "new": "任一傳奇飾品",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 825428,
+          "grew": 0
+        },
+        {
+          "row": 4049,
+          "rel": 16,
+          "old": "普蘭德斯珠寶箱",
+          "new": "普蘭德斯飾品箱",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 825444,
+          "grew": 0
+        },
+        {
+          "row": 5688,
+          "rel": 16,
+          "old": "珠寶箱",
+          "new": "飾品寶箱",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 825462,
+          "grew": 1
+        },
+        {
+          "row": 7298,
+          "rel": 16,
+          "old": "珠寶",
+          "new": "飾品",
+          "action": "append",
+          "shared_refs": 4,
+          "new_pool_offset": 825474,
+          "grew": 0
+        }
+      ]
+    },
+    {
+      "table": "auguryrewardoutcomes.datc64",
+      "path_in_ggpk": "data/traditional chinese/auguryrewardoutcomes.datc64",
+      "src": "pairs/zh/auguryrewardoutcomes.datc64",
+      "source": [
+        "fix-newtext.csv"
+      ],
+      "dst": "out/patch/auguryrewardoutcomes.datc64",
+      "sha256_original": "a4629afcd193c103631567852b3fc95f47dc162c2254038bccf29d9b3c3b6c64",
+      "sha256_patched": "65de600296d75dcc77878d0857942dd31d8bd799279d0dfe15c759b57303b551",
+      "size_original": 83058,
+      "size_patched": 83470,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [
+        [
+          369,
+          80
+        ]
+      ],
+      "edits": [
+        {
+          "row": 32,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Mirror Shard",
+          "new": "被強化的怪物會掉落額外一個魔鏡碎片",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42726,
+          "grew": -37
+        },
+        {
+          "row": 33,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Fracturing Orb",
+          "new": "被強化的怪物會掉落額外一個破裂石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42764,
+          "grew": -40
+        },
+        {
+          "row": 34,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Divine Orb",
+          "new": "被強化的怪物會掉落額外一個神聖石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42800,
+          "grew": -36
+        },
+        {
+          "row": 35,
+          "rel": 16,
+          "old": "Empowered Monster will drop additional Divine Orbs",
+          "new": "被強化的怪物會掉落額外數個神聖石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42836,
+          "grew": -34
+        },
+        {
+          "row": 36,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Orb of Annulment",
+          "new": "被強化的怪物會掉落額外一個無效石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42872,
+          "grew": -42
+        },
+        {
+          "row": 37,
+          "rel": 16,
+          "old": "Empowered Monster will drop additional Orbs of Annulment",
+          "new": "被強化的怪物會掉落額外數個無效石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42908,
+          "grew": -40
+        },
+        {
+          "row": 38,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Reflecting Mist",
+          "new": "被強化的怪物會掉落額外一個映像迷霧",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42944,
+          "grew": -40
+        },
+        {
+          "row": 39,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Hinekora's Lock",
+          "new": "被強化的怪物會掉落額外一個悉妮蔻拉的髮絲",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 42982,
+          "grew": -37
+        },
+        {
+          "row": 40,
+          "rel": 16,
+          "old": "Empowered Monster will drop an additional Sacred Orb",
+          "new": "被強化的怪物會掉落額外一個聖玉",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 43026,
+          "grew": -37
+        },
+        {
+          "row": 164,
+          "rel": 16,
+          "old": "Empowered Monster will drop additional Rare Amulets\nAmulets dropped by Empowered Monster will have a Gem modifier",
+          "new": "被強化的怪物會掉落額外稀有項鍊\n由被強化怪物所掉落的項鍊會擁有一條寶石詞綴",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 43060,
+          "grew": -76
+        }
+      ]
+    },
+    {
+      "table": "clientstrings.datc64",
+      "path_in_ggpk": "data/traditional chinese/clientstrings.datc64",
+      "src": "pairs/zh/clientstrings.datc64",
+      "source": [
+        "fix-category-ui.csv",
+        "fix-newtext.csv"
+      ],
+      "dst": "out/patch/clientstrings.datc64",
+      "sha256_original": "d94e46e61e7efe2504bc220c8f8769310e527cd6ed07b58231c700a7d4e289d9",
+      "sha256_patched": "eb332363403288bdad02cf785e4d542b550bc5e442d967542230df7b59275585",
+      "size_original": 1308260,
+      "size_patched": 1308422,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [],
+      "edits": [
+        {
+          "row": 7903,
+          "rel": 8,
+          "old": "每個額外的隊伍成員玩家會增加找到的特定物品數量，\r\n像是護甲、珠寶、通貨、金幣、寶石和傳奇物品。",
+          "new": "每個額外的隊伍成員玩家會增加找到的特定物品數量，\r\n像是護甲、飾品、通貨、金幣、寶石和傳奇物品。",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 858458,
+          "grew": 0
+        },
+        {
+          "row": 8648,
+          "rel": 8,
+          "old": "After selecting this, you will be unable to reclaim this item until you have chosen an outcome",
+          "new": "選擇後，在你選定結果之前將無法取回此物品",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 858558,
+          "grew": -74
+        },
+        {
+          "row": 8649,
+          "rel": 8,
+          "old": "A random Viscera",
+          "new": "1 個隨機臟器",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 858602,
+          "grew": -9
+        }
+      ]
+    },
+    {
+      "table": "currencyitems.datc64",
+      "path_in_ggpk": "data/traditional chinese/currencyitems.datc64",
+      "src": "pairs/zh/currencyitems.datc64",
+      "source": [
+        "fix-category-ui.csv",
+        "fix-newtext.csv"
+      ],
+      "dst": "out/patch/currencyitems.datc64",
+      "sha256_original": "63ce518c22034da1f7f464d88b03d1585b2d44af7383759041593216ec092689",
+      "sha256_patched": "49947dae8f1428a730c05fae78ee91abe12629fe1a0c4bf0bf6832aec05767c5",
+      "size_original": 524550,
+      "size_patched": 525118,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [
+        [
+          1989,
+          72
+        ]
+      ],
+      "edits": [
+        {
+          "row": 1960,
+          "rel": 72,
+          "old": "<whiteitem>{實驗性珠寶}\r\n<default>{物品等級:} <normal>{86}",
+          "new": "<whiteitem>{實驗性飾品}\r\n<default>{物品等級:} <normal>{86}",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 116598,
+          "grew": 0
+        },
+        {
+          "row": 1961,
+          "rel": 56,
+          "old": "<whiteitem>{實驗性珠寶}\r\n<default>{物品等級:} <normal>{86}",
+          "new": "<whiteitem>{實驗性飾品}\r\n<default>{物品等級:} <normal>{86}",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 116700,
+          "grew": 0
+        },
+        {
+          "row": 1869,
+          "rel": 32,
+          "old": "Right click to reveal a random Exalted Orb.",
+          "new": "右鍵點擊以隨機揭露一個崇高石。",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 116802,
+          "grew": -28
+        },
+        {
+          "row": 1869,
+          "rel": 56,
+          "old": "A collection of unknown exotic Exalted Orbs",
+          "new": "一系列未知的異域崇高石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 116836,
+          "grew": -32
+        },
+        {
+          "row": 1869,
+          "rel": 72,
+          "old": "<<xbox_button_a>> to reveal a random Exalted Orb.",
+          "new": "使用<<xbox_button_a>>以隨機揭露一個崇高石。",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 116862,
+          "grew": -19
+        },
+        {
+          "row": 60,
+          "rel": 32,
+          "old": "Right click this item then left click a rare map item to apply it.",
+          "new": "右鍵點擊此物品，再左鍵點擊一件稀有地圖物品以套用它。",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 116926,
+          "grew": -40
+        },
+        {
+          "row": 60,
+          "rel": 56,
+          "old": "Removes a random Suffix modifier and adds a random\nrare-only modifier to a rare map item",
+          "new": "移除一條隨機後綴詞綴，並為一件稀有地圖物品加入一條隨機\n的稀有限定詞綴",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 116982,
+          "grew": -53
+        },
+        {
+          "row": 60,
+          "rel": 72,
+          "old": "<<xbox_button_a>> to select, then <<xbox_button_a>> on a rare map item to apply it.",
+          "new": "<<xbox_button_a>>選取，然後在稀有地圖物品上按<<xbox_button_a>>以套用它。",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 117056,
+          "grew": -30
+        }
+      ]
+    },
+    {
+      "table": "incursionrooms.datc64",
+      "path_in_ggpk": "data/traditional chinese/incursionrooms.datc64",
+      "src": "pairs/zh/incursionrooms.datc64",
+      "source": [
+        "fix-category-ui.csv"
+      ],
+      "dst": "out/patch/incursionrooms.datc64",
+      "sha256_original": "3e7a1706e42ea6a545a9ffc33d20907fd0257c5ba53effcaf510870ccc068e09",
+      "sha256_patched": "2a5b0b2d80254b0feba46d53dcab8d55642d6fe05200900e52115fe0e2d89d91",
+      "size_original": 69848,
+      "size_patched": 69862,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [],
+      "edits": [
+        {
+          "row": 50,
+          "rel": 8,
+          "old": "珠寶冶煉室",
+          "new": "飾品冶煉室",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 48286,
+          "grew": 0
+        }
+      ]
+    },
+    {
+      "table": "monstervarieties.datc64",
+      "path_in_ggpk": "data/traditional chinese/monstervarieties.datc64",
+      "src": "pairs/zh/monstervarieties.datc64",
+      "source": [
+        "fix-newtext.csv"
+      ],
+      "dst": "out/patch/monstervarieties.datc64",
+      "sha256_original": "e29ad8d62a52466b5b0b5255c349e5606cc4700f64021f5aec5a19ac0ff77072",
+      "sha256_patched": "c4f46466fb7354a8b1b6f29958dcb3474360600784e8d65995ce9cef61f47adb",
+      "size_original": 14824192,
+      "size_patched": 14824216,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [],
+      "edits": [
+        {
+          "row": 427,
+          "rel": 228,
+          "old": "Stoneshamble",
+          "new": "踉蹌之岩",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 6084632,
+          "grew": -8
+        },
+        {
+          "row": 427,
+          "rel": 260,
+          "old": "Stoneshamble",
+          "new": "踉蹌之岩",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 6084644,
+          "grew": -8
+        }
+      ]
+    },
+    {
+      "table": "uitalktext.datc64",
+      "path_in_ggpk": "data/traditional chinese/uitalktext.datc64",
+      "src": "pairs/zh/uitalktext.datc64",
+      "source": [
+        "fix-category-ui.csv"
+      ],
+      "dst": "out/patch/uitalktext.datc64",
+      "sha256_original": "eea9643599a595c4aaa31c4c71907d95a098fd4b8d6878fb673f04017dc8a67e",
+      "sha256_patched": "de7e5b99352417a07b8f965b245250cf932c6334ad27d38006718523c9c961b2",
+      "size_original": 23720,
+      "size_patched": 23784,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [],
+      "edits": [
+        {
+          "row": 54,
+          "rel": 20,
+          "old": "他們應該叫那個房間是札爾特的珠寶盒！想像一下它們現今的價值！",
+          "new": "他們應該叫那個房間是札爾特的飾品盒！想像一下它們現今的價值！",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 19308,
+          "grew": 0
+        }
+      ]
+    }
+  ]
+}
