@@ -1,11 +1,11 @@
 {
-  "version": "0.6.0",
+  "version": "0.7.0",
   "lang": "traditional chinese",
   "game": {
-    "client_version": "3.30.0c",
-    "patch_version": "3.30.0.3",
-    "fingerprint": "83689aef5c78cfe16364160962235c1deeeaecde85184445ad5bed353fcd02a2",
-    "locked_at": "2026-11-19T13:43:51",
+    "client_version": "3.30.0d",
+    "patch_version": "3.30.0.4",
+    "fingerprint": "a27179244953f4a34e5f572f6587ca56c8f413928ae9fbec9ae1c659d2001462",
+    "locked_at": "2026-11-20T13:22:20",
     "ggpk_size": 79769601101,
     "source": "game.lock.json"
   },
@@ -13,7 +13,7 @@
     "out/fix-category-ui.csv",
     "out/fix-newtext.csv"
   ],
-  "total_edits": 24,
+  "total_edits": 36,
   "files": [
     {
       "table": "achievementitems.datc64",
@@ -90,8 +90,8 @@
         "fix-newtext.csv"
       ],
       "dst": "out/patch/auguryrewardoutcomes.datc64",
-      "sha256_original": "f3477e8adcf07bd268ef0b1929d2a946ee77cc3a7bd9ce1c93fc4e2ca163dd06",
-      "sha256_patched": "a1f03dbdc51d8024842e826432e9d7c8b2ee93efca26811546ab39ef903e50ab",
+      "sha256_original": "a4629afcd193c103631567852b3fc95f47dc162c2254038bccf29d9b3c3b6c64",
+      "sha256_patched": "65de600296d75dcc77878d0857942dd31d8bd799279d0dfe15c759b57303b551",
       "size_original": 83058,
       "size_patched": 83470,
       "verify": "ok",
@@ -205,6 +205,72 @@
       ]
     },
     {
+      "table": "baseitemtypes.datc64",
+      "path_in_ggpk": "data/traditional chinese/baseitemtypes.datc64",
+      "src": "pairs/zh/baseitemtypes.datc64",
+      "source": [
+        "fix-newtext.csv"
+      ],
+      "dst": "out/patch/baseitemtypes.datc64",
+      "sha256_original": "862a0474cdb7a7775a8c73807cb39f69cf351583f5cc560da33969f8755a4a5a",
+      "sha256_patched": "df7148c21c8dd5cb6b8c41ab406aaecd5a00528600543a020e03587a69b1656e",
+      "size_original": 2877930,
+      "size_patched": 2877992,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [
+        [
+          5669,
+          268
+        ],
+        [
+          5669,
+          284
+        ]
+      ],
+      "edits": [
+        {
+          "row": 60,
+          "rel": 32,
+          "old": "Originator's Exalted Orb",
+          "new": "開創者崇高石",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 763018,
+          "grew": -18
+        },
+        {
+          "row": 215,
+          "rel": 32,
+          "old": "Primordial Exalted Orb",
+          "new": "始祖崇高石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 763034,
+          "grew": -17
+        },
+        {
+          "row": 772,
+          "rel": 124,
+          "old": "Originator's Exalted Orb",
+          "new": "開創者崇高石",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 763048,
+          "grew": -18
+        },
+        {
+          "row": 774,
+          "rel": 124,
+          "old": "Originator's Exalted Orb",
+          "new": "開創者崇高石",
+          "action": "append",
+          "shared_refs": 2,
+          "new_pool_offset": 763064,
+          "grew": -18
+        }
+      ]
+    },
+    {
       "table": "clientstrings.datc64",
       "path_in_ggpk": "data/traditional chinese/clientstrings.datc64",
       "src": "pairs/zh/clientstrings.datc64",
@@ -257,40 +323,101 @@
       "path_in_ggpk": "data/traditional chinese/currencyitems.datc64",
       "src": "pairs/zh/currencyitems.datc64",
       "source": [
-        "fix-category-ui.csv"
+        "fix-category-ui.csv",
+        "fix-newtext.csv"
       ],
       "dst": "out/patch/currencyitems.datc64",
-      "sha256_original": "3c218fced454390c5cce888d05ffd98aee42deb867d64f161528156a3bd8aead",
-      "sha256_patched": "434245ed0059b7c78cd1e9184322d5a75a52a26357eeb4704a4ad8530b74b80a",
-      "size_original": 523330,
-      "size_patched": 523534,
+      "sha256_original": "63ce518c22034da1f7f464d88b03d1585b2d44af7383759041593216ec092689",
+      "sha256_patched": "49947dae8f1428a730c05fae78ee91abe12629fe1a0c4bf0bf6832aec05767c5",
+      "size_original": 524550,
+      "size_patched": 525118,
       "verify": "ok",
       "tolerated_eof_sentinel": [
         [
-          1987,
+          1989,
           72
         ]
       ],
       "edits": [
         {
-          "row": 1958,
+          "row": 1960,
           "rel": 72,
           "old": "<whiteitem>{實驗性珠寶}\r\n<default>{物品等級:} <normal>{86}",
           "new": "<whiteitem>{實驗性飾品}\r\n<default>{物品等級:} <normal>{86}",
           "action": "append",
           "shared_refs": 2,
-          "new_pool_offset": 115788,
+          "new_pool_offset": 116598,
           "grew": 0
         },
         {
-          "row": 1959,
+          "row": 1961,
           "rel": 56,
           "old": "<whiteitem>{實驗性珠寶}\r\n<default>{物品等級:} <normal>{86}",
           "new": "<whiteitem>{實驗性飾品}\r\n<default>{物品等級:} <normal>{86}",
           "action": "append",
           "shared_refs": 2,
-          "new_pool_offset": 115890,
+          "new_pool_offset": 116700,
           "grew": 0
+        },
+        {
+          "row": 1869,
+          "rel": 32,
+          "old": "Right click to reveal a random Exalted Orb.",
+          "new": "右鍵點擊以隨機揭露一個崇高石。",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 116802,
+          "grew": -28
+        },
+        {
+          "row": 1869,
+          "rel": 56,
+          "old": "A collection of unknown exotic Exalted Orbs",
+          "new": "一系列未知的異域崇高石",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 116836,
+          "grew": -32
+        },
+        {
+          "row": 1869,
+          "rel": 72,
+          "old": "<<xbox_button_a>> to reveal a random Exalted Orb.",
+          "new": "使用<<xbox_button_a>>以隨機揭露一個崇高石。",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 116862,
+          "grew": -19
+        },
+        {
+          "row": 60,
+          "rel": 32,
+          "old": "Right click this item then left click a rare map item to apply it.",
+          "new": "右鍵點擊此物品，再左鍵點擊一件稀有地圖物品以套用它。",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 116926,
+          "grew": -40
+        },
+        {
+          "row": 60,
+          "rel": 56,
+          "old": "Removes a random Suffix modifier and adds a random\nrare-only modifier to a rare map item",
+          "new": "移除一條隨機後綴詞綴，並為一件稀有地圖物品加入一條隨機\n的稀有限定詞綴",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 116982,
+          "grew": -53
+        },
+        {
+          "row": 60,
+          "rel": 72,
+          "old": "<<xbox_button_a>> to select, then <<xbox_button_a>> on a rare map item to apply it.",
+          "new": "<<xbox_button_a>>選取，然後在稀有地圖物品上按<<xbox_button_a>>以套用它。",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 117056,
+          "grew": -30
         }
       ]
     },
@@ -322,6 +449,43 @@
       ]
     },
     {
+      "table": "keywordpopups.datc64",
+      "path_in_ggpk": "data/traditional chinese/keywordpopups.datc64",
+      "src": "pairs/zh/keywordpopups.datc64",
+      "source": [
+        "fix-newtext.csv"
+      ],
+      "dst": "out/patch/keywordpopups.datc64",
+      "sha256_original": "57d78b6e3d20cadc049a6a81eb84304b87b38ba136592d199bf7f091ae0380cd",
+      "sha256_patched": "c5135df399baf8633ff08bda4fc626c0807a5ce4edce924e11c18a115399e953",
+      "size_original": 39342,
+      "size_patched": 39422,
+      "verify": "ok",
+      "tolerated_eof_sentinel": [],
+      "edits": [
+        {
+          "row": 161,
+          "rel": 8,
+          "old": "Limited Currency",
+          "new": "限定通貨",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 27676,
+          "grew": -12
+        },
+        {
+          "row": 161,
+          "rel": 16,
+          "old": "Nightmare Maps are only modifiable with Chaos Orbs, Vaal Orbs, Originator Exalted Orbs, Delirium Orbs and Chisels.",
+          "new": "夢魘地圖僅能使用混沌石、瓦爾寶珠、開創者崇高石、譫妄玉和圖釘調整",
+          "action": "append",
+          "shared_refs": 1,
+          "new_pool_offset": 27688,
+          "grew": -82
+        }
+      ]
+    },
+    {
       "table": "monstervarieties.datc64",
       "path_in_ggpk": "data/traditional chinese/monstervarieties.datc64",
       "src": "pairs/zh/monstervarieties.datc64",
@@ -329,8 +493,8 @@
         "fix-newtext.csv"
       ],
       "dst": "out/patch/monstervarieties.datc64",
-      "sha256_original": "5af9b240b97f7bdafb8044026b146a610778fc285885ee14cd1b60fa7f99904f",
-      "sha256_patched": "5f2d173d3fd266e9a395143feb442e11f12f761da5d3525d4bf86f63cb83ee89",
+      "sha256_original": "e29ad8d62a52466b5b0b5255c349e5606cc4700f64021f5aec5a19ac0ff77072",
+      "sha256_patched": "c4f46466fb7354a8b1b6f29958dcb3474360600784e8d65995ce9cef61f47adb",
       "size_original": 14824192,
       "size_patched": 14824216,
       "verify": "ok",

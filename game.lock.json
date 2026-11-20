@@ -1,32 +1,32 @@
 {
   "schema": 1,
-  "locked_at": "2026-11-19T13:43:51",
+  "locked_at": "2026-11-20T13:22:20",
   "game_dir": "C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile",
   "version": {
     "log": "logs/LatestClient.txt",
-    "log_mtime": "2026-11-19T13:01:09",
-    "client_version": "3.30.0c",
-    "patch_version": "3.30.0.3"
+    "log_mtime": "2026-11-20T13:16:15",
+    "client_version": "3.30.0d",
+    "patch_version": "3.30.0.4"
   },
   "ggpk": {
     "size": 79769601101,
-    "mtime": "2026-11-15T13:13:41"
+    "mtime": "2026-11-19T14:13:40"
   },
   "exe": {
     "PathOfExile.exe": {
-      "size": 79946072,
-      "sha256": "69a11eacf7d9bf86c98a8de57ff2ccc60a998ed2a6dcfd228180c070dcf419e3",
-      "mtime": "2026-11-19T13:00:06"
+      "size": 79945560,
+      "sha256": "8447dbe236e1608611f79644b5439ad739d63eadbe73b7d2d7989b338fcc6ebf",
+      "mtime": "2026-11-20T13:14:46"
     },
     "PathOfExile_x64.exe": {
       "size": 541528,
-      "sha256": "58a0e8c0878979b5314bbef73e89c994edaa1dccd03910773b64e7e099c10bf1",
-      "mtime": "2026-11-19T13:00:19"
+      "sha256": "cefe8694a5227950ca071637673ca17414e5baeba2ebff3257809dab46157fd0",
+      "mtime": "2026-11-20T13:14:56"
     },
     "Client.exe": {
       "size": 541528,
-      "sha256": "ab0124fe9b8be5d52e7db5dd0585d7ec7cd14e7cfcdbaeb93fe422e5a6e17b85",
-      "mtime": "2026-11-19T13:00:22"
+      "sha256": "b33de3bf1cdc3d9a4e63d6329bdb6e198790d9d11a5c9d1bf570752cfc016eee",
+      "mtime": "2026-11-20T13:14:55"
     }
   },
   "counts": {
@@ -34,7 +34,7 @@
     "statdesc_files": 49,
     "total": 531
   },
-  "fingerprint": "83689aef5c78cfe16364160962235c1deeeaecde85184445ad5bed353fcd02a2",
+  "fingerprint": "a27179244953f4a34e5f572f6587ca56c8f413928ae9fbec9ae1c659d2001462",
   "files": {
     "data/traditional chinese/achievementitemrewards.datc64": {
       "size": 352,
@@ -118,11 +118,11 @@
     },
     "data/traditional chinese/alternatequalitytypes.datc64": {
       "size": 2942,
-      "sha256": "24ab1d604dd0e2d294d915bea8dbe82f87f5b68cc8c5c94841124fccee2a42a7"
+      "sha256": "613248d982bc94b18d38d8f72f1dc55842cbf5425a35c8d459a80afb2d7ad39b"
     },
     "data/traditional chinese/alternatequalitytypes.datcl64": {
       "size": 4066,
-      "sha256": "775bac2d21d4a39354211be47e1e586aa08f8135fe219590722d6401b2e29154"
+      "sha256": "dea1d93527dac02cc52e17f13b0a9c7d377407155542ac2eca948e781aa6fc9b"
     },
     "data/traditional chinese/alternatetreeversionkeystones.datc64": {
       "size": 1234,
@@ -222,11 +222,11 @@
     },
     "data/traditional chinese/atlasmissiontypes.datc64": {
       "size": 3802,
-      "sha256": "833ef2bde22d1ec13288ac6773a5e5dcb2d0706c7ec2b224e64ab23b7c25a2c3"
+      "sha256": "bb4213c9b7378db24e671c395cf229c5cd558faa36a47fa88a9d71e89aaa4a75"
     },
     "data/traditional chinese/atlasmissiontypes.datcl64": {
       "size": 6632,
-      "sha256": "d52495ff63dc36a54d2b0b2bc0b30f709125c66e6b4417477b38f2ec237c1d43"
+      "sha256": "61fabacb21dc85613afff0a399e16ad4bc144e6051a467614236d67fdedad2cf"
     },
     "data/traditional chinese/atlaspassiveskillsubtrees.datc64": {
       "size": 4084,
@@ -262,11 +262,11 @@
     },
     "data/traditional chinese/atlasthreadtypes.datc64": {
       "size": 3072,
-      "sha256": "de123a4215d84c06ab8b5395f48dd94d2da930b16549bc5e8146f42e09a03a27"
+      "sha256": "7684ddc59634de1ea92f128254c6814c3ff970fb2c75dbc7d0b22c92d45d9946"
     },
     "data/traditional chinese/atlasthreadtypes.datcl64": {
       "size": 4504,
-      "sha256": "2431a43b2a0e86f59e00aa5121419603280d9574c4e6c12673b47ff6c673ec2c"
+      "sha256": "4a0dcb15c62230cc7337ccd0da59b53a7d6642e61de7dd76cb204891fe15e830"
     },
     "data/traditional chinese/atlastrees.datc64": {
       "size": 340,
@@ -278,11 +278,11 @@
     },
     "data/traditional chinese/atlasvoidstoneslots.datc64": {
       "size": 2524,
-      "sha256": "22fdf9aadd298856d9117d0e7e44e9b9ec227d2ef556a0121affcb6943936d33"
+      "sha256": "7b17d2b239da200a5e185487d02e47b841498743eba4d51fbf4fce38736e5e89"
     },
     "data/traditional chinese/atlasvoidstoneslots.datcl64": {
       "size": 4444,
-      "sha256": "c5c3855d0cf2f9b66ef159f54297a0432aceae73769421fc8325d296150282c8"
+      "sha256": "dc22b1198706ee5a563b23d36f52731dba68c891ebff02d37fad2d339fda3bd2"
     },
     "data/traditional chinese/augurycards.datc64": {
       "size": 6174,
@@ -318,11 +318,11 @@
     },
     "data/traditional chinese/auguryrewardoutcomes.datc64": {
       "size": 83058,
-      "sha256": "f3477e8adcf07bd268ef0b1929d2a946ee77cc3a7bd9ce1c93fc4e2ca163dd06"
+      "sha256": "a4629afcd193c103631567852b3fc95f47dc162c2254038bccf29d9b3c3b6c64"
     },
     "data/traditional chinese/auguryrewardoutcomes.datcl64": {
       "size": 116678,
-      "sha256": "f4628253f4be46a6e43ab85db255154ed89f226bd8e1f709b120046d81d1e406"
+      "sha256": "d67c7512a14645e0b72bc130284ab892959e71e8bdafb17a1344f73509e412ff"
     },
     "data/traditional chinese/awarddisplay.datc64": {
       "size": 18331,
@@ -334,11 +334,11 @@
     },
     "data/traditional chinese/azmeriwoodsdusttype.datc64": {
       "size": 1080,
-      "sha256": "1f87790936fe3e19ae663c07562775f41b70da774d6f77fd19f0cf4a49f2d6eb"
+      "sha256": "0cf44455449977a5b8cd3affcc2ca2b7aa67df5c0222baad503eed4ae4ec8c12"
     },
     "data/traditional chinese/azmeriwoodsdusttype.datcl64": {
       "size": 1716,
-      "sha256": "7a01ef7396a1f5903d186884a8241fdf2091816f5aef8b89f9a32352003e1e34"
+      "sha256": "30f0838111c571c931a145d67206d59413acb2b3b4f5a62ad596ddf8da2958bc"
     },
     "data/traditional chinese/backenderrors.datc64": {
       "size": 72694,
@@ -349,12 +349,12 @@
       "sha256": "d0ee4d67ae5fc8096bf94e9ee6c2aaa42d3e860b238e2114cb0db5734e9808cf"
     },
     "data/traditional chinese/baseitemtypes.datc64": {
-      "size": 2876784,
-      "sha256": "9e953c41115153100457fed860907f6e4f0982b9327a1c95a3692729f9847fac"
+      "size": 2877930,
+      "sha256": "862a0474cdb7a7775a8c73807cb39f69cf351583f5cc560da33969f8755a4a5a"
     },
     "data/traditional chinese/baseitemtypes.datcl64": {
-      "size": 3455512,
-      "sha256": "4c76f5be4cc08c17a733eafb08df053fee250129de3759a03a4090c56ec0d921"
+      "size": 3456946,
+      "sha256": "65f5f7b02cfc1d7be2278d7129e9be7a94385a7878117bbdd742fee82ad34a89"
     },
     "data/traditional chinese/battlepasses.datc64": {
       "size": 3864,
@@ -366,11 +366,11 @@
     },
     "data/traditional chinese/battlepassrewards.datc64": {
       "size": 43440,
-      "sha256": "a1fce5b0ec2351ab9655786e6e664205622547ac94d17f8bd72f8b9542ec3386"
+      "sha256": "fc140e46634cb2a02fd718772b7a5f536e33b644b2bbd512e6c2a9df472c556f"
     },
     "data/traditional chinese/battlepassrewards.datcl64": {
       "size": 55036,
-      "sha256": "e48828fff09f07a480acd2752ae8d001c33c843c1c5a660d7a06db3c2711b18d"
+      "sha256": "c52b6cb6d33c9877cd03d409a6b3e7694a1c7d2324b483d614804c20c002fcd9"
     },
     "data/traditional chinese/battlepasstracks.datc64": {
       "size": 148,
@@ -382,11 +382,11 @@
     },
     "data/traditional chinese/bestiaryfamilies.datc64": {
       "size": 3153,
-      "sha256": "e3e9dcf24174690fdecf5dbe758503ee1bf51fc22a856c244dd9a1f42510122c"
+      "sha256": "6a9662ac7d5ff1e8b1d3ba494f0eb956d984c251673dc5b267519bf98b0d8574"
     },
     "data/traditional chinese/bestiaryfamilies.datcl64": {
       "size": 5301,
-      "sha256": "8d19feb32cb774f5f9417159e286a14869940eb6d4e5ff34a4a3f72683dff312"
+      "sha256": "24a9e1fd6233fcae07e106b538b299f48f8ed103392dfa3fef56db1421a94c50"
     },
     "data/traditional chinese/bestiarygenus.datc64": {
       "size": 5538,
@@ -470,11 +470,11 @@
     },
     "data/traditional chinese/betrayalupgrades.datc64": {
       "size": 16912,
-      "sha256": "2870581fab087e5b4745e25785e654875a42876bd7225b638412ac6fae726d1c"
+      "sha256": "8cd160a66a6056975f8e73751b5f98821c14ece82f00deda75b30b8bce1274c1"
     },
     "data/traditional chinese/betrayalupgrades.datcl64": {
       "size": 25440,
-      "sha256": "e5a47e4f423861fe0b41d45ea4d594e095a37ae7329d33e7ff17d1273c034af6"
+      "sha256": "a3992ad7d02b1a43fa3b9edf9ed3ef9541b14fa7448e57f198a02f88fc8e5684"
     },
     "data/traditional chinese/bindablevirtualkeys.datc64": {
       "size": 2868,
@@ -486,11 +486,11 @@
     },
     "data/traditional chinese/blightcraftingitems.datc64": {
       "size": 1166,
-      "sha256": "36fffd601e02fd9bf23a331eae2c342f0b76283ab54a63564ce5c4d5c5afc1c5"
+      "sha256": "234275cfc8014679fc9199b67bb5a7c2fd60b61e94a795126e7c87ac5e57be7c"
     },
     "data/traditional chinese/blightcraftingitems.datcl64": {
       "size": 1232,
-      "sha256": "8f5c2b4bc5bce5316cb07d34acaaefff4ea39d0eda9e4fc8b49f5f2cb578a83a"
+      "sha256": "9239731dfcef0e21f72b42aee14f3d260aba88a0aa9e66fa8602a9f566a2a3b2"
     },
     "data/traditional chinese/blighttowers.datc64": {
       "size": 15727,
@@ -541,12 +541,12 @@
       "sha256": "8ff61c919a13981423faeaace2557d48fff443aa584ad47340c3d7a12e211389"
     },
     "data/traditional chinese/buffvisuals.datc64": {
-      "size": 1123882,
-      "sha256": "98b8b9be6bfccddd1d46e09d2b35574320ecd3090b2283b0507b33422cb54346"
+      "size": 1123972,
+      "sha256": "b3a33b0b689d588e8507331d8049af115cbfe6d2ff89b95cf572660bd9cc3b57"
     },
     "data/traditional chinese/buffvisuals.datcl64": {
-      "size": 1577064,
-      "sha256": "42dd21f42228e7ccd223ba23de31146a8dd7a0a8c04b0fc57b232cfe504db75e"
+      "size": 1577240,
+      "sha256": "7c3ccfd1c464980663506ab8d96b4fcf166b5093ed91d0fb6a8932b6906bd0f1"
     },
     "data/traditional chinese/builtinitemfilters.datc64": {
       "size": 172,
@@ -590,11 +590,11 @@
     },
     "data/traditional chinese/characters.datc64": {
       "size": 14468,
-      "sha256": "bd308e65ffdaa20acf58f93593ad111c07966df603e7fcde409345426a0a6b25"
+      "sha256": "d229412fd36b8ea3bdd4e9c6571539072b4a973472ef2e6d2b8aad48c19bb1ad"
     },
     "data/traditional chinese/characters.datcl64": {
       "size": 23820,
-      "sha256": "d051559199bf8f8a293dc5a1528f26645e4569e6ddd390c03d07fafc153dd1f4"
+      "sha256": "6569f309bd63b9ac867f94962d5ad65abb507bf4259a50a5624b0a9768fdf7a8"
     },
     "data/traditional chinese/characterstartstates.datc64": {
       "size": 34147,
@@ -614,11 +614,11 @@
     },
     "data/traditional chinese/chests.datc64": {
       "size": 1169390,
-      "sha256": "753fa7547c30cbaf01ec81883325ae15afa660425767b85624d8c3f3023eb47a"
+      "sha256": "86b1c8aef7e2a8ff565b6887a92339fb6290f1b950a1ebff013a1bfcea13b9eb"
     },
     "data/traditional chinese/chests.datcl64": {
       "size": 1468164,
-      "sha256": "5c22485a6b99603bcdef99e1ebaf866814e96d8b0f55cc5db0437bc7c797be51"
+      "sha256": "aaef1516b530717b0f6ad35d72f2d4894dd59945431800e03cdda11931b2d036"
     },
     "data/traditional chinese/clientstrings.datc64": {
       "size": 1308260,
@@ -670,11 +670,11 @@
     },
     "data/traditional chinese/craftingbenchoptions.datc64": {
       "size": 402416,
-      "sha256": "da7ef749371292b5d023cb71fe63d4e145dcbbd53c08bf6702c2c5f00eb84e6a"
+      "sha256": "685c18ea48d006a0aa2ff92af635f8350b23a29bcce94741401bca363aa8b5e7"
     },
     "data/traditional chinese/craftingbenchoptions.datcl64": {
       "size": 403874,
-      "sha256": "158af0826b2e608cd516d778f449bff69f11f65e9c28a5a31664979394d9158e"
+      "sha256": "4f4ccf23675025ebbb92f03459cad2ba2c7d3b92908926d6c9eaa1d2dd7e2a16"
     },
     "data/traditional chinese/craftingitemclasscategories.datc64": {
       "size": 3034,
@@ -709,28 +709,28 @@
       "sha256": "3ef7819f33c41cac249f108649c515e101c9654f9cba9475b3b33b7a5a4898b7"
     },
     "data/traditional chinese/currencyitems.datc64": {
-      "size": 523330,
-      "sha256": "3c218fced454390c5cce888d05ffd98aee42deb867d64f161528156a3bd8aead"
+      "size": 524550,
+      "sha256": "63ce518c22034da1f7f464d88b03d1585b2d44af7383759041593216ec092689"
     },
     "data/traditional chinese/currencyitems.datcl64": {
-      "size": 625160,
-      "sha256": "34706e2f79e6e2bab27087b7ef581884c55414e7fb435dc27586cd8302eace6e"
+      "size": 627162,
+      "sha256": "5530e463f3d6a5595fdbc27c797af9f1d5932782602c2ad58ea3173cb2146d62"
     },
     "data/traditional chinese/deepwatercraftingcurrencies.datc64": {
       "size": 35600,
-      "sha256": "4bca7614eb018a36d83282351074a6f6b55ad968af81908f9f811f47888031ef"
+      "sha256": "0b4ad94539c3d48494dee53e2fce8190e2a40a71c2390f0a6fc1525c0307fa74"
     },
     "data/traditional chinese/deepwatercraftingcurrencies.datcl64": {
       "size": 38774,
-      "sha256": "8d8810613fcdc95b11fd3e8e1fe5c6a42471e895b160312c088940e7e9e471ad"
+      "sha256": "765b095ef0e3edea1c3c12564e25cea72045f0dea6d6183cbec73bdd3ca13ddc"
     },
     "data/traditional chinese/deepwaterlockerlayout.datc64": {
       "size": 1118,
-      "sha256": "417d734da6fcdd183c1da92e08c4645284e08143da794d991c5bd10a0d8954ff"
+      "sha256": "c3eaedfef448059f1887cb93cc2f7efa2370a422e9e96affe042266831b6b5d0"
     },
     "data/traditional chinese/deepwaterlockerlayout.datcl64": {
       "size": 1824,
-      "sha256": "7d3b06459f4feeffcc82f7e507b30c415eb3a4ae4eb354eacaf4e686d14e101c"
+      "sha256": "cc753382e847b83de079d270791cf8b00945a069828e90b9829ab469fb239984"
     },
     "data/traditional chinese/deepwaterrooms.datc64": {
       "size": 26496,
@@ -862,11 +862,11 @@
     },
     "data/traditional chinese/fragmentstashtablayout.datc64": {
       "size": 63118,
-      "sha256": "45892e7687fbca462e1e1b6ac3e0a0b57d254c8b0f52a79394fed84d5435edb0"
+      "sha256": "15767cac38081ecc52f8094a4c02decff8569b7d5e7ed6292c6066b477ff090e"
     },
     "data/traditional chinese/fragmentstashtablayout.datcl64": {
       "size": 96924,
-      "sha256": "3833c9c527cdabcf40b1d28d2418e159eef2f1946a624003faec902e594473be"
+      "sha256": "3ec82a55722308c98284808e77dac7b8bd99cffddc43e5af12cb59527d958262"
     },
     "data/traditional chinese/gamepadbutton.datc64": {
       "size": 2040,
@@ -910,11 +910,11 @@
     },
     "data/traditional chinese/harvestcraftfilters.datc64": {
       "size": 382,
-      "sha256": "2f2a892bf680bfbb8071de4d361a461bb51e386372ba83b69a8f06215f0266e2"
+      "sha256": "6429772eb6bb378870a7b6c96fb4d11955fd0fae9e23e8b49fc3443c35feb060"
     },
     "data/traditional chinese/harvestcraftfilters.datcl64": {
       "size": 552,
-      "sha256": "161833669ad4b6ee81b66bedfa7c132963c9ca73def1fb3069670d717719d999"
+      "sha256": "acaf2981264074cc9d62bb18fe90b14ab869650112385dace36e1542786ae643"
     },
     "data/traditional chinese/harvestcraftoptions.datc64": {
       "size": 55492,
@@ -942,11 +942,11 @@
     },
     "data/traditional chinese/heistobjectives.datc64": {
       "size": 2624,
-      "sha256": "ff30b1ee3adc617492223a803f6829bfa97acdbaeb4bdcb0defe75413c8cd5f6"
+      "sha256": "abf336f816d3f47c6f29976dc33e243c64028b452624a0ea7b65dcfc6b24cc18"
     },
     "data/traditional chinese/heistobjectives.datcl64": {
       "size": 2880,
-      "sha256": "ca7cf4d727cc15b674b51687b40b3e5e6d55957da6db04c73bb618f7f3defc93"
+      "sha256": "64c46923835b13e49cf838f6e050e3971fd724b8b891bf0c585b3001cf5246a6"
     },
     "data/traditional chinese/heistobjectivevaluedescriptions.datc64": {
       "size": 136,
@@ -958,11 +958,11 @@
     },
     "data/traditional chinese/heistquestcontracts.datc64": {
       "size": 9452,
-      "sha256": "1f7ed72e4e1eac4d6ebe07fe45d604ec22b1e3650a2f0638fddb2ccf35437ab7"
+      "sha256": "9b8de34ab239daa98ccc1c9af5a3676f8260e0a5519e0fb887492499cb2ba9f7"
     },
     "data/traditional chinese/heistquestcontracts.datcl64": {
       "size": 9648,
-      "sha256": "6d0cb276cfa0a88c4b428c6f79237b543d44e094244e57581ed7790041dbb3d0"
+      "sha256": "e516e7680983a9d31e3cb51519e985a5c5a4546c44d9a646cbb7f56b8802f118"
     },
     "data/traditional chinese/hellscapepassives.datc64": {
       "size": 6702,
@@ -998,11 +998,11 @@
     },
     "data/traditional chinese/incubators.datc64": {
       "size": 3508,
-      "sha256": "67d8c506cb3449f9ccec51916e38a581b48fc56f6db99faf07cb1b3361bf9172"
+      "sha256": "286046faa046c22a9d76a077adc8e9656208c5f42616450a591cb020a5768199"
     },
     "data/traditional chinese/incubators.datcl64": {
       "size": 3852,
-      "sha256": "c95f7b4cac77705a308be8efdfc78ae1fde5d5e3b780c2657a2bf3093ae7f6e9"
+      "sha256": "c345045f718c3896719522586523d47705cc52da9203c855511ab7ab69313e9f"
     },
     "data/traditional chinese/incursionrooms.datc64": {
       "size": 69848,
@@ -1054,35 +1054,35 @@
     },
     "data/traditional chinese/itemisedcorpse.datc64": {
       "size": 12996,
-      "sha256": "a02e28edf5b9ea2c052af125c8eb3226a8409da2d25b74cbf4d2fad2acde228a"
+      "sha256": "dc50193a37bd275ad41c0e5b162e6525d032d2a27bab877359e80e87eb717032"
     },
     "data/traditional chinese/itemisedcorpse.datcl64": {
       "size": 19184,
-      "sha256": "c710f08c52d608646b6d552cea7baf2ee08dc5491f0b7cf2c68cc9339044525e"
+      "sha256": "fb07f2741b3f1a4e3807a154cf7592eb38cffce57a1197ce303869eb921b251a"
     },
     "data/traditional chinese/itemisednecropolispacks.datc64": {
       "size": 5028,
-      "sha256": "5c57b57a907ce2ddc3e7bdc7c67603f0f25dbb9386910afa0bf28f2d7484b0ff"
+      "sha256": "1b0004a134def2ee22afe621767cd612b823eee8771460364a65c126dfae5a0a"
     },
     "data/traditional chinese/itemisednecropolispacks.datcl64": {
       "size": 6516,
-      "sha256": "9192e171d60cbda3231c792ce1e730988dfd926941f3cded794ce6ad6325fc4e"
+      "sha256": "be08c9b776fad031c67bd81fbfcab5b290df499167023db034d903861ee32cc2"
     },
     "data/traditional chinese/keywordpopups.datc64": {
-      "size": 38960,
-      "sha256": "f4fe6a012e32adf37813b66f591e80dfe63619642e023cd4f80e853efcfa33f0"
+      "size": 39342,
+      "sha256": "57d78b6e3d20cadc049a6a81eb84304b87b38ba136592d199bf7f091ae0380cd"
     },
     "data/traditional chinese/keywordpopups.datcl64": {
-      "size": 64808,
-      "sha256": "ac9c974f0de8a9f2cde2a70fd031ddd02176cda1f94b5df7528afbf64362632f"
+      "size": 65488,
+      "sha256": "569246f0b074ff85f730e5369dce4f7bffaaec68bd76c722be22fc7d399f39db"
     },
     "data/traditional chinese/labyrinthbonusitems.datc64": {
       "size": 150,
-      "sha256": "ebb9ebec95c979cf7dc36bde824af68c82be64049aaa35b6c81a9e72e9d1ff20"
+      "sha256": "9fa8bda30f4977fabc1e96b8730fb0c5bd4a4a9b605e37b92841f8c938180168"
     },
     "data/traditional chinese/labyrinthbonusitems.datcl64": {
       "size": 192,
-      "sha256": "6f8f148abec2690bd4f3f23b20238b186899e22d8042f55b254d467cded6278e"
+      "sha256": "ac4d00dd11e73f603fb5d6b424158af513280c764a1bf7959dfe34194298d415"
     },
     "data/traditional chinese/labyrinthcraftoptions.datc64": {
       "size": 14567,
@@ -1094,11 +1094,11 @@
     },
     "data/traditional chinese/labyrinths.datc64": {
       "size": 960,
-      "sha256": "968c98772568443db17ec68eaa02606329e16c011005d50c9d44f7808636c923"
+      "sha256": "77995f3bd2763cb8f02039e33e4ac305dfc066f2d4352c43c90267ba05f658a0"
     },
     "data/traditional chinese/labyrinths.datcl64": {
       "size": 1004,
-      "sha256": "a8d60b6183055d1eb5235f3a675341d1e4739e959301da9ec7fedfeccc680aec"
+      "sha256": "b7a9b880dc51bbe6f13382f51b206c94eff98d69bb3bc139354ff8637fd26893"
     },
     "data/traditional chinese/labyrinthsecrets.datc64": {
       "size": 13996,
@@ -1182,19 +1182,19 @@
     },
     "data/traditional chinese/mapstashspecialsubstashgroup.datc64": {
       "size": 2248,
-      "sha256": "f8ca2b97e6052cd7861a3cf02a996b4ff7930d47e26bc045fa42f8dc8a57ec20"
+      "sha256": "355a610c610e5e8dd17f23d09ffbcf3001583d8c61e225ee809677e4e7461804"
     },
     "data/traditional chinese/mapstashspecialsubstashgroup.datcl64": {
       "size": 2988,
-      "sha256": "5d094b8279dbd660dc50554c91ab03d31417f837fbf91256cb5fc0f9d2720902"
+      "sha256": "78e71af0285bf065e437ee74a229429277b01ee4fb88b82c1c1a227449d3ded8"
     },
     "data/traditional chinese/memorylinetype.datc64": {
       "size": 1766,
-      "sha256": "7e07494bcb1aae6ed3405a9a95041a6146f572d0162f54a44f2eeb27a4e90d4a"
+      "sha256": "5d080a7aa1cf1dcdebe5477c5863e08dd41bc7e1fb87d36cd1f8850f8f9e4f8d"
     },
     "data/traditional chinese/memorylinetype.datcl64": {
       "size": 2150,
-      "sha256": "ed3a0561ee14986475dac56aa06a5667d64a317a13d66a52c331bc707e598702"
+      "sha256": "84a1e5c0fdb9fa072b7a3e20656f2d4a84389ac867640cd9eda7aad6ed4e63a2"
     },
     "data/traditional chinese/mercenaryattributes.datc64": {
       "size": 858,
@@ -1294,11 +1294,11 @@
     },
     "data/traditional chinese/mods.datc64": {
       "size": 35121174,
-      "sha256": "cf0cc8f270eef26cc531371f246169e2ef98cf0323bd8366412ae41cd2946018"
+      "sha256": "983a0a24a17f8649c09dc730ea729a1bac723b4ed138aca5a269c4be7a4d48a9"
     },
     "data/traditional chinese/mods.datcl64": {
       "size": 38216940,
-      "sha256": "bb7313621efe17e8916545c413434e71904318addaa72919ffd6ab777e7cbd8a"
+      "sha256": "6e7b886c0af4de0b5321774124fe09573bbb73782e528099284a749b2d31ea31"
     },
     "data/traditional chinese/monstercategories.datc64": {
       "size": 232,
@@ -1310,11 +1310,11 @@
     },
     "data/traditional chinese/monstervarieties.datc64": {
       "size": 14824192,
-      "sha256": "5af9b240b97f7bdafb8044026b146a610778fc285885ee14cd1b60fa7f99904f"
+      "sha256": "e29ad8d62a52466b5b0b5255c349e5606cc4700f64021f5aec5a19ac0ff77072"
     },
     "data/traditional chinese/monstervarieties.datcl64": {
       "size": 17531910,
-      "sha256": "d8c2ec8b775a41b08bfc138a572b3b0d281f5b657a8042ad3902708d94e5e7aa"
+      "sha256": "a9f7ea9638ba7ca5e6875703669ab7f595769e9a8a5ab424d6601a2dcd74f9d6"
     },
     "data/traditional chinese/mousecursorsizesettings.datc64": {
       "size": 134,
@@ -1358,11 +1358,11 @@
     },
     "data/traditional chinese/necropoliscraftbases.datc64": {
       "size": 147978,
-      "sha256": "0fe4188fe79b2190230e0cf7334fd4c9b5e26795d86d91e7bbf62f5b80e7ed48"
+      "sha256": "e6490e3980fc6046d700984c22f8033b3f930a91d462a98df45f980c03b69bb1"
     },
     "data/traditional chinese/necropoliscraftbases.datcl64": {
       "size": 224836,
-      "sha256": "c85d8d9239ccc88ef610db96f5e47eb06790461f5011aa831676d686d2f0b27a"
+      "sha256": "2caedf22b97b0c38e90df0db75702a8187f8a396f2fe5efb25a6f80b7bc290c2"
     },
     "data/traditional chinese/necropoliscraftitemtypes.datc64": {
       "size": 12746,
@@ -1414,11 +1414,11 @@
     },
     "data/traditional chinese/npctalk.datc64": {
       "size": 1799426,
-      "sha256": "40ff85c71ea81c0c19dac811b3e8b1539f23ba030dba82db592b2e4e9ab0c7e3"
+      "sha256": "37d117774f3989df4b16c266641015bdd2a928d59cecdff6dbc5bdf23cad35ec"
     },
     "data/traditional chinese/npctalk.datcl64": {
       "size": 1849640,
-      "sha256": "59b1db462238496cb2c50cdbb9ede7ca63d16c214e588b50dbf0d60564d221e2"
+      "sha256": "e6fba82fe7d3672857448880a6528fdad88bedfab1963c84d3a6da6c946066bb"
     },
     "data/traditional chinese/npctextaudio.datc64": {
       "size": 10713101,
@@ -1446,11 +1446,11 @@
     },
     "data/traditional chinese/pantheonsouls.datc64": {
       "size": 2540,
-      "sha256": "918c7329c483a00aa47ecef5e7339377a984ba33ed40a6b8a69f5e25bb9195c6"
+      "sha256": "8425cb86b2ed38fc867e73129d3bee60b87caca9fe065bf09e7876f7dced8f17"
     },
     "data/traditional chinese/pantheonsouls.datcl64": {
       "size": 2548,
-      "sha256": "196a9b9c620aea7fbc90aae952ca24d3a99b42a1f4f83f78800d19acdc6491f7"
+      "sha256": "fb7e65ee3db6c9b58a5794f771291192cde1008861df3fbc986e560a8335bd67"
     },
     "data/traditional chinese/passiveoverridelimits.datc64": {
       "size": 3059,
@@ -1470,11 +1470,11 @@
     },
     "data/traditional chinese/passiveskills.datc64": {
       "size": 3432076,
-      "sha256": "d96790473b2029198736a8e6d11f9894527104666f57bf500ac059e8087da672"
+      "sha256": "e509884104a2cab2448df73230aa661d03cdf40f0f136f8037fb3fb080f767e3"
     },
     "data/traditional chinese/passiveskills.datcl64": {
       "size": 3948240,
-      "sha256": "95bdf4a85bc4e6b8adf292eb90be55124197b51218c1c99260a6a9f11c0f6dfc"
+      "sha256": "490384b68f683fb9a961d099e4edb40eac60066491bccf5cf7cec3d555347e3e"
     },
     "data/traditional chinese/passiveskillstatcategories.datc64": {
       "size": 960,
@@ -1606,19 +1606,19 @@
     },
     "data/traditional chinese/sanctumdeferredrewardcategories.datc64": {
       "size": 2374,
-      "sha256": "b5da0f9efabbb223dc986b7d5a06df13874b339d214274823b192d93134fe774"
+      "sha256": "dbcdcab55138230f6e757387f5211100bac71b6cda0e7cb221697d826d3e9e01"
     },
     "data/traditional chinese/sanctumdeferredrewardcategories.datcl64": {
       "size": 3256,
-      "sha256": "b2d94306a3709e58900cdb935b07eded32a56195d329a37f56343de00eef5e93"
+      "sha256": "3a89857b240216540f997a39ac5e02a74414abbf78cc0b1eeb97f34dce1264fa"
     },
     "data/traditional chinese/sanctumfloors.datc64": {
       "size": 1338,
-      "sha256": "1e74f97fb58df83dcc21cf291709ec7b42fad904d89c96a1b4c0855bb74c1a8f"
+      "sha256": "e6eb48c1e9566ff85bb4e8bbf57b8354675e8ed66fd94e2ab5170805de1593cf"
     },
     "data/traditional chinese/sanctumfloors.datcl64": {
       "size": 2216,
-      "sha256": "45eb07777f3e824419335f0d5fafb118bb33199696fdc5e95a8afd599713b4a2"
+      "sha256": "8c86edcd8efd015c7b12b782451631c69ae333ed875eeaefc57b265ecfa85c17"
     },
     "data/traditional chinese/sanctumpersistenteffectcategories.datc64": {
       "size": 2958,
@@ -1646,11 +1646,11 @@
     },
     "data/traditional chinese/sanctumselectiondisplayoverride.datc64": {
       "size": 17890,
-      "sha256": "d0255e65622df8d3a4a22f2b7efd49ff9e683728cb9c0259e5bc6a693fa7a2a0"
+      "sha256": "9f2dcf850aa14445723ebe4250dc7452a167da5adc071881057b28bbaf35bd2c"
     },
     "data/traditional chinese/sanctumselectiondisplayoverride.datcl64": {
       "size": 26848,
-      "sha256": "645e62a8661d1bfabad9dcd53d66762352eaff2defec41f4272d17e8b3d38bf9"
+      "sha256": "3ba19ad2a7b9e1e9b513bdfdff0da109d869f338d484d0ba703b6db56aed783b"
     },
     "data/traditional chinese/sentinelpassives.datc64": {
       "size": 8108,
@@ -1749,12 +1749,12 @@
       "sha256": "396c2d8091e440215b276beed39d8f206f6690c0a61301372cf41cc780c49185"
     },
     "data/traditional chinese/tags.datc64": {
-      "size": 98476,
-      "sha256": "b4d34599274337dd47f261fec959bd76673622ba3ca7584ce7d12db0a4109fed"
+      "size": 98540,
+      "sha256": "0e8e3a2d45547db50de3112ebaac69a8550fce8e12a6bb0d5a1bd272c0e32f53"
     },
     "data/traditional chinese/tags.datcl64": {
-      "size": 150456,
-      "sha256": "0a29824c4b92a52141e9be40216dc30aba82d927050453025e76432c71250588"
+      "size": 150552,
+      "sha256": "58e268bde82ae1694ed9ff69b1bbf214e4094afeeb16a4c70016a2d44c81911f"
     },
     "data/traditional chinese/tieredmicrotransactionsvisuals.datc64": {
       "size": 5508,
@@ -1806,11 +1806,11 @@
     },
     "data/traditional chinese/ultimatumitemisedrewards.datc64": {
       "size": 13538,
-      "sha256": "c29711c10267e7c89bf45f5ae2c9aff2d70ff042dea429a1ea1feb00f7cbf2e0"
+      "sha256": "eb5d60c77ba860bb3fbf9c304621b9519014ebca8b4aa98e816547769bbae799"
     },
     "data/traditional chinese/ultimatumitemisedrewards.datcl64": {
       "size": 16396,
-      "sha256": "ca467d3f409b81fd31eed14e0ac29da6307ab1360e695bda802bf9bd6420531e"
+      "sha256": "3f3aefe6edb8fabc6bac1f4657105fb1f659c04f9cd89ae30d36230b290a6c1e"
     },
     "data/traditional chinese/ultimatummodifiers.datc64": {
       "size": 57804,
@@ -1822,11 +1822,11 @@
     },
     "data/traditional chinese/uniquemaps.datc64": {
       "size": 2898,
-      "sha256": "192624926b37fe65c40573c4c02c174d2935862dead93513969a39340c1dc719"
+      "sha256": "e739dda89aab8a5199e0cc31ca2672d069e31ec06b0c7e7e3fa61236b2316488"
     },
     "data/traditional chinese/uniquemaps.datcl64": {
       "size": 3222,
-      "sha256": "c33f29c0fa549559329400bbbab3171f1f2d34916532da7ebbc543ccbb6e3a05"
+      "sha256": "cb19662edb663e4e4c6315f459f2e0cefdbc7273509f53ceed89df8d9be282f8"
     },
     "data/traditional chinese/uniquestashtypes.datc64": {
       "size": 4733,
@@ -2141,8 +2141,8 @@
       "sha256": "97ec505f66b07bbfd37bc452a2ea48599960a3fbf4f8347dd0418386b6f5d5d4"
     },
     "metadata/statdescriptions/stat_descriptions.csd": {
-      "size": 30324122,
-      "sha256": "04cb94a3fbbd26f4301ae67b23dc839aabb62a7d195e8a6b70658040403e2729"
+      "size": 30320724,
+      "sha256": "bba8bfce9ebab908d08ef7d8f8c8ec50b88037af1c03944f033bceb5245e7b75"
     },
     "metadata/statdescriptions/tincture_stat_descriptions.csd": {
       "size": 303792,

@@ -49,17 +49,17 @@
  },
  {
   "table": "baseitemtypes.datc64",
-  "rows": 5668,
-  "cols": 7,
-  "pairs": 39254,
+  "rows": 5670,
+  "cols": 8,
+  "pairs": 44936,
   "diff": 5226,
-  "cjk": 5226
+  "cjk": 5479
  },
  {
   "table": "baseitemtypes.datcl64",
-  "rows": 5668,
+  "rows": 5670,
   "cols": 1,
-  "pairs": 5248,
+  "pairs": 5250,
   "diff": 5224,
   "cjk": 5221
  },
@@ -137,9 +137,9 @@
  },
  {
   "table": "currencyitems.datc64",
-  "rows": 1988,
+  "rows": 1990,
   "cols": 1,
-  "pairs": 1236,
+  "pairs": 1238,
   "diff": 1235,
   "cjk": 1234
  },
@@ -329,17 +329,17 @@
  },
  {
   "table": "keywordpopups.datc64",
-  "rows": 161,
+  "rows": 162,
   "cols": 3,
-  "pairs": 377,
+  "pairs": 380,
   "diff": 214,
   "cjk": 214
  },
  {
   "table": "keywordpopups.datcl64",
-  "rows": 161,
+  "rows": 162,
   "cols": 2,
-  "pairs": 216,
+  "pairs": 218,
   "diff": 213,
   "cjk": 211
  },
@@ -1001,15 +1001,15 @@
  },
  {
   "table": "tags.datc64",
-  "rows": 1443,
+  "rows": 1444,
   "cols": 2,
-  "pairs": 1469,
+  "pairs": 1470,
   "diff": 26,
   "cjk": 26
  },
  {
   "table": "tags.datcl64",
-  "rows": 1443,
+  "rows": 1444,
   "cols": 1,
   "pairs": 26,
   "diff": 26,

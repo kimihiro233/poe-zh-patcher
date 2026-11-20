@@ -13672,6 +13672,8 @@ metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_additiona
 metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_additional_3_items_%,1,100|#,,Wombgifts Birth 3 additional Currency Items,胎贈產出3個額外通貨物品
 metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_additional_item_%,0,1|99,,{0}% chance for Wombgifts to Birth an additional Currency Item,胎贈有 {0}% 機率產出額外 1 個通貨
 metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_additional_item_%,1,100|#,,Wombgifts Birth an additional Currency Item,胎贈產出額外 1 個通貨
+metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_additional_mutated_currency_chance_%,0,1|99,,{0}% chance to Birth an additional Foulborn Currency (level 75+),
+metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_additional_mutated_currency_chance_%,1,100|#,negate 1,Birthed an additional Foulborn Currency (level 75+),
 metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_basic_currency_converted_to_shards,0,#,,Birthed Currency is instead dropped as many random Currency Shards,產出的通貨改為掉落多個隨機通貨碎片
 metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_can_create_graft_currency,0,#,,Wombgifts have a chance to Birth Graft Implants,胎贈有機率產出接肢植入物
 metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_can_create_mutated_currency,0,#,,Wombgifts have a chance to Birth Foulborn Currency at Level 68 and above,胎贈在等級 68 以上有機率產出穢生通貨
@@ -13681,8 +13683,6 @@ metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_gold_chan
 metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_gold_chance_%,1,100|#,,Birthed Currency drops as Gold instead,產出的通貨改為掉落金幣
 metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_graft_currency_chance_+%,0,1|#,,{0}% increased chance for Birthed Currency to be Graft Implants,產出的通貨成為接肢植入物的機率提高 {0}%
 metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_graft_currency_chance_+%,1,#|-1,negate 1,{0}% reduced chance for Birthed Currency to be Graft Implants,產出的通貨成為接肢植入物的機率降低 {0}%
-metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_mutated_currency_chance_+%,0,1|#,,{0}% increased chance for Birthed Currency to be Foulborn Currency,產出的通貨成為穢生通貨的機率提高 {0}%
-metadata_statdescriptions_stat_descriptions.txt,brequel_currency_fruit_mutated_currency_chance_+%,1,#|-1,negate 1,{0}% reduced chance for Birthed Currency to be Foulborn Currency,產出的通貨成為穢生通貨的機率降低 {0}%
 metadata_statdescriptions_stat_descriptions.txt,brequel_equipment_fruit_1h_weapon_chance_+%,0,1|#,,{0}% increased chance for Birthed Equipment to be One-Handed Melee Weapons,產出的裝備成為單手近戰武器的機率提高 {0}%
 metadata_statdescriptions_stat_descriptions.txt,brequel_equipment_fruit_1h_weapon_chance_+%,1,#|-1,negate 1,{0}% reduced chance for Birthed Equipment to be One-Handed Melee Weapons,產出的裝備成為單手近戰武器的機率降低 {0}%
 metadata_statdescriptions_stat_descriptions.txt,brequel_equipment_fruit_2h_weapon_chance_+%,0,1|#,,{0}% increased chance for Birthed Equipment to be Two-Handed Melee Weapons,產出的裝備成為雙手近戰武器的機率提高 {0}%

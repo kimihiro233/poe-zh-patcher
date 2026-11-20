@@ -242,12 +242,12 @@ such as Armour, Jewellery, Currency, Gold, Gems and Unique Items.","每個額外
 像是護甲、珠寶、通貨、金幣、寶石和傳奇物品。","每個額外的隊伍成員玩家會增加找到的特定物品數量，
 像是護甲、飾品、通貨、金幣、寶石和傳奇物品。","每個額外的隊伍成員玩家會增加找到的特定物品數量，
 像是護甲、珠寶、通貨、金幣、寶石和傳奇物品。",
-fix-category-ui,7,pending,,currencyitems.datc64,1958,72,"<whiteitem>{Experimented Jewellery}
+fix-category-ui,7,pending,,currencyitems.datc64,1960,72,"<whiteitem>{Experimented Jewellery}
 <default>{Item Level:} <normal>{86}","<whiteitem>{實驗性珠寶}
 <default>{物品等級:} <normal>{86}","<whiteitem>{實驗性飾品}
 <default>{物品等級:} <normal>{86}","<whiteitem>{實驗性珠寶}
 <default>{物品等級:} <normal>{86}",
-fix-category-ui,8,pending,,currencyitems.datc64,1959,56,"<whiteitem>{Experimented Jewellery}
+fix-category-ui,8,pending,,currencyitems.datc64,1961,56,"<whiteitem>{Experimented Jewellery}
 <default>{Item Level:} <normal>{86}","<whiteitem>{實驗性珠寶}
 <default>{物品等級:} <normal>{86}","<whiteitem>{實驗性飾品}
 <default>{物品等級:} <normal>{86}","<whiteitem>{實驗性珠寶}

@@ -12,12 +12,12 @@ fix-direction#10,aura_effect_on_self_from_skills_+%_per_herald_effecting_you,每
 fix-direction#11,base_attack_skill_cost_efficiency_+%,增加 {0}% 攻擊的消耗效用,✓ stat_descriptions.txt:188957；stat_descriptions.txt:188958
 fix-direction#12,base_mana_cost_efficiency_+%_per_10_devotion,每 10 個奉獻增加 {0}% 魔力消耗效用,✓ stat_descriptions.txt:191039；stat_descriptions.txt:191040
 fix-direction#13,base_mana_cost_efficiency_+%_while_on_low_mana,貧魔時增加 {0}% 魔力消耗效用,✓ stat_descriptions.txt:191131；stat_descriptions.txt:191132
-fix-direction#14,defences_+%_while_wielding_staff,持長杖時，增加 {0}% 防禦,✓ stat_descriptions.txt:235970；stat_descriptions.txt:235971
-fix-direction#15,energy_shield_from_helmet_+%,增加 {0}% 裝備的頭盔的能量護盾,✓ stat_descriptions.txt:246933；stat_descriptions.txt:246934
-fix-direction#16,hallowing_flame_magnitude_+%_per_2%_attack_block_chance,每2%攻擊格擋機率，增加{0}%你施加的聖徒烈火幅度,✓ stat_descriptions.txt:267385；stat_descriptions.txt:267386
-fix-direction#17,spell_damage_+%_while_you_have_arcane_surge,當你有秘能波動時增加 {0}% 法術傷害,✓ stat_descriptions.txt:398051；stat_descriptions.txt:398052
-fix-direction#18,unattached_sigil_attachment_range_+%_per_second,未附著的烙印每秒減少 {0}% 烙印附著距離,✓ stat_descriptions.txt:411536；stat_descriptions.txt:411537
-fix-direction#19,unique_quiver_chill_as_though_damage_+%_final,冰緩敵人有如造成 {0}% 更多傷害,✓ stat_descriptions.txt:412350；stat_descriptions.txt:412351
+fix-direction#14,defences_+%_while_wielding_staff,持長杖時，增加 {0}% 防禦,✓ stat_descriptions.txt:235929；stat_descriptions.txt:235930
+fix-direction#15,energy_shield_from_helmet_+%,增加 {0}% 裝備的頭盔的能量護盾,✓ stat_descriptions.txt:246892；stat_descriptions.txt:246893
+fix-direction#16,hallowing_flame_magnitude_+%_per_2%_attack_block_chance,每2%攻擊格擋機率，增加{0}%你施加的聖徒烈火幅度,✓ stat_descriptions.txt:267344；stat_descriptions.txt:267345
+fix-direction#17,spell_damage_+%_while_you_have_arcane_surge,當你有秘能波動時增加 {0}% 法術傷害,✓ stat_descriptions.txt:398010；stat_descriptions.txt:398011
+fix-direction#18,unattached_sigil_attachment_range_+%_per_second,未附著的烙印每秒減少 {0}% 烙印附著距離,✓ stat_descriptions.txt:411495；stat_descriptions.txt:411496
+fix-direction#19,unique_quiver_chill_as_though_damage_+%_final,冰緩敵人有如造成 {0}% 更多傷害,✓ stat_descriptions.txt:412309；stat_descriptions.txt:412310
 fix-mult#1,map_unique_monster_tribute_multiplier_final_+%,你地圖中的傳奇怪物在祭祀神壇被擊殺時，獲得的貢禮減少 {0}%,✓ atlas_stat_descriptions.txt:40701
 fix-mult#2,map_unique_monster_tribute_multiplier_final_+%,你地圖中的傳奇怪物在祭祀神壇被擊殺時，獲得的貢禮增加 {0}%,✓ atlas_stat_descriptions.txt:40702
 fix-mult#3,support_inspiration_mana_cost_+%_final,被輔助的技能增加 {0}% 魔力消耗,✓ gem_stat_descriptions.txt:1261
@@ -50,21 +50,21 @@ fix-mult#29,alternate_ascendancy_herald_buff_effect_+%_final_per_1%_mana_reserve
 fix-mult#30,alternate_ascendancy_herald_minion_and_herald_damage_+%_final_per_1%_life_reserved,捷光環技能與由捷光環技能召喚的召喚物每保留 1% 最大生命，造成的傷害提高 {0}%,✓ stat_descriptions.txt:174060
 fix-mult#31,gladiator_area_of_effect_+%_final_while_wielding_mace,持錘或權杖時，範圍效果增加 {0}%,✓ stat_descriptions.txt:177074
 fix-mult#32,gladiator_area_of_effect_+%_final_while_wielding_mace,持錘或權杖時，範圍效果減少 {0}%,✓ stat_descriptions.txt:177075
-fix-mult#33,damage_+%_final_to_grant_packmate_on_death,死亡時怪物群成員傷害增加 {0}%,✓ stat_descriptions.txt:229448
-fix-mult#34,damage_+%_final_to_grant_packmate_on_death,死亡時怪物群成員傷害減少 {0}%,✓ stat_descriptions.txt:229449
-fix-mult#35,deadeye_accuracy_rating_+%_final_per_frenzy_charge,每顆狂怒球減少 {0}% 命中值,✓ stat_descriptions.txt:234912
-fix-mult#36,gladiator_critical_strike_chance_+%_final_while_wielding_dagger,持匕首時，增加 {0}% 暴擊率,✓ stat_descriptions.txt:265038
-fix-mult#37,gladiator_critical_strike_chance_+%_final_while_wielding_dagger,持匕首時，減少 {0}% 暴擊率,✓ stat_descriptions.txt:265039
-fix-mult#38,map_leaguestone_beyond_monster_item_quantity_and_rarity_+%_final,超越怪物增加 {0}% 物品掉落數量和物品稀有度,✓ stat_descriptions.txt:333002
-fix-mult#39,map_leaguestone_beyond_monster_item_quantity_and_rarity_+%_final,超越怪物減少 {0}% 物品掉落數量和物品稀有度,✓ stat_descriptions.txt:333003
-fix-mult#40,map_leaguestone_imprisoned_monsters_item_rarity_+%_final,受精髓禁錮的怪物增加 {0}% 掉落物品稀有度,✓ stat_descriptions.txt:333183
-fix-mult#41,map_monster_item_rarity_+permyriad_final_per_empowered_soul,怪物每擁有 1 個強化靈魂，增加 {0}% 物品掉落稀有度，最多 500%,✓ stat_descriptions.txt:336092
-fix-mult#42,monster_damage_+%_final_per_alive_packmate,怪物群中每隻存活的怪物使傷害增加 {0}%,✓ stat_descriptions.txt:366544
-fix-mult#43,monster_damage_+%_final_per_alive_packmate,怪物群中每隻存活的怪物使傷害減少 {0}%,✓ stat_descriptions.txt:366545
-fix-mult#44,necromancer_minion_damage_+%_final,召喚物造成的傷害增加 {0}%,✓ stat_descriptions.txt:369827
-fix-mult#45,necromancer_minion_damage_+%_final,召喚物造成的傷害減少 {0}%,✓ stat_descriptions.txt:369828
-fix-mult#46,strongest_packmate_multiplier_+%_final,最強的怪物群成員傷害增加 {0}%,✓ stat_descriptions.txt:402109
-fix-mult#47,strongest_packmate_multiplier_+%_final,最強的怪物群成員傷害減少 {0}%,✓ stat_descriptions.txt:402110
+fix-mult#33,damage_+%_final_to_grant_packmate_on_death,死亡時怪物群成員傷害增加 {0}%,✓ stat_descriptions.txt:229407
+fix-mult#34,damage_+%_final_to_grant_packmate_on_death,死亡時怪物群成員傷害減少 {0}%,✓ stat_descriptions.txt:229408
+fix-mult#35,deadeye_accuracy_rating_+%_final_per_frenzy_charge,每顆狂怒球減少 {0}% 命中值,✓ stat_descriptions.txt:234871
+fix-mult#36,gladiator_critical_strike_chance_+%_final_while_wielding_dagger,持匕首時，增加 {0}% 暴擊率,✓ stat_descriptions.txt:264997
+fix-mult#37,gladiator_critical_strike_chance_+%_final_while_wielding_dagger,持匕首時，減少 {0}% 暴擊率,✓ stat_descriptions.txt:264998
+fix-mult#38,map_leaguestone_beyond_monster_item_quantity_and_rarity_+%_final,超越怪物增加 {0}% 物品掉落數量和物品稀有度,✓ stat_descriptions.txt:332961
+fix-mult#39,map_leaguestone_beyond_monster_item_quantity_and_rarity_+%_final,超越怪物減少 {0}% 物品掉落數量和物品稀有度,✓ stat_descriptions.txt:332962
+fix-mult#40,map_leaguestone_imprisoned_monsters_item_rarity_+%_final,受精髓禁錮的怪物增加 {0}% 掉落物品稀有度,✓ stat_descriptions.txt:333142
+fix-mult#41,map_monster_item_rarity_+permyriad_final_per_empowered_soul,怪物每擁有 1 個強化靈魂，增加 {0}% 物品掉落稀有度，最多 500%,✓ stat_descriptions.txt:336051
+fix-mult#42,monster_damage_+%_final_per_alive_packmate,怪物群中每隻存活的怪物使傷害增加 {0}%,✓ stat_descriptions.txt:366503
+fix-mult#43,monster_damage_+%_final_per_alive_packmate,怪物群中每隻存活的怪物使傷害減少 {0}%,✓ stat_descriptions.txt:366504
+fix-mult#44,necromancer_minion_damage_+%_final,召喚物造成的傷害增加 {0}%,✓ stat_descriptions.txt:369786
+fix-mult#45,necromancer_minion_damage_+%_final,召喚物造成的傷害減少 {0}%,✓ stat_descriptions.txt:369787
+fix-mult#46,strongest_packmate_multiplier_+%_final,最強的怪物群成員傷害增加 {0}%,✓ stat_descriptions.txt:402068
+fix-mult#47,strongest_packmate_multiplier_+%_final,最強的怪物群成員傷害減少 {0}%,✓ stat_descriptions.txt:402069
 fix-mult#48,tincture_bleeding_damage_+%_final_vs_non_bleeding_enemies,用近戰武器對未流血敵人造成的流血，傷害增加 {0}%,✓ tincture_stat_descriptions.txt:2907
 fix-mult#49,tincture_bleeding_damage_+%_final_vs_non_bleeding_enemies,用近戰武器對未流血敵人造成的流血，傷害減少 {0}%,✓ tincture_stat_descriptions.txt:2908
 fix-gem#1,local_socketed_skill_gem_level_+1_per_x_player_levels,玩家每 {0} 等級，插槽中的技能寶石等級 +1,✓ stat_descriptions.txt:6756
@@ -85,22 +85,22 @@ fix-gem#15,physical_skill_gem_level_+_if_6_elder_items,若裝備 6 種尊師之�
 fix-gem#16,all_skill_gem_level_+,全部技能寶石等級 {0:+d},✓ stat_descriptions.txt:173565
 fix-gem#17,all_skill_gem_quality_+,全部技能寶石品質 {0:+d}%,✓ stat_descriptions.txt:173600
 fix-gem#18,base_elemental_skill_gem_level_+_if_6_unique_influence_amoung_equipped_non_amulet_items,發生行列眾星時，所有元素技能寶石等級 {0:+d},✓ stat_descriptions.txt:189819
-fix-gem#19,chaos_skill_gem_level_+,全部混沌技能寶石等級 {0:+d},✓ stat_descriptions.txt:218694
-fix-gem#20,cold_skill_gem_level_+_if_at_least_4_foulborn_uniques_equipped,如果至少裝備了4件穢生傳奇物品，全部冰冷技能寶石等級 {0:+d},✓ stat_descriptions.txt:221936
-fix-gem#21,cold_skill_gem_level_+,全部冰冷技能寶石等級 {0:+d},✓ stat_descriptions.txt:221971
-fix-gem#22,curse_skill_gem_level_+,全部詛咒技能寶石等級{0:+d},✓ stat_descriptions.txt:228813
-fix-gem#23,dexterity_skill_gem_level_+,全部敏捷技能寶石等級 {0:+d},✓ stat_descriptions.txt:236821
-fix-gem#24,fire_skill_gem_level_+,全部火焰技能寶石等級 {0:+d},✓ stat_descriptions.txt:253299
-fix-gem#25,herald_skill_gem_level_+,所有捷光環技能寶石的等級 {0:+d},✓ stat_descriptions.txt:276007
-fix-gem#26,intelligence_skill_gem_level_+,全部智慧技能寶石等級 {0:+d},✓ stat_descriptions.txt:282534
-fix-gem#27,lightning_skill_gem_level_+_if_at_least_4_foulborn_uniques_equipped,如果至少裝備了4件穢生傳奇物品，全部閃電技能寶石等級 {0:+d},✓ stat_descriptions.txt:289689
-fix-gem#28,lightning_skill_gem_level_+,全部閃電技能寶石等級 {0:+d},✓ stat_descriptions.txt:289724
-fix-gem#29,link_skill_gem_level_+,全部連結技能寶石等級 {0:+d},✓ stat_descriptions.txt:290794
-fix-gem#30,local_socketed_gem_level_+_per_filled_socket,每顆插槽中的寶石，插槽技能寶石等級 {:+d},✓ stat_descriptions.txt:310417
-fix-gem#31,melee_skill_gem_level_+,全部近戰技能寶石等級 {0:+d},✓ stat_descriptions.txt:359207
-fix-gem#32,minion_skill_gem_quality_+,所有召喚物技能寶石的品質 {0:+d}%,✓ stat_descriptions.txt:364223
-fix-gem#33,physical_skill_gem_level_+,全部物理技能寶石等級 {0:+d},✓ stat_descriptions.txt:378264
-fix-gem#34,strength_skill_gem_level_+,全部力量技能寶石等級 {0:+d},✓ stat_descriptions.txt:401991
+fix-gem#19,chaos_skill_gem_level_+,全部混沌技能寶石等級 {0:+d},✓ stat_descriptions.txt:218653
+fix-gem#20,cold_skill_gem_level_+_if_at_least_4_foulborn_uniques_equipped,如果至少裝備了4件穢生傳奇物品，全部冰冷技能寶石等級 {0:+d},✓ stat_descriptions.txt:221895
+fix-gem#21,cold_skill_gem_level_+,全部冰冷技能寶石等級 {0:+d},✓ stat_descriptions.txt:221930
+fix-gem#22,curse_skill_gem_level_+,全部詛咒技能寶石等級{0:+d},✓ stat_descriptions.txt:228772
+fix-gem#23,dexterity_skill_gem_level_+,全部敏捷技能寶石等級 {0:+d},✓ stat_descriptions.txt:236780
+fix-gem#24,fire_skill_gem_level_+,全部火焰技能寶石等級 {0:+d},✓ stat_descriptions.txt:253258
+fix-gem#25,herald_skill_gem_level_+,所有捷光環技能寶石的等級 {0:+d},✓ stat_descriptions.txt:275966
+fix-gem#26,intelligence_skill_gem_level_+,全部智慧技能寶石等級 {0:+d},✓ stat_descriptions.txt:282493
+fix-gem#27,lightning_skill_gem_level_+_if_at_least_4_foulborn_uniques_equipped,如果至少裝備了4件穢生傳奇物品，全部閃電技能寶石等級 {0:+d},✓ stat_descriptions.txt:289648
+fix-gem#28,lightning_skill_gem_level_+,全部閃電技能寶石等級 {0:+d},✓ stat_descriptions.txt:289683
+fix-gem#29,link_skill_gem_level_+,全部連結技能寶石等級 {0:+d},✓ stat_descriptions.txt:290753
+fix-gem#30,local_socketed_gem_level_+_per_filled_socket,每顆插槽中的寶石，插槽技能寶石等級 {:+d},✓ stat_descriptions.txt:310376
+fix-gem#31,melee_skill_gem_level_+,全部近戰技能寶石等級 {0:+d},✓ stat_descriptions.txt:359166
+fix-gem#32,minion_skill_gem_quality_+,所有召喚物技能寶石的品質 {0:+d}%,✓ stat_descriptions.txt:364182
+fix-gem#33,physical_skill_gem_level_+,全部物理技能寶石等級 {0:+d},✓ stat_descriptions.txt:378223
+fix-gem#34,strength_skill_gem_level_+,全部力量技能寶石等級 {0:+d},✓ stat_descriptions.txt:401950
 fix-order#1,supported_chaos_skill_gem_level_+,{0:+d} 被輔助混沌技能寶石的等級,✓ gem_stat_descriptions.txt:31489
 fix-order#2,supported_elemental_skill_gem_level_+,{0:+d} 被輔助元素技能寶石的等級,✓ gem_stat_descriptions.txt:31559
 fix-order#3,supported_minion_skill_gem_level_+,{0:+d} 被輔助召喚物技能寶石的等級,✓ gem_stat_descriptions.txt:31594
@@ -108,19 +108,19 @@ fix-order#4,supported_physical_skill_gem_level_+,{0:+d} 被輔助物理技能寶
 fix-order#5,supported_strike_skill_gem_level_+,{0:+d} 被輔助打擊技能寶石的等級,✓ gem_stat_descriptions.txt:31874
 fix-order#6,local_socketed_physical_gem_level_+,{0:+d} 插槽中全部物理寶石的等級,✓ stat_descriptions.txt:7089
 fix-order#7,aura_skill_gem_level_+,{0:+d}所有光環技能寶石等級,✓ stat_descriptions.txt:186240
-fix-order#8,critical_support_gem_level_+,{0:+d} 全部暴擊輔助寶石的等級,✓ stat_descriptions.txt:227898
-fix-order#9,totem_skill_gem_level_+,{0:+d} 全部圖騰技能寶石的等級,✓ stat_descriptions.txt:407794
-fix-order#10,vaal_skill_gem_level_+,{0:+d} 全部瓦爾技能寶石的等級,✓ stat_descriptions.txt:412832
+fix-order#8,critical_support_gem_level_+,{0:+d} 全部暴擊輔助寶石的等級,✓ stat_descriptions.txt:227857
+fix-order#9,totem_skill_gem_level_+,{0:+d} 全部圖騰技能寶石的等級,✓ stat_descriptions.txt:407753
+fix-order#10,vaal_skill_gem_level_+,{0:+d} 全部瓦爾技能寶石的等級,✓ stat_descriptions.txt:412791
 fix-wording#1,map_unique_monster_X_special_rewards,區域內的傳奇怪物有 1 個額外獎勵\n區域內的傳奇怪物會根據每個獎勵增加難度,✓ map_stat_descriptions.txt:7621
 fix-wording#2,map_unique_monster_X_special_rewards,區域內的傳奇怪物有 {0} 個額外獎勵\n區域內的傳奇怪物會根據每個獎勵增加難度,✓ map_stat_descriptions.txt:7622
-fix-wording#3,map_metamorph_itemised_boss_more_difficult,區域內鍊魔頭目掉落的器官可構成更困難的鍊魔頭目,✓ stat_descriptions.txt:335258
+fix-wording#3,map_metamorph_itemised_boss_more_difficult,區域內鍊魔頭目掉落的器官可構成更困難的鍊魔頭目,✓ stat_descriptions.txt:335217
 fix-wording#4,all_skill_gem_quality_+,全部技能寶石品質 {0:+d}%,✓ 已达成
 fix-wording#5,all_skill_gem_level_+,全部技能寶石等級 {0:+d},✓ 已达成
 fix-additive-rev#1,physical_damage_+%_per_frenzy_charge,每一狂怒球造成{0}%更多物理傷害,✓ active_skill_gem_stat_descriptions.txt:850
 fix-additive-rev#2,physical_damage_+%_per_frenzy_charge,每一狂怒球造成{0}%更少物理傷害,✓ active_skill_gem_stat_descriptions.txt:851
 fix-additive-rev#3,map_boss_damage_+%_per_divination_card,每張盜竊命運卡會使最終地圖頭目造成更多傷害,✓ map_stat_descriptions.txt:3351
 fix-additive-rev#4,display_map_boss_gives_experience_+%,傳奇頭目給予 {0}% 更多經驗值,✓ stat_descriptions.txt:99688
-fix-additive-rev#5,map_unique_item_drop_chance_+%,區域掉落 {0}% 更多傳奇道具,✓ stat_descriptions.txt:352594
+fix-additive-rev#5,map_unique_item_drop_chance_+%,區域掉落 {0}% 更多傳奇道具,✓ stat_descriptions.txt:352553
 fix-category#1,map_harvest_double_item_quant_and_rarity_bonuses_for_seeds,你地圖中的豐收對道具數量和稀有度有 2 倍加成,✓ atlas_stat_descriptions.txt:23711
 fix-category#2,map_strongboxes_drop_x_additional_rare_items,你地圖中的每個保險箱含有 1 個額外隨機稀有道具,✓ atlas_stat_descriptions.txt:38024
 fix-category#3,map_strongboxes_drop_x_additional_rare_items,你地圖中的每個保險箱含有 {0} 個額外隨機稀有道具,✓ atlas_stat_descriptions.txt:38025
@@ -131,36 +131,36 @@ fix-category#7,expedition_elite_%_to_drop_rare_jewellery,<enchanted>{{符文怪�
 fix-category#8,map_area_contains_jewellery_chest,下一個區域將含有 1 個普蘭德斯珠寶箱,✓ leaguestone_stat_descriptions.txt:201
 fix-category#9,attack_damage_+%_per_explicit_map_mod_affecting_area,每個影響該地區地圖道具的詞綴，增加 {0}% 攻擊傷害,✓ stat_descriptions.txt:182963
 fix-category#10,attack_speed_+%_per_explicit_map_mod_affecting_area,每個影響該地區地圖道具的詞綴，增加 {0}% 攻擊速度,✓ stat_descriptions.txt:184566
-fix-category#11,brequel_equipment_fruit_armour_chance_+%,產出的裝備成為防具的機率提高 {0}%,✓ stat_descriptions.txt:202741
-fix-category#12,brequel_equipment_fruit_armour_chance_+%,產出的裝備成為防具的機率降低 {0}%,✓ stat_descriptions.txt:202742
-fix-category#13,brequel_unique_fruit_armour_chance_+%,產出的傳奇物品成為防具的機率提高 {0}%,✓ stat_descriptions.txt:205268
-fix-category#14,brequel_unique_fruit_armour_chance_+%,產出的傳奇物品成為防具的機率降低 {0}%,✓ stat_descriptions.txt:205269
-fix-category#15,brequel_unique_fruit_weapon_and_armour_X_lucky_socket_number_and_links_rolls,產出的傳奇武器與防具會額外擲出插槽與連結 {0} 次並取其最佳結果,✓ stat_descriptions.txt:206115
-fix-category#16,brequel_unique_fruit_weapon_and_armour_random_quality,產出的傳奇武器與防具具有隨機品質值,✓ stat_descriptions.txt:206150
-fix-category#17,chest_drop_additional_corrupted_item_divination_cards,額外含有授予腐化道具的命運卡,✓ stat_descriptions.txt:218827
-fix-category#18,defences_from_animated_guardians_items_apply_to_animated_weapon,幻化守衛上附加的防禦道具也套用至幻化武器,✓ stat_descriptions.txt:235942
-fix-category#19,heist_additional_armour_rewards_from_reward_chests_%,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外護甲道具,✓ stat_descriptions.txt:268168
-fix-category#20,heist_additional_corrupted_rewards_from_reward_chests_%,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外已汙染的道具,✓ stat_descriptions.txt:268273
-fix-category#21,heist_additional_uniques_rewards_from_reward_chests_%,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外傳奇道具,✓ stat_descriptions.txt:268728
-fix-category#22,heist_items_are_fully_linked_%,劫盜中有 {0}% 機率掉落最大連線的道具,✓ stat_descriptions.txt:272353
-fix-category#23,heist_items_are_fully_linked_%,劫盜中掉落最大連線的道具,✓ stat_descriptions.txt:272354
-fix-category#24,heist_items_drop_corrupted_%,劫盜中有 {0}% 機率掉落已汙染的道具,✓ stat_descriptions.txt:272399
-fix-category#25,heist_items_drop_corrupted_%,劫盜中掉落已汙染的道具,✓ stat_descriptions.txt:272400
-fix-category#26,heist_items_drop_identified_%,劫盜中有 {0}% 機率掉落已鑑定道具,✓ stat_descriptions.txt:272445
-fix-category#27,heist_items_drop_identified_%,劫盜中掉落已鑑定道具,✓ stat_descriptions.txt:272446
-fix-category#28,heist_items_have_elder_influence_%,劫盜中有 {0}% 機率掉落的道具有尊師勢力,✓ stat_descriptions.txt:272491
-fix-category#29,heist_items_have_elder_influence_%,劫盜中掉落的道具有尊師勢力,✓ stat_descriptions.txt:272492
-fix-category#30,heist_items_have_shaper_influence_%,劫盜中有 {0}% 機率掉落的道具有塑界者勢力,✓ stat_descriptions.txt:272583
-fix-category#31,heist_items_have_shaper_influence_%,劫盜中掉落的道具有塑界者勢力,✓ stat_descriptions.txt:272584
-fix-category#32,map_area_contains_jewellery_chest,區域含有 1 個普蘭德斯珠寶箱,✓ stat_descriptions.txt:320818
-fix-category#33,map_possessed_monsters_drop_unique_chance_%,最初 3 個被附身的怪物有 {0}% 機率掉落 1 個額外傳奇道具,✓ stat_descriptions.txt:344433
-fix-category#34,map_possessed_monsters_drop_unique_chance_%,最初 3 個被附身的怪物掉落 1 個額外傳奇道具,✓ stat_descriptions.txt:344434
-fix-category#36,map_vaal_vessel_drop_X_divination_cards,瓦爾容器包含 1 個額外給予已汙染道具的命運卡,✓ stat_descriptions.txt:353317
-fix-category#37,map_vaal_vessel_drop_X_divination_cards,瓦爾容器包含 {0} 個額外給予已汙染道具的命運卡,✓ stat_descriptions.txt:353318
-fix-category#38,map_vaal_vessel_drop_x_double_implicit_corrupted_uniques,瓦爾容器包含 1 格額外有兩個固定詞綴的已汙染傳奇道具,✓ stat_descriptions.txt:353858
-fix-category#39,map_vaal_vessel_drop_x_double_implicit_corrupted_uniques,瓦爾容器包含 {0} 格額外有兩個固定詞綴的已汙染傳奇道具,✓ stat_descriptions.txt:353859
-fix-category#40,physical_damage_+%_per_explicit_map_mod_affecting_area,每個影響該地區地圖道具的詞綴，增加 {0}% 物理傷害,✓ stat_descriptions.txt:376615
-fix-category#41,ward_from_armour_item_+%,{0}%增加裝備道具所賦予的保護,✓ stat_descriptions.txt:415502
+fix-category#11,brequel_equipment_fruit_armour_chance_+%,產出的裝備成為防具的機率提高 {0}%,✓ stat_descriptions.txt:202700
+fix-category#12,brequel_equipment_fruit_armour_chance_+%,產出的裝備成為防具的機率降低 {0}%,✓ stat_descriptions.txt:202701
+fix-category#13,brequel_unique_fruit_armour_chance_+%,產出的傳奇物品成為防具的機率提高 {0}%,✓ stat_descriptions.txt:205227
+fix-category#14,brequel_unique_fruit_armour_chance_+%,產出的傳奇物品成為防具的機率降低 {0}%,✓ stat_descriptions.txt:205228
+fix-category#15,brequel_unique_fruit_weapon_and_armour_X_lucky_socket_number_and_links_rolls,產出的傳奇武器與防具會額外擲出插槽與連結 {0} 次並取其最佳結果,✓ stat_descriptions.txt:206074
+fix-category#16,brequel_unique_fruit_weapon_and_armour_random_quality,產出的傳奇武器與防具具有隨機品質值,✓ stat_descriptions.txt:206109
+fix-category#17,chest_drop_additional_corrupted_item_divination_cards,額外含有授予腐化道具的命運卡,✓ stat_descriptions.txt:218786
+fix-category#18,defences_from_animated_guardians_items_apply_to_animated_weapon,幻化守衛上附加的防禦道具也套用至幻化武器,✓ stat_descriptions.txt:235901
+fix-category#19,heist_additional_armour_rewards_from_reward_chests_%,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外護甲道具,✓ stat_descriptions.txt:268127
+fix-category#20,heist_additional_corrupted_rewards_from_reward_chests_%,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外已汙染的道具,✓ stat_descriptions.txt:268232
+fix-category#21,heist_additional_uniques_rewards_from_reward_chests_%,劫盜中開啟獎勵箱時，有 {0}% 機率獲得額外傳奇道具,✓ stat_descriptions.txt:268687
+fix-category#22,heist_items_are_fully_linked_%,劫盜中有 {0}% 機率掉落最大連線的道具,✓ stat_descriptions.txt:272312
+fix-category#23,heist_items_are_fully_linked_%,劫盜中掉落最大連線的道具,✓ stat_descriptions.txt:272313
+fix-category#24,heist_items_drop_corrupted_%,劫盜中有 {0}% 機率掉落已汙染的道具,✓ stat_descriptions.txt:272358
+fix-category#25,heist_items_drop_corrupted_%,劫盜中掉落已汙染的道具,✓ stat_descriptions.txt:272359
+fix-category#26,heist_items_drop_identified_%,劫盜中有 {0}% 機率掉落已鑑定道具,✓ stat_descriptions.txt:272404
+fix-category#27,heist_items_drop_identified_%,劫盜中掉落已鑑定道具,✓ stat_descriptions.txt:272405
+fix-category#28,heist_items_have_elder_influence_%,劫盜中有 {0}% 機率掉落的道具有尊師勢力,✓ stat_descriptions.txt:272450
+fix-category#29,heist_items_have_elder_influence_%,劫盜中掉落的道具有尊師勢力,✓ stat_descriptions.txt:272451
+fix-category#30,heist_items_have_shaper_influence_%,劫盜中有 {0}% 機率掉落的道具有塑界者勢力,✓ stat_descriptions.txt:272542
+fix-category#31,heist_items_have_shaper_influence_%,劫盜中掉落的道具有塑界者勢力,✓ stat_descriptions.txt:272543
+fix-category#32,map_area_contains_jewellery_chest,區域含有 1 個普蘭德斯珠寶箱,✓ stat_descriptions.txt:320777
+fix-category#33,map_possessed_monsters_drop_unique_chance_%,最初 3 個被附身的怪物有 {0}% 機率掉落 1 個額外傳奇道具,✓ stat_descriptions.txt:344392
+fix-category#34,map_possessed_monsters_drop_unique_chance_%,最初 3 個被附身的怪物掉落 1 個額外傳奇道具,✓ stat_descriptions.txt:344393
+fix-category#36,map_vaal_vessel_drop_X_divination_cards,瓦爾容器包含 1 個額外給予已汙染道具的命運卡,✓ stat_descriptions.txt:353276
+fix-category#37,map_vaal_vessel_drop_X_divination_cards,瓦爾容器包含 {0} 個額外給予已汙染道具的命運卡,✓ stat_descriptions.txt:353277
+fix-category#38,map_vaal_vessel_drop_x_double_implicit_corrupted_uniques,瓦爾容器包含 1 格額外有兩個固定詞綴的已汙染傳奇道具,✓ stat_descriptions.txt:353817
+fix-category#39,map_vaal_vessel_drop_x_double_implicit_corrupted_uniques,瓦爾容器包含 {0} 格額外有兩個固定詞綴的已汙染傳奇道具,✓ stat_descriptions.txt:353818
+fix-category#40,physical_damage_+%_per_explicit_map_mod_affecting_area,每個影響該地區地圖道具的詞綴，增加 {0}% 物理傷害,✓ stat_descriptions.txt:376574
+fix-category#41,ward_from_armour_item_+%,{0}%增加裝備道具所賦予的保護,✓ stat_descriptions.txt:415461
 fix-placeholder#1,deepwater_chance_to_ancient_%,機會石改為掉落古變石,✓ 上游已修正（本条可退役）｜機會石有{0}%機率改為掉落古變石
 fix-placeholder#2,deepwater_chaos_to_divine_%,混沌石改為掉落神聖石,✓ 上游已修正（本条可退役）｜混沌石有{0}%機率改為掉落神聖石
 fix-placeholder#3,deepwater_scour_to_annulment_%,重鑄石改為掉落無效石,✓ 上游已修正（本条可退役）｜重鑄石有{0}%機率改為掉落無效石
