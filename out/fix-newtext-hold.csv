@@ -1,0 +1,3 @@
+﻿table,row,slot,en,zh_old,zh_new,note
+keywordpopups.datc64,161,8,Limited Currency,Limited Currency,限定通貨,3.30.0d 新增的關鍵字提示；限定＝官方 Limited 的譯法（如稀有限定）｜3.30.0d 暂缓：同批多张 .dat 写进同一自建 bundle 时客户端闪退，先撤出
+keywordpopups.datc64,161,16,"Nightmare Maps are only modifiable with Chaos Orbs, Vaal Orbs, Originator Exalted Orbs, Delirium Orbs and Chisels.","Nightmare Maps are only modifiable with Chaos Orbs, Vaal Orbs, Originator Exalted Orbs, Delirium Orbs and Chisels.",夢魘地圖僅能使用混沌石、瓦爾寶珠、開創者崇高石、譫妄玉和圖釘調整,3.30.0d 新增；句式照官方 clientstrings row 7270「僅能使用混沌石、瓦爾寶珠、譫妄玉和圖釘調整」；道具名用官方譯名（混沌石／瓦爾寶珠／譫妄玉／圖釘）｜3.30.0d 暂缓：同批多张 .dat 写进同一自建 bundle 时客户端闪退，先撤出

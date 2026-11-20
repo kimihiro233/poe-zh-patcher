@@ -1566,6 +1566,34 @@ internal static class Program {
         Check("逃生舱：一个字节都没回滚", File.ReadAllBytes(path).SequenceEqual(bytesBeforeDiscard));
         Check("逃生舱：之后不再认为有未完成写入", !GgpkUndo.Recover(path).Recovered);
 
+        // ---- H) 大于 64 MB 的块必须能退回去
+        // ggpk 的索引是**一整块**写下去的（3.30 时期就有 78 MB）。旧版把单块上限
+        // 写死 64 MB，于是索引一旦写坏就永远退不回去 —— 客户端报的是
+        // 「File not found: Metadata/StatDescriptions/stat_descriptions.csd」，
+        // 而日志里明明存着原始索引的字节，就是这段判断把它们全拒了。
+        var bigPath = Path.Combine(root, "Big.ggpk");
+        const int bigLen = 80 << 20;
+        var bigOrig = new byte[bigLen];
+        for (int i = 0; i < bigOrig.Length; i++) bigOrig[i] = (byte)(i & 0xFF);
+        File.WriteAllBytes(bigPath, bigOrig);
+        var uH = GgpkUndo.Begin(bigPath);
+        using (var fsH = new FileStream(bigPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)) {
+            var st = uH.Wrap(fsH);
+            st.Position = 1 << 20;
+            var blk = new byte[70 << 20];          // 70 MB > 旧的 64 MB 上限
+            for (int i = 0; i < blk.Length; i++) blk[i] = (byte)(~i & 0xFF);
+            st.Write(blk, 0, blk.Length);
+            st.Flush();
+        }
+        uH.SimulateCrash();
+        var recH = GgpkUndo.Recover(bigPath);
+        Check("70MB 的大块也退得回去", recH.Recovered && recH.Complete, recH.Message);
+        var bigNow = File.ReadAllBytes(bigPath);
+        bool bigOk = bigNow.Length >= bigOrig.Length;
+        for (int i = 0; bigOk && i < bigOrig.Length; i++)
+            if (bigNow[i] != bigOrig[i]) { bigOk = false; Console.WriteLine($"    ! 第 {i:N0} 个字节不一样"); }
+        Check("大块退回去后内容逐字节回到写前", bigOk);
+
         Console.WriteLine();
         Console.WriteLine($"日志目录还剩 {Directory.GetDirectories(GgpkUndo.RootFor(path)).Length} 份（提交过的快照会留着当后悔药）");
         Console.WriteLine($"ggpk 逐字节还原自检：{(bad == 0 ? "全部通过" : $"{bad} 项失败")}");

@@ -34,6 +34,10 @@ internal sealed class GgpkUndo : IRollback {
     private const string UndoName = "undo.bin";
     private const string MetaName = "meta.json";
     private const long SyncMs = 150;                      // 硬落盘节流：断电最多丢这么久
+    // 单块上限：ggpk 索引是一整块写下去的（3.30 时期 78 MB），必须容得下它，
+    // 否则索引写坏后没有退路。上限只用来挡「日志被截断后的垃圾偏移」，
+    // 真正的边界判断是下面那句 off > OrigLength - cnt。
+    private const int MaxBlock = 512 << 20;
     private static readonly byte[] Magic = Encoding.ASCII.GetBytes("POEZHU1\n");
 
     // 一次安装 = 一份日志。容器中途重开（落盘后回读校验）要接着往同一份里记，
@@ -442,7 +446,13 @@ internal sealed class GgpkUndo : IRollback {
                 // off 可能是垃圾值，f.Position = off 会写到文件尾之外，FileStream 在中间
                 // 填 0 —— 结果是「追加了一堆垃圾，读回比对还能通过，然后报成功」。
                 // 用 off > OrigLength - cnt 而不是 off + cnt > OrigLength，避开 long 加法溢出。
-                if (off < 0 || cnt <= 0 || cnt > (64 << 20) || off > m.OrigLength - cnt) {
+                //
+                // 上限不能是 64 MB：ggpk 的索引是**一整块**写下去的，3.30 时期就有 78 MB，
+                // 超过 64 MB 的块会被这里判成越界 → 索引一旦写坏就永远退不回去
+                // （2026-11-20 实测：一次安装后客户端报「File not found:
+                // Metadata/StatDescriptions/stat_descriptions.csd」，而日志里明明存着
+                // 原始索引的 78 MB 字节，就是这段判断把它们全拒了）。
+                if (off < 0 || cnt <= 0 || cnt > MaxBlock || off > m.OrigLength - cnt) {
                     errs.Add($"日志记录越界（偏移 {off}，长度 {cnt}，原文长度 {m.OrigLength}）");
                     break;
                 }

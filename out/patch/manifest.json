@@ -1,5 +1,5 @@
 {
-  "version": "0.7.0",
+  "version": "0.7.1",
   "lang": "traditional chinese",
   "game": {
     "client_version": "3.30.0d",
@@ -13,7 +13,7 @@
     "out/fix-category-ui.csv",
     "out/fix-newtext.csv"
   ],
-  "total_edits": 36,
+  "total_edits": 30,
   "files": [
     {
       "table": "achievementitems.datc64",
@@ -205,72 +205,6 @@
       ]
     },
     {
-      "table": "baseitemtypes.datc64",
-      "path_in_ggpk": "data/traditional chinese/baseitemtypes.datc64",
-      "src": "pairs/zh/baseitemtypes.datc64",
-      "source": [
-        "fix-newtext.csv"
-      ],
-      "dst": "out/patch/baseitemtypes.datc64",
-      "sha256_original": "862a0474cdb7a7775a8c73807cb39f69cf351583f5cc560da33969f8755a4a5a",
-      "sha256_patched": "df7148c21c8dd5cb6b8c41ab406aaecd5a00528600543a020e03587a69b1656e",
-      "size_original": 2877930,
-      "size_patched": 2877992,
-      "verify": "ok",
-      "tolerated_eof_sentinel": [
-        [
-          5669,
-          268
-        ],
-        [
-          5669,
-          284
-        ]
-      ],
-      "edits": [
-        {
-          "row": 60,
-          "rel": 32,
-          "old": "Originator's Exalted Orb",
-          "new": "開創者崇高石",
-          "action": "append",
-          "shared_refs": 2,
-          "new_pool_offset": 763018,
-          "grew": -18
-        },
-        {
-          "row": 215,
-          "rel": 32,
-          "old": "Primordial Exalted Orb",
-          "new": "始祖崇高石",
-          "action": "append",
-          "shared_refs": 1,
-          "new_pool_offset": 763034,
-          "grew": -17
-        },
-        {
-          "row": 772,
-          "rel": 124,
-          "old": "Originator's Exalted Orb",
-          "new": "開創者崇高石",
-          "action": "append",
-          "shared_refs": 2,
-          "new_pool_offset": 763048,
-          "grew": -18
-        },
-        {
-          "row": 774,
-          "rel": 124,
-          "old": "Originator's Exalted Orb",
-          "new": "開創者崇高石",
-          "action": "append",
-          "shared_refs": 2,
-          "new_pool_offset": 763064,
-          "grew": -18
-        }
-      ]
-    },
-    {
       "table": "clientstrings.datc64",
       "path_in_ggpk": "data/traditional chinese/clientstrings.datc64",
       "src": "pairs/zh/clientstrings.datc64",
@@ -445,43 +379,6 @@
           "shared_refs": 1,
           "new_pool_offset": 48286,
           "grew": 0
-        }
-      ]
-    },
-    {
-      "table": "keywordpopups.datc64",
-      "path_in_ggpk": "data/traditional chinese/keywordpopups.datc64",
-      "src": "pairs/zh/keywordpopups.datc64",
-      "source": [
-        "fix-newtext.csv"
-      ],
-      "dst": "out/patch/keywordpopups.datc64",
-      "sha256_original": "57d78b6e3d20cadc049a6a81eb84304b87b38ba136592d199bf7f091ae0380cd",
-      "sha256_patched": "c5135df399baf8633ff08bda4fc626c0807a5ce4edce924e11c18a115399e953",
-      "size_original": 39342,
-      "size_patched": 39422,
-      "verify": "ok",
-      "tolerated_eof_sentinel": [],
-      "edits": [
-        {
-          "row": 161,
-          "rel": 8,
-          "old": "Limited Currency",
-          "new": "限定通貨",
-          "action": "append",
-          "shared_refs": 1,
-          "new_pool_offset": 27676,
-          "grew": -12
-        },
-        {
-          "row": 161,
-          "rel": 16,
-          "old": "Nightmare Maps are only modifiable with Chaos Orbs, Vaal Orbs, Originator Exalted Orbs, Delirium Orbs and Chisels.",
-          "new": "夢魘地圖僅能使用混沌石、瓦爾寶珠、開創者崇高石、譫妄玉和圖釘調整",
-          "action": "append",
-          "shared_refs": 1,
-          "new_pool_offset": 27688,
-          "grew": -82
         }
       ]
     },
