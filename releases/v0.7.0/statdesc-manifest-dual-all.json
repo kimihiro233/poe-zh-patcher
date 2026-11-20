@@ -1,0 +1,711 @@
+{
+  "version": "0.7.0",
+  "kind": "statdescriptions",
+  "flavor": "dual-all",
+  "game": {
+    "log": "logs/LatestClient.txt",
+    "log_mtime": "2026-11-20T13:16:15",
+    "client_version": "3.30.0d",
+    "patch_version": "3.30.0.4",
+    "fingerprint": "a27179244953f4a34e5f572f6587ca56c8f413928ae9fbec9ae1c659d2001462",
+    "locked_at": "2026-11-20T13:22:20",
+    "ggpk_size": 79769601101,
+    "source": "game.lock.json"
+  },
+  "fingerprint": "a27179244953f4a34e5f572f6587ca56c8f413928ae9fbec9ae1c659d2001462",
+  "total_edits": 165,
+  "files": [
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/active_skill_gem_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_active_skill_gem_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_active_skill_gem_stat_descriptions.txt",
+      "sha256_original": "17a640e318408076ab6c6eb200b514cd99147c4b9e10500cede509d77dfb31a1",
+      "sha256_patched": "c1349abfe1814eaa5350becddd96e57b6e35fb7c7e4662318c78467b1ad1a045",
+      "size_original": 944156,
+      "size_patched": 998316,
+      "edits": 2,
+      "sha256_variants": [
+        "e398304cbf2020173d132e29a2ee1520fe14341aa278cceb8d8b0427af1342a8",
+        "a1ac11781b664eeb0f17e2297ca5659a829f995c575c873eea38aed4d6005936"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/advanced_mod_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_advanced_mod_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_advanced_mod_stat_descriptions.txt",
+      "sha256_original": "9d71cd230a46af4a9e719ce78dfdafb320fa63ca7d80a0b2414c59d3ac69c3bd",
+      "sha256_patched": "484c5ce85e6fab5ac754e1b6993b23c654439f54704ae1fe5148fb34bba50944",
+      "size_original": 172016,
+      "size_patched": 177990,
+      "edits": 0,
+      "sha256_variants": [
+        "9d71cd230a46af4a9e719ce78dfdafb320fa63ca7d80a0b2414c59d3ac69c3bd",
+        "ae4a0f3b3318c456a9b2e1c78dc9b923a5d6ee840aca63cddf5416b1af82207f",
+        "96d881ca1e8343d429b4458f4d4ba772b7488659f10d50e31a27e52afbcef64a"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/atlas_relic_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_atlas_relic_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_atlas_relic_stat_descriptions.txt",
+      "sha256_original": "fd95f9b55a28e41403c59be2532c18ee55ffc715a427cfa84664059a575366d7",
+      "sha256_patched": "cd473a10919e8191374c1b81acc746c6b513f65e76d680657e3f8e19e5d07d28",
+      "size_original": 10488,
+      "size_patched": 10960,
+      "edits": 0,
+      "sha256_variants": [
+        "fd95f9b55a28e41403c59be2532c18ee55ffc715a427cfa84664059a575366d7"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/atlas_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_atlas_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_atlas_stat_descriptions.txt",
+      "sha256_original": "bb7f6e841f265819c0ba83d584641ebb29ab8124d0df2265c53ece1cf9299aba",
+      "sha256_patched": "99d623a417fe71371f0731d36a35c098fa6d83887fca8ff299afb115a336f1d0",
+      "size_original": 3399146,
+      "size_patched": 3640478,
+      "edits": 5,
+      "sha256_variants": [
+        "d417b46a145ddefbaa959c781cfc54bcd63e6a8114929d2186e4e9055bccb16c",
+        "0f0038dddff008d58ef3c61613e75a115069da7577115d35d830f29d2984c0cd",
+        "706805ebd46d79a10ec8a8f5626e0b388244b7020aa8fdeba993de1d633fa59a",
+        "9d615f6f397cf091419c7256f3f10c65203a90edca5b0c5d11e98c5f504b5e92",
+        "8d3c1f018af83c30a3aae9d320d5c84c235f2e1639861873c1b6a8252e12e4ca"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/atlas_variant_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_atlas_variant_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_atlas_variant_stat_descriptions.txt",
+      "sha256_original": "af1c87924a47fba58b53028579cca936519ec590a078ca72feb6614d97168a22",
+      "sha256_patched": "929819e5d266393cd73c68ca6cf400dcb479908703b8dfef09ffcddf554c401e",
+      "size_original": 82754,
+      "size_patched": 86270,
+      "edits": 0,
+      "sha256_variants": [
+        "af1c87924a47fba58b53028579cca936519ec590a078ca72feb6614d97168a22",
+        "c3c8f71fbc5520c86f035ad5ee5c50f65d09a91a061adf73f756d345fa7da1d9",
+        "bc98a32a6d6f0f4fe870a8265d59a6da1bd1abbbfb8c9b4f8cab7f32c0efe71e"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/aura_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_aura_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_aura_skill_stat_descriptions.txt",
+      "sha256_original": "be7277df412bd89d2a553852a57405a0022e18eb644b01c7be01c06c059c2b82",
+      "sha256_patched": "7671968fc449f149f3b998f527652a4c89b459ae6a88fc7666558712d722219b",
+      "size_original": 250192,
+      "size_patched": 266008,
+      "edits": 0,
+      "sha256_variants": [
+        "be7277df412bd89d2a553852a57405a0022e18eb644b01c7be01c06c059c2b82"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/banner_aura_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_banner_aura_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_banner_aura_skill_stat_descriptions.txt",
+      "sha256_original": "c737d21eaa7060f75487a3eb6a5a4a69724e1e9b113bc801bc4906ee9b784697",
+      "sha256_patched": "4538b3b01fa23d9a1f5d354ca0636cbb627bae571adf2205ea73794f3182f650",
+      "size_original": 54576,
+      "size_patched": 58008,
+      "edits": 0,
+      "sha256_variants": [
+        "c737d21eaa7060f75487a3eb6a5a4a69724e1e9b113bc801bc4906ee9b784697"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/beam_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_beam_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_beam_skill_stat_descriptions.txt",
+      "sha256_original": "935844cbb48e1302a22ac553b5957aac24976a6f9f4367c9b9faa563b45d5d2e",
+      "sha256_patched": "c8c7cdc4be1560c45cd2bef7e2ce81f85c087a720eb3e8eb18589d4186c56255",
+      "size_original": 10676,
+      "size_patched": 11448,
+      "edits": 0,
+      "sha256_variants": [
+        "935844cbb48e1302a22ac553b5957aac24976a6f9f4367c9b9faa563b45d5d2e"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/brand_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_brand_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_brand_skill_stat_descriptions.txt",
+      "sha256_original": "bb3b8fd27524079141a533b4533ac1601487209dd4dc6aab96f74aa9cef62669",
+      "sha256_patched": "fae25f361a86d22457324af522bcb701b3088ce6bd5277a0051a8405af687cbd",
+      "size_original": 34024,
+      "size_patched": 35872,
+      "edits": 0,
+      "sha256_variants": [
+        "bb3b8fd27524079141a533b4533ac1601487209dd4dc6aab96f74aa9cef62669"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/buff_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_buff_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_buff_skill_stat_descriptions.txt",
+      "sha256_original": "4268b064398d2b93d29a736823e9a476f3e95db3bb3d80a31201b965c52fb599",
+      "sha256_patched": "44f911258a79af3774b65cdc984afe254e5c93c6a60019c7ac3f16a1a4bf4167",
+      "size_original": 168976,
+      "size_patched": 178994,
+      "edits": 0,
+      "sha256_variants": [
+        "4268b064398d2b93d29a736823e9a476f3e95db3bb3d80a31201b965c52fb599"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/chest_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_chest_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_chest_stat_descriptions.txt",
+      "sha256_original": "1cab4646a7610653f5a8d4b674493573809627796d4734718492b56f22d89059",
+      "sha256_patched": "28c012754d233ab3ec908acbc30ada88e1e2e98221c357fc1fc52326a0a3b595",
+      "size_original": 180148,
+      "size_patched": 191790,
+      "edits": 0,
+      "sha256_variants": [
+        "1cab4646a7610653f5a8d4b674493573809627796d4734718492b56f22d89059",
+        "6b32359b7c099d58b20e0da16d8ede21c23faf337c651b47fa7d0118d0bf07b2",
+        "7d2ec80ceb731166768d9b4796051e1977cbfc053ebc73a7a21a5cbbecac93ec"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/curse_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_curse_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_curse_skill_stat_descriptions.txt",
+      "sha256_original": "93be1d43cffa12ffa73f2ccc8decd4be06f8cd5a912810f49334ba906fb79067",
+      "sha256_patched": "5b22ae12541fcd8064d3ca27e93960f731dfe1e90c085c758c0645717a19a59d",
+      "size_original": 221514,
+      "size_patched": 234308,
+      "edits": 0,
+      "sha256_variants": [
+        "93be1d43cffa12ffa73f2ccc8decd4be06f8cd5a912810f49334ba906fb79067"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/debuff_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_debuff_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_debuff_skill_stat_descriptions.txt",
+      "sha256_original": "c63607ea6c8acc8802d5d282920647d03bc35209f9bade4aa31dce82916a5810",
+      "sha256_patched": "20dec796ad9afea91d5b0d1d00b48309939452c4ebdd6440304c28e5fb8fde95",
+      "size_original": 66772,
+      "size_patched": 70576,
+      "edits": 0,
+      "sha256_variants": [
+        "c63607ea6c8acc8802d5d282920647d03bc35209f9bade4aa31dce82916a5810"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/deepwater_applied_adjacent_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_deepwater_applied_adjacent_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_deepwater_applied_adjacent_stat_descriptions.txt",
+      "sha256_original": "5b4cfd2d43d745d044e5cda532e012a0eac7036efa8dada4335a15aa88b468c0",
+      "sha256_patched": "536c3156b25ee06f5ee98a07c5866c6d228b0c2f13a01440735d73b8f6dbc0c2",
+      "size_original": 7698,
+      "size_patched": 8128,
+      "edits": 0,
+      "sha256_variants": [
+        "5b4cfd2d43d745d044e5cda532e012a0eac7036efa8dada4335a15aa88b468c0"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/deepwater_explicit_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_deepwater_explicit_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_deepwater_explicit_stat_descriptions.txt",
+      "sha256_original": "eab334c95be79340d32a3295226d8a5a085a9107f220a2c45b4e91bc6e93f244",
+      "sha256_patched": "d0ba21f8295c022a7eb193429ece1e4712411c5c3501899ff163f5aa665eba2f",
+      "size_original": 62496,
+      "size_patched": 66926,
+      "edits": 0,
+      "sha256_variants": [
+        "eab334c95be79340d32a3295226d8a5a085a9107f220a2c45b4e91bc6e93f244"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/deepwater_implicit_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_deepwater_implicit_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_deepwater_implicit_stat_descriptions.txt",
+      "sha256_original": "636cf78f8dfea27509280307e8bd790197d88a48f0ef6358c46eaa3f511824fb",
+      "sha256_patched": "8095fa21341d98c24fcaf687dd2b3ae262316bb40e4dc710a1fe617109faf923",
+      "size_original": 205312,
+      "size_patched": 220214,
+      "edits": 0,
+      "sha256_variants": [
+        "636cf78f8dfea27509280307e8bd790197d88a48f0ef6358c46eaa3f511824fb",
+        "cfbcf6e0698d52be2e68e62ebfd2eb751a1b13ba7415fe2477d812f75d571932",
+        "bb8977f2a5befeed5644672b5611431277adf72ea05d923fa10a6db012d7b1d9"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/expedition_relic_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_expedition_relic_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_expedition_relic_stat_descriptions.txt",
+      "sha256_original": "94924fc3d6bb1e77174a3b8e783014d3f953779964a636eebe295f81d8651ccf",
+      "sha256_patched": "119944b7895ca37996edd705e4406d691c73f128e906e772fcb59d0ee7d62b87",
+      "size_original": 447728,
+      "size_patched": 478912,
+      "edits": 4,
+      "sha256_variants": [
+        "f28349fa50bf46a8e4e652adc7f6aab5ee294be895df2c746ac6021207e916a2",
+        "9e354dbe7b14118dde7b16b9a90fece42f6101ec33a2396843397a122d7a8037",
+        "89aeb2fa65219c80a72792066580b4ddb3b15ceb1647f1cfb80fc0a6be436893",
+        "5038c98d5c7ddcc072db8a726bac45f800bdc8c947d3a48c36bf4e269c5b2fb2",
+        "88b0471901941766d3026b0457f49f27b847deb980b643df128ae5f57f4d70ef"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/gem_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_gem_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_gem_stat_descriptions.txt",
+      "sha256_original": "8cd680da06cd2d36ee228f93984673ff490e52e9258d89a376cda3a8dae73740",
+      "sha256_patched": "729d1b88808e36cf235b299fdcab7c522d3a0cf6b22944ea6f007f34cdf8e44e",
+      "size_original": 2861700,
+      "size_patched": 3043698,
+      "edits": 10,
+      "sha256_variants": [
+        "091947b2acedadd2691112b31a0ea85bc0c77bc08f57dfcbb221d704ed94b0ec",
+        "58fc999f296a5768236d0d36f1a1ab7b6ce42775106744ff8207e41bf3003bd5",
+        "85ca4c3417a2f93113741df1d40694dd18f77b31636b92b90d5ad2bcedbcc5cf",
+        "9f240f4e199f6d5c9f1e3358c59200b88a62fb8ed60854ee8098c49130b13d12",
+        "7cac55aca24e579e69296b9b336d235131d0687467062e4a4b47c9ced9b0056e"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/graft_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_graft_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_graft_stat_descriptions.txt",
+      "sha256_original": "36bcce1236ac4f63690bfa772b68803c7a31627aea9efac0072e8787b4d563fa",
+      "sha256_patched": "61c7524a320b5bc3a48e74ec0c2958a0123a7a45458842e5b55fe40c36913325",
+      "size_original": 361206,
+      "size_patched": 383886,
+      "edits": 0,
+      "sha256_variants": [
+        "36bcce1236ac4f63690bfa772b68803c7a31627aea9efac0072e8787b4d563fa"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/harvest_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_harvest_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_harvest_stat_descriptions.txt",
+      "sha256_original": "b193352e20f36c3ed21530ff78add1ee23c632980a9574191b49ff2dcfcfdb7f",
+      "sha256_patched": "857897a78b771c56470f2b15b22dc6a294a7db54f0e8c86bc03a5367324bc568",
+      "size_original": 59682,
+      "size_patched": 63536,
+      "edits": 0,
+      "sha256_variants": [
+        "b193352e20f36c3ed21530ff78add1ee23c632980a9574191b49ff2dcfcfdb7f"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/heist_equipment_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_heist_equipment_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_heist_equipment_stat_descriptions.txt",
+      "sha256_original": "931b15b9454426a2f213fbf2fe2371c7761ff1869e12ed8bc63618a7307850be",
+      "sha256_patched": "b688997564bbcbc2d1c63f3859d6c29fa62817a2767ebc62e77f74c914fbebe1",
+      "size_original": 330152,
+      "size_patched": 351316,
+      "edits": 1,
+      "sha256_variants": [
+        "58b9343663d23278ed8b3b73a83b26ce0a1a65db050025785eb05711af2c07e5",
+        "9a66e3f2e8941802092f9d9ef355ba1b8a07b6e60be405596cf28aab32e76d16",
+        "5d07a1d909107839e3bc6285d3ce8db1ea90a2b45ccc78fe0ecb67f32706a120",
+        "1c3947b321aba0042c31991561748eee58d834f7c8c95cb924a90dde22a52eb5",
+        "dd014bf1d2d04f6f6fa4765c158f6d305d764e88a2b44cd3930c31f1239ded67"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/leaguestone_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_leaguestone_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_leaguestone_stat_descriptions.txt",
+      "sha256_original": "ecb24489a2f5ad8548af85d296fbf06ae438bca55d43b6123c2b9609e922d847",
+      "sha256_patched": "a889ea59e5f60a27bb52bb5440a428bb0b9d52441f784645657ee20398fbd9db",
+      "size_original": 492426,
+      "size_patched": 528334,
+      "edits": 5,
+      "sha256_variants": [
+        "bf5404b898b45cb88ec830082f3614847000af3749cd7df63d573e9ad337d906",
+        "134d05bd7d57eed288c7a46f937f3ce091e53f5070bb030fd0fb1fd09cda3d81",
+        "1997a45ca89470935392ac53ed93d62bc50646484fb7516ee5a990aa6239dca5",
+        "be2208480444efbe882d6e360e56f9a19676e8853110e7658d1eebcb326fb251",
+        "9020757a653f411cd6efdd44d6567407e39f46057e37ee14ffc003570d7b5092"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/legion_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_legion_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_legion_stat_descriptions.txt",
+      "sha256_original": "dfe12feb59be73998c24c1ddf886746e07633a6bce8cea1eca4cbd1a2266fc7f",
+      "sha256_patched": "2b1a4c211bcdb7f367aaf000a82d9ff27f777a6cfea47bac5f74c488dd9044c2",
+      "size_original": 12212,
+      "size_patched": 13102,
+      "edits": 0,
+      "sha256_variants": [
+        "dfe12feb59be73998c24c1ddf886746e07633a6bce8cea1eca4cbd1a2266fc7f"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/map_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_map_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_map_stat_descriptions.txt",
+      "sha256_original": "aaf9a54e11eddb4f08632b696d5f79cb7c4f06d9423e4c88ef3eb0d3665766ad",
+      "sha256_patched": "80ae34d36c6383a2d4181fde3511769ba7f8e48239cdd01195b9a1207b5f0585",
+      "size_original": 564994,
+      "size_patched": 601772,
+      "edits": 14,
+      "sha256_variants": [
+        "ce96d543819557fb27cafa9c039109a46965d557d0117b5809b94fc267d509a6",
+        "577fa18fd765992e0d87f9e14aad24579565584c42d642b1af9e638afdd12ec4",
+        "2c94fbba0f6aa21f88f1bbf8f663df972679d92a288ade9851419b093ffa28d8",
+        "79fdff37a6a3d635f60c48eb25ce270f9ee39cd7abacbe622eb98268ed5671ab",
+        "d10fd68338a83df59cedc2a1a100972c97d71d15312f48b64107c07ca83f51e3"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/mercenary_support_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_mercenary_support_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_mercenary_support_stat_descriptions.txt",
+      "sha256_original": "13a3bce2467498f3ae53b028293b645ac0034411f2e13e8ce6ac553571678e23",
+      "sha256_patched": "d028c2b65b8168bed03f2fee9b0f53a2a50244535a35f5d5688f9789bd086501",
+      "size_original": 162870,
+      "size_patched": 173800,
+      "edits": 0,
+      "sha256_variants": [
+        "13a3bce2467498f3ae53b028293b645ac0034411f2e13e8ce6ac553571678e23"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/minion_attack_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_minion_attack_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_minion_attack_skill_stat_descriptions.txt",
+      "sha256_original": "cebf5c3cfc5480a3a5acae0af4b5ab374216f9917c2439c1a53c739ba23ac617",
+      "sha256_patched": "51df7a2b2590cebabea33bab33dfb47b675baf0a1e50901745f9cf7de8aae822",
+      "size_original": 656932,
+      "size_patched": 700134,
+      "edits": 0,
+      "sha256_variants": [
+        "cebf5c3cfc5480a3a5acae0af4b5ab374216f9917c2439c1a53c739ba23ac617",
+        "e991001b7e52cd1eafc56137a2b1000c678d5efc353a3cea0cd44a9afa950e58",
+        "ff3270ca56ef47a2513a7ac85a70298e939c5910307bd9617234e5117d5a0328"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/minion_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_minion_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_minion_skill_stat_descriptions.txt",
+      "sha256_original": "4d68e79bf22623eb786e960e2a2e2dd911ee6f61399b2676e93c9e2999ba0474",
+      "sha256_patched": "e8a024dcc0ae7986124706839435d14e0487732915ce6889035184a9a17fc1f6",
+      "size_original": 1139454,
+      "size_patched": 1206126,
+      "edits": 2,
+      "sha256_variants": [
+        "1256ff036b11c6d6e3c734249d3c0ee7e207dca36c084c77763a254860cac09a",
+        "a01ddfae9b9a9d59a8ece1577ed7de9e02e0ce1ed3c53c9f0ee69417f6c3a36c",
+        "b4aeda63f9bf63dfd2eb3c1dbab363aa634374f0788acf7f7ecf69e5c1239898",
+        "85dbd5f70a10504f7826fddbe6ff7cba55e27f173bcfb43c227383d8cee2c252",
+        "b8f97e91ed72bddda141e19c7f920d0474a4ad9091942251cd78df86e8e0c6f4"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/minion_spell_damage_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_minion_spell_damage_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_minion_spell_damage_skill_stat_descriptions.txt",
+      "sha256_original": "2e265b2f6c481eca33863a7895b54b41a6287f7f299357a31775fbc3afd371bb",
+      "sha256_patched": "9741350de457fbb3539efbfd38f02c9a7492e731d8c450b7af5dbbac1426a9f4",
+      "size_original": 368752,
+      "size_patched": 391718,
+      "edits": 0,
+      "sha256_variants": [
+        "2e265b2f6c481eca33863a7895b54b41a6287f7f299357a31775fbc3afd371bb",
+        "a21d634bf9c945afa3d9bd4a51b1ae662d7b1cc0ec2c105ba59bf55f78c23daf",
+        "e598fa5e53dd826c45596196c0ffdc60704f259f7161f0fe5c58a69592936cf4"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/minion_spell_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_minion_spell_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_minion_spell_skill_stat_descriptions.txt",
+      "sha256_original": "7d9040f1e8cee411a3e60855a91407899ad855d5e35541fa83b2dd8e3988c8c5",
+      "sha256_patched": "2a29a35ff1f43214e45750b56ff6e4ff0a97db324ac1cf2864c33a1ccf7b60bf",
+      "size_original": 28658,
+      "size_patched": 30270,
+      "edits": 0,
+      "sha256_variants": [
+        "7d9040f1e8cee411a3e60855a91407899ad855d5e35541fa83b2dd8e3988c8c5"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/mirage_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_mirage_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_mirage_stat_descriptions.txt",
+      "sha256_original": "374a209acee84f05908bfd310c09c2553a8019b31d9e9e0ab63e34af11f4b571",
+      "sha256_patched": "68d719d33b2158a2ecc7d98a76165ef9c7049da9a64b086e749d8fa2878200cf",
+      "size_original": 140272,
+      "size_patched": 149958,
+      "edits": 4,
+      "sha256_variants": [
+        "cb49429055bfe1e81bbf4596add2fa8324260b3816250b10c57751ddf95bf610",
+        "3235391733d7b844bc09b66abdb3963e3eda0648249f64159157091014b9d9d8",
+        "7e2ee193fb821a36a6ddcc5f88929d62fd0f568e5e4753c343edb23b00e7b56f",
+        "eabd52595193dfea7495b8343c183c71d1d276b06b1cda8a63d6732a71a187ce",
+        "c21ff4437052c106352c4b27b5cd216a5edbef7fa9037d715ef19a446ca6e84d"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/monster_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_monster_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_monster_stat_descriptions.txt",
+      "sha256_original": "4960bb516707c444f2bfc341cfc8529eafcf66946830b0d28385e0c17e6b14be",
+      "sha256_patched": "d6115d0a87c9d56ac52bd4278dac118386b9f937c399db4c9022f41dffeb799e",
+      "size_original": 44198,
+      "size_patched": 46252,
+      "edits": 0,
+      "sha256_variants": [
+        "4960bb516707c444f2bfc341cfc8529eafcf66946830b0d28385e0c17e6b14be"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/necropolis_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_necropolis_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_necropolis_stat_descriptions.txt",
+      "sha256_original": "e2132236040df3574dc86acdf6a3101d81de35ff1dc1fa38a1bf897043b27a7c",
+      "sha256_patched": "5b35e0e1bb3549a8482c420cf7430dacf642dc9b09ccac9af3b5dcdadd42d809",
+      "size_original": 457744,
+      "size_patched": 481608,
+      "edits": 0,
+      "sha256_variants": [
+        "e2132236040df3574dc86acdf6a3101d81de35ff1dc1fa38a1bf897043b27a7c"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/offering_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_offering_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_offering_skill_stat_descriptions.txt",
+      "sha256_original": "b49ed8c89e1b29336bad78a9deaaa99be0b858af0d60de0acf78401c509e2433",
+      "sha256_patched": "795f46c39b860890600491f4f81e8130ef3bc080e79a570a73857f93c7dee836",
+      "size_original": 41278,
+      "size_patched": 43686,
+      "edits": 0,
+      "sha256_variants": [
+        "b49ed8c89e1b29336bad78a9deaaa99be0b858af0d60de0acf78401c509e2433"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/passive_skill_aura_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_passive_skill_aura_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_passive_skill_aura_stat_descriptions.txt",
+      "sha256_original": "094a47d107d35bbcbba816834f0256cb47bd7f45d72940d3281897ac8c6fa673",
+      "sha256_patched": "c4c5f0e7f035fafa87eac54cae6b2b7b5fb73e2a422ea31da8182ebe0964b5a5",
+      "size_original": 74958,
+      "size_patched": 79386,
+      "edits": 0,
+      "sha256_variants": [
+        "094a47d107d35bbcbba816834f0256cb47bd7f45d72940d3281897ac8c6fa673"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/passive_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_passive_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_passive_skill_stat_descriptions.txt",
+      "sha256_original": "dab1a8a4aff87e6543e1be4f06ea9e4051c549856bb8eb293b493462e68a57c9",
+      "sha256_patched": "0b5775755c9538d9e743b4d7bd741bfa2be00262ddaf0345ef78c2c88e4a867d",
+      "size_original": 409484,
+      "size_patched": 437850,
+      "edits": 1,
+      "sha256_variants": [
+        "bd3e852d005f12d0e52fd7c97c7eeed027f2e8ff2db93ef0c6b87dfcff00aa4b",
+        "a180d9c540b8ade6e6524d1fafffbcd94d25b5699f094966dc2c7a3062c0f1cf"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/primordial_altar_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_primordial_altar_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_primordial_altar_stat_descriptions.txt",
+      "sha256_original": "870c5d6c098133ef41872a1460a0b65fa147df338e00eb3c9d7ab8fdf13b5c46",
+      "sha256_patched": "aa8d85e4332b8e6f473156b15c4a9dbc6d756338e10db890afc6fa1eab145929",
+      "size_original": 243444,
+      "size_patched": 261502,
+      "edits": 0,
+      "sha256_variants": [
+        "870c5d6c098133ef41872a1460a0b65fa147df338e00eb3c9d7ab8fdf13b5c46",
+        "17dbd3db5907d533cb4802e6695e3e09a56d6caa7f26e374ca122b388496d689",
+        "ae008cf62f948996d4c136eb969e335677fa6a137353994e9229476f51c60594"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/sanctum_relic_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_sanctum_relic_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_sanctum_relic_stat_descriptions.txt",
+      "sha256_original": "13a42918ea4c8e6fa03ee2787cc36c9201573b0f4be7840fd1588d842005d287",
+      "sha256_patched": "81f60e567f5f0ee2d68a87a9b52cbb0fb33801ce9337fd980c4b4861df08d358",
+      "size_original": 128328,
+      "size_patched": 136398,
+      "edits": 0,
+      "sha256_variants": [
+        "13a42918ea4c8e6fa03ee2787cc36c9201573b0f4be7840fd1588d842005d287"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/secondary_debuff_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_secondary_debuff_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_secondary_debuff_skill_stat_descriptions.txt",
+      "sha256_original": "06b3ff49aef98079499d2079667dffc790432fb427569cfd928cfb8b2b3c358c",
+      "sha256_patched": "63f64f519069ab96835316d52576dccf3e71079534871d41721279ef5cae7a3f",
+      "size_original": 4526,
+      "size_patched": 4660,
+      "edits": 0,
+      "sha256_variants": [
+        "06b3ff49aef98079499d2079667dffc790432fb427569cfd928cfb8b2b3c358c"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/sentinel_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_sentinel_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_sentinel_stat_descriptions.txt",
+      "sha256_original": "45a3c98b26442304784581ba26f705e007a402739fa666c9a51acef36a3a5037",
+      "sha256_patched": "fceb37b0e8d64598bbca3a97701f5eb9544464ec64e21dadf4e5ac42956b1513",
+      "size_original": 393298,
+      "size_patched": 415492,
+      "edits": 0,
+      "sha256_variants": [
+        "45a3c98b26442304784581ba26f705e007a402739fa666c9a51acef36a3a5037",
+        "41deed299a88ec775853d52567eef1c04ca04de18f53a8a113688b4dc542b5f6",
+        "1a5603710b2932ce9e4aee4231c82b9bff3a6d8db96bc8eaed5c15373381ae31"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/single_minion_spell_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_single_minion_spell_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_single_minion_spell_skill_stat_descriptions.txt",
+      "sha256_original": "71d38a20c57c16e44a302e3b3c704bff2a84e1000b3618bbcd0fbcc00e695f4d",
+      "sha256_patched": "230a7d7413012ee471cafb6f936348b578a0bbf34a793c6edb9497482851fbc8",
+      "size_original": 148942,
+      "size_patched": 157310,
+      "edits": 0,
+      "sha256_variants": [
+        "71d38a20c57c16e44a302e3b3c704bff2a84e1000b3618bbcd0fbcc00e695f4d"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_skill_stat_descriptions.txt",
+      "sha256_original": "956cc4ebf14a61d1392ffb715da34c3b36da9200f72d4eb9398fd8c44bc77768",
+      "sha256_patched": "36bacf329d1966c5f1c8a4e98206234c5d35900134c1a665308f245508de1371",
+      "size_original": 5749044,
+      "size_patched": 6086464,
+      "edits": 1,
+      "sha256_variants": [
+        "5c703b1c698e67107b0d64b4d7ff90189b0f54be16671dbac569285352073e2e",
+        "df6beb65242ec2627fba32c22dd0a0911f835a95cefdc24de4acb7b799a4110c",
+        "32f1e798371e98044433a266d4a45150fb005f18f2c77b284079e755bf4105bb",
+        "30806e7b2e5cd09ed68b7932bc5d22c9ea3e72f0d56872dc423dec35a6947e8a",
+        "b93f8373099679623cf124b967731d521cea4ea74a1231610e0a4dc76e79ad51"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_stat_descriptions.txt",
+      "sha256_original": "bba8bfce9ebab908d08ef7d8f8c8ec50b88037af1c03944f033bceb5245e7b75",
+      "sha256_patched": "d07fbb658e1362c92cffefab787a603cb4055479d6df4fab0ebcbd2a510a257b",
+      "size_original": 30320724,
+      "size_patched": 32121470,
+      "edits": 114,
+      "sha256_variants": [
+        "718a0cbfaf78303b7eca54d6222d10e37f9bbd303263cbc3f5b2e13f532354b7",
+        "228ced8c606ff4a0d9e0f9b789df20d0f821e57ca230fe170d7d3848880401be",
+        "281c6554a4be9bf0b3c43cad30636c1e821ec4de87f339e765ba8a107054bdc8",
+        "cbbbab3bdc138b220f66ad53829091894a76843891555ee69183bc6eaff8ceb5",
+        "0d5b1201284533eadf3cf12c90da3d216df782375721e5c6800d1171d99618c6",
+        "8d835b3785296d20baa4964aaa314c0ad8f83b698fd6fca6e8a58ddc6bfe038a",
+        "75f636ed45a61d37a2973d52dc63b1ba66f51850af2f9641195593e3517ba94f",
+        "0bd1f00bb1d11b64be279c3258898ce4882f499e34c0aa44aff2f7dc014b41c8"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/tincture_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_tincture_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_tincture_stat_descriptions.txt",
+      "sha256_original": "3421d5e6a481c2cbc770ba5e2cd0b4b255347e13266d1a85dbb650485e547949",
+      "sha256_patched": "afdcb6a9b512ab18825f6123906b359cbc8fb72d97d8114fef39d8c9562f258d",
+      "size_original": 303792,
+      "size_patched": 320488,
+      "edits": 2,
+      "sha256_variants": [
+        "3ec4fe09ffc08f18d24e91a85140593fe0755e43e345596dc90132c8513faee8",
+        "78d7c8d0f2eb2da1349868613b4f55cd8e9d2599c2f5eed2ee46ee11dd1dc9e7"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/variable_duration_skill_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_variable_duration_skill_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_variable_duration_skill_stat_descriptions.txt",
+      "sha256_original": "fd8c05df2a1b2ec3d4b9712d9e9e4a7b9e67adb3f8399487a9befc9f22b75316",
+      "sha256_patched": "104edbbd054ed629266624e7f4cad568ce889cfc786caf9d7247b6831f3134c4",
+      "size_original": 14108,
+      "size_patched": 14724,
+      "edits": 0,
+      "sha256_variants": [
+        "fd8c05df2a1b2ec3d4b9712d9e9e4a7b9e67adb3f8399487a9befc9f22b75316"
+      ]
+    },
+    {
+      "kind": "file_replace",
+      "path_in_ggpk": "metadata/statdescriptions/village_stat_descriptions.csd",
+      "src": "raw_sd/metadata_statdescriptions_village_stat_descriptions.txt",
+      "dst": "out/patch-sd-dual-all/metadata_statdescriptions_village_stat_descriptions.txt",
+      "sha256_original": "d5ac8cf0d2122d9970bfef4d8128672ff3078c8b771b654bcf105e5f5eae68ed",
+      "sha256_patched": "3bf9e9fb28568e0d6ec7e1fc29ff6200945d7039f369b6fabbf1f3b1ef5a081a",
+      "size_original": 155778,
+      "size_patched": 167442,
+      "edits": 0,
+      "sha256_variants": [
+        "d5ac8cf0d2122d9970bfef4d8128672ff3078c8b771b654bcf105e5f5eae68ed"
+      ]
+    }
+  ]
+}

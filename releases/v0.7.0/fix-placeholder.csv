@@ -1,0 +1,21 @@
+﻿file,stat_ids,cond,zh_old,zh_new,kind,note
+metadata_statdescriptions_stat_descriptions.txt,deepwater_chance_to_ancient_%,1|#,機會石改為掉落古變石,機會石有 {0}% 機率改為掉落古變石,MISS_NUM,英文是「{0}% chance … instead」；繁中把機率整段丟了，讀成必定轉換
+metadata_statdescriptions_stat_descriptions.txt,deepwater_chaos_to_divine_%,1|#,混沌石改為掉落神聖石,混沌石有 {0}% 機率改為掉落神聖石,MISS_NUM,同上：漏 {0}%
+metadata_statdescriptions_stat_descriptions.txt,deepwater_scour_to_annulment_%,1|#,重鑄石改為掉落無效石,重鑄石有 {0}% 機率改為掉落無效石,MISS_NUM,同上：漏 {0}%
+metadata_statdescriptions_atlas_stat_descriptions.txt,map_orb_of_chance_to_unique_item_%,#,你地圖中的機會石改為掉落傳奇物品,你地圖中的機會石有 {0}% 機率改為掉落傳奇物品,MISS_NUM,同族：漏 {0}%（map_orb_of_chance_to_unique_item_%）
+metadata_statdescriptions_active_skill_gem_stat_descriptions.txt,projectiles_return projectile_return_%_chance,0  1|99,投射物有 {0}% 機率返回你,投射物有 {1}% 機率返回你,MISS_NUM,编号错位：英文用 {1}（projectile_return_%_chance），繁中取了 {0}（projectiles_return 是布林），永远显示 0/1%
+metadata_statdescriptions_skill_stat_descriptions.txt,is_trap number_of_traps_to_throw,1|# 2|#,當觸發時使用此技能投擲 {0} 個陷阱,當觸發時使用此技能投擲 {1} 個陷阱,MISS_NUM,编号错位：number_of_traps_to_throw 是第 2 个 stat，应为 {1}
+metadata_statdescriptions_skill_stat_descriptions.txt,rage_slash_damage_+%_final_per_amount_of_rage_sacrificed rage_slash_rage_sacrifice_per_damage_bonus,1|# #,每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更多傷害,每 {1} 犧牲的盛怒，使盛怒風暴造成 {0}% 更多傷害,MISS_NUM,数值写死 5%：英文是 {0}%
+metadata_statdescriptions_skill_stat_descriptions.txt,rage_slash_damage_+%_final_per_amount_of_rage_sacrificed rage_slash_rage_sacrifice_per_damage_bonus,#|-1 #,每 {1} 犧牲的盛怒，使盛怒風暴造成 5% 更少傷害,每 {1} 犧牲的盛怒，使盛怒風暴造成 {0}% 更少傷害,MISS_NUM,数值写死 5%：英文是 {0}%
+metadata_statdescriptions_skill_stat_descriptions.txt,spectral_throw_an_spectral_helix_active_skill_projectile_speed_+%_variation_final,1|#,每個投射物有介在 10% 更多至 10% 更少投射物速度,每個投射物有介在 {0}% 更多至 {0}% 更少投射物速度,MISS_NUM,数值写死 10%：英文同一个 {0} 出现两次
+metadata_statdescriptions_skill_stat_descriptions.txt,virtual_intensity_loss_ms_while_moving_interval virtual_intensity_lost_on_teleport,# #,移動或你立即傳送時，\n每 {0} 秒失去 1 強化,移動時每 {0} 秒失去 1 強化\n若你傳送，立即失去 {1} 強化,MISS_NUM,原句把「傳送立即失去 {1} 強化」整句并掉，只剩移动那一半；补回第二句
+metadata_statdescriptions_stat_descriptions.txt,additional_maximum_all_elemental_resistances_%_if_suppressed_spell_recently,#,若你近期有壓抑法術傷害，,若你近期有壓抑法術傷害，{0:+d}% 全部最大元素抗性,MISS_NUM,繁中句子被截断在逗号，数值整段没了
+metadata_statdescriptions_stat_descriptions.txt,map_vaal_vessel_drop_X_vaal_temple_maps,#,瓦爾容器包含 1 張瓦爾密殿,瓦爾容器包含 {0} 張額外的瓦爾密殿,MISS_NUM,数值写死 1 且漏 additional；条件 #（≥2）时也显示「1 張」
+metadata_statdescriptions_chest_stat_descriptions.txt,number_of_packs_to_summon number_of_monsters_to_summon summoned_monster_rarity,2|# # 1,被 {1} 群魔法怪物守衛著,被 {0} 群魔法怪物守衛著,MISS_NUM,编号错位：群数（packs）是 {0}，繁中取了 {1}（怪物数）
+metadata_statdescriptions_chest_stat_descriptions.txt,number_of_packs_to_summon number_of_monsters_to_summon summoned_monster_rarity,2|# # 2,被 {1} 群稀有怪物守衛著,被 {0} 群稀有怪物守衛著,MISS_NUM,同上
+metadata_statdescriptions_minion_skill_stat_descriptions.txt,active_skill_non_reaper_minion_damage_+%_final,1|#,奪魂鐮使你非奪魂鐮召喚物造成 {0} 更多傷害,奪魂鐮使你非奪魂鐮召喚物造成 {0}% 更多傷害,MISS_PCT,漏百分号
+metadata_statdescriptions_minion_skill_stat_descriptions.txt,active_skill_non_reaper_minion_damage_+%_final,#|-1,奪魂鐮使你非奪魂鐮召喚物造成 {0} 更少傷害,奪魂鐮使你非奪魂鐮召喚物造成 {0}% 更少傷害,MISS_PCT,漏百分号
+metadata_statdescriptions_passive_skill_stat_descriptions.txt,keystone_magebane,#,敏捷不提供固有的閃避值加成\n每 15 點敏捷 +1 法術傷害壓抑率,敏捷不提供固有的閃避值加成\n每 15 點敏捷 +1% 法術傷害壓抑率,MISS_PCT,漏百分号：+1 应为 +1%
+metadata_statdescriptions_gem_stat_descriptions.txt,trigger_on_ward_break_%_chance,1|99,當你的保護被破壞時觸發被輔助的技能,當你的保護被破壞時，有 {0}% 機率觸發被輔助的技能,MISS_NUM,漏 {0}%：英文「{0}% chance to Trigger …」，繁中写成了必定触发
+metadata_statdescriptions_skill_stat_descriptions.txt,support_arcane_surge_cast_speed_+% support_arcane_surge_mana_regeneration_rate_+%,# #,秘能波動增加 {0}% 施放速度\n秘能波動增加 {0}% 魔力恢復率,秘能波動增加 {0}% 施放速度\n秘能波動增加 {1}% 魔力恢復率,MISS_NUM,编号错位：第二行魔力恢復率应为 {1}，繁中写成了 {0}（会显示施放速度的数值）
+metadata_statdescriptions_leaguestone_stat_descriptions.txt,map_leaguestone_additional_shrines,1,下個區域額外含有 1 座神殿,下個區域額外含有最多 {0} 座神殿,MISS_NUM,英文是 up to {0} additional Shrine；繁中写死成 1 座，数值整段丢失
